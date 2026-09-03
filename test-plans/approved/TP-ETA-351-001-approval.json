@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "1.0.0",
+  "approvalId": "APR-TP-ETA-351-001",
+  "gate": "TEST_PLAN",
+  "artifactId": "TP-ETA-351-001",
+  "artifactVersion": 1,
+  "release": "1.0",
+  "capability": "account-access",
+  "sourceArtifactPath": "test-plans/generated/TP-ETA-351-001.json",
+  "decision": "APPROVE",
+  "reviewer": {
+    "name": "Nitin Saini",
+    "role": "Reviewer",
+    "reference": null
+  },
+  "reviewedAt": "2026-08-31T14:05:00.000Z",
+  "comments": "Gate 2 approved. All eight test scenarios of TP-ETA-351-001 v1 are approved for BDD_DESIGN. This decision was given by the reviewer in chat and transcribed into this artifact by the orchestrator; the transcription is a record of a human decision, not an agent approval. Three questions raised in the review package were NOT answered by this decision and remain REVIEW_REQUIRED: AMB-ETA-351-004 (whether treating a password as a secret means only on-screen concealment), AMB-ETA-351-006 (whether any permission-dependent behaviour is in scope) and CLR-TP-ETA-351-001 (whether indirect coverage of REQ-ETA-351-004 is acceptable). No agent may resolve these by observing the application, because they are questions of business intent and scope. Approving this plan therefore authorises Gherkin feature files for the eight scenarios exactly as written, and authorises nothing beyond them. The condition attached at Gate 1 remains in force: no unresolved ambiguity may be hardened into a concrete expectation. Observation at PLAYWRIGHT_VALIDATION may establish how a criterion is met, but must never change what the criterion requires.",
+  "itemDecisions": [
+    {
+      "itemId": "TS-ETA-351-001",
+      "decision": "APPROVE",
+      "comment": "Declare the kind of sign-in before entering any details. AC-ETA-351-001. Asserts that the choice exists, not how it is made; the mechanism stays open as AMB-ETA-351-002."
+    },
+    {
+      "itemId": "TS-ETA-351-002",
+      "decision": "APPROVE",
+      "comment": "Both sign-in kinds offered and distinguishable. AC-ETA-351-002. No Business Entity Login behaviour is exercised, which matches the story's exclusion."
+    },
+    {
+      "itemId": "TS-ETA-351-003",
+      "decision": "APPROVE",
+      "comment": "Page asks for the organization details rather than every possible field. AC-ETA-351-003. Approved with the field set deliberately unnamed pending AMB-ETA-351-001."
+    },
+    {
+      "itemId": "TS-ETA-351-004",
+      "decision": "APPROVE",
+      "comment": "Password not readable on screen. AC-ETA-351-004. Approved as concealment only. AMB-ETA-351-004 remains unanswered, so no further secret-handling obligation may be added without a new Gate 1 criterion."
+    },
+    {
+      "itemId": "TS-ETA-351-005",
+      "decision": "APPROVE",
+      "comment": "Correct details reach the eCore Command Center Home page. AC-ETA-351-005. The only scenario permitted to use the real account. Approved as stopping at arrival; AMB-ETA-351-006 remains unanswered."
+    },
+    {
+      "itemId": "TS-ETA-351-006",
+      "decision": "APPROVE",
+      "comment": "Wrong details refused and reported. AC-ETA-351-006. Fabricated data only. No message text may be asserted."
+    },
+    {
+      "itemId": "TS-ETA-351-007",
+      "decision": "APPROVE",
+      "comment": "Missing details refused and reported. AC-ETA-351-007. Fabricated data only. Approved as the generic case; AMB-ETA-351-005 remains unanswered, so no per-field expectation may be written."
+    },
+    {
+      "itemId": "TS-ETA-351-008",
+      "decision": "APPROVE",
+      "comment": "The two failure responses differ from each other. AC-ETA-351-008. Approved as a single comparative scenario performing both attempts, because the criterion cannot be evaluated from one attempt."
+    }
+  ]
+}

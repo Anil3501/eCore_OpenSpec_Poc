@@ -1,0 +1,2095 @@
+{
+  "_dataClassification": "REAL_JIRA_DATA",
+  "retrievalMethod": "JIRA_REST_API_V3",
+  "retrievalNote": "Retrieved by src/utils/jira-fetch.ts, the documented REST fallback, because the Atlassian MCP server exposed no issue-fetch tool in this session. The issue payload below is verbatim.",
+  "requestedIssueKey": "ETA-351",
+  "requestUrl": "https://eoriginal.atlassian.net/rest/api/3/issue/ETA-351?expand=renderedFields%2Cnames",
+  "retrievedAt": "2026-08-31T12:44:24.412Z",
+  "issue": {
+    "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations,customfield_11318.properties,customfield_10900.requestTypePractice,customfield_11319.properties",
+    "id": "110012",
+    "self": "https://eoriginal.atlassian.net/rest/api/3/issue/110012",
+    "key": "ETA-351",
+    "renderedFields": {
+      "statusCategory": null,
+      "resolution": null,
+      "customfield_10500": null,
+      "customfield_11839": null,
+      "lastViewed": "Friday 8:53 PM",
+      "customfield_11391": "",
+      "customfield_11390": "",
+      "customfield_11397": "",
+      "customfield_11399": "",
+      "customfield_11398": "",
+      "labels": null,
+      "aggregatetimeoriginalestimate": null,
+      "customfield_11708": null,
+      "issuelinks": null,
+      "assignee": null,
+      "components": null,
+      "customfield_11380": null,
+      "customfield_11382": null,
+      "customfield_11381": null,
+      "customfield_11384": null,
+      "customfield_11383": null,
+      "customfield_11386": null,
+      "customfield_11385": null,
+      "customfield_11388": "",
+      "customfield_11389": "",
+      "customfield_10600": null,
+      "subtasks": null,
+      "customfield_11371": null,
+      "customfield_11370": null,
+      "reporter": null,
+      "customfield_11374": null,
+      "customfield_11378": "",
+      "customfield_11369": null,
+      "progress": null,
+      "customfield_11806": null,
+      "votes": null,
+      "worklog": {
+        "startAt": 0,
+        "maxResults": 20,
+        "total": 0,
+        "worklogs": []
+      },
+      "issuetype": null,
+      "customfield_11360": "",
+      "customfield_11362": "",
+      "customfield_11483": null,
+      "project": null,
+      "customfield_11361": null,
+      "customfield_11000": null,
+      "customfield_11364": null,
+      "customfield_11484": "",
+      "customfield_11363": null,
+      "customfield_11486": "",
+      "customfield_11365": null,
+      "customfield_11368": null,
+      "customfield_11367": "",
+      "customfield_11359": null,
+      "customfield_11358": null,
+      "customfield_10700": "",
+      "resolutiondate": null,
+      "watches": null,
+      "customfield_11351": null,
+      "customfield_11350": null,
+      "customfield_11353": null,
+      "customfield_11352": null,
+      "customfield_11354": null,
+      "customfield_11357": null,
+      "customfield_11356": null,
+      "customfield_11348": null,
+      "customfield_11347": null,
+      "customfield_11349": null,
+      "updated": "Friday 8:53 PM",
+      "customfield_11580": null,
+      "timeoriginalestimate": null,
+      "customfield_11461": null,
+      "customfield_11340": null,
+      "customfield_11582": null,
+      "description": "<h2><a name=\"Summary\"></a>Summary</h2>\n\n<p>As an organization user, I want to sign in to eCore Command Center using my organization credentials so that I can access the application</p>\n\n<h2><a name=\"Story\"></a>Story</h2>\n\n<p>As an organization user of eCore Command Center<br/>\nI want to sign in using my organization credentials<br/>\nSo that I can access the application with my assigned permissions</p>\n\n<h2><a name=\"Context\"></a>Context</h2>\n\n<p>The eCore Command Center login page is the entry point to the application. It<br/>\nsupports more than one kind of sign-in, and the user tells the system which kind<br/>\nthey are using before entering their details. Organization users authenticate<br/>\nagainst their organization rather than against an individual business entity, so<br/>\nthe organization they belong to forms part of what they supply at sign-in.</p>\n\n<p>The other supported sign-in kind is Business Entity Login. It exists on the same<br/>\npage and the user must be able to tell the two apart and choose between them, but<br/>\nits own behaviour is handled elsewhere and is not part of this story.</p>\n\n<p>Which details the page asks for depends on the choice the user makes. The page is<br/>\nexpected to respond to that choice rather than present every possible field at<br/>\nonce.</p>\n\n<h2><a name=\"Whattheuserdoes\"></a>What the user does</h2>\n\n<p>A user arrives at the login page, indicates that they are signing in on behalf of<br/>\ntheir organization, supplies who they are, which organization they belong to, and<br/>\nthe secret that proves it, and submits. If everything they supplied is correct,<br/>\nthey arrive at the eCore Command Center Home page and can work in the application<br/>\nwithin the limits of their organization and permissions.</p>\n\n<p>Passwords are secrets and are treated as such on screen.</p>\n\n<p>Not everything a user submits will be correct. Details can be wrong, and details<br/>\ncan be left out altogether. In neither case should the user get into the<br/>\napplication, and in neither case should they be left guessing about what happened.<br/>\nWrong details and missing details are different problems and the user should be<br/>\nable to tell which one they have hit.</p>\n\n<h2><a name=\"OutofScope\"></a>Out of Scope</h2>\n\n<p>Business Entity Login behaviour; Forgot Password; password reset; user creation;<br/>\norganization creation; role and permission configuration; MFA and SSO; session<br/>\ntimeout; account lockout; exact error-message wording.</p>",
+      "customfield_11460": null,
+      "customfield_11581": null,
+      "customfield_11584": "",
+      "customfield_11342": "",
+      "customfield_11583": "",
+      "customfield_11341": "",
+      "customfield_11100": null,
+      "customfield_11344": "",
+      "customfield_11343": "",
+      "customfield_11346": null,
+      "customfield_11466": null,
+      "timetracking": {},
+      "customfield_11345": null,
+      "customfield_11458": null,
+      "customfield_11579": "",
+      "customfield_11578": null,
+      "customfield_11457": null,
+      "customfield_11339": "",
+      "customfield_10800": null,
+      "customfield_11459": null,
+      "customfield_10008": null,
+      "customfield_10009": null,
+      "summary": null,
+      "customfield_11450": null,
+      "customfield_11331": "",
+      "customfield_11452": null,
+      "customfield_11451": null,
+      "customfield_11330": "",
+      "customfield_10000": null,
+      "customfield_11333": "",
+      "customfield_11575": null,
+      "customfield_11454": null,
+      "customfield_10001": null,
+      "customfield_10002": null,
+      "customfield_11453": null,
+      "customfield_11332": "",
+      "customfield_11574": null,
+      "customfield_11577": null,
+      "customfield_11335": "",
+      "customfield_10003": null,
+      "customfield_11455": null,
+      "customfield_10004": null,
+      "customfield_11576": null,
+      "customfield_11446": null,
+      "environment": "",
+      "customfield_11449": null,
+      "customfield_11448": null,
+      "customfield_11327": null,
+      "customfield_11329": "",
+      "duedate": null,
+      "comment": {
+        "comments": [
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/110012/comment/205342",
+            "id": "205342",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "emailAddress": "nitin.saini@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+              },
+              "displayName": "Nitin Saini",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": "<p>Continued development of the POC automation framework and completed the end-to-end framework implementation.</p>\n\n<p>Finalized the workflow covering Jira requirement input, acceptance criteria generation, test plan creation, test script generation, human approval gates, test execution, and report generation.</p>\n\n<p>Completed the framework setup and validated the overall workflow, with application-based execution to be continued as required.</p>",
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "emailAddress": "nitin.saini@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+              },
+              "displayName": "Nitin Saini",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "24/Aug/26 1:47 PM",
+            "updated": "24/Aug/26 1:47 PM",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/110012/comment/205447",
+            "id": "205447",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "emailAddress": "nitin.saini@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+              },
+              "displayName": "Nitin Saini",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": "<p>Continued enhancing the POC automation framework based on the feedback and suggestions provided by Mustafa during the initial framework demo.</p>\n\n<p>Updated the framework to support Jira tickets with or without predefined Acceptance Criteria.</p>",
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "emailAddress": "nitin.saini@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+              },
+              "displayName": "Nitin Saini",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "Wednesday 4:04 AM",
+            "updated": "Wednesday 4:04 AM",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/110012/comment/205521",
+            "id": "205521",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "emailAddress": "nitin.saini@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+              },
+              "displayName": "Nitin Saini",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": "<ul>\n\t<li>Initiated development of a new AI-assisted automation framework to analyze Jira tickets, including linked tickets and sub-stories, and convert the requirements into structured raw data and Acceptance Criteria.</li>\n\t<li>The framework incorporates <b>three human approval gates across the workflow</b>: <b>Acceptance Criteria Approval</b>, <b>Test Plan Approval</b>, and <b>Automation Approval</b>.</li>\n\t<li>Following the approval stages, the framework generates the <b>Test Plan</b>, creates BDD-based automation scripts, and executes the test scripts as part of the end-to-end automation workflow.</li>\n\t<li>Received feedback and improvement suggestions from Mustafa and Abhinav and are currently working on incorporating the identified changes and enhancements into the framework.</li>\n</ul>\n",
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "emailAddress": "nitin.saini@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+              },
+              "displayName": "Nitin Saini",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "Thursday 2:41 AM",
+            "updated": "Thursday 2:41 AM",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/110012/comment/205637",
+            "id": "205637",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "emailAddress": "nitin.saini@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+              },
+              "displayName": "Nitin Saini",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": "<ul>\n\t<li>Completed the implementation of the AI-assisted automation framework and integrated <b>v8-to-istanbul</b> for test coverage tracking.</li>\n\t<li>Incorporated the coverage functionality into the existing framework while ensuring that the previously implemented features and workflows continue to work without disruption, along with the required updates to related references and configurations.</li>\n\t<li>Performed validation using multiple Jira ticket scenarios, including tickets with <b>no Acceptance Criteria, incomplete Acceptance Criteria, and complete Acceptance Criteria</b>, to verify the framework’s behavior across different requirement conditions.</li>\n\t<li>The framework is now functionally complete and undergoing further validation and refinement based on the test results.</li>\n</ul>\n",
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "emailAddress": "nitin.saini@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+              },
+              "displayName": "Nitin Saini",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "Friday 5:19 AM",
+            "updated": "Friday 5:19 AM",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/110012/comment/205773",
+            "id": "205773",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "emailAddress": "nitin.saini@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+              },
+              "displayName": "Nitin Saini",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": "<ul>\n\t<li>As part of the ongoing framework design activity, reviewed the new requirement to leverage <b>models available in FAB Studio</b>.</li>\n\t<li>Spent time gaining an understanding of <b>FAB Agents and available models</b>, including how they can be integrated and utilized within the existing automation framework.</li>\n\t<li>Evaluated the potential integration approach and continued defining how FAB capabilities can be incorporated into the framework to support the overall automation workflow.</li>\n</ul>\n",
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "emailAddress": "nitin.saini@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+              },
+              "displayName": "Nitin Saini",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "Friday 8:53 PM",
+            "updated": "Friday 8:53 PM",
+            "jsdPublic": true
+          }
+        ],
+        "self": "https://eoriginal.atlassian.net/rest/api/3/issue/110012/comment",
+        "maxResults": 5,
+        "total": 5,
+        "startAt": 0
+      },
+      "statuscategorychangedate": "24/Aug/26 1:47 PM",
+      "customfield_11441": null,
+      "customfield_11440": null,
+      "fixVersions": null,
+      "customfield_11443": null,
+      "customfield_11445": null,
+      "customfield_11323": "",
+      "customfield_11444": null,
+      "customfield_11435": "",
+      "customfield_11438": null,
+      "customfield_11437": "",
+      "customfield_11318": null,
+      "customfield_10900": null,
+      "customfield_11439": null,
+      "customfield_11319": null,
+      "customfield_11430": null,
+      "customfield_10100": null,
+      "customfield_11432": null,
+      "priority": null,
+      "customfield_11674": null,
+      "customfield_11431": null,
+      "customfield_11434": "",
+      "customfield_11433": null,
+      "customfield_11425": null,
+      "customfield_11545": null,
+      "customfield_11426": null,
+      "timeestimate": null,
+      "customfield_11429": null,
+      "versions": null,
+      "status": null,
+      "customfield_11421": null,
+      "customfield_11300": null,
+      "customfield_11420": null,
+      "customfield_11423": null,
+      "customfield_11301": null,
+      "customfield_11544": null,
+      "customfield_11543": null,
+      "customfield_11535": null,
+      "customfield_11534": null,
+      "customfield_11416": null,
+      "customfield_11415": null,
+      "customfield_11418": null,
+      "aggregatetimeestimate": null,
+      "customfield_11417": null,
+      "customfield_11419": "",
+      "creator": null,
+      "aggregateprogress": null,
+      "customfield_11531": null,
+      "customfield_11530": null,
+      "customfield_11412": "",
+      "customfield_11533": null,
+      "customfield_11532": null,
+      "customfield_11411": "",
+      "customfield_11524": null,
+      "customfield_11523": null,
+      "customfield_11402": "",
+      "customfield_11526": null,
+      "customfield_11525": null,
+      "customfield_11407": "",
+      "customfield_11527": null,
+      "customfield_11406": null,
+      "customfield_11409": "",
+      "customfield_11529": null,
+      "customfield_11408": "",
+      "timespent": null,
+      "aggregatetimespent": null,
+      "customfield_11641": null,
+      "customfield_11401": "<div class='table-wrap'>\n<table class='confluenceTable'><tbody>\n<tr>\n<th class='confluenceTh'><b>Date</b></th>\n<th class='confluenceTh'><b>Status(Pass/Fail)</b></th>\n<th class='confluenceTh'><b>Version</b></th>\n<th class='confluenceTh'><b>Tester</b></th>\n</tr>\n<tr>\n<td class='confluenceTd'>&nbsp;</td>\n<td class='confluenceTd'>&nbsp;</td>\n<td class='confluenceTd'>&nbsp;</td>\n<td class='confluenceTd'>&nbsp;</td>\n</tr>\n</tbody></table>\n</div>\n",
+      "customfield_11400": "",
+      "workratio": null,
+      "created": "24/Aug/26 5:19 AM",
+      "customfield_11872": null,
+      "customfield_10300": null,
+      "customfield_11504": "",
+      "customfield_11740": null,
+      "customfield_11741": "",
+      "security": null,
+      "attachment": [],
+      "customfield_10400": null,
+      "customfield_11608": null
+    },
+    "names": {
+      "parent": "Parent",
+      "statusCategory": "Status Category",
+      "resolution": "Resolution",
+      "customfield_10500": "Customer",
+      "customfield_11839": "Agent Sessions",
+      "lastViewed": "Last Viewed",
+      "customfield_11391": "Root Cause",
+      "customfield_11390": "UI Changes",
+      "customfield_11397": "Test Scenario Details",
+      "customfield_11399": "Test Data",
+      "customfield_11398": "Test Steps",
+      "labels": "Labels",
+      "aggregatetimeoriginalestimate": "Σ Original Estimate",
+      "customfield_11708": "Tech Debt Type",
+      "issuelinks": "Linked Issues",
+      "assignee": "Assignee",
+      "components": "Components",
+      "customfield_11380": "System Availability",
+      "customfield_11382": "Compliance",
+      "customfield_11381": "Infrastructure or System Changes",
+      "customfield_11384": "Actual Dev Hours",
+      "customfield_11383": "User Experience",
+      "customfield_11386": "Tested Browsers",
+      "customfield_11385": "Actual QA Hours",
+      "customfield_11388": "API Changes",
+      "customfield_11389": "Notes to QA",
+      "customfield_10600": "Organizations",
+      "subtasks": "Sub-tasks",
+      "customfield_11371": "Actual Hours Total",
+      "customfield_11370": "Estimated Hours Total",
+      "reporter": "Reporter",
+      "customfield_11374": "Satisfaction",
+      "customfield_11378": "Configuration Changes",
+      "customfield_11369": "Est QA Hours",
+      "progress": "Progress",
+      "customfield_11806": "Work item created forms",
+      "votes": "Votes",
+      "worklog": "Log Work",
+      "issuetype": "Issue Type",
+      "customfield_11360": "Modified API",
+      "customfield_11362": "Engineering Summary",
+      "customfield_11483": "Veracode Link",
+      "project": "Project",
+      "customfield_11361": "Start date",
+      "customfield_11000": "QA",
+      "customfield_11364": "Request participants",
+      "customfield_11484": "Mitigation Status and Comments",
+      "customfield_11363": "Create QA Automation Task",
+      "customfield_11486": "Environment",
+      "customfield_11365": "Story point estimate",
+      "customfield_11368": "Est Dev Hours",
+      "customfield_11367": "Issue colour",
+      "customfield_11359": "Emergency Development Approval",
+      "customfield_11358": "Emergency Operations Approval",
+      "customfield_10700": "Acceptance Criteria",
+      "resolutiondate": "Resolved",
+      "watches": "Watchers",
+      "customfield_11351": "Customer Service Approval",
+      "customfield_11350": "Product Management Approval",
+      "customfield_11353": "CR Scheduled Date",
+      "customfield_11352": "Operations Approval",
+      "customfield_11354": "CR Deployed Date",
+      "customfield_11357": "QC Approver",
+      "customfield_11356": "QC Approval",
+      "customfield_11348": "Software Development Approver",
+      "customfield_11347": "Customer Support Approver",
+      "customfield_11349": "Software Development Approval",
+      "updated": "Updated",
+      "customfield_11580": "Insights",
+      "timeoriginalestimate": "Original estimate",
+      "customfield_11461": "Automation Failed Envs",
+      "customfield_11340": "Priority Level",
+      "customfield_11582": "Linked items",
+      "description": "Description",
+      "customfield_11460": "Automation Type",
+      "customfield_11581": "Comments",
+      "customfield_11584": "Delivery status",
+      "customfield_11342": "Deployment Instructions",
+      "customfield_11583": "Delivery progress",
+      "customfield_11341": "Reason for Change",
+      "customfield_11100": "Developer",
+      "customfield_11344": "Rollback Instructions",
+      "customfield_11343": "Post Deployment Testing",
+      "customfield_11346": "Product Management Approver",
+      "customfield_11466": "Impacted Area",
+      "timetracking": "Time tracking",
+      "customfield_11345": "Operations Approver",
+      "customfield_11458": "Category",
+      "customfield_11579": "Atlassian project status",
+      "customfield_11578": "Atlassian project",
+      "customfield_11457": "Integration Consultant",
+      "customfield_11339": "Change Description",
+      "customfield_10800": "Impact",
+      "customfield_11459": "Automation Scripts Failed Count",
+      "customfield_10008": "Story Points",
+      "customfield_10009": "Approvals",
+      "summary": "Summary",
+      "customfield_11450": "Associations",
+      "customfield_11331": "Message",
+      "customfield_11452": "Open forms",
+      "customfield_11451": "API Test Required?",
+      "customfield_11330": "Repository",
+      "customfield_10000": "[CHART] Date of First Response",
+      "customfield_11333": "Last Commit Date",
+      "customfield_11575": "Idea archived",
+      "customfield_11454": "Locked forms",
+      "customfield_10001": "[CHART] Time in Status",
+      "customfield_10002": "Rank",
+      "customfield_11453": "Submitted forms",
+      "customfield_11332": "Files Changed",
+      "customfield_11574": "Documentation Complete?",
+      "customfield_11577": "Idea archived on",
+      "customfield_11335": "SVN",
+      "customfield_10003": "Sprint",
+      "customfield_11455": "Total forms",
+      "customfield_10004": "Epic Link",
+      "customfield_11576": "Idea archived by",
+      "customfield_11446": "Release Notes Required?",
+      "environment": "Environment",
+      "customfield_11449": "Association Count",
+      "customfield_11448": "In Docs",
+      "customfield_11327": "SF Case Number",
+      "customfield_11329": "Revision",
+      "duedate": "Due date",
+      "comment": "Comment",
+      "statuscategorychangedate": "Status Category Changed",
+      "customfield_11441": "Team",
+      "customfield_11440": "Response Due Date",
+      "fixVersions": "Fix versions",
+      "customfield_11443": "Satisfaction date",
+      "customfield_11445": "Affected services",
+      "customfield_11323": "Business Value",
+      "customfield_11444": "Request language",
+      "customfield_11435": "Notes to Team",
+      "customfield_11438": "Follow Up",
+      "customfield_11437": "Steps to Reproduce",
+      "customfield_11318": "Tempo Team",
+      "customfield_10900": "Request Type",
+      "customfield_11439": "Epic Size",
+      "customfield_11319": "Account",
+      "customfield_11430": "Changes Required",
+      "customfield_10100": "Flagged",
+      "customfield_11432": "Last Execution Date",
+      "priority": "Priority",
+      "customfield_11674": "Reported by Customer?",
+      "customfield_11431": "Utility Type",
+      "customfield_11434": "Documentation Pages",
+      "customfield_11433": "Smoke Test",
+      "customfield_11425": "Include in Regression?",
+      "customfield_11545": "Environment",
+      "customfield_11426": "Test Type",
+      "timeestimate": "Remaining Estimate",
+      "customfield_11429": "ETC Ticket Created?",
+      "versions": "Affects versions",
+      "status": "Status",
+      "customfield_11421": "Number of Transactions",
+      "customfield_11300": "QA Story Points",
+      "customfield_11420": "UtilityType",
+      "customfield_11423": "UAT",
+      "customfield_11301": "Dev Story Points",
+      "customfield_11544": "Goals",
+      "customfield_11543": "Sentiment",
+      "customfield_11535": "Project overview status",
+      "customfield_11534": "Project overview key",
+      "customfield_11416": "Resolution Date",
+      "customfield_11415": "Original Due Date",
+      "customfield_11418": "Target end",
+      "aggregatetimeestimate": "Σ Remaining Estimate",
+      "customfield_11417": "Target start",
+      "customfield_11419": "QA Test Cases",
+      "creator": "Creator",
+      "aggregateprogress": "Σ Progress",
+      "customfield_11531": "Merged to Master",
+      "customfield_11530": "Technology Investment Category",
+      "customfield_11412": "Escalation Feedback",
+      "customfield_11533": "Times in CR",
+      "customfield_11532": "Date Refined",
+      "customfield_11411": "Internal Instructions",
+      "customfield_11524": "Product Owner",
+      "customfield_11523": "Feature Env URL",
+      "customfield_11402": "Code Review",
+      "customfield_11526": "Times in QA",
+      "customfield_11525": "Design",
+      "customfield_11407": "Customer Urgency Statement",
+      "customfield_11527": "DevOps Ticket Created?",
+      "customfield_11406": "System Down Time",
+      "customfield_11409": "Escalation Data",
+      "customfield_11529": "Vulnerability",
+      "customfield_11408": "Customer Impact Statement",
+      "timespent": "Time Spent",
+      "aggregatetimespent": "Σ Time Spent",
+      "customfield_11641": "Focus Areas",
+      "customfield_11401": "Test History",
+      "customfield_11400": "Test Expected Result",
+      "workratio": "Work Ratio",
+      "created": "Created",
+      "customfield_11872": "Incident manager",
+      "customfield_10300": "Development",
+      "customfield_11504": "Automation Goal",
+      "customfield_11740": "Development Phase",
+      "customfield_11741": "Asset",
+      "security": "Security Level",
+      "attachment": "Attachment",
+      "customfield_10400": "Team",
+      "customfield_11608": "Owned by"
+    },
+    "fields": {
+      "parent": {
+        "id": "108847",
+        "key": "ETA-164",
+        "self": "https://eoriginal.atlassian.net/rest/api/3/issue/108847",
+        "fields": {
+          "summary": "eCore Application Testing, Automation & Migration",
+          "status": {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/status/3",
+            "description": "This work item is being actively worked on at the moment by the assignee.",
+            "iconUrl": "https://eoriginal.atlassian.net/images/icons/statuses/inprogress.png",
+            "name": "In Progress",
+            "id": "3",
+            "statusCategory": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/statuscategory/4",
+              "id": 4,
+              "key": "indeterminate",
+              "colorName": "yellow",
+              "name": "In Progress"
+            }
+          },
+          "priority": {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/priority/1",
+            "iconUrl": "https://eoriginal.atlassian.net/images/icons/priorities/critical_new.svg",
+            "name": "Highest",
+            "id": "1"
+          },
+          "issuetype": {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issuetype/10000",
+            "id": "10000",
+            "description": "A collection of related bugs, stories, and tasks.",
+            "iconUrl": "https://eoriginal.atlassian.net/images/icons/issuetypes/epic.svg",
+            "name": "Epic",
+            "subtask": false,
+            "hierarchyLevel": 1
+          }
+        }
+      },
+      "statusCategory": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/statuscategory/4",
+        "id": 4,
+        "key": "indeterminate",
+        "colorName": "yellow",
+        "name": "In Progress"
+      },
+      "resolution": null,
+      "customfield_10500": null,
+      "customfield_11839": null,
+      "lastViewed": "2026-08-28T20:53:28.717-0400",
+      "customfield_11391": null,
+      "customfield_11390": null,
+      "customfield_11397": null,
+      "customfield_11399": null,
+      "customfield_11398": null,
+      "labels": [
+        "QA"
+      ],
+      "aggregatetimeoriginalestimate": null,
+      "customfield_11708": null,
+      "issuelinks": [],
+      "assignee": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
+        "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+        "emailAddress": "nitin.saini@wolterskluwer.com",
+        "avatarUrls": {
+          "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+          "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+          "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+          "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+        },
+        "displayName": "Nitin Saini",
+        "active": true,
+        "timeZone": "America/New_York",
+        "accountType": "atlassian"
+      },
+      "components": [],
+      "customfield_11380": null,
+      "customfield_11382": null,
+      "customfield_11381": null,
+      "customfield_11384": null,
+      "customfield_11383": null,
+      "customfield_11386": null,
+      "customfield_11385": null,
+      "customfield_11388": null,
+      "customfield_11389": null,
+      "customfield_10600": [],
+      "subtasks": [],
+      "customfield_11371": null,
+      "customfield_11370": null,
+      "reporter": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
+        "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+        "emailAddress": "nitin.saini@wolterskluwer.com",
+        "avatarUrls": {
+          "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+          "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+          "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+          "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+        },
+        "displayName": "Nitin Saini",
+        "active": true,
+        "timeZone": "America/New_York",
+        "accountType": "atlassian"
+      },
+      "customfield_11374": null,
+      "customfield_11378": null,
+      "customfield_11369": null,
+      "progress": {
+        "progress": 0,
+        "total": 0
+      },
+      "customfield_11806": null,
+      "votes": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/issue/ETA-351/votes",
+        "votes": 0,
+        "hasVoted": false
+      },
+      "worklog": {
+        "startAt": 0,
+        "maxResults": 20,
+        "total": 0,
+        "worklogs": []
+      },
+      "issuetype": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/issuetype/10001",
+        "id": "10001",
+        "description": "Created by Jira Agile - do not edit or delete. Issue type for a user story.",
+        "iconUrl": "https://eoriginal.atlassian.net/images/icons/issuetypes/story.svg",
+        "name": "Story",
+        "subtask": false,
+        "hierarchyLevel": 0
+      },
+      "customfield_11360": null,
+      "customfield_11362": null,
+      "customfield_11483": null,
+      "project": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/project/10731",
+        "id": "10731",
+        "key": "ETA",
+        "name": "eO Test Automation Coverage App Stability Program",
+        "projectTypeKey": "software",
+        "simplified": false,
+        "avatarUrls": {
+          "48x48": "https://eoriginal.atlassian.net/rest/api/3/universal_avatar/view/type/project/avatar/10724",
+          "24x24": "https://eoriginal.atlassian.net/rest/api/3/universal_avatar/view/type/project/avatar/10724?size=small",
+          "16x16": "https://eoriginal.atlassian.net/rest/api/3/universal_avatar/view/type/project/avatar/10724?size=xsmall",
+          "32x32": "https://eoriginal.atlassian.net/rest/api/3/universal_avatar/view/type/project/avatar/10724?size=medium"
+        }
+      },
+      "customfield_11361": null,
+      "customfield_11000": null,
+      "customfield_11364": [],
+      "customfield_11484": null,
+      "customfield_11363": null,
+      "customfield_11486": null,
+      "customfield_11365": null,
+      "customfield_11368": null,
+      "customfield_11367": null,
+      "customfield_11359": null,
+      "customfield_11358": null,
+      "customfield_10700": null,
+      "resolutiondate": null,
+      "watches": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/issue/ETA-351/watchers",
+        "watchCount": 1,
+        "isWatching": true
+      },
+      "customfield_11351": null,
+      "customfield_11350": null,
+      "customfield_11353": null,
+      "customfield_11352": null,
+      "customfield_11354": null,
+      "customfield_11357": null,
+      "customfield_11356": null,
+      "customfield_11348": null,
+      "customfield_11347": null,
+      "customfield_11349": null,
+      "updated": "2026-08-28T20:53:43.242-0400",
+      "customfield_11580": null,
+      "timeoriginalestimate": null,
+      "customfield_11461": null,
+      "customfield_11340": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/customFieldOption/10300",
+        "value": "Normal",
+        "id": "10300"
+      },
+      "customfield_11582": null,
+      "description": {
+        "type": "doc",
+        "version": 1,
+        "content": [
+          {
+            "type": "heading",
+            "attrs": {
+              "level": 2,
+              "localId": "73f36dbfa9c4"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Summary"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "As an organization user, I want to sign in to eCore Command Center using my organization credentials so that I can access the application"
+              }
+            ],
+            "attrs": {
+              "localId": "de9778000bf6"
+            }
+          },
+          {
+            "type": "heading",
+            "attrs": {
+              "level": 2,
+              "localId": "b11715da5424"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Story"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "As an organization user of eCore Command Center"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "I want to sign in using my organization credentials"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "So that I can access the application with my assigned permissions"
+              }
+            ],
+            "attrs": {
+              "localId": "dfb0611c672c"
+            }
+          },
+          {
+            "type": "heading",
+            "attrs": {
+              "level": 2,
+              "localId": "52adf47716ef"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Context"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "The eCore Command Center login page is the entry point to the application. It"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "supports more than one kind of sign-in, and the user tells the system which kind"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "they are using before entering their details. Organization users authenticate"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "against their organization rather than against an individual business entity, so"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "the organization they belong to forms part of what they supply at sign-in."
+              }
+            ],
+            "attrs": {
+              "localId": "38bed5f3bb94"
+            }
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "The other supported sign-in kind is Business Entity Login. It exists on the same"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "page and the user must be able to tell the two apart and choose between them, but"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "its own behaviour is handled elsewhere and is not part of this story."
+              }
+            ],
+            "attrs": {
+              "localId": "779c2bccaacc"
+            }
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Which details the page asks for depends on the choice the user makes. The page is"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "expected to respond to that choice rather than present every possible field at"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "once."
+              }
+            ],
+            "attrs": {
+              "localId": "df4e70c0ff16"
+            }
+          },
+          {
+            "type": "heading",
+            "attrs": {
+              "level": 2,
+              "localId": "47e670265512"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "What the user does"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "A user arrives at the login page, indicates that they are signing in on behalf of"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "their organization, supplies who they are, which organization they belong to, and"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "the secret that proves it, and submits. If everything they supplied is correct,"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "they arrive at the eCore Command Center Home page and can work in the application"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "within the limits of their organization and permissions."
+              }
+            ],
+            "attrs": {
+              "localId": "6fdd6b1cfaa9"
+            }
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Passwords are secrets and are treated as such on screen."
+              }
+            ],
+            "attrs": {
+              "localId": "7a4e3e18a37c"
+            }
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Not everything a user submits will be correct. Details can be wrong, and details"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "can be left out altogether. In neither case should the user get into the"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "application, and in neither case should they be left guessing about what happened."
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Wrong details and missing details are different problems and the user should be"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "able to tell which one they have hit."
+              }
+            ],
+            "attrs": {
+              "localId": "7362e91cde80"
+            }
+          },
+          {
+            "type": "heading",
+            "attrs": {
+              "level": 2,
+              "localId": "52d616c372a3"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Out of Scope"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Business Entity Login behaviour; Forgot Password; password reset; user creation;"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "organization creation; role and permission configuration; MFA and SSO; session"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "timeout; account lockout; exact error-message wording."
+              }
+            ],
+            "attrs": {
+              "localId": "5d7a14b93d97"
+            }
+          }
+        ]
+      },
+      "customfield_11460": null,
+      "customfield_11581": null,
+      "customfield_11584": null,
+      "customfield_11342": null,
+      "customfield_11583": null,
+      "customfield_11341": null,
+      "customfield_11100": null,
+      "customfield_11344": null,
+      "customfield_11343": null,
+      "customfield_11346": null,
+      "customfield_11466": null,
+      "timetracking": {},
+      "customfield_11345": null,
+      "customfield_11458": null,
+      "customfield_11579": null,
+      "customfield_11578": null,
+      "customfield_11457": null,
+      "customfield_11339": null,
+      "customfield_10800": null,
+      "customfield_11459": null,
+      "customfield_10008": null,
+      "customfield_10009": null,
+      "summary": "Organization Login for eCore Command Center: login type selection, credential entry, authentication, and Home page access",
+      "customfield_11450": null,
+      "customfield_11331": null,
+      "customfield_11452": null,
+      "customfield_11451": null,
+      "customfield_11330": null,
+      "customfield_10000": null,
+      "customfield_11333": null,
+      "customfield_11575": null,
+      "customfield_11454": null,
+      "customfield_10001": null,
+      "customfield_10002": "2|i0258u:",
+      "customfield_11453": null,
+      "customfield_11332": null,
+      "customfield_11574": null,
+      "customfield_11577": null,
+      "customfield_11335": null,
+      "customfield_10003": null,
+      "customfield_11455": null,
+      "customfield_10004": "ETA-164",
+      "customfield_11576": null,
+      "customfield_11446": [
+        {
+          "self": "https://eoriginal.atlassian.net/rest/api/3/customFieldOption/10443",
+          "value": "No",
+          "id": "10443"
+        }
+      ],
+      "environment": null,
+      "customfield_11449": null,
+      "customfield_11448": null,
+      "customfield_11327": null,
+      "customfield_11329": null,
+      "duedate": null,
+      "comment": {
+        "comments": [
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/110012/comment/205342",
+            "id": "205342",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "emailAddress": "nitin.saini@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+              },
+              "displayName": "Nitin Saini",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": {
+              "type": "doc",
+              "version": 1,
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Continued development of the POC automation framework and completed the end-to-end framework implementation."
+                    }
+                  ],
+                  "attrs": {
+                    "localId": "abc819728ee8"
+                  }
+                },
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Finalized the workflow covering Jira requirement input, acceptance criteria generation, test plan creation, test script generation, human approval gates, test execution, and report generation."
+                    }
+                  ],
+                  "attrs": {
+                    "localId": "78f7f40ca9d3"
+                  }
+                },
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Completed the framework setup and validated the overall workflow, with application-based execution to be continued as required."
+                    }
+                  ],
+                  "attrs": {
+                    "localId": "cac98a30ed83"
+                  }
+                }
+              ]
+            },
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "emailAddress": "nitin.saini@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+              },
+              "displayName": "Nitin Saini",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "2026-08-24T13:47:37.813-0400",
+            "updated": "2026-08-24T13:47:37.813-0400",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/110012/comment/205447",
+            "id": "205447",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "emailAddress": "nitin.saini@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+              },
+              "displayName": "Nitin Saini",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": {
+              "type": "doc",
+              "version": 1,
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Continued enhancing the POC automation framework based on the feedback and suggestions provided by Mustafa during the initial framework demo."
+                    }
+                  ],
+                  "attrs": {
+                    "localId": "fa34b158d216"
+                  }
+                },
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Updated the framework to support Jira tickets with or without predefined Acceptance Criteria."
+                    }
+                  ],
+                  "attrs": {
+                    "localId": "6c0521debeb0"
+                  }
+                }
+              ]
+            },
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "emailAddress": "nitin.saini@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+              },
+              "displayName": "Nitin Saini",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "2026-08-26T04:04:15.726-0400",
+            "updated": "2026-08-26T04:04:15.726-0400",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/110012/comment/205521",
+            "id": "205521",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "emailAddress": "nitin.saini@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+              },
+              "displayName": "Nitin Saini",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": {
+              "type": "doc",
+              "version": 1,
+              "content": [
+                {
+                  "type": "bulletList",
+                  "content": [
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "localId": "5f1469aeccab"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "Initiated development of a new AI-assisted automation framework to analyze Jira tickets, including linked tickets and sub-stories, and convert the requirements into structured raw data and Acceptance Criteria."
+                            }
+                          ],
+                          "attrs": {
+                            "localId": "2d353cb798e0"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "localId": "88355a3d7ac9"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "The framework incorporates "
+                            },
+                            {
+                              "type": "text",
+                              "text": "three human approval gates across the workflow",
+                              "marks": [
+                                {
+                                  "type": "strong"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "text": ": "
+                            },
+                            {
+                              "type": "text",
+                              "text": "Acceptance Criteria Approval",
+                              "marks": [
+                                {
+                                  "type": "strong"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "text": ", "
+                            },
+                            {
+                              "type": "text",
+                              "text": "Test Plan Approval",
+                              "marks": [
+                                {
+                                  "type": "strong"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "text": ", and "
+                            },
+                            {
+                              "type": "text",
+                              "text": "Automation Approval",
+                              "marks": [
+                                {
+                                  "type": "strong"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "text": "."
+                            }
+                          ],
+                          "attrs": {
+                            "localId": "0404e5febbb4"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "localId": "f255e857bfea"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "Following the approval stages, the framework generates the "
+                            },
+                            {
+                              "type": "text",
+                              "text": "Test Plan",
+                              "marks": [
+                                {
+                                  "type": "strong"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "text": ", creates BDD-based automation scripts, and executes the test scripts as part of the end-to-end automation workflow."
+                            }
+                          ],
+                          "attrs": {
+                            "localId": "7838d2738d97"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "localId": "1cf348a10d36"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "Received feedback and improvement suggestions from Mustafa and Abhinav and are currently working on incorporating the identified changes and enhancements into the framework."
+                            }
+                          ],
+                          "attrs": {
+                            "localId": "4ef4de4ca0ea"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "attrs": {
+                    "localId": "f4f3a9a4bc9b"
+                  }
+                }
+              ]
+            },
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "emailAddress": "nitin.saini@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+              },
+              "displayName": "Nitin Saini",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "2026-08-27T02:41:44.135-0400",
+            "updated": "2026-08-27T02:41:44.135-0400",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/110012/comment/205637",
+            "id": "205637",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "emailAddress": "nitin.saini@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+              },
+              "displayName": "Nitin Saini",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": {
+              "type": "doc",
+              "version": 1,
+              "content": [
+                {
+                  "type": "bulletList",
+                  "content": [
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "localId": "32a3fed29231"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "Completed the implementation of the AI-assisted automation framework and integrated "
+                            },
+                            {
+                              "type": "text",
+                              "text": "v8-to-istanbul",
+                              "marks": [
+                                {
+                                  "type": "strong"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "text": " for test coverage tracking."
+                            }
+                          ],
+                          "attrs": {
+                            "localId": "8f3d6d59d393"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "localId": "2e117a034b7a"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "Incorporated the coverage functionality into the existing framework while ensuring that the previously implemented features and workflows continue to work without disruption, along with the required updates to related references and configurations."
+                            }
+                          ],
+                          "attrs": {
+                            "localId": "d4bbd008886e"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "localId": "d7dc09acd3c5"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "Performed validation using multiple Jira ticket scenarios, including tickets with "
+                            },
+                            {
+                              "type": "text",
+                              "text": "no Acceptance Criteria, incomplete Acceptance Criteria, and complete Acceptance Criteria",
+                              "marks": [
+                                {
+                                  "type": "strong"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "text": ", to verify the framework’s behavior across different requirement conditions."
+                            }
+                          ],
+                          "attrs": {
+                            "localId": "a81917323b05"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "localId": "d0b7b88ab0c2"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "The framework is now functionally complete and undergoing further validation and refinement based on the test results."
+                            }
+                          ],
+                          "attrs": {
+                            "localId": "4ccfabd93882"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "attrs": {
+                    "localId": "2ad3833f5dcf"
+                  }
+                }
+              ]
+            },
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "emailAddress": "nitin.saini@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+              },
+              "displayName": "Nitin Saini",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "2026-08-28T05:19:08.734-0400",
+            "updated": "2026-08-28T05:19:08.734-0400",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/110012/comment/205773",
+            "id": "205773",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "emailAddress": "nitin.saini@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+              },
+              "displayName": "Nitin Saini",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": {
+              "type": "doc",
+              "version": 1,
+              "content": [
+                {
+                  "type": "bulletList",
+                  "content": [
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "localId": "fd324aad0f6b"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "As part of the ongoing framework design activity, reviewed the new requirement to leverage "
+                            },
+                            {
+                              "type": "text",
+                              "text": "models available in FAB Studio",
+                              "marks": [
+                                {
+                                  "type": "strong"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "text": "."
+                            }
+                          ],
+                          "attrs": {
+                            "localId": "09b43383c36d"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "localId": "55424f62e906"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "Spent time gaining an understanding of "
+                            },
+                            {
+                              "type": "text",
+                              "text": "FAB Agents and available models",
+                              "marks": [
+                                {
+                                  "type": "strong"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "text": ", including how they can be integrated and utilized within the existing automation framework."
+                            }
+                          ],
+                          "attrs": {
+                            "localId": "ab08e70774da"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "localId": "030b2ee124d1"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "Evaluated the potential integration approach and continued defining how FAB capabilities can be incorporated into the framework to support the overall automation workflow."
+                            }
+                          ],
+                          "attrs": {
+                            "localId": "eb5ce99a8ec0"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "attrs": {
+                    "localId": "cd124d202ea1"
+                  }
+                }
+              ]
+            },
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "emailAddress": "nitin.saini@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+              },
+              "displayName": "Nitin Saini",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "2026-08-28T20:53:43.242-0400",
+            "updated": "2026-08-28T20:53:43.242-0400",
+            "jsdPublic": true
+          }
+        ],
+        "self": "https://eoriginal.atlassian.net/rest/api/3/issue/110012/comment",
+        "maxResults": 5,
+        "total": 5,
+        "startAt": 0
+      },
+      "statuscategorychangedate": "2026-08-24T13:47:22.710-0400",
+      "customfield_11441": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/customFieldOption/10436",
+        "value": "ECORE",
+        "id": "10436"
+      },
+      "customfield_11440": null,
+      "fixVersions": [],
+      "customfield_11443": null,
+      "customfield_11445": null,
+      "customfield_11323": null,
+      "customfield_11444": null,
+      "customfield_11435": null,
+      "customfield_11438": null,
+      "customfield_11437": null,
+      "customfield_11318": null,
+      "customfield_10900": null,
+      "customfield_11439": null,
+      "customfield_11319": null,
+      "customfield_11430": null,
+      "customfield_10100": null,
+      "customfield_11432": null,
+      "priority": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/priority/3",
+        "iconUrl": "https://eoriginal.atlassian.net/images/icons/priorities/medium_new.svg",
+        "name": "Medium",
+        "id": "3"
+      },
+      "customfield_11674": null,
+      "customfield_11431": null,
+      "customfield_11434": null,
+      "customfield_11433": null,
+      "customfield_11425": null,
+      "customfield_11545": null,
+      "customfield_11426": null,
+      "timeestimate": null,
+      "customfield_11429": null,
+      "versions": [],
+      "status": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/status/3",
+        "description": "This work item is being actively worked on at the moment by the assignee.",
+        "iconUrl": "https://eoriginal.atlassian.net/images/icons/statuses/inprogress.png",
+        "name": "In Progress",
+        "id": "3",
+        "statusCategory": {
+          "self": "https://eoriginal.atlassian.net/rest/api/3/statuscategory/4",
+          "id": 4,
+          "key": "indeterminate",
+          "colorName": "yellow",
+          "name": "In Progress"
+        }
+      },
+      "customfield_11421": null,
+      "customfield_11300": null,
+      "customfield_11420": null,
+      "customfield_11423": null,
+      "customfield_11301": null,
+      "customfield_11544": null,
+      "customfield_11543": null,
+      "customfield_11535": null,
+      "customfield_11534": null,
+      "customfield_11416": null,
+      "customfield_11415": null,
+      "customfield_11418": null,
+      "aggregatetimeestimate": null,
+      "customfield_11417": null,
+      "customfield_11419": null,
+      "creator": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
+        "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+        "emailAddress": "nitin.saini@wolterskluwer.com",
+        "avatarUrls": {
+          "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+          "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+          "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+          "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+        },
+        "displayName": "Nitin Saini",
+        "active": true,
+        "timeZone": "America/New_York",
+        "accountType": "atlassian"
+      },
+      "aggregateprogress": {
+        "progress": 0,
+        "total": 0
+      },
+      "customfield_11531": null,
+      "customfield_11530": null,
+      "customfield_11412": null,
+      "customfield_11533": null,
+      "customfield_11532": null,
+      "customfield_11411": null,
+      "customfield_11524": null,
+      "customfield_11523": null,
+      "customfield_11402": null,
+      "customfield_11526": null,
+      "customfield_11525": null,
+      "customfield_11407": null,
+      "customfield_11527": null,
+      "customfield_11406": null,
+      "customfield_11409": null,
+      "customfield_11529": null,
+      "customfield_11408": null,
+      "timespent": null,
+      "aggregatetimespent": null,
+      "customfield_11641": null,
+      "customfield_11401": {
+        "type": "doc",
+        "version": 1,
+        "content": [
+          {
+            "type": "table",
+            "attrs": {
+              "isNumberColumnEnabled": false,
+              "layout": "default"
+            },
+            "content": [
+              {
+                "type": "tableRow",
+                "content": [
+                  {
+                    "type": "tableHeader",
+                    "attrs": {},
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "Date",
+                            "marks": [
+                              {
+                                "type": "strong"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableHeader",
+                    "attrs": {},
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "Status(Pass/Fail)",
+                            "marks": [
+                              {
+                                "type": "strong"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableHeader",
+                    "attrs": {},
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "Version",
+                            "marks": [
+                              {
+                                "type": "strong"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableHeader",
+                    "attrs": {},
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "Tester",
+                            "marks": [
+                              {
+                                "type": "strong"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "tableRow",
+                "content": [
+                  {
+                    "type": "tableCell",
+                    "attrs": {},
+                    "content": [
+                      {
+                        "type": "paragraph"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {},
+                    "content": [
+                      {
+                        "type": "paragraph"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {},
+                    "content": [
+                      {
+                        "type": "paragraph"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {},
+                    "content": [
+                      {
+                        "type": "paragraph"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "customfield_11400": null,
+      "workratio": -1,
+      "created": "2026-08-24T05:19:12.132-0400",
+      "customfield_11872": null,
+      "customfield_10300": "{}",
+      "customfield_11504": null,
+      "customfield_11740": null,
+      "customfield_11741": null,
+      "security": null,
+      "attachment": [],
+      "customfield_10400": null,
+      "customfield_11608": null
+    }
+  }
+}

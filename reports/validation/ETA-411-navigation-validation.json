@@ -1,0 +1,131 @@
+{
+  "probe": "ETA-411-navigation-validation",
+  "story": "ETA-411",
+  "testPlanId": "TP-ETA-411-001",
+  "stage": "PLAYWRIGHT_VALIDATION",
+  "evidenceSource": "Scripted Playwright navigation. The Playwright MCP server exposed no tools in this session, so this is the documented fallback. Every destination below was reached by an actual click, not inferred from a link address.",
+  "startedAt": "2026-09-01T12:20:18.726Z",
+  "note": "Observation only. No approved expectation was edited to match what was seen.",
+  "homeUrl": "https://qa1.eoriginal.org:8443/ssweb/setup/welcome.eo",
+  "homeTitle": "eOriginal Command Center™",
+  "locatorAmbiguity": {
+    "New Transaction": {
+      "unscopedMatches": 2,
+      "scopedToIconContainer": 1
+    },
+    "Workspace": {
+      "unscopedMatches": 2,
+      "scopedToIconContainer": 1
+    }
+  },
+  "iconContainer": {
+    "found": true,
+    "links": [
+      {
+        "text": "New Transaction",
+        "href": "/ssweb/setup/container/ct/newPackage.eo",
+        "elementId": null,
+        "className": null
+      },
+      {
+        "text": "Workspace",
+        "href": "/ssweb/setup/workspace/workspace.eo",
+        "elementId": null,
+        "className": null
+      },
+      {
+        "text": "Preferences",
+        "href": "/ssweb/setup/prefs/preferences.eo",
+        "elementId": null,
+        "className": null
+      }
+    ]
+  },
+  "headerLinks": [],
+  "commandCenterControl": {
+    "tag": "div",
+    "elementId": "bannerBackground",
+    "className": "clickable",
+    "text": null,
+    "ariaLabel": null,
+    "title": null,
+    "role": null,
+    "backgroundImage": "url(\"https://qa1.eoriginal.org:8443/ssweb/images/command_center.png\")",
+    "cursor": "pointer",
+    "width": 216,
+    "height": 45
+  },
+  "walks": [
+    {
+      "entryPoint": "dashboard icon: New Transaction",
+      "target": "New Transaction",
+      "clicked": true,
+      "landedUrl": "https://qa1.eoriginal.org:8443/ssweb/setup/container/ct/newPackage.eo",
+      "landedTitle": "eOriginal Command Center™",
+      "headings": [
+        "Create Transaction",
+        "Manage Documents",
+        "Document Visibility",
+        "The attached documents must be in one of the following formats:"
+      ],
+      "returnedHomeUrl": "https://qa1.eoriginal.org:8443/ssweb/setup/welcome.eo",
+      "error": null
+    },
+    {
+      "entryPoint": "dashboard icon: Workspace",
+      "target": "Workspace",
+      "clicked": true,
+      "landedUrl": "https://qa1.eoriginal.org:8443/ssweb/setup/workspace/workspace.eo",
+      "landedTitle": "eOriginal Command Center™",
+      "headings": [
+        "Search Criteria",
+        "Output",
+        "The attached documents must be in one of the following formats:"
+      ],
+      "returnedHomeUrl": "https://qa1.eoriginal.org:8443/ssweb/setup/welcome.eo",
+      "error": null
+    },
+    {
+      "entryPoint": "dashboard icon: Preferences",
+      "target": "Preferences",
+      "clicked": true,
+      "landedUrl": "https://qa1.eoriginal.org:8443/ssweb/setup/prefs/preferences.eo",
+      "landedTitle": "eOriginal Command Center™",
+      "headings": [
+        "The attached documents must be in one of the following formats:"
+      ],
+      "returnedHomeUrl": "https://qa1.eoriginal.org:8443/ssweb/setup/welcome.eo",
+      "error": null
+    },
+    {
+      "entryPoint": "header link: New Transaction",
+      "target": "New Transaction",
+      "clicked": true,
+      "landedUrl": "https://qa1.eoriginal.org:8443/ssweb/setup/container/ct/newPackage.eo",
+      "landedTitle": "eOriginal Command Center™",
+      "headings": [
+        "Create Transaction",
+        "Manage Documents",
+        "Document Visibility",
+        "The attached documents must be in one of the following formats:"
+      ],
+      "returnedHomeUrl": "https://qa1.eoriginal.org:8443/ssweb/setup/welcome.eo",
+      "error": null
+    },
+    {
+      "entryPoint": "header link: Workspace",
+      "target": "Workspace",
+      "clicked": true,
+      "landedUrl": "https://qa1.eoriginal.org:8443/ssweb/setup/workspace/workspace.eo",
+      "landedTitle": "eOriginal Command Center™",
+      "headings": [
+        "Search Criteria",
+        "Output",
+        "The attached documents must be in one of the following formats:"
+      ],
+      "returnedHomeUrl": "https://qa1.eoriginal.org:8443/ssweb/setup/welcome.eo",
+      "error": null
+    }
+  ],
+  "finishedAt": "2026-09-01T12:21:04.324Z"
+}

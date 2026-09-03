@@ -1,0 +1,432 @@
+{
+  "schemaVersion": "1.0.0",
+  "testPlanId": "TP-ETA-351-001",
+  "artifactVersion": 1,
+  "release": "1.0",
+  "capability": "account-access",
+  "jiraStoryIds": [
+    "ETA-351"
+  ],
+  "requirementIds": [
+    "REQ-ETA-351-001",
+    "REQ-ETA-351-002",
+    "REQ-ETA-351-003",
+    "REQ-ETA-351-005",
+    "REQ-ETA-351-006",
+    "REQ-ETA-351-007",
+    "REQ-ETA-351-008"
+  ],
+  "acIds": [
+    "AC-ETA-351-001",
+    "AC-ETA-351-002",
+    "AC-ETA-351-003",
+    "AC-ETA-351-004",
+    "AC-ETA-351-005",
+    "AC-ETA-351-006",
+    "AC-ETA-351-007",
+    "AC-ETA-351-008"
+  ],
+  "openSpecRefs": [
+    "openspec/changes/add-organization-login/specs/account-access/organization-login/spec.md",
+    "openspec/changes/add-organization-login/proposal.md",
+    "openspec/changes/add-organization-login/design.md"
+  ],
+  "objective": "Verify that an organization user can declare the kind of sign-in they are using, supply their organization details, be admitted to the eCore Command Center Home page when those details are correct, and be refused and informed when they are wrong or incomplete - in each case asserting only what the approved acceptance criteria assert.",
+  "scope": {
+    "inScope": [
+      "Declaring the kind of sign-in before entering credential details (AC-ETA-351-001).",
+      "Presence and distinguishability of both supported sign-in kinds on the login page (AC-ETA-351-002).",
+      "The page responding to the organization choice rather than presenting every possible field at once (AC-ETA-351-003).",
+      "On-screen concealment of the password (AC-ETA-351-004).",
+      "Successful organization sign-in reaching the eCore Command Center Home page (AC-ETA-351-005).",
+      "Refusal and notification when supplied details are wrong (AC-ETA-351-006).",
+      "Refusal and notification when required details are left out (AC-ETA-351-007).",
+      "The wrong-details response being distinguishable from the missing-details response (AC-ETA-351-008)."
+    ],
+    "outOfScope": [
+      "Business Entity Login behaviour beyond its presence and distinguishability - excluded by the story.",
+      "Forgot Password, password reset, user creation and organization creation - excluded by the story.",
+      "Role and permission configuration, and any permission-dependent behaviour after arrival on the Home page - excluded by the story and unresolved as AMB-ETA-351-006.",
+      "Multi-factor authentication and single sign-on - excluded by the story.",
+      "Session timeout - excluded by the story.",
+      "Account lockout behaviour - excluded by the story. No scenario in this plan attempts to provoke it.",
+      "Exact error-message wording - excluded by the story. No scenario asserts message text.",
+      "Secret-handling obligations beyond on-screen concealment, such as autocomplete, clipboard or page-source exposure - unresolved as AMB-ETA-351-004."
+    ]
+  },
+  "assumptions": [
+    "The eCore Command Center login page is reachable at the configured base URL from the executing network.",
+    "A valid organization account exists for the qa environment and is supplied through environment configuration, never through this artifact.",
+    "The approved acceptance criteria are the only source of expected behaviour. Where a criterion is deliberately abstract, the corresponding scenario stays abstract."
+  ],
+  "dependencies": [
+    "requirements/approved/ETA-351.json at artifactVersion 1.",
+    "requirements/approved/ETA-351-ac-approval.json - Gate 1 decision APPROVE for all eight criteria.",
+    "openspec/changes/add-organization-login/specs/account-access/organization-login/spec.md.",
+    "VPN or equivalent network access to the qa host. Without it no scenario can execute and results must be recorded as BLOCKED.",
+    "Application observation at the PLAYWRIGHT_VALIDATION stage to determine the observable form of the expectations named in AMB-ETA-351-001, AMB-ETA-351-002, AMB-ETA-351-003 and AMB-ETA-351-005."
+  ],
+  "risks": [
+    {
+      "riskId": "RISK-TP-ETA-351-001",
+      "description": "Repeated failed sign-in attempts could lock the real organization account. The story places lockout out of scope, but the login page warns that an account can lock after a number of incorrect attempts, so the risk is real regardless of scope.",
+      "level": "HIGH",
+      "mitigation": "Every negative scenario uses fabricated values from test-data/account-access.sample.json. Only TS-ETA-351-005 uses the real account."
+    },
+    {
+      "riskId": "RISK-TP-ETA-351-002",
+      "description": "Four acceptance criteria describe an observable effect without naming the observable signal, because the story leaves it unstated. A scenario could be hardened prematurely against whatever the application happens to do.",
+      "level": "HIGH",
+      "mitigation": "Expected results are written at the same level of abstraction as the approved criteria. Observation at PLAYWRIGHT_VALIDATION may reveal how a criterion is met, but must never replace what the criterion requires."
+    },
+    {
+      "riskId": "RISK-TP-ETA-351-003",
+      "description": "The qa environment requires VPN access, so execution may be impossible at the scheduled time.",
+      "level": "MEDIUM",
+      "mitigation": "Absence of application access is recorded as an environment blocker and the affected scenarios are recorded as BLOCKED. No result is inferred."
+    },
+    {
+      "riskId": "RISK-TP-ETA-351-004",
+      "description": "AC-ETA-351-008 is comparative: it can only be evaluated by relating the outcomes of two separate attempts. A per-scenario pass or fail is not sufficient evidence on its own.",
+      "level": "MEDIUM",
+      "mitigation": "TS-ETA-351-008 performs both attempts within one scenario and compares their responses, rather than inferring the comparison from TS-ETA-351-006 and TS-ETA-351-007."
+    },
+    {
+      "riskId": "RISK-TP-ETA-351-005",
+      "description": "REQ-ETA-351-004 - what the user supplies and submits - has no acceptance criterion of its own and therefore no scenario of its own. Its behaviour is exercised only indirectly through the sign-in scenarios.",
+      "level": "LOW",
+      "mitigation": "Recorded here and in the Gate 1 review rather than covered by an invented criterion. If direct coverage is wanted, a new acceptance criterion must be approved first."
+    }
+  ],
+  "scenarios": [
+    {
+      "testScenarioId": "TS-ETA-351-001",
+      "title": "The login page offers a way to declare the kind of sign-in before any details are entered",
+      "type": "POSITIVE",
+      "acIds": [
+        "AC-ETA-351-001"
+      ],
+      "preconditions": [
+        "The eCore Command Center login page is open.",
+        "No credential detail has been entered."
+      ],
+      "steps": [
+        "Open the eCore Command Center login page.",
+        "Observe the page before entering any details."
+      ],
+      "expectedResult": "A way to declare which kind of sign-in is being used is available before any credential detail is entered. The mechanism by which the choice is made is not asserted, because it is unresolved as AMB-ETA-351-002.",
+      "testDataRequirements": [
+        "None. No details are entered."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "HIGH",
+      "riskTag": "risk-medium",
+      "suiteTag": "suite-smoke",
+      "scenarioAction": "CREATE"
+    },
+    {
+      "testScenarioId": "TS-ETA-351-002",
+      "title": "Both supported sign-in kinds are offered and can be told apart",
+      "type": "POSITIVE",
+      "acIds": [
+        "AC-ETA-351-002"
+      ],
+      "preconditions": [
+        "The eCore Command Center login page is open."
+      ],
+      "steps": [
+        "Open the eCore Command Center login page.",
+        "Examine the sign-in kinds the page offers."
+      ],
+      "expectedResult": "Organization sign-in and Business Entity Login are both offered and are distinguishable from each other. No Business Entity Login behaviour beyond its presence is exercised, because the story places it out of scope.",
+      "testDataRequirements": [
+        "None. No details are entered."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "HIGH",
+      "riskTag": "risk-medium",
+      "suiteTag": "suite-smoke",
+      "scenarioAction": "CREATE"
+    },
+    {
+      "testScenarioId": "TS-ETA-351-003",
+      "title": "Choosing organization sign-in makes the page ask for the organization details rather than every possible field",
+      "type": "POSITIVE",
+      "acIds": [
+        "AC-ETA-351-003"
+      ],
+      "preconditions": [
+        "The eCore Command Center login page is open."
+      ],
+      "steps": [
+        "Open the eCore Command Center login page.",
+        "Indicate that the sign-in is on behalf of an organization.",
+        "Observe which details the page now asks for."
+      ],
+      "expectedResult": "The page asks for the details that belong to organization sign-in and does not present every possible field at once. The specific field set is not asserted, because it is unresolved as AMB-ETA-351-001 and must be established by observation before this scenario can be made concrete.",
+      "testDataRequirements": [
+        "None. No details are entered."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "HIGH",
+      "riskTag": "risk-high",
+      "suiteTag": "suite-regression",
+      "scenarioAction": "CREATE"
+    },
+    {
+      "testScenarioId": "TS-ETA-351-004",
+      "title": "The password is not readable on screen as it is typed",
+      "type": "POSITIVE",
+      "acIds": [
+        "AC-ETA-351-004"
+      ],
+      "preconditions": [
+        "Organization sign-in has been selected."
+      ],
+      "steps": [
+        "Open the eCore Command Center login page.",
+        "Indicate that the sign-in is on behalf of an organization.",
+        "Type a fabricated secret into the field that accepts the secret.",
+        "Observe whether the typed value is readable on screen."
+      ],
+      "expectedResult": "The typed secret is not readable on screen. No further secret-handling obligation is asserted, because whether any is intended is unresolved as AMB-ETA-351-004.",
+      "testDataRequirements": [
+        "A fabricated secret from test-data/account-access.sample.json. The real password must never be used, because the value is only typed and never submitted."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "HIGH",
+      "riskTag": "risk-high",
+      "suiteTag": "suite-critical",
+      "scenarioAction": "CREATE"
+    },
+    {
+      "testScenarioId": "TS-ETA-351-005",
+      "title": "Correct organization details admit the user to the eCore Command Center Home page",
+      "type": "POSITIVE",
+      "acIds": [
+        "AC-ETA-351-005"
+      ],
+      "preconditions": [
+        "Organization sign-in has been selected.",
+        "A valid organization account is available through environment configuration."
+      ],
+      "steps": [
+        "Open the eCore Command Center login page.",
+        "Indicate that the sign-in is on behalf of an organization.",
+        "Supply correct organization sign-in details.",
+        "Submit."
+      ],
+      "expectedResult": "The user arrives at the eCore Command Center Home page. Nothing about what the user may then do is asserted, because permission-dependent behaviour is out of scope and unresolved as AMB-ETA-351-006.",
+      "testDataRequirements": [
+        "The real qa organization account, read through environment configuration only. Credentials must never appear in this plan, in a feature file or in test data."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "HIGH",
+      "riskTag": "risk-high",
+      "suiteTag": "suite-critical",
+      "scenarioAction": "CREATE"
+    },
+    {
+      "testScenarioId": "TS-ETA-351-006",
+      "title": "Wrong details do not admit the user and the user is told what happened",
+      "type": "NEGATIVE",
+      "acIds": [
+        "AC-ETA-351-006"
+      ],
+      "preconditions": [
+        "Organization sign-in has been selected."
+      ],
+      "steps": [
+        "Open the eCore Command Center login page.",
+        "Indicate that the sign-in is on behalf of an organization.",
+        "Supply fabricated details that are complete but wrong.",
+        "Submit."
+      ],
+      "expectedResult": "The user is not admitted to the application and is told that the attempt failed. No message text is asserted, because exact error-message wording is out of scope; the observable form of being told is unresolved as AMB-ETA-351-003.",
+      "testDataRequirements": [
+        "Fabricated, complete but invalid details from test-data/account-access.sample.json with dataClassification SYNTHETIC_INPUTS. The real account must never be used, to avoid provoking lockout."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "HIGH",
+      "riskTag": "risk-high",
+      "suiteTag": "suite-regression",
+      "scenarioAction": "CREATE"
+    },
+    {
+      "testScenarioId": "TS-ETA-351-007",
+      "title": "Required details left out do not admit the user and the user is told what happened",
+      "type": "NEGATIVE",
+      "acIds": [
+        "AC-ETA-351-007"
+      ],
+      "preconditions": [
+        "Organization sign-in has been selected."
+      ],
+      "steps": [
+        "Open the eCore Command Center login page.",
+        "Indicate that the sign-in is on behalf of an organization.",
+        "Leave one or more required details out.",
+        "Submit."
+      ],
+      "expectedResult": "The user is not admitted to the application and is told that the attempt failed. Which individual details are mandatory, and whether omitting one behaves differently from omitting several, is unresolved as AMB-ETA-351-005, so this scenario asserts the generic case only.",
+      "testDataRequirements": [
+        "Fabricated partial details from test-data/account-access.sample.json with dataClassification SYNTHETIC_INPUTS."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "HIGH",
+      "riskTag": "risk-high",
+      "suiteTag": "suite-regression",
+      "scenarioAction": "CREATE"
+    },
+    {
+      "testScenarioId": "TS-ETA-351-008",
+      "title": "The response to wrong details differs from the response to missing details",
+      "type": "NEGATIVE",
+      "acIds": [
+        "AC-ETA-351-008"
+      ],
+      "preconditions": [
+        "Organization sign-in has been selected."
+      ],
+      "steps": [
+        "Open the eCore Command Center login page.",
+        "Indicate that the sign-in is on behalf of an organization.",
+        "Submit fabricated details that are complete but wrong, and note the response.",
+        "Return to the login page, indicate organization sign-in again, leave required details out, submit, and note the response.",
+        "Compare the two responses."
+      ],
+      "expectedResult": "The two responses differ from each other, so the user can tell which of the two problems they have hit. The difference is asserted as a difference, not as specific wording, because exact error-message wording is out of scope and the observable signal is unresolved as AMB-ETA-351-003.",
+      "testDataRequirements": [
+        "Both the invalid and the partial fabricated detail sets from test-data/account-access.sample.json with dataClassification SYNTHETIC_INPUTS."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "HIGH",
+      "riskTag": "risk-high",
+      "suiteTag": "suite-regression",
+      "scenarioAction": "CREATE"
+    }
+  ],
+  "environmentRequirements": {
+    "environment": "qa",
+    "notes": [
+      "The eCore Command Center login page on the qa host. Network access requires VPN.",
+      "One valid organization account, supplied through environment configuration and never written into a governed artifact.",
+      "Fabricated invalid and partial detail sets in test-data/account-access.sample.json for every negative scenario.",
+      "If the application cannot be reached, affected scenarios are recorded as BLOCKED with the unreachable host named. A blocked scenario is never reported as passed and never filed as a defect."
+    ]
+  },
+  "entryCriteria": [
+    "Gate 1 is cleared: requirements/approved/ETA-351-ac-approval.json records decision APPROVE for all eight acceptance criteria.",
+    "The OpenSpec change add-organization-login validates and its spec delta covers all eight approved criteria.",
+    "This test plan is approved at Gate 2 before any feature file is written."
+  ],
+  "exitCriteria": [
+    "Every scenario in this plan has a recorded execution result of PASSED, FAILED or BLOCKED - never an inferred one.",
+    "Every approved acceptance criterion maps to at least one executed scenario in the capability RTM.",
+    "Coverage is computed from RTM data only, and any uncovered, deferred, blocked or failed criterion is listed rather than rounded away.",
+    "Every clarification listed below is still visible with its current status; none has been silently resolved by observation."
+  ],
+  "coverageMappings": [
+    {
+      "acId": "AC-ETA-351-001",
+      "testScenarioIds": [
+        "TS-ETA-351-001"
+      ]
+    },
+    {
+      "acId": "AC-ETA-351-002",
+      "testScenarioIds": [
+        "TS-ETA-351-002"
+      ]
+    },
+    {
+      "acId": "AC-ETA-351-003",
+      "testScenarioIds": [
+        "TS-ETA-351-003"
+      ]
+    },
+    {
+      "acId": "AC-ETA-351-004",
+      "testScenarioIds": [
+        "TS-ETA-351-004"
+      ]
+    },
+    {
+      "acId": "AC-ETA-351-005",
+      "testScenarioIds": [
+        "TS-ETA-351-005"
+      ]
+    },
+    {
+      "acId": "AC-ETA-351-006",
+      "testScenarioIds": [
+        "TS-ETA-351-006"
+      ]
+    },
+    {
+      "acId": "AC-ETA-351-007",
+      "testScenarioIds": [
+        "TS-ETA-351-007"
+      ]
+    },
+    {
+      "acId": "AC-ETA-351-008",
+      "testScenarioIds": [
+        "TS-ETA-351-008"
+      ]
+    }
+  ],
+  "clarifications": [
+    {
+      "clarificationId": "AMB-ETA-351-001",
+      "question": "What exactly is the field set for organization sign-in - is 'which organization they belong to' one detail or several? TS-ETA-351-003 cannot name the details it expects until this is answered.",
+      "status": "REVIEW_REQUIRED"
+    },
+    {
+      "clarificationId": "AMB-ETA-351-002",
+      "question": "How does the user declare the kind of sign-in - dropdown, radio buttons, tabs, separate links or something else? TS-ETA-351-001 and TS-ETA-351-002 assert that the choice exists but not how it is made.",
+      "status": "REVIEW_REQUIRED"
+    },
+    {
+      "clarificationId": "AMB-ETA-351-003",
+      "question": "What observable difference is required between the wrong-details and missing-details responses, given that exact wording is out of scope? TS-ETA-351-006, TS-ETA-351-007 and TS-ETA-351-008 depend on this.",
+      "status": "REVIEW_REQUIRED"
+    },
+    {
+      "clarificationId": "AMB-ETA-351-004",
+      "question": "Does treating a password as a secret on screen mean only concealment, or does it carry further obligations? TS-ETA-351-004 asserts concealment alone.",
+      "status": "REVIEW_REQUIRED"
+    },
+    {
+      "clarificationId": "AMB-ETA-351-005",
+      "question": "Which organization sign-in details are mandatory, and does omitting one behave the same as omitting several? TS-ETA-351-007 covers the generic case only; a per-detail expectation would need this answer.",
+      "status": "REVIEW_REQUIRED"
+    },
+    {
+      "clarificationId": "AMB-ETA-351-006",
+      "question": "Is any permission-dependent behaviour in scope, or does the story end at arrival on the Home page? TS-ETA-351-005 stops at arrival.",
+      "status": "REVIEW_REQUIRED"
+    },
+    {
+      "clarificationId": "CLR-TP-ETA-351-001",
+      "question": "REQ-ETA-351-004 - the user supplies who they are, which organization they belong to and the secret, then submits - has no acceptance criterion of its own, so it has no scenario of its own. Is indirect coverage through the sign-in scenarios acceptable, or should a criterion be added and approved at Gate 1?",
+      "status": "REVIEW_REQUIRED"
+    }
+  ],
+  "approvalStatus": "APPROVED",
+  "approvalRef": "test-plans/approved/TP-ETA-351-001-approval.json",
+  "dataClassification": "REAL_JIRA_DATA",
+  "timestamps": {
+    "createdAt": "2026-08-31T13:50:00.000Z",
+    "updatedAt": "2026-08-31T14:05:00.000Z",
+    "approvedAt": "2026-08-31T14:05:00.000Z"
+  }
+}

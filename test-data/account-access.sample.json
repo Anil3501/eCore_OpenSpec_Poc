@@ -1,0 +1,18 @@
+{
+  "dataClassification": "SYNTHETIC_INPUTS",
+  "capability": "account-access",
+  "description": "Fabricated organization sign-in inputs. Every value here is invented and is guaranteed not to identify a real user, organization or secret. Real credentials are never stored in this repository; they are read from the environment at run time.",
+  "safetyNote": "The eCore login page warns that an account may lock out after a configured number of incorrect attempts. Every failing scenario must draw from this file so that repeated failures land on values that belong to nobody. Only the happy path uses the real account.",
+  "organizationSignIn": {
+    "wrongDetails": {
+      "username": "qa.fabricated.user.eta351",
+      "organization": "FABRICATED-ORG-DOES-NOT-EXIST",
+      "password": "Fabricated!Passw0rd!eta351"
+    },
+    "incompleteDetails": {
+      "username": "qa.fabricated.user.eta351",
+      "organization": "FABRICATED-ORG-DOES-NOT-EXIST"
+    },
+    "secretForConcealmentCheck": "Fabricated!Secret!NeverSubmitted"
+  }
+}

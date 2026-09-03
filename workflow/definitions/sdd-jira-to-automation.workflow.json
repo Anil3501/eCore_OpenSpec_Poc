@@ -1,0 +1,265 @@
+{
+  "schemaVersion": "1.0.0",
+  "workflowDefinitionId": "sdd-jira-to-automation",
+  "title": "Jira story to executable Playwright-BDD automation",
+  "description": "Orchestrator-driven, spec-driven workflow with three mandatory human approval gates. Every stage is idempotent and resumable from durable workflow state.",
+  "owner": "sdd-workflow-orchestrator",
+  "batching": {
+    "unit": "JIRA_STORY",
+    "maxStoriesPerInvocation": 1,
+    "maxScenariosPerInvocation": 10,
+    "note": "Never process all stories or all tests in a single model invocation. Capability, tag, risk and release are also supported batch axes."
+  },
+  "stages": [
+    {
+      "stage": "JIRA_RETRIEVAL",
+      "agent": "jira-requirement-analysis",
+      "tools": ["atlassian-mcp"],
+      "requires": [],
+      "outputs": ["requirements/raw/<JIRA-ID>.json"],
+      "next": "REQUIREMENT_NORMALIZATION",
+      "blockedWhen": "Atlassian MCP authentication is unavailable or the deployment is Jira Server/Data Center."
+    },
+    {
+      "stage": "REQUIREMENT_NORMALIZATION",
+      "agent": "jira-requirement-analysis",
+      "requires": ["requirements/raw/<JIRA-ID>.json"],
+      "outputs": ["requirements/normalized/<JIRA-ID>.json"],
+      "next": "AC_ANALYSIS"
+    },
+    {
+      "stage": "AC_ANALYSIS",
+      "agent": "jira-requirement-analysis",
+      "requires": ["requirements/normalized/<JIRA-ID>.json"],
+      "outputs": ["requirements/normalized/<JIRA-ID>.json"],
+      "next": "AC_REVIEW_PACKAGE",
+      "rules": [
+        "Preserve every extracted AC verbatim in originalText.",
+        "Every proposed AC requires a rationale supported by available Jira context.",
+        "Unsupported information is recorded as REVIEW_REQUIRED, never invented."
+      ]
+    },
+    {
+      "stage": "AC_REVIEW_PACKAGE",
+      "agent": "jira-requirement-analysis",
+      "requires": ["requirements/normalized/<JIRA-ID>.json"],
+      "outputs": [
+        "requirements/reviews/<JIRA-ID>-ac-review.md",
+        "requirements/reviews/<JIRA-ID>-ac-approval.template.json",
+        "traceability/capabilities/<capability>.rtm.proposed.json"
+      ],
+      "next": "AC_APPROVAL"
+    },
+    {
+      "stage": "AC_APPROVAL",
+      "agent": null,
+      "gate": "ACCEPTANCE_CRITERIA",
+      "requires": ["requirements/reviews/<JIRA-ID>-ac-review.md"],
+      "approvalArtifact": "requirements/approved/<JIRA-ID>-ac-approval.json",
+      "outputs": ["requirements/approved/<JIRA-ID>.json"],
+      "next": "OPENSPEC_GENERATION",
+      "haltsWorkflow": true
+    },
+    {
+      "stage": "OPENSPEC_GENERATION",
+      "agent": "OpenSpec",
+      "requires": ["requirements/approved/<JIRA-ID>-ac-approval.json"],
+      "invokes": "Existing OpenSpec skills and prompts (opsx-propose / openspec-propose). Never fabricate OpenSpec filenames or conventions.",
+      "outputs": ["openspec/changes/<change-name>/**"],
+      "next": "TEST_PLAN_GENERATION",
+      "rules": [
+        "Only APPROVE-d acceptance criteria may be used.",
+        "OpenSpec artifacts describe business behaviour only - no selectors, locators, page objects, fixtures or TypeScript."
+      ]
+    },
+    {
+      "stage": "TEST_PLAN_GENERATION",
+      "agent": "sdd-workflow-orchestrator",
+      "requires": ["requirements/approved/<JIRA-ID>.json", "openspec/changes/<change-name>/**"],
+      "outputs": [
+        "test-plans/generated/<TEST-PLAN-ID>.json",
+        "test-plans/generated/<TEST-PLAN-ID>-review.md",
+        "test-plans/generated/<TEST-PLAN-ID>-approval.template.json"
+      ],
+      "next": "TEST_PLAN_APPROVAL"
+    },
+    {
+      "stage": "TEST_PLAN_APPROVAL",
+      "agent": null,
+      "gate": "TEST_PLAN",
+      "requires": ["test-plans/generated/<TEST-PLAN-ID>-review.md"],
+      "approvalArtifact": "test-plans/approved/<TEST-PLAN-ID>-approval.json",
+      "outputs": ["test-plans/approved/<TEST-PLAN-ID>.json"],
+      "next": "BDD_DESIGN",
+      "haltsWorkflow": true
+    },
+    {
+      "stage": "BDD_DESIGN",
+      "agent": "sdd-workflow-orchestrator",
+      "requires": ["test-plans/approved/<TEST-PLAN-ID>-approval.json"],
+      "outputs": [
+        "features/generated/<capability>/<feature>.feature",
+        "features/generated/<capability>/<TEST-PLAN-ID>-automation-design.md"
+      ],
+      "next": "AUTOMATION_REVIEW_PACKAGE"
+    },
+    {
+      "stage": "AUTOMATION_REVIEW_PACKAGE",
+      "agent": "sdd-workflow-orchestrator",
+      "requires": ["features/generated/<capability>/<feature>.feature"],
+      "outputs": [
+        "features/generated/<capability>/<TEST-PLAN-ID>-automation-design.md",
+        "features/generated/<capability>/<TEST-PLAN-ID>-automation-approval.template.json"
+      ],
+      "next": "AUTOMATION_APPROVAL"
+    },
+    {
+      "stage": "AUTOMATION_APPROVAL",
+      "agent": null,
+      "gate": "AUTOMATION_DESIGN",
+      "requires": ["features/generated/<capability>/<TEST-PLAN-ID>-automation-design.md"],
+      "approvalArtifact": "features/approved/<capability>/<TEST-PLAN-ID>-automation-approval.json",
+      "outputs": ["features/approved/<capability>/<feature>.feature"],
+      "next": "PLAYWRIGHT_VALIDATION",
+      "haltsWorkflow": true
+    },
+    {
+      "stage": "PLAYWRIGHT_VALIDATION",
+      "agent": "playwright-test-planner",
+      "tools": ["playwright-test-mcp"],
+      "requires": ["features/approved/<capability>/<TEST-PLAN-ID>-automation-approval.json"],
+      "outputs": ["reports/validation/<TEST-PLAN-ID>-browser-validation.json", "specs/**"],
+      "next": "IMPLEMENTATION",
+      "rules": [
+        "Explore approved scenarios only.",
+        "Never add unapproved business requirements.",
+        "Record application-versus-specification mismatches instead of silently changing an approved expectation.",
+        "Replace MCP_VALIDATION_REQUIRED placeholders only with validated locators."
+      ]
+    },
+    {
+      "stage": "IMPLEMENTATION",
+      "agent": "sdd-workflow-orchestrator",
+      "requires": ["reports/validation/<TEST-PLAN-ID>-browser-validation.json"],
+      "outputs": ["steps/**", "src/pages/**", "src/components/**", "src/fixtures/**", "test-data/**"],
+      "next": "BDD_GENERATION"
+    },
+    {
+      "stage": "BDD_GENERATION",
+      "agent": "sdd-workflow-orchestrator",
+      "command": "npm run bdd",
+      "requires": ["features/approved/<capability>/<feature>.feature", "steps/**"],
+      "outputs": [".features-gen/**"],
+      "next": "EXECUTION"
+    },
+    {
+      "stage": "EXECUTION",
+      "agent": "sdd-workflow-orchestrator",
+      "command": "npm test",
+      "requires": [".features-gen/**"],
+      "outputs": ["reports/playwright-report/**", "traceability/executions/<EXECUTION-ID>.json"],
+      "next": "RTM_UPDATE",
+      "nextOnSuccess": "RTM_UPDATE",
+      "nextOnFailure": "FAILURE_TRIAGE",
+      "blockedWhen": "PLAYWRIGHT_BASE_URL, credentials, application access or test data are unavailable. Record BLOCKED - never fabricate a passing result."
+    },
+    {
+      "stage": "FAILURE_TRIAGE",
+      "agent": "bug-analyzer",
+      "tools": ["playwright-test"],
+      "command": "npm run triage:failures",
+      "requires": ["reports/execution/results.json", "traceability/executions/<EXECUTION-ID>.json"],
+      "outputs": ["defects/<DEF-ID>.json", "reports/defects/<DEF-ID>/**", "reports/validation/failure-triage.json"],
+      "next": "LOCATOR_HEALING",
+      "nextWhenLocatorSuspect": "LOCATOR_HEALING",
+      "nextWhenApplicationDefect": "BUG_REPORTING",
+      "haltsWorkflowWhenEnvironmentBlocker": true,
+      "rules": [
+        "Evidence is copied out of test-results/ before anything else; the next run overwrites it.",
+        "ENVIRONMENT_BLOCKER outranks every other signal. DNS, TLS, proxy, refused connection or missing configuration means the application was never reached, so the failure proves nothing about it. Halt - never heal it, never file it.",
+        "Classification is mechanical. AMBIGUOUS is routed to healing first, because an unnecessary heal is cheaper than a false bug.",
+        "expectedBehaviour is the approved acceptance criterion verbatim. Never paraphrase it and never invent one.",
+        "A fingerprint that already belongs to a REPORTED defect is recorded as DUPLICATE, not filed again."
+      ],
+      "blockedWhen": "reports/execution/results.json is absent or the failing test carries no @ac- tag, so the failure cannot be traced to an approved acceptance criterion."
+    },
+    {
+      "stage": "LOCATOR_HEALING",
+      "agent": "governed-locator-healer",
+      "tools": ["playwright-test"],
+      "maxAttempts": 2,
+      "requires": ["defects/<DEF-ID>.json"],
+      "outputs": ["src/pages/**", "src/components/**", "defects/<DEF-ID>.json"],
+      "next": "RTM_UPDATE",
+      "nextWhenHealed": "RTM_UPDATE",
+      "nextWhenNotHealed": "BUG_REPORTING",
+      "rules": [
+        "Only locators and waits inside src/pages/** and src/components/** may change.",
+        "Feature files, step definitions, assertions and test data are out of bounds - changing them would change the approved behaviour under test.",
+        "test.fixme, test.skip and waitForTimeout are forbidden. Silencing a test is not healing it.",
+        "After two attempts without a green re-run, set classification LOCATOR_UNHEALABLE and outcome NOT_HEALED, revert speculative edits and hand over to BUG_REPORTING.",
+        "An APPLICATION_DEFECT never enters this stage."
+      ],
+      "blockedWhen": "The scenario cannot be re-run, so no attempt can be evidenced."
+    },
+    {
+      "stage": "BUG_REPORTING",
+      "agent": "bug-analyzer",
+      "tools": ["atlassian"],
+      "requires": ["defects/<DEF-ID>.json", "reports/defects/<DEF-ID>/**"],
+      "outputs": ["defects/<DEF-ID>.json", "traceability/capabilities/<capability>.rtm.proposed.json"],
+      "next": "RTM_UPDATE",
+      "rules": [
+        "fixVersions are read verbatim from the story under test. If the story has none, BLOCK - never guess a release.",
+        "The bug is linked to the story and assigned to the configured reviewer. An unassigned bug is an unreviewed bug.",
+        "Severity, priority and root cause are never invented. Raise them as open questions in the description instead.",
+        "The agent proposes the RTM defectRefs update; only the orchestrator merges it."
+      ],
+      "blockedWhen": "JIRA_BUG_ASSIGNEE_ACCOUNT_ID is unset, the story has no fixVersions, or the Atlassian MCP session is not authenticated."
+    },
+    {
+      "stage": "RTM_UPDATE",
+      "agent": "sdd-workflow-orchestrator",
+      "requires": ["traceability/executions/<EXECUTION-ID>.json"],
+      "outputs": [
+        "traceability/capabilities/<capability>.rtm.json",
+        "traceability/capabilities/<capability>.coverage.json",
+        "traceability/index/lookup.index.json",
+        "workflow/history/<workflowId>.history.jsonl"
+      ],
+      "next": "COMPLETED"
+    },
+    {
+      "stage": "COMPLETED",
+      "agent": null,
+      "requires": [],
+      "outputs": [],
+      "next": null
+    }
+  ],
+  "mergeProtocol": [
+    "Delegated output is written to an isolated *.proposed.json file.",
+    "The orchestrator validates the proposed update.",
+    "The orchestrator acquires a processing lock covering the target traceability files.",
+    "The orchestrator merges the update.",
+    "The orchestrator validates the merged artifact.",
+    "The orchestrator releases the lock.",
+    "The orchestrator appends the update to workflow/history/<workflowId>.history.jsonl."
+  ],
+  "idempotencyChecks": [
+    "Does the output artifact already exist?",
+    "Did the source artifact version change?",
+    "Was the artifact approved?",
+    "Is another workflow instance processing it?",
+    "Would regeneration overwrite historical evidence?",
+    "Did the previous stage complete successfully?",
+    "Is the current stage allowed to execute?",
+    "Are all required approvals recorded in validated workspace artifacts?",
+    "Does a defect with this failure fingerprint already exist, and was it already REPORTED?",
+    "Has the two-attempt locator healing cap already been reached for this defect?"
+  ],
+  "failurePolicy": {
+    "schemaValidation": "Attempt exactly one correction, then stop and report the exact blocker.",
+    "maxRetries": 1
+  }
+}

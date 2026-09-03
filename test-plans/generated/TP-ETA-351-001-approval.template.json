@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "1.0.0",
+  "approvalId": "APR-TP-ETA-351-001",
+  "gate": "TEST_PLAN",
+  "artifactId": "TP-ETA-351-001",
+  "artifactVersion": 1,
+  "release": "1.0",
+  "capability": "account-access",
+  "sourceArtifactPath": "test-plans/generated/TP-ETA-351-001.json",
+  "decision": "REVIEW_REQUIRED_REPLACE_WITH_APPROVE_OR_REQUEST_CHANGES_OR_REJECT_OR_DEFER",
+  "reviewer": {
+    "name": "REPLACE_WITH_REVIEWER_NAME",
+    "role": "REPLACE_WITH_REVIEWER_ROLE",
+    "reference": null
+  },
+  "reviewedAt": "REPLACE_WITH_ISO_8601_TIMESTAMP",
+  "comments": "REPLACE_WITH_REVIEW_COMMENTS. Please state explicitly whether the six ambiguities may remain unresolved through BDD_DESIGN, and answer AMB-ETA-351-004, AMB-ETA-351-006 and CLR-TP-ETA-351-001, which no amount of application observation can resolve.",
+  "itemDecisions": [
+    {
+      "itemId": "TS-ETA-351-001",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Declare the kind of sign-in before entering any details. AC-ETA-351-001. Asserts that the choice exists, not how it is made."
+    },
+    {
+      "itemId": "TS-ETA-351-002",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Both sign-in kinds offered and distinguishable. AC-ETA-351-002. No Business Entity Login behaviour is exercised."
+    },
+    {
+      "itemId": "TS-ETA-351-003",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Page asks for the organization details rather than every possible field. AC-ETA-351-003. The field set is deliberately unnamed - see AMB-ETA-351-001."
+    },
+    {
+      "itemId": "TS-ETA-351-004",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Password not readable on screen. AC-ETA-351-004. Concealment only - see AMB-ETA-351-004."
+    },
+    {
+      "itemId": "TS-ETA-351-005",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Correct details reach the eCore Command Center Home page. AC-ETA-351-005. The only scenario using the real account. Stops at arrival - see AMB-ETA-351-006."
+    },
+    {
+      "itemId": "TS-ETA-351-006",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Wrong details refused and reported. AC-ETA-351-006. Fabricated data only. No message text asserted."
+    },
+    {
+      "itemId": "TS-ETA-351-007",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Missing details refused and reported. AC-ETA-351-007. Fabricated data only. Generic case only - see AMB-ETA-351-005."
+    },
+    {
+      "itemId": "TS-ETA-351-008",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "The two failure responses differ from each other. AC-ETA-351-008. Performs both attempts in one scenario because the criterion is comparative."
+    }
+  ]
+}

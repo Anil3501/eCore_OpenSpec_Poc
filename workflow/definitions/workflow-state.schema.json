@@ -1,0 +1,212 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ecore-openspec-poc/schemas/workflow-state.schema.json",
+  "title": "Durable Workflow State",
+  "description": "One instance per Jira story and release. The orchestrator must read this file before acting and must never rely on conversation history for workflow state.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "workflowId",
+    "workflowDefinition",
+    "jiraStoryId",
+    "release",
+    "capability",
+    "currentStage",
+    "status",
+    "completedStages",
+    "pendingApproval",
+    "inputArtifactVersions",
+    "outputArtifactPaths",
+    "nextStage",
+    "retryCount",
+    "createdAt",
+    "updatedAt",
+    "startedAt",
+    "completedAt",
+    "errorDetails",
+    "processingLock",
+    "assignedAgent",
+    "lastSuccessfulStage"
+  ],
+  "properties": {
+    "schemaVersion": { "type": "string", "const": "1.0.0" },
+    "workflowId": { "type": "string", "pattern": "^WF-[A-Z0-9-]+-R[0-9]+\\.[0-9]+$" },
+    "workflowDefinition": { "type": "string", "minLength": 1 },
+    "jiraStoryId": { "type": "string", "pattern": "^[A-Z][A-Z0-9]+-[0-9]+$" },
+    "release": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+(\\.[0-9]+)?$" },
+    "capability": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "dataClassification": {
+      "type": "string",
+      "enum": ["REAL_JIRA_DATA", "SAMPLE_DATA"]
+    },
+    "currentStage": { "$ref": "#/$defs/stage" },
+    "nextStage": {
+      "anyOf": [{ "$ref": "#/$defs/stage" }, { "type": "null" }]
+    },
+    "lastSuccessfulStage": {
+      "anyOf": [{ "$ref": "#/$defs/stage" }, { "type": "null" }]
+    },
+    "status": { "$ref": "#/$defs/status" },
+    "completedStages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["stage", "completedAt", "outputs"],
+        "properties": {
+          "stage": { "$ref": "#/$defs/stage" },
+          "completedAt": { "type": "string", "format": "date-time" },
+          "agent": { "type": ["string", "null"] },
+          "outputs": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "pendingApproval": {
+      "anyOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["gate", "reviewPackagePath", "approvalTemplatePath", "requestedAt"],
+          "properties": {
+            "gate": {
+              "type": "string",
+              "enum": ["ACCEPTANCE_CRITERIA", "TEST_PLAN", "AUTOMATION_DESIGN"]
+            },
+            "reviewPackagePath": { "type": "string", "minLength": 1 },
+            "approvalTemplatePath": { "type": "string", "minLength": 1 },
+            "expectedApprovalPath": { "type": "string", "minLength": 1 },
+            "requestedAt": { "type": "string", "format": "date-time" }
+          }
+        }
+      ]
+    },
+    "inputArtifactVersions": {
+      "description": "Map of artifact path -> artifact version used as input. Enables change detection before regeneration.",
+      "type": "object",
+      "additionalProperties": { "type": "integer", "minimum": 1 }
+    },
+    "outputArtifactPaths": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "retryCount": { "type": "integer", "minimum": 0 },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "updatedAt": { "type": "string", "format": "date-time" },
+    "startedAt": {
+      "anyOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }]
+    },
+    "completedAt": {
+      "anyOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }]
+    },
+    "errorDetails": {
+      "anyOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["code", "message", "occurredAt"],
+          "properties": {
+            "code": { "type": "string", "minLength": 1 },
+            "message": { "type": "string", "minLength": 1 },
+            "stage": { "anyOf": [{ "$ref": "#/$defs/stage" }, { "type": "null" }] },
+            "occurredAt": { "type": "string", "format": "date-time" },
+            "blocker": { "type": ["string", "null"] }
+          }
+        }
+      ]
+    },
+    "processingLock": {
+      "anyOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["lockId", "owner", "acquiredAt", "scope"],
+          "properties": {
+            "lockId": { "type": "string", "minLength": 1 },
+            "owner": { "type": "string", "minLength": 1 },
+            "acquiredAt": { "type": "string", "format": "date-time" },
+            "expiresAt": { "type": ["string", "null"], "format": "date-time" },
+            "scope": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      ]
+    },
+    "assignedAgent": {
+      "type": ["string", "null"],
+      "enum": [
+        "sdd-workflow-orchestrator",
+        "jira-requirement-analysis",
+        "OpenSpec",
+        "playwright-test-planner",
+        "playwright-test-generator",
+        "playwright-test-healer",
+        "bug-analyzer",
+        "governed-locator-healer",
+        null
+      ]
+    },
+    "defectContext": {
+      "description": "Present only after EXECUTION recorded a failure. Absent on every workflow that predates the failure-handling branch.",
+      "anyOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["activeDefectIds", "healingAttemptCount"],
+          "properties": {
+            "activeDefectIds": {
+              "type": "array",
+              "items": { "type": "string", "pattern": "^DEF-[A-Z0-9-]+-[0-9]{3}$" }
+            },
+            "healingAttemptCount": { "type": "integer", "minimum": 0, "maximum": 2 }
+          }
+        }
+      ]
+    }
+  },
+  "$defs": {
+    "stage": {
+      "type": "string",
+      "enum": [
+        "JIRA_RETRIEVAL",
+        "REQUIREMENT_NORMALIZATION",
+        "AC_ANALYSIS",
+        "AC_REVIEW_PACKAGE",
+        "AC_APPROVAL",
+        "OPENSPEC_GENERATION",
+        "TEST_PLAN_GENERATION",
+        "TEST_PLAN_APPROVAL",
+        "BDD_DESIGN",
+        "AUTOMATION_REVIEW_PACKAGE",
+        "AUTOMATION_APPROVAL",
+        "PLAYWRIGHT_VALIDATION",
+        "IMPLEMENTATION",
+        "BDD_GENERATION",
+        "EXECUTION",
+        "FAILURE_TRIAGE",
+        "LOCATOR_HEALING",
+        "BUG_REPORTING",
+        "RTM_UPDATE",
+        "COMPLETED"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "NOT_STARTED",
+        "IN_PROGRESS",
+        "VALIDATION_FAILED",
+        "WAITING_FOR_CLARIFICATION",
+        "WAITING_FOR_HUMAN",
+        "APPROVED",
+        "REJECTED",
+        "CHANGES_REQUESTED",
+        "BLOCKED",
+        "COMPLETED"
+      ]
+    }
+  }
+}

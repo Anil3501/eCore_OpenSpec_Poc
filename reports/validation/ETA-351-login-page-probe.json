@@ -1,0 +1,234 @@
+{
+  "probe": "ETA-351-login-page",
+  "purpose": "PLAYWRIGHT_VALIDATION observation. No credential supplied, nothing submitted.",
+  "startedAt": "2026-08-31T16:09:39.229Z",
+  "requestedUrl": "https://qa1.eoriginal.org:8443/ssweb/setup/showLogin.eo",
+  "finalUrl": "https://qa1.eoriginal.org:8443/ssweb/setup/showLogin.eo",
+  "title": "eOriginal Command Center™",
+  "redirected": false,
+  "controls": [
+    {
+      "tag": "input",
+      "type": "hidden",
+      "id": "login-platform-description",
+      "name": "platformDescription",
+      "visible": false,
+      "accessibleName": "Safari 7.x on Windows NT 10.0 64-bit",
+      "role": null,
+      "required": false,
+      "options": null
+    },
+    {
+      "tag": "input",
+      "type": "hidden",
+      "id": "login-fingerprint",
+      "name": "fingerprint",
+      "visible": false,
+      "accessibleName": "6d7482ef54c37fff34dfa5a9e314fa2a",
+      "role": null,
+      "required": false,
+      "options": null
+    },
+    {
+      "tag": "input",
+      "type": "hidden",
+      "id": "eo_cc_login_targetUrl",
+      "name": "targetUrl",
+      "visible": false,
+      "accessibleName": "/setup/welcome.eo",
+      "role": null,
+      "required": false,
+      "options": null
+    },
+    {
+      "tag": "select",
+      "type": "select-one",
+      "id": "loginType",
+      "name": null,
+      "visible": true,
+      "accessibleName": "businessEntity",
+      "role": null,
+      "required": false,
+      "options": [
+        "Organization Login",
+        "Business Entity Login"
+      ]
+    },
+    {
+      "tag": "input",
+      "type": "text",
+      "id": "userName",
+      "name": "UserName",
+      "visible": true,
+      "accessibleName": "Username",
+      "role": null,
+      "required": false,
+      "options": null
+    },
+    {
+      "tag": "input",
+      "type": "text",
+      "id": "orgName",
+      "name": "OrgName",
+      "visible": false,
+      "accessibleName": "Organization Name",
+      "role": null,
+      "required": false,
+      "options": null
+    },
+    {
+      "tag": "input",
+      "type": "text",
+      "id": "businessEntity",
+      "name": "BusinessEntity",
+      "visible": true,
+      "accessibleName": "Business Entity",
+      "role": null,
+      "required": false,
+      "options": null
+    },
+    {
+      "tag": "input",
+      "type": "password",
+      "id": "password",
+      "name": "Password",
+      "visible": true,
+      "accessibleName": "Password",
+      "role": null,
+      "required": false,
+      "options": null
+    },
+    {
+      "tag": "input",
+      "type": "submit",
+      "id": null,
+      "name": null,
+      "visible": true,
+      "accessibleName": "Sign In",
+      "role": null,
+      "required": false,
+      "options": null
+    },
+    {
+      "tag": "select",
+      "type": "select-one",
+      "id": "forgotPasswordLoginType",
+      "name": null,
+      "visible": false,
+      "accessibleName": "businessEntity",
+      "role": null,
+      "required": false,
+      "options": [
+        "Organization Login",
+        "Business Entity Login"
+      ]
+    },
+    {
+      "tag": "input",
+      "type": "text",
+      "id": "passwordForm_userName",
+      "name": "UserName",
+      "visible": false,
+      "accessibleName": "Username",
+      "role": null,
+      "required": false,
+      "options": null
+    },
+    {
+      "tag": "input",
+      "type": "text",
+      "id": "passwordForm_orgName",
+      "name": "OrgName",
+      "visible": false,
+      "accessibleName": "Organization Name",
+      "role": null,
+      "required": false,
+      "options": null
+    },
+    {
+      "tag": "input",
+      "type": "text",
+      "id": "passwordForm_businessEntity",
+      "name": "BusinessEntity",
+      "visible": false,
+      "accessibleName": "Business Entity",
+      "role": null,
+      "required": false,
+      "options": null
+    },
+    {
+      "tag": "input",
+      "type": "submit",
+      "id": null,
+      "name": null,
+      "visible": false,
+      "accessibleName": "Submit",
+      "role": null,
+      "required": false,
+      "options": null
+    }
+  ],
+  "visibleControls": [
+    {
+      "tag": "select",
+      "type": "select-one",
+      "id": "loginType",
+      "name": null,
+      "visible": true,
+      "accessibleName": "businessEntity",
+      "role": null,
+      "required": false,
+      "options": [
+        "Organization Login",
+        "Business Entity Login"
+      ]
+    },
+    {
+      "tag": "input",
+      "type": "text",
+      "id": "userName",
+      "name": "UserName",
+      "visible": true,
+      "accessibleName": "Username",
+      "role": null,
+      "required": false,
+      "options": null
+    },
+    {
+      "tag": "input",
+      "type": "text",
+      "id": "businessEntity",
+      "name": "BusinessEntity",
+      "visible": true,
+      "accessibleName": "Business Entity",
+      "role": null,
+      "required": false,
+      "options": null
+    },
+    {
+      "tag": "input",
+      "type": "password",
+      "id": "password",
+      "name": "Password",
+      "visible": true,
+      "accessibleName": "Password",
+      "role": null,
+      "required": false,
+      "options": null
+    },
+    {
+      "tag": "input",
+      "type": "submit",
+      "id": null,
+      "name": null,
+      "visible": true,
+      "accessibleName": "Sign In",
+      "role": null,
+      "required": false,
+      "options": null
+    }
+  ],
+  "pageText": "Command Center Organization Login Business Entity Login Forgot password? © 2026 eOriginal, Inc. All Rights Reserved. 100 South 5th Street, Suite 500 Minneapolis, MN 55402 Support: 1-866-364-3578",
+  "screenshot": "reports\\validation\\ETA-351-login-page.png",
+  "status": "OBSERVED"
+}

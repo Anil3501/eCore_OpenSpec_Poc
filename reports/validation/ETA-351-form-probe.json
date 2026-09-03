@@ -1,0 +1,156 @@
+{
+  "probe": "ETA-351-forms",
+  "startedAt": "2026-08-31T16:20:55.929Z",
+  "forms": [
+    {
+      "id": "eo_cc_login",
+      "name": "eo_cc_login",
+      "action": "eo_cc_login",
+      "className": "",
+      "visible": true,
+      "controls": [
+        {
+          "tag": "input",
+          "type": "hidden",
+          "id": "login-platform-description",
+          "name": "platformDescription",
+          "placeholder": null,
+          "value": null,
+          "visible": false
+        },
+        {
+          "tag": "input",
+          "type": "hidden",
+          "id": "login-fingerprint",
+          "name": "fingerprint",
+          "placeholder": null,
+          "value": null,
+          "visible": false
+        },
+        {
+          "tag": "input",
+          "type": "hidden",
+          "id": "eo_cc_login_targetUrl",
+          "name": "targetUrl",
+          "placeholder": null,
+          "value": null,
+          "visible": false
+        },
+        {
+          "tag": "select",
+          "type": "select-one",
+          "id": "loginType",
+          "name": null,
+          "placeholder": null,
+          "value": null,
+          "visible": true
+        },
+        {
+          "tag": "input",
+          "type": "text",
+          "id": "userName",
+          "name": "UserName",
+          "placeholder": "Username",
+          "value": null,
+          "visible": true
+        },
+        {
+          "tag": "input",
+          "type": "text",
+          "id": "orgName",
+          "name": "OrgName",
+          "placeholder": "Organization Name",
+          "value": null,
+          "visible": true
+        },
+        {
+          "tag": "input",
+          "type": "text",
+          "id": "businessEntity",
+          "name": "BusinessEntity",
+          "placeholder": "Business Entity",
+          "value": null,
+          "visible": false
+        },
+        {
+          "tag": "input",
+          "type": "password",
+          "id": "password",
+          "name": "Password",
+          "placeholder": "Password",
+          "value": null,
+          "visible": true
+        },
+        {
+          "tag": "input",
+          "type": "submit",
+          "id": null,
+          "name": null,
+          "placeholder": null,
+          "value": "Sign In",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": "forgot-password",
+      "name": "forgot-password",
+      "action": "/ssweb/setup/submitForgotPasswordEmail.eo",
+      "className": "",
+      "visible": false,
+      "controls": [
+        {
+          "tag": "select",
+          "type": "select-one",
+          "id": "forgotPasswordLoginType",
+          "name": null,
+          "placeholder": null,
+          "value": null,
+          "visible": false
+        },
+        {
+          "tag": "input",
+          "type": "text",
+          "id": "passwordForm_userName",
+          "name": "UserName",
+          "placeholder": "Username",
+          "value": null,
+          "visible": false
+        },
+        {
+          "tag": "input",
+          "type": "text",
+          "id": "passwordForm_orgName",
+          "name": "OrgName",
+          "placeholder": "Organization Name",
+          "value": null,
+          "visible": false
+        },
+        {
+          "tag": "input",
+          "type": "text",
+          "id": "passwordForm_businessEntity",
+          "name": "BusinessEntity",
+          "placeholder": "Business Entity",
+          "value": null,
+          "visible": false
+        },
+        {
+          "tag": "input",
+          "type": "submit",
+          "id": null,
+          "name": null,
+          "placeholder": null,
+          "value": "Submit",
+          "visible": false
+        }
+      ]
+    }
+  ],
+  "duplicateNamesAcrossForms": {
+    "Username": 2,
+    "Organization Name": 2,
+    "Business Entity": 2
+  },
+  "status": "OBSERVED"
+}

@@ -1,0 +1,51 @@
+{
+  "probe": "ETA-351-messages",
+  "startedAt": "2026-08-31T16:14:55.907Z",
+  "missingDetailsContainers": [
+    {
+      "tag": "span",
+      "id": null,
+      "className": "",
+      "role": null,
+      "html": "<span>Username is required.</span>"
+    },
+    {
+      "tag": "p (parent)",
+      "id": "validateTips",
+      "className": "darkRed",
+      "role": null,
+      "html": "<p id=\"validateTips\" class=\"darkRed\"><span>Username is required.</span><br><span>Organization Name is required.</span><br><span>Password is required.</span><br></p>"
+    },
+    {
+      "tag": "span",
+      "id": null,
+      "className": "",
+      "role": null,
+      "html": "<span>Organization Name is required.</span>"
+    },
+    {
+      "tag": "span",
+      "id": null,
+      "className": "",
+      "role": null,
+      "html": "<span>Password is required.</span>"
+    }
+  ],
+  "wrongDetailsContainers": [
+    {
+      "tag": "span",
+      "id": null,
+      "className": "",
+      "role": null,
+      "html": "<span>Your login attempt failed. You may have entered one or more of your credentials incorrectly, or selected the incorrect Organization Login/Business Entity Login scope. Please remember that all credentials are required and are case sensitive. Your account may lock out after a configured number of incorrect attempts. If necessary, contact your system administrator for assistance.</span>"
+    },
+    {
+      "tag": "li (parent)",
+      "id": null,
+      "className": "",
+      "role": null,
+      "html": "<li><span>Your login attempt failed. You may have entered one or more of your credentials incorrectly, or selected the incorrect Organization Login/Business Entity Login scope. Please remember that all credentials are required and are case sensitive. Your account may lock out after a configured number of incorrect attempts. If necessary, contact your system administrator for assistance.</span></li>"
+    }
+  ],
+  "status": "OBSERVED"
+}

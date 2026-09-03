@@ -1,0 +1,206 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ecore-openspec-poc/schemas/test-plan.schema.json",
+  "title": "Business Test Plan",
+  "description": "Generated only from approved acceptance criteria, approved OpenSpec artifacts, Jira source context and existing RTM relationships. Business-level only - no automation implementation detail.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "testPlanId",
+    "artifactVersion",
+    "release",
+    "capability",
+    "jiraStoryIds",
+    "requirementIds",
+    "acIds",
+    "objective",
+    "scope",
+    "assumptions",
+    "dependencies",
+    "risks",
+    "scenarios",
+    "environmentRequirements",
+    "entryCriteria",
+    "exitCriteria",
+    "coverageMappings",
+    "clarifications",
+    "approvalStatus",
+    "dataClassification",
+    "timestamps"
+  ],
+  "properties": {
+    "schemaVersion": { "type": "string", "const": "1.0.0" },
+    "testPlanId": { "type": "string", "pattern": "^TP-[A-Z0-9-]+-[0-9]{3}$" },
+    "artifactVersion": { "type": "integer", "minimum": 1 },
+    "release": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+(\\.[0-9]+)?$" },
+    "capability": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "jiraStoryIds": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "pattern": "^[A-Z][A-Z0-9]+-[0-9]+$" }
+    },
+    "requirementIds": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "pattern": "^REQ-[A-Z][A-Z0-9]+-[0-9]+-[0-9]{3}$" }
+    },
+    "acIds": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "pattern": "^AC-[A-Z][A-Z0-9]+-[0-9]+-[0-9]{3}$" }
+    },
+    "openSpecRefs": { "type": "array", "items": { "type": "string" } },
+    "objective": { "type": "string", "minLength": 1 },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["inScope", "outOfScope"],
+      "properties": {
+        "inScope": { "type": "array", "items": { "type": "string" } },
+        "outOfScope": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "assumptions": { "type": "array", "items": { "type": "string" } },
+    "dependencies": { "type": "array", "items": { "type": "string" } },
+    "risks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["riskId", "description", "level"],
+        "properties": {
+          "riskId": { "type": "string", "minLength": 1 },
+          "description": { "type": "string", "minLength": 1 },
+          "level": { "type": "string", "enum": ["LOW", "MEDIUM", "HIGH"] },
+          "mitigation": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "scenarios": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/scenario" }
+    },
+    "environmentRequirements": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["environment", "notes"],
+      "properties": {
+        "environment": {
+          "type": "string",
+          "enum": ["local", "dev", "qa", "uat", "staging"]
+        },
+        "notes": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "entryCriteria": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "exitCriteria": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "coverageMappings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["acId", "testScenarioIds"],
+        "properties": {
+          "acId": { "type": "string", "pattern": "^AC-[A-Z][A-Z0-9]+-[0-9]+-[0-9]{3}$" },
+          "testScenarioIds": {
+            "type": "array",
+            "items": { "type": "string", "pattern": "^TS-[A-Z0-9-]+-[0-9]{3}$" }
+          }
+        }
+      }
+    },
+    "clarifications": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["clarificationId", "question", "status"],
+        "properties": {
+          "clarificationId": { "type": "string", "minLength": 1 },
+          "question": { "type": "string", "minLength": 1 },
+          "status": {
+            "type": "string",
+            "enum": ["REVIEW_REQUIRED", "RESOLVED", "DEFERRED"]
+          }
+        }
+      }
+    },
+    "approvalStatus": {
+      "type": "string",
+      "enum": [
+        "PENDING_TEST_PLAN_APPROVAL",
+        "APPROVED",
+        "REJECTED",
+        "DEFERRED",
+        "REQUEST_CHANGES",
+        "REVIEW_REQUIRED"
+      ]
+    },
+    "approvalRef": { "type": ["string", "null"] },
+    "dataClassification": {
+      "type": "string",
+      "enum": ["REAL_JIRA_DATA", "SAMPLE_DATA"]
+    },
+    "timestamps": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["createdAt", "updatedAt"],
+      "properties": {
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" },
+        "approvedAt": {
+          "anyOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }]
+        }
+      }
+    }
+  },
+  "$defs": {
+    "scenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "testScenarioId",
+        "title",
+        "type",
+        "acIds",
+        "preconditions",
+        "steps",
+        "expectedResult",
+        "testDataRequirements",
+        "automationCandidate",
+        "priority"
+      ],
+      "properties": {
+        "testScenarioId": { "type": "string", "pattern": "^TS-[A-Z0-9-]+-[0-9]{3}$" },
+        "title": { "type": "string", "minLength": 1 },
+        "type": {
+          "type": "string",
+          "enum": ["POSITIVE", "NEGATIVE", "BOUNDARY"]
+        },
+        "acIds": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "pattern": "^AC-[A-Z][A-Z0-9]+-[0-9]+-[0-9]{3}$" }
+        },
+        "preconditions": { "type": "array", "items": { "type": "string" } },
+        "steps": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "expectedResult": { "type": "string", "minLength": 1 },
+        "testDataRequirements": { "type": "array", "items": { "type": "string" } },
+        "automationCandidate": { "type": "boolean" },
+        "automationDecision": {
+          "type": "string",
+          "enum": ["AUTOMATE", "MANUAL_ONLY", "DEFERRED", "REVIEW_REQUIRED"]
+        },
+        "priority": { "type": "string", "enum": ["LOW", "MEDIUM", "HIGH"] },
+        "riskTag": { "type": ["string", "null"] },
+        "suiteTag": { "type": ["string", "null"] },
+        "scenarioAction": {
+          "type": "string",
+          "enum": ["REUSE", "UPDATE", "CREATE", "RETIRE", "REGRESSION", "REVIEW_REQUIRED"]
+        }
+      }
+    }
+  }
+}

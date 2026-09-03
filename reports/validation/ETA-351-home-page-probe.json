@@ -1,0 +1,61 @@
+{
+  "probe": "ETA-351-home-page",
+  "startedAt": "2026-08-31T16:21:47.586Z",
+  "note": "Single successful sign-in. No credential value is recorded in this file.",
+  "configuredLoginType": "Organization Login",
+  "landedUrl": "https://qa1.eoriginal.org:8443/ssweb/setup/welcome.eo",
+  "title": "eOriginal Command Center™",
+  "stillOnLoginPage": false,
+  "signInButtonStillPresent": 0,
+  "failureMessage": [],
+  "headings": [
+    {
+      "tag": "h2",
+      "text": "New Transaction"
+    },
+    {
+      "tag": "h2",
+      "text": "Workspace"
+    },
+    {
+      "tag": "h2",
+      "text": "Preferences"
+    }
+  ],
+  "landmarks": [
+    {
+      "tag": "div",
+      "role": "dialog",
+      "id": null,
+      "text": "Session Expiring! Close Your session is about to expire. Click Continue to avoid"
+    }
+  ],
+  "links": [
+    "Nitin Saini",
+    "Nitin Saini",
+    "Home",
+    "New Transaction",
+    "Workspace",
+    "Configuration Changes",
+    "eAsset® Analytics",
+    "Event Analytics",
+    "Infographics",
+    "Manage Scheduled Reports",
+    "Open Requests",
+    "Permission Analysis",
+    "Transaction Retention Analysis",
+    "User Activity Analysis",
+    "Vault Content",
+    "Organization",
+    "Vault",
+    "Tutorials",
+    "Support",
+    "About",
+    "Logout",
+    "New Transaction",
+    "Workspace",
+    "Preferences"
+  ],
+  "bodyTextStart": "Logged In User: Nitin Saini (Nitin Saini) Home New Transaction Workspace Reports Preferences Help Logout New Transaction Workspace Preferences © Mon Aug 31 12:22:03 EDT 2026 eOriginal, Inc. All Rights Reserved.",
+  "status": "OBSERVED"
+}

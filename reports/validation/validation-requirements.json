@@ -1,0 +1,46 @@
+{
+  "generatedAt": "2026-09-01T10:40:01.794Z",
+  "scope": "requirements",
+  "summary": {
+    "total": 5,
+    "passed": 5,
+    "failed": 0,
+    "skipped": 0
+  },
+  "results": [
+    {
+      "id": "REQ-STRUCTURE",
+      "title": "Requirement artifacts validate against schema",
+      "status": "PASS",
+      "messages": [
+        "3 artifact(s) validated."
+      ]
+    },
+    {
+      "id": "APR-STRUCTURE",
+      "title": "Approval artifacts validate against schema",
+      "status": "PASS",
+      "messages": [
+        "3 approval artifact(s) validated."
+      ]
+    },
+    {
+      "id": "SEM-APPROVAL-EVIDENCE",
+      "title": "Approved artifacts carry validated approval evidence",
+      "status": "PASS",
+      "messages": []
+    },
+    {
+      "id": "SEM-SAMPLE-ISOLATION",
+      "title": "Synthetic SAMPLE_DATA stays separated from real Jira data",
+      "status": "PASS",
+      "messages": []
+    },
+    {
+      "id": "SEM-VERSIONS",
+      "title": "Artifact versions increase when approved content changes",
+      "status": "PASS",
+      "messages": []
+    }
+  ]
+}

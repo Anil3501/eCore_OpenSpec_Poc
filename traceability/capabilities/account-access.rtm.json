@@ -1,0 +1,410 @@
+{
+  "schemaVersion": "1.0.0",
+  "capability": "account-access",
+  "release": "1.0",
+  "artifactVersion": 3,
+  "dataClassification": "REAL_JIRA_DATA",
+  "updatedAt": "2026-08-31T16:31:35.495Z",
+  "entries": [
+    {
+      "traceId": "TRC-ETA-351-001",
+      "jiraStoryId": "ETA-351",
+      "requirementId": "REQ-ETA-351-001",
+      "acId": "AC-ETA-351-001",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/ETA-351.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/ETA-351-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-ETA-351-001-approval.json",
+        "automationDesign": "features/approved/account-access/TP-ETA-351-001-automation-approval.json"
+      },
+      "openSpecRefs": [
+        "openspec/changes/add-organization-login/specs/account-access/organization-login/spec.md"
+      ],
+      "testPlan": {
+        "testPlanId": "TP-ETA-351-001",
+        "testScenarioId": "TS-ETA-351-001",
+        "path": "test-plans/approved/TP-ETA-351-001.json",
+        "version": 1
+      },
+      "automation": {
+        "featureFile": "features/approved/account-access/organization-sign-in.feature",
+        "gherkinScenario": "The login page offers a way to declare the kind of sign-in before any details are entered",
+        "stepDefinitions": [
+          "steps/organization-sign-in.steps.ts"
+        ],
+        "pageObjects": [
+          "src/pages/ecore-login.page.ts",
+          "src/pages/ecore-home.page.ts"
+        ],
+        "fixtures": [
+          "src/fixtures/test.ts"
+        ],
+        "generatedTest": ".features-gen/features/approved/account-access/organization-sign-in.feature.spec.js",
+        "automationStatus": "EXECUTABLE",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-ETA-351-001",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-ETA-351-001.json"
+        }
+      ]
+    },
+    {
+      "traceId": "TRC-ETA-351-002",
+      "jiraStoryId": "ETA-351",
+      "requirementId": "REQ-ETA-351-002",
+      "acId": "AC-ETA-351-002",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/ETA-351.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/ETA-351-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-ETA-351-001-approval.json",
+        "automationDesign": "features/approved/account-access/TP-ETA-351-001-automation-approval.json"
+      },
+      "openSpecRefs": [
+        "openspec/changes/add-organization-login/specs/account-access/organization-login/spec.md"
+      ],
+      "testPlan": {
+        "testPlanId": "TP-ETA-351-001",
+        "testScenarioId": "TS-ETA-351-002",
+        "path": "test-plans/approved/TP-ETA-351-001.json",
+        "version": 1
+      },
+      "automation": {
+        "featureFile": "features/approved/account-access/organization-sign-in.feature",
+        "gherkinScenario": "Both supported sign-in kinds are offered and can be told apart",
+        "stepDefinitions": [
+          "steps/organization-sign-in.steps.ts"
+        ],
+        "pageObjects": [
+          "src/pages/ecore-login.page.ts",
+          "src/pages/ecore-home.page.ts"
+        ],
+        "fixtures": [
+          "src/fixtures/test.ts"
+        ],
+        "generatedTest": ".features-gen/features/approved/account-access/organization-sign-in.feature.spec.js",
+        "automationStatus": "EXECUTABLE",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-ETA-351-001",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-ETA-351-001.json"
+        }
+      ]
+    },
+    {
+      "traceId": "TRC-ETA-351-003",
+      "jiraStoryId": "ETA-351",
+      "requirementId": "REQ-ETA-351-003",
+      "acId": "AC-ETA-351-003",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/ETA-351.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/ETA-351-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-ETA-351-001-approval.json",
+        "automationDesign": "features/approved/account-access/TP-ETA-351-001-automation-approval.json"
+      },
+      "openSpecRefs": [
+        "openspec/changes/add-organization-login/specs/account-access/organization-login/spec.md"
+      ],
+      "testPlan": {
+        "testPlanId": "TP-ETA-351-001",
+        "testScenarioId": "TS-ETA-351-003",
+        "path": "test-plans/approved/TP-ETA-351-001.json",
+        "version": 1
+      },
+      "automation": {
+        "featureFile": "features/approved/account-access/organization-sign-in.feature",
+        "gherkinScenario": "Choosing organization sign-in makes the page ask for the organization details rather than every possible field",
+        "stepDefinitions": [
+          "steps/organization-sign-in.steps.ts"
+        ],
+        "pageObjects": [
+          "src/pages/ecore-login.page.ts",
+          "src/pages/ecore-home.page.ts"
+        ],
+        "fixtures": [
+          "src/fixtures/test.ts"
+        ],
+        "generatedTest": ".features-gen/features/approved/account-access/organization-sign-in.feature.spec.js",
+        "automationStatus": "EXECUTABLE",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-ETA-351-001",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-ETA-351-001.json"
+        }
+      ]
+    },
+    {
+      "traceId": "TRC-ETA-351-004",
+      "jiraStoryId": "ETA-351",
+      "requirementId": "REQ-ETA-351-006",
+      "acId": "AC-ETA-351-004",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/ETA-351.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/ETA-351-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-ETA-351-001-approval.json",
+        "automationDesign": "features/approved/account-access/TP-ETA-351-001-automation-approval.json"
+      },
+      "openSpecRefs": [
+        "openspec/changes/add-organization-login/specs/account-access/organization-login/spec.md"
+      ],
+      "testPlan": {
+        "testPlanId": "TP-ETA-351-001",
+        "testScenarioId": "TS-ETA-351-004",
+        "path": "test-plans/approved/TP-ETA-351-001.json",
+        "version": 1
+      },
+      "automation": {
+        "featureFile": "features/approved/account-access/organization-sign-in.feature",
+        "gherkinScenario": "The password is not readable on screen as it is typed",
+        "stepDefinitions": [
+          "steps/organization-sign-in.steps.ts"
+        ],
+        "pageObjects": [
+          "src/pages/ecore-login.page.ts",
+          "src/pages/ecore-home.page.ts"
+        ],
+        "fixtures": [
+          "src/fixtures/test.ts"
+        ],
+        "generatedTest": ".features-gen/features/approved/account-access/organization-sign-in.feature.spec.js",
+        "automationStatus": "EXECUTABLE",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-ETA-351-001",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-ETA-351-001.json"
+        }
+      ]
+    },
+    {
+      "traceId": "TRC-ETA-351-005",
+      "jiraStoryId": "ETA-351",
+      "requirementId": "REQ-ETA-351-005",
+      "acId": "AC-ETA-351-005",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/ETA-351.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/ETA-351-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-ETA-351-001-approval.json",
+        "automationDesign": "features/approved/account-access/TP-ETA-351-001-automation-approval.json"
+      },
+      "openSpecRefs": [
+        "openspec/changes/add-organization-login/specs/account-access/organization-login/spec.md"
+      ],
+      "testPlan": {
+        "testPlanId": "TP-ETA-351-001",
+        "testScenarioId": "TS-ETA-351-005",
+        "path": "test-plans/approved/TP-ETA-351-001.json",
+        "version": 1
+      },
+      "automation": {
+        "featureFile": "features/approved/account-access/organization-sign-in.feature",
+        "gherkinScenario": "Correct organization details admit the user to the eCore Command Center Home page",
+        "stepDefinitions": [
+          "steps/organization-sign-in.steps.ts"
+        ],
+        "pageObjects": [
+          "src/pages/ecore-login.page.ts",
+          "src/pages/ecore-home.page.ts"
+        ],
+        "fixtures": [
+          "src/fixtures/test.ts"
+        ],
+        "generatedTest": ".features-gen/features/approved/account-access/organization-sign-in.feature.spec.js",
+        "automationStatus": "EXECUTABLE",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-ETA-351-001",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-ETA-351-001.json"
+        }
+      ]
+    },
+    {
+      "traceId": "TRC-ETA-351-006",
+      "jiraStoryId": "ETA-351",
+      "requirementId": "REQ-ETA-351-007",
+      "acId": "AC-ETA-351-006",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/ETA-351.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/ETA-351-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-ETA-351-001-approval.json",
+        "automationDesign": "features/approved/account-access/TP-ETA-351-001-automation-approval.json"
+      },
+      "openSpecRefs": [
+        "openspec/changes/add-organization-login/specs/account-access/organization-login/spec.md"
+      ],
+      "testPlan": {
+        "testPlanId": "TP-ETA-351-001",
+        "testScenarioId": "TS-ETA-351-006",
+        "path": "test-plans/approved/TP-ETA-351-001.json",
+        "version": 1
+      },
+      "automation": {
+        "featureFile": "features/approved/account-access/organization-sign-in.feature",
+        "gherkinScenario": "Wrong details do not admit the user and the user is told what happened",
+        "stepDefinitions": [
+          "steps/organization-sign-in.steps.ts"
+        ],
+        "pageObjects": [
+          "src/pages/ecore-login.page.ts",
+          "src/pages/ecore-home.page.ts"
+        ],
+        "fixtures": [
+          "src/fixtures/test.ts"
+        ],
+        "generatedTest": ".features-gen/features/approved/account-access/organization-sign-in.feature.spec.js",
+        "automationStatus": "EXECUTABLE",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-ETA-351-001",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-ETA-351-001.json"
+        }
+      ]
+    },
+    {
+      "traceId": "TRC-ETA-351-007",
+      "jiraStoryId": "ETA-351",
+      "requirementId": "REQ-ETA-351-007",
+      "acId": "AC-ETA-351-007",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/ETA-351.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/ETA-351-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-ETA-351-001-approval.json",
+        "automationDesign": "features/approved/account-access/TP-ETA-351-001-automation-approval.json"
+      },
+      "openSpecRefs": [
+        "openspec/changes/add-organization-login/specs/account-access/organization-login/spec.md"
+      ],
+      "testPlan": {
+        "testPlanId": "TP-ETA-351-001",
+        "testScenarioId": "TS-ETA-351-007",
+        "path": "test-plans/approved/TP-ETA-351-001.json",
+        "version": 1
+      },
+      "automation": {
+        "featureFile": "features/approved/account-access/organization-sign-in.feature",
+        "gherkinScenario": "Required details left out do not admit the user and the user is told what happened",
+        "stepDefinitions": [
+          "steps/organization-sign-in.steps.ts"
+        ],
+        "pageObjects": [
+          "src/pages/ecore-login.page.ts",
+          "src/pages/ecore-home.page.ts"
+        ],
+        "fixtures": [
+          "src/fixtures/test.ts"
+        ],
+        "generatedTest": ".features-gen/features/approved/account-access/organization-sign-in.feature.spec.js",
+        "automationStatus": "EXECUTABLE",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-ETA-351-001",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-ETA-351-001.json"
+        }
+      ]
+    },
+    {
+      "traceId": "TRC-ETA-351-008",
+      "jiraStoryId": "ETA-351",
+      "requirementId": "REQ-ETA-351-008",
+      "acId": "AC-ETA-351-008",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/ETA-351.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/ETA-351-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-ETA-351-001-approval.json",
+        "automationDesign": "features/approved/account-access/TP-ETA-351-001-automation-approval.json"
+      },
+      "openSpecRefs": [
+        "openspec/changes/add-organization-login/specs/account-access/organization-login/spec.md"
+      ],
+      "testPlan": {
+        "testPlanId": "TP-ETA-351-001",
+        "testScenarioId": "TS-ETA-351-008",
+        "path": "test-plans/approved/TP-ETA-351-001.json",
+        "version": 1
+      },
+      "automation": {
+        "featureFile": "features/approved/account-access/organization-sign-in.feature",
+        "gherkinScenario": "The response to wrong details differs from the response to missing details",
+        "stepDefinitions": [
+          "steps/organization-sign-in.steps.ts"
+        ],
+        "pageObjects": [
+          "src/pages/ecore-login.page.ts",
+          "src/pages/ecore-home.page.ts"
+        ],
+        "fixtures": [
+          "src/fixtures/test.ts"
+        ],
+        "generatedTest": ".features-gen/features/approved/account-access/organization-sign-in.feature.spec.js",
+        "automationStatus": "EXECUTABLE",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-ETA-351-001",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-ETA-351-001.json"
+        }
+      ]
+    }
+  ]
+}

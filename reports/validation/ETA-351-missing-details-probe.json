@@ -1,0 +1,90 @@
+{
+  "probe": "ETA-351-missing-details",
+  "purpose": "Determine whether omitting required details produces any observable response.",
+  "startedAt": "2026-08-31T16:13:38.292Z",
+  "status": "OBSERVED",
+  "cases": [
+    {
+      "name": "all fields empty",
+      "filled": {},
+      "before": {
+        "url": "https://qa1.eoriginal.org:8443/ssweb/setup/showLogin.eo",
+        "bodyText": "Command Center Organization Login Business Entity Login Forgot password? © 2026 eOriginal, Inc. All Rights Reserved. 100 South 5th Street, Suite 500 Minneapolis, MN 55402 Support: 1-866-364-3578",
+        "htmlLength": 7843
+      },
+      "after": {
+        "url": "https://qa1.eoriginal.org:8443/ssweb/setup/showLogin.eo",
+        "bodyText": "Command Center Username is required. Organization Name is required. Password is required. Organization Login Business Entity Login Forgot password? © 2026 eOriginal, Inc. All Rights Reserved. 100 South 5th Street, Suite 500 Minneapolis, MN 55402 Support: 1-866-364-3578",
+        "htmlLength": 8001
+      },
+      "navigated": false,
+      "textChanged": true,
+      "newText": "Command Center Username is required. Organization Name is required. Password is required. Organization Login Business Entity Login Forgot password? © 2026 eOriginal, Inc. All Rights Reserved. 100 South 5th Street, Suite 500 Minneapolis, MN 55402 Support: 1-866-364-3578",
+      "htmlValidationBlocked": false
+    },
+    {
+      "name": "only password omitted",
+      "filled": {
+        "userName": "qa.fabricated.user.eta351",
+        "orgName": "FABRICATED-ORG-DOES-NOT-EXIST"
+      },
+      "before": {
+        "url": "https://qa1.eoriginal.org:8443/ssweb/setup/showLogin.eo",
+        "bodyText": "Command Center Organization Login Business Entity Login Forgot password? © 2026 eOriginal, Inc. All Rights Reserved. 100 South 5th Street, Suite 500 Minneapolis, MN 55402 Support: 1-866-364-3578",
+        "htmlLength": 7843
+      },
+      "after": {
+        "url": "https://qa1.eoriginal.org:8443/ssweb/setup/showLogin.eo",
+        "bodyText": "Command Center Password is required. Organization Login Business Entity Login Forgot password? © 2026 eOriginal, Inc. All Rights Reserved. 100 South 5th Street, Suite 500 Minneapolis, MN 55402 Support: 1-866-364-3578",
+        "htmlLength": 7886
+      },
+      "navigated": false,
+      "textChanged": true,
+      "newText": "Command Center Password is required. Organization Login Business Entity Login Forgot password? © 2026 eOriginal, Inc. All Rights Reserved. 100 South 5th Street, Suite 500 Minneapolis, MN 55402 Support: 1-866-364-3578",
+      "htmlValidationBlocked": false
+    },
+    {
+      "name": "only organization omitted",
+      "filled": {
+        "userName": "qa.fabricated.user.eta351",
+        "password": "(fabricated secret)"
+      },
+      "before": {
+        "url": "https://qa1.eoriginal.org:8443/ssweb/setup/showLogin.eo",
+        "bodyText": "Command Center Organization Login Business Entity Login Forgot password? © 2026 eOriginal, Inc. All Rights Reserved. 100 South 5th Street, Suite 500 Minneapolis, MN 55402 Support: 1-866-364-3578",
+        "htmlLength": 7843
+      },
+      "after": {
+        "url": "https://qa1.eoriginal.org:8443/ssweb/setup/showLogin.eo",
+        "bodyText": "Command Center Organization Name is required. Organization Login Business Entity Login Forgot password? © 2026 eOriginal, Inc. All Rights Reserved. 100 South 5th Street, Suite 500 Minneapolis, MN 55402 Support: 1-866-364-3578",
+        "htmlLength": 7895
+      },
+      "navigated": false,
+      "textChanged": true,
+      "newText": "Command Center Organization Name is required. Organization Login Business Entity Login Forgot password? © 2026 eOriginal, Inc. All Rights Reserved. 100 South 5th Street, Suite 500 Minneapolis, MN 55402 Support: 1-866-364-3578",
+      "htmlValidationBlocked": false
+    },
+    {
+      "name": "all fields present but wrong (control case)",
+      "filled": {
+        "userName": "qa.fabricated.user.eta351",
+        "orgName": "FABRICATED-ORG-DOES-NOT-EXIST",
+        "password": "(fabricated secret)"
+      },
+      "before": {
+        "url": "https://qa1.eoriginal.org:8443/ssweb/setup/showLogin.eo",
+        "bodyText": "Command Center Organization Login Business Entity Login Forgot password? © 2026 eOriginal, Inc. All Rights Reserved. 100 South 5th Street, Suite 500 Minneapolis, MN 55402 Support: 1-866-364-3578",
+        "htmlLength": 7843
+      },
+      "after": {
+        "url": "https://qa1.eoriginal.org:8443/ssweb/setup/showLogin.eo",
+        "bodyText": "Command Center Your login attempt failed. You may have entered one or more of your credentials incorrectly, or selected the incorrect Organization Login/Business Entity Login scope. Please remember that all credentials are required and are case sensitive. Your account may lock out after a configured number of incorrect attempts. If necessary, contact your system administrator for assistance. Organization Login Business Entity Login Forgot password? © 2026 eOriginal, Inc. All Rights Reserved. 100 South 5th Street, Suite 500 Minneapolis, MN 55402 Support: 1-866-364-3578",
+        "htmlLength": 8266
+      },
+      "navigated": false,
+      "textChanged": true,
+      "newText": "Command Center Your login attempt failed. You may have entered one or more of your credentials incorrectly, or selected the incorrect Organization Login/Business Entity Login scope. Please remember that all credentials are required and are case sensitive. Your account may lock out after a configured number of incorrect attempts. If necessary, contact your system administrator for assistance. Organization Login Business Entity Login Forgot password? © 2026 eOriginal, Inc. All Rights Reserved. 100 South 5th Street, Suite 500 Minneapolis, MN 55402 Support: 1-866-364-3578",
+      "htmlValidationBlocked": false
+    }
+  ]
+}

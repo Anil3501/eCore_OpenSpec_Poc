@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ecore-openspec-poc/schemas/coverage-matrix.schema.json",
+  "title": "Coverage Matrix",
+  "description": "Derived strictly from RTM data. Percentages are null whenever the source data required to compute them is missing. A 100% value is only permitted when RTM data proves it.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "capability",
+    "release",
+    "generatedAt",
+    "dataClassification",
+    "sourceRtm",
+    "totals",
+    "coverage",
+    "gaps"
+  ],
+  "properties": {
+    "schemaVersion": { "type": "string", "const": "1.0.0" },
+    "capability": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "release": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+(\\.[0-9]+)?$" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "dataClassification": {
+      "type": "string",
+      "enum": ["REAL_JIRA_DATA", "SAMPLE_DATA"]
+    },
+    "sourceRtm": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "version"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "version": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "totals": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "approvedAcs",
+        "approvedAcsLinkedToApprovedScenarios",
+        "approvedAcsLinkedToExecutableAutomation",
+        "automatedAcsExecuted",
+        "executedAcsPassed"
+      ],
+      "properties": {
+        "approvedAcs": { "type": "integer", "minimum": 0 },
+        "approvedAcsLinkedToApprovedScenarios": { "type": "integer", "minimum": 0 },
+        "approvedAcsLinkedToExecutableAutomation": { "type": "integer", "minimum": 0 },
+        "automatedAcsExecuted": { "type": "integer", "minimum": 0 },
+        "executedAcsPassed": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "acDesignCoveragePct",
+        "automationCoveragePct",
+        "executionCoveragePct",
+        "passCoveragePct"
+      ],
+      "properties": {
+        "acDesignCoveragePct": { "$ref": "#/$defs/percentage" },
+        "automationCoveragePct": { "$ref": "#/$defs/percentage" },
+        "executionCoveragePct": { "$ref": "#/$defs/percentage" },
+        "passCoveragePct": { "$ref": "#/$defs/percentage" }
+      }
+    },
+    "gaps": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "uncoveredAcIds",
+        "deferredAcIds",
+        "blockedAcIds",
+        "manualOnlyAcIds",
+        "failedAcIds",
+        "clarificationRequiredAcIds"
+      ],
+      "properties": {
+        "uncoveredAcIds": { "$ref": "#/$defs/acIdList" },
+        "deferredAcIds": { "$ref": "#/$defs/acIdList" },
+        "blockedAcIds": { "$ref": "#/$defs/acIdList" },
+        "manualOnlyAcIds": { "$ref": "#/$defs/acIdList" },
+        "failedAcIds": { "$ref": "#/$defs/acIdList" },
+        "clarificationRequiredAcIds": { "$ref": "#/$defs/acIdList" }
+      }
+    },
+    "notes": { "type": "array", "items": { "type": "string" } }
+  },
+  "$defs": {
+    "percentage": {
+      "description": "Null when the source data required for the calculation is unavailable.",
+      "type": ["number", "null"],
+      "minimum": 0,
+      "maximum": 100
+    },
+    "acIdList": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^AC-[A-Z][A-Z0-9]+-[0-9]+-[0-9]{3}$" }
+    }
+  }
+}

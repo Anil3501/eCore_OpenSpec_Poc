@@ -1,0 +1,204 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ecore-openspec-poc/schemas/defect-report.schema.json",
+  "title": "Defect Report",
+  "description": "Records one failed acceptance criterion observed in a real test execution, the deterministic triage signal, any governed locator-healing attempts, and the resulting Jira bug. A defect report is evidence, not a claim: it may only exist for a failure recorded in a real execution artifact.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "defectId",
+    "release",
+    "capability",
+    "jiraStoryId",
+    "dataClassification",
+    "executionId",
+    "executionRecordPath",
+    "testPlanId",
+    "testScenarioId",
+    "acId",
+    "requirementId",
+    "featureFile",
+    "gherkinScenario",
+    "classification",
+    "classificationRationale",
+    "fingerprint",
+    "failure",
+    "evidence",
+    "healing",
+    "jira",
+    "status",
+    "artifactVersion",
+    "createdAt",
+    "updatedAt",
+    "notes"
+  ],
+  "properties": {
+    "schemaVersion": { "type": "string", "const": "1.0.0" },
+    "defectId": {
+      "description": "Stable, immutable identifier. Allocated once and reused for the lifetime of the defect.",
+      "type": "string",
+      "pattern": "^DEF-[A-Z0-9-]+-[0-9]{3}$"
+    },
+    "release": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+(\\.[0-9]+)?$" },
+    "capability": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "jiraStoryId": { "type": "string", "pattern": "^[A-Z][A-Z0-9]+-[0-9]+$" },
+    "dataClassification": { "type": "string", "enum": ["REAL_JIRA_DATA", "SAMPLE_DATA"] },
+    "executionId": { "type": "string", "minLength": 1 },
+    "executionRecordPath": {
+      "description": "Path to the governed execution artifact that recorded this failure. A defect can never be raised without one.",
+      "type": "string",
+      "minLength": 1
+    },
+    "testPlanId": { "type": "string", "pattern": "^TP-[A-Z0-9-]+-[0-9]{3}$" },
+    "testScenarioId": { "type": "string", "pattern": "^TS-[A-Z0-9-]+-[0-9]{3}$" },
+    "acId": { "type": "string", "pattern": "^AC-[A-Z][A-Z0-9]+-[0-9]+-[0-9]{3}$" },
+    "requirementId": { "type": "string", "pattern": "^REQ-[A-Z][A-Z0-9]+-[0-9]+-[0-9]{3}$" },
+    "featureFile": { "type": "string", "minLength": 1 },
+    "gherkinScenario": { "type": "string", "minLength": 1 },
+    "classification": { "$ref": "#/$defs/classification" },
+    "classificationRationale": {
+      "description": "Cites the deterministic signal that produced the classification. Never a claim about application internals.",
+      "type": "string",
+      "minLength": 1
+    },
+    "fingerprint": {
+      "description": "sha256 of capability|acId|testScenarioId|normalised error signature. Used to prevent duplicate Jira issues.",
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "failure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "errorMessage",
+        "errorStack",
+        "durationSeconds",
+        "retryIndex",
+        "observedBehaviour",
+        "expectedBehaviour"
+      ],
+      "properties": {
+        "errorMessage": { "type": "string", "minLength": 1 },
+        "errorStack": { "type": ["string", "null"] },
+        "durationSeconds": { "type": "number", "minimum": 0 },
+        "retryIndex": { "type": "integer", "minimum": 0 },
+        "observedBehaviour": {
+          "description": "What the run actually did, in business language, derived only from execution evidence.",
+          "type": "string",
+          "minLength": 1
+        },
+        "expectedBehaviour": {
+          "description": "Verbatim text of the approved acceptance criterion. Never paraphrased and never authored by an agent.",
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["screenshots", "traceFiles", "playwrightReport", "attachmentsWithheld"],
+      "properties": {
+        "screenshots": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "traceFiles": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "playwrightReport": { "type": ["string", "null"] },
+        "attachmentsWithheld": {
+          "description": "True when BUG_ATTACH_TRACE is disabled and trace files were deliberately not uploaded.",
+          "type": "boolean"
+        }
+      }
+    },
+    "healing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["attempts", "outcome"],
+      "properties": {
+        "attempts": {
+          "description": "At most two governed healing attempts. Each entry requires a real re-run result.",
+          "type": "array",
+          "maxItems": 2,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["attemptNumber", "attemptedAt", "agent", "filesChanged", "rerunResult", "notes"],
+            "properties": {
+              "attemptNumber": { "type": "integer", "minimum": 1, "maximum": 2 },
+              "attemptedAt": { "type": "string", "format": "date-time" },
+              "agent": { "type": "string", "minLength": 1 },
+              "filesChanged": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+              "rerunResult": { "type": "string", "enum": ["PASSED", "FAILED", "TIMED_OUT"] },
+              "notes": { "type": "string" }
+            }
+          }
+        },
+        "outcome": { "type": "string", "enum": ["HEALED", "NOT_HEALED", "NOT_ATTEMPTED"] }
+      }
+    },
+    "jira": {
+      "anyOf": [{ "$ref": "#/$defs/jiraLink" }, { "type": "null" }]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["TRIAGED", "HEALING", "HEALED", "REPORTED", "DUPLICATE", "BLOCKED", "REVIEW_REQUIRED"]
+    },
+    "artifactVersion": { "type": "integer", "minimum": 1 },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "updatedAt": { "type": "string", "format": "date-time" },
+    "notes": { "type": "array", "items": { "type": "string" } }
+  },
+  "$defs": {
+    "classification": {
+      "type": "string",
+      "enum": [
+        "LOCATOR_SUSPECT",
+        "APPLICATION_DEFECT",
+        "AMBIGUOUS",
+        "LOCATOR_UNHEALABLE",
+        "ENVIRONMENT_BLOCKER",
+        "HEALED",
+        "REVIEW_REQUIRED"
+      ]
+    },
+    "jiraLink": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "issueKey",
+        "issueUrl",
+        "projectKey",
+        "issueType",
+        "fixVersions",
+        "linkedStory",
+        "linkType",
+        "assigneeAccountId",
+        "attachmentsUploaded",
+        "createdAt",
+        "createdVia",
+        "dedupeOf"
+      ],
+      "properties": {
+        "issueKey": { "type": "string", "pattern": "^[A-Z][A-Z0-9]+-[0-9]+$" },
+        "issueUrl": { "type": "string", "minLength": 1 },
+        "projectKey": { "type": "string", "minLength": 1 },
+        "issueType": { "type": "string", "minLength": 1 },
+        "fixVersions": {
+          "description": "Copied verbatim from the story under test. Never invented by an agent.",
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "linkedStory": { "type": "string", "pattern": "^[A-Z][A-Z0-9]+-[0-9]+$" },
+        "linkType": { "type": "string", "minLength": 1 },
+        "assigneeAccountId": { "type": "string", "minLength": 1 },
+        "attachmentsUploaded": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "createdVia": { "type": "string", "enum": ["ATLASSIAN_MCP", "JIRA_REST"] },
+        "dedupeOf": {
+          "description": "Issue key of the pre-existing bug when this failure fingerprint was already reported.",
+          "type": ["string", "null"]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "1.0.0",
+  "approvalId": "APR-AD-ETA-351-001",
+  "gate": "AUTOMATION_DESIGN",
+  "artifactId": "TP-ETA-351-001",
+  "artifactVersion": 1,
+  "release": "1.0",
+  "capability": "account-access",
+  "sourceArtifactPath": "features/generated/account-access/TP-ETA-351-001-automation-design.md",
+  "decision": "REPLACE_WITH_APPROVE_OR_REQUEST_CHANGES_OR_REJECT_OR_DEFER",
+  "reviewer": {
+    "name": "REPLACE_WITH_REVIEWER_NAME",
+    "role": "REPLACE_WITH_REVIEWER_ROLE",
+    "reference": null
+  },
+  "reviewedAt": "REPLACE_WITH_ISO_8601_TIMESTAMP",
+  "comments": "REPLACE_WITH_REVIEW_COMMENTS. Approving this gate promotes features/generated/account-access/organization-sign-in.feature into features/approved/, which is the only input to bddgen. Please confirm you accept that no locator has been verified yet - every one will be written as MCP_VALIDATION_REQUIRED and replaced only by the Playwright Test Planner against the real application. AMB-ETA-351-004, AMB-ETA-351-006 and CLR-TP-ETA-351-001 are still unanswered and no amount of application observation will close them.",
+  "itemDecisions": [
+    {
+      "itemId": "TS-ETA-351-001",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Scenario: The login page offers a way to declare the kind of sign-in before any details are entered. Observes the page before any choice is made, so the sign-in choice is deliberately kept out of the Background."
+    },
+    {
+      "itemId": "TS-ETA-351-002",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Scenario: Both supported sign-in kinds are offered and can be told apart. Asserts presence and distinguishability only."
+    },
+    {
+      "itemId": "TS-ETA-351-003",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Scenario: Choosing organization sign-in makes the page ask for the organization details rather than every possible field. Names no field, pending AMB-ETA-351-001."
+    },
+    {
+      "itemId": "TS-ETA-351-004",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Scenario: The password is not readable on screen as it is typed. Types a fabricated secret and never submits it."
+    },
+    {
+      "itemId": "TS-ETA-351-005",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Scenario: Correct organization details admit the user to the eCore Command Center Home page. The only scenario using the real account. Stops at arrival."
+    },
+    {
+      "itemId": "TS-ETA-351-006",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Scenario: Wrong details do not admit the user and the user is told what happened. Fabricated data only. Asserts no message text."
+    },
+    {
+      "itemId": "TS-ETA-351-007",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Scenario: Required details left out do not admit the user and the user is told what happened. Fabricated data only. Generic case only, pending AMB-ETA-351-005."
+    },
+    {
+      "itemId": "TS-ETA-351-008",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Scenario: The response to wrong details differs from the response to missing details. Performs two sign-in attempts in one scenario and compares them. Submits two failing attempts, so it must never touch the real account."
+    }
+  ]
+}

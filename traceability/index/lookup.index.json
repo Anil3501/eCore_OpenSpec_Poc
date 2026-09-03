@@ -1,0 +1,566 @@
+{
+  "schemaVersion": "1.0.0",
+  "release": "1.0",
+  "updatedAt": "2026-09-01T13:52:10.000Z",
+  "dataClassification": "REAL_JIRA_DATA",
+  "indexes": {
+    "byJiraStoryId": {
+      "ETA-351": [
+        {
+          "capability": "account-access",
+          "rtmPath": "traceability/capabilities/account-access.rtm.json",
+          "traceIds": [
+            "TRC-ETA-351-001",
+            "TRC-ETA-351-002",
+            "TRC-ETA-351-003",
+            "TRC-ETA-351-004",
+            "TRC-ETA-351-005",
+            "TRC-ETA-351-006",
+            "TRC-ETA-351-007",
+            "TRC-ETA-351-008"
+          ]
+        }
+      ],
+      "ETA-411": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-001",
+            "TRC-ETA-411-002",
+            "TRC-ETA-411-003",
+            "TRC-ETA-411-004",
+            "TRC-ETA-411-005",
+            "TRC-ETA-411-006",
+            "TRC-ETA-411-007",
+            "TRC-ETA-411-008",
+            "TRC-ETA-411-009"
+          ]
+        }
+      ]
+    },
+    "byRequirementId": {
+      "REQ-ETA-351-001": [
+        {
+          "capability": "account-access",
+          "rtmPath": "traceability/capabilities/account-access.rtm.json",
+          "traceIds": [
+            "TRC-ETA-351-001"
+          ]
+        }
+      ],
+      "REQ-ETA-351-002": [
+        {
+          "capability": "account-access",
+          "rtmPath": "traceability/capabilities/account-access.rtm.json",
+          "traceIds": [
+            "TRC-ETA-351-002"
+          ]
+        }
+      ],
+      "REQ-ETA-351-003": [
+        {
+          "capability": "account-access",
+          "rtmPath": "traceability/capabilities/account-access.rtm.json",
+          "traceIds": [
+            "TRC-ETA-351-003"
+          ]
+        }
+      ],
+      "REQ-ETA-351-006": [
+        {
+          "capability": "account-access",
+          "rtmPath": "traceability/capabilities/account-access.rtm.json",
+          "traceIds": [
+            "TRC-ETA-351-004"
+          ]
+        }
+      ],
+      "REQ-ETA-351-005": [
+        {
+          "capability": "account-access",
+          "rtmPath": "traceability/capabilities/account-access.rtm.json",
+          "traceIds": [
+            "TRC-ETA-351-005"
+          ]
+        }
+      ],
+      "REQ-ETA-351-007": [
+        {
+          "capability": "account-access",
+          "rtmPath": "traceability/capabilities/account-access.rtm.json",
+          "traceIds": [
+            "TRC-ETA-351-006",
+            "TRC-ETA-351-007"
+          ]
+        }
+      ],
+      "REQ-ETA-351-008": [
+        {
+          "capability": "account-access",
+          "rtmPath": "traceability/capabilities/account-access.rtm.json",
+          "traceIds": [
+            "TRC-ETA-351-008"
+          ]
+        }
+      ],
+      "REQ-ETA-411-001": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-001"
+          ]
+        }
+      ],
+      "REQ-ETA-411-002": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-002",
+            "TRC-ETA-411-007"
+          ]
+        }
+      ],
+      "REQ-ETA-411-003": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-003",
+            "TRC-ETA-411-004",
+            "TRC-ETA-411-005",
+            "TRC-ETA-411-008",
+            "TRC-ETA-411-009"
+          ]
+        }
+      ],
+      "REQ-ETA-411-004": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-006"
+          ]
+        }
+      ]
+    },
+    "byAcId": {
+      "AC-ETA-351-001": [
+        {
+          "capability": "account-access",
+          "rtmPath": "traceability/capabilities/account-access.rtm.json",
+          "traceIds": [
+            "TRC-ETA-351-001"
+          ]
+        }
+      ],
+      "AC-ETA-351-002": [
+        {
+          "capability": "account-access",
+          "rtmPath": "traceability/capabilities/account-access.rtm.json",
+          "traceIds": [
+            "TRC-ETA-351-002"
+          ]
+        }
+      ],
+      "AC-ETA-351-003": [
+        {
+          "capability": "account-access",
+          "rtmPath": "traceability/capabilities/account-access.rtm.json",
+          "traceIds": [
+            "TRC-ETA-351-003"
+          ]
+        }
+      ],
+      "AC-ETA-351-004": [
+        {
+          "capability": "account-access",
+          "rtmPath": "traceability/capabilities/account-access.rtm.json",
+          "traceIds": [
+            "TRC-ETA-351-004"
+          ]
+        }
+      ],
+      "AC-ETA-351-005": [
+        {
+          "capability": "account-access",
+          "rtmPath": "traceability/capabilities/account-access.rtm.json",
+          "traceIds": [
+            "TRC-ETA-351-005"
+          ]
+        }
+      ],
+      "AC-ETA-351-006": [
+        {
+          "capability": "account-access",
+          "rtmPath": "traceability/capabilities/account-access.rtm.json",
+          "traceIds": [
+            "TRC-ETA-351-006"
+          ]
+        }
+      ],
+      "AC-ETA-351-007": [
+        {
+          "capability": "account-access",
+          "rtmPath": "traceability/capabilities/account-access.rtm.json",
+          "traceIds": [
+            "TRC-ETA-351-007"
+          ]
+        }
+      ],
+      "AC-ETA-351-008": [
+        {
+          "capability": "account-access",
+          "rtmPath": "traceability/capabilities/account-access.rtm.json",
+          "traceIds": [
+            "TRC-ETA-351-008"
+          ]
+        }
+      ],
+      "AC-ETA-411-001": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-001"
+          ]
+        }
+      ],
+      "AC-ETA-411-002": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-002"
+          ]
+        }
+      ],
+      "AC-ETA-411-003": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-003"
+          ]
+        }
+      ],
+      "AC-ETA-411-004": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-004"
+          ]
+        }
+      ],
+      "AC-ETA-411-005": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-005"
+          ]
+        }
+      ],
+      "AC-ETA-411-006": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-006"
+          ]
+        }
+      ],
+      "AC-ETA-411-007": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-007"
+          ]
+        }
+      ],
+      "AC-ETA-411-008": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-008"
+          ]
+        }
+      ],
+      "AC-ETA-411-009": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-009"
+          ]
+        }
+      ]
+    },
+    "byTestPlanId": {
+      "TP-ETA-351-001": [
+        {
+          "capability": "account-access",
+          "rtmPath": "traceability/capabilities/account-access.rtm.json",
+          "traceIds": [
+            "TRC-ETA-351-001",
+            "TRC-ETA-351-002",
+            "TRC-ETA-351-003",
+            "TRC-ETA-351-004",
+            "TRC-ETA-351-005",
+            "TRC-ETA-351-006",
+            "TRC-ETA-351-007",
+            "TRC-ETA-351-008"
+          ]
+        }
+      ],
+      "TP-ETA-411-001": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-001",
+            "TRC-ETA-411-002",
+            "TRC-ETA-411-003",
+            "TRC-ETA-411-004",
+            "TRC-ETA-411-005",
+            "TRC-ETA-411-006",
+            "TRC-ETA-411-007",
+            "TRC-ETA-411-008",
+            "TRC-ETA-411-009"
+          ]
+        }
+      ]
+    },
+    "byTestScenarioId": {
+      "TS-ETA-351-001": [
+        {
+          "capability": "account-access",
+          "rtmPath": "traceability/capabilities/account-access.rtm.json",
+          "traceIds": [
+            "TRC-ETA-351-001"
+          ]
+        }
+      ],
+      "TS-ETA-351-002": [
+        {
+          "capability": "account-access",
+          "rtmPath": "traceability/capabilities/account-access.rtm.json",
+          "traceIds": [
+            "TRC-ETA-351-002"
+          ]
+        }
+      ],
+      "TS-ETA-351-003": [
+        {
+          "capability": "account-access",
+          "rtmPath": "traceability/capabilities/account-access.rtm.json",
+          "traceIds": [
+            "TRC-ETA-351-003"
+          ]
+        }
+      ],
+      "TS-ETA-351-004": [
+        {
+          "capability": "account-access",
+          "rtmPath": "traceability/capabilities/account-access.rtm.json",
+          "traceIds": [
+            "TRC-ETA-351-004"
+          ]
+        }
+      ],
+      "TS-ETA-351-005": [
+        {
+          "capability": "account-access",
+          "rtmPath": "traceability/capabilities/account-access.rtm.json",
+          "traceIds": [
+            "TRC-ETA-351-005"
+          ]
+        }
+      ],
+      "TS-ETA-351-006": [
+        {
+          "capability": "account-access",
+          "rtmPath": "traceability/capabilities/account-access.rtm.json",
+          "traceIds": [
+            "TRC-ETA-351-006"
+          ]
+        }
+      ],
+      "TS-ETA-351-007": [
+        {
+          "capability": "account-access",
+          "rtmPath": "traceability/capabilities/account-access.rtm.json",
+          "traceIds": [
+            "TRC-ETA-351-007"
+          ]
+        }
+      ],
+      "TS-ETA-351-008": [
+        {
+          "capability": "account-access",
+          "rtmPath": "traceability/capabilities/account-access.rtm.json",
+          "traceIds": [
+            "TRC-ETA-351-008"
+          ]
+        }
+      ],
+      "TS-ETA-411-001": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-001"
+          ]
+        }
+      ],
+      "TS-ETA-411-002": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-002"
+          ]
+        }
+      ],
+      "TS-ETA-411-003": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-003"
+          ]
+        }
+      ],
+      "TS-ETA-411-004": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-004"
+          ]
+        }
+      ],
+      "TS-ETA-411-005": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-005"
+          ]
+        }
+      ],
+      "TS-ETA-411-006": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-006"
+          ]
+        }
+      ],
+      "TS-ETA-411-007": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-007"
+          ]
+        }
+      ],
+      "TS-ETA-411-008": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-008"
+          ]
+        }
+      ],
+      "TS-ETA-411-009": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-009"
+          ]
+        }
+      ]
+    },
+    "byFeatureFile": {
+      "features/approved/account-access/organization-sign-in.feature": [
+        {
+          "capability": "account-access",
+          "rtmPath": "traceability/capabilities/account-access.rtm.json",
+          "traceIds": [
+            "TRC-ETA-351-001",
+            "TRC-ETA-351-002",
+            "TRC-ETA-351-003",
+            "TRC-ETA-351-004",
+            "TRC-ETA-351-005",
+            "TRC-ETA-351-006",
+            "TRC-ETA-351-007",
+            "TRC-ETA-351-008"
+          ]
+        }
+      ],
+      "features/approved/home-navigation/home-icon-navigation.feature": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-001",
+            "TRC-ETA-411-002",
+            "TRC-ETA-411-003",
+            "TRC-ETA-411-004",
+            "TRC-ETA-411-005",
+            "TRC-ETA-411-006",
+            "TRC-ETA-411-007",
+            "TRC-ETA-411-008",
+            "TRC-ETA-411-009"
+          ]
+        }
+      ]
+    },
+    "byExecutionId": {
+      "EXEC-ETA-351-001": [
+        {
+          "capability": "account-access",
+          "rtmPath": "traceability/capabilities/account-access.rtm.json",
+          "traceIds": [
+            "TRC-ETA-351-001",
+            "TRC-ETA-351-002",
+            "TRC-ETA-351-003",
+            "TRC-ETA-351-004",
+            "TRC-ETA-351-005",
+            "TRC-ETA-351-006",
+            "TRC-ETA-351-007",
+            "TRC-ETA-351-008"
+          ]
+        }
+      ],
+      "EXEC-ETA-411-001": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-001",
+            "TRC-ETA-411-002",
+            "TRC-ETA-411-003",
+            "TRC-ETA-411-004",
+            "TRC-ETA-411-005",
+            "TRC-ETA-411-006",
+            "TRC-ETA-411-007",
+            "TRC-ETA-411-008",
+            "TRC-ETA-411-009"
+          ]
+        }
+      ]
+    },
+    "byDefectId": {}
+  }
+}

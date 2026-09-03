@@ -1,0 +1,75 @@
+{
+  "probe": "ETA-351-behaviour",
+  "purpose": "PLAYWRIGHT_VALIDATION. All submitted values are fabricated; no real credential is read.",
+  "startedAt": "2026-08-31T16:12:38.782Z",
+  "fabricatedValuesUsed": [
+    "username",
+    "organization",
+    "password"
+  ],
+  "phaseA_organizationFieldSet": [
+    {
+      "tag": "select",
+      "type": "select-one",
+      "id": "loginType",
+      "visible": true,
+      "accessibleName": null,
+      "required": false
+    },
+    {
+      "tag": "input",
+      "type": "text",
+      "id": "userName",
+      "visible": true,
+      "accessibleName": "Username",
+      "required": false
+    },
+    {
+      "tag": "input",
+      "type": "text",
+      "id": "orgName",
+      "visible": true,
+      "accessibleName": "Organization Name",
+      "required": false
+    },
+    {
+      "tag": "input",
+      "type": "password",
+      "id": "password",
+      "visible": true,
+      "accessibleName": "Password",
+      "required": false
+    },
+    {
+      "tag": "input",
+      "type": "submit",
+      "id": null,
+      "visible": true,
+      "accessibleName": null,
+      "required": false
+    }
+  ],
+  "phaseB_missingDetails": {
+    "url": "https://qa1.eoriginal.org:8443/ssweb/setup/showLogin.eo",
+    "domMessages": [],
+    "browserValidationMessages": []
+  },
+  "phaseC_fieldsFilled": [
+    "userName",
+    "orgName",
+    "password"
+  ],
+  "phaseC_wrongDetails": {
+    "url": "https://qa1.eoriginal.org:8443/ssweb/setup/showLogin.eo",
+    "domMessages": [
+      {
+        "selector": ".errorMessage",
+        "id": null,
+        "text": "Your login attempt failed. You may have entered one or more of your credentials incorrectly, or selected the incorrect Organization Login/Business Entity Login scope. Please remember that all credentials are required and are case sensitive. Your account may lock out after a configured number of inco"
+      }
+    ],
+    "browserValidationMessages": []
+  },
+  "responsesDiffer": true,
+  "status": "OBSERVED"
+}

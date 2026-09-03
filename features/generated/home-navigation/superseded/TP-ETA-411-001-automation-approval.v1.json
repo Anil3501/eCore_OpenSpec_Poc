@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "1.0.0",
+  "approvalId": "APR-AD-ETA-411-001",
+  "gate": "AUTOMATION_DESIGN",
+  "artifactId": "TP-ETA-411-001",
+  "artifactVersion": 1,
+  "release": "1.0",
+  "capability": "home-navigation",
+  "sourceArtifactPath": "features/generated/home-navigation/TP-ETA-411-001-automation-design.md",
+  "decision": "APPROVE",
+  "reviewer": {
+    "name": "Nitin Saini",
+    "role": "Reviewer",
+    "reference": null
+  },
+  "reviewedAt": "2026-09-01T13:00:00.000Z",
+  "comments": "Gate 3 approved. All nine scenarios of home-icon-navigation.feature are approved for implementation. This decision was given by the reviewer in chat and transcribed into this artifact by the orchestrator; the transcription is a record of a human decision, not an agent approval. The three acceptances the review package asked for are recorded here explicitly rather than inferred from silence. First, the reviewer accepts that no locator has been verified: every locator will be written as MCP_VALIDATION_REQUIRED and replaced only by observation at PLAYWRIGHT_VALIDATION, and two of them will carry written VALIDATED waivers rather than accessible locators - the Command Center control, which exposes no accessible name, and the dashboard icons, which must be scoped to avoid colliding with the header links of the same name. Second, the reviewer accepts that TS-ETA-411-008 and TS-ETA-411-009 are written against link addresses that were never walked; this approval authorises the code, not the expectation, and if PLAYWRIGHT_VALIDATION observes a different destination it is recorded as a discrepancy and returned to Gate 1 rather than absorbed by editing the criterion. Third, AMB-ETA-411-006 remains REVIEW_REQUIRED and is not resolved by this approval; no scenario may reach the Preferences page by any route other than the Home page icon while it is open. Approving this gate promotes features/generated/home-navigation/home-icon-navigation.feature into features/approved/, which is the only input bddgen reads, and authorises the first TypeScript for this capability. It authorises the nine scenarios exactly as written and nothing beyond them. The absence of negative scenarios is deliberate and is not cured by this approval: adding failure coverage requires a new acceptance criterion approved at Gate 1, never a scenario invented during implementation.",
+  "itemDecisions": [
+    {
+      "itemId": "TS-ETA-411-001",
+      "decision": "APPROVE",
+      "comment": "Scenario: A successful organization sign-in places the user on the Home page. The only scenario that exercises signing in as behaviour; the other eight consume the session as a precondition. Reuses three existing steps from the account-access capability verbatim."
+    },
+    {
+      "itemId": "TS-ETA-411-002",
+      "decision": "APPROVE",
+      "comment": "Scenario: The Home page presents three activatable icons. Asserts presence and activatability only, and names the icons as the Home page dashboard icons rather than the header links of the same name. Rests on a single observed account - RISK-TP-ETA-411-004."
+    },
+    {
+      "itemId": "TS-ETA-411-003",
+      "decision": "APPROVE",
+      "comment": "Scenario: The New Transaction icon reaches the New Transaction page. The only destination offering an element unique to it, so this scenario asserts more than arrival. Uses the dashboard icon, not the header link - the distinction from TS-ETA-411-008 is load-bearing and must survive any later refactor."
+    },
+    {
+      "itemId": "TS-ETA-411-004",
+      "decision": "APPROVE",
+      "comment": "Scenario: The Workspace icon reaches the Workspace page. Arrival only. The destination exposes nothing unique and every page returns the same browser title, so this will pass on a page that arrived and then failed to render. Knowingly accepted as AMB-ETA-411-002."
+    },
+    {
+      "itemId": "TS-ETA-411-005",
+      "decision": "APPROVE",
+      "comment": "Scenario: The Preferences icon reaches the Preferences page. Arrival only, as above, and the single approved route to this page while AMB-ETA-411-006 is open."
+    },
+    {
+      "itemId": "TS-ETA-411-006",
+      "decision": "APPROVE",
+      "comment": "Scenario Outline: The Command Center control returns the user Home from each destination. The criterion says any Home page icon, so all three return legs are walked through an Examples table rather than one being walked and two inferred. One scenario id, three executions. Asserts the outcome only, never how the control is labelled - it has no accessible name, accepted as AMB-ETA-411-005."
+    },
+    {
+      "itemId": "TS-ETA-411-007",
+      "decision": "APPROVE",
+      "comment": "Scenario: The header navigation offers New Transaction and Workspace links. Exactly two duplicates, not three. Also asserts the links are distinct from the dashboard icons of the same name, which is the guard against TS-ETA-411-003 and TS-ETA-411-008 collapsing into one test."
+    },
+    {
+      "itemId": "TS-ETA-411-008",
+      "decision": "APPROVE",
+      "comment": "Scenario: The header New Transaction link reaches the New Transaction page. UNCONFIRMED DESTINATION - the expected page comes from the link address and was never navigated. This approval authorises the code, not the expectation; PLAYWRIGHT_VALIDATION must walk the link and record what it observes. See RISK-TP-ETA-411-001."
+    },
+    {
+      "itemId": "TS-ETA-411-009",
+      "decision": "APPROVE",
+      "comment": "Scenario: The header Workspace link reaches the Workspace page. UNCONFIRMED DESTINATION, as above. Must exercise the header link rather than the dashboard icon, or it silently duplicates TS-ETA-411-004."
+    }
+  ]
+}

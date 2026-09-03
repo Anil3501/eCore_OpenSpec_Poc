@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "1.0.0",
+  "executionId": "EXEC-ETA-351-001",
+  "workflowId": "WF-ETA-351-R1.0",
+  "jiraStoryId": "ETA-351",
+  "release": "1.0",
+  "capability": "account-access",
+  "environment": "qa1",
+  "dataClassification": "REAL_JIRA_DATA",
+  "executedAt": "2026-08-31T16:27:32.695Z",
+  "durationMs": 64783,
+  "runner": "playwright-bdd via npm test",
+  "reportPath": "reports/playwright-report/index.html",
+  "resultsPath": "reports/execution/results.json",
+  "notes": [
+    "First run of this suite recorded 3 failures, all automation defects rather than application defects: a Locator.or() strict-mode violation in the failure assertion, and an assertion timeout shorter than the login interstitial redirect. Both were healed in src/pages/ecore-login.page.ts and the suite was re-run. This record reflects the re-run.",
+    "Negative scenarios submit only fabricated values from test-data/account-access.sample.json. Only TS-ETA-351-005 uses the real account."
+  ],
+  "scenarios": [
+    {
+      "traceId": "TRC-ETA-351-001",
+      "requirementId": "REQ-ETA-351-001",
+      "acId": "AC-ETA-351-001",
+      "testPlanId": "TP-ETA-351-001",
+      "testScenarioId": "TS-ETA-351-001",
+      "featureFile": "features/approved/account-access/organization-sign-in.feature",
+      "gherkinScenario": "The login page offers a way to declare the kind of sign-in before any details are entered",
+      "result": "PASSED",
+      "durationMs": 14896,
+      "failureSummary": null
+    },
+    {
+      "traceId": "TRC-ETA-351-002",
+      "requirementId": "REQ-ETA-351-002",
+      "acId": "AC-ETA-351-002",
+      "testPlanId": "TP-ETA-351-001",
+      "testScenarioId": "TS-ETA-351-002",
+      "featureFile": "features/approved/account-access/organization-sign-in.feature",
+      "gherkinScenario": "Both supported sign-in kinds are offered and can be told apart",
+      "result": "PASSED",
+      "durationMs": 15739,
+      "failureSummary": null
+    },
+    {
+      "traceId": "TRC-ETA-351-003",
+      "requirementId": "REQ-ETA-351-003",
+      "acId": "AC-ETA-351-003",
+      "testPlanId": "TP-ETA-351-001",
+      "testScenarioId": "TS-ETA-351-003",
+      "featureFile": "features/approved/account-access/organization-sign-in.feature",
+      "gherkinScenario": "Choosing organization sign-in makes the page ask for the organization details rather than every possible field",
+      "result": "PASSED",
+      "durationMs": 11631,
+      "failureSummary": null
+    },
+    {
+      "traceId": "TRC-ETA-351-004",
+      "requirementId": "REQ-ETA-351-006",
+      "acId": "AC-ETA-351-004",
+      "testPlanId": "TP-ETA-351-001",
+      "testScenarioId": "TS-ETA-351-004",
+      "featureFile": "features/approved/account-access/organization-sign-in.feature",
+      "gherkinScenario": "The password is not readable on screen as it is typed",
+      "result": "PASSED",
+      "durationMs": 14204,
+      "failureSummary": null
+    },
+    {
+      "traceId": "TRC-ETA-351-005",
+      "requirementId": "REQ-ETA-351-005",
+      "acId": "AC-ETA-351-005",
+      "testPlanId": "TP-ETA-351-001",
+      "testScenarioId": "TS-ETA-351-005",
+      "featureFile": "features/approved/account-access/organization-sign-in.feature",
+      "gherkinScenario": "Correct organization details admit the user to the eCore Command Center Home page",
+      "result": "PASSED",
+      "durationMs": 11139,
+      "failureSummary": null
+    },
+    {
+      "traceId": "TRC-ETA-351-006",
+      "requirementId": "REQ-ETA-351-007",
+      "acId": "AC-ETA-351-006",
+      "testPlanId": "TP-ETA-351-001",
+      "testScenarioId": "TS-ETA-351-006",
+      "featureFile": "features/approved/account-access/organization-sign-in.feature",
+      "gherkinScenario": "Wrong details do not admit the user and the user is told what happened",
+      "result": "PASSED",
+      "durationMs": 14446,
+      "failureSummary": null
+    },
+    {
+      "traceId": "TRC-ETA-351-007",
+      "requirementId": "REQ-ETA-351-007",
+      "acId": "AC-ETA-351-007",
+      "testPlanId": "TP-ETA-351-001",
+      "testScenarioId": "TS-ETA-351-007",
+      "featureFile": "features/approved/account-access/organization-sign-in.feature",
+      "gherkinScenario": "Required details left out do not admit the user and the user is told what happened",
+      "result": "PASSED",
+      "durationMs": 9524,
+      "failureSummary": null
+    },
+    {
+      "traceId": "TRC-ETA-351-008",
+      "requirementId": "REQ-ETA-351-008",
+      "acId": "AC-ETA-351-008",
+      "testPlanId": "TP-ETA-351-001",
+      "testScenarioId": "TS-ETA-351-008",
+      "featureFile": "features/approved/account-access/organization-sign-in.feature",
+      "gherkinScenario": "The response to wrong details differs from the response to missing details",
+      "result": "PASSED",
+      "durationMs": 12790,
+      "failureSummary": null
+    }
+  ]
+}

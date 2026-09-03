@@ -1,0 +1,220 @@
+{
+  "schemaVersion": "1.0.0",
+  "workflowId": "WF-ETA-411-R1.0",
+  "workflowDefinition": "workflow/definitions/sdd-jira-to-automation.workflow.json",
+  "jiraStoryId": "ETA-411",
+  "release": "1.0",
+  "capability": "home-navigation",
+  "dataClassification": "REAL_JIRA_DATA",
+  "currentStage": "COMPLETED",
+  "nextStage": null,
+  "lastSuccessfulStage": "RTM_UPDATE",
+  "status": "COMPLETED",
+  "completedStages": [
+    {
+      "stage": "JIRA_RETRIEVAL",
+      "completedAt": "2026-09-01T10:24:48.511Z",
+      "agent": "jira-requirement-analysis",
+      "outputs": [
+        "requirements/raw/ETA-411.json"
+      ]
+    },
+    {
+      "stage": "REQUIREMENT_NORMALIZATION",
+      "completedAt": "2026-09-01T10:45:00.000Z",
+      "agent": "jira-requirement-analysis",
+      "outputs": [
+        "requirements/normalized/ETA-411.json"
+      ]
+    },
+    {
+      "stage": "AC_ANALYSIS",
+      "completedAt": "2026-09-01T10:45:00.000Z",
+      "agent": "jira-requirement-analysis",
+      "outputs": [
+        "requirements/normalized/ETA-411.json"
+      ]
+    },
+    {
+      "stage": "AC_REVIEW_PACKAGE",
+      "completedAt": "2026-09-01T10:50:00.000Z",
+      "agent": "jira-requirement-analysis",
+      "outputs": [
+        "requirements/reviews/ETA-411-ac-review.md",
+        "requirements/reviews/ETA-411-ac-approval.template.json"
+      ]
+    },
+    {
+      "stage": "AC_APPROVAL",
+      "completedAt": "2026-09-01T11:25:00.000Z",
+      "agent": null,
+      "outputs": [
+        "requirements/approved/ETA-411-ac-approval.json",
+        "requirements/approved/ETA-411.json"
+      ]
+    },
+    {
+      "stage": "OPENSPEC_GENERATION",
+      "completedAt": "2026-09-01T11:40:00.000Z",
+      "agent": "openspec-propose",
+      "outputs": [
+        "openspec/changes/add-home-navigation/proposal.md",
+        "openspec/changes/add-home-navigation/specs/home-navigation/icon-navigation/spec.md",
+        "openspec/changes/add-home-navigation/design.md",
+        "openspec/changes/add-home-navigation/tasks.md"
+      ]
+    },
+    {
+      "stage": "TEST_PLAN_GENERATION",
+      "completedAt": "2026-09-01T11:55:00.000Z",
+      "agent": "playwright-test-planner",
+      "outputs": [
+        "test-plans/generated/TP-ETA-411-001.json",
+        "test-plans/generated/TP-ETA-411-001-review.md",
+        "test-plans/generated/TP-ETA-411-001-approval.template.json"
+      ]
+    },
+    {
+      "stage": "TEST_PLAN_APPROVAL",
+      "completedAt": "2026-09-01T12:10:00.000Z",
+      "agent": null,
+      "outputs": [
+        "test-plans/approved/TP-ETA-411-001-approval.json",
+        "test-plans/approved/TP-ETA-411-001.json"
+      ]
+    },
+    {
+      "stage": "BDD_DESIGN",
+      "completedAt": "2026-09-01T12:30:00.000Z",
+      "agent": "sdd-workflow-orchestrator",
+      "outputs": [
+        "features/generated/home-navigation/home-icon-navigation.feature",
+        "features/generated/home-navigation/TP-ETA-411-001-automation-design.md"
+      ]
+    },
+    {
+      "stage": "AUTOMATION_REVIEW_PACKAGE",
+      "completedAt": "2026-09-01T12:45:00.000Z",
+      "agent": "sdd-workflow-orchestrator",
+      "outputs": [
+        "features/generated/home-navigation/TP-ETA-411-001-automation-approval.template.json"
+      ]
+    },
+    {
+      "stage": "AUTOMATION_APPROVAL",
+      "completedAt": "2026-09-01T15:45:00.000Z",
+      "agent": "sdd-workflow-orchestrator",
+      "outputs": [
+        "features/approved/home-navigation/TP-ETA-411-001-automation-approval.json",
+        "features/approved/home-navigation/home-icon-navigation.feature",
+        "features/generated/home-navigation/TP-ETA-411-001-automation-amendment-review.md",
+        "features/generated/home-navigation/TP-ETA-411-001-automation-approval.v2.template.json",
+        "features/generated/home-navigation/superseded/TP-ETA-411-001-automation-approval.v1.json"
+      ]
+    },
+    {
+      "stage": "PLAYWRIGHT_VALIDATION",
+      "completedAt": "2026-09-01T13:20:00.000Z",
+      "agent": "playwright-test-planner",
+      "outputs": [
+        "scripts/eta-411-navigation-validation.ts",
+        "reports/validation/ETA-411-navigation-validation.json",
+        "reports/validation/ETA-411-playwright-validation.md"
+      ]
+    },
+    {
+      "stage": "IMPLEMENTATION",
+      "completedAt": "2026-09-01T13:45:00.000Z",
+      "agent": "sdd-workflow-orchestrator",
+      "outputs": [
+        "src/pages/ecore-home.page.ts",
+        "src/pages/ecore-new-transaction.page.ts",
+        "src/pages/ecore-workspace.page.ts",
+        "src/pages/ecore-preferences.page.ts",
+        "src/fixtures/test.ts",
+        "steps/home-icon-navigation.steps.ts"
+      ]
+    },
+    {
+      "stage": "BDD_GENERATION",
+      "completedAt": "2026-09-01T14:00:00.000Z",
+      "agent": null,
+      "outputs": [
+        ".features-gen/features/approved/home-navigation/home-icon-navigation.feature.spec.js"
+      ]
+    },
+    {
+      "stage": "EXECUTION",
+      "completedAt": "2026-09-01T13:49:22.049Z",
+      "agent": null,
+      "outputs": [
+        "traceability/executions/EXEC-ETA-411-001.json",
+        "reports/execution/results.json",
+        "reports/playwright-report/index.html"
+      ]
+    },
+    {
+      "stage": "RTM_UPDATE",
+      "completedAt": "2026-09-01T13:52:10.000Z",
+      "agent": "sdd-workflow-orchestrator",
+      "outputs": [
+        "traceability/capabilities/home-navigation.rtm.json",
+        "traceability/capabilities/home-navigation.coverage.json",
+        "traceability/index/lookup.index.json"
+      ]
+    }
+  ],
+  "pendingApproval": null,
+  "inputArtifactVersions": {
+    "requirements/normalized/ETA-411.json": 1,
+    "requirements/approved/ETA-411.json": 1,
+    "test-plans/approved/TP-ETA-411-001.json": 1
+  },
+  "outputArtifactPaths": [
+    "requirements/raw/ETA-411.json",
+    "requirements/normalized/ETA-411.json",
+    "requirements/reviews/ETA-411-ac-review.md",
+    "requirements/reviews/ETA-411-ac-approval.template.json",
+    "requirements/approved/ETA-411-ac-approval.json",
+    "requirements/approved/ETA-411.json",
+    "openspec/changes/add-home-navigation/proposal.md",
+    "openspec/changes/add-home-navigation/specs/home-navigation/icon-navigation/spec.md",
+    "openspec/changes/add-home-navigation/design.md",
+    "openspec/changes/add-home-navigation/tasks.md",
+    "test-plans/generated/TP-ETA-411-001.json",
+    "test-plans/generated/TP-ETA-411-001-review.md",
+    "test-plans/generated/TP-ETA-411-001-approval.template.json",
+    "test-plans/approved/TP-ETA-411-001-approval.json",
+    "test-plans/approved/TP-ETA-411-001.json",
+    "features/generated/home-navigation/home-icon-navigation.feature",
+    "features/generated/home-navigation/TP-ETA-411-001-automation-design.md",
+    "features/generated/home-navigation/TP-ETA-411-001-automation-approval.template.json",
+    "features/approved/home-navigation/TP-ETA-411-001-automation-approval.json",
+    "features/approved/home-navigation/home-icon-navigation.feature",
+    "scripts/eta-411-navigation-validation.ts",
+    "reports/validation/ETA-411-navigation-validation.json",
+    "reports/validation/ETA-411-playwright-validation.md",
+    "src/pages/ecore-home.page.ts",
+    "src/pages/ecore-new-transaction.page.ts",
+    "src/pages/ecore-workspace.page.ts",
+    "src/pages/ecore-preferences.page.ts",
+    "src/fixtures/test.ts",
+    "steps/home-icon-navigation.steps.ts",
+    ".features-gen/features/approved/home-navigation/home-icon-navigation.feature.spec.js",
+    "features/generated/home-navigation/TP-ETA-411-001-automation-amendment-review.md",
+    "features/generated/home-navigation/TP-ETA-411-001-automation-approval.v2.template.json",
+    "features/generated/home-navigation/superseded/TP-ETA-411-001-automation-approval.v1.json",
+    "traceability/executions/EXEC-ETA-411-001.json",
+    "traceability/capabilities/home-navigation.rtm.json",
+    "traceability/capabilities/home-navigation.coverage.json",
+    "traceability/index/lookup.index.json"
+  ],
+  "retryCount": 1,
+  "createdAt": "2026-09-01T10:24:19.198Z",
+  "updatedAt": "2026-09-01T13:52:10.000Z",
+  "startedAt": "2026-09-01T10:24:19.198Z",
+  "completedAt": "2026-09-01T13:52:11.000Z",
+  "errorDetails": null,
+  "processingLock": null,
+  "assignedAgent": null
+}

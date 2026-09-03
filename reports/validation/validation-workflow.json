@@ -1,0 +1,32 @@
+{
+  "generatedAt": "2026-09-01T13:57:00.987Z",
+  "scope": "workflow",
+  "summary": {
+    "total": 3,
+    "passed": 2,
+    "failed": 1,
+    "skipped": 0
+  },
+  "results": [
+    {
+      "id": "WF-STRUCTURE",
+      "title": "Workflow states validate against schema",
+      "status": "FAIL",
+      "messages": [
+        "workflow/instances/WF-ETA-411-R1.0.json -> completedAt: A COMPLETED workflow must record completedAt."
+      ]
+    },
+    {
+      "id": "SEM-GATES",
+      "title": "All three approval gates are enforced by artifact evidence",
+      "status": "PASS",
+      "messages": []
+    },
+    {
+      "id": "SEM-LOCKS",
+      "title": "No two workflows write to the same traceability artifact",
+      "status": "PASS",
+      "messages": []
+    }
+  ]
+}

@@ -1,0 +1,191 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ecore-openspec-poc/schemas/rtm.schema.json",
+  "title": "Requirements Traceability Matrix (capability partition)",
+  "description": "Stores stable identifiers, versions, paths, relationships, statuses and references only. Full artifact content is never duplicated here. One file per business capability to support >3000 test cases.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "capability",
+    "release",
+    "artifactVersion",
+    "dataClassification",
+    "updatedAt",
+    "entries"
+  ],
+  "properties": {
+    "schemaVersion": { "type": "string", "const": "1.0.0" },
+    "capability": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "release": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+(\\.[0-9]+)?$" },
+    "artifactVersion": { "type": "integer", "minimum": 1 },
+    "dataClassification": {
+      "type": "string",
+      "enum": ["REAL_JIRA_DATA", "SAMPLE_DATA"]
+    },
+    "updatedAt": { "type": "string", "format": "date-time" },
+    "entries": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/entry" }
+    }
+  },
+  "$defs": {
+    "artifactRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "version"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "version": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "traceId",
+        "jiraStoryId",
+        "requirementId",
+        "acId",
+        "status",
+        "changeType",
+        "requirementArtifact",
+        "approvalRefs",
+        "openSpecRefs",
+        "testPlan",
+        "automation",
+        "executionRefs"
+      ],
+      "properties": {
+        "traceId": { "type": "string", "pattern": "^TRC-[A-Z0-9-]+-[0-9]{3}$" },
+        "jiraStoryId": { "type": "string", "pattern": "^[A-Z][A-Z0-9]+-[0-9]+$" },
+        "requirementId": {
+          "type": "string",
+          "pattern": "^REQ-[A-Z][A-Z0-9]+-[0-9]+-[0-9]{3}$"
+        },
+        "acId": { "type": "string", "pattern": "^AC-[A-Z][A-Z0-9]+-[0-9]+-[0-9]{3}$" },
+        "status": {
+          "type": "string",
+          "enum": [
+            "PENDING_APPROVAL",
+            "APPROVED",
+            "REJECTED",
+            "DEFERRED",
+            "REQUEST_CHANGES",
+            "REVIEW_REQUIRED",
+            "BLOCKED"
+          ]
+        },
+        "changeType": {
+          "type": "string",
+          "enum": ["NEW", "MODIFIED", "REMOVED", "UNCHANGED", "DEFECT_FIX", "REVIEW_REQUIRED"]
+        },
+        "requirementArtifact": { "$ref": "#/$defs/artifactRef" },
+        "approvalRefs": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["acceptanceCriteria", "testPlan", "automationDesign"],
+          "properties": {
+            "acceptanceCriteria": { "type": ["string", "null"] },
+            "testPlan": { "type": ["string", "null"] },
+            "automationDesign": { "type": ["string", "null"] }
+          }
+        },
+        "openSpecRefs": { "type": "array", "items": { "type": "string" } },
+        "testPlan": {
+          "anyOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["testPlanId", "testScenarioId", "path", "version"],
+              "properties": {
+                "testPlanId": { "type": "string", "pattern": "^TP-[A-Z0-9-]+-[0-9]{3}$" },
+                "testScenarioId": { "type": "string", "pattern": "^TS-[A-Z0-9-]+-[0-9]{3}$" },
+                "path": { "type": "string", "minLength": 1 },
+                "version": { "type": "integer", "minimum": 1 }
+              }
+            }
+          ]
+        },
+        "automation": {
+          "anyOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "featureFile",
+                "gherkinScenario",
+                "stepDefinitions",
+                "pageObjects",
+                "fixtures",
+                "generatedTest",
+                "automationStatus"
+              ],
+              "properties": {
+                "featureFile": { "type": "string", "minLength": 1 },
+                "gherkinScenario": { "type": "string", "minLength": 1 },
+                "stepDefinitions": { "type": "array", "items": { "type": "string" } },
+                "pageObjects": { "type": "array", "items": { "type": "string" } },
+                "components": { "type": "array", "items": { "type": "string" } },
+                "fixtures": { "type": "array", "items": { "type": "string" } },
+                "generatedTest": { "type": ["string", "null"] },
+                "automationStatus": {
+                  "type": "string",
+                  "enum": [
+                    "DESIGNED",
+                    "IMPLEMENTED",
+                    "EXECUTABLE",
+                    "MANUAL_ONLY",
+                    "BLOCKED",
+                    "RETIRED",
+                    "REVIEW_REQUIRED"
+                  ]
+                },
+                "scenarioAction": {
+                  "type": "string",
+                  "enum": ["REUSE", "UPDATE", "CREATE", "RETIRE", "REGRESSION", "REVIEW_REQUIRED"]
+                }
+              }
+            }
+          ]
+        },
+        "executionRefs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["executionId", "result", "recordPath"],
+            "properties": {
+              "executionId": { "type": "string", "minLength": 1 },
+              "result": {
+                "type": "string",
+                "enum": ["PASSED", "FAILED", "SKIPPED", "TIMED_OUT", "BLOCKED", "NOT_EXECUTED"]
+              },
+              "recordPath": { "type": "string", "minLength": 1 }
+            }
+          }
+        },
+        "defectRefs": {
+          "description": "Defects raised against this acceptance criterion. Optional: pre-existing partitions predate the failure-handling branch. Written only by the orchestrator, via the controlled merge protocol.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["defectId", "status", "recordPath", "jiraIssueKey"],
+            "properties": {
+              "defectId": { "type": "string", "pattern": "^DEF-[A-Z0-9-]+-[0-9]{3}$" },
+              "status": {
+                "type": "string",
+                "enum": ["TRIAGED", "HEALING", "HEALED", "REPORTED", "DUPLICATE", "BLOCKED", "REVIEW_REQUIRED"]
+              },
+              "recordPath": { "type": "string", "minLength": 1 },
+              "jiraIssueKey": { "type": ["string", "null"] }
+            }
+          }
+        }
+      }
+    }
+  }
+}

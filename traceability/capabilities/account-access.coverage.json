@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "1.0.0",
+  "capability": "account-access",
+  "release": "1.0",
+  "generatedAt": "2026-08-31T16:31:35.501Z",
+  "dataClassification": "REAL_JIRA_DATA",
+  "sourceRtm": {
+    "path": "traceability/capabilities/account-access.rtm.json",
+    "version": 3
+  },
+  "totals": {
+    "approvedAcs": 8,
+    "approvedAcsLinkedToApprovedScenarios": 8,
+    "approvedAcsLinkedToExecutableAutomation": 8,
+    "automatedAcsExecuted": 8,
+    "executedAcsPassed": 8
+  },
+  "coverage": {
+    "acDesignCoveragePct": 100,
+    "automationCoveragePct": 100,
+    "executionCoveragePct": 100,
+    "passCoveragePct": 100
+  },
+  "gaps": {
+    "uncoveredAcIds": [],
+    "deferredAcIds": [],
+    "blockedAcIds": [],
+    "manualOnlyAcIds": [],
+    "failedAcIds": [],
+    "clarificationRequiredAcIds": []
+  },
+  "notes": [
+    "These percentages describe acceptance-criterion coverage only. They are unrelated to browser code coverage in reports/coverage/, which measures which application JavaScript executed and is never evidence that an acceptance criterion is satisfied.",
+    "REQ-ETA-351-004 carries no acceptance criterion and therefore appears nowhere in this matrix. Its coverage is genuinely unknown, not zero and not complete. Tracked as CLR-TP-ETA-351-001.",
+    "AMB-ETA-351-004 and AMB-ETA-351-006 remain open human questions. Full coverage of the approved criteria does not mean every question about the story has been answered."
+  ]
+}

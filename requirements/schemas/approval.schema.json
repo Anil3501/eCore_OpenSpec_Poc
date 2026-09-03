@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ecore-openspec-poc/schemas/approval.schema.json",
+  "title": "Human Approval Artifact",
+  "description": "Records a human decision at one of the three mandatory approval gates. A chat message alone never unlocks a workflow stage - approval must exist as a validated workspace artifact.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "approvalId",
+    "gate",
+    "artifactId",
+    "artifactVersion",
+    "release",
+    "capability",
+    "sourceArtifactPath",
+    "decision",
+    "reviewer",
+    "reviewedAt",
+    "comments",
+    "itemDecisions"
+  ],
+  "properties": {
+    "schemaVersion": { "type": "string", "const": "1.0.0" },
+    "approvalId": {
+      "type": "string",
+      "pattern": "^APR-(AC|TP|AD)-[A-Z0-9-]+-[0-9]{3}$"
+    },
+    "gate": {
+      "type": "string",
+      "enum": [
+        "ACCEPTANCE_CRITERIA",
+        "TEST_PLAN",
+        "AUTOMATION_DESIGN"
+      ]
+    },
+    "artifactId": {
+      "description": "Identifier of the artifact under review (Jira story id, test plan id, or automation design id).",
+      "type": "string",
+      "minLength": 1
+    },
+    "artifactVersion": { "type": "integer", "minimum": 1 },
+    "release": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+(\\.[0-9]+)?$" },
+    "capability": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "sourceArtifactPath": { "type": "string", "minLength": 1 },
+    "decision": { "$ref": "#/$defs/decision" },
+    "reviewer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "role"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "role": { "type": "string", "minLength": 1 },
+        "reference": {
+          "description": "Non-secret reference such as a Jira account id or ticket comment link.",
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "reviewedAt": { "type": "string", "format": "date-time" },
+    "comments": { "type": "string" },
+    "itemDecisions": {
+      "description": "Item-level decisions. For Gate 1 there must be one entry per acceptance criterion.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["itemId", "decision"],
+        "properties": {
+          "itemId": { "type": "string", "minLength": 1 },
+          "decision": { "$ref": "#/$defs/decision" },
+          "comment": { "type": "string" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "decision": {
+      "type": "string",
+      "enum": ["APPROVE", "REJECT", "DEFER", "REQUEST_CHANGES"]
+    }
+  }
+}

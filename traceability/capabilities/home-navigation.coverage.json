@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "capability": "home-navigation",
+  "release": "1.0",
+  "generatedAt": "2026-09-01T13:52:10.000Z",
+  "dataClassification": "REAL_JIRA_DATA",
+  "sourceRtm": {
+    "path": "traceability/capabilities/home-navigation.rtm.json",
+    "version": 1
+  },
+  "totals": {
+    "approvedAcs": 9,
+    "approvedAcsLinkedToApprovedScenarios": 9,
+    "approvedAcsLinkedToExecutableAutomation": 9,
+    "automatedAcsExecuted": 9,
+    "executedAcsPassed": 9
+  },
+  "coverage": {
+    "acDesignCoveragePct": 100,
+    "automationCoveragePct": 100,
+    "executionCoveragePct": 100,
+    "passCoveragePct": 100
+  },
+  "gaps": {
+    "uncoveredAcIds": [],
+    "deferredAcIds": [],
+    "blockedAcIds": [],
+    "manualOnlyAcIds": [],
+    "failedAcIds": [],
+    "clarificationRequiredAcIds": [
+      "AC-ETA-411-005",
+      "AC-ETA-411-007"
+    ]
+  },
+  "notes": [
+    "Every percentage here is 100 and each one is derived from the nine entries in traceability/capabilities/home-navigation.rtm.json, all of which carry status APPROVED, automationStatus EXECUTABLE and an executionRef with result PASSED in EXEC-ETA-411-001. No denominator is zero and no figure is assumed.",
+    "100% means every approved acceptance criterion for ETA-411 has an approved scenario, executable automation and a real passing execution. It does not mean Home page navigation is fully tested. It means the nine criteria the reviewer approved are covered, and the criteria are only as strong as what was approved.",
+    "AC-ETA-411-005 and AC-ETA-411-007 are listed as clarification-required because AMB-ETA-411-006 is still REVIEW_REQUIRED. The header exposes no Preferences link; the only header-area route to the Preferences page is a menu link labelled 'Organization'. Until a human decides whether that link is in scope, AC-ETA-411-007 covers two destinations by two routes while Preferences is covered by one route only. Both criteria pass as written. They are flagged because the question of what should have been written is open, which is a gap in the requirement rather than in the automation.",
+    "Three of these criteria assert arrival by landing URL alone. AC-ETA-411-004 and AC-ETA-411-005 have no unique visible element on their destination pages, and AMB-ETA-411-002 resolved that the URL is accepted as proof. A page that navigates correctly and then fails to render its content would still pass. This was knowingly accepted by the reviewer, not overlooked. On 2026-09-01 an attempt to strengthen the Workspace assertion with a heading named 'Search Criteria' was reverted, because no such heading exists; see traceability/executions/EXEC-ETA-411-001.json.",
+    "RISK-TP-ETA-411-004 is undischarged. Every scenario signs in with one real organization account, so this coverage says nothing about what a different account, role or permission set is offered on the Home page. Do not read 100% as evidence of role coverage.",
+    "Browser code coverage from npm run test:coverage is a separate measurement of which application JavaScript executed. It is not requirement coverage, is not evidence for any acceptance criterion here, and is deliberately excluded from these figures."
+  ]
+}

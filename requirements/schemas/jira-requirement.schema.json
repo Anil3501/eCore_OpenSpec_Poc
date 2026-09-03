@@ -1,0 +1,344 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ecore-openspec-poc/schemas/jira-requirement.schema.json",
+  "title": "Jira Requirement Artifact",
+  "description": "Normalized, machine-validatable representation of a single Jira story, its requirements and its acceptance criteria. Produced by the Jira Requirement Analysis Agent. Stops at Approval Gate 1.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "artifactVersion",
+    "release",
+    "capability",
+    "story",
+    "requirements",
+    "acceptanceCriteria",
+    "ambiguities",
+    "source",
+    "approvalStatus",
+    "timestamps"
+  ],
+  "properties": {
+    "schemaVersion": { "$ref": "#/$defs/schemaVersion" },
+    "artifactVersion": { "$ref": "#/$defs/artifactVersion" },
+    "release": { "$ref": "#/$defs/release" },
+    "capability": { "$ref": "#/$defs/capability" },
+    "supersedes": {
+      "description": "Artifact version this artifact replaces. Historical approved versions are never mutated.",
+      "type": ["integer", "null"],
+      "minimum": 1
+    },
+    "changeType": { "$ref": "#/$defs/changeType" },
+    "story": { "$ref": "#/$defs/story" },
+    "requirements": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/requirement" }
+    },
+    "acceptanceCriteria": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/acceptanceCriterion" }
+    },
+    "ambiguities": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/ambiguity" }
+    },
+    "source": { "$ref": "#/$defs/source" },
+    "approvalStatus": { "$ref": "#/$defs/status" },
+    "approvalRef": {
+      "description": "Relative path to the validated approval artifact. Required before downstream generation.",
+      "type": ["string", "null"],
+      "minLength": 1
+    },
+    "timestamps": { "$ref": "#/$defs/timestamps" }
+  },
+  "$defs": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "artifactVersion": {
+      "description": "Monotonically increasing. Must increase when approved content changes.",
+      "type": "integer",
+      "minimum": 1
+    },
+    "release": {
+      "description": "Release version this artifact belongs to, e.g. '1.0'.",
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+(\\.[0-9]+)?$"
+    },
+    "capability": {
+      "description": "Business capability slug used for RTM partitioning.",
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "jiraId": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9]+-[0-9]+$"
+    },
+    "isoTimestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sourceType": {
+      "type": "string",
+      "enum": [
+        "EXTRACTED_FROM_JIRA",
+        "PROPOSED_BY_REQUIREMENT_ANALYSIS",
+        "MODIFIED_DURING_HUMAN_REVIEW"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "PENDING_APPROVAL",
+        "APPROVED",
+        "REJECTED",
+        "DEFERRED",
+        "REQUEST_CHANGES",
+        "REVIEW_REQUIRED"
+      ]
+    },
+    "changeType": {
+      "type": "string",
+      "enum": [
+        "NEW",
+        "MODIFIED",
+        "REMOVED",
+        "UNCHANGED",
+        "DEFECT_FIX",
+        "REVIEW_REQUIRED"
+      ]
+    },
+    "story": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "jiraId",
+        "summary",
+        "description",
+        "issueType",
+        "priority",
+        "status",
+        "labels",
+        "components",
+        "parent",
+        "linkedIssues",
+        "sourceRef"
+      ],
+      "properties": {
+        "jiraId": { "$ref": "#/$defs/jiraId" },
+        "summary": { "type": "string", "minLength": 1 },
+        "description": { "type": "string" },
+        "issueType": { "type": "string", "minLength": 1 },
+        "priority": { "type": ["string", "null"] },
+        "status": { "type": ["string", "null"] },
+        "labels": { "type": "array", "items": { "type": "string" } },
+        "components": { "type": "array", "items": { "type": "string" } },
+        "parent": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "required": ["jiraId", "summary"],
+          "properties": {
+            "jiraId": { "$ref": "#/$defs/jiraId" },
+            "summary": { "type": "string" }
+          }
+        },
+        "linkedIssues": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["jiraId", "linkType", "summary"],
+            "properties": {
+              "jiraId": { "$ref": "#/$defs/jiraId" },
+              "linkType": { "type": "string" },
+              "summary": { "type": "string" }
+            }
+          }
+        },
+        "sourceRef": {
+          "description": "Source URL or reference when available, otherwise null.",
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "requirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "requirementId",
+        "description",
+        "originalText",
+        "sourceType",
+        "status",
+        "version"
+      ],
+      "properties": {
+        "requirementId": {
+          "type": "string",
+          "pattern": "^REQ-[A-Z][A-Z0-9]+-[0-9]+-[0-9]{3}$"
+        },
+        "description": { "type": "string", "minLength": 1 },
+        "originalText": {
+          "description": "Verbatim Jira wording. Null only when no source text exists.",
+          "type": ["string", "null"]
+        },
+        "sourceType": { "$ref": "#/$defs/sourceType" },
+        "status": { "$ref": "#/$defs/status" },
+        "version": { "$ref": "#/$defs/artifactVersion" },
+        "changeType": { "$ref": "#/$defs/changeType" }
+      }
+    },
+    "acceptanceCriterion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "acId",
+        "requirementId",
+        "description",
+        "originalText",
+        "given",
+        "when",
+        "then",
+        "sourceType",
+        "status",
+        "version",
+        "rationale",
+        "clarificationRefs"
+      ],
+      "properties": {
+        "acId": {
+          "type": "string",
+          "pattern": "^AC-[A-Z][A-Z0-9]+-[0-9]+-[0-9]{3}$"
+        },
+        "requirementId": {
+          "type": "string",
+          "pattern": "^REQ-[A-Z][A-Z0-9]+-[0-9]+-[0-9]{3}$"
+        },
+        "description": { "type": "string", "minLength": 1 },
+        "originalText": {
+          "description": "Verbatim Jira AC wording. Must be preserved for EXTRACTED_FROM_JIRA.",
+          "type": ["string", "null"]
+        },
+        "given": { "type": "string", "minLength": 1 },
+        "when": { "type": "string", "minLength": 1 },
+        "then": { "type": "string", "minLength": 1 },
+        "sourceType": { "$ref": "#/$defs/sourceType" },
+        "status": { "$ref": "#/$defs/status" },
+        "version": { "$ref": "#/$defs/artifactVersion" },
+        "rationale": {
+          "description": "Mandatory for PROPOSED_BY_REQUIREMENT_ANALYSIS.",
+          "type": ["string", "null"]
+        },
+        "clarificationRefs": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^AMB-[A-Z0-9-]+-[0-9]{3}$" }
+        },
+        "changeType": { "$ref": "#/$defs/changeType" }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "sourceType": { "const": "PROPOSED_BY_REQUIREMENT_ANALYSIS" }
+            },
+            "required": ["sourceType"]
+          },
+          "then": {
+            "properties": { "rationale": { "type": "string", "minLength": 1 } }
+          }
+        },
+        {
+          "if": {
+            "properties": { "sourceType": { "const": "EXTRACTED_FROM_JIRA" } },
+            "required": ["sourceType"]
+          },
+          "then": {
+            "properties": { "originalText": { "type": "string", "minLength": 1 } }
+          }
+        }
+      ]
+    },
+    "ambiguity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ambiguityId", "question", "impact", "relatedTo", "status"],
+      "properties": {
+        "ambiguityId": { "type": "string", "pattern": "^AMB-[A-Z0-9-]+-[0-9]{3}$" },
+        "question": { "type": "string", "minLength": 1 },
+        "impact": { "type": "string", "minLength": 1 },
+        "relatedTo": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "status": {
+          "type": "string",
+          "enum": ["REVIEW_REQUIRED", "RESOLVED", "DEFERRED"]
+        },
+        "resolution": {
+          "description": "The answer received from a human. Required in practice whenever status is RESOLVED. Never authored by an agent.",
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "resolvedBy": {
+          "description": "Who answered the question. An agent is never a valid value.",
+          "type": ["string", "null"]
+        },
+        "resolvedAt": { "type": ["string", "null"], "format": "date-time" }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "system",
+        "retrievedVia",
+        "dataClassification",
+        "rawSnapshotPath",
+        "retrievedAt"
+      ],
+      "properties": {
+        "system": { "type": "string", "enum": ["JIRA", "SAMPLE_DATA"] },
+        "retrievedVia": {
+          "description": "How the story was retrieved. ATLASSIAN_MCP is the primary path. JIRA_REST_API is the documented fallback used when the MCP server exposes no issue-fetch tool; it must never be claimed unless a REST snapshot genuinely exists.",
+          "type": "string",
+          "enum": ["ATLASSIAN_MCP", "JIRA_REST_API", "SAMPLE_DATA"]
+        },
+        "dataClassification": {
+          "description": "Synthetic content must never be mixed with real Jira output.",
+          "type": "string",
+          "enum": ["REAL_JIRA_DATA", "SAMPLE_DATA"]
+        },
+        "rawSnapshotPath": { "type": ["string", "null"] },
+        "retrievedAt": { "$ref": "#/$defs/isoTimestamp" }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "dataClassification": { "const": "SAMPLE_DATA" } },
+            "required": ["dataClassification"]
+          },
+          "then": {
+            "properties": {
+              "system": { "const": "SAMPLE_DATA" },
+              "retrievedVia": { "const": "SAMPLE_DATA" }
+            }
+          }
+        }
+      ]
+    },
+    "timestamps": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["createdAt", "updatedAt"],
+      "properties": {
+        "createdAt": { "$ref": "#/$defs/isoTimestamp" },
+        "updatedAt": { "$ref": "#/$defs/isoTimestamp" },
+        "approvedAt": {
+          "anyOf": [{ "$ref": "#/$defs/isoTimestamp" }, { "type": "null" }]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "scripts": {
+    "bdd": "bddgen",
+    "test": "bddgen && playwright test",
+    "test:smoke": "bddgen && playwright test --grep \"@suite-smoke\"",
+    "test:regression": "bddgen && playwright test --grep \"@suite-regression\"",
+    "test:critical": "bddgen && playwright test --grep \"@risk-high\"",
+    "test:headed": "bddgen && playwright test --headed",
+    "test:ui": "bddgen && playwright test --ui",
+    "test:coverage": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON src/utils/coverage-run.ts",
+    "coverage:report": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON src/utils/coverage-report.ts",
+    "coverage:clean": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON src/utils/coverage-report.ts --clean",
+    "coverage:open": "start \"\" reports\\coverage\\report\\index.html",
+    "report": "playwright show-report reports/playwright-report",
+    "typecheck": "tsc --noEmit",
+    "triage:failures": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON src/utils/failure-triage.ts",
+    "jira:fetch": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON src/utils/jira-fetch.ts",
+    "validate:requirements": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON src/utils/validate-artifacts.ts requirements",
+    "validate:workflow": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON src/utils/validate-artifacts.ts workflow",
+    "validate:rtm": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON src/utils/validate-artifacts.ts rtm",
+    "validate:defects": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON src/utils/validate-artifacts.ts defects",
+    "validate:automation": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON src/utils/validate-artifacts.ts automation",
+    "validate:artifacts": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON src/utils/validate-artifacts.ts all",
+    "workflow:status": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON src/utils/workflow-status.ts"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "@types/istanbul-lib-coverage": "^2.0.6",
+    "@types/istanbul-lib-report": "^3.0.3",
+    "@types/istanbul-reports": "^3.0.4",
+    "@types/node": "^26.2.0",
+    "istanbul-lib-coverage": "^3.2.2",
+    "istanbul-lib-report": "^3.0.1",
+    "istanbul-reports": "^3.2.0",
+    "playwright-bdd": "^9.2.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^7.0.2",
+    "v8-to-istanbul": "^9.3.0"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "zod": "^4.4.3"
+  }
+}

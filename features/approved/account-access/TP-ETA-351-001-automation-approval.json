@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "1.0.0",
+  "approvalId": "APR-AD-ETA-351-001",
+  "gate": "AUTOMATION_DESIGN",
+  "artifactId": "TP-ETA-351-001",
+  "artifactVersion": 1,
+  "release": "1.0",
+  "capability": "account-access",
+  "sourceArtifactPath": "features/generated/account-access/TP-ETA-351-001-automation-design.md",
+  "decision": "APPROVE",
+  "reviewer": {
+    "name": "Nitin Saini",
+    "role": "Reviewer",
+    "reference": null
+  },
+  "reviewedAt": "2026-08-31T14:40:00.000Z",
+  "comments": "Gate 3 approved. All eight scenarios of features/generated/account-access/organization-sign-in.feature are approved for promotion to features/approved/, which is the only input to bddgen. This decision was given by the reviewer in chat and transcribed into this artifact by the orchestrator; the transcription is a record of a human decision, not an agent approval. Two questions put to the reviewer before this gate were not answered and are recorded here as unanswered rather than assumed: whether the reviewer wants to inspect page objects and step definitions after IMPLEMENTATION and before EXECUTION (the framework defines no gate there), and whether VPN access to the qa host is currently available for PLAYWRIGHT_VALIDATION. If the host cannot be reached, the correct outcome is an ENVIRONMENT_BLOCKER: the workflow halts, nothing is healed and no defect is filed, because a failure that never reached the application proves nothing about it. AMB-ETA-351-004, AMB-ETA-351-006 and CLR-TP-ETA-351-001 remain REVIEW_REQUIRED and cannot be closed by observing the application. No locator has been verified at the time of this approval; every locator written during IMPLEMENTATION must carry MCP_VALIDATION_REQUIRED until the Playwright Test Planner validates it against the real page, and that marker is a build failure while the file backs approved automation.",
+  "itemDecisions": [
+    {
+      "itemId": "TS-ETA-351-001",
+      "decision": "APPROVE",
+      "comment": "The login page offers a way to declare the kind of sign-in before any details are entered. Observes the page before any choice is made, which is why the sign-in choice is kept out of the Background."
+    },
+    {
+      "itemId": "TS-ETA-351-002",
+      "decision": "APPROVE",
+      "comment": "Both supported sign-in kinds are offered and can be told apart. Asserts presence and distinguishability only; no Business Entity Login behaviour is exercised."
+    },
+    {
+      "itemId": "TS-ETA-351-003",
+      "decision": "APPROVE",
+      "comment": "Choosing organization sign-in makes the page ask for the organization details rather than every possible field. Names no field, pending AMB-ETA-351-001."
+    },
+    {
+      "itemId": "TS-ETA-351-004",
+      "decision": "APPROVE",
+      "comment": "The password is not readable on screen as it is typed. Types a fabricated secret and never submits it. Concealment only, pending AMB-ETA-351-004."
+    },
+    {
+      "itemId": "TS-ETA-351-005",
+      "decision": "APPROVE",
+      "comment": "Correct organization details admit the user to the eCore Command Center Home page. The only scenario permitted to use the real account. Stops at arrival, pending AMB-ETA-351-006."
+    },
+    {
+      "itemId": "TS-ETA-351-006",
+      "decision": "APPROVE",
+      "comment": "Wrong details do not admit the user and the user is told what happened. Fabricated data only. No message text may be asserted."
+    },
+    {
+      "itemId": "TS-ETA-351-007",
+      "decision": "APPROVE",
+      "comment": "Required details left out do not admit the user and the user is told what happened. Fabricated data only. Generic case only, pending AMB-ETA-351-005."
+    },
+    {
+      "itemId": "TS-ETA-351-008",
+      "decision": "APPROVE",
+      "comment": "The response to wrong details differs from the response to missing details. Two sign-in attempts in one scenario because the criterion is comparative. Submits two failing attempts, so it must never touch the real account."
+    }
+  ]
+}

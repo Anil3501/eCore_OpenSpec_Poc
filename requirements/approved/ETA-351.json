@@ -1,0 +1,340 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactVersion": 1,
+  "release": "1.0",
+  "capability": "account-access",
+  "supersedes": null,
+  "changeType": "NEW",
+  "story": {
+    "jiraId": "ETA-351",
+    "summary": "Organization Login for eCore Command Center: login type selection, credential entry, authentication, and Home page access",
+    "description": "Summary\nAs an organization user, I want to sign in to eCore Command Center using my organization credentials so that I can access the application\nStory\nAs an organization user of eCore Command Center\nI want to sign in using my organization credentials\nSo that I can access the application with my assigned permissions\nContext\nThe eCore Command Center login page is the entry point to the application. It\nsupports more than one kind of sign-in, and the user tells the system which kind\nthey are using before entering their details. Organization users authenticate\nagainst their organization rather than against an individual business entity, so\nthe organization they belong to forms part of what they supply at sign-in.\nThe other supported sign-in kind is Business Entity Login. It exists on the same\npage and the user must be able to tell the two apart and choose between them, but\nits own behaviour is handled elsewhere and is not part of this story.\nWhich details the page asks for depends on the choice the user makes. The page is\nexpected to respond to that choice rather than present every possible field at\nonce.\nWhat the user does\nA user arrives at the login page, indicates that they are signing in on behalf of\ntheir organization, supplies who they are, which organization they belong to, and\nthe secret that proves it, and submits. If everything they supplied is correct,\nthey arrive at the eCore Command Center Home page and can work in the application\nwithin the limits of their organization and permissions.\nPasswords are secrets and are treated as such on screen.\nNot everything a user submits will be correct. Details can be wrong, and details\ncan be left out altogether. In neither case should the user get into the\napplication, and in neither case should they be left guessing about what happened.\nWrong details and missing details are different problems and the user should be\nable to tell which one they have hit.\nOut of Scope\nBusiness Entity Login behaviour; Forgot Password; password reset; user creation;\norganization creation; role and permission configuration; MFA and SSO; session\ntimeout; account lockout; exact error-message wording.",
+    "issueType": "Story",
+    "priority": "Medium",
+    "status": "In Progress",
+    "labels": [
+      "QA"
+    ],
+    "components": [],
+    "parent": {
+      "jiraId": "ETA-164",
+      "summary": "eCore Application Testing, Automation & Migration"
+    },
+    "linkedIssues": [],
+    "sourceRef": "https://eoriginal.atlassian.net/browse/ETA-351"
+  },
+  "requirements": [
+    {
+      "requirementId": "REQ-ETA-351-001",
+      "description": "The login page lets the user declare which kind of sign-in they are using before they enter their details.",
+      "originalText": "It supports more than one kind of sign-in, and the user tells the system which kind they are using before entering their details.",
+      "sourceType": "EXTRACTED_FROM_JIRA",
+      "status": "APPROVED",
+      "version": 1,
+      "changeType": "NEW"
+    },
+    {
+      "requirementId": "REQ-ETA-351-002",
+      "description": "Organization Login and Business Entity Login both exist on the login page, and the user can tell them apart and choose between them. Business Entity Login behaviour itself is out of scope.",
+      "originalText": "The other supported sign-in kind is Business Entity Login. It exists on the same page and the user must be able to tell the two apart and choose between them, but its own behaviour is handled elsewhere and is not part of this story.",
+      "sourceType": "EXTRACTED_FROM_JIRA",
+      "status": "APPROVED",
+      "version": 1,
+      "changeType": "NEW"
+    },
+    {
+      "requirementId": "REQ-ETA-351-003",
+      "description": "The details the page asks for depend on the sign-in kind the user chose. The page responds to that choice instead of presenting every possible field at once.",
+      "originalText": "Which details the page asks for depends on the choice the user makes. The page is expected to respond to that choice rather than present every possible field at once.",
+      "sourceType": "EXTRACTED_FROM_JIRA",
+      "status": "APPROVED",
+      "version": 1,
+      "changeType": "NEW"
+    },
+    {
+      "requirementId": "REQ-ETA-351-004",
+      "description": "An organization user signing in supplies who they are, which organization they belong to, and the secret that proves it, then submits.",
+      "originalText": "A user arrives at the login page, indicates that they are signing in on behalf of their organization, supplies who they are, which organization they belong to, and the secret that proves it, and submits.",
+      "sourceType": "EXTRACTED_FROM_JIRA",
+      "status": "APPROVED",
+      "version": 1,
+      "changeType": "NEW"
+    },
+    {
+      "requirementId": "REQ-ETA-351-005",
+      "description": "When everything supplied is correct, the user arrives at the eCore Command Center Home page.",
+      "originalText": "If everything they supplied is correct, they arrive at the eCore Command Center Home page and can work in the application within the limits of their organization and permissions.",
+      "sourceType": "EXTRACTED_FROM_JIRA",
+      "status": "APPROVED",
+      "version": 1,
+      "changeType": "NEW"
+    },
+    {
+      "requirementId": "REQ-ETA-351-006",
+      "description": "Passwords are treated as secrets on screen.",
+      "originalText": "Passwords are secrets and are treated as such on screen.",
+      "sourceType": "EXTRACTED_FROM_JIRA",
+      "status": "APPROVED",
+      "version": 1,
+      "changeType": "NEW"
+    },
+    {
+      "requirementId": "REQ-ETA-351-007",
+      "description": "Neither wrong details nor missing details admit the user to the application, and in neither case is the user left guessing about what happened.",
+      "originalText": "Not everything a user submits will be correct. Details can be wrong, and details can be left out altogether. In neither case should the user get into the application, and in neither case should they be left guessing about what happened.",
+      "sourceType": "EXTRACTED_FROM_JIRA",
+      "status": "APPROVED",
+      "version": 1,
+      "changeType": "NEW"
+    },
+    {
+      "requirementId": "REQ-ETA-351-008",
+      "description": "Wrong details and missing details are different problems, and the user can tell which of the two they have hit.",
+      "originalText": "Wrong details and missing details are different problems and the user should be able to tell which one they have hit.",
+      "sourceType": "EXTRACTED_FROM_JIRA",
+      "status": "APPROVED",
+      "version": 1,
+      "changeType": "NEW"
+    }
+  ],
+  "acceptanceCriteria": [
+    {
+      "acId": "AC-ETA-351-001",
+      "requirementId": "REQ-ETA-351-001",
+      "description": "The login page offers a way to declare the kind of sign-in before any credential detail is entered.",
+      "originalText": null,
+      "given": "the eCore Command Center login page is open",
+      "when": "the user looks at the page before entering any details",
+      "then": "the page offers a way to declare which kind of sign-in is being used",
+      "sourceType": "PROPOSED_BY_REQUIREMENT_ANALYSIS",
+      "status": "APPROVED",
+      "version": 1,
+      "rationale": "The story states the page 'supports more than one kind of sign-in, and the user tells the system which kind they are using before entering their details'. The ordering ('before entering their details') is stated explicitly, so it is testable. The mechanism by which the user declares the kind is not stated, which is raised as AMB-ETA-351-002.",
+      "clarificationRefs": [
+        "AMB-ETA-351-002"
+      ],
+      "changeType": "NEW"
+    },
+    {
+      "acId": "AC-ETA-351-002",
+      "requirementId": "REQ-ETA-351-002",
+      "description": "Both supported sign-in kinds are offered on the login page and are distinguishable from one another.",
+      "originalText": null,
+      "given": "the eCore Command Center login page is open",
+      "when": "the user examines the available sign-in kinds",
+      "then": "organization sign-in and Business Entity Login are both offered and can be told apart from each other",
+      "sourceType": "PROPOSED_BY_REQUIREMENT_ANALYSIS",
+      "status": "APPROVED",
+      "version": 1,
+      "rationale": "The story requires that 'the user must be able to tell the two apart and choose between them'. This criterion asserts only presence and distinguishability, because the story places Business Entity Login's own behaviour out of scope.",
+      "clarificationRefs": [
+        "AMB-ETA-351-002"
+      ],
+      "changeType": "NEW"
+    },
+    {
+      "acId": "AC-ETA-351-003",
+      "requirementId": "REQ-ETA-351-003",
+      "description": "Choosing organization sign-in causes the page to ask for the organization sign-in details rather than every possible field at once.",
+      "originalText": null,
+      "given": "the eCore Command Center login page is open",
+      "when": "the user indicates the sign-in is on behalf of an organization",
+      "then": "the page asks for the details that belong to organization sign-in and does not present every possible field at once",
+      "sourceType": "PROPOSED_BY_REQUIREMENT_ANALYSIS",
+      "status": "APPROVED",
+      "version": 1,
+      "rationale": "Directly supported by 'Which details the page asks for depends on the choice the user makes. The page is expected to respond to that choice rather than present every possible field at once.' The exact field set is not enumerated in the story, so it is raised as AMB-ETA-351-001 rather than assumed.",
+      "clarificationRefs": [
+        "AMB-ETA-351-001"
+      ],
+      "changeType": "NEW"
+    },
+    {
+      "acId": "AC-ETA-351-004",
+      "requirementId": "REQ-ETA-351-006",
+      "description": "The password the user types is not readable on screen.",
+      "originalText": null,
+      "given": "the user has selected organization sign-in",
+      "when": "the user types the secret that proves who they are",
+      "then": "the secret is not readable on screen",
+      "sourceType": "PROPOSED_BY_REQUIREMENT_ANALYSIS",
+      "status": "APPROVED",
+      "version": 1,
+      "rationale": "The story states 'Passwords are secrets and are treated as such on screen.' Concealment on screen is the only behaviour that sentence asserts. Whether any further secret-handling obligation is intended is raised as AMB-ETA-351-004.",
+      "clarificationRefs": [
+        "AMB-ETA-351-004"
+      ],
+      "changeType": "NEW"
+    },
+    {
+      "acId": "AC-ETA-351-005",
+      "requirementId": "REQ-ETA-351-005",
+      "description": "Correct organization sign-in details take the user to the eCore Command Center Home page.",
+      "originalText": null,
+      "given": "the user has selected organization sign-in",
+      "when": "the user supplies correct details and submits",
+      "then": "the user arrives at the eCore Command Center Home page",
+      "sourceType": "PROPOSED_BY_REQUIREMENT_ANALYSIS",
+      "status": "APPROVED",
+      "version": 1,
+      "rationale": "The story states 'If everything they supplied is correct, they arrive at the eCore Command Center Home page'. The trailing clause about working 'within the limits of their organization and permissions' is deliberately excluded, because the story lists role and permission configuration as out of scope; that exclusion is recorded as AMB-ETA-351-006.",
+      "clarificationRefs": [
+        "AMB-ETA-351-006"
+      ],
+      "changeType": "NEW"
+    },
+    {
+      "acId": "AC-ETA-351-006",
+      "requirementId": "REQ-ETA-351-007",
+      "description": "Wrong details do not admit the user, and the user is told what happened.",
+      "originalText": null,
+      "given": "the user has selected organization sign-in",
+      "when": "the user supplies details that are wrong and submits",
+      "then": "the user is not admitted to the application and is told that the attempt failed",
+      "sourceType": "PROPOSED_BY_REQUIREMENT_ANALYSIS",
+      "status": "APPROVED",
+      "version": 1,
+      "rationale": "Supported by 'In neither case should the user get into the application, and in neither case should they be left guessing about what happened.' No specific message text is asserted, because the story lists exact error-message wording as out of scope. See AMB-ETA-351-003.",
+      "clarificationRefs": [
+        "AMB-ETA-351-003"
+      ],
+      "changeType": "NEW"
+    },
+    {
+      "acId": "AC-ETA-351-007",
+      "requirementId": "REQ-ETA-351-007",
+      "description": "Details left out do not admit the user, and the user is told what happened.",
+      "originalText": null,
+      "given": "the user has selected organization sign-in",
+      "when": "the user leaves required details out and submits",
+      "then": "the user is not admitted to the application and is told that the attempt failed",
+      "sourceType": "PROPOSED_BY_REQUIREMENT_ANALYSIS",
+      "status": "APPROVED",
+      "version": 1,
+      "rationale": "The story treats 'details can be left out altogether' as a distinct case with the same two obligations: no entry, and no guessing. Which individual details are mandatory is not stated and is raised as AMB-ETA-351-005.",
+      "clarificationRefs": [
+        "AMB-ETA-351-003",
+        "AMB-ETA-351-005"
+      ],
+      "changeType": "NEW"
+    },
+    {
+      "acId": "AC-ETA-351-008",
+      "requirementId": "REQ-ETA-351-008",
+      "description": "The response to wrong details is distinguishable from the response to missing details.",
+      "originalText": null,
+      "given": "the user has selected organization sign-in",
+      "when": "the user submits wrong details on one attempt and leaves required details out on another",
+      "then": "the two responses differ from each other, so the user can tell which problem they have hit",
+      "sourceType": "PROPOSED_BY_REQUIREMENT_ANALYSIS",
+      "status": "APPROVED",
+      "version": 1,
+      "rationale": "The story states 'Wrong details and missing details are different problems and the user should be able to tell which one they have hit.' This is asserted as a difference between the two responses rather than as specific wording, because exact error-message wording is out of scope. The observable signal that must differ is unresolved: see AMB-ETA-351-003.",
+      "clarificationRefs": [
+        "AMB-ETA-351-003"
+      ],
+      "changeType": "NEW"
+    }
+  ],
+  "ambiguities": [
+    {
+      "ambiguityId": "AMB-ETA-351-001",
+      "question": "The story says the user supplies 'which organization they belong to'. Is that a single detail, or more than one (for example an organization name and a separate organization identifier)? What exactly is the field set for organization sign-in?",
+      "impact": "AC-ETA-351-003 cannot state which details the page asks for, and no test data can be defined, until the field set is known. Guessing would invent a data requirement the story does not state.",
+      "relatedTo": [
+        "REQ-ETA-351-003",
+        "REQ-ETA-351-004",
+        "AC-ETA-351-003"
+      ],
+      "status": "REVIEW_REQUIRED",
+      "resolution": null,
+      "resolvedBy": null,
+      "resolvedAt": null
+    },
+    {
+      "ambiguityId": "AMB-ETA-351-002",
+      "question": "How does the user 'tell the system which kind they are using' - a dropdown, radio buttons, tabs, separate links, or something else?",
+      "impact": "AC-ETA-351-001 and AC-ETA-351-002 can assert that the choice exists but not how it is made. The interaction model must be confirmed against the real page before automation can address it.",
+      "relatedTo": [
+        "REQ-ETA-351-001",
+        "REQ-ETA-351-002",
+        "AC-ETA-351-001",
+        "AC-ETA-351-002"
+      ],
+      "status": "REVIEW_REQUIRED",
+      "resolution": null,
+      "resolvedBy": null,
+      "resolvedAt": null
+    },
+    {
+      "ambiguityId": "AMB-ETA-351-003",
+      "question": "Exact error-message wording is explicitly out of scope, yet the user must be able to tell wrong details from missing details. What observable difference is required between the two responses, and is asserting that difference without asserting the text acceptable?",
+      "impact": "AC-ETA-351-006, AC-ETA-351-007 and AC-ETA-351-008 currently assert only that the user is told something and that the two responses differ. If a stronger guarantee is intended, these criteria are too weak; if not, they are correct as written.",
+      "relatedTo": [
+        "REQ-ETA-351-007",
+        "REQ-ETA-351-008",
+        "AC-ETA-351-006",
+        "AC-ETA-351-007",
+        "AC-ETA-351-008"
+      ],
+      "status": "REVIEW_REQUIRED",
+      "resolution": null,
+      "resolvedBy": null,
+      "resolvedAt": null
+    },
+    {
+      "ambiguityId": "AMB-ETA-351-004",
+      "question": "'Passwords are secrets and are treated as such on screen.' Does this mean only that the typed value is concealed on screen, or does it carry further obligations such as excluding the value from autocomplete, from copy, or from the page source?",
+      "impact": "AC-ETA-351-004 asserts only on-screen concealment. Any additional obligation would need its own criterion and would not be inferable from the current wording.",
+      "relatedTo": [
+        "REQ-ETA-351-006",
+        "AC-ETA-351-004"
+      ],
+      "status": "REVIEW_REQUIRED",
+      "resolution": null,
+      "resolvedBy": null,
+      "resolvedAt": null
+    },
+    {
+      "ambiguityId": "AMB-ETA-351-005",
+      "question": "Which of the organization sign-in details are mandatory, and does leaving one out behave the same as leaving several out?",
+      "impact": "AC-ETA-351-007 covers the missing-details case generically. Without this answer the number of distinct missing-detail scenarios cannot be decided, and a per-field expectation cannot be written.",
+      "relatedTo": [
+        "REQ-ETA-351-004",
+        "REQ-ETA-351-007",
+        "AC-ETA-351-007"
+      ],
+      "status": "REVIEW_REQUIRED",
+      "resolution": null,
+      "resolvedBy": null,
+      "resolvedAt": null
+    },
+    {
+      "ambiguityId": "AMB-ETA-351-006",
+      "question": "The story says a successful user 'can work in the application within the limits of their organization and permissions', but also lists role and permission configuration as out of scope. Is any permission-dependent behaviour in scope for this story, or does the story end at arrival on the Home page?",
+      "impact": "AC-ETA-351-005 currently stops at arrival on the Home page. If permission-limited behaviour is in scope, at least one further criterion is missing and the capability boundary is wrong.",
+      "relatedTo": [
+        "REQ-ETA-351-005",
+        "AC-ETA-351-005"
+      ],
+      "status": "REVIEW_REQUIRED",
+      "resolution": null,
+      "resolvedBy": null,
+      "resolvedAt": null
+    }
+  ],
+  "source": {
+    "system": "JIRA",
+    "retrievedVia": "JIRA_REST_API",
+    "dataClassification": "REAL_JIRA_DATA",
+    "rawSnapshotPath": "requirements/raw/ETA-351.json",
+    "retrievedAt": "2026-08-31T12:44:24.412Z"
+  },
+  "approvalStatus": "APPROVED",
+  "approvalRef": "requirements/approved/ETA-351-ac-approval.json",
+  "timestamps": {
+    "createdAt": "2026-08-31T13:05:00.000Z",
+    "updatedAt": "2026-08-31T13:20:00.000Z",
+    "approvedAt": "2026-08-31T13:20:00.000Z"
+  }
+}

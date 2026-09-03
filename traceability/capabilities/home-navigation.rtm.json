@@ -1,0 +1,468 @@
+{
+  "schemaVersion": "1.0.0",
+  "capability": "home-navigation",
+  "release": "1.0",
+  "artifactVersion": 1,
+  "dataClassification": "REAL_JIRA_DATA",
+  "updatedAt": "2026-09-01T13:52:10.000Z",
+  "entries": [
+    {
+      "traceId": "TRC-ETA-411-001",
+      "jiraStoryId": "ETA-411",
+      "requirementId": "REQ-ETA-411-001",
+      "acId": "AC-ETA-411-001",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/ETA-411.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/ETA-411-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-ETA-411-001-approval.json",
+        "automationDesign": "features/approved/home-navigation/TP-ETA-411-001-automation-approval.json"
+      },
+      "openSpecRefs": [
+        "openspec/changes/add-home-navigation/specs/home-navigation/icon-navigation/spec.md"
+      ],
+      "testPlan": {
+        "testPlanId": "TP-ETA-411-001",
+        "testScenarioId": "TS-ETA-411-001",
+        "path": "test-plans/approved/TP-ETA-411-001.json",
+        "version": 1
+      },
+      "automation": {
+        "featureFile": "features/approved/home-navigation/home-icon-navigation.feature",
+        "gherkinScenario": "A successful organization sign-in places the user on the Home page",
+        "stepDefinitions": [
+          "steps/organization-sign-in.steps.ts"
+        ],
+        "pageObjects": [
+          "src/pages/ecore-login.page.ts",
+          "src/pages/ecore-home.page.ts"
+        ],
+        "fixtures": [
+          "src/fixtures/test.ts"
+        ],
+        "generatedTest": ".features-gen/features/approved/home-navigation/home-icon-navigation.feature.spec.js",
+        "automationStatus": "EXECUTABLE",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-ETA-411-001",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-ETA-411-001.json"
+        }
+      ]
+    },
+    {
+      "traceId": "TRC-ETA-411-002",
+      "jiraStoryId": "ETA-411",
+      "requirementId": "REQ-ETA-411-002",
+      "acId": "AC-ETA-411-002",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/ETA-411.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/ETA-411-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-ETA-411-001-approval.json",
+        "automationDesign": "features/approved/home-navigation/TP-ETA-411-001-automation-approval.json"
+      },
+      "openSpecRefs": [
+        "openspec/changes/add-home-navigation/specs/home-navigation/icon-navigation/spec.md"
+      ],
+      "testPlan": {
+        "testPlanId": "TP-ETA-411-001",
+        "testScenarioId": "TS-ETA-411-002",
+        "path": "test-plans/approved/TP-ETA-411-001.json",
+        "version": 1
+      },
+      "automation": {
+        "featureFile": "features/approved/home-navigation/home-icon-navigation.feature",
+        "gherkinScenario": "The Home page presents three activatable icons",
+        "stepDefinitions": [
+          "steps/home-icon-navigation.steps.ts"
+        ],
+        "pageObjects": [
+          "src/pages/ecore-login.page.ts",
+          "src/pages/ecore-home.page.ts"
+        ],
+        "fixtures": [
+          "src/fixtures/test.ts"
+        ],
+        "generatedTest": ".features-gen/features/approved/home-navigation/home-icon-navigation.feature.spec.js",
+        "automationStatus": "EXECUTABLE",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-ETA-411-001",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-ETA-411-001.json"
+        }
+      ]
+    },
+    {
+      "traceId": "TRC-ETA-411-003",
+      "jiraStoryId": "ETA-411",
+      "requirementId": "REQ-ETA-411-003",
+      "acId": "AC-ETA-411-003",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/ETA-411.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/ETA-411-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-ETA-411-001-approval.json",
+        "automationDesign": "features/approved/home-navigation/TP-ETA-411-001-automation-approval.json"
+      },
+      "openSpecRefs": [
+        "openspec/changes/add-home-navigation/specs/home-navigation/icon-navigation/spec.md"
+      ],
+      "testPlan": {
+        "testPlanId": "TP-ETA-411-001",
+        "testScenarioId": "TS-ETA-411-003",
+        "path": "test-plans/approved/TP-ETA-411-001.json",
+        "version": 1
+      },
+      "automation": {
+        "featureFile": "features/approved/home-navigation/home-icon-navigation.feature",
+        "gherkinScenario": "The New Transaction icon reaches the New Transaction page",
+        "stepDefinitions": [
+          "steps/home-icon-navigation.steps.ts"
+        ],
+        "pageObjects": [
+          "src/pages/ecore-login.page.ts",
+          "src/pages/ecore-home.page.ts",
+          "src/pages/ecore-new-transaction.page.ts"
+        ],
+        "fixtures": [
+          "src/fixtures/test.ts"
+        ],
+        "generatedTest": ".features-gen/features/approved/home-navigation/home-icon-navigation.feature.spec.js",
+        "automationStatus": "EXECUTABLE",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-ETA-411-001",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-ETA-411-001.json"
+        }
+      ]
+    },
+    {
+      "traceId": "TRC-ETA-411-004",
+      "jiraStoryId": "ETA-411",
+      "requirementId": "REQ-ETA-411-003",
+      "acId": "AC-ETA-411-004",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/ETA-411.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/ETA-411-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-ETA-411-001-approval.json",
+        "automationDesign": "features/approved/home-navigation/TP-ETA-411-001-automation-approval.json"
+      },
+      "openSpecRefs": [
+        "openspec/changes/add-home-navigation/specs/home-navigation/icon-navigation/spec.md"
+      ],
+      "testPlan": {
+        "testPlanId": "TP-ETA-411-001",
+        "testScenarioId": "TS-ETA-411-004",
+        "path": "test-plans/approved/TP-ETA-411-001.json",
+        "version": 1
+      },
+      "automation": {
+        "featureFile": "features/approved/home-navigation/home-icon-navigation.feature",
+        "gherkinScenario": "The Workspace icon reaches the Workspace page",
+        "stepDefinitions": [
+          "steps/home-icon-navigation.steps.ts"
+        ],
+        "pageObjects": [
+          "src/pages/ecore-login.page.ts",
+          "src/pages/ecore-home.page.ts",
+          "src/pages/ecore-workspace.page.ts"
+        ],
+        "fixtures": [
+          "src/fixtures/test.ts"
+        ],
+        "generatedTest": ".features-gen/features/approved/home-navigation/home-icon-navigation.feature.spec.js",
+        "automationStatus": "EXECUTABLE",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-ETA-411-001",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-ETA-411-001.json"
+        }
+      ]
+    },
+    {
+      "traceId": "TRC-ETA-411-005",
+      "jiraStoryId": "ETA-411",
+      "requirementId": "REQ-ETA-411-003",
+      "acId": "AC-ETA-411-005",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/ETA-411.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/ETA-411-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-ETA-411-001-approval.json",
+        "automationDesign": "features/approved/home-navigation/TP-ETA-411-001-automation-approval.json"
+      },
+      "openSpecRefs": [
+        "openspec/changes/add-home-navigation/specs/home-navigation/icon-navigation/spec.md"
+      ],
+      "testPlan": {
+        "testPlanId": "TP-ETA-411-001",
+        "testScenarioId": "TS-ETA-411-005",
+        "path": "test-plans/approved/TP-ETA-411-001.json",
+        "version": 1
+      },
+      "automation": {
+        "featureFile": "features/approved/home-navigation/home-icon-navigation.feature",
+        "gherkinScenario": "The Preferences icon reaches the Preferences page",
+        "stepDefinitions": [
+          "steps/home-icon-navigation.steps.ts"
+        ],
+        "pageObjects": [
+          "src/pages/ecore-login.page.ts",
+          "src/pages/ecore-home.page.ts",
+          "src/pages/ecore-preferences.page.ts"
+        ],
+        "fixtures": [
+          "src/fixtures/test.ts"
+        ],
+        "generatedTest": ".features-gen/features/approved/home-navigation/home-icon-navigation.feature.spec.js",
+        "automationStatus": "EXECUTABLE",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-ETA-411-001",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-ETA-411-001.json"
+        }
+      ]
+    },
+    {
+      "traceId": "TRC-ETA-411-006",
+      "jiraStoryId": "ETA-411",
+      "requirementId": "REQ-ETA-411-004",
+      "acId": "AC-ETA-411-006",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/ETA-411.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/ETA-411-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-ETA-411-001-approval.json",
+        "automationDesign": "features/approved/home-navigation/TP-ETA-411-001-automation-approval.json"
+      },
+      "openSpecRefs": [
+        "openspec/changes/add-home-navigation/specs/home-navigation/icon-navigation/spec.md"
+      ],
+      "testPlan": {
+        "testPlanId": "TP-ETA-411-001",
+        "testScenarioId": "TS-ETA-411-006",
+        "path": "test-plans/approved/TP-ETA-411-001.json",
+        "version": 1
+      },
+      "automation": {
+        "featureFile": "features/approved/home-navigation/home-icon-navigation.feature",
+        "gherkinScenario": "The Command Center control returns the user Home from <destination>",
+        "stepDefinitions": [
+          "steps/home-icon-navigation.steps.ts"
+        ],
+        "pageObjects": [
+          "src/pages/ecore-login.page.ts",
+          "src/pages/ecore-home.page.ts",
+          "src/pages/ecore-new-transaction.page.ts",
+          "src/pages/ecore-workspace.page.ts",
+          "src/pages/ecore-preferences.page.ts"
+        ],
+        "fixtures": [
+          "src/fixtures/test.ts"
+        ],
+        "generatedTest": ".features-gen/features/approved/home-navigation/home-icon-navigation.feature.spec.js",
+        "automationStatus": "EXECUTABLE",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-ETA-411-001",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-ETA-411-001.json"
+        }
+      ]
+    },
+    {
+      "traceId": "TRC-ETA-411-007",
+      "jiraStoryId": "ETA-411",
+      "requirementId": "REQ-ETA-411-002",
+      "acId": "AC-ETA-411-007",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/ETA-411.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/ETA-411-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-ETA-411-001-approval.json",
+        "automationDesign": "features/approved/home-navigation/TP-ETA-411-001-automation-approval.json"
+      },
+      "openSpecRefs": [
+        "openspec/changes/add-home-navigation/specs/home-navigation/icon-navigation/spec.md"
+      ],
+      "testPlan": {
+        "testPlanId": "TP-ETA-411-001",
+        "testScenarioId": "TS-ETA-411-007",
+        "path": "test-plans/approved/TP-ETA-411-001.json",
+        "version": 1
+      },
+      "automation": {
+        "featureFile": "features/approved/home-navigation/home-icon-navigation.feature",
+        "gherkinScenario": "The header navigation offers New Transaction and Workspace links",
+        "stepDefinitions": [
+          "steps/home-icon-navigation.steps.ts"
+        ],
+        "pageObjects": [
+          "src/pages/ecore-login.page.ts",
+          "src/pages/ecore-home.page.ts"
+        ],
+        "fixtures": [
+          "src/fixtures/test.ts"
+        ],
+        "generatedTest": ".features-gen/features/approved/home-navigation/home-icon-navigation.feature.spec.js",
+        "automationStatus": "EXECUTABLE",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-ETA-411-001",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-ETA-411-001.json"
+        }
+      ]
+    },
+    {
+      "traceId": "TRC-ETA-411-008",
+      "jiraStoryId": "ETA-411",
+      "requirementId": "REQ-ETA-411-003",
+      "acId": "AC-ETA-411-008",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/ETA-411.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/ETA-411-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-ETA-411-001-approval.json",
+        "automationDesign": "features/approved/home-navigation/TP-ETA-411-001-automation-approval.json"
+      },
+      "openSpecRefs": [
+        "openspec/changes/add-home-navigation/specs/home-navigation/icon-navigation/spec.md"
+      ],
+      "testPlan": {
+        "testPlanId": "TP-ETA-411-001",
+        "testScenarioId": "TS-ETA-411-008",
+        "path": "test-plans/approved/TP-ETA-411-001.json",
+        "version": 1
+      },
+      "automation": {
+        "featureFile": "features/approved/home-navigation/home-icon-navigation.feature",
+        "gherkinScenario": "The header New Transaction link reaches the New Transaction page",
+        "stepDefinitions": [
+          "steps/home-icon-navigation.steps.ts"
+        ],
+        "pageObjects": [
+          "src/pages/ecore-login.page.ts",
+          "src/pages/ecore-home.page.ts",
+          "src/pages/ecore-new-transaction.page.ts"
+        ],
+        "fixtures": [
+          "src/fixtures/test.ts"
+        ],
+        "generatedTest": ".features-gen/features/approved/home-navigation/home-icon-navigation.feature.spec.js",
+        "automationStatus": "EXECUTABLE",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-ETA-411-001",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-ETA-411-001.json"
+        }
+      ]
+    },
+    {
+      "traceId": "TRC-ETA-411-009",
+      "jiraStoryId": "ETA-411",
+      "requirementId": "REQ-ETA-411-003",
+      "acId": "AC-ETA-411-009",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/ETA-411.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/ETA-411-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-ETA-411-001-approval.json",
+        "automationDesign": "features/approved/home-navigation/TP-ETA-411-001-automation-approval.json"
+      },
+      "openSpecRefs": [
+        "openspec/changes/add-home-navigation/specs/home-navigation/icon-navigation/spec.md"
+      ],
+      "testPlan": {
+        "testPlanId": "TP-ETA-411-001",
+        "testScenarioId": "TS-ETA-411-009",
+        "path": "test-plans/approved/TP-ETA-411-001.json",
+        "version": 1
+      },
+      "automation": {
+        "featureFile": "features/approved/home-navigation/home-icon-navigation.feature",
+        "gherkinScenario": "The header Workspace link reaches the Workspace page",
+        "stepDefinitions": [
+          "steps/home-icon-navigation.steps.ts"
+        ],
+        "pageObjects": [
+          "src/pages/ecore-login.page.ts",
+          "src/pages/ecore-home.page.ts",
+          "src/pages/ecore-workspace.page.ts"
+        ],
+        "fixtures": [
+          "src/fixtures/test.ts"
+        ],
+        "generatedTest": ".features-gen/features/approved/home-navigation/home-icon-navigation.feature.spec.js",
+        "automationStatus": "EXECUTABLE",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-ETA-411-001",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-ETA-411-001.json"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,424 @@
+{
+  "schemaVersion": "1.0.0",
+  "testPlanId": "TP-ETA-411-001",
+  "artifactVersion": 1,
+  "release": "1.0",
+  "capability": "home-navigation",
+  "jiraStoryIds": [
+    "ETA-411"
+  ],
+  "requirementIds": [
+    "REQ-ETA-411-001",
+    "REQ-ETA-411-002",
+    "REQ-ETA-411-003",
+    "REQ-ETA-411-004"
+  ],
+  "acIds": [
+    "AC-ETA-411-001",
+    "AC-ETA-411-002",
+    "AC-ETA-411-003",
+    "AC-ETA-411-004",
+    "AC-ETA-411-005",
+    "AC-ETA-411-006",
+    "AC-ETA-411-007",
+    "AC-ETA-411-008",
+    "AC-ETA-411-009"
+  ],
+  "openSpecRefs": [
+    "openspec/changes/add-home-navigation/specs/home-navigation/icon-navigation/spec.md",
+    "openspec/changes/add-home-navigation/proposal.md",
+    "openspec/changes/add-home-navigation/design.md"
+  ],
+  "objective": "Verify that a signed-in organization user is presented with the three Home page icons, that each icon and each duplicating header link takes the user to the page it stands for, and that the Command Center control in the upper left corner returns the user to the Home page - asserting only what the approved acceptance criteria assert, and no more.",
+  "scope": {
+    "inScope": [
+      "Arrival on the eCore Command Center Home page after a successful organization sign-in (AC-ETA-411-001).",
+      "Presence and activatability of the three Home page dashboard icons: New Transaction, Workspace and Preferences (AC-ETA-411-002).",
+      "The New Transaction icon reaching the New Transaction page (AC-ETA-411-003).",
+      "The Workspace icon reaching the Workspace page (AC-ETA-411-004).",
+      "The Preferences icon reaching the Preferences page (AC-ETA-411-005).",
+      "The Command Center control in the upper left corner returning the user to the Home page from a destination reached by an icon (AC-ETA-411-006).",
+      "Presence of the header navigation links named New Transaction and Workspace that duplicate two of the dashboard icons (AC-ETA-411-007).",
+      "The header New Transaction link reaching the New Transaction page (AC-ETA-411-008).",
+      "The header Workspace link reaching the Workspace page (AC-ETA-411-009)."
+    ],
+    "outOfScope": [
+      "The behaviour of any destination page after arrival. Every scenario in this plan ends at arrival.",
+      "The wider navigation menu of roughly fifteen further destinations including Configuration Changes, eAsset Analytics, Event Analytics, Infographics, Manage Scheduled Reports, Open Requests, Permission Analysis, Transaction Retention Analysis, User Activity Analysis, Vault Content, Organization, Vault, Tutorials, Support and About - excluded by the AMB-ETA-411-001 resolution.",
+      "Any header route to the Preferences page. No header Preferences link exists, and whether the menu link labelled Organization constitutes such a route is unresolved as AMB-ETA-411-006. No scenario in this plan reaches the Preferences page by any route other than the Home page Preferences icon.",
+      "Any assertion about how the Command Center control is labelled or exposed to assistive technology. AMB-ETA-411-005 accepted the control as it stands, so TS-ETA-411-006 asserts the navigation outcome only.",
+      "Any permission-dependent or role-dependent variation in the icon set - the AMB-ETA-411-003 resolution states there is none, and no scenario tests for one.",
+      "Sign-in mechanics beyond reaching the Home page. Those belong to TP-ETA-351-001 and the account-access capability.",
+      "Browser back and forward navigation, deep linking and bookmarking - not mentioned by the story."
+    ]
+  },
+  "assumptions": [
+    "The eCore Command Center is reachable at the configured base URL from the executing network.",
+    "A valid organization account exists for the qa environment and is supplied through environment configuration, never through this artifact.",
+    "The destination addresses recorded in the approved criteria are properties of the product rather than of the qa environment. If they differ per environment, the affected criteria need rewording at Gate 1 rather than the scenarios being adjusted.",
+    "The approved acceptance criteria are the only source of expected behaviour. Where a criterion rests on weaker evidence, the scenario says so rather than asserting more than the criterion supports."
+  ],
+  "dependencies": [
+    "requirements/approved/ETA-411.json at artifactVersion 1.",
+    "requirements/approved/ETA-411-ac-approval.json - Gate 1 decision APPROVE for all nine criteria.",
+    "openspec/changes/add-home-navigation/specs/home-navigation/icon-navigation/spec.md.",
+    "The account-access capability provides the authenticated session every scenario begins from. The existing organization sign-in automation is reused rather than reimplemented.",
+    "VPN or equivalent network access to the qa host. Without it no scenario can execute and results must be recorded as BLOCKED.",
+    "Application observation at the PLAYWRIGHT_VALIDATION stage to confirm the destinations of the two header links before TS-ETA-411-008 and TS-ETA-411-009 assert them."
+  ],
+  "risks": [
+    {
+      "riskId": "RISK-TP-ETA-411-001",
+      "description": "AC-ETA-411-008 and AC-ETA-411-009 were approved on the evidence of a link address alone. Neither header link was ever activated during reconnaissance. A link address is not proof of navigation - a redirect, an interstitial or a permission check can intervene, and this application is already known to use an interstitial on the login path. TS-ETA-411-008 and TS-ETA-411-009 could therefore be planned against destinations the links do not actually reach.",
+      "level": "HIGH",
+      "mitigation": "Both scenarios are marked as resting on unconfirmed destinations. PLAYWRIGHT_VALIDATION must walk both links and record the observed landing page before either scenario is implemented. If an observed destination differs from the approved criterion, it is recorded as a discrepancy and returned to Gate 1 - the criterion is never edited to match the application."
+    },
+    {
+      "riskId": "RISK-TP-ETA-411-002",
+      "description": "AMB-ETA-411-002 was resolved so that the address of the landing page is acceptable proof that the correct page was reached. An address assertion cannot distinguish a correctly rendered page from one that reached the right address and then rendered an error, an empty result or a permission refusal. Such a case will pass, and the plan will report coverage it does not truly have.",
+      "level": "HIGH",
+      "mitigation": "Accepted knowingly at Gate 1 and recorded in the approval rather than mitigated away. TS-ETA-411-003 additionally asserts the Create Transaction heading, because that destination is the only one that offers a unique on-screen element. TS-ETA-411-004 and TS-ETA-411-005 cannot do the same and are therefore genuinely weaker. Strengthening them requires naming a visible element per destination, which reopens AMB-ETA-411-002."
+    },
+    {
+      "riskId": "RISK-TP-ETA-411-003",
+      "description": "The header navigation repeats the names New Transaction and Workspace, so the same accessible name resolves to more than one element on the Home page. An unscoped lookup produces a strict-mode violation, and a lookup scoped by convenience rather than intent could silently exercise the header link while claiming to test the dashboard icon - making TS-ETA-411-003 and TS-ETA-411-008 the same test under two identifiers.",
+      "level": "HIGH",
+      "mitigation": "Every scenario states explicitly which of the two entry points it uses. PLAYWRIGHT_VALIDATION must confirm that the dashboard-icon locator and the header-link locator resolve to different elements, and that neither is ambiguous. This was already observed during reconnaissance, where an unscoped lookup failed with a strict-mode violation."
+    },
+    {
+      "riskId": "RISK-TP-ETA-411-004",
+      "description": "AC-ETA-411-002 asserts the icon set as a statement about the product, but it was observed with a single account. The AMB-ETA-411-003 resolution is the reviewer's assertion that the set does not vary, not a measurement. If the set is in fact permission-dependent, TS-ETA-411-002 is testing that one account's configuration has not changed rather than testing the product.",
+      "level": "MEDIUM",
+      "mitigation": "Recorded here rather than covered by a scenario, because testing it would need a second account with a different permission set, which does not exist in this plan. The overlapping AMB-ETA-351-006 remains open on the account-access capability. If a second account ever contradicts the assertion, AC-ETA-411-002 returns to Gate 1."
+    },
+    {
+      "riskId": "RISK-TP-ETA-411-005",
+      "description": "AMB-ETA-411-006 is unresolved, so the Preferences page has one planned route while New Transaction and Workspace each have two. A later reader may see the asymmetry as an oversight and add a header Preferences scenario, which would assert a link that does not exist.",
+      "level": "MEDIUM",
+      "mitigation": "The asymmetry is stated in scope, in the specification and in this risk. No scenario reaches the Preferences page other than through the Home page icon until AMB-ETA-411-006 is answered by a human."
+    },
+    {
+      "riskId": "RISK-TP-ETA-411-006",
+      "description": "The Command Center control exposes no text, no alt text, no title and no accessible name. It can only be addressed by a non-semantic identifier, which is the most fragile kind of locator and the first thing to break under a cosmetic redesign.",
+      "level": "MEDIUM",
+      "mitigation": "AMB-ETA-411-005 accepted this. The locator carries a VALIDATED waiver recording that no accessible alternative exists. If it later breaks, the governed locator healer handles it as a locator move rather than a behaviour change, because the approved behaviour is unaffected."
+    },
+    {
+      "riskId": "RISK-TP-ETA-411-007",
+      "description": "The qa environment requires VPN access, so execution may be impossible at the scheduled time.",
+      "level": "MEDIUM",
+      "mitigation": "Absence of application access is recorded as an environment blocker and the affected scenarios are recorded as BLOCKED. No result is inferred, and an unreachable environment is never filed as a defect."
+    },
+    {
+      "riskId": "RISK-TP-ETA-411-008",
+      "description": "Every scenario in this plan is POSITIVE. The story describes only successful navigation, so there is no approved criterion describing what should happen when a destination is unavailable, a session has expired or a user lacks permission for a destination. The suite will therefore prove that navigation works and prove nothing about how it fails.",
+      "level": "LOW",
+      "mitigation": "Recorded rather than filled in. Adding a negative scenario would require inventing a business rule about failure behaviour that ETA-411 does not state. If negative coverage is wanted, a new acceptance criterion must be approved at Gate 1 first."
+    }
+  ],
+  "scenarios": [
+    {
+      "testScenarioId": "TS-ETA-411-001",
+      "title": "A successful organization sign-in places the user on the Home page",
+      "type": "POSITIVE",
+      "acIds": [
+        "AC-ETA-411-001"
+      ],
+      "preconditions": [
+        "The eCore Command Center is reachable.",
+        "A valid organization account is available through environment configuration."
+      ],
+      "steps": [
+        "Sign in to eCore Command Center as an organization user with correct details.",
+        "Observe the page that is displayed."
+      ],
+      "expectedResult": "The eCore Command Center Home page is displayed to the user. The scenario ends at arrival and asserts nothing about what the Home page contains, which is TS-ETA-411-002.",
+      "testDataRequirements": [
+        "The real organization account, supplied through environment configuration and never written into a governed artifact. Correct details are used, so no failed-attempt counter is touched."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "HIGH",
+      "riskTag": "risk-high",
+      "suiteTag": "suite-critical",
+      "scenarioAction": "CREATE"
+    },
+    {
+      "testScenarioId": "TS-ETA-411-002",
+      "title": "The Home page presents three activatable icons",
+      "type": "POSITIVE",
+      "acIds": [
+        "AC-ETA-411-002"
+      ],
+      "preconditions": [
+        "An organization user is signed in and on the Home page."
+      ],
+      "steps": [
+        "Observe the icons offered on the Home page.",
+        "Confirm each of the three can be activated."
+      ],
+      "expectedResult": "Three icons are offered, named New Transaction, Workspace and Preferences, and each one can be activated. The icons are identified as the Home page dashboard icons, not the header navigation links of the same name.",
+      "testDataRequirements": [
+        "None beyond the authenticated session."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "HIGH",
+      "riskTag": "risk-medium",
+      "suiteTag": "suite-smoke",
+      "scenarioAction": "CREATE"
+    },
+    {
+      "testScenarioId": "TS-ETA-411-003",
+      "title": "The New Transaction icon reaches the New Transaction page",
+      "type": "POSITIVE",
+      "acIds": [
+        "AC-ETA-411-003"
+      ],
+      "preconditions": [
+        "An organization user is signed in and on the Home page."
+      ],
+      "steps": [
+        "Activate the New Transaction icon on the Home page dashboard.",
+        "Observe the page that is reached."
+      ],
+      "expectedResult": "The user is taken to the New Transaction page. This destination is the only one that offers a unique on-screen element, so the scenario asserts both the landing address and the Create Transaction heading rather than the address alone.",
+      "testDataRequirements": [
+        "None beyond the authenticated session. No transaction is created; the scenario ends on arrival."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "HIGH",
+      "riskTag": "risk-high",
+      "suiteTag": "suite-critical",
+      "scenarioAction": "CREATE"
+    },
+    {
+      "testScenarioId": "TS-ETA-411-004",
+      "title": "The Workspace icon reaches the Workspace page",
+      "type": "POSITIVE",
+      "acIds": [
+        "AC-ETA-411-004"
+      ],
+      "preconditions": [
+        "An organization user is signed in and on the Home page."
+      ],
+      "steps": [
+        "Activate the Workspace icon on the Home page dashboard.",
+        "Observe the page that is reached."
+      ],
+      "expectedResult": "The user is taken to the Workspace page, asserted by the landing address. This destination exposes no element unique to it, so the address is the only available discriminator and the assertion is knowingly weaker than TS-ETA-411-003 - see RISK-TP-ETA-411-002.",
+      "testDataRequirements": [
+        "None beyond the authenticated session."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "HIGH",
+      "riskTag": "risk-high",
+      "suiteTag": "suite-critical",
+      "scenarioAction": "CREATE"
+    },
+    {
+      "testScenarioId": "TS-ETA-411-005",
+      "title": "The Preferences icon reaches the Preferences page",
+      "type": "POSITIVE",
+      "acIds": [
+        "AC-ETA-411-005"
+      ],
+      "preconditions": [
+        "An organization user is signed in and on the Home page."
+      ],
+      "steps": [
+        "Activate the Preferences icon on the Home page dashboard.",
+        "Observe the page that is reached."
+      ],
+      "expectedResult": "The user is taken to the Preferences page, asserted by the landing address. As with TS-ETA-411-004 no unique on-screen element exists. This is the only planned route to the Preferences page, because no header Preferences link exists and AMB-ETA-411-006 is unresolved.",
+      "testDataRequirements": [
+        "None beyond the authenticated session. No preference is changed; the scenario ends on arrival."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "HIGH",
+      "riskTag": "risk-high",
+      "suiteTag": "suite-critical",
+      "scenarioAction": "CREATE"
+    },
+    {
+      "testScenarioId": "TS-ETA-411-006",
+      "title": "The Command Center control returns the user Home from each destination",
+      "type": "POSITIVE",
+      "acIds": [
+        "AC-ETA-411-006"
+      ],
+      "preconditions": [
+        "An organization user is signed in and on the Home page."
+      ],
+      "steps": [
+        "Activate a Home page icon and observe the destination reached.",
+        "Activate the Command Center control in the upper left corner.",
+        "Observe the page that is reached.",
+        "Repeat for each of the three Home page icons."
+      ],
+      "expectedResult": "From each of the three destinations, activating the Command Center control returns the user to the eCore Command Center Home page. The criterion says 'any Home page icon', so all three return legs are walked rather than one being walked and the rest inferred. Nothing is asserted about how the control is labelled or exposed.",
+      "testDataRequirements": [
+        "None beyond the authenticated session."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "HIGH",
+      "riskTag": "risk-high",
+      "suiteTag": "suite-critical",
+      "scenarioAction": "CREATE"
+    },
+    {
+      "testScenarioId": "TS-ETA-411-007",
+      "title": "The header navigation offers New Transaction and Workspace links",
+      "type": "POSITIVE",
+      "acIds": [
+        "AC-ETA-411-007"
+      ],
+      "preconditions": [
+        "An organization user is signed in and on the Home page."
+      ],
+      "steps": [
+        "Observe the links offered in the header navigation bar.",
+        "Confirm they are distinct from the Home page dashboard icons of the same name."
+      ],
+      "expectedResult": "Links named New Transaction and Workspace are offered in the header navigation bar, in addition to the dashboard icons of the same name. Exactly two duplicates are expected, not three. The scenario must not assert a header Preferences link, because none exists.",
+      "testDataRequirements": [
+        "None beyond the authenticated session."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "MEDIUM",
+      "riskTag": "risk-medium",
+      "suiteTag": "suite-smoke",
+      "scenarioAction": "CREATE"
+    },
+    {
+      "testScenarioId": "TS-ETA-411-008",
+      "title": "The header New Transaction link reaches the New Transaction page",
+      "type": "POSITIVE",
+      "acIds": [
+        "AC-ETA-411-008"
+      ],
+      "preconditions": [
+        "An organization user is signed in and on the Home page.",
+        "PLAYWRIGHT_VALIDATION has walked this link and recorded the observed destination. Until that is done the expected destination is unconfirmed."
+      ],
+      "steps": [
+        "Activate the New Transaction link in the header navigation bar.",
+        "Observe the page that is reached."
+      ],
+      "expectedResult": "The user is taken to the New Transaction page, the same destination the Home page icon of that name reaches. The expected destination comes from the link's address and has never been confirmed by navigation - see RISK-TP-ETA-411-001. This scenario must exercise the header link, not the dashboard icon; if it exercises the icon it silently duplicates TS-ETA-411-003.",
+      "testDataRequirements": [
+        "None beyond the authenticated session."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "MEDIUM",
+      "riskTag": "risk-high",
+      "suiteTag": "suite-regression",
+      "scenarioAction": "CREATE"
+    },
+    {
+      "testScenarioId": "TS-ETA-411-009",
+      "title": "The header Workspace link reaches the Workspace page",
+      "type": "POSITIVE",
+      "acIds": [
+        "AC-ETA-411-009"
+      ],
+      "preconditions": [
+        "An organization user is signed in and on the Home page.",
+        "PLAYWRIGHT_VALIDATION has walked this link and recorded the observed destination. Until that is done the expected destination is unconfirmed."
+      ],
+      "steps": [
+        "Activate the Workspace link in the header navigation bar.",
+        "Observe the page that is reached."
+      ],
+      "expectedResult": "The user is taken to the Workspace page, the same destination the Home page icon of that name reaches. As with TS-ETA-411-008 the expected destination rests on the link's address alone, and the scenario must exercise the header link rather than the dashboard icon.",
+      "testDataRequirements": [
+        "None beyond the authenticated session."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "MEDIUM",
+      "riskTag": "risk-high",
+      "suiteTag": "suite-regression",
+      "scenarioAction": "CREATE"
+    }
+  ],
+  "environmentRequirements": {
+    "environment": "qa",
+    "notes": [
+      "The eCore Command Center on the qa host. Network access requires VPN.",
+      "One valid organization account, supplied through environment configuration and never written into a governed artifact.",
+      "No fabricated test data is required. Every scenario in this plan is positive and signs in with correct details, so no failed-attempt counter is touched and the account cannot be locked out by this suite.",
+      "Every scenario needs an authenticated session, so all nine share the sign-in precondition. The existing organization sign-in automation from the account-access capability is reused rather than reimplemented.",
+      "If the application cannot be reached, affected scenarios are recorded as BLOCKED with the unreachable host named. A blocked scenario is never reported as passed and never filed as a defect."
+    ]
+  },
+  "entryCriteria": [
+    "Gate 1 is cleared: requirements/approved/ETA-411-ac-approval.json records decision APPROVE for all nine acceptance criteria.",
+    "The OpenSpec change add-home-navigation validates under openspec validate --strict and its spec covers all nine approved criteria.",
+    "This test plan is approved at Gate 2 before any feature file is written."
+  ],
+  "exitCriteria": [
+    "Every scenario in this plan has a recorded execution result of PASSED, FAILED or BLOCKED - never an inferred one.",
+    "Every approved acceptance criterion maps to at least one executed scenario in the capability RTM.",
+    "The destinations behind TS-ETA-411-008 and TS-ETA-411-009 have been confirmed by navigation at PLAYWRIGHT_VALIDATION, and any difference from the approved criteria is recorded as a discrepancy rather than absorbed.",
+    "Coverage is computed from RTM data only, and any uncovered, deferred, blocked or failed criterion is listed rather than rounded away.",
+    "AMB-ETA-411-006 is still visible with its current status. Coverage is not reported as complete while it is unresolved, and no scenario has settled it by inference."
+  ],
+  "coverageMappings": [
+    { "acId": "AC-ETA-411-001", "testScenarioIds": ["TS-ETA-411-001"] },
+    { "acId": "AC-ETA-411-002", "testScenarioIds": ["TS-ETA-411-002"] },
+    { "acId": "AC-ETA-411-003", "testScenarioIds": ["TS-ETA-411-003"] },
+    { "acId": "AC-ETA-411-004", "testScenarioIds": ["TS-ETA-411-004"] },
+    { "acId": "AC-ETA-411-005", "testScenarioIds": ["TS-ETA-411-005"] },
+    { "acId": "AC-ETA-411-006", "testScenarioIds": ["TS-ETA-411-006"] },
+    { "acId": "AC-ETA-411-007", "testScenarioIds": ["TS-ETA-411-007"] },
+    { "acId": "AC-ETA-411-008", "testScenarioIds": ["TS-ETA-411-008"] },
+    { "acId": "AC-ETA-411-009", "testScenarioIds": ["TS-ETA-411-009"] }
+  ],
+  "clarifications": [
+    {
+      "clarificationId": "AMB-ETA-411-001",
+      "question": "Which controls count as Icons on the Home page? Resolved at Gate 1 as the three dashboard icons plus the header links that duplicate them, excluding the wider navigation menu. The plan records that only two duplicates exist, not the three the answer assumed.",
+      "status": "RESOLVED"
+    },
+    {
+      "clarificationId": "AMB-ETA-411-002",
+      "question": "What evidence establishes that the user reached the correct page? Resolved at Gate 1 as the landing address. TS-ETA-411-004 and TS-ETA-411-005 rest on the address alone and will pass on a page that reached the right address and rendered an error - see RISK-TP-ETA-411-002.",
+      "status": "RESOLVED"
+    },
+    {
+      "clarificationId": "AMB-ETA-411-003",
+      "question": "Is the Home page icon set identical for every organization user? Resolved at Gate 1 as yes. This is the reviewer's assertion rather than an observation, since reconnaissance used a single account, so TS-ETA-411-002 inherits that assumption.",
+      "status": "RESOLVED"
+    },
+    {
+      "clarificationId": "AMB-ETA-411-004",
+      "question": "Which release does ETA-411 belong to? Resolved at Gate 1 as 1.0. Jira still carries no fixVersions, so the governed artifacts remain the only record.",
+      "status": "RESOLVED"
+    },
+    {
+      "clarificationId": "AMB-ETA-411-005",
+      "question": "Is the Command Center control's missing accessible name an accessibility defect? Resolved at Gate 1 as accepted, not filed. TS-ETA-411-006 therefore asserts the navigation outcome only and says nothing about how the control is exposed.",
+      "status": "RESOLVED"
+    },
+    {
+      "clarificationId": "AMB-ETA-411-006",
+      "question": "How should the Preferences page be reached from the header? The header exposes no Preferences link; the only header-area route to that address is a menu link labelled Organization. Is that link a third navigation route, is the Preferences icon the only in-scope route, or is Organization a distinct destination that happens to share an address? TS-ETA-411-005 covers the icon route only, and no scenario asserts a header route either way.",
+      "status": "REVIEW_REQUIRED"
+    }
+  ],
+  "approvalStatus": "APPROVED",
+  "approvalRef": "test-plans/approved/TP-ETA-411-001-approval.json",
+  "dataClassification": "REAL_JIRA_DATA",
+  "timestamps": {
+    "createdAt": "2026-09-01T11:55:00.000Z",
+    "updatedAt": "2026-09-01T12:10:00.000Z",
+    "approvedAt": "2026-09-01T12:10:00.000Z"
+  }
+}

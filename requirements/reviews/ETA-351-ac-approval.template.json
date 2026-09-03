@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "1.0.0",
+  "approvalId": "APR-AC-ETA-351-001",
+  "gate": "ACCEPTANCE_CRITERIA",
+  "artifactId": "ETA-351",
+  "artifactVersion": 1,
+  "release": "1.0",
+  "capability": "account-access",
+  "sourceArtifactPath": "requirements/normalized/ETA-351.json",
+  "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+  "reviewer": {
+    "name": "REPLACE_WITH_YOUR_NAME",
+    "role": "REPLACE_WITH_YOUR_ROLE",
+    "reference": null
+  },
+  "reviewedAt": "REPLACE_WITH_ISO_8601_TIMESTAMP",
+  "comments": "Replace with any overall comment. Answers to the six ambiguities belong here or in the per-item comments; they are what unblocks the criteria that reference them.",
+  "itemDecisions": [
+    {
+      "itemId": "AC-ETA-351-001",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Page offers a way to declare the sign-in kind before details are entered."
+    },
+    {
+      "itemId": "AC-ETA-351-002",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Both sign-in kinds are offered and are distinguishable."
+    },
+    {
+      "itemId": "AC-ETA-351-003",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Choosing organization sign-in changes which details are asked for. Depends on AMB-ETA-351-001."
+    },
+    {
+      "itemId": "AC-ETA-351-004",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Password is not readable on screen. Depends on AMB-ETA-351-004."
+    },
+    {
+      "itemId": "AC-ETA-351-005",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Correct details reach the Home page. Depends on AMB-ETA-351-006."
+    },
+    {
+      "itemId": "AC-ETA-351-006",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Wrong details are refused and reported. Depends on AMB-ETA-351-003."
+    },
+    {
+      "itemId": "AC-ETA-351-007",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Missing details are refused and reported. Depends on AMB-ETA-351-003 and AMB-ETA-351-005."
+    },
+    {
+      "itemId": "AC-ETA-351-008",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "The two failure responses are distinguishable. Depends on AMB-ETA-351-003."
+    }
+  ]
+}

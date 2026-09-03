@@ -1,0 +1,14 @@
+{
+  "_dataClassification": "REAL_JIRA_DATA",
+  "release": "1.0",
+  "baselineCreatedAt": "2026-08-31T00:00:00.000Z",
+  "description": "Release baseline. Records which capability partitions and artifact versions make up release 1.0, so that a later release can be compared against a frozen point without rewriting history.",
+  "capabilities": [],
+  "stories": [],
+  "notes": [
+    "Reset to an empty baseline on 2026-08-31 at the owner's instruction. Every ETA-351 artifact, source file and execution log was deleted so the full workflow could be re-run from stage one as an end-to-end verification of the framework.",
+    "This file was reset rather than deleted because no workflow stage regenerates a release baseline.",
+    "Release 1.0 currently contains no stories. The RTM_UPDATE stage of the re-run will repopulate the capability partitions and the lookup index; this baseline must be updated by hand once the re-run completes.",
+    "A new release creates a new baseline file. Existing baselines are never edited."
+  ]
+}

@@ -1,0 +1,449 @@
+{
+  "probe": "ETA-411-home-icons",
+  "story": "ETA-411",
+  "startedAt": "2026-09-01T10:37:25.805Z",
+  "note": "Structural observation of the Home page only. Presence of an icon is not a statement of its intended behaviour. No credential value is recorded in this file.",
+  "configuredLoginType": "Organization Login",
+  "landedUrl": "https://qa1.eoriginal.org:8443/ssweb/setup/welcome.eo",
+  "title": "eOriginal Command Center™",
+  "iconCandidates": [
+    {
+      "label": "New Transaction",
+      "accessibleName": null,
+      "href": "/ssweb/setup/container/ct/newPackage.eo",
+      "imageAlt": null,
+      "imageSource": "/ssweb/images/dashboard/dashboard_transaction.png?eOv=26.7%2B20260826134038",
+      "markerClass": null,
+      "tag": "a",
+      "elementId": null,
+      "visible": true
+    },
+    {
+      "label": "Workspace",
+      "accessibleName": null,
+      "href": "/ssweb/setup/workspace/workspace.eo",
+      "imageAlt": null,
+      "imageSource": "/ssweb/images/dashboard/dashboard_workspace.png?eOv=26.7%2B20260826134038",
+      "markerClass": null,
+      "tag": "a",
+      "elementId": null,
+      "visible": true
+    },
+    {
+      "label": "Preferences",
+      "accessibleName": null,
+      "href": "/ssweb/setup/prefs/preferences.eo",
+      "imageAlt": null,
+      "imageSource": "/ssweb/images/dashboard/dashboard_preferences.png?eOv=26.7%2B20260826134038",
+      "markerClass": null,
+      "tag": "a",
+      "elementId": null,
+      "visible": true
+    },
+    {
+      "label": "Close",
+      "accessibleName": "Close",
+      "href": null,
+      "imageAlt": null,
+      "imageSource": null,
+      "markerClass": "ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close",
+      "tag": "button",
+      "elementId": null,
+      "visible": false
+    }
+  ],
+  "allNamedLinks": [
+    {
+      "text": "Nitin Saini",
+      "href": "/ssweb/setup/userSettings.eo",
+      "title": null
+    },
+    {
+      "text": "Nitin Saini",
+      "href": "/ssweb/setup/viewOrganizationData.eo?orgSid=6160",
+      "title": null
+    },
+    {
+      "text": "Home",
+      "href": "/ssweb/setup/welcome.eo",
+      "title": null
+    },
+    {
+      "text": "New Transaction",
+      "href": "/ssweb/setup/container/ct/newPackage.eo",
+      "title": null
+    },
+    {
+      "text": "Workspace",
+      "href": "/ssweb/setup/workspace/workspace.eo",
+      "title": null
+    },
+    {
+      "text": "Configuration Changes",
+      "href": "/ssweb/setup/analytics/admin/confChanges.eo",
+      "title": null
+    },
+    {
+      "text": "eAsset® Analytics",
+      "href": "/ssweb/setup/analytics/transDocActivity.eo",
+      "title": null
+    },
+    {
+      "text": "Event Analytics",
+      "href": "/ssweb/setup/analytics/detailByEvent.eo",
+      "title": null
+    },
+    {
+      "text": "Infographics",
+      "href": "/ssweb/setup/analytics/charts.eo",
+      "title": null
+    },
+    {
+      "text": "Manage Scheduled Reports",
+      "href": "/ssweb/setup/analytics/manageScheduledReports.eo",
+      "title": null
+    },
+    {
+      "text": "Open Requests",
+      "href": "/ssweb/setup/analytics/openRequests.eo",
+      "title": null
+    },
+    {
+      "text": "Permission Analysis",
+      "href": "/ssweb/setup/analytics/admin/permissionMappings.eo",
+      "title": null
+    },
+    {
+      "text": "Transaction Retention Analysis",
+      "href": "/ssweb/setup/analytics/admin/transactionRetention.eo",
+      "title": null
+    },
+    {
+      "text": "User Activity Analysis",
+      "href": "/ssweb/setup/analytics/admin/userActivity.eo",
+      "title": null
+    },
+    {
+      "text": "Vault Content",
+      "href": "/ssweb/setup/analytics/admin/vaultContent.eo",
+      "title": null
+    },
+    {
+      "text": "Organization",
+      "href": "/ssweb/setup/prefs/preferences.eo",
+      "title": null
+    },
+    {
+      "text": "Vault",
+      "href": "/ssweb/setup/vault/vault.eo",
+      "title": null
+    },
+    {
+      "text": "Tutorials",
+      "href": "https://wolters-kluwer.my.site.com/ComplianceSolutionsSupport/s/",
+      "title": null
+    },
+    {
+      "text": "Support",
+      "href": "/ssweb/setup/support.eo",
+      "title": null
+    },
+    {
+      "text": "About",
+      "href": "/ssweb/setup/about.eo",
+      "title": null
+    },
+    {
+      "text": "Logout",
+      "href": "/ssweb/setup/logout.eo",
+      "title": null
+    },
+    {
+      "text": "New Transaction",
+      "href": "/ssweb/setup/container/ct/newPackage.eo",
+      "title": null
+    },
+    {
+      "text": "Workspace",
+      "href": "/ssweb/setup/workspace/workspace.eo",
+      "title": null
+    },
+    {
+      "text": "Preferences",
+      "href": "/ssweb/setup/prefs/preferences.eo",
+      "title": null
+    }
+  ],
+  "topLeftControls": [
+    {
+      "tag": "a",
+      "text": "Nitin Saini",
+      "href": "/ssweb/setup/userSettings.eo",
+      "title": null,
+      "ariaLabel": null,
+      "className": null,
+      "elementId": null,
+      "backgroundImage": null,
+      "top": 14,
+      "left": 1131,
+      "width": 62,
+      "height": 13
+    },
+    {
+      "tag": "a",
+      "text": "Nitin Saini",
+      "href": "/ssweb/setup/viewOrganizationData.eo?orgSid=6160",
+      "title": null,
+      "ariaLabel": null,
+      "className": null,
+      "elementId": null,
+      "backgroundImage": null,
+      "top": 14,
+      "left": 1202,
+      "width": 62,
+      "height": 13
+    },
+    {
+      "tag": "a",
+      "text": "Home",
+      "href": "/ssweb/setup/welcome.eo",
+      "title": null,
+      "ariaLabel": null,
+      "className": "nav",
+      "elementId": "header.home",
+      "backgroundImage": null,
+      "top": 34,
+      "left": 787,
+      "width": 35,
+      "height": 18
+    },
+    {
+      "tag": "a",
+      "text": "Logout",
+      "href": "/ssweb/setup/logout.eo",
+      "title": null,
+      "ariaLabel": null,
+      "className": "nav",
+      "elementId": "header.logout",
+      "backgroundImage": null,
+      "top": 34,
+      "left": 1231,
+      "width": 41,
+      "height": 18
+    },
+    {
+      "tag": "a",
+      "text": "New Transaction",
+      "href": "/ssweb/setup/container/ct/newPackage.eo",
+      "title": null,
+      "ariaLabel": null,
+      "className": null,
+      "elementId": "header.new_transaction",
+      "backgroundImage": null,
+      "top": 35,
+      "left": 839,
+      "width": 99,
+      "height": 15
+    },
+    {
+      "tag": "a",
+      "text": "Workspace",
+      "href": "/ssweb/setup/workspace/workspace.eo",
+      "title": null,
+      "ariaLabel": null,
+      "className": null,
+      "elementId": "header.workspace",
+      "backgroundImage": null,
+      "top": 35,
+      "left": 954,
+      "width": 65,
+      "height": 15
+    },
+    {
+      "tag": "a",
+      "text": "New Transaction",
+      "href": "/ssweb/setup/container/ct/newPackage.eo",
+      "title": null,
+      "ariaLabel": null,
+      "className": null,
+      "elementId": null,
+      "backgroundImage": null,
+      "top": 154,
+      "left": 82,
+      "width": 356,
+      "height": 291
+    },
+    {
+      "tag": "a",
+      "text": "Workspace",
+      "href": "/ssweb/setup/workspace/workspace.eo",
+      "title": null,
+      "ariaLabel": null,
+      "className": null,
+      "elementId": null,
+      "backgroundImage": null,
+      "top": 154,
+      "left": 462,
+      "width": 356,
+      "height": 291
+    },
+    {
+      "tag": "a",
+      "text": "Preferences",
+      "href": "/ssweb/setup/prefs/preferences.eo",
+      "title": null,
+      "ariaLabel": null,
+      "className": null,
+      "elementId": null,
+      "backgroundImage": null,
+      "top": 154,
+      "left": 842,
+      "width": 356,
+      "height": 291
+    }
+  ],
+  "brandingElements": [
+    {
+      "tag": "a",
+      "elementId": "header.logout",
+      "className": "nav",
+      "text": "Logout",
+      "backgroundImage": null,
+      "insideLinkHref": "/ssweb/setup/logout.eo",
+      "top": 34,
+      "left": 1231
+    },
+    {
+      "tag": "div",
+      "elementId": null,
+      "className": "ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ui-draggable-handle",
+      "text": "Session Expiring! Close",
+      "backgroundImage": "url(\"https://qa1.eoriginal.org:8443/ssweb/css/smoothness/images/ui-bg_highlight-soft_75_cccccc_1x100.png\")",
+      "insideLinkHref": null,
+      "top": 0,
+      "left": 0
+    }
+  ],
+  "upperLeftRegion": [
+    {
+      "tag": "div",
+      "elementId": "homeWrapper",
+      "className": null,
+      "ownText": null,
+      "backgroundImage": "url(\"https://qa1.eoriginal.org:8443/ssweb/images/dashboard/bg-home.jpg\")",
+      "cursor": "auto",
+      "hasInlineClick": false,
+      "insideLinkHref": null,
+      "top": 0,
+      "left": 0,
+      "width": 1280,
+      "height": 703
+    },
+    {
+      "tag": "div",
+      "elementId": "banner",
+      "className": null,
+      "ownText": null,
+      "backgroundImage": "url(\"https://qa1.eoriginal.org:8443/ssweb/images/bg150.png\")",
+      "cursor": "auto",
+      "hasInlineClick": false,
+      "insideLinkHref": null,
+      "top": 0,
+      "left": 0,
+      "width": 1280,
+      "height": 55
+    },
+    {
+      "tag": "div",
+      "elementId": "bannerBackground",
+      "className": "clickable",
+      "ownText": null,
+      "backgroundImage": "url(\"https://qa1.eoriginal.org:8443/ssweb/images/command_center.png\")",
+      "cursor": "pointer",
+      "hasInlineClick": false,
+      "insideLinkHref": null,
+      "top": 5,
+      "left": 5,
+      "width": 216,
+      "height": 45
+    }
+  ],
+  "headings": [
+    "New Transaction",
+    "Workspace",
+    "Preferences"
+  ],
+  "images": [
+    {
+      "alt": null,
+      "title": null,
+      "src": "/ssweb/images/dashboard/dashboard_transaction.png?eOv=26.7%2B20260826134038",
+      "insideLink": true,
+      "linkHref": "/ssweb/setup/container/ct/newPackage.eo"
+    },
+    {
+      "alt": null,
+      "title": null,
+      "src": "/ssweb/images/dashboard/dashboard_workspace.png?eOv=26.7%2B20260826134038",
+      "insideLink": true,
+      "linkHref": "/ssweb/setup/workspace/workspace.eo"
+    },
+    {
+      "alt": null,
+      "title": null,
+      "src": "/ssweb/images/dashboard/dashboard_preferences.png?eOv=26.7%2B20260826134038",
+      "insideLink": true,
+      "linkHref": "/ssweb/setup/prefs/preferences.eo"
+    },
+    {
+      "alt": "",
+      "title": null,
+      "src": "/ssweb/images/dashboard/bg-dots.png?eOv=26.7%2B20260826134038",
+      "insideLink": false,
+      "linkHref": null
+    }
+  ],
+  "navigationWalk": [
+    {
+      "icon": "New Transaction",
+      "landedUrl": "https://qa1.eoriginal.org:8443/ssweb/setup/container/ct/newPackage.eo",
+      "landedTitle": "eOriginal Command Center™",
+      "landedHeadings": [
+        "Create Transaction",
+        "Manage Documents",
+        "Document Visibility",
+        "The attached documents must be in one of the following formats:"
+      ],
+      "commandCenterPresent": true,
+      "afterCommandCenterUrl": "https://qa1.eoriginal.org:8443/ssweb/setup/welcome.eo",
+      "returnedHome": true,
+      "status": "OBSERVED"
+    },
+    {
+      "icon": "Workspace",
+      "landedUrl": "https://qa1.eoriginal.org:8443/ssweb/setup/workspace/workspace.eo",
+      "landedTitle": "eOriginal Command Center™",
+      "landedHeadings": [
+        "The attached documents must be in one of the following formats:"
+      ],
+      "commandCenterPresent": true,
+      "afterCommandCenterUrl": "https://qa1.eoriginal.org:8443/ssweb/setup/welcome.eo",
+      "returnedHome": true,
+      "status": "OBSERVED"
+    },
+    {
+      "icon": "Preferences",
+      "landedUrl": "https://qa1.eoriginal.org:8443/ssweb/setup/prefs/preferences.eo",
+      "landedTitle": "eOriginal Command Center™",
+      "landedHeadings": [
+        "The attached documents must be in one of the following formats:"
+      ],
+      "commandCenterPresent": true,
+      "afterCommandCenterUrl": "https://qa1.eoriginal.org:8443/ssweb/setup/welcome.eo",
+      "returnedHome": true,
+      "status": "OBSERVED"
+    }
+  ],
+  "homeUrl": "https://qa1.eoriginal.org:8443/ssweb/setup/welcome.eo",
+  "status": "OBSERVED"
+}
