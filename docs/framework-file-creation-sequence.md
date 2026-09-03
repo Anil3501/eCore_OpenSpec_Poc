@@ -1,5 +1,6 @@
 # Framework File Creation Sequence
 
+
 This document lists **every file created**, in the order it is created, when a Jira story is taken
 end-to-end through this OpenSpec-based, orchestrator-driven Playwright-BDD framework — from the
 first retrieval step to the final traceability update. It follows
