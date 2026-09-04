@@ -13,7 +13,7 @@
   "completedStages": [
     {
       "stage": "JIRA_RETRIEVAL",
-      "completedAt": "2026-09-04T18:30:00.000Z",
+      "completedAt": "2026-09-04T18:32:01.000Z",
       "agent": "sdd-workflow-orchestrator",
       "outputs": [
         "requirements/raw/ETA-411.json"
@@ -26,9 +26,9 @@
     "requirements/raw/ETA-411.json"
   ],
   "retryCount": 0,
-  "createdAt": "2026-09-01T10:24:19.198Z",
-  "updatedAt": "2026-09-04T18:30:00.000Z",
-  "startedAt": "2026-09-04T18:30:00.000Z",
+  "createdAt": "2026-09-04T18:32:00.000Z",
+  "updatedAt": "2026-09-04T18:32:01.000Z",
+  "startedAt": "2026-09-04T18:32:00.000Z",
   "completedAt": null,
   "errorDetails": null,
   "processingLock": null,

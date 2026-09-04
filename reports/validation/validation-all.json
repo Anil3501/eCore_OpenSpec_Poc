@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-04T18:21:27.701Z",
+  "generatedAt": "2026-09-04T18:30:44.797Z",
   "scope": "all",
   "summary": {
     "total": 18,
@@ -13,7 +13,7 @@
       "title": "Requirement artifacts validate against schema",
       "status": "PASS",
       "messages": [
-        "4 artifact(s) validated."
+        "2 artifact(s) validated."
       ]
     },
     {
@@ -21,7 +21,7 @@
       "title": "Approval artifacts validate against schema",
       "status": "PASS",
       "messages": [
-        "6 approval artifact(s) validated."
+        "3 approval artifact(s) validated."
       ]
     },
     {
@@ -29,7 +29,7 @@
       "title": "Test plans validate against schema",
       "status": "PASS",
       "messages": [
-        "4 test plan(s) validated."
+        "2 test plan(s) validated."
       ]
     },
     {
@@ -45,7 +45,7 @@
       "title": "RTM and coverage artifacts validate against schema",
       "status": "PASS",
       "messages": [
-        "2 RTM partition(s), 2 coverage matrix/matrices, 1 index file(s)."
+        "1 RTM partition(s), 1 coverage matrix/matrices, 1 index file(s)."
       ]
     },
     {
@@ -85,7 +85,7 @@
       "title": "Every Gherkin scenario carries traceability tags",
       "status": "PASS",
       "messages": [
-        "2 approved feature file(s) checked."
+        "1 approved feature file(s) checked."
       ]
     },
     {
@@ -125,7 +125,7 @@
       "title": "Automation code follows the approved locator and wait policy",
       "status": "PASS",
       "messages": [
-        "9 automation source file(s) and 2 approved feature file(s) checked against 5 locator/wait rules."
+        "8 automation source file(s) and 1 approved feature file(s) checked against 5 locator/wait rules."
       ]
     },
     {
