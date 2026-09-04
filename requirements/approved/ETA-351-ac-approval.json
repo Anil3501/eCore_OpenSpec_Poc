@@ -3,58 +3,58 @@
   "approvalId": "APR-AC-ETA-351-001",
   "gate": "ACCEPTANCE_CRITERIA",
   "artifactId": "ETA-351",
-  "artifactVersion": 1,
+  "artifactVersion": 2,
   "release": "1.0",
   "capability": "account-access",
   "sourceArtifactPath": "requirements/normalized/ETA-351.json",
   "decision": "APPROVE",
   "reviewer": {
-    "name": "Nitin Saini",
+    "name": "Anil",
     "role": "Reviewer",
     "reference": null
   },
-  "reviewedAt": "2026-08-31T13:20:00.000Z",
-  "comments": "All 8 acceptance criteria approved as proposed. Recorded on the reviewer's instruction given in chat and transcribed by the orchestrator; the decision is the reviewer's, the transcription is not an agent approval. Note for downstream stages: ETA-351 contains no acceptance criteria in Jira, so all 8 criteria are PROPOSED_BY_REQUIREMENT_ANALYSIS readings of the story description rather than business-authored criteria. The six ambiguities AMB-ETA-351-001 through AMB-ETA-351-006 were NOT resolved at this gate and remain REVIEW_REQUIRED; they are deferred to PLAYWRIGHT_VALIDATION, where the real login page can answer the observable ones (field set, selection mechanism, failure-response difference). Any ambiguity that the application cannot answer - in particular the intended scope of secret handling (AMB-004) and whether permission-limited behaviour is in scope (AMB-006) - must return to a human before it is asserted as a business rule. Test plan scope should therefore stay within what these criteria literally assert and must not harden any unresolved ambiguity into an expectation.",
+  "reviewedAt": "2026-09-04T14:05:00.000Z",
+  "comments": "Decision given in chat on 2026-09-04 and transcribed here by the orchestrator; the artifact, not the message, is the approval. All 8 acceptance criteria approved for the full re-run of ETA-351. The criteria are byte-identical to the set approved on 2026-08-31 under APR-AC-ETA-351-001 v1, reproduced independently from a freshly fetched Jira snapshot. The six ambiguities AMB-ETA-351-001 through AMB-ETA-351-006 were NOT answered by this decision and remain REVIEW_REQUIRED; they are deferred, not resolved, exactly as in the previous run. Any criterion depending on one of them is approved as written, meaning the observable behaviour is agreed while the underlying rule stays unstated.",
   "itemDecisions": [
     {
       "itemId": "AC-ETA-351-001",
       "decision": "APPROVE",
-      "comment": "Page offers a way to declare the sign-in kind before details are entered. Selection mechanism unresolved (AMB-ETA-351-002)."
+      "comment": "Page offers a way to declare the sign-in kind before details are entered."
     },
     {
       "itemId": "AC-ETA-351-002",
       "decision": "APPROVE",
-      "comment": "Both sign-in kinds are offered and distinguishable. Business Entity Login behaviour remains out of scope."
+      "comment": "Both sign-in kinds are offered and are distinguishable."
     },
     {
       "itemId": "AC-ETA-351-003",
       "decision": "APPROVE",
-      "comment": "Choosing organization sign-in changes which details are asked for. Exact field set unresolved (AMB-ETA-351-001) and must not be assumed."
+      "comment": "Choosing organization sign-in changes which details are asked for. AMB-ETA-351-001 remains unanswered."
     },
     {
       "itemId": "AC-ETA-351-004",
       "decision": "APPROVE",
-      "comment": "Password is not readable on screen. Scope limited to on-screen concealment; any wider secret-handling obligation is unresolved (AMB-ETA-351-004)."
+      "comment": "Password is not readable on screen. AMB-ETA-351-004 remains unanswered."
     },
     {
       "itemId": "AC-ETA-351-005",
       "decision": "APPROVE",
-      "comment": "Correct details reach the Home page. Criterion ends at arrival; permission-limited behaviour unresolved (AMB-ETA-351-006)."
+      "comment": "Correct details reach the Home page. AMB-ETA-351-006 remains unanswered."
     },
     {
       "itemId": "AC-ETA-351-006",
       "decision": "APPROVE",
-      "comment": "Wrong details are refused and reported. No message wording may be asserted (AMB-ETA-351-003)."
+      "comment": "Wrong details are refused and reported. AMB-ETA-351-003 remains unanswered."
     },
     {
       "itemId": "AC-ETA-351-007",
       "decision": "APPROVE",
-      "comment": "Missing details are refused and reported. Which details are mandatory is unresolved (AMB-ETA-351-005)."
+      "comment": "Missing details are refused and reported. AMB-ETA-351-003 and AMB-ETA-351-005 remain unanswered."
     },
     {
       "itemId": "AC-ETA-351-008",
       "decision": "APPROVE",
-      "comment": "The two failure responses are distinguishable. Asserted as a difference only, never as specific text (AMB-ETA-351-003)."
+      "comment": "The two failure responses are distinguishable. AMB-ETA-351-003 remains unanswered."
     }
   ]
 }

@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "release": "1.0",
-  "updatedAt": "2026-09-01T13:52:10.000Z",
+  "updatedAt": "2026-09-04T15:16:00.000Z",
   "dataClassification": "REAL_JIRA_DATA",
   "indexes": {
     "byJiraStoryId": {
@@ -557,6 +557,22 @@
             "TRC-ETA-411-007",
             "TRC-ETA-411-008",
             "TRC-ETA-411-009"
+          ]
+        }
+      ],
+      "EXEC-ETA-351-002": [
+        {
+          "capability": "account-access",
+          "rtmPath": "traceability/capabilities/account-access.rtm.json",
+          "traceIds": [
+            "TRC-ETA-351-001",
+            "TRC-ETA-351-002",
+            "TRC-ETA-351-003",
+            "TRC-ETA-351-004",
+            "TRC-ETA-351-005",
+            "TRC-ETA-351-006",
+            "TRC-ETA-351-007",
+            "TRC-ETA-351-008"
           ]
         }
       ]

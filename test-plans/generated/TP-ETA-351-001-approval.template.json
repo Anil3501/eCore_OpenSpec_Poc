@@ -3,58 +3,58 @@
   "approvalId": "APR-TP-ETA-351-001",
   "gate": "TEST_PLAN",
   "artifactId": "TP-ETA-351-001",
-  "artifactVersion": 1,
+  "artifactVersion": 2,
   "release": "1.0",
   "capability": "account-access",
   "sourceArtifactPath": "test-plans/generated/TP-ETA-351-001.json",
-  "decision": "REVIEW_REQUIRED_REPLACE_WITH_APPROVE_OR_REQUEST_CHANGES_OR_REJECT_OR_DEFER",
+  "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
   "reviewer": {
-    "name": "REPLACE_WITH_REVIEWER_NAME",
-    "role": "REPLACE_WITH_REVIEWER_ROLE",
+    "name": "REPLACE_WITH_YOUR_NAME",
+    "role": "REPLACE_WITH_YOUR_ROLE",
     "reference": null
   },
   "reviewedAt": "REPLACE_WITH_ISO_8601_TIMESTAMP",
-  "comments": "REPLACE_WITH_REVIEW_COMMENTS. Please state explicitly whether the six ambiguities may remain unresolved through BDD_DESIGN, and answer AMB-ETA-351-004, AMB-ETA-351-006 and CLR-TP-ETA-351-001, which no amount of application observation can resolve.",
+  "comments": "Replace with any overall comment. Approving this plan also confirms the interface judgement in section 2 of the review: that no acceptance criterion in ETA-351 is API-verifiable and all eight scenarios are UI. Say so here if you disagree.",
   "itemDecisions": [
     {
       "itemId": "TS-ETA-351-001",
       "decision": "REPLACE_WITH_DECISION",
-      "comment": "Declare the kind of sign-in before entering any details. AC-ETA-351-001. Asserts that the choice exists, not how it is made."
+      "comment": "A way to declare the sign-in kind exists before any details are entered. UI."
     },
     {
       "itemId": "TS-ETA-351-002",
       "decision": "REPLACE_WITH_DECISION",
-      "comment": "Both sign-in kinds offered and distinguishable. AC-ETA-351-002. No Business Entity Login behaviour is exercised."
+      "comment": "Both sign-in kinds are offered and distinguishable. UI."
     },
     {
       "itemId": "TS-ETA-351-003",
       "decision": "REPLACE_WITH_DECISION",
-      "comment": "Page asks for the organization details rather than every possible field. AC-ETA-351-003. The field set is deliberately unnamed - see AMB-ETA-351-001."
+      "comment": "Choosing organization sign-in changes which details are asked for. UI. Stays abstract pending AMB-ETA-351-001."
     },
     {
       "itemId": "TS-ETA-351-004",
       "decision": "REPLACE_WITH_DECISION",
-      "comment": "Password not readable on screen. AC-ETA-351-004. Concealment only - see AMB-ETA-351-004."
+      "comment": "The password is not readable on screen. UI. Uses a fabricated secret that is typed but never submitted."
     },
     {
       "itemId": "TS-ETA-351-005",
       "decision": "REPLACE_WITH_DECISION",
-      "comment": "Correct details reach the eCore Command Center Home page. AC-ETA-351-005. The only scenario using the real account. Stops at arrival - see AMB-ETA-351-006."
+      "comment": "Correct details reach the Home page. UI. The only scenario that uses the real organization account."
     },
     {
       "itemId": "TS-ETA-351-006",
       "decision": "REPLACE_WITH_DECISION",
-      "comment": "Wrong details refused and reported. AC-ETA-351-006. Fabricated data only. No message text asserted."
+      "comment": "Wrong details are refused and reported. UI. Fabricated credentials only; no message text asserted."
     },
     {
       "itemId": "TS-ETA-351-007",
       "decision": "REPLACE_WITH_DECISION",
-      "comment": "Missing details refused and reported. AC-ETA-351-007. Fabricated data only. Generic case only - see AMB-ETA-351-005."
+      "comment": "Missing details are refused and reported. UI. No message text asserted."
     },
     {
       "itemId": "TS-ETA-351-008",
       "decision": "REPLACE_WITH_DECISION",
-      "comment": "The two failure responses differ from each other. AC-ETA-351-008. Performs both attempts in one scenario because the criterion is comparative."
+      "comment": "The two failure responses are distinguishable. UI. Both attempts happen inside one scenario so the comparison is evidenced, not inferred."
     }
   ]
 }

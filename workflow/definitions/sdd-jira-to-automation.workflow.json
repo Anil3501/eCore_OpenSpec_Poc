@@ -27,7 +27,8 @@
       "rules": [
         "Gate 1 is NOT re-run. The acceptance criteria are unchanged and already approved; re-approving them wastes a reviewer and risks producing a divergent AC set for one story.",
         "Only stages whose inputs are provably unchanged may be skipped. Compare the approved requirement artifactVersion against the one the previous run recorded; if it moved, use NEW_STORY instead.",
-        "Open a new workflow instance (for example WF-<JIRA-ID>-R<release>.1). Never overwrite the completed instance - it holds the evidence of the previous run.",
+        "Reuse the existing instance WF-<JIRA-ID>-R<release> and reset it. There is deliberately one instance per story and release, so a second instance for the same pair cannot exist: the workflowId is derived from jiraStoryId and release and is rejected if it disagrees with them. Do NOT invent a release that Jira does not have in order to get a second instance - that release would then leak into the RTM and into feature tags.",
+        "Resetting an instance does overwrite it, so the evidence of the previous run must be preserved elsewhere BEFORE the reset: append a WORKFLOW_RESTARTED event to workflow/history/<workflowId>.history.jsonl, which is append-only, and confirm the prior state is committed to version control. If either is missing, stop - the protection this rule exists for is gone.",
         "Existing execution records, approvals and defect artifacts are historical evidence and are never regenerated or overwritten.",
         "The revised test plan is a new artifactVersion of the same TEST-PLAN-ID, merged by testScenarioId. Existing scenarios are preserved; new scenarios are added.",
         "An added API scenario must not retire a UI scenario covering the same acceptance criterion unless a human explicitly approves the retirement at Gate 2."

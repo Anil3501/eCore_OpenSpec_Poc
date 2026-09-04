@@ -6,13 +6,18 @@
 | Release | 1.0 |
 | Capability | account-access |
 | Artifact under review | [requirements/normalized/ETA-351.json](../normalized/ETA-351.json) |
-| Artifact version | 1 |
-| Raw snapshot | [requirements/raw/ETA-351.json](../raw/ETA-351.json) |
+| Artifact version | 2 (supersedes 1) |
+| Raw snapshot | [reports/jira/ETA-351.jira.json](../../reports/jira/ETA-351.jira.json) |
 | Retrieved via | Jira REST API v3 (documented fallback — the Atlassian MCP server exposed no issue-fetch tool in this session) |
-| Retrieved at | 2026-08-31T12:44:24.412Z |
+| Retrieved at | 2026-09-04T13:54:48.102Z |
 | Data classification | REAL_JIRA_DATA |
 | Approval template | [requirements/reviews/ETA-351-ac-approval.template.json](ETA-351-ac-approval.template.json) |
 | Expected approval path | `requirements/approved/ETA-351-ac-approval.json` |
+
+**This is a deliberate full re-run**, requested to validate the framework after the API-testing
+capability was integrated. The story was first processed on 2026-08-31 (committed at `caf9b13`).
+Everything below was re-derived from a freshly fetched snapshot, not copied forward. Section 10
+records every difference from the first run.
 
 **Nothing downstream of this gate has been generated.** No OpenSpec artifacts, no test plan, no
 feature files, no page objects.
@@ -26,7 +31,7 @@ feature files, no page objects.
 | Key | ETA-351 |
 | Summary | Organization Login for eCore Command Center: login type selection, credential entry, authentication, and Home page access |
 | Type | Story |
-| Status | In Progress |
+| Status | Closed *(was `In Progress` at the first run — see section 10)* |
 | Priority | Medium |
 | Labels | QA |
 | Components | *(none)* |
@@ -40,9 +45,15 @@ feature files, no page objects.
 
 ## 2. Original Jira description
 
-Reproduced verbatim from the snapshot. Every quotation used as a requirement `originalText` was
-checked programmatically against this text and all 8 matched.
+Reproduced from the 2026-09-04 snapshot. The Jira field is Atlassian Document Format; the text below
+is the document's text nodes in order, with its hard line breaks preserved. Every quotation used as
+a requirement `originalText` was checked against this text, and all 8 matched. Where a requirement
+quotes across a wrapped line, the wrap is rendered as a single space and nothing else is altered.
 
+> **Summary**
+>
+> As an organization user, I want to sign in to eCore Command Center using my organization credentials so that I can access the application
+>
 > **Story**
 >
 > As an organization user of eCore Command Center
@@ -51,39 +62,47 @@ checked programmatically against this text and all 8 matched.
 >
 > **Context**
 >
-> The login page is the entry point to eCore Command Center. It supports more than one kind of
-> sign-in, and the user tells the system which kind they are using before entering their details.
+> The eCore Command Center login page is the entry point to the application. It
+> supports more than one kind of sign-in, and the user tells the system which kind
+> they are using before entering their details. Organization users authenticate
+> against their organization rather than against an individual business entity, so
+> the organization they belong to forms part of what they supply at sign-in.
 >
-> This story covers Organization Login. Organization users authenticate against their organization
-> rather than against an individual business entity, so the organization they belong to forms part
-> of what they supply at sign-in.
+> The other supported sign-in kind is Business Entity Login. It exists on the same
+> page and the user must be able to tell the two apart and choose between them, but
+> its own behaviour is handled elsewhere and is not part of this story.
 >
-> The other supported sign-in kind is Business Entity Login. It exists on the same page and the user
-> must be able to tell the two apart and choose between them, but its own behaviour is handled
-> elsewhere and is not part of this story.
+> Which details the page asks for depends on the choice the user makes. The page is
+> expected to respond to that choice rather than present every possible field at
+> once.
 >
-> Which details the page asks for depends on the choice the user makes. The page is expected to
-> respond to that choice rather than present every possible field at once.
+> **What the user does**
 >
-> **User flow**
->
-> A user arrives at the login page, indicates that they are signing in on behalf of their
-> organization, supplies who they are, which organization they belong to, and the secret that proves
-> it, and submits. If everything they supplied is correct, they arrive at the eCore Command Center
-> Home page and can work in the application within the limits of their organization and permissions.
+> A user arrives at the login page, indicates that they are signing in on behalf of
+> their organization, supplies who they are, which organization they belong to, and
+> the secret that proves it, and submits. If everything they supplied is correct,
+> they arrive at the eCore Command Center Home page and can work in the application
+> within the limits of their organization and permissions.
 >
 > Passwords are secrets and are treated as such on screen.
 >
-> Not everything a user submits will be correct. Details can be wrong, and details can be left out
-> altogether. In neither case should the user get into the application, and in neither case should
-> they be left guessing about what happened. Wrong details and missing details are different
-> problems and the user should be able to tell which one they have hit.
+> Not everything a user submits will be correct. Details can be wrong, and details
+> can be left out altogether. In neither case should the user get into the
+> application, and in neither case should they be left guessing about what happened.
+> Wrong details and missing details are different problems and the user should be
+> able to tell which one they have hit.
 >
 > **Out of Scope**
 >
-> Business Entity Login behaviour; Forgot Password and password reset; user creation; organization
-> creation; role and permission configuration; MFA and SSO; session timeout; account lockout; exact
-> error-message wording.
+> Business Entity Login behaviour; Forgot Password; password reset; user creation;
+> organization creation; role and permission configuration; MFA and SSO; session
+> timeout; account lockout; exact error-message wording.
+
+### Comments on the ticket
+
+The snapshot carries 7 comments, all written by the story's own author and all worklog updates about
+building this automation framework. **None of them states a business rule about eCore sign-in**, so
+no requirement, criterion or ambiguity below is derived from a comment.
 
 ---
 
@@ -106,7 +125,9 @@ behavioural criteria for this story.)*
 
 ## 4. Additional acceptance criteria proposed
 
-All 8 are `PROPOSED_BY_REQUIREMENT_ANALYSIS`, all `PENDING_APPROVAL`, all version 1.
+All 8 are `PROPOSED_BY_REQUIREMENT_ANALYSIS`, all `PENDING_APPROVAL`, all item version 1 and all
+`changeType: UNCHANGED` — the re-run reproduced the first run's set exactly, so no item content
+moved. The artifact around them is version 2.
 
 | AC | Requirement | Given | When | Then |
 | --- | --- | --- | --- | --- |
@@ -174,6 +195,12 @@ Proposed only. Written to
 [traceability/capabilities/account-access.rtm.proposed.json](../../traceability/capabilities/account-access.rtm.proposed.json)
 and **not** merged — the orchestrator owns the merge, and only after this gate clears.
 
+The eight trace ids are deliberately the same ids the first run used, because the RTM merges by key,
+not by position. One consequence you should know about: while this proposal file sits next to the
+already-merged `account-access.rtm.json`, `npm run validate:artifacts` will report those eight
+trace ids as duplicated across partitions under `SEM-RTM`. That is the expected state between Gate 1
+and the orchestrator's merge, and it clears when the proposal is merged and removed.
+
 | Trace | Story | Requirement | AC | Status |
 | --- | --- | --- | --- | --- |
 | TRC-ETA-351-001 | ETA-351 | REQ-ETA-351-001 | AC-ETA-351-001 | PENDING_APPROVAL |
@@ -206,6 +233,55 @@ Two further gaps you should know about before approving:
 - **Nothing here has been checked against the real application.** No page has been opened, no
   locator validated. That happens at `PLAYWRIGHT_VALIDATION`, after Gates 1 and 2.
 - **The QA host requires VPN.** Execution will block without it.
+
+### Interface observation — not a classification
+
+The framework now supports API-level verification, so this is worth stating plainly: **the ETA-351
+description says nothing about an API.** It names no endpoint, method, status code, field name or
+error payload. Nothing in section 4 was therefore classified as API-verifiable, and no ambiguity was
+raised about API specifics, because raising one would imply the story asserts an API contract it
+does not mention.
+
+Which interface verifies each criterion is a Gate 2 decision for the test planner, not a requirement
+I am entitled to author. If you want any of these eight criteria verified below the UI, say so in
+your approval comments so the planner treats it as your instruction rather than its own inference.
+
+---
+
+## 10. Divergence from the first run (2026-08-31, commit `caf9b13`)
+
+This is the point of the exercise, so it is reported whether or not anything moved.
+
+| # | What | First run | This run | Cause |
+| --- | --- | --- | --- | --- |
+| 1 | Requirements normalized | 8 | 8 | — identical ids, wording and `originalText` |
+| 2 | Acceptance criteria | 8, all proposed | 8, all proposed | — identical Given/When/Then and rationale |
+| 3 | Acceptance criteria found *in* Jira | 0 | 0 | The description still has no AC section |
+| 4 | Ambiguities | 6, all `REVIEW_REQUIRED` | 6, all `REVIEW_REQUIRED` | — |
+| 5 | Jira status | `In Progress` | `Closed` | The human closed the ticket. No behavioural content changed. |
+| 6 | Jira comments | 0 read | 7 read, 0 used | All 7 are the author's worklog notes about building this framework. None states an eCore business rule. |
+| 7 | Artifact version | 1 | 2, `supersedes: 1`, `changeType: UNCHANGED` | Regeneration over an approved v1 |
+| 8 | Section 2 of this package | Paraphrased the description and used headings (`User flow`) the ticket does not contain | Reproduces the ticket's own headings and line breaks | **A real defect in the first run's review package.** The requirement `originalText` values were correct both times; only this human-facing quotation drifted. Corrected here. |
+| 9 | `source.rawSnapshotPath` | `requirements/raw/ETA-351.json` | `reports/jira/ETA-351.jira.json` | See the note below — the governed promotion could not be performed in this session. |
+
+**Bottom line: the analysis is reproducible.** Same 8 requirements, same 8 criteria, same 6
+ambiguities, from an independently re-fetched snapshot. The only substantive finding is row 8.
+
+### Open item — the raw snapshot has not been promoted
+
+`requirements/raw/ETA-351.json` still holds the **2026-08-31** snapshot. The 2026-09-04 snapshot
+lives at `reports/jira/ETA-351.jira.json` and is what everything above was derived from, so
+`source.rawSnapshotPath` points there rather than claiming a promotion that did not happen.
+
+Promoting it is a byte-for-byte file copy, and this session exposed no tool that can execute one.
+Retyping a 2,529-line snapshot cannot be guaranteed verbatim, and a raw artifact that is *almost*
+the Jira response is worse than none. One command completes the stage:
+
+```powershell
+Copy-Item reports/jira/ETA-351.jira.json requirements/raw/ETA-351.json -Force
+```
+
+After that, `source.rawSnapshotPath` should be set back to `requirements/raw/ETA-351.json`.
 
 ---
 

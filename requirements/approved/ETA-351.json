@@ -1,17 +1,17 @@
 {
   "schemaVersion": "1.0.0",
-  "artifactVersion": 1,
+  "artifactVersion": 2,
   "release": "1.0",
   "capability": "account-access",
-  "supersedes": null,
-  "changeType": "NEW",
+  "supersedes": 1,
+  "changeType": "UNCHANGED",
   "story": {
     "jiraId": "ETA-351",
     "summary": "Organization Login for eCore Command Center: login type selection, credential entry, authentication, and Home page access",
     "description": "Summary\nAs an organization user, I want to sign in to eCore Command Center using my organization credentials so that I can access the application\nStory\nAs an organization user of eCore Command Center\nI want to sign in using my organization credentials\nSo that I can access the application with my assigned permissions\nContext\nThe eCore Command Center login page is the entry point to the application. It\nsupports more than one kind of sign-in, and the user tells the system which kind\nthey are using before entering their details. Organization users authenticate\nagainst their organization rather than against an individual business entity, so\nthe organization they belong to forms part of what they supply at sign-in.\nThe other supported sign-in kind is Business Entity Login. It exists on the same\npage and the user must be able to tell the two apart and choose between them, but\nits own behaviour is handled elsewhere and is not part of this story.\nWhich details the page asks for depends on the choice the user makes. The page is\nexpected to respond to that choice rather than present every possible field at\nonce.\nWhat the user does\nA user arrives at the login page, indicates that they are signing in on behalf of\ntheir organization, supplies who they are, which organization they belong to, and\nthe secret that proves it, and submits. If everything they supplied is correct,\nthey arrive at the eCore Command Center Home page and can work in the application\nwithin the limits of their organization and permissions.\nPasswords are secrets and are treated as such on screen.\nNot everything a user submits will be correct. Details can be wrong, and details\ncan be left out altogether. In neither case should the user get into the\napplication, and in neither case should they be left guessing about what happened.\nWrong details and missing details are different problems and the user should be\nable to tell which one they have hit.\nOut of Scope\nBusiness Entity Login behaviour; Forgot Password; password reset; user creation;\norganization creation; role and permission configuration; MFA and SSO; session\ntimeout; account lockout; exact error-message wording.",
     "issueType": "Story",
     "priority": "Medium",
-    "status": "In Progress",
+    "status": "Closed",
     "labels": [
       "QA"
     ],
@@ -31,7 +31,7 @@
       "sourceType": "EXTRACTED_FROM_JIRA",
       "status": "APPROVED",
       "version": 1,
-      "changeType": "NEW"
+      "changeType": "UNCHANGED"
     },
     {
       "requirementId": "REQ-ETA-351-002",
@@ -40,7 +40,7 @@
       "sourceType": "EXTRACTED_FROM_JIRA",
       "status": "APPROVED",
       "version": 1,
-      "changeType": "NEW"
+      "changeType": "UNCHANGED"
     },
     {
       "requirementId": "REQ-ETA-351-003",
@@ -49,7 +49,7 @@
       "sourceType": "EXTRACTED_FROM_JIRA",
       "status": "APPROVED",
       "version": 1,
-      "changeType": "NEW"
+      "changeType": "UNCHANGED"
     },
     {
       "requirementId": "REQ-ETA-351-004",
@@ -58,7 +58,7 @@
       "sourceType": "EXTRACTED_FROM_JIRA",
       "status": "APPROVED",
       "version": 1,
-      "changeType": "NEW"
+      "changeType": "UNCHANGED"
     },
     {
       "requirementId": "REQ-ETA-351-005",
@@ -67,7 +67,7 @@
       "sourceType": "EXTRACTED_FROM_JIRA",
       "status": "APPROVED",
       "version": 1,
-      "changeType": "NEW"
+      "changeType": "UNCHANGED"
     },
     {
       "requirementId": "REQ-ETA-351-006",
@@ -76,7 +76,7 @@
       "sourceType": "EXTRACTED_FROM_JIRA",
       "status": "APPROVED",
       "version": 1,
-      "changeType": "NEW"
+      "changeType": "UNCHANGED"
     },
     {
       "requirementId": "REQ-ETA-351-007",
@@ -85,7 +85,7 @@
       "sourceType": "EXTRACTED_FROM_JIRA",
       "status": "APPROVED",
       "version": 1,
-      "changeType": "NEW"
+      "changeType": "UNCHANGED"
     },
     {
       "requirementId": "REQ-ETA-351-008",
@@ -94,7 +94,7 @@
       "sourceType": "EXTRACTED_FROM_JIRA",
       "status": "APPROVED",
       "version": 1,
-      "changeType": "NEW"
+      "changeType": "UNCHANGED"
     }
   ],
   "acceptanceCriteria": [
@@ -113,7 +113,7 @@
       "clarificationRefs": [
         "AMB-ETA-351-002"
       ],
-      "changeType": "NEW"
+      "changeType": "UNCHANGED"
     },
     {
       "acId": "AC-ETA-351-002",
@@ -130,7 +130,7 @@
       "clarificationRefs": [
         "AMB-ETA-351-002"
       ],
-      "changeType": "NEW"
+      "changeType": "UNCHANGED"
     },
     {
       "acId": "AC-ETA-351-003",
@@ -147,7 +147,7 @@
       "clarificationRefs": [
         "AMB-ETA-351-001"
       ],
-      "changeType": "NEW"
+      "changeType": "UNCHANGED"
     },
     {
       "acId": "AC-ETA-351-004",
@@ -164,7 +164,7 @@
       "clarificationRefs": [
         "AMB-ETA-351-004"
       ],
-      "changeType": "NEW"
+      "changeType": "UNCHANGED"
     },
     {
       "acId": "AC-ETA-351-005",
@@ -181,7 +181,7 @@
       "clarificationRefs": [
         "AMB-ETA-351-006"
       ],
-      "changeType": "NEW"
+      "changeType": "UNCHANGED"
     },
     {
       "acId": "AC-ETA-351-006",
@@ -198,7 +198,7 @@
       "clarificationRefs": [
         "AMB-ETA-351-003"
       ],
-      "changeType": "NEW"
+      "changeType": "UNCHANGED"
     },
     {
       "acId": "AC-ETA-351-007",
@@ -216,7 +216,7 @@
         "AMB-ETA-351-003",
         "AMB-ETA-351-005"
       ],
-      "changeType": "NEW"
+      "changeType": "UNCHANGED"
     },
     {
       "acId": "AC-ETA-351-008",
@@ -233,7 +233,7 @@
       "clarificationRefs": [
         "AMB-ETA-351-003"
       ],
-      "changeType": "NEW"
+      "changeType": "UNCHANGED"
     }
   ],
   "ambiguities": [
@@ -328,13 +328,13 @@
     "retrievedVia": "JIRA_REST_API",
     "dataClassification": "REAL_JIRA_DATA",
     "rawSnapshotPath": "requirements/raw/ETA-351.json",
-    "retrievedAt": "2026-08-31T12:44:24.412Z"
+    "retrievedAt": "2026-09-04T13:54:48.102Z"
   },
   "approvalStatus": "APPROVED",
   "approvalRef": "requirements/approved/ETA-351-ac-approval.json",
   "timestamps": {
     "createdAt": "2026-08-31T13:05:00.000Z",
-    "updatedAt": "2026-08-31T13:20:00.000Z",
-    "approvedAt": "2026-08-31T13:20:00.000Z"
+    "updatedAt": "2026-09-04T14:05:00.000Z",
+    "approvedAt": "2026-09-04T14:05:00.000Z"
   }
 }

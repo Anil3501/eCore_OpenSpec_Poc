@@ -1,9 +1,10 @@
 {
   "_dataClassification": "REAL_JIRA_DATA",
-  "_note": "Verbatim Jira snapshot promoted by the JIRA_RETRIEVAL stage. Never edit by hand.",
   "retrievalMethod": "JIRA_REST_API_V3",
+  "retrievalNote": "Retrieved by src/utils/jira-fetch.ts, the documented REST fallback, because the Atlassian MCP server exposed no issue-fetch tool in this session. The issue payload below is verbatim.",
+  "requestedIssueKey": "ETA-351",
   "requestUrl": "https://eoriginal.atlassian.net/rest/api/3/issue/ETA-351?expand=renderedFields%2Cnames",
-  "retrievedAt": "2026-08-31T12:44:24.412Z",
+  "retrievedAt": "2026-09-04T13:54:48.102Z",
   "issue": {
     "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations,customfield_11318.properties,customfield_10900.requestTypePractice,customfield_11319.properties",
     "id": "110012",
@@ -14,7 +15,7 @@
       "resolution": null,
       "customfield_10500": null,
       "customfield_11839": null,
-      "lastViewed": "Friday 8:53 PM",
+      "lastViewed": "28/Aug/26 8:53 PM",
       "customfield_11391": "",
       "customfield_11390": "",
       "customfield_11397": "",
@@ -81,7 +82,7 @@
       "customfield_11348": null,
       "customfield_11347": null,
       "customfield_11349": null,
-      "updated": "Friday 8:53 PM",
+      "updated": "Tuesday 10:06 PM",
       "customfield_11580": null,
       "timeoriginalestimate": null,
       "customfield_11461": null,
@@ -212,8 +213,8 @@
               "timeZone": "America/New_York",
               "accountType": "atlassian"
             },
-            "created": "Wednesday 4:04 AM",
-            "updated": "Wednesday 4:04 AM",
+            "created": "26/Aug/26 4:04 AM",
+            "updated": "26/Aug/26 4:04 AM",
             "jsdPublic": true
           },
           {
@@ -250,8 +251,8 @@
               "timeZone": "America/New_York",
               "accountType": "atlassian"
             },
-            "created": "Thursday 2:41 AM",
-            "updated": "Thursday 2:41 AM",
+            "created": "27/Aug/26 2:41 AM",
+            "updated": "27/Aug/26 2:41 AM",
             "jsdPublic": true
           },
           {
@@ -288,8 +289,8 @@
               "timeZone": "America/New_York",
               "accountType": "atlassian"
             },
-            "created": "Friday 5:19 AM",
-            "updated": "Friday 5:19 AM",
+            "created": "28/Aug/26 5:19 AM",
+            "updated": "28/Aug/26 5:19 AM",
             "jsdPublic": true
           },
           {
@@ -326,17 +327,93 @@
               "timeZone": "America/New_York",
               "accountType": "atlassian"
             },
-            "created": "Friday 8:53 PM",
-            "updated": "Friday 8:53 PM",
+            "created": "28/Aug/26 8:53 PM",
+            "updated": "28/Aug/26 8:53 PM",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/110012/comment/205884",
+            "id": "205884",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "emailAddress": "nitin.saini@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+              },
+              "displayName": "Nitin Saini",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": "<ul>\n\t<li>As part of the ongoing framework development, implemented a <b>Defect Analyzer Agent</b> to support automated defect analysis during test execution.</li>\n\t<li>The agent is designed to analyze failed test executions, identify potential defects, and automatically create a <b>Jira defect within the same Jira story</b> associated with the current execution.</li>\n\t<li>This enhancement improves the end-to-end automation workflow by integrating <b>test execution, defect identification, and Jira defect creation</b> into the framework.</li>\n</ul>\n",
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "emailAddress": "nitin.saini@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+              },
+              "displayName": "Nitin Saini",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "Tuesday 3:52 AM",
+            "updated": "Tuesday 3:52 AM",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/110012/comment/205937",
+            "id": "205937",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "emailAddress": "nitin.saini@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+              },
+              "displayName": "Nitin Saini",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": "<ul>\n\t<li>Completed the development of the <b>AI-assisted automation framework</b> and validated the end-to-end workflow.</li>\n\t<li>The framework can read and process Jira tickets, generate <b>requirements, Acceptance Criteria, and Test Plans</b>, and create the corresponding BDD automation artifacts, including <b>feature files, step definitions, and page objects</b>.</li>\n\t<li>Implemented <b>Healer Agents</b> to identify and resolve <b>locator-related and code-related issues</b> encountered during test execution.</li>\n\t<li>Successfully executed the generated test cases, with the applicable test cases passing and <b>execution reports generated</b> successfully.</li>\n\t<li>Overall, the framework now supports an end-to-end flow from <b>Jira requirement → test planning → BDD script generation → self-healing → execution → reporting</b>.</li>\n</ul>\n",
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "emailAddress": "nitin.saini@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+              },
+              "displayName": "Nitin Saini",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "Tuesday 10:05 PM",
+            "updated": "Tuesday 10:05 PM",
             "jsdPublic": true
           }
         ],
         "self": "https://eoriginal.atlassian.net/rest/api/3/issue/110012/comment",
-        "maxResults": 5,
-        "total": 5,
+        "maxResults": 7,
+        "total": 7,
         "startAt": 0
       },
-      "statuscategorychangedate": "24/Aug/26 1:47 PM",
+      "statuscategorychangedate": "Tuesday 10:06 PM",
       "customfield_11441": null,
       "customfield_11440": null,
       "fixVersions": null,
@@ -663,11 +740,11 @@
         }
       },
       "statusCategory": {
-        "self": "https://eoriginal.atlassian.net/rest/api/3/statuscategory/4",
-        "id": 4,
-        "key": "indeterminate",
-        "colorName": "yellow",
-        "name": "In Progress"
+        "self": "https://eoriginal.atlassian.net/rest/api/3/statuscategory/3",
+        "id": 3,
+        "key": "done",
+        "colorName": "green",
+        "name": "Done"
       },
       "resolution": null,
       "customfield_10500": null,
@@ -801,7 +878,7 @@
       "customfield_11348": null,
       "customfield_11347": null,
       "customfield_11349": null,
-      "updated": "2026-08-28T20:53:43.242-0400",
+      "updated": "2026-09-01T22:06:46.594-0400",
       "customfield_11580": null,
       "timeoriginalestimate": null,
       "customfield_11461": null,
@@ -1823,14 +1900,406 @@
             "created": "2026-08-28T20:53:43.242-0400",
             "updated": "2026-08-28T20:53:43.242-0400",
             "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/110012/comment/205884",
+            "id": "205884",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "emailAddress": "nitin.saini@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+              },
+              "displayName": "Nitin Saini",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": {
+              "type": "doc",
+              "version": 1,
+              "content": [
+                {
+                  "type": "bulletList",
+                  "content": [
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "localId": "917311e7e943"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "As part of the ongoing framework development, implemented a "
+                            },
+                            {
+                              "type": "text",
+                              "text": "Defect Analyzer Agent",
+                              "marks": [
+                                {
+                                  "type": "strong"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "text": " to support automated defect analysis during test execution."
+                            }
+                          ],
+                          "attrs": {
+                            "localId": "4be6fdf8ddf8"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "localId": "ef14fc24307c"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "The agent is designed to analyze failed test executions, identify potential defects, and automatically create a "
+                            },
+                            {
+                              "type": "text",
+                              "text": "Jira defect within the same Jira story",
+                              "marks": [
+                                {
+                                  "type": "strong"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "text": " associated with the current execution."
+                            }
+                          ],
+                          "attrs": {
+                            "localId": "37eb6cd275a0"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "localId": "bb1a7be76b07"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "This enhancement improves the end-to-end automation workflow by integrating "
+                            },
+                            {
+                              "type": "text",
+                              "text": "test execution, defect identification, and Jira defect creation",
+                              "marks": [
+                                {
+                                  "type": "strong"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "text": " into the framework."
+                            }
+                          ],
+                          "attrs": {
+                            "localId": "47737f172b39"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "attrs": {
+                    "localId": "162dbd8d60fd"
+                  }
+                }
+              ]
+            },
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "emailAddress": "nitin.saini@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+              },
+              "displayName": "Nitin Saini",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "2026-09-01T03:52:21.998-0400",
+            "updated": "2026-09-01T03:52:21.998-0400",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/110012/comment/205937",
+            "id": "205937",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "emailAddress": "nitin.saini@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+              },
+              "displayName": "Nitin Saini",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": {
+              "type": "doc",
+              "version": 1,
+              "content": [
+                {
+                  "type": "bulletList",
+                  "content": [
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "localId": "93f4e3871a4f"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "Completed the development of the "
+                            },
+                            {
+                              "type": "text",
+                              "text": "AI-assisted automation framework",
+                              "marks": [
+                                {
+                                  "type": "strong"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "text": " and validated the end-to-end workflow."
+                            }
+                          ],
+                          "attrs": {
+                            "localId": "c99fc1dd3135"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "localId": "69264d1090b9"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "The framework can read and process Jira tickets, generate "
+                            },
+                            {
+                              "type": "text",
+                              "text": "requirements, Acceptance Criteria, and Test Plans",
+                              "marks": [
+                                {
+                                  "type": "strong"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "text": ", and create the corresponding BDD automation artifacts, including "
+                            },
+                            {
+                              "type": "text",
+                              "text": "feature files, step definitions, and page objects",
+                              "marks": [
+                                {
+                                  "type": "strong"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "text": "."
+                            }
+                          ],
+                          "attrs": {
+                            "localId": "d81ee61057d9"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "localId": "418c114c75f0"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "Implemented "
+                            },
+                            {
+                              "type": "text",
+                              "text": "Healer Agents",
+                              "marks": [
+                                {
+                                  "type": "strong"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "text": " to identify and resolve "
+                            },
+                            {
+                              "type": "text",
+                              "text": "locator-related and code-related issues",
+                              "marks": [
+                                {
+                                  "type": "strong"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "text": " encountered during test execution."
+                            }
+                          ],
+                          "attrs": {
+                            "localId": "58a3fb978c53"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "localId": "5c822cb82e93"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "Successfully executed the generated test cases, with the applicable test cases passing and "
+                            },
+                            {
+                              "type": "text",
+                              "text": "execution reports generated",
+                              "marks": [
+                                {
+                                  "type": "strong"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "text": " successfully."
+                            }
+                          ],
+                          "attrs": {
+                            "localId": "aa4d7bec9292"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "localId": "8c41a28ea43e"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "Overall, the framework now supports an end-to-end flow from "
+                            },
+                            {
+                              "type": "text",
+                              "text": "Jira requirement → test planning → BDD script generation → self-healing → execution → reporting",
+                              "marks": [
+                                {
+                                  "type": "strong"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "text": "."
+                            }
+                          ],
+                          "attrs": {
+                            "localId": "bf892c4d2902"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "attrs": {
+                    "localId": "2ea2bd962eab"
+                  }
+                }
+              ]
+            },
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "emailAddress": "nitin.saini@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+              },
+              "displayName": "Nitin Saini",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "2026-09-01T22:05:34.604-0400",
+            "updated": "2026-09-01T22:05:34.604-0400",
+            "jsdPublic": true
           }
         ],
         "self": "https://eoriginal.atlassian.net/rest/api/3/issue/110012/comment",
-        "maxResults": 5,
-        "total": 5,
+        "maxResults": 7,
+        "total": 7,
         "startAt": 0
       },
-      "statuscategorychangedate": "2026-08-24T13:47:22.710-0400",
+      "statuscategorychangedate": "2026-09-01T22:06:46.594-0400",
       "customfield_11441": {
         "self": "https://eoriginal.atlassian.net/rest/api/3/customFieldOption/10436",
         "value": "ECORE",
@@ -1869,17 +2338,17 @@
       "customfield_11429": null,
       "versions": [],
       "status": {
-        "self": "https://eoriginal.atlassian.net/rest/api/3/status/3",
-        "description": "This work item is being actively worked on at the moment by the assignee.",
-        "iconUrl": "https://eoriginal.atlassian.net/images/icons/statuses/inprogress.png",
-        "name": "In Progress",
-        "id": "3",
+        "self": "https://eoriginal.atlassian.net/rest/api/3/status/6",
+        "description": "The work item is considered finished, the resolution is correct. Work items which are closed can be reopened.",
+        "iconUrl": "https://eoriginal.atlassian.net/images/icons/statuses/closed.png",
+        "name": "Closed",
+        "id": "6",
         "statusCategory": {
-          "self": "https://eoriginal.atlassian.net/rest/api/3/statuscategory/4",
-          "id": 4,
-          "key": "indeterminate",
-          "colorName": "yellow",
-          "name": "In Progress"
+          "self": "https://eoriginal.atlassian.net/rest/api/3/statuscategory/3",
+          "id": 3,
+          "key": "done",
+          "colorName": "green",
+          "name": "Done"
         }
       },
       "customfield_11421": null,

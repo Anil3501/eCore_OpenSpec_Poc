@@ -3,18 +3,18 @@
   "approvalId": "APR-AD-ETA-351-001",
   "gate": "AUTOMATION_DESIGN",
   "artifactId": "TP-ETA-351-001",
-  "artifactVersion": 1,
+  "artifactVersion": 2,
   "release": "1.0",
   "capability": "account-access",
   "sourceArtifactPath": "features/generated/account-access/TP-ETA-351-001-automation-design.md",
   "decision": "APPROVE",
   "reviewer": {
-    "name": "Nitin Saini",
+    "name": "Anil",
     "role": "Reviewer",
     "reference": null
   },
-  "reviewedAt": "2026-08-31T14:40:00.000Z",
-  "comments": "Gate 3 approved. All eight scenarios of features/generated/account-access/organization-sign-in.feature are approved for promotion to features/approved/, which is the only input to bddgen. This decision was given by the reviewer in chat and transcribed into this artifact by the orchestrator; the transcription is a record of a human decision, not an agent approval. Two questions put to the reviewer before this gate were not answered and are recorded here as unanswered rather than assumed: whether the reviewer wants to inspect page objects and step definitions after IMPLEMENTATION and before EXECUTION (the framework defines no gate there), and whether VPN access to the qa host is currently available for PLAYWRIGHT_VALIDATION. If the host cannot be reached, the correct outcome is an ENVIRONMENT_BLOCKER: the workflow halts, nothing is healed and no defect is filed, because a failure that never reached the application proves nothing about it. AMB-ETA-351-004, AMB-ETA-351-006 and CLR-TP-ETA-351-001 remain REVIEW_REQUIRED and cannot be closed by observing the application. No locator has been verified at the time of this approval; every locator written during IMPLEMENTATION must carry MCP_VALIDATION_REQUIRED until the Playwright Test Planner validates it against the real page, and that marker is a build failure while the file backs approved automation.",
+  "reviewedAt": "2026-09-04T15:10:00.000Z",
+  "comments": "Decision given in chat on 2026-09-04 and transcribed here by the orchestrator; the artifact, not the message, is the approval. Option A selected from section 3 of the design document: the existing automation is confirmed, not regenerated. No step definition, page object, service or feature file is deleted. Approving also confirms that automation approved against test plan v1 remains correct for plan v2, because the plan declares every scenario UI and absence of an @interface- tag already means UI, so the interface declaration requires no code change. Re-verification happens where it is meaningful - at EXECUTION against the live application - rather than by rewriting unchanged inputs into identical code. The six ambiguities remain unanswered, so the dependent scenarios stay abstract and assert the criterion rather than the mechanism.",
   "itemDecisions": [
     {
       "itemId": "TS-ETA-351-001",

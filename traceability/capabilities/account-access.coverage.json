@@ -2,11 +2,11 @@
   "schemaVersion": "1.0.0",
   "capability": "account-access",
   "release": "1.0",
-  "generatedAt": "2026-08-31T16:31:35.501Z",
+  "generatedAt": "2026-09-04T15:16:00.000Z",
   "dataClassification": "REAL_JIRA_DATA",
   "sourceRtm": {
     "path": "traceability/capabilities/account-access.rtm.json",
-    "version": 3
+    "version": 6
   },
   "totals": {
     "approvedAcs": 8,

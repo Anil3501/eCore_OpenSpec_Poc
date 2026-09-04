@@ -3,7 +3,7 @@
   "approvalId": "APR-AC-ETA-351-001",
   "gate": "ACCEPTANCE_CRITERIA",
   "artifactId": "ETA-351",
-  "artifactVersion": 1,
+  "artifactVersion": 2,
   "release": "1.0",
   "capability": "account-access",
   "sourceArtifactPath": "requirements/normalized/ETA-351.json",

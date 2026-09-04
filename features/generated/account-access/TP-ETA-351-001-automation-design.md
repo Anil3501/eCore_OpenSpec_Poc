@@ -1,144 +1,105 @@
-# Automation design — TP-ETA-351-001
+# Automation design — TP-ETA-351-001 v2
 
 | Field | Value |
 | --- | --- |
-| Test plan | `TP-ETA-351-001` v1, approved at Gate 2 on 2026-08-31 |
+| Test plan | `TP-ETA-351-001` **v2**, approved at Gate 2 on 2026-09-04 by Anil (Reviewer) |
 | Feature file | [features/generated/account-access/organization-sign-in.feature](organization-sign-in.feature) |
-| Jira story | [ETA-351](https://eoriginal.atlassian.net/browse/ETA-351) |
+| Jira story | ETA-351 |
 | Release / capability | 1.0 / `account-access` |
 | Gate | Awaiting `AUTOMATION_DESIGN` (Gate 3 of 3) |
+| Previous approval | v1, approved 2026-08-31 by Nitin Saini |
 
 ---
 
-## 1. Starting point
+## 1. Starting point — this is not a green field
 
-The repository contains **no automation for this story**. `src/pages`, `src/services`, `steps/`,
-`features/` and `test-data/` were emptied before this run. Everything below is to be created, not
-modified. The only existing automation asset is [src/fixtures/test.ts](../../../src/fixtures/test.ts),
-which currently exposes `environment` and `browserCoverage` and is story-agnostic.
+The v1 design document opened by saying the repository contained no automation for this story. That
+was true then. It is not true now, and repeating it would be the easiest lie in this package.
 
-## 2. Feature design
+The automation exists, is approved, and passes:
 
-One feature file, eight scenarios, one per approved test scenario. Scenario titles match
-`TP-ETA-351-001` exactly, so the plan and the feature file can be diffed mechanically.
-
-A `Background` holds the single shared precondition — the login page being open. Choosing the
-organization sign-in kind is **not** in the Background, because two scenarios
-(`TS-ETA-351-001`, `TS-ETA-351-002`) must observe the page *before* any choice is made. Pushing that
-step into the Background would have destroyed the very ordering `AC-ETA-351-001` asserts.
-
-Tags: the four story-level tags sit on the `Feature`, and `@req-`, `@ac-`, `@ts-`, `@risk-` and
-`@suite-` sit on each scenario. `SEM-FEATURE-TAGS` treats feature tags as inherited, so all six
-required prefixes resolve for every scenario.
-
-## 3. Step vocabulary
-
-Eleven steps cover all eight scenarios. Reuse is high because the negative scenarios differ only in
-the data they supply.
-
-| Step | Used by |
+| Asset | Role |
 | --- | --- |
-| `Given the eCore Command Center login page is open` | all (Background) |
-| `Given I have chosen to sign in on behalf of my organization` | TS-004…008 |
-| `When I look at the page before entering any details` | TS-001 |
-| `When I examine the sign-in kinds the page offers` | TS-002 |
-| `When I choose to sign in on behalf of my organization` | TS-003 |
-| `When I type the secret that proves who I am` | TS-004 |
-| `When I sign in with correct organization details` | TS-005 |
-| `When I sign in with organization details that are wrong` | TS-006, TS-008 |
-| `When I sign in leaving required organization details out` | TS-007, TS-008 |
-| `And I remember how the application responded` | TS-008 |
-| `And I return to the login page and choose to sign in on behalf of my organization` | TS-008 |
+| [features/approved/account-access/organization-sign-in.feature](../../approved/account-access/organization-sign-in.feature) | 8 scenarios, business language only |
+| [steps/organization-sign-in.steps.ts](../../../steps/organization-sign-in.steps.ts) | Orchestration only |
+| [src/pages/ecore-login.page.ts](../../../src/pages/ecore-login.page.ts) | Login page locators |
+| [src/pages/ecore-home.page.ts](../../../src/pages/ecore-home.page.ts) | Home page locators |
+| [src/services/organization-login.service.ts](../../../src/services/organization-login.service.ts) | Sign-in journeys, real vs fabricated credential selection |
+| [test-data/account-access.sample.json](../../../test-data/account-access.sample.json) | `SYNTHETIC_INPUTS` for every negative path |
+| [src/fixtures/test.ts](../../../src/fixtures/test.ts) | `environment`, `browserCoverage`, `apiRequest` |
 
-No step names a field, a control or a selector. `TS-ETA-351-008` reuses the two failure steps rather
-than duplicating them, and adds only the two steps that make the comparison possible.
+## 2. What actually changed between v1 and v2
 
-## 4. Why `TS-ETA-351-008` looks different
+**The automation design is unchanged. Nothing in it needs to be rebuilt.**
 
-It is the only scenario that performs two sign-in attempts. `AC-ETA-351-008` asserts a
-*relationship* between two responses, which no single attempt can demonstrate. The scenario captures
-the first response, produces the second, and compares them.
+The chain behind it moved, but every link landed on the same value:
 
-The comparison must be made on something observable that is **not** the message text, because exact
-wording is out of scope. What that observable is remains open as `AMB-ETA-351-003` and is resolved at
-`PLAYWRIGHT_VALIDATION`, not here.
+- The eight acceptance criteria were re-derived from a fresh Jira fetch and reproduced identically.
+- The eight test scenarios were regenerated and are byte-identical to v1.
+- The feature file was checked against the approved plan: the eight `@ts-` tags match the eight
+  approved scenarios exactly and in order.
 
-## 5. Proposed layers
+The one substantive delta is the interface declaration, and it is deliberately invisible in the code:
 
-| Layer | File | Responsibility |
-| --- | --- | --- |
-| Page object | `src/pages/ecore-login.page.ts` | Locators for the sign-in kind control, the organization detail fields, the submit control and whatever conveys a failure. Page-scoped assertions only. |
-| Page object | `src/pages/ecore-home.page.ts` | A single arrival assertion for the Home page. Nothing else — permission behaviour is out of scope. |
-| Service | `src/services/organization-login.service.ts` | Resolves which detail set a scenario uses: real credentials from `env.requireEcoreLogin()` for the happy path, fabricated values from test data for every failure path. |
-| Steps | `steps/organization-sign-in.steps.ts` | Orchestration only. Calls page objects and the service; holds no locator and no literal data. |
-| Fixtures | `src/fixtures/test.ts` | Registers the two page objects and the service alongside the existing `environment` and `browserCoverage` fixtures. |
-| Test data | `test-data/account-access.sample.json` | `dataClassification: SYNTHETIC_INPUTS`. Fabricated invalid and partial detail sets. Never a real value. |
+**The approved plan v2 declares every scenario `interfaceType: "UI"`, and no feature file or step
+definition changes as a result.** Absence of an `@interface-` tag already means UI. Adding
+`@interface-ui` would validate cleanly and would still be wrong — the compatibility rule exists so
+that every feature file written before API support existed stays correct without being edited, and
+the first file to break that rule teaches the next author to break it too.
 
-No component object is proposed. Nothing here is a genuinely reused cross-page widget, and inventing
-one for symmetry would be over-abstraction.
+So Gate 3 v2 is not asking you to approve new automation. It is asking you to confirm that automation
+approved against plan v1 is still the right automation for plan v2.
 
-## 6. Locator status — every locator is currently unknown
+## 3. The decision this package needs from you
 
-**No locator in this design has been verified.** The application has not been opened. Every locator
-will be written with an `MCP_VALIDATION_REQUIRED` marker and must be replaced by the Playwright Test
-Planner using Playwright MCP against the real page before the suite can be approved. That marker is
-a build failure once a file backs Gate 3 approved automation, so an unverified locator cannot reach
-an approved suite even by accident.
+The re-run was requested as a full reset "including automation". Carrying that out literally now
+means **deleting working, approved, passing code and regenerating it from inputs that have not
+changed**. Two honest options:
 
-Preference order remains `getByRole` → `getByLabel` → `getByPlaceholder` → `getByText` →
-`getByTestId`. XPath, positional selection and `waitForTimeout` are unavailable and have no waiver.
+**Option A — confirm the existing automation (recommended).** Approve at Gate 3 v2. Nothing is
+deleted. The automation is re-executed at the `EXECUTION` stage against the live application, which
+is where a genuine regression would surface anyway. The re-run's value came from the requirement
+stage, which reproduced independently and caught a real defect in the v1 review package.
 
-## 7. Ambiguities and what may resolve them
+**Option B — genuine regeneration.** `steps/organization-sign-in.steps.ts`, `src/pages/ecore-login.page.ts`,
+`src/pages/ecore-home.page.ts`, `src/services/organization-login.service.ts` and the feature file are
+deleted and rewritten. Every locator returns to `MCP_VALIDATION_REQUIRED` and must be re-validated
+through Playwright MCP at `PLAYWRIGHT_VALIDATION`. The suite is red until that completes. This tests
+the generator, not the application. It is recoverable — the current state is committed — but it is
+still deletion of working code, so it will not happen without you saying so.
 
-| ID | Blocks | Resolvable by observation? |
-| --- | --- | --- |
-| `AMB-ETA-351-001` field set for organization sign-in | TS-003, and the shape of test data | Yes |
-| `AMB-ETA-351-002` how the sign-in kind is declared | TS-001, TS-002, TS-003 | Yes |
-| `AMB-ETA-351-003` observable difference between the two failures | TS-006, TS-007, TS-008 | Yes |
-| `AMB-ETA-351-005` which details are mandatory | TS-007 | Yes |
-| `AMB-ETA-351-004` does "treated as a secret" mean only concealment | TS-004 | **No — business intent** |
-| `AMB-ETA-351-006` is permission-dependent behaviour in scope | TS-005 | **No — scope** |
-| `CLR-TP-ETA-351-001` REQ-ETA-351-004 has no criterion | — | **No — governance** |
+Mark this document `REQUEST_CHANGES` with "regenerate" if you want Option B.
 
-### A trap worth naming
+## 4. Layering, unchanged and re-verified
 
-`src/utils/env.ts` defines an `EcoreLogin` shape with five fields: login type, username,
-organization, organization id and password. It is tempting to read that as the answer to
-`AMB-ETA-351-001`.
+- **Feature file**: business behaviour only. Scanned for locators, XPath, css, test ids and
+  page-object calls — none found.
+- **Steps**: orchestration only. No locators, no hard-coded data, no multi-page workflows.
+- **Page objects**: own every locator. Accessible-role locators preferred; any string selector or
+  `getByTestId` carries a `VALIDATED -` comment naming the observation that justified it.
+- **No API client**: `src/api/` gains nothing from this story. The plan declares no API scenario, no
+  endpoint was invented, and no `apiContract` was authored.
 
-**It is not.** Environment configuration records what someone once wired up. It is not a business
-rule, it carries no approval, and the story does not mention it. `AMB-ETA-351-001` stays
-`REVIEW_REQUIRED` until the real page is observed or a human answers it. If the observed page
-disagrees with that interface, the interface is what is wrong.
+`npm run validate:artifacts` reports `SEM-AUTOMATION-HYGIENE` passing across 9 automation source
+files and 2 approved feature files against 5 locator and wait rules.
 
-## 8. Data and safety
+## 5. Credential handling
 
-Only `TS-ETA-351-005` uses the real account, via `env.requireEcoreLogin()`. Every other scenario —
-including `TS-ETA-351-004`, which types a secret but never submits it — uses fabricated values.
+Only `TS-ETA-351-005` uses the real organization account, through `env.requireEcoreLogin()`. Every
+negative scenario draws fabricated values from `test-data/account-access.sample.json`, because the
+login page warns that an account can lock out after a number of incorrect attempts. Lockout is out of
+scope for the story; the risk to a shared QA account is not.
 
-This matters more than the story admits. The login page warns that an account can lock after a
-number of incorrect attempts. `TS-ETA-351-006`, `TS-ETA-351-007` and `TS-ETA-351-008` submit failing
-attempts, and `TS-ETA-351-008` submits two on its own. Pointing those at the real account would risk
-locking the only credential the capability has. Account lockout is listed out of scope by the story,
-but a locked account does not care what the story says.
+No credential appears in a feature file, a step definition, a page object or this document.
 
-Credentials are read through `env` at run time. They appear in no artifact, no feature file, no test
-data file and no log.
+## 6. What is still unresolved
 
-## 9. Execution shape
+`AMB-ETA-351-001` through `AMB-ETA-351-006` remain `REVIEW_REQUIRED`. Neither Gate 1 nor Gate 2
+answered them. The scenarios that depend on them stay abstract, and the automation asserts the
+criterion rather than the mechanism it happened to observe.
 
-- `features/approved/**` is the only input to `bddgen`. This file stays in `features/generated/`
-  until Gate 3 clears.
-- After approval: `npm run bdd`, then `npx playwright test --list` to confirm all eight scenarios
-  are discovered before any run.
-- No plain Playwright spec may duplicate a business scenario — `SEM-NO-DUPLICATES` enforces it, and
-  `tests/seed.spec.ts` must keep asserting no business behaviour.
+## 7. How to record your decision
 
-## 10. What is not proven
-
-- **The application has never been opened in this run.** Every locator, every field name and every
-  failure signal is unknown.
-- **VPN access to the qa host is unconfirmed.** If it is unavailable at `PLAYWRIGHT_VALIDATION`, the
-  correct outcome is an `ENVIRONMENT_BLOCKER` — never a healed test and never a filed bug, because a
-  failure that never reached the application proves nothing about it.
-- **No step definition or page object exists yet.** This document is a design, not an implementation.
+Copy [TP-ETA-351-001-automation-approval.template.json](TP-ETA-351-001-automation-approval.template.json)
+to `features/approved/account-access/TP-ETA-351-001-automation-approval.json`, replace the
+placeholders, and save. A message in chat is not an approval.

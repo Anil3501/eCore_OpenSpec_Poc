@@ -22,9 +22,10 @@ export const processingLockSchema = z.object({
 export const workflowStateSchema = z
   .object({
     schemaVersion: z.literal(SCHEMA_VERSION),
+    // The optional patch segment must stay in step with releaseSchema, or a story on 1.0.1 can have no instance.
     workflowId: z
       .string()
-      .regex(/^WF-[A-Z0-9-]+-R\d+\.\d+$/, 'workflowId must look like "WF-ABC-123-R1.0"'),
+      .regex(/^WF-[A-Z0-9-]+-R\d+\.\d+(\.\d+)?$/, 'workflowId must look like "WF-ABC-123-R1.0"'),
     workflowDefinition: z.string().min(1),
     jiraStoryId: jiraIdSchema,
     release: releaseSchema,

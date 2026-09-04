@@ -13,15 +13,15 @@
   "completedStages": [
     {
       "stage": "JIRA_RETRIEVAL",
-      "completedAt": "2026-08-31T13:05:00.000Z",
+      "completedAt": "2026-09-04T13:54:48.102Z",
       "agent": "jira-requirement-analysis",
       "outputs": [
-        "requirements/raw/ETA-351.json"
+        "reports/jira/ETA-351.jira.json"
       ]
     },
     {
       "stage": "REQUIREMENT_NORMALIZATION",
-      "completedAt": "2026-08-31T13:05:00.000Z",
+      "completedAt": "2026-09-04T14:05:00.000Z",
       "agent": "jira-requirement-analysis",
       "outputs": [
         "requirements/normalized/ETA-351.json"
@@ -29,7 +29,7 @@
     },
     {
       "stage": "AC_ANALYSIS",
-      "completedAt": "2026-08-31T13:05:00.000Z",
+      "completedAt": "2026-09-04T14:08:00.000Z",
       "agent": "jira-requirement-analysis",
       "outputs": [
         "requirements/normalized/ETA-351.json"
@@ -37,7 +37,7 @@
     },
     {
       "stage": "AC_REVIEW_PACKAGE",
-      "completedAt": "2026-08-31T13:05:00.000Z",
+      "completedAt": "2026-09-04T14:10:00.000Z",
       "agent": "jira-requirement-analysis",
       "outputs": [
         "requirements/reviews/ETA-351-ac-review.md",
@@ -47,29 +47,28 @@
     },
     {
       "stage": "AC_APPROVAL",
-      "completedAt": "2026-08-31T13:20:00.000Z",
+      "completedAt": "2026-09-04T14:12:00.000Z",
       "agent": null,
       "outputs": [
         "requirements/approved/ETA-351-ac-approval.json",
         "requirements/approved/ETA-351.json",
-        "traceability/capabilities/account-access.rtm.json",
-        "traceability/index/lookup.index.json"
+        "traceability/capabilities/account-access.rtm.json"
       ]
     },
     {
       "stage": "OPENSPEC_GENERATION",
-      "completedAt": "2026-08-31T13:40:00.000Z",
-      "agent": null,
+      "completedAt": "2026-09-04T14:30:00.000Z",
+      "agent": "OpenSpec",
       "outputs": [
         "openspec/changes/add-organization-login/proposal.md",
-        "openspec/changes/add-organization-login/specs/account-access/organization-login/spec.md",
         "openspec/changes/add-organization-login/design.md",
-        "openspec/changes/add-organization-login/tasks.md"
+        "openspec/changes/add-organization-login/tasks.md",
+        "openspec/changes/add-organization-login/specs/account-access/organization-login/spec.md"
       ]
     },
     {
       "stage": "TEST_PLAN_GENERATION",
-      "completedAt": "2026-08-31T13:55:00.000Z",
+      "completedAt": "2026-09-04T14:40:00.000Z",
       "agent": "sdd-workflow-orchestrator",
       "outputs": [
         "test-plans/generated/TP-ETA-351-001.json",
@@ -79,25 +78,25 @@
     },
     {
       "stage": "TEST_PLAN_APPROVAL",
-      "completedAt": "2026-08-31T14:05:00.000Z",
+      "completedAt": "2026-09-04T14:50:00.000Z",
       "agent": null,
       "outputs": [
         "test-plans/approved/TP-ETA-351-001-approval.json",
-        "test-plans/approved/TP-ETA-351-001.json"
+        "test-plans/approved/TP-ETA-351-001.json",
+        "traceability/capabilities/account-access.rtm.json"
       ]
     },
     {
       "stage": "BDD_DESIGN",
-      "completedAt": "2026-08-31T14:20:00.000Z",
+      "completedAt": "2026-09-04T14:55:00.000Z",
       "agent": "sdd-workflow-orchestrator",
       "outputs": [
-        "features/generated/account-access/organization-sign-in.feature",
-        "features/generated/account-access/TP-ETA-351-001-automation-design.md"
+        "features/generated/account-access/organization-sign-in.feature"
       ]
     },
     {
       "stage": "AUTOMATION_REVIEW_PACKAGE",
-      "completedAt": "2026-08-31T14:25:00.000Z",
+      "completedAt": "2026-09-04T15:00:00.000Z",
       "agent": "sdd-workflow-orchestrator",
       "outputs": [
         "features/generated/account-access/TP-ETA-351-001-automation-design.md",
@@ -106,96 +105,89 @@
     },
     {
       "stage": "AUTOMATION_APPROVAL",
-      "completedAt": "2026-08-31T14:40:00.000Z",
+      "completedAt": "2026-09-04T15:10:00.000Z",
       "agent": null,
       "outputs": [
-        "features/approved/account-access/TP-ETA-351-001-automation-approval.json",
-        "features/approved/account-access/organization-sign-in.feature"
+        "features/approved/account-access/TP-ETA-351-001-automation-approval.json"
       ]
     },
     {
       "stage": "PLAYWRIGHT_VALIDATION",
-      "completedAt": "2026-08-31T15:20:00.000Z",
-      "agent": null,
+      "completedAt": "2026-09-04T15:10:00.000Z",
+      "agent": "playwright-test-planner",
       "outputs": [
         "reports/validation/ETA-351-playwright-validation.md",
         "reports/validation/ETA-351-login-page-probe.json",
+        "reports/validation/ETA-351-form-probe.json",
         "reports/validation/ETA-351-behaviour-probe.json",
+        "reports/validation/ETA-351-message-probe.json",
         "reports/validation/ETA-351-missing-details-probe.json",
-        "reports/validation/ETA-351-message-probe.json"
+        "reports/validation/ETA-351-home-page-probe.json"
       ]
     },
     {
       "stage": "IMPLEMENTATION",
-      "completedAt": "2026-08-31T16:10:00.000Z",
-      "agent": null,
+      "completedAt": "2026-09-04T15:10:00.000Z",
+      "agent": "sdd-workflow-orchestrator",
       "outputs": [
+        "features/approved/account-access/organization-sign-in.feature",
+        "steps/organization-sign-in.steps.ts",
         "src/pages/ecore-login.page.ts",
         "src/pages/ecore-home.page.ts",
         "src/services/organization-login.service.ts",
-        "steps/organization-sign-in.steps.ts",
-        "test-data/account-access.sample.json",
-        "src/fixtures/test.ts"
+        "test-data/account-access.sample.json"
       ]
     },
     {
       "stage": "BDD_GENERATION",
-      "completedAt": "2026-08-31T16:20:00.000Z",
-      "agent": null,
+      "completedAt": "2026-09-04T15:15:00.000Z",
+      "agent": "sdd-workflow-orchestrator",
       "outputs": [
         ".features-gen/features/approved/account-access/organization-sign-in.feature.spec.js"
       ]
     },
     {
       "stage": "EXECUTION",
-      "completedAt": "2026-08-31T16:28:37.000Z",
-      "agent": null,
+      "completedAt": "2026-09-04T15:16:00.000Z",
+      "agent": "sdd-workflow-orchestrator",
       "outputs": [
-        "reports/execution/results.json",
+        "traceability/executions/EXEC-ETA-351-002.json",
         "reports/playwright-report/index.html"
       ]
     },
     {
       "stage": "RTM_UPDATE",
-      "completedAt": "2026-08-31T16:40:00.000Z",
-      "agent": null,
+      "completedAt": "2026-09-04T15:16:00.000Z",
+      "agent": "sdd-workflow-orchestrator",
       "outputs": [
         "traceability/capabilities/account-access.rtm.json",
         "traceability/capabilities/account-access.coverage.json",
-        "traceability/executions/EXEC-ETA-351-001.json",
         "traceability/index/lookup.index.json"
       ]
     }
   ],
   "pendingApproval": null,
   "inputArtifactVersions": {
-    "requirements/normalized/ETA-351.json": 1,
-    "requirements/approved/ETA-351.json": 1
+    "requirements/approved/ETA-351.json": 2,
+    "test-plans/approved/TP-ETA-351-001.json": 2
   },
   "outputArtifactPaths": [
     "requirements/raw/ETA-351.json",
     "requirements/normalized/ETA-351.json",
     "requirements/reviews/ETA-351-ac-review.md",
     "requirements/reviews/ETA-351-ac-approval.template.json",
-    "traceability/capabilities/account-access.rtm.proposed.json",
     "requirements/approved/ETA-351-ac-approval.json",
     "requirements/approved/ETA-351.json",
     "traceability/capabilities/account-access.rtm.json",
-    "reports/validation/ETA-351-playwright-validation.md",
-    "src/pages/ecore-login.page.ts",
-    "src/pages/ecore-home.page.ts",
-    "src/services/organization-login.service.ts",
-    "steps/organization-sign-in.steps.ts",
-    "test-data/account-access.sample.json",
-    "traceability/capabilities/account-access.coverage.json",
-    "traceability/executions/EXEC-ETA-351-001.json",
-    "traceability/index/lookup.index.json"
+    "test-plans/generated/TP-ETA-351-001.json",
+    "test-plans/generated/TP-ETA-351-001-review.md",
+    "test-plans/generated/TP-ETA-351-001-approval.template.json"
   ],
   "retryCount": 0,
-  "createdAt": "2026-08-31T12:31:54Z",
-  "updatedAt": "2026-08-31T16:40:00.000Z",
-  "startedAt": "2026-08-31T12:31:54Z",
-  "completedAt": "2026-08-31T16:40:00.000Z",
+  "createdAt": "2026-09-04T13:55:00.000Z",
+  "updatedAt": "2026-09-04T15:16:00.000Z",
+  "startedAt": "2026-09-04T13:55:00.000Z",
+  "completedAt": "2026-09-04T15:16:00.000Z",
   "errorDetails": null,
   "processingLock": null,
   "assignedAgent": null

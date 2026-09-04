@@ -2,9 +2,9 @@
   "schemaVersion": "1.0.0",
   "capability": "account-access",
   "release": "1.0",
-  "artifactVersion": 3,
+  "artifactVersion": 6,
   "dataClassification": "REAL_JIRA_DATA",
-  "updatedAt": "2026-08-31T16:31:35.495Z",
+  "updatedAt": "2026-09-04T15:16:00.000Z",
   "entries": [
     {
       "traceId": "TRC-ETA-351-001",
@@ -12,10 +12,10 @@
       "requirementId": "REQ-ETA-351-001",
       "acId": "AC-ETA-351-001",
       "status": "APPROVED",
-      "changeType": "NEW",
+      "changeType": "UNCHANGED",
       "requirementArtifact": {
         "path": "requirements/approved/ETA-351.json",
-        "version": 1
+        "version": 2
       },
       "approvalRefs": {
         "acceptanceCriteria": "requirements/approved/ETA-351-ac-approval.json",
@@ -29,7 +29,7 @@
         "testPlanId": "TP-ETA-351-001",
         "testScenarioId": "TS-ETA-351-001",
         "path": "test-plans/approved/TP-ETA-351-001.json",
-        "version": 1
+        "version": 2
       },
       "automation": {
         "featureFile": "features/approved/account-access/organization-sign-in.feature",
@@ -53,6 +53,11 @@
           "executionId": "EXEC-ETA-351-001",
           "result": "PASSED",
           "recordPath": "traceability/executions/EXEC-ETA-351-001.json"
+        },
+        {
+          "executionId": "EXEC-ETA-351-002",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-ETA-351-002.json"
         }
       ]
     },
@@ -62,10 +67,10 @@
       "requirementId": "REQ-ETA-351-002",
       "acId": "AC-ETA-351-002",
       "status": "APPROVED",
-      "changeType": "NEW",
+      "changeType": "UNCHANGED",
       "requirementArtifact": {
         "path": "requirements/approved/ETA-351.json",
-        "version": 1
+        "version": 2
       },
       "approvalRefs": {
         "acceptanceCriteria": "requirements/approved/ETA-351-ac-approval.json",
@@ -79,7 +84,7 @@
         "testPlanId": "TP-ETA-351-001",
         "testScenarioId": "TS-ETA-351-002",
         "path": "test-plans/approved/TP-ETA-351-001.json",
-        "version": 1
+        "version": 2
       },
       "automation": {
         "featureFile": "features/approved/account-access/organization-sign-in.feature",
@@ -103,6 +108,11 @@
           "executionId": "EXEC-ETA-351-001",
           "result": "PASSED",
           "recordPath": "traceability/executions/EXEC-ETA-351-001.json"
+        },
+        {
+          "executionId": "EXEC-ETA-351-002",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-ETA-351-002.json"
         }
       ]
     },
@@ -112,10 +122,10 @@
       "requirementId": "REQ-ETA-351-003",
       "acId": "AC-ETA-351-003",
       "status": "APPROVED",
-      "changeType": "NEW",
+      "changeType": "UNCHANGED",
       "requirementArtifact": {
         "path": "requirements/approved/ETA-351.json",
-        "version": 1
+        "version": 2
       },
       "approvalRefs": {
         "acceptanceCriteria": "requirements/approved/ETA-351-ac-approval.json",
@@ -129,7 +139,7 @@
         "testPlanId": "TP-ETA-351-001",
         "testScenarioId": "TS-ETA-351-003",
         "path": "test-plans/approved/TP-ETA-351-001.json",
-        "version": 1
+        "version": 2
       },
       "automation": {
         "featureFile": "features/approved/account-access/organization-sign-in.feature",
@@ -153,6 +163,11 @@
           "executionId": "EXEC-ETA-351-001",
           "result": "PASSED",
           "recordPath": "traceability/executions/EXEC-ETA-351-001.json"
+        },
+        {
+          "executionId": "EXEC-ETA-351-002",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-ETA-351-002.json"
         }
       ]
     },
@@ -162,10 +177,10 @@
       "requirementId": "REQ-ETA-351-006",
       "acId": "AC-ETA-351-004",
       "status": "APPROVED",
-      "changeType": "NEW",
+      "changeType": "UNCHANGED",
       "requirementArtifact": {
         "path": "requirements/approved/ETA-351.json",
-        "version": 1
+        "version": 2
       },
       "approvalRefs": {
         "acceptanceCriteria": "requirements/approved/ETA-351-ac-approval.json",
@@ -179,7 +194,7 @@
         "testPlanId": "TP-ETA-351-001",
         "testScenarioId": "TS-ETA-351-004",
         "path": "test-plans/approved/TP-ETA-351-001.json",
-        "version": 1
+        "version": 2
       },
       "automation": {
         "featureFile": "features/approved/account-access/organization-sign-in.feature",
@@ -203,6 +218,11 @@
           "executionId": "EXEC-ETA-351-001",
           "result": "PASSED",
           "recordPath": "traceability/executions/EXEC-ETA-351-001.json"
+        },
+        {
+          "executionId": "EXEC-ETA-351-002",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-ETA-351-002.json"
         }
       ]
     },
@@ -212,10 +232,10 @@
       "requirementId": "REQ-ETA-351-005",
       "acId": "AC-ETA-351-005",
       "status": "APPROVED",
-      "changeType": "NEW",
+      "changeType": "UNCHANGED",
       "requirementArtifact": {
         "path": "requirements/approved/ETA-351.json",
-        "version": 1
+        "version": 2
       },
       "approvalRefs": {
         "acceptanceCriteria": "requirements/approved/ETA-351-ac-approval.json",
@@ -229,7 +249,7 @@
         "testPlanId": "TP-ETA-351-001",
         "testScenarioId": "TS-ETA-351-005",
         "path": "test-plans/approved/TP-ETA-351-001.json",
-        "version": 1
+        "version": 2
       },
       "automation": {
         "featureFile": "features/approved/account-access/organization-sign-in.feature",
@@ -253,6 +273,11 @@
           "executionId": "EXEC-ETA-351-001",
           "result": "PASSED",
           "recordPath": "traceability/executions/EXEC-ETA-351-001.json"
+        },
+        {
+          "executionId": "EXEC-ETA-351-002",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-ETA-351-002.json"
         }
       ]
     },
@@ -262,10 +287,10 @@
       "requirementId": "REQ-ETA-351-007",
       "acId": "AC-ETA-351-006",
       "status": "APPROVED",
-      "changeType": "NEW",
+      "changeType": "UNCHANGED",
       "requirementArtifact": {
         "path": "requirements/approved/ETA-351.json",
-        "version": 1
+        "version": 2
       },
       "approvalRefs": {
         "acceptanceCriteria": "requirements/approved/ETA-351-ac-approval.json",
@@ -279,7 +304,7 @@
         "testPlanId": "TP-ETA-351-001",
         "testScenarioId": "TS-ETA-351-006",
         "path": "test-plans/approved/TP-ETA-351-001.json",
-        "version": 1
+        "version": 2
       },
       "automation": {
         "featureFile": "features/approved/account-access/organization-sign-in.feature",
@@ -303,6 +328,11 @@
           "executionId": "EXEC-ETA-351-001",
           "result": "PASSED",
           "recordPath": "traceability/executions/EXEC-ETA-351-001.json"
+        },
+        {
+          "executionId": "EXEC-ETA-351-002",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-ETA-351-002.json"
         }
       ]
     },
@@ -312,10 +342,10 @@
       "requirementId": "REQ-ETA-351-007",
       "acId": "AC-ETA-351-007",
       "status": "APPROVED",
-      "changeType": "NEW",
+      "changeType": "UNCHANGED",
       "requirementArtifact": {
         "path": "requirements/approved/ETA-351.json",
-        "version": 1
+        "version": 2
       },
       "approvalRefs": {
         "acceptanceCriteria": "requirements/approved/ETA-351-ac-approval.json",
@@ -329,7 +359,7 @@
         "testPlanId": "TP-ETA-351-001",
         "testScenarioId": "TS-ETA-351-007",
         "path": "test-plans/approved/TP-ETA-351-001.json",
-        "version": 1
+        "version": 2
       },
       "automation": {
         "featureFile": "features/approved/account-access/organization-sign-in.feature",
@@ -353,6 +383,11 @@
           "executionId": "EXEC-ETA-351-001",
           "result": "PASSED",
           "recordPath": "traceability/executions/EXEC-ETA-351-001.json"
+        },
+        {
+          "executionId": "EXEC-ETA-351-002",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-ETA-351-002.json"
         }
       ]
     },
@@ -362,10 +397,10 @@
       "requirementId": "REQ-ETA-351-008",
       "acId": "AC-ETA-351-008",
       "status": "APPROVED",
-      "changeType": "NEW",
+      "changeType": "UNCHANGED",
       "requirementArtifact": {
         "path": "requirements/approved/ETA-351.json",
-        "version": 1
+        "version": 2
       },
       "approvalRefs": {
         "acceptanceCriteria": "requirements/approved/ETA-351-ac-approval.json",
@@ -379,7 +414,7 @@
         "testPlanId": "TP-ETA-351-001",
         "testScenarioId": "TS-ETA-351-008",
         "path": "test-plans/approved/TP-ETA-351-001.json",
-        "version": 1
+        "version": 2
       },
       "automation": {
         "featureFile": "features/approved/account-access/organization-sign-in.feature",
@@ -403,6 +438,11 @@
           "executionId": "EXEC-ETA-351-001",
           "result": "PASSED",
           "recordPath": "traceability/executions/EXEC-ETA-351-001.json"
+        },
+        {
+          "executionId": "EXEC-ETA-351-002",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-ETA-351-002.json"
         }
       ]
     }
