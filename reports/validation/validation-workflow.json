@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-09-01T13:57:00.987Z",
+  "generatedAt": "2026-09-04T18:07:31.617Z",
   "scope": "workflow",
   "summary": {
     "total": 3,
-    "passed": 2,
-    "failed": 1,
+    "passed": 3,
+    "failed": 0,
     "skipped": 0
   },
   "results": [
     {
       "id": "WF-STRUCTURE",
       "title": "Workflow states validate against schema",
-      "status": "FAIL",
+      "status": "PASS",
       "messages": [
-        "workflow/instances/WF-ETA-411-R1.0.json -> completedAt: A COMPLETED workflow must record completedAt."
+        "2 workflow instance(s) validated."
       ]
     },
     {

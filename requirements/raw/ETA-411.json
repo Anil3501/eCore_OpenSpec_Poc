@@ -4,7 +4,7 @@
   "retrievalNote": "Retrieved by src/utils/jira-fetch.ts, the documented REST fallback, because the Atlassian MCP server exposed no issue-fetch tool in this session. The issue payload below is verbatim.",
   "requestedIssueKey": "ETA-411",
   "requestUrl": "https://eoriginal.atlassian.net/rest/api/3/issue/ETA-411?expand=renderedFields%2Cnames",
-  "retrievedAt": "2026-09-01T10:24:48.511Z",
+  "retrievedAt": "2026-09-04T18:20:59.532Z",
   "issue": {
     "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations,customfield_11318.properties,customfield_10900.requestTypePractice,customfield_11319.properties",
     "id": "110541",
@@ -15,7 +15,7 @@
       "resolution": null,
       "customfield_10500": null,
       "customfield_11839": null,
-      "lastViewed": "Today 6:12 AM",
+      "lastViewed": "Tuesday 6:12 AM",
       "customfield_11391": "",
       "customfield_11390": "",
       "customfield_11397": "",
@@ -82,13 +82,13 @@
       "customfield_11348": null,
       "customfield_11347": null,
       "customfield_11349": null,
-      "updated": "Today 6:13 AM",
+      "updated": "Today 2:00 PM",
       "customfield_11580": null,
       "timeoriginalestimate": null,
       "customfield_11461": null,
       "customfield_11340": null,
       "customfield_11582": null,
-      "description": "<p>With Org users, login to eCore and click on each of the Icons on the Home page, verify that you are taken to the correct page, and click Command Center in the upper left corner to return to the Home Page.</p>",
+      "description": "<p>As an Organization user, I want to view and access only the eCore modules authorized for my organization and role, so that I can navigate to New Transaction, Workspace, and Preferences from the Dashboard main screen; access Home, New Transaction, Workspace, and Preferences from the top-right navigation menu; access Organization and Vault as sub-items under Preferences; and return to the Home page using Command Center.</p>\n\n<p>The UI and supporting APIs must provide consistent module access and prevent unauthenticated or unauthorized access.</p>",
       "customfield_11460": null,
       "customfield_11581": null,
       "customfield_11584": "",
@@ -140,13 +140,90 @@
       "customfield_11329": "",
       "duedate": null,
       "comment": {
-        "comments": [],
+        "comments": [
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/110541/comment/205936",
+            "id": "205936",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "emailAddress": "nitin.saini@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+              },
+              "displayName": "Nitin Saini",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": "<ul>\n\t<li>Created Jira ticket <b>ETA-411</b> and executed the end-to-end flow through the POC automation framework.</li>\n\t<li>During execution, the framework required additional clarification due to limited details and description of the Home Page icons in the Jira ticket, resulting in multiple queries and increased processing time for requirement and Acceptance Criteria generation.</li>\n\t<li>Identified several test failures during actual execution. The <b>Healer Agent</b> successfully analyzed and corrected the scripts for some of the failures, while a few issues are still pending and currently being worked on for resolution.</li>\n</ul>\n",
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "emailAddress": "nitin.saini@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+              },
+              "displayName": "Nitin Saini",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "Tuesday 9:52 PM",
+            "updated": "Tuesday 9:52 PM",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/110541/comment/206119",
+            "id": "206119",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "emailAddress": "nitin.saini@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+              },
+              "displayName": "Nitin Saini",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": "<ul>\n\t<li>Completed the development and stabilization of the <b>AI-assisted POC automation framework</b>, and the end-to-end workflow is now functioning as expected.</li>\n\t<li>The framework successfully processes Jira tickets, generates <b>requirements, Acceptance Criteria, Test Plans, and BDD automation scripts</b>, including feature files, step definitions, and page objects.</li>\n\t<li>Integrated <b>Healer Agents</b> to handle locator- and code-related issues during execution, enabling automated script correction where required.</li>\n\t<li>Successfully validated the generated test cases through execution, with <b>test results and coverage reports generated successfully</b>.</li>\n\t<li>The framework is now ready for further enhancements and refinement based on upcoming requirements and feedback.</li>\n</ul>\n",
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "emailAddress": "nitin.saini@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+              },
+              "displayName": "Nitin Saini",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "Today 5:03 AM",
+            "updated": "Today 5:03 AM",
+            "jsdPublic": true
+          }
+        ],
         "self": "https://eoriginal.atlassian.net/rest/api/3/issue/110541/comment",
-        "maxResults": 0,
-        "total": 0,
+        "maxResults": 2,
+        "total": 2,
         "startAt": 0
       },
-      "statuscategorychangedate": "Today 6:13 AM",
+      "statuscategorychangedate": "Today 5:08 AM",
       "customfield_11441": null,
       "customfield_11440": null,
       "fixVersions": null,
@@ -216,9 +293,10 @@
       "customfield_11401": "<div class='table-wrap'>\n<table class='confluenceTable'><tbody>\n<tr>\n<th class='confluenceTh'><b>Date</b></th>\n<th class='confluenceTh'><b>Status(Pass/Fail)</b></th>\n<th class='confluenceTh'><b>Version</b></th>\n<th class='confluenceTh'><b>Tester</b></th>\n</tr>\n<tr>\n<td class='confluenceTd'>&nbsp;</td>\n<td class='confluenceTd'>&nbsp;</td>\n<td class='confluenceTd'>&nbsp;</td>\n<td class='confluenceTd'>&nbsp;</td>\n</tr>\n</tbody></table>\n</div>\n",
       "customfield_11400": "",
       "workratio": null,
-      "created": "Today 6:11 AM",
+      "created": "Tuesday 6:11 AM",
       "customfield_11872": null,
       "customfield_10300": null,
+      "customfield_11873": null,
       "customfield_11504": "",
       "customfield_11740": null,
       "customfield_11741": "",
@@ -426,6 +504,7 @@
       "created": "Created",
       "customfield_11872": "Incident manager",
       "customfield_10300": "Development",
+      "customfield_11873": "Safe-AI Impact",
       "customfield_11504": "Automation Goal",
       "customfield_11740": "Development Phase",
       "customfield_11741": "Asset",
@@ -473,11 +552,11 @@
         }
       },
       "statusCategory": {
-        "self": "https://eoriginal.atlassian.net/rest/api/3/statuscategory/4",
-        "id": 4,
-        "key": "indeterminate",
-        "colorName": "yellow",
-        "name": "In Progress"
+        "self": "https://eoriginal.atlassian.net/rest/api/3/statuscategory/3",
+        "id": 3,
+        "key": "done",
+        "colorName": "green",
+        "name": "Done"
       },
       "resolution": null,
       "customfield_10500": null,
@@ -611,7 +690,7 @@
       "customfield_11348": null,
       "customfield_11347": null,
       "customfield_11349": null,
-      "updated": "2026-09-01T06:13:02.779-0400",
+      "updated": "2026-09-04T14:00:49.565-0400",
       "customfield_11580": null,
       "timeoriginalestimate": null,
       "customfield_11461": null,
@@ -630,11 +709,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "With Org users, login to eCore and click on each of the Icons on the Home page, verify that you are taken to the correct page, and click Command Center in the upper left corner to return to the Home Page."
+                "text": "As an Organization user, I want to view and access only the eCore modules authorized for my organization and role, so that I can navigate to New Transaction, Workspace, and Preferences from the Dashboard main screen; access Home, New Transaction, Workspace, and Preferences from the top-right navigation menu; access Organization and Vault as sub-items under Preferences; and return to the Home page using Command Center."
               }
             ],
             "attrs": {
-              "localId": "1617726ac05a"
+              "localId": "2cfe49c66054"
+            }
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "The UI and supporting APIs must provide consistent module access and prevent unauthenticated or unauthorized access."
+              }
+            ],
+            "attrs": {
+              "localId": "03f31076f26f"
             }
           }
         ]
@@ -696,13 +787,354 @@
       "customfield_11329": null,
       "duedate": null,
       "comment": {
-        "comments": [],
+        "comments": [
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/110541/comment/205936",
+            "id": "205936",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "emailAddress": "nitin.saini@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+              },
+              "displayName": "Nitin Saini",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": {
+              "type": "doc",
+              "version": 1,
+              "content": [
+                {
+                  "type": "bulletList",
+                  "content": [
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "localId": "0c228242996f"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "Created Jira ticket "
+                            },
+                            {
+                              "type": "text",
+                              "text": "ETA-411",
+                              "marks": [
+                                {
+                                  "type": "strong"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "text": " and executed the end-to-end flow through the POC automation framework."
+                            }
+                          ],
+                          "attrs": {
+                            "localId": "313e56bbe70f"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "localId": "629952368375"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "During execution, the framework required additional clarification due to limited details and description of the Home Page icons in the Jira ticket, resulting in multiple queries and increased processing time for requirement and Acceptance Criteria generation."
+                            }
+                          ],
+                          "attrs": {
+                            "localId": "1a55a7d4969e"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "localId": "9d9acd32d8cc"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "Identified several test failures during actual execution. The "
+                            },
+                            {
+                              "type": "text",
+                              "text": "Healer Agent",
+                              "marks": [
+                                {
+                                  "type": "strong"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "text": " successfully analyzed and corrected the scripts for some of the failures, while a few issues are still pending and currently being worked on for resolution."
+                            }
+                          ],
+                          "attrs": {
+                            "localId": "ee6de4f889a6"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "attrs": {
+                    "localId": "8249312f9dac"
+                  }
+                }
+              ]
+            },
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "emailAddress": "nitin.saini@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+              },
+              "displayName": "Nitin Saini",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "2026-09-01T21:52:41.312-0400",
+            "updated": "2026-09-01T21:52:41.312-0400",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/110541/comment/206119",
+            "id": "206119",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "emailAddress": "nitin.saini@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+              },
+              "displayName": "Nitin Saini",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": {
+              "type": "doc",
+              "version": 1,
+              "content": [
+                {
+                  "type": "bulletList",
+                  "content": [
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "localId": "4fb8fcaf7c4a"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "Completed the development and stabilization of the "
+                            },
+                            {
+                              "type": "text",
+                              "text": "AI-assisted POC automation framework",
+                              "marks": [
+                                {
+                                  "type": "strong"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "text": ", and the end-to-end workflow is now functioning as expected."
+                            }
+                          ],
+                          "attrs": {
+                            "localId": "cf94e0f5c2de"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "localId": "241b04ea34c8"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "The framework successfully processes Jira tickets, generates "
+                            },
+                            {
+                              "type": "text",
+                              "text": "requirements, Acceptance Criteria, Test Plans, and BDD automation scripts",
+                              "marks": [
+                                {
+                                  "type": "strong"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "text": ", including feature files, step definitions, and page objects."
+                            }
+                          ],
+                          "attrs": {
+                            "localId": "41b2845ffda0"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "localId": "aad5bafff5f9"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "Integrated "
+                            },
+                            {
+                              "type": "text",
+                              "text": "Healer Agents",
+                              "marks": [
+                                {
+                                  "type": "strong"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "text": " to handle locator- and code-related issues during execution, enabling automated script correction where required."
+                            }
+                          ],
+                          "attrs": {
+                            "localId": "7c00064d629f"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "localId": "2957e640d8cd"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "Successfully validated the generated test cases through execution, with "
+                            },
+                            {
+                              "type": "text",
+                              "text": "test results and coverage reports generated successfully",
+                              "marks": [
+                                {
+                                  "type": "strong"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "text": "."
+                            }
+                          ],
+                          "attrs": {
+                            "localId": "32ca0dcfc86e"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "localId": "d6cc444ad502"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "The framework is now ready for further enhancements and refinement based on upcoming requirements and feedback."
+                            }
+                          ],
+                          "attrs": {
+                            "localId": "a30f5e135b4b"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "attrs": {
+                    "localId": "978fa160d1c3"
+                  }
+                }
+              ]
+            },
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+              "emailAddress": "nitin.saini@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+              },
+              "displayName": "Nitin Saini",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "2026-09-04T05:03:55.159-0400",
+            "updated": "2026-09-04T05:03:55.159-0400",
+            "jsdPublic": true
+          }
+        ],
         "self": "https://eoriginal.atlassian.net/rest/api/3/issue/110541/comment",
-        "maxResults": 0,
-        "total": 0,
+        "maxResults": 2,
+        "total": 2,
         "startAt": 0
       },
-      "statuscategorychangedate": "2026-09-01T06:13:02.780-0400",
+      "statuscategorychangedate": "2026-09-04T05:08:11.375-0400",
       "customfield_11441": {
         "self": "https://eoriginal.atlassian.net/rest/api/3/customFieldOption/10436",
         "value": "ECORE",
@@ -741,17 +1173,17 @@
       "customfield_11429": null,
       "versions": [],
       "status": {
-        "self": "https://eoriginal.atlassian.net/rest/api/3/status/3",
-        "description": "This work item is being actively worked on at the moment by the assignee.",
-        "iconUrl": "https://eoriginal.atlassian.net/images/icons/statuses/inprogress.png",
-        "name": "In Progress",
-        "id": "3",
+        "self": "https://eoriginal.atlassian.net/rest/api/3/status/6",
+        "description": "The work item is considered finished, the resolution is correct. Work items which are closed can be reopened.",
+        "iconUrl": "https://eoriginal.atlassian.net/images/icons/statuses/closed.png",
+        "name": "Closed",
+        "id": "6",
         "statusCategory": {
-          "self": "https://eoriginal.atlassian.net/rest/api/3/statuscategory/4",
-          "id": 4,
-          "key": "indeterminate",
-          "colorName": "yellow",
-          "name": "In Progress"
+          "self": "https://eoriginal.atlassian.net/rest/api/3/statuscategory/3",
+          "id": 3,
+          "key": "done",
+          "colorName": "green",
+          "name": "Done"
         }
       },
       "customfield_11421": null,
@@ -954,6 +1386,7 @@
       "created": "2026-09-01T06:11:44.211-0400",
       "customfield_11872": null,
       "customfield_10300": "{}",
+      "customfield_11873": null,
       "customfield_11504": null,
       "customfield_11740": null,
       "customfield_11741": null,
