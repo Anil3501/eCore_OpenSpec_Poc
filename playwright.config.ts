@@ -1,6 +1,12 @@
 import { defineConfig, devices } from '@playwright/test';
 import { defineBddConfig } from 'playwright-bdd';
+import fs from 'node:fs';
 import { env } from './src/utils/env.ts';
+
+// Written by `npm run capture:session`, git-ignored, and read ONLY by the seed
+// project below. Absent on a normal checkout, which is why it is optional.
+const SESSION_STATE_PATH = '.auth/ecore-session.json';
+const hasCapturedSession = fs.existsSync(SESSION_STATE_PATH);
 
 /**
  * Playwright-BDD generation.
@@ -75,7 +81,16 @@ export default defineConfig({
       name: 'seed',
       testDir: './tests',
       testMatch: 'seed.spec.ts',
-      use: { ...devices['Desktop Chrome'] },
+      use: {
+        ...devices['Desktop Chrome'],
+        // Exploration through Playwright MCP needs an authenticated browser,
+        // but every value passed to an MCP tool is recorded in the agent
+        // transcript, so signing in through MCP would leak a live password.
+        // The seed project therefore resumes a session captured out-of-band.
+        // Deliberately scoped to `seed`: `bdd` and `technical` must always
+        // exercise the real sign-in, never a pre-authenticated shortcut.
+        ...(hasCapturedSession ? { storageState: SESSION_STATE_PATH } : {}),
+      },
     },
   ],
 });

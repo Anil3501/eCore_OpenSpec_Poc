@@ -102,6 +102,16 @@ Business rules, user roles, error-message wording, numeric limits, time limits, 
 validation rules, integration behaviour, data-retention rules, permission behaviour, or regulatory
 requirements. If it is not in the Jira context, it is an ambiguity with status `REVIEW_REQUIRED`.
 
+This includes **API details**. An endpoint path, HTTP method, status code, field name or error
+payload is a business-visible contract, not an implementation detail you may fill in. Where a story
+describes API behaviour without stating the specifics, raise an `AMB-*` ambiguity naming exactly
+what is missing.
+
+Where a story states API behaviour explicitly, extract it verbatim like any other criterion. Where
+it is silent but an acceptance criterion looks API-verifiable, you may **note** that in the review
+package as an observation with a rationale — but you may not classify it. Which interface verifies a
+criterion is a testing decision taken at Gate 2, not a requirement you are entitled to author.
+
 ## Review package structure
 
 `requirements/reviews/<JIRA-ID>-ac-review.md` must contain, in this order:

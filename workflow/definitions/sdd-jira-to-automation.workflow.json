@@ -10,6 +10,30 @@
     "maxScenariosPerInvocation": 10,
     "note": "Never process all stories or all tests in a single model invocation. Capability, tag, risk and release are also supported batch axes."
   },
+  "entryPoints": [
+    {
+      "id": "NEW_STORY",
+      "startStage": "JIRA_RETRIEVAL",
+      "description": "Default. A story that has never been processed."
+    },
+    {
+      "id": "TEST_STRATEGY_REVISION",
+      "startStage": "TEST_PLAN_GENERATION",
+      "description": "A story whose approved requirements are unchanged but whose tests must change - most commonly adding API coverage to an already-automated story. Re-enters at Gate 2 and passes Gates 2 and 3 only.",
+      "requires": [
+        "requirements/approved/<JIRA-ID>.json",
+        "requirements/approved/<JIRA-ID>-ac-approval.json"
+      ],
+      "rules": [
+        "Gate 1 is NOT re-run. The acceptance criteria are unchanged and already approved; re-approving them wastes a reviewer and risks producing a divergent AC set for one story.",
+        "Only stages whose inputs are provably unchanged may be skipped. Compare the approved requirement artifactVersion against the one the previous run recorded; if it moved, use NEW_STORY instead.",
+        "Open a new workflow instance (for example WF-<JIRA-ID>-R<release>.1). Never overwrite the completed instance - it holds the evidence of the previous run.",
+        "Existing execution records, approvals and defect artifacts are historical evidence and are never regenerated or overwritten.",
+        "The revised test plan is a new artifactVersion of the same TEST-PLAN-ID, merged by testScenarioId. Existing scenarios are preserved; new scenarios are added.",
+        "An added API scenario must not retire a UI scenario covering the same acceptance criterion unless a human explicitly approves the retirement at Gate 2."
+      ]
+    }
+  ],
   "stages": [
     {
       "stage": "JIRA_RETRIEVAL",
@@ -81,7 +105,14 @@
         "test-plans/generated/<TEST-PLAN-ID>-review.md",
         "test-plans/generated/<TEST-PLAN-ID>-approval.template.json"
       ],
-      "next": "TEST_PLAN_APPROVAL"
+      "next": "TEST_PLAN_APPROVAL",
+      "rules": [
+        "Every scenario declares an interfaceType. Absence means UI, so a plan written before API support stays valid.",
+        "Whether an acceptance criterion is API-verifiable is a testing judgement, not a stated requirement. Propose it with a rationale and mark it REVIEW_REQUIRED; never decide it silently.",
+        "An API scenario may ADD coverage. It may never REPLACE a UI scenario - that would delete the only end-to-end proof of a journey while leaving the coverage number unchanged.",
+        "An API or HYBRID scenario must carry an apiContract. Never guess an endpoint, a field name or a status code.",
+        "The review package lists every proposed contract so the human approving Gate 2 is agreeing to it explicitly."
+      ]
     },
     {
       "stage": "TEST_PLAN_APPROVAL",
@@ -91,7 +122,11 @@
       "approvalArtifact": "test-plans/approved/<TEST-PLAN-ID>-approval.json",
       "outputs": ["test-plans/approved/<TEST-PLAN-ID>.json"],
       "next": "BDD_DESIGN",
-      "haltsWorkflow": true
+      "haltsWorkflow": true,
+      "rules": [
+        "This gate is where an OBSERVED contract becomes HUMAN_APPROVED. A human agreeing to the endpoint, status codes and response shape is exactly as authoritative as an OpenAPI document.",
+        "An approved plan may not assert an acceptance criterion against an OBSERVED or UNVERIFIED contract. Observed traffic records what the application does, not what it should do, so it would make a current bug the definition of correct."
+      ]
     },
     {
       "stage": "BDD_DESIGN",
@@ -128,20 +163,23 @@
       "agent": "playwright-test-planner",
       "tools": ["playwright-test-mcp"],
       "requires": ["features/approved/<capability>/<TEST-PLAN-ID>-automation-approval.json"],
-      "outputs": ["reports/validation/<TEST-PLAN-ID>-browser-validation.json", "specs/**"],
+      "outputs": ["reports/validation/<TEST-PLAN-ID>-browser-validation.json", "reports/validation/<TEST-PLAN-ID>-api-validation.json", "specs/**"],
       "next": "IMPLEMENTATION",
       "rules": [
         "Explore approved scenarios only.",
         "Never add unapproved business requirements.",
         "Record application-versus-specification mismatches instead of silently changing an approved expectation.",
-        "Replace MCP_VALIDATION_REQUIRED placeholders only with validated locators."
+        "Replace MCP_VALIDATION_REQUIRED placeholders only with validated locators.",
+        "Discover API contracts by driving the approved UI flow and recording the calls the application really makes (browser_network_requests). Never guess an endpoint - a guessed DELETE has side effects a guessed locator does not.",
+        "Observed traffic is recorded with contractSource OBSERVED. It is evidence of what the application does, never authority for what it should do, and it cannot back an assertion until Gate 2 approves it.",
+        "Replace API_CONTRACT_UNVERIFIED placeholders only with a contract that has real provenance."
       ]
     },
     {
       "stage": "IMPLEMENTATION",
       "agent": "sdd-workflow-orchestrator",
       "requires": ["reports/validation/<TEST-PLAN-ID>-browser-validation.json"],
-      "outputs": ["steps/**", "src/pages/**", "src/components/**", "src/fixtures/**", "test-data/**"],
+      "outputs": ["steps/**", "src/pages/**", "src/components/**", "src/fixtures/**", "src/api/**", "src/models/api/**", "test-data/**"],
       "next": "BDD_GENERATION"
     },
     {
@@ -173,11 +211,15 @@
       "next": "LOCATOR_HEALING",
       "nextWhenLocatorSuspect": "LOCATOR_HEALING",
       "nextWhenApplicationDefect": "BUG_REPORTING",
+      "nextWhenContractMismatch": "BUG_REPORTING",
       "haltsWorkflowWhenEnvironmentBlocker": true,
       "rules": [
         "Evidence is copied out of test-results/ before anything else; the next run overwrites it.",
         "ENVIRONMENT_BLOCKER outranks every other signal. DNS, TLS, proxy, refused connection or missing configuration means the application was never reached, so the failure proves nothing about it. Halt - never heal it, never file it.",
         "Classification is mechanical. AMBIGUOUS is routed to healing first, because an unnecessary heal is cheaper than a false bug.",
+        "Read the failing scenario's @interface- tag BEFORE classifying. An API scenario exercises no locator, so LOCATOR_SUSPECT and AMBIGUOUS-routed-to-healing do not apply to it - routing one to the healer would burn both attempts against a DOM the test never touched and then file a locator bug it never was.",
+        "An API failure is CONTRACT_MISMATCH when the call completed but violated the approved contract, APPLICATION_DEFECT when the behaviour itself is wrong, and ENVIRONMENT_BLOCKER when the request never reached the application. A 502, a refused connection or a TLS failure is a blocker; a 401 is only a blocker when the test never obtained a credential at all.",
+        "An API-only failure has no screenshot. Its evidence is the redacted request/response exchange, recorded in evidence.apiExchanges. Never record an empty evidence set instead.",
         "expectedBehaviour is the approved acceptance criterion verbatim. Never paraphrase it and never invent one.",
         "A fingerprint that already belongs to a REPORTED defect is recorded as DUPLICATE, not filed again."
       ],
@@ -198,7 +240,9 @@
         "Feature files, step definitions, assertions and test data are out of bounds - changing them would change the approved behaviour under test.",
         "test.fixme, test.skip and waitForTimeout are forbidden. Silencing a test is not healing it.",
         "After two attempts without a green re-run, set classification LOCATOR_UNHEALABLE and outcome NOT_HEALED, revert speculative edits and hand over to BUG_REPORTING.",
-        "An APPLICATION_DEFECT never enters this stage."
+        "An APPLICATION_DEFECT never enters this stage.",
+        "An @interface-api scenario never enters this stage. It exercises no locator, and src/api/** is outside the blast radius. Refuse and hand back, exactly as for an ENVIRONMENT_BLOCKER.",
+        "A CONTRACT_MISMATCH never enters this stage. Either the application changed or the agreed contract is wrong, and both are human decisions rather than something a test may absorb."
       ],
       "blockedWhen": "The scenario cannot be re-run, so no attempt can be evidenced."
     },

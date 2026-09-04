@@ -53,6 +53,28 @@ You will:
    - Map out the primary user journeys and identify critical paths through the application
    - Consider different user types and their typical behaviors
 
+2a. **Observe API contracts (only when the approved plan declares an API or HYBRID scenario)**
+   - Start from [reports/validation/ecore-api-discovery.json](../../reports/validation/ecore-api-discovery.json).
+     It already records what eCore exposes: three observed endpoints and ~178 that are merely
+     declared. Read it before exploring, so you do not re-discover it — and heed it, because it
+     documents that sign-in and navigation make **no** API calls at all
+   - For an authenticated flow, run `npm run capture:session` first. The `seed` project then
+     resumes that session, so the password never passes through an MCP tool argument
+   - Drive the **approved** flow, then read the calls the application actually made with
+     `browser_network_requests` / `browser_network_request`
+   - Record method, path, status code and response shape into
+     `reports/validation/<TEST-PLAN-ID>-api-validation.json` with `contractSource: OBSERVED`
+   - **Never guess an endpoint, field name or status code.** A guessed `DELETE` has side effects a
+     guessed locator does not. A path listed under `declaredButNotObserved` is a name and nothing
+     more — not a contract, and not permission to call it. If the flow does not reveal the call,
+     say so and stop
+   - Observed traffic describes what the application **does**, never what it **should** do. It may
+     get a scenario to a state; it may not be the basis of an assertion on an acceptance criterion.
+     A human converts it to `HUMAN_APPROVED` at Gate 2 — that is what makes it authoritative
+   - Check whether the response carries **values or markup**. eCore's grid feed returns every
+     business field as an HTML string, which no contract can meaningfully assert against
+   - Redact `Authorization` headers, cookies and payload values before writing anything
+
 3. **Design Comprehensive Scenarios**
 
    Create detailed test scenarios that cover:

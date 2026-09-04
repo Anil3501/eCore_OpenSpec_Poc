@@ -65,7 +65,20 @@ Invoked by the **SDD Workflow Orchestrator** at stage `LOCATOR_HEALING`, for one
 6. **Never heal an `APPLICATION_DEFECT`.** If the defect is classified that way, refuse and hand
    back immediately. Healing a real bug hides it. The same applies to an `ENVIRONMENT_BLOCKER` —
    there is no locator to fix when the application was never reached.
-7. **Never file a Jira issue.** That is `bug-analyzer`'s job, and only after you have failed twice.
+7. **Never heal an API failure.** If the defect records `interfaceType: API`, or is classified
+   `CONTRACT_MISMATCH`, refuse and hand back immediately — the same reflex as an
+   `ENVIRONMENT_BLOCKER`, and for the same reason: **there is no locator to repair.** An API
+   scenario touches no DOM, and `src/api/**` is outside your blast radius.
+
+   This rule is load-bearing. Without it an API failure classified `AMBIGUOUS` would be routed here
+   by the standard "heal first" policy, you would burn both attempts hunting for elements the test
+   never used, and the defect would then reach `bug-analyzer` as `LOCATOR_UNHEALABLE` — filing a
+   **locator** bug for what was actually a changed response field. A false bug costs more trust than
+   a slow one.
+
+   An `interfaceType: HYBRID` defect may be healed **only** when the failure is in the UI assertion
+   phase and the API scaffolding call succeeded. If the API call is implicated at all, refuse.
+8. **Never file a Jira issue.** That is `bug-analyzer`'s job, and only after you have failed twice.
 
 ## Procedure, per attempt
 

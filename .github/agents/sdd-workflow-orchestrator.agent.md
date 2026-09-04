@@ -50,6 +50,7 @@ work yourself.
 | Jira access tools | official Atlassian MCP |
 | Specification proposals, deltas, tasks, validation, sync, archive | existing OpenSpec skills / `OpenSpec` agent |
 | Approved UI-flow exploration, DOM and locator validation | `playwright-test-planner` + Playwright MCP |
+| Approved API-flow observation and contract discovery | `playwright-test-planner` + Playwright MCP network tools |
 | Gherkin processing and executable test generation | playwright-bdd (`npm run bdd`) |
 | Test execution and native HTML reporting | Playwright (`npm test`, `npm run report`) |
 | Failing-test debugging | `playwright-test-healer`, unchanged |
@@ -159,16 +160,40 @@ Jira source context and existing RTM relationships. Every scenario needs a stabl
 `TS-<JIRA-ID>-NNN` id. Write the plan, the review markdown and the approval template, then go to
 Gate 2.
 
+Every scenario also declares an `interfaceType`. Absence means `UI`, so a plan written before API
+support existed stays valid unedited. Three rules govern the choice:
+
+- **Whether an AC is API-verifiable is a testing judgement, not a stated requirement.** Propose it
+  with a rationale and mark it `REVIEW_REQUIRED`; the human decides at Gate 2. Never decide silently.
+- **An API scenario adds coverage; it never replaces a UI scenario.** Converting a slow UI sign-in
+  into a fast API call would delete the only end-to-end proof that the login page works while the
+  coverage number stayed identical. Retirement is a human decision, recorded at Gate 2.
+- **An `API` or `HYBRID` scenario must carry an `apiContract`.** Never guess an endpoint, field name
+  or status code. Where nothing authoritative exists, mark `contractSource: OBSERVED` and list the
+  contract in the review package so Gate 2 can convert it to `HUMAN_APPROVED` — which is exactly as
+  authoritative as an OpenAPI document. An approved plan may not assert an AC against `OBSERVED`.
+
 **BDD_DESIGN** — business-readable Gherkin only. Required tags per scenario:
 `@release-<r> @capability-<c> @<JIRA-ID> @req-<REQ-ID> @ac-<AC-ID> @tp-<TP-ID> @ts-<TS-ID>`, plus
 `@risk-*` and `@suite-*` when applicable. Reuse existing steps before writing new ones. Never put
 selectors, XPath, page-object method names or browser mechanics in a feature file.
+
+A scenario whose approved plan declares `API` or `HYBRID` also carries `@interface-api` or
+`@interface-hybrid`. A missing `@interface-` tag means `UI`. The tag must match the plan —
+`SEM-API-CONTRACT` fails the build when it does not. The Gherkin itself stays business language:
+no endpoints, no status codes, no JSON.
 
 **PLAYWRIGHT_VALIDATION** — delegate to `playwright-test-planner` with the approved OpenSpec
 requirement, approved test plan, approved feature files, approved automation design, the existing
 seed test and the existing fixtures. Constrain it to approved scenarios. Record mismatches between
 application behaviour and approved expectations in `reports/validation/`; never adjust an approved
 expectation to match the application.
+
+For an `API` or `HYBRID` scenario the planner discovers the contract by driving the approved UI flow
+and recording the calls the application really makes, writing
+`reports/validation/<TP-ID>-api-validation.json`. **Never let it guess an endpoint** — a guessed
+`DELETE` has side effects a guessed locator does not. Observed traffic is recorded as `OBSERVED`
+and is evidence of what the application *does*, never authority for what it *should* do.
 
 Use `playwright-test-generator` only if its definition is compatible with the installed
 playwright-bdd setup, it produces no duplicate conventional `.spec.ts` for a BDD scenario, and its
@@ -194,11 +219,16 @@ same merge.
 **FAILURE_TRIAGE** — delegate to `bug-analyzer`. It runs `npm run triage:failures`, preserves
 evidence out of `test-results/` (which the next run overwrites) and writes `defects/<DEF-ID>.json`.
 On return, record the defect ids in `defectContext.activeDefectIds`, set `healingAttemptCount` to 0,
-and route each defect: `APPLICATION_DEFECT` to `BUG_REPORTING`, everything else to
-`LOCATOR_HEALING`. A defect classified `ENVIRONMENT_BLOCKER` **halts the workflow** — set the
+and route each defect: `APPLICATION_DEFECT` and `CONTRACT_MISMATCH` to `BUG_REPORTING`, everything
+else to `LOCATOR_HEALING`. A defect classified `ENVIRONMENT_BLOCKER` **halts the workflow** — set the
 workflow `BLOCKED` with the unreachable host or missing variable named in `errorDetails`, and
 neither heal nor file it. The application was never reached, so the failure proves nothing about
 it.
+
+**Check `interfaceType` before routing.** An `API` defect never goes to `LOCATOR_HEALING`, whatever
+its classification — it exercises no locator, so the healer would burn both attempts against a DOM
+the test never touched and the defect would reach Jira described as a locator bug it never was.
+Route it to `BUG_REPORTING` instead.
 
 **LOCATOR_HEALING** — delegate to `governed-locator-healer`, one defect at a time. Enforce the cap
 yourself: never dispatch a third attempt. Increment `defectContext.healingAttemptCount` after each
@@ -209,8 +239,8 @@ address of an element moved. If the healer reports it had to change what a test 
 escalate to a human.
 
 **BUG_REPORTING** — delegate to `bug-analyzer`. Before dispatching, confirm the defect is genuinely
-eligible: `APPLICATION_DEFECT`, or `LOCATOR_UNHEALABLE` with two recorded failed attempts. Refuse
-otherwise. The agent returns an updated defect artifact plus
+eligible: `APPLICATION_DEFECT`, `CONTRACT_MISMATCH`, or `LOCATOR_UNHEALABLE` with two recorded
+failed attempts. Refuse otherwise. The agent returns an updated defect artifact plus
 `traceability/capabilities/<capability>.rtm.proposed.json`; merge it through the controlled merge
 protocol like any other proposal.
 

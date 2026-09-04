@@ -14,6 +14,8 @@ tools:
   - playwright-test/browser_select_option
   - playwright-test/browser_snapshot
   - playwright-test/browser_type
+  - playwright-test/browser_network_request
+  - playwright-test/browser_network_requests
   - playwright-test/browser_verify_element_visible
   - playwright-test/browser_verify_list_visible
   - playwright-test/browser_verify_text_visible

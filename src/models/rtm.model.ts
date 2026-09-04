@@ -6,6 +6,7 @@ import {
   changeTypeSchema,
   dataClassificationSchema,
   executionResultSchema,
+  interfaceTypeSchema,
   isoTimestampSchema,
   jiraIdSchema,
   releaseSchema,
@@ -15,6 +16,7 @@ import {
   testPlanIdSchema,
   testScenarioIdSchema,
   traceIdSchema,
+  type InterfaceType,
 } from './common.model.ts';
 
 const artifactRefSchema = z.object({
@@ -50,6 +52,8 @@ export const rtmEntrySchema = z.object({
       testScenarioId: testScenarioIdSchema,
       path: z.string().min(1),
       version: artifactVersionSchema,
+      // Absent means UI, so an RTM written before API support stays valid.
+      interfaceType: interfaceTypeSchema.optional(),
     })
     .nullable(),
   automation: z
@@ -158,6 +162,27 @@ export const rtmSchema = z
     }
   });
 
+/**
+ * Per-interface coverage.
+ *
+ * Deliberately carries no `acDesignCoveragePct`. An acceptance criterion only
+ * acquires an interface once a test plan links it to a scenario, so the
+ * denominator "approved ACs of this interface" cannot exist before the
+ * numerator does - the measure would read 100% or null and never anything
+ * useful. Design coverage is meaningful only across all interfaces at once.
+ */
+const interfaceCoverageSchema = z
+  .object({
+    acsWithScenarios: z.number().int().min(0),
+    acsWithExecutableAutomation: z.number().int().min(0),
+    acsExecuted: z.number().int().min(0),
+    acsPassed: z.number().int().min(0),
+    automationCoveragePct: z.number().min(0).max(100).nullable(),
+    executionCoveragePct: z.number().min(0).max(100).nullable(),
+    passCoveragePct: z.number().min(0).max(100).nullable(),
+  })
+  .strict();
+
 export const coverageMatrixSchema = z
   .object({
     schemaVersion: z.literal(SCHEMA_VERSION),
@@ -178,6 +203,16 @@ export const coverageMatrixSchema = z
       automationCoveragePct: z.number().min(0).max(100).nullable(),
       executionCoveragePct: z.number().min(0).max(100).nullable(),
       passCoveragePct: z.number().min(0).max(100).nullable(),
+      // Optional: absent means the split was never measured, which is not the
+      // same as a capability having no API coverage.
+      byInterface: z
+        .object({
+          UI: interfaceCoverageSchema,
+          API: interfaceCoverageSchema,
+          HYBRID: interfaceCoverageSchema,
+        })
+        .strict()
+        .optional(),
     }),
     gaps: z.object({
       uncoveredAcIds: z.array(acIdSchema),
@@ -226,14 +261,20 @@ export const lookupIndexSchema = z
 export type RtmEntry = z.infer<typeof rtmEntrySchema>;
 export type Rtm = z.infer<typeof rtmSchema>;
 export type CoverageMatrix = z.infer<typeof coverageMatrixSchema>;
+export type InterfaceCoverage = z.infer<typeof interfaceCoverageSchema>;
 export type LookupIndex = z.infer<typeof lookupIndexSchema>;
 
 /**
  * Recomputes the four coverage measures strictly from RTM data.
  * Returns null for any measure whose denominator is unavailable, so that a
  * missing-data situation can never be reported as 100%.
+ *
+ * The interface split is always computed even though it is optional in a
+ * stored matrix: optional there means "an older artifact never recorded it",
+ * not "it could not be derived".
  */
-export function computeCoverage(rtm: Rtm): CoverageMatrix['coverage'] & {
+export function computeCoverage(rtm: Rtm): Omit<CoverageMatrix['coverage'], 'byInterface'> & {
+  byInterface: NonNullable<CoverageMatrix['coverage']['byInterface']>;
   totals: CoverageMatrix['totals'];
 } {
   const approved = rtm.entries.filter((entry) => entry.status === 'APPROVED');
@@ -275,6 +316,39 @@ export function computeCoverage(rtm: Rtm): CoverageMatrix['coverage'] & {
   const pct = (numerator: number, denominator: number): number | null =>
     denominator === 0 ? null : Math.round((numerator / denominator) * 10000) / 100;
 
+  const isExecutable = (entry: RtmEntry): boolean =>
+    entry.automation !== null &&
+    ['IMPLEMENTED', 'EXECUTABLE'].includes(entry.automation.automationStatus);
+
+  const wasExecuted = (entry: RtmEntry): boolean =>
+    entry.executionRefs.some((execution) =>
+      ['PASSED', 'FAILED', 'SKIPPED', 'TIMED_OUT'].includes(execution.result),
+    );
+
+  const lastPassed = (entry: RtmEntry): boolean => entry.executionRefs.at(-1)?.result === 'PASSED';
+
+  const forInterface = (target: InterfaceType): InterfaceCoverage => {
+    const scoped = approved.filter(
+      (entry) => entry.testPlan !== null && (entry.testPlan.interfaceType ?? 'UI') === target,
+    );
+    const acs = (entries: RtmEntry[]): number => new Set(entries.map((entry) => entry.acId)).size;
+
+    const withScenarios = acs(scoped);
+    const executable = acs(scoped.filter(isExecutable));
+    const executed = acs(scoped.filter(wasExecuted));
+    const passedCount = acs(scoped.filter(lastPassed));
+
+    return {
+      acsWithScenarios: withScenarios,
+      acsWithExecutableAutomation: executable,
+      acsExecuted: executed,
+      acsPassed: passedCount,
+      automationCoveragePct: pct(executable, withScenarios),
+      executionCoveragePct: pct(executed, executable),
+      passCoveragePct: pct(passedCount, executed),
+    };
+  };
+
   return {
     totals: {
       approvedAcs: approvedAcs.size,
@@ -287,5 +361,10 @@ export function computeCoverage(rtm: Rtm): CoverageMatrix['coverage'] & {
     automationCoveragePct: pct(linkedToAutomation.size, approvedAcs.size),
     executionCoveragePct: pct(executed.size, linkedToAutomation.size),
     passCoveragePct: pct(passed.size, executed.size),
+    byInterface: {
+      UI: forInterface('UI'),
+      API: forInterface('API'),
+      HYBRID: forInterface('HYBRID'),
+    },
   };
 }

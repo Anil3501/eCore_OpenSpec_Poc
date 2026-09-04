@@ -6,6 +6,7 @@ import {
   dataClassificationSchema,
   defectIdSchema,
   executionIdSchema,
+  interfaceTypeSchema,
   isoTimestampSchema,
   jiraIdSchema,
   releaseSchema,
@@ -29,6 +30,11 @@ export const defectClassificationSchema = z.enum([
   'AMBIGUOUS',
   'LOCATOR_UNHEALABLE',
   'ENVIRONMENT_BLOCKER',
+  // The API answered, but not as the approved contract says it should. There is
+  // no locator to repair, so this never enters LOCATOR_HEALING - either the
+  // application changed or the agreed contract is wrong, and both are human
+  // decisions rather than something a test may quietly absorb.
+  'CONTRACT_MISMATCH',
   'HEALED',
   'REVIEW_REQUIRED',
 ]);
@@ -44,6 +50,25 @@ export const defectStatusSchema = z.enum([
 ]);
 
 export const healingOutcomeSchema = z.enum(['HEALED', 'NOT_HEALED', 'NOT_ATTEMPTED']);
+
+/**
+ * A recorded request/response pair.
+ *
+ * This is the evidence an API-only failure has instead of a screenshot. Headers
+ * and bodies are redacted before they are written - a defect artifact is a
+ * governed file, not a place to leak an authorization token.
+ */
+export const apiExchangeSchema = z
+  .object({
+    method: z.string().min(1),
+    /** Path only. A full URL would re-introduce the host and any query secrets. */
+    path: z.string().min(1),
+    expectedStatusCodes: z.array(z.number().int().min(100).max(599)).min(1),
+    actualStatus: z.number().int().min(100).max(599),
+    contractViolations: z.array(z.string()),
+    redactedResponseBody: z.string(),
+  })
+  .strict();
 
 export const healingAttemptSchema = z.object({
   attemptNumber: z.number().int().min(1).max(2),
@@ -87,6 +112,8 @@ export const defectReportSchema = z
     requirementId: requirementIdSchema,
     featureFile: z.string().min(1),
     gherkinScenario: z.string().min(1),
+    // Optional so a defect written before API support stays valid. Absent is UI.
+    interfaceType: interfaceTypeSchema.optional(),
     classification: defectClassificationSchema,
     classificationRationale: z.string().min(1),
     fingerprint: z.string().regex(/^[a-f0-9]{64}$/, 'fingerprint must be a sha256 hex digest'),
@@ -103,6 +130,8 @@ export const defectReportSchema = z
       traceFiles: z.array(z.string().min(1)),
       playwrightReport: z.string().nullable(),
       attachmentsWithheld: z.boolean(),
+      // An API-only scenario produces no screenshot; this is its evidence.
+      apiExchanges: z.array(apiExchangeSchema).optional(),
     }),
     healing: z.object({
       attempts: z.array(healingAttemptSchema).max(2),
@@ -170,6 +199,46 @@ export const defectReportSchema = z
         message:
           'An APPLICATION_DEFECT must not be sent to the locator healer. Healing it would mask a real failure.',
       });
+    }
+
+    // There is no locator to repair when no element was ever involved. Without
+    // this rule an API failure classified AMBIGUOUS would be routed to healing,
+    // burn both attempts against a DOM the test never touched, and then be
+    // filed as a locator bug it never was.
+    const exercisesApi = defect.interfaceType === 'API' || defect.interfaceType === 'HYBRID';
+    const healingClassifications = ['LOCATOR_SUSPECT', 'LOCATOR_UNHEALABLE'];
+    if (defect.interfaceType === 'API' && healingClassifications.includes(defect.classification)) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['classification'],
+        message: `An API scenario cannot be "${defect.classification}". It exercises no locator. Use CONTRACT_MISMATCH, APPLICATION_DEFECT or ENVIRONMENT_BLOCKER.`,
+      });
+    }
+
+    if (defect.classification === 'CONTRACT_MISMATCH') {
+      if (!exercisesApi) {
+        ctx.addIssue({
+          code: 'custom',
+          path: ['classification'],
+          message: 'CONTRACT_MISMATCH requires interfaceType API or HYBRID. A UI scenario has no contract to violate.',
+        });
+      }
+      if (defect.healing.attempts.length > 0) {
+        ctx.addIssue({
+          code: 'custom',
+          path: ['healing', 'attempts'],
+          message:
+            'A CONTRACT_MISMATCH must not enter locator healing. Either the application changed or the agreed contract is wrong; both are human decisions.',
+        });
+      }
+      if ((defect.evidence.apiExchanges ?? []).length === 0) {
+        ctx.addIssue({
+          code: 'custom',
+          path: ['evidence', 'apiExchanges'],
+          message:
+            'A CONTRACT_MISMATCH must record the request/response exchange that violated the contract. Without it the claim is unevidenced.',
+        });
+      }
     }
 
     // The application was never reached, so nothing can be concluded about it.

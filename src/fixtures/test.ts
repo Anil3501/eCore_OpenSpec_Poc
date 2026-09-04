@@ -1,4 +1,5 @@
 import { test as bddTest } from 'playwright-bdd';
+import { request as playwrightRequest, type APIRequestContext } from '@playwright/test';
 import path from 'node:path';
 import { env, type FrameworkEnvironment } from '../utils/env.ts';
 import { startBrowserCoverage, stopBrowserCoverage } from '../utils/coverage.ts';
@@ -51,6 +52,13 @@ export interface FrameworkFixtures {
   preferencesPage: EcorePreferencesPage;
   organizationLogin: OrganizationLoginService;
   signInResponseMemory: SignInResponseMemory;
+  /**
+   * API request context for @interface-api and @interface-hybrid scenarios.
+   *
+   * Created lazily: a UI-only scenario never touches it, so a repository with no
+   * API_BASE_URL configured still runs exactly as it does today.
+   */
+  apiRequest: APIRequestContext;
 }
 
 export const test = bddTest.extend<FrameworkFixtures>({
@@ -87,6 +95,25 @@ export const test = bddTest.extend<FrameworkFixtures>({
   // eslint-disable-next-line no-empty-pattern
   signInResponseMemory: async ({}, use) => {
     await use({});
+  },
+
+  apiRequest: async ({ context }, use) => {
+    const api = env.requireApiConfig();
+    const headers: Record<string, string> = { Accept: 'application/json' };
+    if (api.authMode === 'BEARER') headers.Authorization = `Bearer ${api.authToken}`;
+    if (api.authMode === 'BASIC') headers.Authorization = `Basic ${api.authToken}`;
+
+    // SESSION_COOKIE reuses the browser's storage state, which is what lets a
+    // hybrid scenario seed over the API and then assert in the signed-in UI.
+    const storageState = api.authMode === 'SESSION_COOKIE' ? await context.storageState() : undefined;
+
+    const apiContext = await playwrightRequest.newContext({
+      baseURL: api.baseUrl,
+      extraHTTPHeaders: headers,
+      storageState,
+    });
+    await use(apiContext);
+    await apiContext.dispose();
   },
 
   browserCoverage: [

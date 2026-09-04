@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-09-01T13:57:21.081Z",
+  "generatedAt": "2026-09-04T13:35:10.002Z",
   "scope": "all",
   "summary": {
-    "total": 17,
+    "total": 18,
     "passed": 15,
     "failed": 0,
-    "skipped": 2
+    "skipped": 3
   },
   "results": [
     {
@@ -126,6 +126,14 @@
       "status": "PASS",
       "messages": [
         "9 automation source file(s) and 2 approved feature file(s) checked against 5 locator/wait rules."
+      ]
+    },
+    {
+      "id": "SEM-API-CONTRACT",
+      "title": "API scenarios rest on an authoritative, tagged contract",
+      "status": "SKIPPED",
+      "messages": [
+        "No API or hybrid scenarios are declared in any test plan."
       ]
     }
   ]

@@ -64,6 +64,8 @@ export const PATHS = {
   components: 'src/components',
   services: 'src/services',
   fixtures: 'src/fixtures',
+  api: 'src/api',
+  apiContracts: 'src/models/api',
   steps: 'steps',
 } as const;
 
@@ -536,6 +538,30 @@ function checkCoverageHonesty(loaded: LoadedArtifacts): CheckResult {
     compare('executionCoveragePct', matrix.coverage.executionCoveragePct, recomputed.executionCoveragePct);
     compare('passCoveragePct', matrix.coverage.passCoveragePct, recomputed.passCoveragePct);
 
+    // Only checked when recorded. An absent split means "never measured", but a
+    // recorded one that disagrees with the RTM is a false coverage claim.
+    if (matrix.coverage.byInterface !== undefined) {
+      for (const interfaceType of ['UI', 'API', 'HYBRID'] as const) {
+        const stored = matrix.coverage.byInterface[interfaceType];
+        const actual = recomputed.byInterface[interfaceType];
+        for (const measure of [
+          'automationCoveragePct',
+          'executionCoveragePct',
+          'passCoveragePct',
+        ] as const) {
+          compare(`byInterface.${interfaceType}.${measure}`, stored[measure], actual[measure]);
+        }
+        for (const total of [
+          'acsWithScenarios',
+          'acsWithExecutableAutomation',
+          'acsExecuted',
+          'acsPassed',
+        ] as const) {
+          compare(`byInterface.${interfaceType}.${total}`, stored[total], actual[total]);
+        }
+      }
+    }
+
     const totalsMatch =
       matrix.totals.approvedAcs === recomputed.totals.approvedAcs &&
       matrix.totals.approvedAcsLinkedToApprovedScenarios ===
@@ -657,6 +683,47 @@ const HYGIENE_RULES: HygieneRule[] = [
 ];
 
 /**
+ * Rules for `src/api`, where the failure modes are different from the DOM's.
+ *
+ * A guessed endpoint is as dangerous as a guessed locator and worse when the
+ * verb has side effects, so a destructive call must name its cleanup strategy
+ * rather than silently mutate a shared environment.
+ */
+const API_HYGIENE_RULES: HygieneRule[] = [
+  {
+    id: 'HARDCODED_URL',
+    pattern: /['"`]https?:\/\//i,
+    problem: 'hard-codes an absolute URL instead of resolving it from API_BASE_URL through env',
+    waiver: null,
+  },
+  {
+    id: 'DIRECT_ENV_READ',
+    pattern: /process\.env\./,
+    problem: 'reads process.env directly instead of going through the typed loader in src/utils/env.ts',
+    waiver: null,
+  },
+  {
+    id: 'DESTRUCTIVE_CALL',
+    pattern: /\.(delete|put)\s*\(/i,
+    problem:
+      'issues a non-idempotent request against a shared environment, which can destroy data another team is using',
+    waiver: 'CLEANUP -',
+  },
+  {
+    id: 'HARD_WAIT',
+    pattern: /waitForTimeout\s*\(/,
+    problem: 'uses a fixed sleep instead of polling or a web-first assertion',
+    waiver: 'JUSTIFIED-WAIT:',
+  },
+  {
+    id: 'DISABLED_TEST',
+    pattern: /\btest\.(skip|fixme|slow)\s*\(/,
+    problem: 'disables or slows a test instead of fixing it, which would report a red build as green',
+    waiver: null,
+  },
+];
+
+/**
  * Walks upwards from a line looking for a waiver marker, stopping at the blank
  * line or closing brace that separates this member from the previous one, so a
  * marker can never leak from an unrelated member below it.
@@ -680,12 +747,33 @@ function checkAutomationHygiene(loaded: LoadedArtifacts): CheckResult {
     ...listFilesRecursive(PATHS.steps, '.ts'),
   ];
   const featureFiles = listFilesRecursive(PATHS.featuresApproved, '.feature');
+  const apiFiles = listFilesRecursive(PATHS.api, '.ts');
 
-  if (sourceFiles.length === 0 && featureFiles.length === 0) {
+  if (sourceFiles.length === 0 && featureFiles.length === 0 && apiFiles.length === 0) {
     return skip('SEM-AUTOMATION-HYGIENE', title, 'No automation source or approved feature files found.');
   }
 
   const messages: string[] = [];
+
+  for (const file of apiFiles) {
+    const lines = readText(file).split(/\r?\n/);
+    for (let index = 0; index < lines.length; index += 1) {
+      const rawLine = lines[index] ?? '';
+      const line = rawLine.trim();
+      if (line.startsWith('//') || line.startsWith('*') || line.startsWith('/*')) continue;
+
+      for (const rule of API_HYGIENE_RULES) {
+        if (!rule.pattern.test(rawLine)) continue;
+        if (rule.waiver !== null && hasWaiverAbove(lines, index, rule.waiver)) continue;
+
+        const remedy =
+          rule.waiver === null
+            ? ''
+            : ` If there is genuinely no alternative, record why in a "${rule.waiver}" comment directly above it.`;
+        messages.push(`${file}:${index + 1}: ${rule.id} - ${rule.problem}.${remedy} Line: ${line}`);
+      }
+    }
+  }
 
   for (const file of sourceFiles) {
     const lines = readText(file).split(/\r?\n/);
@@ -742,10 +830,17 @@ function checkAutomationHygiene(loaded: LoadedArtifacts): CheckResult {
     if (!exists(file)) continue; // SEM-RTM already reports references that do not resolve.
     const lines = readText(file).split(/\r?\n/);
     for (let index = 0; index < lines.length; index += 1) {
-      if (!(lines[index] ?? '').includes('MCP_VALIDATION_REQUIRED')) continue;
-      messages.push(
-        `${file}:${index + 1}: UNVALIDATED_LOCATOR - this file backs Gate 3 approved automation but still carries MCP_VALIDATION_REQUIRED. Validate the locator through Playwright MCP.`,
-      );
+      const line = lines[index] ?? '';
+      if (line.includes('MCP_VALIDATION_REQUIRED')) {
+        messages.push(
+          `${file}:${index + 1}: UNVALIDATED_LOCATOR - this file backs Gate 3 approved automation but still carries MCP_VALIDATION_REQUIRED. Validate the locator through Playwright MCP.`,
+        );
+      }
+      if (line.includes('API_CONTRACT_UNVERIFIED')) {
+        messages.push(
+          `${file}:${index + 1}: UNVERIFIED_CONTRACT - this file backs Gate 3 approved automation but still carries API_CONTRACT_UNVERIFIED. A guessed endpoint is as dangerous as a guessed locator.`,
+        );
+      }
     }
   }
 
@@ -754,6 +849,110 @@ function checkAutomationHygiene(loaded: LoadedArtifacts): CheckResult {
         `${sourceFiles.length} automation source file(s) and ${featureFiles.length} approved feature file(s) checked against ${HYGIENE_RULES.length} locator/wait rules.`,
       ])
     : fail('SEM-AUTOMATION-HYGIENE', title, messages);
+}
+
+/**
+ * Every API scenario rests on a contract nobody guessed.
+ *
+ * The rule that matters most here is the OBSERVED one. Traffic captured from
+ * the running application records what it *does*; asserting an acceptance
+ * criterion against it would make the current behaviour the definition of
+ * correct, so a bug would pass forever and only fail once someone fixed it.
+ * Gate 2 is where a human converts OBSERVED into HUMAN_APPROVED, and this check
+ * is what makes skipping that step impossible.
+ */
+function checkApiContracts(loaded: LoadedArtifacts): CheckResult {
+  const id = 'SEM-API-CONTRACT';
+  const title = 'API scenarios rest on an authoritative, tagged contract';
+
+  const approvedPlanFiles = new Set(collectJsonFiles(PATHS.testPlansApproved));
+  const messages: string[] = [];
+
+  // testScenarioId -> declared interface, across approved plans only.
+  const interfaceByScenario = new Map<string, 'UI' | 'API' | 'HYBRID'>();
+  let apiScenarioCount = 0;
+
+  for (const [file, plan] of loaded.testPlans) {
+    const isApproved = approvedPlanFiles.has(file);
+    for (const scenario of plan.scenarios) {
+      const interfaceType = scenario.interfaceType ?? 'UI';
+      if (isApproved) interfaceByScenario.set(scenario.testScenarioId, interfaceType);
+      if (interfaceType === 'UI') continue;
+      apiScenarioCount += 1;
+
+      const contract = scenario.apiContract;
+      if (contract === undefined) continue; // Already reported by TP-STRUCTURE.
+
+      if (contract.responseContractRef && !exists(contract.responseContractRef)) {
+        messages.push(
+          `${file}: ${scenario.testScenarioId} references response contract "${contract.responseContractRef}", which does not exist.`,
+        );
+      }
+
+      const authoritative = contract.contractSource === 'OPENAPI' || contract.contractSource === 'HUMAN_APPROVED';
+      if (isApproved && contract.scaffoldingOnly !== true && !authoritative) {
+        messages.push(
+          `${file}: ${scenario.testScenarioId} asserts ${scenario.acIds.join(', ')} against a ${contract.contractSource} contract. ` +
+            'Observed traffic describes what the application does, not what it should do. Agree the contract at Gate 2 (HUMAN_APPROVED) or mark it scaffoldingOnly.',
+        );
+      }
+
+      // Scaffolding reaches a state; it never proves one.
+      if (contract.scaffoldingOnly === true && interfaceType === 'API') {
+        messages.push(
+          `${file}: ${scenario.testScenarioId} is API-only and scaffoldingOnly. A scenario that only reaches a state asserts nothing, so it cannot cover ${scenario.acIds.join(', ')}. Use HYBRID, or drop scaffoldingOnly and agree the contract.`,
+        );
+      }
+    }
+  }
+
+  // A feature scenario must declare the same interface its approved plan does.
+  for (const file of listFilesRecursive(PATHS.featuresApproved, '.feature')) {
+    const lines = readText(file).split(/\r?\n/);
+    let pendingTags: string[] = [];
+    let featureTags: string[] = [];
+
+    for (const rawLine of lines) {
+      const line = rawLine.trim();
+      if (line.startsWith('@')) {
+        pendingTags = pendingTags.concat(line.split(/\s+/).filter((tag) => tag.startsWith('@')));
+        continue;
+      }
+      if (line.startsWith('Feature:')) {
+        featureTags = pendingTags;
+        pendingTags = [];
+        continue;
+      }
+      if (!line.startsWith('Scenario:') && !line.startsWith('Scenario Outline:')) continue;
+
+      const effective = featureTags.concat(pendingTags);
+      pendingTags = [];
+
+      const scenarioTag = effective.find((tag) => tag.startsWith('@ts-'));
+      if (scenarioTag === undefined) continue; // SEM-FEATURE-TAGS reports this.
+
+      const declared = interfaceByScenario.get(scenarioTag.slice('@ts-'.length));
+      if (declared === undefined) continue;
+
+      // Absence means UI, so a legacy feature file stays valid without edits.
+      const interfaceTag = effective.find((tag) => tag.startsWith('@interface-'));
+      const tagged = interfaceTag === undefined ? 'UI' : interfaceTag.slice('@interface-'.length).toUpperCase();
+
+      if (tagged !== declared) {
+        messages.push(
+          `${file}: scenario "${line}" is tagged ${interfaceTag ?? '(no @interface- tag, meaning UI)'} but its approved test plan declares ${declared}. Add @interface-${declared.toLowerCase()}.`,
+        );
+      }
+    }
+  }
+
+  if (apiScenarioCount === 0 && messages.length === 0) {
+    return skip(id, title, 'No API or hybrid scenarios are declared in any test plan.');
+  }
+
+  return messages.length === 0
+    ? pass(id, title, [`${apiScenarioCount} API/hybrid scenario(s) checked.`])
+    : fail(id, title, messages);
 }
 
 function checkNoDuplicateBusinessScenarios(): CheckResult {
@@ -1038,6 +1237,7 @@ export function runValidation(
     checkWorkflowLocks(loaded),
     checkDefectEvidence(loaded),
     checkAutomationHygiene(loaded),
+    checkApiContracts(loaded),
   ];
 
   const all = results.concat(semantic);
@@ -1048,7 +1248,7 @@ export function runValidation(
     workflow: ['WF-STRUCTURE', 'SEM-GATES', 'SEM-LOCKS'],
     rtm: ['RTM-STRUCTURE', 'SEM-RTM', 'SEM-COVERAGE', 'SEM-FEATURE-TAGS', 'SEM-NO-DUPLICATES'],
     defects: ['DEF-STRUCTURE', 'SEM-DEFECT-EVIDENCE', 'SEM-SAMPLE-ISOLATION'],
-    automation: ['SEM-AUTOMATION-HYGIENE', 'SEM-FEATURE-TAGS', 'SEM-NO-DUPLICATES'],
+    automation: ['SEM-AUTOMATION-HYGIENE', 'SEM-FEATURE-TAGS', 'SEM-NO-DUPLICATES', 'SEM-API-CONTRACT'],
   };
 
   const wanted = new Set(scopeFilter[scope]);

@@ -19,6 +19,9 @@ loadDotenv({ path: path.resolve(process.cwd(), '.env'), quiet: true });
 export const TEST_ENVIRONMENTS = ['local', 'dev', 'qa', 'uat', 'staging'] as const;
 export type TestEnvironment = (typeof TEST_ENVIRONMENTS)[number];
 
+export const API_AUTH_MODES = ['NONE', 'BEARER', 'BASIC', 'SESSION_COOKIE'] as const;
+export type ApiAuthMode = (typeof API_AUTH_MODES)[number];
+
 const TRUE_VALUES = new Set(['true', '1', 'yes', 'on']);
 const FALSE_VALUES = new Set(['false', '0', 'no', 'off']);
 
@@ -49,6 +52,17 @@ function booleanCompatible(variableName: string, fallback: boolean) {
 
 const environmentSchema = z.object({
   PLAYWRIGHT_BASE_URL: optionalTrimmed,
+  // Deliberately not derived from PLAYWRIGHT_BASE_URL. In most deployments the
+  // API is on a different host, port or path prefix, and a silently wrong
+  // derived URL produces a confusing 404 instead of a clear config error.
+  API_BASE_URL: optionalTrimmed,
+  API_AUTH_MODE: z
+    .string()
+    .trim()
+    .optional()
+    .transform((value) => (value === undefined || value === '' ? 'NONE' : value.toUpperCase()))
+    .pipe(z.enum(API_AUTH_MODES)),
+  API_AUTH_TOKEN: optionalTrimmed,
   TEST_ENVIRONMENT: z
     .string()
     .trim()
@@ -82,6 +96,9 @@ const environmentSchema = z.object({
 
 const parsed = environmentSchema.safeParse({
   PLAYWRIGHT_BASE_URL: process.env.PLAYWRIGHT_BASE_URL,
+  API_BASE_URL: process.env.API_BASE_URL,
+  API_AUTH_MODE: process.env.API_AUTH_MODE,
+  API_AUTH_TOKEN: process.env.API_AUTH_TOKEN,
   TEST_ENVIRONMENT: process.env.TEST_ENVIRONMENT,
   HEADLESS: process.env.HEADLESS,
   COVERAGE_ENABLED: process.env.COVERAGE_ENABLED,
@@ -159,6 +176,19 @@ export interface JiraBugConfig {
 }
 
 /**
+ * API execution configuration.
+ *
+ * `SESSION_COOKIE` mode carries no token: the API reuses the browser context's
+ * storage state, which is what makes a hybrid scenario possible at all.
+ */
+export interface ApiConfig {
+  baseUrl: string;
+  authMode: ApiAuthMode;
+  /** Absent for NONE and SESSION_COOKIE. Never logged. */
+  authToken: string | undefined;
+}
+
+/**
  * Browser code-coverage settings.
  *
  * This is JavaScript coverage of the *application under test*, captured from
@@ -178,6 +208,7 @@ export interface FrameworkEnvironment {
   /** Present only when configured. Never assume it exists during scaffolding. */
   readonly baseUrl: string | undefined;
   readonly hasBaseUrl: boolean;
+  readonly hasApiBaseUrl: boolean;
   readonly hasCredentials: boolean;
   readonly hasEcoreLogin: boolean;
   readonly hasJiraConfig: boolean;
@@ -185,6 +216,8 @@ export interface FrameworkEnvironment {
   readonly coverage: CoverageSettings;
   /** Required lazily, at the point browser execution starts. */
   requireBaseUrl(): string;
+  /** Required lazily, only when an API scenario or API scaffolding runs. */
+  requireApiConfig(): ApiConfig;
   /** Required lazily, only for username-and-password scenarios. */
   requireCredentials(): Credentials;
   /** Required lazily, only for the eCore organization login form. */
@@ -198,6 +231,7 @@ export interface FrameworkEnvironment {
 }
 
 const hasBaseUrl = values.PLAYWRIGHT_BASE_URL !== undefined;
+const hasApiBaseUrl = values.API_BASE_URL !== undefined;
 
 // Generic credentials fall back to the eCore values so a credential is stored
 // exactly once in .env instead of being duplicated.
@@ -237,6 +271,7 @@ export const env: FrameworkEnvironment = {
   headless: values.HEADLESS,
   baseUrl: values.PLAYWRIGHT_BASE_URL,
   hasBaseUrl,
+  hasApiBaseUrl,
   hasCredentials,
   hasEcoreLogin,
   hasJiraConfig,
@@ -254,6 +289,27 @@ export const env: FrameworkEnvironment = {
       );
     }
     return values.PLAYWRIGHT_BASE_URL as string;
+  },
+
+  requireApiConfig(): ApiConfig {
+    if (!hasApiBaseUrl) {
+      throw new Error(
+        'API_BASE_URL is not set. API execution is BLOCKED. Set API_BASE_URL in your local ' +
+          '.env (see .env.example). It is never derived from PLAYWRIGHT_BASE_URL.',
+      );
+    }
+    const authMode = values.API_AUTH_MODE;
+    if ((authMode === 'BEARER' || authMode === 'BASIC') && values.API_AUTH_TOKEN === undefined) {
+      throw new Error(
+        `API_AUTH_MODE is ${authMode} but API_AUTH_TOKEN is not set. ` +
+          'Set it in your local .env (see .env.example). Values are never logged.',
+      );
+    }
+    return {
+      baseUrl: values.API_BASE_URL as string,
+      authMode,
+      authToken: values.API_AUTH_TOKEN,
+    };
   },
 
   requireCredentials(): Credentials {
@@ -319,6 +375,8 @@ export const env: FrameworkEnvironment = {
       testEnvironment: values.TEST_ENVIRONMENT,
       headless: values.HEADLESS,
       baseUrlConfigured: hasBaseUrl,
+      apiBaseUrlConfigured: hasApiBaseUrl,
+      apiAuthMode: values.API_AUTH_MODE,
       credentialsConfigured: hasCredentials,
       ecoreLoginConfigured: hasEcoreLogin,
       jiraConfigured: hasJiraConfig,

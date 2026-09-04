@@ -103,7 +103,12 @@
                 "testPlanId": { "type": "string", "pattern": "^TP-[A-Z0-9-]+-[0-9]{3}$" },
                 "testScenarioId": { "type": "string", "pattern": "^TS-[A-Z0-9-]+-[0-9]{3}$" },
                 "path": { "type": "string", "minLength": 1 },
-                "version": { "type": "integer", "minimum": 1 }
+                "version": { "type": "integer", "minimum": 1 },
+                "interfaceType": {
+                  "description": "Absent means UI, so an RTM written before API support remains valid.",
+                  "type": "string",
+                  "enum": ["UI", "API", "HYBRID"]
+                }
               }
             }
           ]

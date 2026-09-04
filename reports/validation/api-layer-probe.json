@@ -1,0 +1,52 @@
+{
+  "probe": "api-layer",
+  "startedAt": "2026-09-04T13:35:12.773Z",
+  "scope": "Plumbing only, against a loopback stub server. Proves the API client executes, joins URLs, enforces declared status codes, parses whole contracts and withholds secrets. It observes nothing about the application under test and is not evidence for any acceptance criterion.",
+  "notCovered": [
+    "The apiRequest fixture, which needs a browser context and is exercised by a real run.",
+    "BEARER, BASIC and SESSION_COOKIE auth modes."
+  ],
+  "result": "PASSED",
+  "checks": [
+    {
+      "name": "MODULE_LOADS_AS_ESM",
+      "passed": true,
+      "detail": "env.ts and api-client.ts imported without an interop error."
+    },
+    {
+      "name": "ENV_RESOLVES_API_CONFIG",
+      "passed": true,
+      "detail": "requireApiConfig() returned authMode NONE and the configured base URL."
+    },
+    {
+      "name": "URL_PRESERVES_PATH_PREFIX",
+      "passed": true,
+      "detail": "url('/health') resolved to http://127.0.0.1:52947/api/v1/health"
+    },
+    {
+      "name": "ROUND_TRIP_AND_CONTRACT_PARSE",
+      "passed": true,
+      "detail": "A real HTTP GET through APIRequestContext parsed against its full Zod contract."
+    },
+    {
+      "name": "UNDECLARED_STATUS_REJECTED",
+      "passed": true,
+      "detail": "assertStatus threw CONTRACT_MISMATCH naming the status."
+    },
+    {
+      "name": "STATUS_ERROR_WITHHOLDS_BODY",
+      "passed": true,
+      "detail": "Response body stayed out of the status-mismatch error message."
+    },
+    {
+      "name": "CONTRACT_VIOLATION_REJECTED",
+      "passed": true,
+      "detail": "parse() reported every violating field path, not just the first."
+    },
+    {
+      "name": "CONTRACT_ERROR_WITHHOLDS_VALUES",
+      "passed": true,
+      "detail": "Rejected field values stayed out of the contract-violation error message."
+    }
+  ]
+}

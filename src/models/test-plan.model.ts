@@ -2,8 +2,12 @@ import { z } from 'zod';
 import {
   acIdSchema,
   artifactVersionSchema,
+  AUTHORITATIVE_CONTRACT_SOURCES,
   capabilitySchema,
+  contractSourceSchema,
   dataClassificationSchema,
+  httpMethodSchema,
+  interfaceTypeSchema,
   isoTimestampSchema,
   jiraIdSchema,
   releaseSchema,
@@ -13,6 +17,30 @@ import {
   testPlanIdSchema,
   testScenarioIdSchema,
 } from './common.model.ts';
+
+/**
+ * The API surface a scenario exercises, agreed at Gate 2.
+ *
+ * `contractProvenance` is what makes `contractSource` auditable: an OpenAPI URL,
+ * the `APR-TP-*` approval that agreed it, or the validation report the traffic
+ * was observed in. A source without a provenance is an unsourced claim.
+ */
+export const apiContractSchema = z
+  .object({
+    method: httpMethodSchema,
+    path: z.string().min(1),
+    expectedStatusCodes: z.array(z.number().int().min(100).max(599)).min(1),
+    contractSource: contractSourceSchema,
+    contractProvenance: z.string().min(1),
+    /** Path to the Zod response contract, once one exists. */
+    responseContractRef: z.string().min(1).nullable().optional(),
+    /**
+     * True when the call only reaches a state the scenario then asserts
+     * elsewhere. Scaffolding proves nothing and never counts as AC coverage.
+     */
+    scaffoldingOnly: z.boolean().optional(),
+  })
+  .strict();
 
 export const testScenarioSchema = z.object({
   testScenarioId: testScenarioIdSchema,
@@ -31,6 +59,9 @@ export const testScenarioSchema = z.object({
   riskTag: z.string().nullable().optional(),
   suiteTag: z.string().nullable().optional(),
   scenarioAction: scenarioActionSchema.optional(),
+  // Optional so plans approved before API support remain valid unedited.
+  interfaceType: interfaceTypeSchema.optional(),
+  apiContract: apiContractSchema.optional(),
 });
 
 export const testPlanSchema = z
@@ -107,6 +138,41 @@ export const testPlanSchema = z
         });
       }
       scenarioIds.add(scenario.testScenarioId);
+
+      const interfaceType = scenario.interfaceType ?? 'UI';
+      const exercisesApi = interfaceType === 'API' || interfaceType === 'HYBRID';
+
+      if (exercisesApi && scenario.apiContract === undefined) {
+        ctx.addIssue({
+          code: 'custom',
+          path: ['scenarios'],
+          message: `${scenario.testScenarioId} declares interfaceType "${interfaceType}" but no apiContract. An API scenario without a contract is a guessed endpoint.`,
+        });
+      }
+      if (!exercisesApi && scenario.apiContract !== undefined) {
+        ctx.addIssue({
+          code: 'custom',
+          path: ['scenarios'],
+          message: `${scenario.testScenarioId} declares an apiContract but interfaceType is "${interfaceType}". Set interfaceType to API or HYBRID.`,
+        });
+      }
+
+      // Gate 2 is where an OBSERVED contract becomes HUMAN_APPROVED. Approving a
+      // plan that still asserts against observed traffic would bless whatever
+      // the application currently does as the expected result.
+      const contract = scenario.apiContract;
+      if (
+        plan.approvalStatus === 'APPROVED' &&
+        contract !== undefined &&
+        contract.scaffoldingOnly !== true &&
+        !AUTHORITATIVE_CONTRACT_SOURCES.includes(contract.contractSource)
+      ) {
+        ctx.addIssue({
+          code: 'custom',
+          path: ['scenarios'],
+          message: `${scenario.testScenarioId} asserts an acceptance criterion against a "${contract.contractSource}" contract. An approved plan requires OPENAPI or HUMAN_APPROVED, or the contract must be marked scaffoldingOnly.`,
+        });
+      }
 
       // No orphan scenarios: every scenario must trace back to a declared AC.
       for (const acId of scenario.acIds) {

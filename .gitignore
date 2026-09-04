@@ -28,6 +28,10 @@ reports/defects/
 # Local authenticated session / storage state (never commit)
 .auth/
 
+# Playwright MCP scratch output: page snapshots, console logs and screenshots
+# written during agent exploration. A snapshot can contain live customer data.
+.playwright-mcp/
+
 # Temporary execution artifacts
 *.tmp
 *.log

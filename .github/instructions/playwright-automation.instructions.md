@@ -1,7 +1,7 @@
 ---
 description: "Use when writing Gherkin feature files, playwright-bdd step definitions, page objects, components, fixtures or Playwright config. Covers strict layering, accessible locators, MCP_VALIDATION_REQUIRED markers and Node 24 TypeScript constraints."
 name: "Playwright-BDD automation layering"
-applyTo: ["features/**", "steps/**", "src/pages/**", "src/components/**", "src/fixtures/**", "src/services/**", "test-data/**", "playwright.config.ts", "tests/**"]
+applyTo: ["features/**", "steps/**", "src/pages/**", "src/components/**", "src/fixtures/**", "src/services/**", "src/api/**", "src/models/api/**", "test-data/**", "playwright.config.ts", "tests/**"]
 ---
 
 # Playwright-BDD automation layering
@@ -26,15 +26,48 @@ applyTo: ["features/**", "steps/**", "src/pages/**", "src/components/**", "src/f
 
 | Layer | May contain | Must never contain |
 | --- | --- | --- |
-| `.feature` | Business behaviour in domain language | Selectors, URLs, page-object method names, technical steps |
-| `steps/` | Page-object and service calls | Locators, hard-coded data, assertions on raw DOM, multi-page workflows |
+| `.feature` | Business behaviour in domain language | Selectors, URLs, page-object method names, technical steps, status codes, JSON |
+| `steps/` | Page-object, API-client and service calls | Locators, hard-coded data, assertions on raw DOM, raw HTTP calls, multi-page workflows |
 | `src/pages/` | Locators, interactions, page-scoped assertions | Business data, credentials, cross-page navigation chains |
+| `src/api/` | Endpoints, headers, request/response shaping | Absolute URLs, `process.env`, business assertions, secrets |
+| `src/models/api/` | Zod response contracts | Endpoints, request logic |
 | `src/components/` | Genuinely reused cross-page widgets | Single-use wrappers created "for symmetry" |
-| `src/fixtures/` | Composition of page objects, env and services | New browser/context/page creation, hard-coded secrets |
+| `src/fixtures/` | Composition of page objects, API clients, env and services | New browser/context/page creation, hard-coded secrets |
 | `src/services/` | Test-data resolution and reusable business flows | Secrets — those come from `env` at runtime |
 | `test-data/` | Fabricated inputs, one `<capability>.sample.json` per capability | Any real credential or production value |
 
 Do not create a component object unless the widget is genuinely reused. Over-abstraction is a defect.
+
+## API clients
+
+**An API client is the API's page object.** A page object owns locators; an API client owns
+endpoints. Neither leaks upward — a step definition calls `accountApi.signIn(...)` exactly as it
+calls `loginPage.signIn(...)`, and never issues a request itself.
+
+Extend `ApiClient` in [src/api/api-client.ts](../../src/api/api-client.ts). It supplies URL
+resolution from `API_BASE_URL`, status assertion against the approved contract, and full-body
+contract parsing.
+
+**Parse the whole response against its Zod contract. Never spot-check fields.** Asserting three
+fields and ignoring forty is the API equivalent of a test that passes because it never looked.
+
+**Never guess an endpoint, field name or status code.** An unverified contract stays marked
+`API_CONTRACT_UNVERIFIED` until the planner confirms it against real traffic or an OpenAPI document.
+The marker is allowed while generating, and **fails the build** once the file backs Gate 3 approved
+automation — the same rule as `MCP_VALIDATION_REQUIRED`.
+
+**Never put a response body in an error message.** It can carry the very token or personal data the
+framework is forbidden to log.
+
+Enforced by `SEM-AUTOMATION-HYGIENE` over `src/api`:
+
+| Rule | Waiver |
+| --- | --- |
+| `HARDCODED_URL` — absolute `http(s)://` literal | none |
+| `DIRECT_ENV_READ` — `process.env.*` instead of `env` | none |
+| `DESTRUCTIVE_CALL` — `.delete()` / `.put()` against a shared environment | `CLEANUP - <strategy>` |
+| `HARD_WAIT` — `waitForTimeout()` | `JUSTIFIED-WAIT:` |
+| `DISABLED_TEST` — `test.skip/fixme/slow()` | none |
 
 ## Locators
 

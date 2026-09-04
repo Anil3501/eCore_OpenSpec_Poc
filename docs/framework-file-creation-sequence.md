@@ -78,9 +78,15 @@ Agent: **sdd-workflow-orchestrator** (invoking Playwright Test Planner)
 
 | # | File | Notes |
 | - | --- | --- |
-| 15 | `test-plans/generated/<TEST-PLAN-ID>.json` | Business test plan (e.g. `TP-ETA-351-001.json`) |
+| 15 | `test-plans/generated/<TEST-PLAN-ID>.json` | Business test plan (e.g. `TP-ETA-351-001.json`). Each scenario may declare `interfaceType` (`UI` / `API` / `HYBRID`) plus an `apiContract` |
 | 16 | `test-plans/generated/<TEST-PLAN-ID>-review.md` | Gate 2 human-readable review package |
 | 17 | `test-plans/generated/<TEST-PLAN-ID>-approval.template.json` | Fillable Gate 2 approval template |
+
+**A missing `interfaceType` means `UI`**, so a plan written before API support existed stays valid
+without being edited. An `API` or `HYBRID` scenario must carry an `apiContract`; where no OpenAPI
+document exists it is listed in the review package as `OBSERVED`, and Gate 2 converts it to
+`HUMAN_APPROVED`. An approved plan may not assert an acceptance criterion against an `OBSERVED`
+contract.
 
 ## 🔒 Gate 2 — TEST_PLAN_APPROVAL (human)
 
@@ -97,8 +103,8 @@ Agent: **sdd-workflow-orchestrator** (invoking Playwright Test Generator)
 
 | # | File | Notes |
 | - | --- | --- |
-| 20 | `features/generated/<capability>/<feature>.feature` | Gherkin scenarios tagged `@release-/@capability-/@req-/@ac-/@tp-/@ts-`; business behaviour only |
-| 21 | `features/generated/<capability>/<TEST-PLAN-ID>-automation-design.md` | Automation design notes (locators marked `MCP_VALIDATION_REQUIRED`) |
+| 20 | `features/generated/<capability>/<feature>.feature` | Gherkin scenarios tagged `@release-/@capability-/@req-/@ac-/@tp-/@ts-`; business behaviour only. Adds `@interface-api` or `@interface-hybrid` when the approved plan declares one |
+| 21 | `features/generated/<capability>/<TEST-PLAN-ID>-automation-design.md` | Automation design notes (locators marked `MCP_VALIDATION_REQUIRED`, endpoints marked `API_CONTRACT_UNVERIFIED`) |
 
 ## Stage 8 — AUTOMATION_REVIEW_PACKAGE
 
@@ -124,6 +130,7 @@ Agent: **playwright-test-planner** (via Playwright MCP, browser-driven). Replace
 | # | File | Notes |
 | - | --- | --- |
 | 25 | `reports/validation/<TEST-PLAN-ID>-browser-validation.json` | Evidence that scenarios were explored/validated against the live app |
+| 25a | `reports/validation/<TEST-PLAN-ID>-api-validation.json` | **Only when a scenario declares `API`/`HYBRID`.** Contracts observed from real traffic during the approved flow, recorded as `OBSERVED` — evidence of what the application does, never authority for what it should do |
 | 26 | `specs/**` (probe scripts / exploration artifacts as needed) | e.g. `scripts/eta-351-login-probe.ts` style one-off probes, `reports/validation/<JIRA-ID>-*-probe.json` outputs |
 
 ## Stage 10 — IMPLEMENTATION
@@ -135,6 +142,8 @@ Agent: **sdd-workflow-orchestrator** (invoking Playwright Test Generator)
 | 27 | `steps/<capability-topic>.steps.ts` | Thin step orchestration — no locators, no hard-coded data |
 | 28 | `src/pages/<page-name>.page.ts` | Page objects — own all locators (`getByRole` → `getByLabel` → `getByPlaceholder` → `getByText` → `getByTestId`) |
 | 29 | `src/components/<component-name>.component.ts` | Shared UI components (when needed) |
+| 29a | `src/api/<capability>.api.ts` | **Only for `API`/`HYBRID` scenarios.** API clients extending `ApiClient` — own all endpoints the way page objects own locators. No absolute URLs, no `process.env` |
+| 29b | `src/models/api/<capability>.contract.ts` | **Only for `API`/`HYBRID` scenarios.** Zod response contracts. The whole response is parsed, never spot-checked |
 | 30 | `src/fixtures/test.ts` | Playwright-BDD fixture wiring (created once, extended per capability) |
 | 31 | `src/services/<capability>.service.ts` | Business/service helpers used by steps (e.g. `organization-login.service.ts`) |
 | 32 | `test-data/<capability>.sample.json` | Fabricated `SAMPLE_DATA` inputs for negative/edge scenarios — never the real account |
@@ -170,8 +179,8 @@ Command: `npm run triage:failures`. Agent: **bug-analyzer**.
 
 | # | File | Notes |
 | - | --- | --- |
-| 37 | `defects/<DEF-ID>.json` | Governed defect report, classification `LOCATOR_SUSPECT` / `APPLICATION_DEFECT` / `AMBIGUOUS` / `ENVIRONMENT_BLOCKER` |
-| 38 | `reports/defects/<DEF-ID>/**` | Preserved evidence copied out of `test-results/` (screenshots, `trace.zip`) before the next run overwrites it |
+| 37 | `defects/<DEF-ID>.json` | Governed defect report, classification `LOCATOR_SUSPECT` / `APPLICATION_DEFECT` / `CONTRACT_MISMATCH` / `AMBIGUOUS` / `ENVIRONMENT_BLOCKER` |
+| 38 | `reports/defects/<DEF-ID>/**` | Preserved evidence copied out of `test-results/` (screenshots, `trace.zip`) before the next run overwrites it. An API-only failure has no screenshot — its evidence is the redacted exchange in `evidence.apiExchanges` |
 | 39 | `reports/validation/failure-triage.json` | Triage summary |
 
 `ENVIRONMENT_BLOCKER` halts the workflow here — never healed, never filed.
@@ -247,10 +256,13 @@ release-baselined in `traceability/releases/<release>.baseline.json`.
 23  features/approved/<capability>/<TEST-PLAN-ID>-automation-approval.json  🔒 GATE 3
 24  features/approved/<capability>/<feature>.feature
 25  reports/validation/<TEST-PLAN-ID>-browser-validation.json
+25a reports/validation/<TEST-PLAN-ID>-api-validation.json   (API/HYBRID only)
 26  specs/** (probe/exploration artifacts)
 27  steps/<capability-topic>.steps.ts
 28  src/pages/<page-name>.page.ts
 29  src/components/<component-name>.component.ts   (if needed)
+29a src/api/<capability>.api.ts                    (API/HYBRID only)
+29b src/models/api/<capability>.contract.ts        (API/HYBRID only)
 30  src/fixtures/test.ts
 31  src/services/<capability>.service.ts
 32  test-data/<capability>.sample.json
@@ -266,6 +278,10 @@ release-baselined in `traceability/releases/<release>.baseline.json`.
 
 Steps 37–39 (`FAILURE_TRIAGE`) and the healing/bug-reporting branches only occur when
 `EXECUTION` reports a failing scenario; they are inserted between steps 36 and 40.
+
+Letter-suffixed entries are **conditional**: they are created only when an approved test plan
+declares an `API` or `HYBRID` scenario. A purely UI story creates none of them, which is why the
+main numbering is unchanged.
 
 ---
 

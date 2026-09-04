@@ -87,6 +87,50 @@ export const scenarioActionSchema = z.enum([
   'REVIEW_REQUIRED',
 ]);
 
+/**
+ * Which interface a scenario exercises.
+ *
+ * Absence means UI. Every artifact written before API support existed is
+ * therefore still valid and still correct, without being edited.
+ */
+export const interfaceTypeSchema = z.enum(['UI', 'API', 'HYBRID']);
+
+export type InterfaceType = z.infer<typeof interfaceTypeSchema>;
+
+/** Absence of an explicit interface is UI, never "unknown". */
+export const DEFAULT_INTERFACE_TYPE: InterfaceType = 'UI';
+
+/**
+ * Where an API contract came from, in descending order of authority.
+ *
+ * `OBSERVED` is the trap this enum exists to make visible: traffic captured
+ * from the running application describes what it *does*, not what it *should
+ * do*. Asserting an acceptance criterion against observed behaviour would
+ * codify any current bug as the expected result, so an observed contract may
+ * only get a scenario to a state - never judge one.
+ */
+export const contractSourceSchema = z.enum([
+  'OPENAPI',
+  'HUMAN_APPROVED',
+  'OBSERVED',
+  'UNVERIFIED',
+]);
+
+export type ContractSource = z.infer<typeof contractSourceSchema>;
+
+/** Contract sources strong enough to back an assertion on an approved AC. */
+export const AUTHORITATIVE_CONTRACT_SOURCES: readonly ContractSource[] = ['OPENAPI', 'HUMAN_APPROVED'];
+
+export const httpMethodSchema = z.enum([
+  'GET',
+  'POST',
+  'PUT',
+  'PATCH',
+  'DELETE',
+  'HEAD',
+  'OPTIONS',
+]);
+
 export const decisionSchema = z.enum(['APPROVE', 'REJECT', 'DEFER', 'REQUEST_CHANGES']);
 
 export const dataClassificationSchema = z.enum(['REAL_JIRA_DATA', 'SAMPLE_DATA']);

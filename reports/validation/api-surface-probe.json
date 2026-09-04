@@ -1,0 +1,4466 @@
+{
+  "probe": "api-surface",
+  "stories": [
+    "ETA-351",
+    "ETA-411"
+  ],
+  "startedAt": "2026-09-04T13:18:32.988Z",
+  "scope": "Observation of the approved UI flows only. Records what the application does, never what it should do. No request body, response value, header, cookie or query value is recorded. Nothing here is a contract until a human approves it at Gate 2.",
+  "contractSource": "OBSERVED",
+  "summary": {
+    "totalResponses": 379,
+    "jsonResponses": 1,
+    "xhrOrFetchResponses": 1,
+    "distinctJsonEndpoints": 1,
+    "distinctXhrEndpoints": 1,
+    "byResourceType": {
+      "document": 12,
+      "script": 218,
+      "stylesheet": 78,
+      "image": 65,
+      "font": 5,
+      "xhr": 1
+    }
+  },
+  "distinctJsonEndpoints": [
+    "POST /ssweb/setup/workspace/getSearchTransactionTypes.eo"
+  ],
+  "distinctXhrEndpoints": [
+    "POST /ssweb/setup/workspace/getSearchTransactionTypes.eo"
+  ],
+  "calls": [
+    {
+      "phase": "initial-load",
+      "method": "GET",
+      "path": "/ssweb/setup/showLogin.eo",
+      "queryParamNames": [],
+      "resourceType": "document",
+      "status": 302,
+      "contentType": null,
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "initial-load",
+      "method": "GET",
+      "path": "/ssweb/setup/browserDetectionPage.eo",
+      "queryParamNames": [],
+      "resourceType": "document",
+      "status": 200,
+      "contentType": "text/html;charset=utf-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "initial-load",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "initial-load",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.migrate.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "initial-load",
+      "method": "GET",
+      "path": "/ssweb/js/lib/js.cookie.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "initial-load",
+      "method": "GET",
+      "path": "/ssweb/js/featureDetection.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "initial-load",
+      "method": "GET",
+      "path": "/ssweb/js/lib/modernizr.custom.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "initial-load",
+      "method": "GET",
+      "path": "/ssweb/setup/browserDetectionSubmit.eo",
+      "queryParamNames": [],
+      "resourceType": "document",
+      "status": 302,
+      "contentType": null,
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "initial-load",
+      "method": "GET",
+      "path": "/ssweb/setup/showLogin.eo",
+      "queryParamNames": [],
+      "resourceType": "document",
+      "status": 200,
+      "contentType": "text/html;charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "initial-load",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "initial-load",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.migrate.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "initial-load",
+      "method": "GET",
+      "path": "/ssweb/js/lib/modernizr.custom.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "initial-load",
+      "method": "GET",
+      "path": "/ssweb/js/lib/js.cookie.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "initial-load",
+      "method": "GET",
+      "path": "/ssweb/js/featureDetection.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "initial-load",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.tablednd.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "initial-load",
+      "method": "GET",
+      "path": "/ssweb/css/websign-setup.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "initial-load",
+      "method": "GET",
+      "path": "/ssweb/css/bootstrap.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "initial-load",
+      "method": "GET",
+      "path": "/ssweb/css/jquery-ui.structure.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "initial-load",
+      "method": "GET",
+      "path": "/ssweb/css/bootstrap-icons.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "initial-load",
+      "method": "GET",
+      "path": "/ssweb/css/websign-login-home.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "initial-load",
+      "method": "GET",
+      "path": "/ssweb/js/lib/platform.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "initial-load",
+      "method": "GET",
+      "path": "/ssweb/js/lib/fingerprint2.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "initial-load",
+      "method": "GET",
+      "path": "/ssweb/js/login.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "initial-load",
+      "method": "GET",
+      "path": "/ssweb/js/setup.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "initial-load",
+      "method": "GET",
+      "path": "/ssweb/css/smoothness/jquery-ui.theme.min.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "initial-load",
+      "method": "GET",
+      "path": "/ssweb/js/websign-login.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "initial-load",
+      "method": "GET",
+      "path": "/ssweb/images/eoriginal.png",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "initial-load",
+      "method": "GET",
+      "path": "/ssweb/images/tooltip.gif",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/gif; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "initial-load",
+      "method": "GET",
+      "path": "/css",
+      "queryParamNames": [
+        "family"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=utf-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "initial-load",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery-ui.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "initial-load",
+      "method": "GET",
+      "path": "/ssweb/images/bg-login.jpg",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/jpeg; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "initial-load",
+      "method": "GET",
+      "path": "/s/opensans/v44/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-muw.woff2",
+      "queryParamNames": [],
+      "resourceType": "font",
+      "status": 200,
+      "contentType": "font/woff2",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "POST",
+      "path": "/ssweb/setup/eo_cc_login",
+      "queryParamNames": [],
+      "resourceType": "document",
+      "status": 302,
+      "contentType": null,
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "GET",
+      "path": "/ssweb/setup/welcome.eo",
+      "queryParamNames": [],
+      "resourceType": "document",
+      "status": 200,
+      "contentType": "text/html;charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "GET",
+      "path": "/ssweb/css/bootstrap.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "GET",
+      "path": "/ssweb/css/bootstrap-icons.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "GET",
+      "path": "/ssweb/css/jquery-ui.structure.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "GET",
+      "path": "/ssweb/css/smoothness/jquery-ui.theme.min.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "GET",
+      "path": "/ssweb/css/websign-setup.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "GET",
+      "path": "/ssweb/css/websign-login-home.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.migrate.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery-ui.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "GET",
+      "path": "/ssweb/js/lib/modernizr.custom.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "GET",
+      "path": "/ssweb/js/lib/js.cookie.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "GET",
+      "path": "/ssweb/js/featureDetection.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.tablednd.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "GET",
+      "path": "/ssweb/js/setup.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "GET",
+      "path": "/css",
+      "queryParamNames": [
+        "family"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=utf-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "GET",
+      "path": "/ssweb/css/jquery.qtip.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.timers-1.2.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.bgiframe.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.blockUI.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "GET",
+      "path": "/s/opensans/v44/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-muw.woff2",
+      "queryParamNames": [],
+      "resourceType": "font",
+      "status": 200,
+      "contentType": "font/woff2",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "GET",
+      "path": "/ssweb/css/noty.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.validate.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.postlink.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.validate.additional-methods.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.qtip.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "GET",
+      "path": "/ssweb/js/websign.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "GET",
+      "path": "/ssweb/js/welcome.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.form.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "GET",
+      "path": "/ssweb/js/lib/moment.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "GET",
+      "path": "/ssweb/images/dashboard/dashboard_transaction.png",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "GET",
+      "path": "/ssweb/js/lib/noty.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "GET",
+      "path": "/ssweb/images/dashboard/dashboard_workspace.png",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "GET",
+      "path": "/ssweb/images/dashboard/dashboard_preferences.png",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "GET",
+      "path": "/ssweb/images/dashboard/bg-dots.png",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "GET",
+      "path": "/ssweb/js/lib/moment-timezone-with-data.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "GET",
+      "path": "/ssweb/images/command_center.png",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "GET",
+      "path": "/ssweb/images/dashboard/bg-home.jpg",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/jpeg; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "sign-in",
+      "method": "GET",
+      "path": "/ssweb/images/bg150.png",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/setup/container/ct/newPackage.eo",
+      "queryParamNames": [],
+      "resourceType": "document",
+      "status": 200,
+      "contentType": "text/html;charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/css/jquery-ui.structure.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/css/smoothness/jquery-ui.theme.min.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/css/websign-setup.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/css/jquery.qtip.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.migrate.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery-ui.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.bgiframe.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/lib/modernizr.custom.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/lib/js.cookie.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/featureDetection.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.blockUI.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.tablednd.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.timers-1.2.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.qtip.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.validate.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.validate.additional-methods.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/setup.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.postlink.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/lib/moment.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/lib/moment-timezone-with-data.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/websign.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.form.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/images/tooltip.gif",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/gif; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/css/jquery-ui-timepicker-addon.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/lib/parse-address.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/transaction.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.maskedinput.custom.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery-ui-timepicker-addon.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/uldd-loan-identifier-message.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/parsable-file.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/uldd-form.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/createTransaction.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/images/loading.gif",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/gif; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/lib/handlebars.runtime.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/lib/commons-validator-js.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/images/bg150.png",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/images/command_center.png",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/css/smoothness/images/ui-icons_222222_256x240.png",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/css/smoothness/images/ui-bg_glass_75_e6e6e6_1x400.png",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/css/smoothness/images/ui-bg_highlight-soft_75_cccccc_1x100.png",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "new-transaction",
+      "method": "GET",
+      "path": "/ssweb/css/smoothness/images/ui-icons_888888_256x240.png",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/ssweb/setup/welcome.eo",
+      "queryParamNames": [],
+      "resourceType": "document",
+      "status": 200,
+      "contentType": "text/html;charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/ssweb/css/bootstrap.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/ssweb/css/bootstrap-icons.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/ssweb/css/jquery-ui.structure.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/ssweb/css/smoothness/jquery-ui.theme.min.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/ssweb/css/websign-setup.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/ssweb/css/websign-login-home.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/ssweb/css/jquery.qtip.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.migrate.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery-ui.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.bgiframe.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/lib/modernizr.custom.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/lib/js.cookie.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/featureDetection.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.blockUI.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.tablednd.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.timers-1.2.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.qtip.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.validate.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.validate.additional-methods.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/setup.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.postlink.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/lib/moment.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/lib/moment-timezone-with-data.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/websign.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/ssweb/css/noty.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/lib/noty.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/welcome.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.form.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/ssweb/images/dashboard/dashboard_transaction.png",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/ssweb/images/dashboard/dashboard_workspace.png",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/ssweb/images/dashboard/dashboard_preferences.png",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/ssweb/images/dashboard/bg-dots.png",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/css",
+      "queryParamNames": [
+        "family"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=utf-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/s/opensans/v44/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-muw.woff2",
+      "queryParamNames": [],
+      "resourceType": "font",
+      "status": 200,
+      "contentType": "font/woff2",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/ssweb/images/dashboard/bg-home.jpg",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/jpeg; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/ssweb/images/bg150.png",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/ssweb/images/command_center.png",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-new-transaction",
+      "method": "GET",
+      "path": "/ssweb/css/smoothness/images/ui-icons_222222_256x240.png",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/setup/workspace/workspace.eo",
+      "queryParamNames": [],
+      "resourceType": "document",
+      "status": 200,
+      "contentType": "text/html;charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/css/jquery-ui.structure.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/css/smoothness/jquery-ui.theme.min.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/css/websign-setup.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/css/jquery.qtip.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.migrate.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery-ui.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.bgiframe.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/modernizr.custom.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/js.cookie.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/featureDetection.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.blockUI.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.tablednd.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.timers-1.2.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.qtip.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.validate.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.validate.additional-methods.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/setup.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.postlink.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/moment.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/moment-timezone-with-data.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/websign.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/css/jquery-ui-timepicker-addon.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/css/noty.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/commons-validator-js.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.form.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.maskedinput.custom.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/parse-address.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/handlebars.runtime.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/uldd-form.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/uldd-loan-identifier-message.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/parsable-file.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery-ui-timepicker-addon.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/noty.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/css/setup-reports.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/css/setup-workspace.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/css/south-street/jquery-ui.theme.min.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/css/jquery.dataTables.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/css/smoothness/jquery-ui.theme.scoped.min.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/css/jquery.dataTables_themeroller.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/css/colReorder.dataTables.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/css/query-builder.default.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/css/buttons.dataTables.min.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/css/eo-cc-font.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/css/sweetalert2.min.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/css/chosen.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/EmailPatternValidator.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/images/loading.gif",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/gif; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/dataTables.colReorder.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/dataTables.buttons.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/buttons.colVis.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.layout.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/buttons.html5.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/dataTables.keyTable.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/dataTables.colResize.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery-extendext.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.dataTables.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.multiselect2side.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/chosen.jquery.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/purify.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/qualtrics.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/underscore.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.format.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/query-builder.standalone.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/searchBar.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/sweetalert2.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/queryBuilder.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/postlink.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/workspaceSearch.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/tinymce/tinymce.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/images/down_arrow.gif",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/gif; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/workqueue.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/workspace.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/images/urgent-32.png",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/math.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/images/bg150.png",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/images/command_center.png",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/css/smoothness/images/ui-bg_glass_75_e6e6e6_1x400.png",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/css/smoothness/images/ui-icons_888888_256x240.png",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/setup/workspace/this%20will%20break%20it%20https://zn2l5ekempatsaqi2-wkgrc.siteintercept.qualtrics.com/SIE/",
+      "queryParamNames": [
+        "Q_ZID",
+        "amp;Q_VERSION"
+      ],
+      "resourceType": "script",
+      "status": 500,
+      "contentType": "text/html;charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "POST",
+      "path": "/ssweb/setup/workspace/getSearchTransactionTypes.eo",
+      "queryParamNames": [],
+      "resourceType": "xhr",
+      "status": 200,
+      "contentType": "application/json;charset=UTF-8",
+      "jsonTopLevelKeys": [
+        "content"
+      ]
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/css/south-street/images/ui-bg_gloss-wave_100_ece8da_500x100.png",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/images/chosen-sprite.png",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/css/south-street/images/ui-bg_highlight-hard_100_f5f3e5_1x100.png",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/images/icon_minimize.gif",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/gif; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/css/south-street/images/ui-icons_808080_256x240.png",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/css/south-street/images/ui-icons_847e71_256x240.png",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/images/toggle-up.gif",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/gif; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "workspace",
+      "method": "GET",
+      "path": "/ssweb/images/toggle-lt.gif",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/gif; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/ssweb/setup/welcome.eo",
+      "queryParamNames": [],
+      "resourceType": "document",
+      "status": 200,
+      "contentType": "text/html;charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/ssweb/css/bootstrap.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/ssweb/css/bootstrap-icons.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/ssweb/css/jquery-ui.structure.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/ssweb/css/smoothness/jquery-ui.theme.min.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/ssweb/css/websign-setup.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/ssweb/css/websign-login-home.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/ssweb/css/jquery.qtip.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.migrate.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery-ui.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.bgiframe.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/modernizr.custom.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/js.cookie.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/ssweb/js/featureDetection.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.blockUI.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.tablednd.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.timers-1.2.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.qtip.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.validate.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.validate.additional-methods.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/ssweb/js/setup.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.postlink.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/moment.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/moment-timezone-with-data.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/ssweb/js/websign.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/ssweb/css/noty.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/noty.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/ssweb/js/welcome.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.form.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/ssweb/images/dashboard/dashboard_transaction.png",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/ssweb/images/dashboard/dashboard_workspace.png",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/css",
+      "queryParamNames": [
+        "family"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=utf-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/s/opensans/v44/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-muw.woff2",
+      "queryParamNames": [],
+      "resourceType": "font",
+      "status": 200,
+      "contentType": "font/woff2",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/ssweb/images/dashboard/dashboard_preferences.png",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/ssweb/images/dashboard/bg-dots.png",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/ssweb/images/bg150.png",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/ssweb/images/command_center.png",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/ssweb/images/dashboard/bg-home.jpg",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/jpeg; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-workspace",
+      "method": "GET",
+      "path": "/ssweb/css/smoothness/images/ui-icons_222222_256x240.png",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/setup/prefs/preferences.eo",
+      "queryParamNames": [],
+      "resourceType": "document",
+      "status": 200,
+      "contentType": "text/html;charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/css/jquery-ui.structure.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/css/smoothness/jquery-ui.theme.min.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/css/websign-setup.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/css/jquery.qtip.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.migrate.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery-ui.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.bgiframe.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/modernizr.custom.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/js.cookie.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/js/featureDetection.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.blockUI.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.tablednd.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.timers-1.2.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.qtip.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.validate.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.validate.additional-methods.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/js/setup.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.postlink.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/moment.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/moment-timezone-with-data.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/js/websign.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/css/south-street/jquery-ui.theme.min.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/css/jquery.dataTables.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/css/jquery.dataTables_themeroller.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/css/colReorder.dataTables.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/css/chosen.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/chosen.jquery.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/commons-validator-js.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/js/EmailPatternValidator.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.form.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.layout.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/tinymce/tinymce.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.dataTables.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/dataTables.colReorder.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.maskedinput.custom.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/underscore.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/purify.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/images/loading.gif",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/gif; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/css/setup-administration.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/css/colorpicker.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.caret.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/css/setup-prefs.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/colorpicker.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/js/prefs.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/js/preferences.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/images/bg150.png",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/images/command_center.png",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/css/south-street/images/ui-bg_highlight-hard_100_f5f3e5_1x100.png",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/css/south-street/images/ui-icons_808080_256x240.png",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/css/south-street/images/ui-bg_gloss-wave_100_ece8da_500x100.png",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/images/toggle-lt.gif",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/gif; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "preferences",
+      "method": "GET",
+      "path": "/ssweb/images/chosen-sprite.png",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/ssweb/setup/welcome.eo",
+      "queryParamNames": [],
+      "resourceType": "document",
+      "status": 200,
+      "contentType": "text/html;charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/ssweb/css/bootstrap.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/ssweb/css/bootstrap-icons.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/ssweb/css/jquery-ui.structure.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/ssweb/css/smoothness/jquery-ui.theme.min.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/ssweb/css/websign-setup.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/ssweb/css/websign-login-home.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/ssweb/css/jquery.qtip.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.migrate.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery-ui.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.bgiframe.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/modernizr.custom.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/js.cookie.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/ssweb/js/featureDetection.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.blockUI.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.tablednd.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.timers-1.2.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.qtip.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.validate.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.validate.additional-methods.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/ssweb/js/setup.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.postlink.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/moment.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/moment-timezone-with-data.min.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/ssweb/js/websign.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/ssweb/css/noty.css",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/noty.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/ssweb/js/welcome.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/ssweb/js/lib/jquery.form.js",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "script",
+      "status": 200,
+      "contentType": "application/javascript; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/ssweb/images/dashboard/dashboard_transaction.png",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/ssweb/images/dashboard/dashboard_workspace.png",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/ssweb/images/dashboard/dashboard_preferences.png",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/ssweb/images/dashboard/bg-dots.png",
+      "queryParamNames": [
+        "eOv"
+      ],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/css",
+      "queryParamNames": [
+        "family"
+      ],
+      "resourceType": "stylesheet",
+      "status": 200,
+      "contentType": "text/css; charset=utf-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/s/opensans/v44/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-muw.woff2",
+      "queryParamNames": [],
+      "resourceType": "font",
+      "status": 200,
+      "contentType": "font/woff2",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/ssweb/images/dashboard/bg-home.jpg",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/jpeg; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/ssweb/images/bg150.png",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/ssweb/images/command_center.png",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    },
+    {
+      "phase": "return-home-from-preferences",
+      "method": "GET",
+      "path": "/ssweb/css/smoothness/images/ui-icons_222222_256x240.png",
+      "queryParamNames": [],
+      "resourceType": "image",
+      "status": 200,
+      "contentType": "image/png; charset=UTF-8",
+      "jsonTopLevelKeys": null
+    }
+  ]
+}

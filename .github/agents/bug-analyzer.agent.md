@@ -94,10 +94,37 @@ Field sources — never guess any of these:
 | `observedBehaviour` | Plain-language restatement of the Playwright error. Describe what happened, not why |
 | `executionId`, `executionRecordPath` | `traceability/executions/EXEC-*.json` for this run |
 | `gherkinScenario` | The scenario name from the approved feature file |
+| `interfaceType` | The `@interface-` tag on the failing scenario. Absent means `UI` |
 | `fingerprint`, `classification`, `evidence.*` | Copied from the triage report |
 | `dataClassification` | Must equal the story's classification in `requirements/approved/<STORY>.json` |
 
 Set `status: TRIAGED`, `healing: { attempts: [], outcome: "NOT_ATTEMPTED" }`, `jira: null`.
+
+### 1.2.1 Classifying an API failure
+
+**Read the `@interface-` tag before you classify.** An API scenario exercises no locator, so
+`LOCATOR_SUSPECT` is not available to it and the usual "route `AMBIGUOUS` to healing first" policy
+does not apply — there is nothing there to heal.
+
+| Signal | Classification |
+| --- | --- |
+| Refused connection, DNS, TLS, proxy, `502`/`503`/`504`, or no `API_BASE_URL` configured | `ENVIRONMENT_BLOCKER` — the request never reached the application |
+| Call completed, but status or response shape violates the approved contract | `CONTRACT_MISMATCH` |
+| Call completed and matched the contract, but the behaviour is wrong | `APPLICATION_DEFECT` |
+
+A `401` needs care: it is an `ENVIRONMENT_BLOCKER` when the test never obtained a credential at all
+(misconfiguration), but an `APPLICATION_DEFECT` or `CONTRACT_MISMATCH` when a valid credential was
+rejected. Decide from the evidence; if the evidence does not settle it, record `AMBIGUOUS` and say
+why — do not guess.
+
+**An API-only failure has no screenshot.** Its evidence is `evidence.apiExchanges`: method, path,
+expected status codes, actual status, contract violations and a **redacted** response body. Never
+hand over an empty evidence set because the usual screenshot was missing.
+
+> Redact before you write. An API request carries `Authorization` headers and full payloads, and a
+> defect artifact is a governed file in the repository. The same caution applies to `trace.zip`: an
+> API trace is a richer secret-leak risk than a UI one, so honour `BUG_ATTACH_TRACE` and record
+> `attachmentsWithheld` rather than silently dropping evidence.
 
 ### 1.3 Validate before handing over
 
@@ -115,7 +142,11 @@ Tell the orchestrator, per defect:
 - `ENVIRONMENT_BLOCKER` → **halt.** Set `status: BLOCKED` and tell the human exactly what is
   unreachable. Do not heal it, do not file it.
 - `APPLICATION_DEFECT` → next stage `BUG_REPORTING`
-- `LOCATOR_SUSPECT` or `AMBIGUOUS` → next stage `LOCATOR_HEALING`
+- `CONTRACT_MISMATCH` → next stage `BUG_REPORTING`. **Never** route it to healing: either the
+  application changed or the agreed contract is wrong, and both are human decisions rather than
+  something a test may quietly absorb.
+- `LOCATOR_SUSPECT` or `AMBIGUOUS` → next stage `LOCATOR_HEALING`, **unless the scenario is
+  `@interface-api`**, in which case healing is not applicable and it goes to `BUG_REPORTING`.
 
 `AMBIGUOUS` goes to healing first. An unnecessary heal attempt is cheap; a bug report that turns out
 to be a stale selector costs a developer an afternoon and erodes trust in the whole suite.
@@ -129,7 +160,7 @@ whole framework untrustworthy. Say what is unreachable and stop.
 
 ## Stage 2 - `BUG_REPORTING`
 
-Entered only for `APPLICATION_DEFECT`, or for `LOCATOR_UNHEALABLE` with
+Entered only for `APPLICATION_DEFECT`, `CONTRACT_MISMATCH`, or for `LOCATOR_UNHEALABLE` with
 `healing.outcome: NOT_HEALED` and exactly two recorded attempts.
 
 ### 2.1 Preconditions — check all, halt on any failure

@@ -65,7 +65,18 @@
         "acDesignCoveragePct": { "$ref": "#/$defs/percentage" },
         "automationCoveragePct": { "$ref": "#/$defs/percentage" },
         "executionCoveragePct": { "$ref": "#/$defs/percentage" },
-        "passCoveragePct": { "$ref": "#/$defs/percentage" }
+        "passCoveragePct": { "$ref": "#/$defs/percentage" },
+        "byInterface": {
+          "description": "Optional. Absent means the split was never measured, which is not the same as a capability having no API coverage. Browser code coverage is unrelated and is never merged here.",
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["UI", "API", "HYBRID"],
+          "properties": {
+            "UI": { "$ref": "#/$defs/interfaceCoverage" },
+            "API": { "$ref": "#/$defs/interfaceCoverage" },
+            "HYBRID": { "$ref": "#/$defs/interfaceCoverage" }
+          }
+        }
       }
     },
     "gaps": {
@@ -91,6 +102,29 @@
     "notes": { "type": "array", "items": { "type": "string" } }
   },
   "$defs": {
+    "interfaceCoverage": {
+      "description": "Carries no acDesignCoveragePct on purpose: an AC only acquires an interface once a test plan links it to a scenario, so that denominator cannot exist before its numerator and the measure could only ever read 100% or null.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "acsWithScenarios",
+        "acsWithExecutableAutomation",
+        "acsExecuted",
+        "acsPassed",
+        "automationCoveragePct",
+        "executionCoveragePct",
+        "passCoveragePct"
+      ],
+      "properties": {
+        "acsWithScenarios": { "type": "integer", "minimum": 0 },
+        "acsWithExecutableAutomation": { "type": "integer", "minimum": 0 },
+        "acsExecuted": { "type": "integer", "minimum": 0 },
+        "acsPassed": { "type": "integer", "minimum": 0 },
+        "automationCoveragePct": { "$ref": "#/$defs/percentage" },
+        "executionCoveragePct": { "$ref": "#/$defs/percentage" },
+        "passCoveragePct": { "$ref": "#/$defs/percentage" }
+      }
+    },
     "percentage": {
       "description": "Null when the source data required for the calculation is unavailable.",
       "type": ["number", "null"],
