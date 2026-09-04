@@ -14,6 +14,7 @@ npm run typecheck            # tsc --noEmit
 npm run bdd                  # bddgen: features/approved/** -> .features-gen/
 npm test                     # bddgen && playwright test
 npm run test:smoke           # only @suite-smoke scenarios (also :regression, :critical)
+npm run report               # open the last HTML report from reports/playwright-report/
 npm run test:coverage        # forces V8 capture on when a local .env disabled it
 npm run probe:api            # loopback check that the API client layer actually executes
 npm run capture:session      # sign in once -> .auth/ecore-session.json for MCP exploration
@@ -106,6 +107,15 @@ that shortcut — they must always exercise the real sign-in.
 
 ## Environment gotchas (these will bite you)
 
+- **The shell is Windows PowerShell.** Chain with `;` — `&&` is a parse error. Two traps inside
+  `node -e "..."`: an escaped `\"` in the inner JavaScript throws
+  `SyntaxError: Invalid string escape`, and `||` can be rewritten to `;` in transit, producing a
+  bogus `Expected ',', got ';'`. Use a ternary (`p.risks?p.risks:[]`) and single quotes inside.
+  If a one-liner fails twice on quoting, write a throwaway script under `scripts/` instead.
+- **A CLI `--reporter` flag REPLACES the config reporter array, it does not add to it.**
+  `playwright test --reporter=list` therefore silently skips the `html` and `json` reporters, and
+  `npm run report` then opens a stale or blank report that looks like "no tests ran". To narrow a
+  run, use `--grep` / `--grep-invert` and leave the reporters alone.
 - **Node 24 native type-stripping is the runtime.** Relative imports **must** carry an explicit
   `.ts` extension: `import { env } from '../utils/env.ts'`.
 - **`erasableSyntaxOnly: true`.** TypeScript parameter properties
@@ -137,6 +147,11 @@ The **SDD Workflow Orchestrator** owns all state and every handoff. It runs **on
 invocation**, then persists state. Stage order, per-stage agent, required inputs and outputs are
 data, not prose — see
 [workflow/definitions/sdd-jira-to-automation.workflow.json](workflow/definitions/sdd-jira-to-automation.workflow.json).
+
+For the file-by-file list of everything one story creates, in stage order, with the reference
+`ETA-351` filenames, see
+[docs/framework-file-creation-sequence.md](docs/framework-file-creation-sequence.md). Consult it
+before creating an artifact rather than guessing a path.
 
 | Directory | Contains | Owner |
 | --- | --- | --- |

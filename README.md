@@ -4,10 +4,12 @@ A proof of concept for a spec-driven test automation framework that turns a Jira
 approved, traceable, executable Playwright-BDD tests through a **durable, resumable, agent-driven
 workflow with three human approval gates**.
 
-> **POC status.** The framework has been driven end to end by one real Jira story, `ETA-351`, from
-> retrieval through three approval gates to a real browser run against the QA environment — 7 of 7
-> scheduled scenarios passing. `ETA-351` is now the only story in the repository and the reference
-> shape for every artifact. See [Known POC limitations](#known-poc-limitations).
+> **POC status.** The framework has been driven end to end by two real Jira stories, `ETA-351`
+> (capability `account-access`) and `ETA-411` (capability `home-navigation`), each from retrieval
+> through three approval gates to a real browser run against the QA environment. Both workflow
+> instances are `COMPLETED` and every scheduled scenario passed — 8 of 8 for `ETA-351`, 11 of 11
+> for `ETA-411`. `ETA-351` remains the reference shape for every artifact type. See
+> [Known POC limitations](#known-poc-limitations).
 
 ---
 
@@ -98,7 +100,7 @@ rules an agent cannot infer from the code:
 | --- | --- |
 | [governed-artifacts.instructions.md](.github/instructions/governed-artifacts.instructions.md) | `requirements/**`, `test-plans/**`, `workflow/**`, `traceability/**`, `src/models/**` |
 | [playwright-automation.instructions.md](.github/instructions/playwright-automation.instructions.md) | `features/**`, `steps/**`, `src/pages|components|fixtures|services/**`, `test-data/**`, `tests/**` |
-| [framework-tooling.instructions.md](.github/instructions/framework-tooling.instructions.md) | `src/utils/**` |
+| [framework-tooling.instructions.md](.github/instructions/framework-tooling.instructions.md) | `src/utils/**`, `scripts/**` |
 
 Project-wide context lives in [AGENTS.md](AGENTS.md).
 
@@ -487,24 +489,39 @@ specs/                   Playwright Planner output (tool-owned)
    an agent cannot perform unattended. `ETA-351` was retrieved with human-assisted authentication and
    is labelled `REAL_JIRA_DATA`. Jira Server / Data Center is not supported by the configured
    endpoint.
-2. **Execution is proven for one capability only.** `ETA-351` ran against the QA environment and
-   [traceability/executions/EXEC-ETA-351-001.json](traceability/executions/EXEC-ETA-351-001.json)
-   records 7 of 7 scheduled scenarios passing. Nothing else in the repository has been executed, and
-   **no result is ever reported as passing without an execution record**.
+2. **Execution is proven for two capabilities only.** `account-access` and `home-navigation` ran
+   against the QA environment;
+   [traceability/executions/EXEC-ETA-351-002.json](traceability/executions/EXEC-ETA-351-002.json)
+   records 8 of 8 scenarios passing and
+   [traceability/executions/EXEC-ETA-411-001.json](traceability/executions/EXEC-ETA-411-001.json)
+   records 11 of 11. Nothing else in the repository has been executed, and **no result is ever
+   reported as passing without an execution record**.
 3. **Locator validation was done without Playwright MCP.** The `playwright-test` MCP server exposed
-   no callable tools, so locators for `account-access` were validated by driving a real Chromium
+   no callable tools, so locators for both capabilities were validated by driving a real Chromium
    session against the live application instead. The evidence standard held; the mechanism differed.
-   See [reports/validation/ETA-351-playwright-validation.md](reports/validation/ETA-351-playwright-validation.md).
+   See [reports/validation/ETA-351-playwright-validation.md](reports/validation/ETA-351-playwright-validation.md)
+   and [reports/validation/ETA-411-playwright-validation.md](reports/validation/ETA-411-playwright-validation.md).
    Any new capability starts again at `MCP_VALIDATION_REQUIRED`.
 4. **Locking is advisory.** `processingLock` is a cooperative field in the workflow state, adequate
    for a single-orchestrator POC. Multi-runner concurrency needs a real lock service.
-5. **Bug analysis is out of scope.** No bug-analysis agent exists.
+5. **The failure-handling branch has never run.** The `bug-analyzer` and `governed-locator-healer`
+   agents exist and the branch is defined in the workflow, but every execution so far has been
+   green, so no defect artifact has ever been created. `defects/` holds only its schema, and the
+   `DEF-STRUCTURE` and `SEM-DEFECT-EVIDENCE` checks report `SKIPPED` in
+   `reports/validation/validation-all.json`. Triage, evidence preservation, fingerprint
+   deduplication, locator healing and Jira filing are **designed but unproven in practice**.
 6. **Schema validation is hand-rolled.** `src/utils/schema-parity.ts` performs a structural parity
    check between each JSON Schema and its instances; full JSON Schema keyword evaluation is
    delegated to the Zod models. A production build should add a dedicated JSON Schema validator.
 7. **`.npmrc` contains a plaintext Artifactory token.** This file was pre-existing and was
    deliberately not modified. **REVIEW_REQUIRED** — rotate the token and move it out of the
    repository before this project is shared or published.
-8. **Not a git repository yet.** `.gitignore` is in place but `git check-ignore` could not be
-   verified because the workspace has not been initialised with `git init`.
+8. **The API path is scaffolding only.** eCore is a server-rendered Java application with no REST
+   resource model (see
+   [reports/validation/ecore-api-discovery.json](reports/validation/ecore-api-discovery.json)), so
+   every approved scenario is `interfaceType: UI`, no feature file carries an `@interface-` tag,
+   `src/api/` contains only the base `api-client.ts`, and the `SEM-API-CONTRACT` check reports
+   `SKIPPED`. The governance rules for API contracts are written but have never been exercised.
+   Closing this honestly needs a story with a genuinely API-verifiable criterion — not a synthetic
+   scenario invented to make the check run.
 

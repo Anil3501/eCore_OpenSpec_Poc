@@ -1,13 +1,14 @@
 ---
-description: "Use when editing framework tooling in src/utils: the env loader, artifact validators, schema-parity checks, workflow status or the v8-to-istanbul coverage pipeline. Covers Node 24 ESM/CJS interop, CLI script conventions, adding an env variable and path-safety."
+description: "Use when editing framework tooling in src/utils or a probe/capture script in scripts/: the env loader, artifact validators, schema-parity checks, workflow status, one-off Playwright probes or the v8-to-istanbul coverage pipeline. Covers Node 24 ESM/CJS interop, CLI script conventions, adding an env variable and path-safety."
 name: "Framework tooling and CLI scripts"
-applyTo: ["src/utils/**"]
+applyTo: ["src/utils/**", "scripts/**"]
 ---
 
 # Framework tooling and CLI scripts
 
 `src/utils/` holds the non-test machinery: the typed env loader, the governance validators and the
-code-coverage pipeline. These files run under **Node directly**, not under Playwright.
+code-coverage pipeline. `scripts/` holds one-off probes and capture utilities driven by the same
+conventions. These files run under **Node directly**, not under Playwright.
 
 ## Node 24 runtime traps
 
@@ -43,6 +44,14 @@ Every script here follows the shape of
    failed check.
 5. A matching entry in `package.json` scripts using
    `node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON src/utils/<file>.ts`.
+
+A `scripts/` probe follows the same five points, plus two of its own. Its docblock states **what
+question the probe exists to answer and what evidence it collected** — scripted navigation is not
+Playwright MCP, and the report must say which it was. And a probe **observes**: it records a
+difference between the application and an approved expectation as a discrepancy for a human, and
+never edits the expectation to match. See
+[scripts/eta-411-navigation-validation.ts](../../scripts/eta-411-navigation-validation.ts).
+Against eCore, sign in exactly once per probe — repeated failed attempts trip the account lockout.
 
 Reuse [src/utils/artifact-io.ts](../../src/utils/artifact-io.ts) (`PROJECT_ROOT`, `toAbsolute`,
 `toRelative`, `readJson`, `listFiles`) rather than re-implementing path or JSON handling.
