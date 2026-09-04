@@ -119,7 +119,10 @@ export const jiraStorySchema = z.object({
       summary: z.string(),
     }),
   ),
-  sourceRef: z.string().nullable(),
+  sourceRef: z
+    .string()
+    .regex(/^https:\/\/[a-z0-9.-]+\/browse\/[A-Z][A-Z0-9]+-[0-9]+$/)
+    .nullable(),
 });
 
 export const requirementSourceSchema = z
@@ -131,7 +134,11 @@ export const requirementSourceSchema = z
     // without a real snapshot on disk.
     retrievedVia: z.enum(['ATLASSIAN_MCP', 'JIRA_REST_API', 'SAMPLE_DATA']),
     dataClassification: dataClassificationSchema,
-    rawSnapshotPath: z.string().nullable(),
+    // The governed copy under requirements/raw/, never the ungoverned fetch snapshot in reports/jira/.
+    rawSnapshotPath: z
+      .string()
+      .regex(/^requirements\/raw\/[A-Z][A-Z0-9]+-[0-9]+\.json$/)
+      .nullable(),
     retrievedAt: isoTimestampSchema,
   })
   .superRefine((source, ctx) => {

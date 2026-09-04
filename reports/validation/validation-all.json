@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-04T18:30:44.797Z",
+  "generatedAt": "2026-09-04T19:13:34.659Z",
   "scope": "all",
   "summary": {
     "total": 18,
@@ -13,7 +13,7 @@
       "title": "Requirement artifacts validate against schema",
       "status": "PASS",
       "messages": [
-        "2 artifact(s) validated."
+        "3 artifact(s) validated."
       ]
     },
     {

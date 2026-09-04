@@ -6,9 +6,9 @@
   "release": "1.0",
   "capability": "home-navigation",
   "dataClassification": "REAL_JIRA_DATA",
-  "currentStage": "JIRA_RETRIEVAL",
-  "nextStage": "REQUIREMENT_NORMALIZATION",
-  "lastSuccessfulStage": "JIRA_RETRIEVAL",
+  "currentStage": "REQUIREMENT_NORMALIZATION",
+  "nextStage": "AC_ANALYSIS",
+  "lastSuccessfulStage": "REQUIREMENT_NORMALIZATION",
   "status": "IN_PROGRESS",
   "completedStages": [
     {
@@ -18,16 +18,27 @@
       "outputs": [
         "requirements/raw/ETA-411.json"
       ]
+    },
+    {
+      "stage": "REQUIREMENT_NORMALIZATION",
+      "completedAt": "2026-09-05T09:15:00.000Z",
+      "agent": "sdd-workflow-orchestrator",
+      "outputs": [
+        "requirements/normalized/ETA-411.json"
+      ]
     }
   ],
   "pendingApproval": null,
-  "inputArtifactVersions": {},
+  "inputArtifactVersions": {
+    "requirements/raw/ETA-411.json": 1
+  },
   "outputArtifactPaths": [
-    "requirements/raw/ETA-411.json"
+    "requirements/raw/ETA-411.json",
+    "requirements/normalized/ETA-411.json"
   ],
   "retryCount": 0,
   "createdAt": "2026-09-04T18:32:00.000Z",
-  "updatedAt": "2026-09-04T18:32:01.000Z",
+  "updatedAt": "2026-09-05T09:15:00.000Z",
   "startedAt": "2026-09-04T18:32:00.000Z",
   "completedAt": null,
   "errorDetails": null,

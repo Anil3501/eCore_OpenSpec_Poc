@@ -1,0 +1,185 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactVersion": 1,
+  "release": "1.0",
+  "capability": "home-navigation",
+  "supersedes": null,
+  "changeType": "NEW",
+  "story": {
+    "jiraId": "ETA-411",
+    "summary": "Create tests to use Home screen icons",
+    "description": "As an Organization user, I want to view and access only the eCore modules authorized for my organization, so that I can navigate to New Transaction, Workspace, and Preferences from the Dashboard main screen; access Home, New Transaction, Workspace, and Preferences from the top-right navigation menu; access Organization and Vault as sub-items under Preferences; and return to the Home page using Command Center.\nThe UI and supporting APIs must provide consistent module access and prevent unauthenticated or unauthorized access.",
+    "issueType": "Story",
+    "priority": "Medium",
+    "status": "Closed",
+    "labels": [
+      "QA"
+    ],
+    "components": [],
+    "parent": {
+      "jiraId": "ETA-164",
+      "summary": "eCore Application Testing, Automation & Migration"
+    },
+    "linkedIssues": [],
+    "sourceRef": "https://eoriginal.atlassian.net/browse/ETA-411"
+  },
+  "requirements": [
+    {
+      "requirementId": "REQ-ETA-411-001",
+      "description": "An Organization user sees and can access only the eCore modules that are authorized for their organization. Modules that are not authorized are not available to them.",
+      "originalText": "As an Organization user, I want to view and access only the eCore modules authorized for my organization",
+      "sourceType": "EXTRACTED_FROM_JIRA",
+      "status": "PENDING_APPROVAL",
+      "version": 1,
+      "changeType": "NEW"
+    },
+    {
+      "requirementId": "REQ-ETA-411-002",
+      "description": "From the Dashboard main screen, an Organization user can navigate to New Transaction, Workspace and Preferences.",
+      "originalText": "so that I can navigate to New Transaction, Workspace, and Preferences from the Dashboard main screen",
+      "sourceType": "EXTRACTED_FROM_JIRA",
+      "status": "PENDING_APPROVAL",
+      "version": 1,
+      "changeType": "NEW"
+    },
+    {
+      "requirementId": "REQ-ETA-411-003",
+      "description": "From the top-right navigation menu, an Organization user can access Home, New Transaction, Workspace and Preferences.",
+      "originalText": "access Home, New Transaction, Workspace, and Preferences from the top-right navigation menu",
+      "sourceType": "EXTRACTED_FROM_JIRA",
+      "status": "PENDING_APPROVAL",
+      "version": 1,
+      "changeType": "NEW"
+    },
+    {
+      "requirementId": "REQ-ETA-411-004",
+      "description": "Organization and Vault are reachable as sub-items under Preferences.",
+      "originalText": "access Organization and Vault as sub-items under Preferences",
+      "sourceType": "EXTRACTED_FROM_JIRA",
+      "status": "PENDING_APPROVAL",
+      "version": 1,
+      "changeType": "NEW"
+    },
+    {
+      "requirementId": "REQ-ETA-411-005",
+      "description": "An Organization user can return to the Home page using Command Center.",
+      "originalText": "and return to the Home page using Command Center",
+      "sourceType": "EXTRACTED_FROM_JIRA",
+      "status": "PENDING_APPROVAL",
+      "version": 1,
+      "changeType": "NEW"
+    },
+    {
+      "requirementId": "REQ-ETA-411-006",
+      "description": "The UI and the supporting APIs provide consistent module access, so that what a user may reach through the interface and what the same user may reach through the APIs agree with one another.",
+      "originalText": "The UI and supporting APIs must provide consistent module access",
+      "sourceType": "EXTRACTED_FROM_JIRA",
+      "status": "PENDING_APPROVAL",
+      "version": 1,
+      "changeType": "NEW"
+    },
+    {
+      "requirementId": "REQ-ETA-411-007",
+      "description": "The UI and the supporting APIs prevent unauthenticated access and prevent unauthorized access.",
+      "originalText": "and prevent unauthenticated or unauthorized access",
+      "sourceType": "EXTRACTED_FROM_JIRA",
+      "status": "PENDING_APPROVAL",
+      "version": 1,
+      "changeType": "NEW"
+    }
+  ],
+  "acceptanceCriteria": [],
+  "ambiguities": [
+    {
+      "ambiguityId": "AMB-ETA-411-001",
+      "question": "ETA-411 is in status Closed with no resolution, and its two comments describe the delivery of this POC automation framework rather than any change to the eCore application. Is the rewritten description a genuine reopening of ETA-411, or does this expanded authorization scope belong on a new child of ETA-164? If it belongs elsewhere, the workflow id, the capability partition and every artifact produced from here on are attached to the wrong story.",
+      "impact": "Scope and traceability. Answering this after Gate 1 wastes the entire requirement, plan and automation effort; answering it now costs nothing.",
+      "relatedTo": [
+        "ETA-411",
+        "ETA-164"
+      ],
+      "status": "REVIEW_REQUIRED",
+      "resolution": null,
+      "resolvedBy": null,
+      "resolvedAt": null
+    },
+    {
+      "ambiguityId": "AMB-ETA-411-002",
+      "question": "REQ-ETA-411-001 requires that a user sees only the modules authorized for their organization, but no mapping of organization to permitted module is given anywhere in the story. Which organizations exist for the purposes of this requirement, and exactly which of Home, New Transaction, Workspace, Preferences, Organization and Vault is each one permitted to see and open? Note that the description was revised on 2026-09-04 to remove the words 'and role', narrowing this question from role-based to organization-based authorization; it did not answer it.",
+      "impact": "Blocks any acceptance criterion about authorization. Without the mapping there is no way to assert that an unauthorized module is absent, and the framework holds credentials for exactly one organization, so a passing test would say nothing about any other organization.",
+      "relatedTo": [
+        "REQ-ETA-411-001",
+        "REQ-ETA-411-006"
+      ],
+      "status": "REVIEW_REQUIRED",
+      "resolution": null,
+      "resolvedBy": null,
+      "resolvedAt": null
+    },
+    {
+      "ambiguityId": "AMB-ETA-411-003",
+      "question": "REQ-ETA-411-006 and REQ-ETA-411-007 refer to 'supporting APIs'. Which APIs are these? Evidence in reports/validation/ecore-api-discovery.json is that eCore is a server-rendered Java application with no REST resource model: sign-in is a form POST returning 302, and the only AJAX is form-encoded RPC-style .eo verbs, of which roughly 178 are declared in markup but have never been exercised.",
+      "impact": "Blocks every API-interface scenario. An endpoint, field name or status code may never be authored by an agent, and several unexercised .eo paths are irreversible against shared QA data.",
+      "relatedTo": [
+        "REQ-ETA-411-006",
+        "REQ-ETA-411-007"
+      ],
+      "status": "REVIEW_REQUIRED",
+      "resolution": null,
+      "resolvedBy": null,
+      "resolvedAt": null
+    },
+    {
+      "ambiguityId": "AMB-ETA-411-004",
+      "question": "REQ-ETA-411-007 requires that unauthenticated or unauthorized access is prevented, but does not say what the application does instead. What is the expected observable outcome: a redirect to the login page, an error page, a specific message, an HTTP status, or a module simply not being rendered? Does the answer differ between unauthenticated and merely unauthorized?",
+      "impact": "Blocks any negative-path acceptance criterion. Choosing an outcome here would be inventing a security behaviour, which an agent may not do.",
+      "relatedTo": [
+        "REQ-ETA-411-007"
+      ],
+      "status": "REVIEW_REQUIRED",
+      "resolution": null,
+      "resolvedBy": null,
+      "resolvedAt": null
+    },
+    {
+      "ambiguityId": "AMB-ETA-411-005",
+      "question": "REQ-ETA-411-006 requires 'consistent module access' between the UI and the supporting APIs. What does consistent mean in a way that can be observed and asserted: identical module lists, identical allow and deny decisions for the same user, or something narrower?",
+      "impact": "Without a definition this requirement cannot be turned into an acceptance criterion that can pass or fail honestly.",
+      "relatedTo": [
+        "REQ-ETA-411-006"
+      ],
+      "status": "REVIEW_REQUIRED",
+      "resolution": null,
+      "resolvedBy": null,
+      "resolvedAt": null
+    },
+    {
+      "ambiguityId": "AMB-ETA-411-006",
+      "question": "The story uses 'Dashboard main screen' in REQ-ETA-411-002 and 'the Home page' in REQ-ETA-411-003 and REQ-ETA-411-005. Are these the same screen under two names, or two different screens? Relatedly, 'Command Center' in REQ-ETA-411-005 is the route back to Home, but the story does not say what it is.",
+      "impact": "Affects how many destinations exist and how arrival is asserted. If they are the same screen, some criteria collapse into one; if not, a screen is currently undescribed.",
+      "relatedTo": [
+        "REQ-ETA-411-002",
+        "REQ-ETA-411-003",
+        "REQ-ETA-411-005"
+      ],
+      "status": "REVIEW_REQUIRED",
+      "resolution": null,
+      "resolvedBy": null,
+      "resolvedAt": null
+    }
+  ],
+  "source": {
+    "system": "JIRA",
+    "retrievedVia": "JIRA_REST_API",
+    "dataClassification": "REAL_JIRA_DATA",
+    "rawSnapshotPath": "requirements/raw/ETA-411.json",
+    "retrievedAt": "2026-09-04T19:11:33.132Z"
+  },
+  "approvalStatus": "PENDING_APPROVAL",
+  "approvalRef": null,
+  "timestamps": {
+    "createdAt": "2026-09-05T09:15:00.000Z",
+    "updatedAt": "2026-09-05T10:05:00.000Z",
+    "approvedAt": null
+  }
+}

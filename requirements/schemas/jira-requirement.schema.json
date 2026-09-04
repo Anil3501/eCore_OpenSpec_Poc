@@ -158,8 +158,9 @@
           }
         },
         "sourceRef": {
-          "description": "Source URL or reference when available, otherwise null.",
-          "type": ["string", "null"]
+          "description": "Browse URL of the story in the Jira instance it came from, otherwise null. Host is deliberately unconstrained so a different Jira deployment stays valid.",
+          "type": ["string", "null"],
+          "pattern": "^https://[a-z0-9.-]+/browse/[A-Z][A-Z0-9]+-[0-9]+$"
         }
       }
     },
@@ -310,7 +311,11 @@
           "type": "string",
           "enum": ["REAL_JIRA_DATA", "SAMPLE_DATA"]
         },
-        "rawSnapshotPath": { "type": ["string", "null"] },
+        "rawSnapshotPath": {
+          "description": "The promoted governed copy under requirements/raw/, not the ungoverned fetch snapshot under reports/jira/. Both are byte-identical; only this one is an artifact.",
+          "type": ["string", "null"],
+          "pattern": "^requirements/raw/[A-Z][A-Z0-9]+-[0-9]+\\.json$"
+        },
         "retrievedAt": { "$ref": "#/$defs/isoTimestamp" }
       },
       "allOf": [

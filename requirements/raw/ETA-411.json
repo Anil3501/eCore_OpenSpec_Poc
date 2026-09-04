@@ -4,7 +4,7 @@
   "retrievalNote": "Retrieved by src/utils/jira-fetch.ts, the documented REST fallback, because the Atlassian MCP server exposed no issue-fetch tool in this session. The issue payload below is verbatim.",
   "requestedIssueKey": "ETA-411",
   "requestUrl": "https://eoriginal.atlassian.net/rest/api/3/issue/ETA-411?expand=renderedFields%2Cnames",
-  "retrievedAt": "2026-09-04T18:20:59.532Z",
+  "retrievedAt": "2026-09-04T19:11:33.132Z",
   "issue": {
     "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations,customfield_11318.properties,customfield_10900.requestTypePractice,customfield_11319.properties",
     "id": "110541",
@@ -82,13 +82,13 @@
       "customfield_11348": null,
       "customfield_11347": null,
       "customfield_11349": null,
-      "updated": "Today 2:00 PM",
+      "updated": "Today 2:59 PM",
       "customfield_11580": null,
       "timeoriginalestimate": null,
       "customfield_11461": null,
       "customfield_11340": null,
       "customfield_11582": null,
-      "description": "<p>As an Organization user, I want to view and access only the eCore modules authorized for my organization and role, so that I can navigate to New Transaction, Workspace, and Preferences from the Dashboard main screen; access Home, New Transaction, Workspace, and Preferences from the top-right navigation menu; access Organization and Vault as sub-items under Preferences; and return to the Home page using Command Center.</p>\n\n<p>The UI and supporting APIs must provide consistent module access and prevent unauthenticated or unauthorized access.</p>",
+      "description": "<p>As an Organization user, I want to view and access only the eCore modules authorized for my organization, so that I can navigate to New Transaction, Workspace, and Preferences from the Dashboard main screen; access Home, New Transaction, Workspace, and Preferences from the top-right navigation menu; access Organization and Vault as sub-items under Preferences; and return to the Home page using Command Center.</p>\n\n<p>The UI and supporting APIs must provide consistent module access and prevent unauthenticated or unauthorized access.</p>",
       "customfield_11460": null,
       "customfield_11581": null,
       "customfield_11584": "",
@@ -690,7 +690,7 @@
       "customfield_11348": null,
       "customfield_11347": null,
       "customfield_11349": null,
-      "updated": "2026-09-04T14:00:49.565-0400",
+      "updated": "2026-09-04T14:59:15.631-0400",
       "customfield_11580": null,
       "timeoriginalestimate": null,
       "customfield_11461": null,
@@ -709,7 +709,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "As an Organization user, I want to view and access only the eCore modules authorized for my organization and role, so that I can navigate to New Transaction, Workspace, and Preferences from the Dashboard main screen; access Home, New Transaction, Workspace, and Preferences from the top-right navigation menu; access Organization and Vault as sub-items under Preferences; and return to the Home page using Command Center."
+                "text": "As an Organization user, I want to view and access only the eCore modules authorized for my organization, so that I can navigate to New Transaction, Workspace, and Preferences from the Dashboard main screen; access Home, New Transaction, Workspace, and Preferences from the top-right navigation menu; access Organization and Vault as sub-items under Preferences; and return to the Home page using Command Center."
               }
             ],
             "attrs": {
