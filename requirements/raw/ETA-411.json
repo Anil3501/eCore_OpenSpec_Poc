@@ -4,7 +4,7 @@
   "retrievalNote": "Retrieved by src/utils/jira-fetch.ts, the documented REST fallback, because the Atlassian MCP server exposed no issue-fetch tool in this session. The issue payload below is verbatim.",
   "requestedIssueKey": "ETA-411",
   "requestUrl": "https://eoriginal.atlassian.net/rest/api/3/issue/ETA-411?expand=renderedFields%2Cnames",
-  "retrievedAt": "2026-09-04T19:11:33.132Z",
+  "retrievedAt": "2026-09-04T19:30:15.884Z",
   "issue": {
     "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations,customfield_11318.properties,customfield_10900.requestTypePractice,customfield_11319.properties",
     "id": "110541",
@@ -82,7 +82,7 @@
       "customfield_11348": null,
       "customfield_11347": null,
       "customfield_11349": null,
-      "updated": "Today 2:59 PM",
+      "updated": "Today 3:27 PM",
       "customfield_11580": null,
       "timeoriginalestimate": null,
       "customfield_11461": null,
@@ -223,7 +223,7 @@
         "total": 2,
         "startAt": 0
       },
-      "statuscategorychangedate": "Today 5:08 AM",
+      "statuscategorychangedate": "Today 3:26 PM",
       "customfield_11441": null,
       "customfield_11440": null,
       "fixVersions": null,
@@ -306,7 +306,6 @@
       "customfield_11608": null
     },
     "names": {
-      "parent": "Parent",
       "statusCategory": "Status Category",
       "resolution": "Resolution",
       "customfield_10500": "Customer",
@@ -514,49 +513,12 @@
       "customfield_11608": "Owned by"
     },
     "fields": {
-      "parent": {
-        "id": "108847",
-        "key": "ETA-164",
-        "self": "https://eoriginal.atlassian.net/rest/api/3/issue/108847",
-        "fields": {
-          "summary": "eCore Application Testing, Automation & Migration",
-          "status": {
-            "self": "https://eoriginal.atlassian.net/rest/api/3/status/3",
-            "description": "This work item is being actively worked on at the moment by the assignee.",
-            "iconUrl": "https://eoriginal.atlassian.net/images/icons/statuses/inprogress.png",
-            "name": "In Progress",
-            "id": "3",
-            "statusCategory": {
-              "self": "https://eoriginal.atlassian.net/rest/api/3/statuscategory/4",
-              "id": 4,
-              "key": "indeterminate",
-              "colorName": "yellow",
-              "name": "In Progress"
-            }
-          },
-          "priority": {
-            "self": "https://eoriginal.atlassian.net/rest/api/3/priority/1",
-            "iconUrl": "https://eoriginal.atlassian.net/images/icons/priorities/critical_new.svg",
-            "name": "Highest",
-            "id": "1"
-          },
-          "issuetype": {
-            "self": "https://eoriginal.atlassian.net/rest/api/3/issuetype/10000",
-            "id": "10000",
-            "description": "A collection of related bugs, stories, and tasks.",
-            "iconUrl": "https://eoriginal.atlassian.net/images/icons/issuetypes/epic.svg",
-            "name": "Epic",
-            "subtask": false,
-            "hierarchyLevel": 1
-          }
-        }
-      },
       "statusCategory": {
-        "self": "https://eoriginal.atlassian.net/rest/api/3/statuscategory/3",
-        "id": 3,
-        "key": "done",
-        "colorName": "green",
-        "name": "Done"
+        "self": "https://eoriginal.atlassian.net/rest/api/3/statuscategory/2",
+        "id": 2,
+        "key": "new",
+        "colorName": "blue-gray",
+        "name": "To Do"
       },
       "resolution": null,
       "customfield_10500": null,
@@ -574,16 +536,16 @@
       "customfield_11708": null,
       "issuelinks": [],
       "assignee": {
-        "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3A8ee7da52-9262-469b-bc7c-71f0537f959d",
-        "accountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
-        "emailAddress": "nitin.saini@wolterskluwer.com",
+        "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=712020%3Aaebb204d-7c5f-4fa0-bf31-2c6b6c09aeed",
+        "accountId": "712020:aebb204d-7c5f-4fa0-bf31-2c6b6c09aeed",
+        "emailAddress": "anil.maddhesia@wolterskluwer.com",
         "avatarUrls": {
-          "48x48": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
-          "24x24": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
-          "16x16": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png",
-          "32x32": "https://secure.gravatar.com/avatar/2fac497515bab34819d00df82a222316?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNS-6.png"
+          "48x48": "https://secure.gravatar.com/avatar/8645f061228cf0c4e61d245e90623e5e?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FAM-1.png",
+          "24x24": "https://secure.gravatar.com/avatar/8645f061228cf0c4e61d245e90623e5e?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FAM-1.png",
+          "16x16": "https://secure.gravatar.com/avatar/8645f061228cf0c4e61d245e90623e5e?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FAM-1.png",
+          "32x32": "https://secure.gravatar.com/avatar/8645f061228cf0c4e61d245e90623e5e?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FAM-1.png"
         },
-        "displayName": "Nitin Saini",
+        "displayName": "Anil Maddhesia",
         "active": true,
         "timeZone": "America/New_York",
         "accountType": "atlassian"
@@ -690,7 +652,7 @@
       "customfield_11348": null,
       "customfield_11347": null,
       "customfield_11349": null,
-      "updated": "2026-09-04T14:59:15.631-0400",
+      "updated": "2026-09-04T15:27:41.833-0400",
       "customfield_11580": null,
       "timeoriginalestimate": null,
       "customfield_11461": null,
@@ -771,7 +733,7 @@
       "customfield_11335": null,
       "customfield_10003": null,
       "customfield_11455": null,
-      "customfield_10004": "ETA-164",
+      "customfield_10004": null,
       "customfield_11576": null,
       "customfield_11446": [
         {
@@ -1134,7 +1096,7 @@
         "total": 2,
         "startAt": 0
       },
-      "statuscategorychangedate": "2026-09-04T05:08:11.375-0400",
+      "statuscategorychangedate": "2026-09-04T15:26:54.690-0400",
       "customfield_11441": {
         "self": "https://eoriginal.atlassian.net/rest/api/3/customFieldOption/10436",
         "value": "ECORE",
@@ -1173,17 +1135,17 @@
       "customfield_11429": null,
       "versions": [],
       "status": {
-        "self": "https://eoriginal.atlassian.net/rest/api/3/status/6",
-        "description": "The work item is considered finished, the resolution is correct. Work items which are closed can be reopened.",
-        "iconUrl": "https://eoriginal.atlassian.net/images/icons/statuses/closed.png",
-        "name": "Closed",
-        "id": "6",
+        "self": "https://eoriginal.atlassian.net/rest/api/3/status/1",
+        "description": "The work item is open and ready for the assignee to start work on it.",
+        "iconUrl": "https://eoriginal.atlassian.net/images/icons/statuses/open.png",
+        "name": "Open",
+        "id": "1",
         "statusCategory": {
-          "self": "https://eoriginal.atlassian.net/rest/api/3/statuscategory/3",
-          "id": 3,
-          "key": "done",
-          "colorName": "green",
-          "name": "Done"
+          "self": "https://eoriginal.atlassian.net/rest/api/3/statuscategory/2",
+          "id": 2,
+          "key": "new",
+          "colorName": "blue-gray",
+          "name": "To Do"
         }
       },
       "customfield_11421": null,

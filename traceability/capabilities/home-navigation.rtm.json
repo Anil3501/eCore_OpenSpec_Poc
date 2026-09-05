@@ -1,0 +1,260 @@
+{
+    "schemaVersion":  "1.0.0",
+    "capability":  "home-navigation",
+    "release":  "1.0",
+    "artifactVersion":  1,
+    "dataClassification":  "REAL_JIRA_DATA",
+    "updatedAt":  "2026-09-05T13:30:00.000Z",
+    "entries":  [
+                    {
+                        "traceId":  "TRC-ETA-411-001",
+                        "jiraStoryId":  "ETA-411",
+                        "requirementId":  "REQ-ETA-411-001",
+                        "acId":  "AC-ETA-411-001",
+                        "status":  "APPROVED",
+                        "changeType":  "NEW",
+                        "requirementArtifact":  {
+                                                    "path":  "requirements/approved/ETA-411.json",
+                                                    "version":  1
+                                                },
+                        "approvalRefs":  {
+                                             "acceptanceCriteria":  "requirements/approved/ETA-411-ac-approval.json",
+                                             "testPlan":  null,
+                                             "automationDesign":  null
+                                         },
+                        "openSpecRefs":  [
+
+                                         ],
+                        "testPlan":  null,
+                        "automation":  null,
+                        "executionRefs":  [
+
+                                          ]
+                    },
+                    {
+                        "traceId":  "TRC-ETA-411-002",
+                        "jiraStoryId":  "ETA-411",
+                        "requirementId":  "REQ-ETA-411-001",
+                        "acId":  "AC-ETA-411-002",
+                        "status":  "DEFERRED",
+                        "changeType":  "NEW",
+                        "requirementArtifact":  {
+                                                    "path":  "requirements/approved/ETA-411.json",
+                                                    "version":  1
+                                                },
+                        "approvalRefs":  {
+                                             "acceptanceCriteria":  "requirements/approved/ETA-411-ac-approval.json",
+                                             "testPlan":  null,
+                                             "automationDesign":  null
+                                         },
+                        "openSpecRefs":  [
+
+                                         ],
+                        "testPlan":  null,
+                        "automation":  null,
+                        "executionRefs":  [
+
+                                          ]
+                    },
+                    {
+                        "traceId":  "TRC-ETA-411-003",
+                        "jiraStoryId":  "ETA-411",
+                        "requirementId":  "REQ-ETA-411-002",
+                        "acId":  "AC-ETA-411-003",
+                        "status":  "APPROVED",
+                        "changeType":  "NEW",
+                        "requirementArtifact":  {
+                                                    "path":  "requirements/approved/ETA-411.json",
+                                                    "version":  1
+                                                },
+                        "approvalRefs":  {
+                                             "acceptanceCriteria":  "requirements/approved/ETA-411-ac-approval.json",
+                                             "testPlan":  null,
+                                             "automationDesign":  null
+                                         },
+                        "openSpecRefs":  [
+
+                                         ],
+                        "testPlan":  null,
+                        "automation":  null,
+                        "executionRefs":  [
+
+                                          ]
+                    },
+                    {
+                        "traceId":  "TRC-ETA-411-004",
+                        "jiraStoryId":  "ETA-411",
+                        "requirementId":  "REQ-ETA-411-003",
+                        "acId":  "AC-ETA-411-004",
+                        "status":  "APPROVED",
+                        "changeType":  "NEW",
+                        "requirementArtifact":  {
+                                                    "path":  "requirements/approved/ETA-411.json",
+                                                    "version":  1
+                                                },
+                        "approvalRefs":  {
+                                             "acceptanceCriteria":  "requirements/approved/ETA-411-ac-approval.json",
+                                             "testPlan":  null,
+                                             "automationDesign":  null
+                                         },
+                        "openSpecRefs":  [
+
+                                         ],
+                        "testPlan":  null,
+                        "automation":  null,
+                        "executionRefs":  [
+
+                                          ]
+                    },
+                    {
+                        "traceId":  "TRC-ETA-411-005",
+                        "jiraStoryId":  "ETA-411",
+                        "requirementId":  "REQ-ETA-411-003",
+                        "acId":  "AC-ETA-411-005",
+                        "status":  "APPROVED",
+                        "changeType":  "NEW",
+                        "requirementArtifact":  {
+                                                    "path":  "requirements/approved/ETA-411.json",
+                                                    "version":  1
+                                                },
+                        "approvalRefs":  {
+                                             "acceptanceCriteria":  "requirements/approved/ETA-411-ac-approval.json",
+                                             "testPlan":  null,
+                                             "automationDesign":  null
+                                         },
+                        "openSpecRefs":  [
+
+                                         ],
+                        "testPlan":  null,
+                        "automation":  null,
+                        "executionRefs":  [
+
+                                          ]
+                    },
+                    {
+                        "traceId":  "TRC-ETA-411-006",
+                        "jiraStoryId":  "ETA-411",
+                        "requirementId":  "REQ-ETA-411-004",
+                        "acId":  "AC-ETA-411-006",
+                        "status":  "APPROVED",
+                        "changeType":  "NEW",
+                        "requirementArtifact":  {
+                                                    "path":  "requirements/approved/ETA-411.json",
+                                                    "version":  1
+                                                },
+                        "approvalRefs":  {
+                                             "acceptanceCriteria":  "requirements/approved/ETA-411-ac-approval.json",
+                                             "testPlan":  null,
+                                             "automationDesign":  null
+                                         },
+                        "openSpecRefs":  [
+
+                                         ],
+                        "testPlan":  null,
+                        "automation":  null,
+                        "executionRefs":  [
+
+                                          ]
+                    },
+                    {
+                        "traceId":  "TRC-ETA-411-007",
+                        "jiraStoryId":  "ETA-411",
+                        "requirementId":  "REQ-ETA-411-005",
+                        "acId":  "AC-ETA-411-007",
+                        "status":  "APPROVED",
+                        "changeType":  "NEW",
+                        "requirementArtifact":  {
+                                                    "path":  "requirements/approved/ETA-411.json",
+                                                    "version":  1
+                                                },
+                        "approvalRefs":  {
+                                             "acceptanceCriteria":  "requirements/approved/ETA-411-ac-approval.json",
+                                             "testPlan":  null,
+                                             "automationDesign":  null
+                                         },
+                        "openSpecRefs":  [
+
+                                         ],
+                        "testPlan":  null,
+                        "automation":  null,
+                        "executionRefs":  [
+
+                                          ]
+                    },
+                    {
+                        "traceId":  "TRC-ETA-411-008",
+                        "jiraStoryId":  "ETA-411",
+                        "requirementId":  "REQ-ETA-411-006",
+                        "acId":  "AC-ETA-411-008",
+                        "status":  "DEFERRED",
+                        "changeType":  "NEW",
+                        "requirementArtifact":  {
+                                                    "path":  "requirements/approved/ETA-411.json",
+                                                    "version":  1
+                                                },
+                        "approvalRefs":  {
+                                             "acceptanceCriteria":  "requirements/approved/ETA-411-ac-approval.json",
+                                             "testPlan":  null,
+                                             "automationDesign":  null
+                                         },
+                        "openSpecRefs":  [
+
+                                         ],
+                        "testPlan":  null,
+                        "automation":  null,
+                        "executionRefs":  [
+
+                                          ]
+                    },
+                    {
+                        "traceId":  "TRC-ETA-411-009",
+                        "jiraStoryId":  "ETA-411",
+                        "requirementId":  "REQ-ETA-411-007",
+                        "acId":  "AC-ETA-411-009",
+                        "status":  "APPROVED",
+                        "changeType":  "NEW",
+                        "requirementArtifact":  {
+                                                    "path":  "requirements/approved/ETA-411.json",
+                                                    "version":  1
+                                                },
+                        "approvalRefs":  {
+                                             "acceptanceCriteria":  "requirements/approved/ETA-411-ac-approval.json",
+                                             "testPlan":  null,
+                                             "automationDesign":  null
+                                         },
+                        "openSpecRefs":  [
+
+                                         ],
+                        "testPlan":  null,
+                        "automation":  null,
+                        "executionRefs":  [
+
+                                          ]
+                    },
+                    {
+                        "traceId":  "TRC-ETA-411-010",
+                        "jiraStoryId":  "ETA-411",
+                        "requirementId":  "REQ-ETA-411-007",
+                        "acId":  "AC-ETA-411-010",
+                        "status":  "DEFERRED",
+                        "changeType":  "NEW",
+                        "requirementArtifact":  {
+                                                    "path":  "requirements/approved/ETA-411.json",
+                                                    "version":  1
+                                                },
+                        "approvalRefs":  {
+                                             "acceptanceCriteria":  "requirements/approved/ETA-411-ac-approval.json",
+                                             "testPlan":  null,
+                                             "automationDesign":  null
+                                         },
+                        "openSpecRefs":  [
+
+                                         ],
+                        "testPlan":  null,
+                        "automation":  null,
+                        "executionRefs":  [
+
+                                          ]
+                    }
+                ]
+}

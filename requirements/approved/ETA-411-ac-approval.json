@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "1.0.0",
+  "approvalId": "APR-AC-ETA-411-001",
+  "gate": "ACCEPTANCE_CRITERIA",
+  "artifactId": "ETA-411",
+  "artifactVersion": 1,
+  "release": "1.0",
+  "capability": "home-navigation",
+  "sourceArtifactPath": "requirements/normalized/ETA-411.json",
+  "decision": "APPROVE",
+  "reviewer": {
+    "name": "Anil Kumar",
+    "role": "Reviewer",
+    "reference": null
+  },
+  "reviewedAt": "2026-09-05T13:30:00.000Z",
+  "comments": "Decision given in chat on 2026-09-05 as 'approve it using as reviewer anil kumar' and transcribed here by the orchestrator; the artifact, not the message, is the approval. Reviewer role was not stated and is recorded as 'Reviewer'. The seven criteria proposed for approval are approved as written and the three proposed as deferred are deferred as an explicit decision. Two items were flagged in the review package for scrutiny and were approved without amendment, so the following stands on record. AC-ETA-411-009 records the reviewer's stated expectation that an unauthenticated visitor is shown an error and remains on the sign-in page; it has never been observed, and the reviewer punctuated that answer with a question mark. It will be checked against the application at PLAYWRIGHT_VALIDATION and any mismatch will be reported as a mismatch, not silently rewritten to match the application. AC-ETA-411-005 asserts that Preferences is offered in the menu, not that it opens a page, because no navigable link with that label was observed; approving it means the presence-only reading is agreed. Approval does not give ETA-411 full coverage: REQ-ETA-411-001 and REQ-ETA-411-007 are partially covered, and REQ-ETA-411-006 is uncovered and is recorded DEFERRED because its only criterion and its defining ambiguity AMB-ETA-411-005 are both deferred. The account reaches nineteen navigable destinations against the six the ticket names; that gap is the substance of REQ-ETA-411-001 and is deferred, not satisfied. The ticket places the navigation menu top-right while the reviewer described it top-left; the criteria follow the ticket and the discrepancy is recorded rather than resolved. The identity Anil.Maddhesia@wolterskluwer.com recorded as resolvedBy on the seven ambiguities was taken from the git commit author on this branch and was not corrected in this decision.",
+  "itemDecisions": [
+    {
+      "itemId": "AC-ETA-411-001",
+      "decision": "APPROVE",
+      "comment": "The six named modules are present and can be opened. Covers the presence half of REQ-001 only."
+    },
+    {
+      "itemId": "AC-ETA-411-002",
+      "decision": "DEFER",
+      "comment": "The absence half of REQ-001, which carries the actual authorization claim. No organization-to-module mapping exists, so it cannot be tested this release."
+    },
+    {
+      "itemId": "AC-ETA-411-003",
+      "decision": "APPROVE",
+      "comment": "Dashboard offers New Transaction, Workspace and Preferences, and each opens. All three were walked end to end."
+    },
+    {
+      "itemId": "AC-ETA-411-004",
+      "decision": "APPROVE",
+      "comment": "Navigation menu offers Home, New Transaction and Workspace, and each opens."
+    },
+    {
+      "itemId": "AC-ETA-411-005",
+      "decision": "APPROVE",
+      "comment": "Approved as a presence check: Preferences is offered in the menu with Organization and Vault beneath it. Flagged in the review package as presence rather than navigability and approved without amendment."
+    },
+    {
+      "itemId": "AC-ETA-411-006",
+      "decision": "APPROVE",
+      "comment": "Organization and Vault open their pages. Organization shares a destination with the Dashboard Preferences icon, so arrival must be asserted on page content."
+    },
+    {
+      "itemId": "AC-ETA-411-007",
+      "decision": "APPROVE",
+      "comment": "Command Center returns the user to Home. The control carries no accessible name, so its locator will need a VALIDATED waiver."
+    },
+    {
+      "itemId": "AC-ETA-411-008",
+      "decision": "DEFER",
+      "comment": "Deferred per AMB-ETA-411-005; 'consistent' remains undefined. REQ-006 is recorded UNCOVERED, not met."
+    },
+    {
+      "itemId": "AC-ETA-411-009",
+      "decision": "APPROVE",
+      "comment": "Approved as the reviewer's stated expectation, not as an observation. To be checked at PLAYWRIGHT_VALIDATION; a mismatch will be reported, not used to rewrite this criterion."
+    },
+    {
+      "itemId": "AC-ETA-411-010",
+      "decision": "DEFER",
+      "comment": "Unproducible this release: narrowing scope to the six authorized modules leaves no unauthorized module to request. REQ-007 is therefore partially covered."
+    }
+  ]
+}

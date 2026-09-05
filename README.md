@@ -156,11 +156,36 @@ type-stripping — there is no build step and no bundler. `package.json` deliber
 `"type": "module"`; the resulting warning is suppressed inside the npm scripts.
 
 ```powershell
+npm run setup               # npm install + playwright install + npm run preflight
+Copy-Item .env.example .env # then fill in the values below
+npm run validate:artifacts  # confirm the checkout is healthy
+```
+
+`npm run setup` is the whole first-run sequence. To do it by hand:
+
+```powershell
 npm install                 # uses the Artifactory registry in .npmrc
 npx playwright install      # download browser binaries (first time only)
-Copy-Item .env.example .env # then fill in the values below
-npm run validate:artifacts  # confirm the checkout is healthy (expect 14 passed)
+npm run preflight           # confirm every CLI a stage needs is executable
 ```
+
+**Run `npm run preflight` before starting a workflow, and after any `git pull` that touches
+`package.json`.** It checks the Node major version, that every declared dependency is actually in
+`node_modules`, that the OpenSpec, `bddgen` and Playwright CLIs each execute, that the browser
+binaries are downloaded, and which environment groups are configured. It writes
+`reports/validation/preflight.json` and exits non-zero on failure.
+
+It exists because the orchestrator's per-stage `requires` list names **artifact paths only**, so a
+missing CLI is invisible until the stage that shells out to it fails. On 2026-09-05 that happened at
+`OPENSPEC_GENERATION` — stage 6 of 17 — because the OpenSpec CLI was not a declared dependency at
+all, so `npm install` on a fresh clone installed nothing. Both halves are fixed: the CLI is now a
+pinned devDependency, and preflight catches the general case.
+
+A `WARN` never fails preflight. Artifact generation and validation are designed to work on a clone
+with no `.env`; only executing against the application needs secrets.
+
+> **Never install a workflow CLI globally.** `npm install -g` does not inherit the project `.npmrc`,
+> so it will reach for public npm and fail. Declare it as a devDependency instead.
 
 > **npm E403 from `registry.npmjs.org`?** Public npm is firewalled here. The project `.npmrc`
 > points at the corporate Artifactory registry, but it is **not** inherited by `npm install -g` or

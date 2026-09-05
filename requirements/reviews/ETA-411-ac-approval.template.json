@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "1.0.0",
+  "approvalId": "APR-AC-ETA-411-001",
+  "gate": "ACCEPTANCE_CRITERIA",
+  "artifactId": "ETA-411",
+  "artifactVersion": 1,
+  "release": "1.0",
+  "capability": "home-navigation",
+  "sourceArtifactPath": "requirements/normalized/ETA-411.json",
+  "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+  "reviewer": {
+    "name": "REPLACE_WITH_YOUR_NAME",
+    "role": "REPLACE_WITH_YOUR_ROLE",
+    "reference": null
+  },
+  "reviewedAt": "REPLACE_WITH_ISO_8601_TIMESTAMP",
+  "comments": "Replace with any overall comment. If Anil.Maddhesia@wolterskluwer.com is not the right person recorded as resolvedBy on the seven ambiguities, correct it here - that identity was taken from the git commit author on this branch, not supplied by name.",
+  "itemDecisions": [
+    {
+      "itemId": "AC-ETA-411-001",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "The six named modules are present and can be opened. Covers the presence half of REQ-001 only."
+    },
+    {
+      "itemId": "AC-ETA-411-002",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Proposed as DEFER. The absence half of REQ-001, which carries the actual authorization claim. No organization-to-module mapping exists and the account reaches nineteen destinations against six named."
+    },
+    {
+      "itemId": "AC-ETA-411-003",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Dashboard offers New Transaction, Workspace and Preferences, and each opens. All three were walked end to end."
+    },
+    {
+      "itemId": "AC-ETA-411-004",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Navigation menu offers Home, New Transaction and Workspace, and each opens. These are the entries observation confirms are navigable links."
+    },
+    {
+      "itemId": "AC-ETA-411-005",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Preferences is OFFERED in the menu with Organization and Vault beneath it. Deliberately a presence check, not a navigation check - the probe found no navigable link with that label. Mark REQUEST_CHANGES if you intended Preferences to be clickable, since that would make this a product defect."
+    },
+    {
+      "itemId": "AC-ETA-411-006",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Organization and Vault open their pages. Note Organization shares a destination with the Dashboard Preferences icon, so arrival must be asserted on page content."
+    },
+    {
+      "itemId": "AC-ETA-411-007",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Command Center returns the user to Home. The control carries no accessible name, so its locator will need a VALIDATED waiver."
+    },
+    {
+      "itemId": "AC-ETA-411-008",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Proposed as DEFER, per AMB-005. REQ-006 is consequently recorded as UNCOVERED, not met."
+    },
+    {
+      "itemId": "AC-ETA-411-009",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Unauthenticated visitor is shown an error message and remains on the sign-in page. This records YOUR STATED EXPECTATION and has not been observed. You punctuated the answer with a question mark - mark REQUEST_CHANGES if you were asking rather than telling."
+    },
+    {
+      "itemId": "AC-ETA-411-010",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Proposed as DEFER. Unproducible this release: narrowing scope to the six authorized modules leaves no unauthorized module to request. REQ-007 is therefore partial."
+    }
+  ]
+}

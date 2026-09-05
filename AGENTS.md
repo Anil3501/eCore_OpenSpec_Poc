@@ -9,6 +9,7 @@ and scaling design. This file only covers what an agent cannot discover on its o
 ## Build and Test
 
 ```powershell
+npm run preflight            # RUN THIS FIRST. Node version, deps, CLIs, browsers, env config.
 npm run validate:artifacts   # 17 structural + semantic checks. RUN THIS AFTER ANY ARTIFACT EDIT.
 npm run typecheck            # tsc --noEmit
 npm run bdd                  # bddgen: features/approved/** -> .features-gen/
@@ -135,6 +136,12 @@ that shortcut — they must always exercise the real sign-in.
   repo — those need the registry configured at **user level** (`~/.npmrc`). If you see
   `403 Forbidden - GET https://registry.npmjs.org/...`, this is the cause; do not retry the same
   command or blame the package name.
+- **A stage's tooling is not checked by the stage's `requires` list.** Every `requires` entry is an
+  artifact path, so a missing CLI stays invisible until the stage shells out to it and fails. Run
+  `npm run preflight` before starting or resuming a workflow. The OpenSpec CLI is
+  **`@fission-ai/openspec`**, a pinned devDependency — the bare name `openspec` on npm is an
+  unrelated 2019 name-squat (`0.0.0`, maintainer `akerust`) and must never be installed. Never
+  install a workflow CLI globally: `npm install -g` does not inherit the project `.npmrc`.
 - **The repo `.npmrc` contains a plaintext token.** Pre-existing, REVIEW_REQUIRED. Do not modify it
   without asking.
 - **`.gitignore` is verified by observation**, not by assumption: `.env`, `.npmrc`, `.auth/` and

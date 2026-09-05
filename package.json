@@ -13,6 +13,8 @@
     "coverage:open": "start \"\" reports\\coverage\\report\\index.html",
     "report": "playwright show-report reports/playwright-report",
     "typecheck": "tsc --noEmit",
+    "setup": "npm install && playwright install && npm run preflight",
+    "preflight": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON src/utils/preflight.ts",
     "probe:api": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/api-layer-probe.ts",
     "capture:session": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/ecore-session-capture.ts",
     "triage:failures": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON src/utils/failure-triage.ts",
@@ -26,6 +28,7 @@
     "workflow:status": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON src/utils/workflow-status.ts"
   },
   "devDependencies": {
+    "@fission-ai/openspec": "^1.11.0",
     "@playwright/test": "^1.62.1",
     "@types/istanbul-lib-coverage": "^2.0.6",
     "@types/istanbul-lib-report": "^3.0.3",

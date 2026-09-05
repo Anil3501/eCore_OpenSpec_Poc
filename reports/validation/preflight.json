@@ -1,0 +1,74 @@
+{
+  "generatedAt": "2026-09-05T07:45:45.642Z",
+  "node": "24.19.0",
+  "platform": "win32",
+  "summary": {
+    "passed": 5,
+    "failed": 0,
+    "warned": 0
+  },
+  "checks": [
+    {
+      "id": "NODE-VERSION",
+      "title": "Node 24+ is the runtime",
+      "status": "PASS",
+      "details": [
+        "Node 24.19.0."
+      ],
+      "remedy": null
+    },
+    {
+      "id": "DEPENDENCIES-INSTALLED",
+      "title": "Every declared dependency is present in node_modules",
+      "status": "PASS",
+      "details": [
+        "15 declared package(s) installed."
+      ],
+      "remedy": null
+    },
+    {
+      "id": "CLI-BINARIES",
+      "title": "Every CLI a workflow stage shells out to is executable",
+      "status": "PASS",
+      "details": [
+        "openspec 1.11.0 from @fission-ai/openspec (OPENSPEC_GENERATION).",
+        "bddgen 9.2.0 from playwright-bdd (BDD_GENERATION).",
+        "playwright Version 1.62.1 from @playwright/test (EXECUTION)."
+      ],
+      "remedy": null
+    },
+    {
+      "id": "PLAYWRIGHT-BROWSERS",
+      "title": "Playwright browser binaries are downloaded",
+      "status": "PASS",
+      "details": [
+        "Chromium is present."
+      ],
+      "remedy": null
+    },
+    {
+      "id": "ENVIRONMENT",
+      "title": "Environment configuration is present",
+      "status": "PASS",
+      "details": [
+        "testEnvironment: qa",
+        "headless: true",
+        "baseUrlConfigured: true",
+        "apiBaseUrlConfigured: true",
+        "apiAuthMode: SESSION_COOKIE",
+        "credentialsConfigured: true",
+        "ecoreLoginConfigured: true",
+        "jiraConfigured: true",
+        "jiraBugFilingConfigured: false",
+        "coverageEnabled: true",
+        "coverageIncludesThirdParty: false",
+        "jiraProjectKey: ETA",
+        "jiraBugProjectKey: ETA",
+        "jiraBugIssueType: Bug",
+        "jiraBugLinkType: Relates",
+        "bugAttachTrace: true"
+      ],
+      "remedy": null
+    }
+  ]
+}
