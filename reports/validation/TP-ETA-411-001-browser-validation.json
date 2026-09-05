@@ -1,0 +1,530 @@
+{
+  "probe": "TP-ETA-411-001-browser-validation",
+  "story": "ETA-411",
+  "testPlanId": "TP-ETA-411-001",
+  "stage": "PLAYWRIGHT_VALIDATION",
+  "evidenceSource": "Scripted Playwright navigation. The Playwright MCP server exposed no tools in this session, so this is the documented fallback. Every destination was reached by an actual click unless the record says otherwise.",
+  "environmentNote": "Run against PLAYWRIGHT_BASE_URL, which now points at qa5. All earlier ETA-411 evidence was gathered on qa1 and is treated here as prior expectation, not fact.",
+  "startedAt": "2026-09-05T09:49:57.063Z",
+  "note": "Observation only. No approved expectation was edited to match what was seen.",
+  "homeUrl": "https://qa5.eoriginal.org:8443/ssweb/setup/welcome.eo",
+  "homeTitle": "eOriginal Command Center™",
+  "menuTrigger": "hover: li.section:has([id=\"header.preferences.org\"])",
+  "homeLinkClickDiagnosis": {
+    "found": true,
+    "width": 35,
+    "height": 18,
+    "display": "flex",
+    "visibility": "visible",
+    "pointerEvents": "auto",
+    "elementAtCentre": {
+      "tag": "a",
+      "elementId": "header.home",
+      "className": "nav"
+    },
+    "isSelf": true
+  },
+  "preferencesGroupingLabel": {
+    "sectionClass": "section more dropdownMenu",
+    "labelTag": "span",
+    "labelText": "Preferences",
+    "isLink": false,
+    "href": null
+  },
+  "locatorChecks": [
+    {
+      "purpose": "Dashboard icon: New Transaction (TS-ETA-411-001, TS-ETA-411-002)",
+      "candidate": "page.locator('#icon-buttons').getByRole('link', { name: 'New Transaction', exact: true })",
+      "matches": 1,
+      "visible": true,
+      "accessibleName": "New Transaction",
+      "note": null
+    },
+    {
+      "purpose": "Unscoped control: New Transaction - recorded to show why the icon locator must be scoped",
+      "candidate": "page.getByRole('link', { name: 'New Transaction', exact: true })",
+      "matches": 2,
+      "visible": true,
+      "accessibleName": "New Transaction",
+      "note": "Does not resolve to exactly one element."
+    },
+    {
+      "purpose": "Dashboard icon: Workspace (TS-ETA-411-001, TS-ETA-411-002)",
+      "candidate": "page.locator('#icon-buttons').getByRole('link', { name: 'Workspace', exact: true })",
+      "matches": 1,
+      "visible": true,
+      "accessibleName": "Workspace",
+      "note": null
+    },
+    {
+      "purpose": "Unscoped control: Workspace - recorded to show why the icon locator must be scoped",
+      "candidate": "page.getByRole('link', { name: 'Workspace', exact: true })",
+      "matches": 2,
+      "visible": true,
+      "accessibleName": "Workspace",
+      "note": "Does not resolve to exactly one element."
+    },
+    {
+      "purpose": "Dashboard icon: Preferences (TS-ETA-411-001, TS-ETA-411-002)",
+      "candidate": "page.locator('#icon-buttons').getByRole('link', { name: 'Preferences', exact: true })",
+      "matches": 1,
+      "visible": true,
+      "accessibleName": "Preferences",
+      "note": null
+    },
+    {
+      "purpose": "Unscoped control: Preferences - recorded to show why the icon locator must be scoped",
+      "candidate": "page.getByRole('link', { name: 'Preferences', exact: true })",
+      "matches": 1,
+      "visible": true,
+      "accessibleName": "Preferences",
+      "note": null
+    },
+    {
+      "purpose": "Navigation menu entry: New Transaction",
+      "candidate": "page.getByRole('link', { name: 'New Transaction', exact: true })",
+      "matches": 2,
+      "visible": true,
+      "accessibleName": "New Transaction",
+      "note": "Does not resolve to exactly one element."
+    },
+    {
+      "purpose": "Navigation menu entry: Workspace",
+      "candidate": "page.getByRole('link', { name: 'Workspace', exact: true })",
+      "matches": 2,
+      "visible": true,
+      "accessibleName": "Workspace",
+      "note": "Does not resolve to exactly one element."
+    },
+    {
+      "purpose": "Navigation menu entry: Home",
+      "candidate": "page.getByRole('link', { name: 'Home', exact: true })",
+      "matches": 1,
+      "visible": true,
+      "accessibleName": "Home",
+      "note": null
+    },
+    {
+      "purpose": "Navigation menu entry: Organization",
+      "candidate": "page.getByRole('link', { name: 'Organization', exact: true })",
+      "matches": 1,
+      "visible": true,
+      "accessibleName": "Organization",
+      "note": null
+    },
+    {
+      "purpose": "Navigation menu entry: Vault",
+      "candidate": "page.getByRole('link', { name: 'Vault', exact: true })",
+      "matches": 1,
+      "visible": true,
+      "accessibleName": "Vault",
+      "note": null
+    },
+    {
+      "purpose": "Menu entry Home - id-based alternative",
+      "candidate": "page.locator('[id=\"header.home\"]')",
+      "matches": 1,
+      "visible": true,
+      "accessibleName": "Home",
+      "note": null
+    },
+    {
+      "purpose": "Menu entry New Transaction - id-based alternative",
+      "candidate": "page.locator('[id=\"header.new_transaction\"]')",
+      "matches": 1,
+      "visible": true,
+      "accessibleName": "New Transaction",
+      "note": null
+    },
+    {
+      "purpose": "Menu entry Workspace - id-based alternative",
+      "candidate": "page.locator('[id=\"header.workspace\"]')",
+      "matches": 1,
+      "visible": true,
+      "accessibleName": "Workspace",
+      "note": null
+    },
+    {
+      "purpose": "Menu entry Organization, beneath Preferences - id-based alternative",
+      "candidate": "page.locator('[id=\"header.preferences.org\"]')",
+      "matches": 1,
+      "visible": true,
+      "accessibleName": "Organization",
+      "note": null
+    },
+    {
+      "purpose": "Menu entry Vault, beneath Preferences - id-based alternative",
+      "candidate": "page.locator('[id=\"header.preferences.vault\"]')",
+      "matches": 1,
+      "visible": true,
+      "accessibleName": "Vault",
+      "note": null
+    },
+    {
+      "purpose": "Command Center (TS-ETA-411-006) - string selector, no accessible name exists",
+      "candidate": "page.locator('#bannerBackground')",
+      "matches": 1,
+      "visible": true,
+      "accessibleName": null,
+      "note": null
+    }
+  ],
+  "commandCenterControl": {
+    "tag": "div",
+    "elementId": "bannerBackground",
+    "className": "clickable",
+    "text": null,
+    "ariaLabel": null,
+    "title": null,
+    "role": null,
+    "backgroundImage": "url(\"https://qa5.eoriginal.org:8443/ssweb/images/command_center.png\")",
+    "cursor": "pointer"
+  },
+  "preferencesGrouping": {
+    "vaultHref": "/ssweb/setup/vault/vault.eo",
+    "ancestry": [
+      {
+        "depth": 0,
+        "tag": "li",
+        "elementId": null,
+        "className": null,
+        "ownText": []
+      },
+      {
+        "depth": 1,
+        "tag": "ul",
+        "elementId": null,
+        "className": "ui-corner-tr ui-corner-bottom",
+        "ownText": []
+      },
+      {
+        "depth": 2,
+        "tag": "li",
+        "elementId": null,
+        "className": "section more dropdownMenu",
+        "ownText": []
+      },
+      {
+        "depth": 3,
+        "tag": "ul",
+        "elementId": "menuContainer",
+        "className": null,
+        "ownText": []
+      },
+      {
+        "depth": 4,
+        "tag": "div",
+        "elementId": "bannerNavLinks",
+        "className": null,
+        "ownText": []
+      }
+    ]
+  },
+  "menuInventory": [
+    {
+      "text": "Nitin Saini",
+      "href": "/ssweb/setup/userSettings.eo",
+      "elementId": null
+    },
+    {
+      "text": "Nitin Saini",
+      "href": "/ssweb/setup/viewOrganizationData.eo?orgSid=6160",
+      "elementId": null
+    },
+    {
+      "text": "Home",
+      "href": "/ssweb/setup/welcome.eo",
+      "elementId": "header.home"
+    },
+    {
+      "text": "New Transaction",
+      "href": "/ssweb/setup/container/ct/newPackage.eo",
+      "elementId": "header.new_transaction"
+    },
+    {
+      "text": "Workspace",
+      "href": "/ssweb/setup/workspace/workspace.eo",
+      "elementId": "header.workspace"
+    },
+    {
+      "text": "Configuration Changes",
+      "href": "/ssweb/setup/analytics/admin/confChanges.eo",
+      "elementId": null
+    },
+    {
+      "text": "eAsset® Analytics",
+      "href": "/ssweb/setup/analytics/transDocActivity.eo",
+      "elementId": null
+    },
+    {
+      "text": "Event Analytics",
+      "href": "/ssweb/setup/analytics/detailByEvent.eo",
+      "elementId": null
+    },
+    {
+      "text": "Infographics",
+      "href": "/ssweb/setup/analytics/charts.eo",
+      "elementId": null
+    },
+    {
+      "text": "Manage Scheduled Reports",
+      "href": "/ssweb/setup/analytics/manageScheduledReports.eo",
+      "elementId": "manageReports"
+    },
+    {
+      "text": "Open Requests",
+      "href": "/ssweb/setup/analytics/openRequests.eo",
+      "elementId": null
+    },
+    {
+      "text": "Permission Analysis",
+      "href": "/ssweb/setup/analytics/admin/permissionMappings.eo",
+      "elementId": null
+    },
+    {
+      "text": "Transaction Retention Analysis",
+      "href": "/ssweb/setup/analytics/admin/transactionRetention.eo",
+      "elementId": null
+    },
+    {
+      "text": "User Activity Analysis",
+      "href": "/ssweb/setup/analytics/admin/userActivity.eo",
+      "elementId": null
+    },
+    {
+      "text": "Vault Content",
+      "href": "/ssweb/setup/analytics/admin/vaultContent.eo",
+      "elementId": null
+    },
+    {
+      "text": "Organization",
+      "href": "/ssweb/setup/prefs/preferences.eo",
+      "elementId": "header.preferences.org"
+    },
+    {
+      "text": "Vault",
+      "href": "/ssweb/setup/vault/vault.eo",
+      "elementId": "header.preferences.vault"
+    },
+    {
+      "text": "Tutorials",
+      "href": "https://wolters-kluwer.my.site.com/ComplianceSolutionsSupport/s/",
+      "elementId": "header.help.tutorial"
+    },
+    {
+      "text": "Support",
+      "href": "/ssweb/setup/support.eo",
+      "elementId": "header.help.support"
+    },
+    {
+      "text": "About",
+      "href": "/ssweb/setup/about.eo",
+      "elementId": "header.help.about"
+    },
+    {
+      "text": "Logout",
+      "href": "/ssweb/setup/logout.eo",
+      "elementId": "header.logout"
+    },
+    {
+      "text": "New Transaction",
+      "href": "/ssweb/setup/container/ct/newPackage.eo",
+      "elementId": null
+    },
+    {
+      "text": "Workspace",
+      "href": "/ssweb/setup/workspace/workspace.eo",
+      "elementId": null
+    },
+    {
+      "text": "Preferences",
+      "href": "/ssweb/setup/prefs/preferences.eo",
+      "elementId": null
+    }
+  ],
+  "walks": [
+    {
+      "entryPoint": "dashboard icon",
+      "target": "New Transaction",
+      "startedFrom": "https://qa5.eoriginal.org:8443/ssweb/setup/welcome.eo",
+      "clicked": true,
+      "landedUrl": "https://qa5.eoriginal.org:8443/ssweb/setup/container/ct/newPackage.eo",
+      "landedTitle": "eOriginal Command Center™",
+      "headings": [
+        "Create Transaction",
+        "Manage Documents",
+        "Document Visibility",
+        "The attached documents must be in one of the following formats:"
+      ],
+      "error": null,
+      "errorDetail": null,
+      "failureDiagnosis": null
+    },
+    {
+      "entryPoint": "dashboard icon",
+      "target": "Workspace",
+      "startedFrom": "https://qa5.eoriginal.org:8443/ssweb/setup/welcome.eo",
+      "clicked": true,
+      "landedUrl": "https://qa5.eoriginal.org:8443/ssweb/setup/workspace/workspace.eo",
+      "landedTitle": "eOriginal Command Center™",
+      "headings": [
+        "Search Criteria",
+        "Output",
+        "The attached documents must be in one of the following formats:"
+      ],
+      "error": null,
+      "errorDetail": null,
+      "failureDiagnosis": null
+    },
+    {
+      "entryPoint": "dashboard icon",
+      "target": "Preferences",
+      "startedFrom": "https://qa5.eoriginal.org:8443/ssweb/setup/welcome.eo",
+      "clicked": true,
+      "landedUrl": "https://qa5.eoriginal.org:8443/ssweb/setup/prefs/preferences.eo",
+      "landedTitle": "eOriginal Command Center™",
+      "headings": [
+        "The attached documents must be in one of the following formats:"
+      ],
+      "error": null,
+      "errorDetail": null,
+      "failureDiagnosis": null
+    },
+    {
+      "entryPoint": "navigation menu",
+      "target": "New Transaction",
+      "startedFrom": "https://qa5.eoriginal.org:8443/ssweb/setup/welcome.eo",
+      "clicked": true,
+      "landedUrl": "https://qa5.eoriginal.org:8443/ssweb/setup/container/ct/newPackage.eo",
+      "landedTitle": "eOriginal Command Center™",
+      "headings": [
+        "Create Transaction",
+        "Manage Documents",
+        "Document Visibility",
+        "The attached documents must be in one of the following formats:"
+      ],
+      "error": null,
+      "errorDetail": null,
+      "failureDiagnosis": null
+    },
+    {
+      "entryPoint": "navigation menu",
+      "target": "Workspace",
+      "startedFrom": "https://qa5.eoriginal.org:8443/ssweb/setup/welcome.eo",
+      "clicked": true,
+      "landedUrl": "https://qa5.eoriginal.org:8443/ssweb/setup/workspace/workspace.eo",
+      "landedTitle": "eOriginal Command Center™",
+      "headings": [
+        "Search Criteria",
+        "Output",
+        "The attached documents must be in one of the following formats:"
+      ],
+      "error": null,
+      "errorDetail": null,
+      "failureDiagnosis": null
+    },
+    {
+      "entryPoint": "navigation menu",
+      "target": "Home",
+      "startedFrom": "https://qa5.eoriginal.org:8443/ssweb/setup/workspace/workspace.eo",
+      "clicked": true,
+      "landedUrl": "https://qa5.eoriginal.org:8443/ssweb/setup/welcome.eo",
+      "landedTitle": "eOriginal Command Center™",
+      "headings": [
+        "New Transaction",
+        "Workspace",
+        "Preferences"
+      ],
+      "error": null,
+      "errorDetail": null,
+      "failureDiagnosis": null
+    },
+    {
+      "entryPoint": "navigation menu",
+      "target": "Organization",
+      "startedFrom": "https://qa5.eoriginal.org:8443/ssweb/setup/welcome.eo",
+      "clicked": true,
+      "landedUrl": "https://qa5.eoriginal.org:8443/ssweb/setup/prefs/preferences.eo",
+      "landedTitle": "eOriginal Command Center™",
+      "headings": [
+        "The attached documents must be in one of the following formats:"
+      ],
+      "error": null,
+      "errorDetail": null,
+      "failureDiagnosis": null
+    },
+    {
+      "entryPoint": "navigation menu",
+      "target": "Vault",
+      "startedFrom": "https://qa5.eoriginal.org:8443/ssweb/setup/welcome.eo",
+      "clicked": true,
+      "landedUrl": "https://qa5.eoriginal.org:8443/ssweb/setup/vault/vault.eo",
+      "landedTitle": "eOriginal Command Center™",
+      "headings": [
+        "The attached documents must be in one of the following formats:"
+      ],
+      "error": null,
+      "errorDetail": null,
+      "failureDiagnosis": null
+    }
+  ],
+  "commandCenterReturns": [
+    {
+      "module": "New Transaction",
+      "visited": "https://qa5.eoriginal.org:8443/ssweb/setup/container/ct/newPackage.eo",
+      "startedAt": "https://qa5.eoriginal.org:8443/ssweb/setup/container/ct/newPackage.eo",
+      "returnedTo": "https://qa5.eoriginal.org:8443/ssweb/setup/welcome.eo",
+      "returnedHome": true
+    },
+    {
+      "module": "Workspace",
+      "visited": "https://qa5.eoriginal.org:8443/ssweb/setup/workspace/workspace.eo",
+      "startedAt": "https://qa5.eoriginal.org:8443/ssweb/setup/workspace/workspace.eo",
+      "returnedTo": "https://qa5.eoriginal.org:8443/ssweb/setup/welcome.eo",
+      "returnedHome": true
+    },
+    {
+      "module": "Preferences",
+      "visited": "https://qa5.eoriginal.org:8443/ssweb/setup/prefs/preferences.eo",
+      "startedAt": "https://qa5.eoriginal.org:8443/ssweb/setup/prefs/preferences.eo",
+      "returnedTo": "https://qa5.eoriginal.org:8443/ssweb/setup/welcome.eo",
+      "returnedHome": true
+    },
+    {
+      "module": "Organization",
+      "visited": "https://qa5.eoriginal.org:8443/ssweb/setup/prefs/preferences.eo",
+      "startedAt": "https://qa5.eoriginal.org:8443/ssweb/setup/prefs/preferences.eo",
+      "returnedTo": "https://qa5.eoriginal.org:8443/ssweb/setup/welcome.eo",
+      "returnedHome": true
+    },
+    {
+      "module": "Vault",
+      "visited": "https://qa5.eoriginal.org:8443/ssweb/setup/vault/vault.eo",
+      "startedAt": "https://qa5.eoriginal.org:8443/ssweb/setup/vault/vault.eo",
+      "returnedTo": "https://qa5.eoriginal.org:8443/ssweb/setup/welcome.eo",
+      "returnedHome": true
+    }
+  ],
+  "unauthenticated": {
+    "requested": "https://qa5.eoriginal.org:8443/ssweb/setup/workspace/workspace.eo",
+    "credentialEntered": false,
+    "landedUrl": "https://qa5.eoriginal.org:8443/ssweb/setup/showLogin.eo?cause=errors.session.expired.message",
+    "landedTitle": "eOriginal Command Center™",
+    "signInFormPresent": true,
+    "messages": [
+      {
+        "tag": "html",
+        "elementId": null,
+        "className": "postmessage filereader cookies getusermedia canvas contenteditable formattribute fileinput formvalidation",
+        "text": "eOriginal Command Center™ Command Center Your session has timed out. To continue you must log back in to the Command Center application with your user credentials. Organization Login Business Entity Login Username Organization Name Business Entity Password Forgot password? Forgot Password Organization Login Business Entity Login Username Organization Name Business Entity Go back © 2026 eOriginal, Inc. All Rights Reserved. 100 South 5th Street, Suite 500 Minneapolis, MN 55402 Support: 1-866-364-3578"
+      },
+      {
+        "tag": "span",
+        "elementId": null,
+        "className": "errorMessage",
+        "text": "Your session has timed out. To continue you must log back in to the Command Center application with your user credentials."
+      }
+    ]
+  },
+  "finishedAt": "2026-09-05T09:51:01.990Z"
+}

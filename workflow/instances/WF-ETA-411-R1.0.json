@@ -6,10 +6,10 @@
     "release":  "1.0",
     "capability":  "home-navigation",
     "dataClassification":  "REAL_JIRA_DATA",
-    "currentStage":  "AUTOMATION_APPROVAL",
-    "nextStage":  "PLAYWRIGHT_VALIDATION",
-    "lastSuccessfulStage":  "AUTOMATION_REVIEW_PACKAGE",
-    "status":  "WAITING_FOR_HUMAN",
+    "currentStage":  "OPENSPEC_ARCHIVE",
+    "nextStage":  "COMPLETED",
+    "lastSuccessfulStage":  "RTM_UPDATE",
+    "status":  "IN_PROGRESS",
     "completedStages":  [
                             {
                                 "stage":  "JIRA_RETRIEVAL",
@@ -102,15 +102,74 @@
                                                 "features/generated/home-navigation/TP-ETA-411-001-automation-design.md",
                                                 "features/generated/home-navigation/TP-ETA-411-001-automation-approval.template.json"
                                             ]
+                            },
+                            {
+                                "stage":  "AUTOMATION_APPROVAL",
+                                "completedAt":  "2026-09-05T18:55:00.000Z",
+                                "agent":  "sdd-workflow-orchestrator",
+                                "outputs":  [
+                                                "features/approved/home-navigation/TP-ETA-411-001-automation-approval.json",
+                                                "features/approved/home-navigation/home-screen-navigation.feature"
+                                            ]
+                            },
+                            {
+                                "stage":  "PLAYWRIGHT_VALIDATION",
+                                "completedAt":  "2026-09-05T19:40:00.000Z",
+                                "agent":  "sdd-workflow-orchestrator",
+                                "outputs":  [
+                                                "reports/validation/TP-ETA-411-001-browser-validation.json",
+                                                "scripts/tp-eta-411-001-browser-validation.ts"
+                                            ]
+                            },
+                            {
+                                "stage":  "IMPLEMENTATION",
+                                "completedAt":  "2026-09-05T20:20:00.000Z",
+                                "agent":  "sdd-workflow-orchestrator",
+                                "outputs":  [
+                                                "steps/home-screen-navigation.steps.ts",
+                                                "src/components/navigation-menu.component.ts",
+                                                "src/components/command-center.component.ts",
+                                                "src/pages/ecore-organization.page.ts",
+                                                "src/pages/ecore-vault.page.ts",
+                                                "src/pages/ecore-home.page.ts",
+                                                "src/pages/ecore-preferences.page.ts",
+                                                "src/pages/ecore-workspace.page.ts",
+                                                "src/fixtures/test.ts",
+                                                "scripts/tp-eta-411-001-content-probe.ts",
+                                                "reports/validation/TP-ETA-411-001-content-probe.json",
+                                                "reports/validation/TP-ETA-411-001-expectation-mismatch.json"
+                                            ]
+                            },
+                            {
+                                "stage":  "BDD_GENERATION",
+                                "completedAt":  "2026-09-05T10:12:00.000Z",
+                                "agent":  "sdd-workflow-orchestrator",
+                                "outputs":  [
+                                                ".features-gen/features/approved/home-navigation/home-screen-navigation.feature.spec.js"
+                                            ]
+                            },
+                            {
+                                "stage":  "EXECUTION",
+                                "completedAt":  "2026-09-05T10:16:53.689Z",
+                                "agent":  "sdd-workflow-orchestrator",
+                                "outputs":  [
+                                                "traceability/executions/EXEC-ETA-411-001.json",
+                                                "reports/execution/results.json",
+                                                "reports/playwright-report/index.html"
+                                            ]
+                            },
+                            {
+                                "stage":  "RTM_UPDATE",
+                                "completedAt":  "2026-09-05T10:25:00.000Z",
+                                "agent":  "sdd-workflow-orchestrator",
+                                "outputs":  [
+                                                "traceability/capabilities/home-navigation.rtm.json",
+                                                "traceability/capabilities/home-navigation.coverage.json",
+                                                "traceability/index/lookup.index.json"
+                                            ]
                             }
                         ],
-    "pendingApproval":  {
-                            "gate":  "AUTOMATION_DESIGN",
-                            "reviewPackagePath":  "features/generated/home-navigation/TP-ETA-411-001-automation-design.md",
-                            "approvalTemplatePath":  "features/generated/home-navigation/TP-ETA-411-001-automation-approval.template.json",
-                            "expectedApprovalPath":  "features/approved/home-navigation/TP-ETA-411-001-automation-approval.json",
-                            "requestedAt":  "2026-09-05T18:20:00.000Z"
-                        },
+    "pendingApproval":  null,
     "inputArtifactVersions":  {
                                   "requirements/raw/ETA-411.json":  1,
                                   "requirements/approved/ETA-411.json":  1,
@@ -136,11 +195,15 @@
                                 "test-plans/approved/TP-ETA-411-001.json",
                                 "features/generated/home-navigation/home-screen-navigation.feature",
                                 "features/generated/home-navigation/TP-ETA-411-001-automation-design.md",
-                                "features/generated/home-navigation/TP-ETA-411-001-automation-approval.template.json"
+                                "features/generated/home-navigation/TP-ETA-411-001-automation-approval.template.json",
+                                "features/approved/home-navigation/TP-ETA-411-001-automation-approval.json",
+                                "features/approved/home-navigation/home-screen-navigation.feature",
+                                "reports/validation/TP-ETA-411-001-browser-validation.json",
+                                "scripts/tp-eta-411-001-browser-validation.ts"
                             ],
     "retryCount":  0,
     "createdAt":  "2026-09-04T18:32:00.000Z",
-    "updatedAt":  "2026-09-05T18:20:00.000Z",
+    "updatedAt":  "2026-09-05T10:25:00.000Z",
     "startedAt":  "2026-09-04T18:32:00.000Z",
     "completedAt":  null,
     "errorDetails":  null,

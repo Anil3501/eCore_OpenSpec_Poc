@@ -1,0 +1,68 @@
+{
+  "recordId": "MISMATCH-TP-ETA-411-001-001",
+  "recordedAt": "2026-09-05T20:10:00.000Z",
+  "recordedBy": "sdd-workflow-orchestrator",
+  "stage": "IMPLEMENTATION",
+  "workflowId": "WF-ETA-411-R1.0",
+  "environment": "qa5",
+  "status": "REVIEW_REQUIRED",
+  "summary": "The Organization menu entry does not open a page of its own. It opens the same page as the Preferences dashboard icon.",
+  "approvedExpectation": {
+    "acceptanceCriterionId": "AC-ETA-411-006",
+    "testScenarioId": "TS-ETA-411-005",
+    "designConstraint": "Arrival is asserted on page content, never on the address, because the Organization entry shares /ssweb/setup/prefs/preferences.eo with the Preferences dashboard icon."
+  },
+  "observedBehaviour": {
+    "evidencePath": "reports/validation/TP-ETA-411-001-content-probe.json",
+    "method": "page.getByRole('heading') filtered by isVisible() - the same ARIA role engine that expect(getByRole(...)) uses. Deliberately NOT a querySelector over h1,h2,h3,legend,caption, which produced a false result on this application once before and cost three scenarios.",
+    "viaPreferencesDashboardIcon": {
+      "url": "https://qa5.eoriginal.org:8443/ssweb/setup/prefs/preferences.eo",
+      "visibleHeadings": [
+        "Scope",
+        "SmartSign Web",
+        "Command Center",
+        "Workflow Rules",
+        "Organization Administration",
+        "Vault Administration",
+        "Partner Configuration"
+      ]
+    },
+    "viaOrganizationMenuEntry": {
+      "url": "https://qa5.eoriginal.org:8443/ssweb/setup/prefs/preferences.eo",
+      "visibleHeadings": [
+        "Scope",
+        "SmartSign Web",
+        "Command Center",
+        "Workflow Rules",
+        "Organization Administration",
+        "Vault Administration",
+        "Partner Configuration"
+      ]
+    },
+    "comparison": {
+      "sameUrl": true,
+      "sameHeadings": true,
+      "sameMainText": false,
+      "sameMainTextNote": "The full visible text differs somewhere beyond the shared opening. That difference has NOT been shown to be a stable discriminator - it may be a list of organization names or another volatile value - so it is not used as one. Asserting on an unexamined difference would be a guess wearing the clothes of evidence."
+    },
+    "viaVaultMenuEntry": {
+      "url": "https://qa5.eoriginal.org:8443/ssweb/setup/vault/vault.eo",
+      "visibleHeadings": [
+        "SmartSign Web",
+        "Command Center",
+        "Workflow Rules",
+        "Vault Administration",
+        "Partner Configuration"
+      ],
+      "note": "Vault IS a distinct destination on every measure. Only the Organization half of AC-ETA-411-006 is in question."
+    }
+  },
+  "consequence": "TS-ETA-411-005 asserts that the Organization entry opens the organization administration settings, which it demonstrably does. It cannot assert that Organization is a destination distinct from Preferences, because on this evidence it is not. No approved artifact has been edited and no assertion has been quietly weakened to make the scenario pass.",
+  "notResolvedBecause": "Whether AC-ETA-411-006 intends 'their own pages' to mean two distinct destinations, or simply that each entry opens the settings it names, is a statement about what the product should do. An agent may not decide it. AMB-ETA-411-006 asked a narrower version of this question and was left REVIEW_REQUIRED.",
+  "decisionRequiredFrom": "human reviewer",
+  "options": [
+    "Accept that Organization and Preferences are two routes to one page, and record AC-ETA-411-006 as covered by the assertion actually made.",
+    "Treat the shared destination as an application defect and file it, leaving AC-ETA-411-006 uncovered until it is fixed.",
+    "Re-word AC-ETA-411-006 at Gate 1, which returns ETA-411 to the AC_APPROVAL gate with a new artifactVersion."
+  ]
+}

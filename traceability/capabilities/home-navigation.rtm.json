@@ -1,260 +1,460 @@
 {
-    "schemaVersion":  "1.0.0",
-    "capability":  "home-navigation",
-    "release":  "1.0",
-    "artifactVersion":  1,
-    "dataClassification":  "REAL_JIRA_DATA",
-    "updatedAt":  "2026-09-05T13:30:00.000Z",
-    "entries":  [
-                    {
-                        "traceId":  "TRC-ETA-411-001",
-                        "jiraStoryId":  "ETA-411",
-                        "requirementId":  "REQ-ETA-411-001",
-                        "acId":  "AC-ETA-411-001",
-                        "status":  "APPROVED",
-                        "changeType":  "NEW",
-                        "requirementArtifact":  {
-                                                    "path":  "requirements/approved/ETA-411.json",
-                                                    "version":  1
-                                                },
-                        "approvalRefs":  {
-                                             "acceptanceCriteria":  "requirements/approved/ETA-411-ac-approval.json",
-                                             "testPlan":  null,
-                                             "automationDesign":  null
-                                         },
-                        "openSpecRefs":  [
-
-                                         ],
-                        "testPlan":  null,
-                        "automation":  null,
-                        "executionRefs":  [
-
-                                          ]
-                    },
-                    {
-                        "traceId":  "TRC-ETA-411-002",
-                        "jiraStoryId":  "ETA-411",
-                        "requirementId":  "REQ-ETA-411-001",
-                        "acId":  "AC-ETA-411-002",
-                        "status":  "DEFERRED",
-                        "changeType":  "NEW",
-                        "requirementArtifact":  {
-                                                    "path":  "requirements/approved/ETA-411.json",
-                                                    "version":  1
-                                                },
-                        "approvalRefs":  {
-                                             "acceptanceCriteria":  "requirements/approved/ETA-411-ac-approval.json",
-                                             "testPlan":  null,
-                                             "automationDesign":  null
-                                         },
-                        "openSpecRefs":  [
-
-                                         ],
-                        "testPlan":  null,
-                        "automation":  null,
-                        "executionRefs":  [
-
-                                          ]
-                    },
-                    {
-                        "traceId":  "TRC-ETA-411-003",
-                        "jiraStoryId":  "ETA-411",
-                        "requirementId":  "REQ-ETA-411-002",
-                        "acId":  "AC-ETA-411-003",
-                        "status":  "APPROVED",
-                        "changeType":  "NEW",
-                        "requirementArtifact":  {
-                                                    "path":  "requirements/approved/ETA-411.json",
-                                                    "version":  1
-                                                },
-                        "approvalRefs":  {
-                                             "acceptanceCriteria":  "requirements/approved/ETA-411-ac-approval.json",
-                                             "testPlan":  null,
-                                             "automationDesign":  null
-                                         },
-                        "openSpecRefs":  [
-
-                                         ],
-                        "testPlan":  null,
-                        "automation":  null,
-                        "executionRefs":  [
-
-                                          ]
-                    },
-                    {
-                        "traceId":  "TRC-ETA-411-004",
-                        "jiraStoryId":  "ETA-411",
-                        "requirementId":  "REQ-ETA-411-003",
-                        "acId":  "AC-ETA-411-004",
-                        "status":  "APPROVED",
-                        "changeType":  "NEW",
-                        "requirementArtifact":  {
-                                                    "path":  "requirements/approved/ETA-411.json",
-                                                    "version":  1
-                                                },
-                        "approvalRefs":  {
-                                             "acceptanceCriteria":  "requirements/approved/ETA-411-ac-approval.json",
-                                             "testPlan":  null,
-                                             "automationDesign":  null
-                                         },
-                        "openSpecRefs":  [
-
-                                         ],
-                        "testPlan":  null,
-                        "automation":  null,
-                        "executionRefs":  [
-
-                                          ]
-                    },
-                    {
-                        "traceId":  "TRC-ETA-411-005",
-                        "jiraStoryId":  "ETA-411",
-                        "requirementId":  "REQ-ETA-411-003",
-                        "acId":  "AC-ETA-411-005",
-                        "status":  "APPROVED",
-                        "changeType":  "NEW",
-                        "requirementArtifact":  {
-                                                    "path":  "requirements/approved/ETA-411.json",
-                                                    "version":  1
-                                                },
-                        "approvalRefs":  {
-                                             "acceptanceCriteria":  "requirements/approved/ETA-411-ac-approval.json",
-                                             "testPlan":  null,
-                                             "automationDesign":  null
-                                         },
-                        "openSpecRefs":  [
-
-                                         ],
-                        "testPlan":  null,
-                        "automation":  null,
-                        "executionRefs":  [
-
-                                          ]
-                    },
-                    {
-                        "traceId":  "TRC-ETA-411-006",
-                        "jiraStoryId":  "ETA-411",
-                        "requirementId":  "REQ-ETA-411-004",
-                        "acId":  "AC-ETA-411-006",
-                        "status":  "APPROVED",
-                        "changeType":  "NEW",
-                        "requirementArtifact":  {
-                                                    "path":  "requirements/approved/ETA-411.json",
-                                                    "version":  1
-                                                },
-                        "approvalRefs":  {
-                                             "acceptanceCriteria":  "requirements/approved/ETA-411-ac-approval.json",
-                                             "testPlan":  null,
-                                             "automationDesign":  null
-                                         },
-                        "openSpecRefs":  [
-
-                                         ],
-                        "testPlan":  null,
-                        "automation":  null,
-                        "executionRefs":  [
-
-                                          ]
-                    },
-                    {
-                        "traceId":  "TRC-ETA-411-007",
-                        "jiraStoryId":  "ETA-411",
-                        "requirementId":  "REQ-ETA-411-005",
-                        "acId":  "AC-ETA-411-007",
-                        "status":  "APPROVED",
-                        "changeType":  "NEW",
-                        "requirementArtifact":  {
-                                                    "path":  "requirements/approved/ETA-411.json",
-                                                    "version":  1
-                                                },
-                        "approvalRefs":  {
-                                             "acceptanceCriteria":  "requirements/approved/ETA-411-ac-approval.json",
-                                             "testPlan":  null,
-                                             "automationDesign":  null
-                                         },
-                        "openSpecRefs":  [
-
-                                         ],
-                        "testPlan":  null,
-                        "automation":  null,
-                        "executionRefs":  [
-
-                                          ]
-                    },
-                    {
-                        "traceId":  "TRC-ETA-411-008",
-                        "jiraStoryId":  "ETA-411",
-                        "requirementId":  "REQ-ETA-411-006",
-                        "acId":  "AC-ETA-411-008",
-                        "status":  "DEFERRED",
-                        "changeType":  "NEW",
-                        "requirementArtifact":  {
-                                                    "path":  "requirements/approved/ETA-411.json",
-                                                    "version":  1
-                                                },
-                        "approvalRefs":  {
-                                             "acceptanceCriteria":  "requirements/approved/ETA-411-ac-approval.json",
-                                             "testPlan":  null,
-                                             "automationDesign":  null
-                                         },
-                        "openSpecRefs":  [
-
-                                         ],
-                        "testPlan":  null,
-                        "automation":  null,
-                        "executionRefs":  [
-
-                                          ]
-                    },
-                    {
-                        "traceId":  "TRC-ETA-411-009",
-                        "jiraStoryId":  "ETA-411",
-                        "requirementId":  "REQ-ETA-411-007",
-                        "acId":  "AC-ETA-411-009",
-                        "status":  "APPROVED",
-                        "changeType":  "NEW",
-                        "requirementArtifact":  {
-                                                    "path":  "requirements/approved/ETA-411.json",
-                                                    "version":  1
-                                                },
-                        "approvalRefs":  {
-                                             "acceptanceCriteria":  "requirements/approved/ETA-411-ac-approval.json",
-                                             "testPlan":  null,
-                                             "automationDesign":  null
-                                         },
-                        "openSpecRefs":  [
-
-                                         ],
-                        "testPlan":  null,
-                        "automation":  null,
-                        "executionRefs":  [
-
-                                          ]
-                    },
-                    {
-                        "traceId":  "TRC-ETA-411-010",
-                        "jiraStoryId":  "ETA-411",
-                        "requirementId":  "REQ-ETA-411-007",
-                        "acId":  "AC-ETA-411-010",
-                        "status":  "DEFERRED",
-                        "changeType":  "NEW",
-                        "requirementArtifact":  {
-                                                    "path":  "requirements/approved/ETA-411.json",
-                                                    "version":  1
-                                                },
-                        "approvalRefs":  {
-                                             "acceptanceCriteria":  "requirements/approved/ETA-411-ac-approval.json",
-                                             "testPlan":  null,
-                                             "automationDesign":  null
-                                         },
-                        "openSpecRefs":  [
-
-                                         ],
-                        "testPlan":  null,
-                        "automation":  null,
-                        "executionRefs":  [
-
-                                          ]
-                    }
-                ]
+  "schemaVersion": "1.0.0",
+  "capability": "home-navigation",
+  "release": "1.0",
+  "artifactVersion": 2,
+  "dataClassification": "REAL_JIRA_DATA",
+  "updatedAt": "2026-09-05T10:25:00.000Z",
+  "entries": [
+    {
+      "traceId": "TRC-ETA-411-001",
+      "jiraStoryId": "ETA-411",
+      "requirementId": "REQ-ETA-411-001",
+      "acId": "AC-ETA-411-001",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/ETA-411.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/ETA-411-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-ETA-411-001-approval.json",
+        "automationDesign": "features/approved/home-navigation/TP-ETA-411-001-automation-approval.json"
+      },
+      "openSpecRefs": [
+        "openspec/changes/add-home-navigation/specs/home-navigation/home-screen-navigation/spec.md"
+      ],
+      "testPlan": {
+        "testPlanId": "TP-ETA-411-001",
+        "testScenarioId": "TS-ETA-411-001",
+        "path": "test-plans/approved/TP-ETA-411-001.json",
+        "version": 1,
+        "interfaceType": "UI"
+      },
+      "automation": {
+        "featureFile": "features/approved/home-navigation/home-screen-navigation.feature",
+        "gherkinScenario": "The six named modules are offered to a signed-in Organization user",
+        "stepDefinitions": [
+          "steps/home-screen-navigation.steps.ts"
+        ],
+        "pageObjects": [
+          "src/pages/ecore-login.page.ts",
+          "src/pages/ecore-home.page.ts"
+        ],
+        "components": [
+          "src/components/navigation-menu.component.ts"
+        ],
+        "fixtures": [
+          "src/fixtures/test.ts"
+        ],
+        "generatedTest": ".features-gen/features/approved/home-navigation/home-screen-navigation.feature.spec.js",
+        "automationStatus": "EXECUTABLE",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-ETA-411-001",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-ETA-411-001.json"
+        }
+      ]
+    },
+    {
+      "traceId": "TRC-ETA-411-002",
+      "jiraStoryId": "ETA-411",
+      "requirementId": "REQ-ETA-411-001",
+      "acId": "AC-ETA-411-002",
+      "status": "DEFERRED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/ETA-411.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/ETA-411-ac-approval.json",
+        "testPlan": null,
+        "automationDesign": null
+      },
+      "openSpecRefs": [],
+      "testPlan": null,
+      "automation": null,
+      "executionRefs": []
+    },
+    {
+      "traceId": "TRC-ETA-411-003",
+      "jiraStoryId": "ETA-411",
+      "requirementId": "REQ-ETA-411-002",
+      "acId": "AC-ETA-411-003",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/ETA-411.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/ETA-411-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-ETA-411-001-approval.json",
+        "automationDesign": "features/approved/home-navigation/TP-ETA-411-001-automation-approval.json"
+      },
+      "openSpecRefs": [
+        "openspec/changes/add-home-navigation/specs/home-navigation/home-screen-navigation/spec.md"
+      ],
+      "testPlan": {
+        "testPlanId": "TP-ETA-411-001",
+        "testScenarioId": "TS-ETA-411-002",
+        "path": "test-plans/approved/TP-ETA-411-001.json",
+        "version": 1,
+        "interfaceType": "UI"
+      },
+      "automation": {
+        "featureFile": "features/approved/home-navigation/home-screen-navigation.feature",
+        "gherkinScenario": "The Dashboard icons open New Transaction, Workspace and Preferences",
+        "stepDefinitions": [
+          "steps/home-screen-navigation.steps.ts"
+        ],
+        "pageObjects": [
+          "src/pages/ecore-login.page.ts",
+          "src/pages/ecore-home.page.ts",
+          "src/pages/ecore-new-transaction.page.ts",
+          "src/pages/ecore-workspace.page.ts",
+          "src/pages/ecore-preferences.page.ts"
+        ],
+        "components": [],
+        "fixtures": [
+          "src/fixtures/test.ts"
+        ],
+        "generatedTest": ".features-gen/features/approved/home-navigation/home-screen-navigation.feature.spec.js",
+        "automationStatus": "EXECUTABLE",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-ETA-411-001",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-ETA-411-001.json"
+        }
+      ]
+    },
+    {
+      "traceId": "TRC-ETA-411-004",
+      "jiraStoryId": "ETA-411",
+      "requirementId": "REQ-ETA-411-003",
+      "acId": "AC-ETA-411-004",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/ETA-411.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/ETA-411-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-ETA-411-001-approval.json",
+        "automationDesign": "features/approved/home-navigation/TP-ETA-411-001-automation-approval.json"
+      },
+      "openSpecRefs": [
+        "openspec/changes/add-home-navigation/specs/home-navigation/home-screen-navigation/spec.md"
+      ],
+      "testPlan": {
+        "testPlanId": "TP-ETA-411-001",
+        "testScenarioId": "TS-ETA-411-003",
+        "path": "test-plans/approved/TP-ETA-411-001.json",
+        "version": 1,
+        "interfaceType": "UI"
+      },
+      "automation": {
+        "featureFile": "features/approved/home-navigation/home-screen-navigation.feature",
+        "gherkinScenario": "The navigation menu opens Home, New Transaction and Workspace",
+        "stepDefinitions": [
+          "steps/home-screen-navigation.steps.ts"
+        ],
+        "pageObjects": [
+          "src/pages/ecore-login.page.ts",
+          "src/pages/ecore-home.page.ts",
+          "src/pages/ecore-new-transaction.page.ts",
+          "src/pages/ecore-workspace.page.ts"
+        ],
+        "components": [
+          "src/components/navigation-menu.component.ts"
+        ],
+        "fixtures": [
+          "src/fixtures/test.ts"
+        ],
+        "generatedTest": ".features-gen/features/approved/home-navigation/home-screen-navigation.feature.spec.js",
+        "automationStatus": "EXECUTABLE",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-ETA-411-001",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-ETA-411-001.json"
+        }
+      ]
+    },
+    {
+      "traceId": "TRC-ETA-411-005",
+      "jiraStoryId": "ETA-411",
+      "requirementId": "REQ-ETA-411-003",
+      "acId": "AC-ETA-411-005",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/ETA-411.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/ETA-411-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-ETA-411-001-approval.json",
+        "automationDesign": "features/approved/home-navigation/TP-ETA-411-001-automation-approval.json"
+      },
+      "openSpecRefs": [
+        "openspec/changes/add-home-navigation/specs/home-navigation/home-screen-navigation/spec.md"
+      ],
+      "testPlan": {
+        "testPlanId": "TP-ETA-411-001",
+        "testScenarioId": "TS-ETA-411-004",
+        "path": "test-plans/approved/TP-ETA-411-001.json",
+        "version": 1,
+        "interfaceType": "UI"
+      },
+      "automation": {
+        "featureFile": "features/approved/home-navigation/home-screen-navigation.feature",
+        "gherkinScenario": "Preferences is offered in the navigation menu with Organization and Vault grouped beneath it",
+        "stepDefinitions": [
+          "steps/home-screen-navigation.steps.ts"
+        ],
+        "pageObjects": [
+          "src/pages/ecore-login.page.ts",
+          "src/pages/ecore-home.page.ts"
+        ],
+        "components": [
+          "src/components/navigation-menu.component.ts"
+        ],
+        "fixtures": [
+          "src/fixtures/test.ts"
+        ],
+        "generatedTest": ".features-gen/features/approved/home-navigation/home-screen-navigation.feature.spec.js",
+        "automationStatus": "EXECUTABLE",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-ETA-411-001",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-ETA-411-001.json"
+        }
+      ]
+    },
+    {
+      "traceId": "TRC-ETA-411-006",
+      "jiraStoryId": "ETA-411",
+      "requirementId": "REQ-ETA-411-004",
+      "acId": "AC-ETA-411-006",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/ETA-411.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/ETA-411-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-ETA-411-001-approval.json",
+        "automationDesign": "features/approved/home-navigation/TP-ETA-411-001-automation-approval.json"
+      },
+      "openSpecRefs": [
+        "openspec/changes/add-home-navigation/specs/home-navigation/home-screen-navigation/spec.md"
+      ],
+      "testPlan": {
+        "testPlanId": "TP-ETA-411-001",
+        "testScenarioId": "TS-ETA-411-005",
+        "path": "test-plans/approved/TP-ETA-411-001.json",
+        "version": 1,
+        "interfaceType": "UI"
+      },
+      "automation": {
+        "featureFile": "features/approved/home-navigation/home-screen-navigation.feature",
+        "gherkinScenario": "Organization and Vault open their own pages from beneath Preferences",
+        "stepDefinitions": [
+          "steps/home-screen-navigation.steps.ts"
+        ],
+        "pageObjects": [
+          "src/pages/ecore-login.page.ts",
+          "src/pages/ecore-home.page.ts",
+          "src/pages/ecore-organization.page.ts",
+          "src/pages/ecore-vault.page.ts"
+        ],
+        "components": [
+          "src/components/navigation-menu.component.ts"
+        ],
+        "fixtures": [
+          "src/fixtures/test.ts"
+        ],
+        "generatedTest": ".features-gen/features/approved/home-navigation/home-screen-navigation.feature.spec.js",
+        "automationStatus": "EXECUTABLE",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-ETA-411-001",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-ETA-411-001.json"
+        }
+      ]
+    },
+    {
+      "traceId": "TRC-ETA-411-007",
+      "jiraStoryId": "ETA-411",
+      "requirementId": "REQ-ETA-411-005",
+      "acId": "AC-ETA-411-007",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/ETA-411.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/ETA-411-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-ETA-411-001-approval.json",
+        "automationDesign": "features/approved/home-navigation/TP-ETA-411-001-automation-approval.json"
+      },
+      "openSpecRefs": [
+        "openspec/changes/add-home-navigation/specs/home-navigation/home-screen-navigation/spec.md"
+      ],
+      "testPlan": {
+        "testPlanId": "TP-ETA-411-001",
+        "testScenarioId": "TS-ETA-411-006",
+        "path": "test-plans/approved/TP-ETA-411-001.json",
+        "version": 1,
+        "interfaceType": "UI"
+      },
+      "automation": {
+        "featureFile": "features/approved/home-navigation/home-screen-navigation.feature",
+        "gherkinScenario": "Command Center returns the user to the Home page from each module",
+        "stepDefinitions": [
+          "steps/home-screen-navigation.steps.ts"
+        ],
+        "pageObjects": [
+          "src/pages/ecore-login.page.ts",
+          "src/pages/ecore-home.page.ts",
+          "src/pages/ecore-new-transaction.page.ts",
+          "src/pages/ecore-workspace.page.ts",
+          "src/pages/ecore-preferences.page.ts",
+          "src/pages/ecore-organization.page.ts",
+          "src/pages/ecore-vault.page.ts"
+        ],
+        "components": [
+          "src/components/navigation-menu.component.ts",
+          "src/components/command-center.component.ts"
+        ],
+        "fixtures": [
+          "src/fixtures/test.ts"
+        ],
+        "generatedTest": ".features-gen/features/approved/home-navigation/home-screen-navigation.feature.spec.js",
+        "automationStatus": "EXECUTABLE",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-ETA-411-001",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-ETA-411-001.json"
+        }
+      ]
+    },
+    {
+      "traceId": "TRC-ETA-411-008",
+      "jiraStoryId": "ETA-411",
+      "requirementId": "REQ-ETA-411-006",
+      "acId": "AC-ETA-411-008",
+      "status": "DEFERRED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/ETA-411.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/ETA-411-ac-approval.json",
+        "testPlan": null,
+        "automationDesign": null
+      },
+      "openSpecRefs": [],
+      "testPlan": null,
+      "automation": null,
+      "executionRefs": []
+    },
+    {
+      "traceId": "TRC-ETA-411-009",
+      "jiraStoryId": "ETA-411",
+      "requirementId": "REQ-ETA-411-007",
+      "acId": "AC-ETA-411-009",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/ETA-411.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/ETA-411-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-ETA-411-001-approval.json",
+        "automationDesign": "features/approved/home-navigation/TP-ETA-411-001-automation-approval.json"
+      },
+      "openSpecRefs": [
+        "openspec/changes/add-home-navigation/specs/home-navigation/home-screen-navigation/spec.md"
+      ],
+      "testPlan": {
+        "testPlanId": "TP-ETA-411-001",
+        "testScenarioId": "TS-ETA-411-007",
+        "path": "test-plans/approved/TP-ETA-411-001.json",
+        "version": 1,
+        "interfaceType": "UI"
+      },
+      "automation": {
+        "featureFile": "features/approved/home-navigation/home-screen-navigation.feature",
+        "gherkinScenario": "An unauthenticated visitor is refused a module and kept on the sign-in page",
+        "stepDefinitions": [
+          "steps/home-screen-navigation.steps.ts"
+        ],
+        "pageObjects": [
+          "src/pages/ecore-login.page.ts",
+          "src/pages/ecore-workspace.page.ts"
+        ],
+        "components": [],
+        "fixtures": [
+          "src/fixtures/test.ts"
+        ],
+        "generatedTest": ".features-gen/features/approved/home-navigation/home-screen-navigation.feature.spec.js",
+        "automationStatus": "EXECUTABLE",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-ETA-411-001",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-ETA-411-001.json"
+        }
+      ]
+    },
+    {
+      "traceId": "TRC-ETA-411-010",
+      "jiraStoryId": "ETA-411",
+      "requirementId": "REQ-ETA-411-007",
+      "acId": "AC-ETA-411-010",
+      "status": "DEFERRED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/ETA-411.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/ETA-411-ac-approval.json",
+        "testPlan": null,
+        "automationDesign": null
+      },
+      "openSpecRefs": [],
+      "testPlan": null,
+      "automation": null,
+      "executionRefs": []
+    }
+  ]
 }

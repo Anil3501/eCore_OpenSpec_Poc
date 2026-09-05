@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "capability": "home-navigation",
+  "release": "1.0",
+  "generatedAt": "2026-09-05T10:25:00.000Z",
+  "dataClassification": "REAL_JIRA_DATA",
+  "sourceRtm": {
+    "path": "traceability/capabilities/home-navigation.rtm.json",
+    "version": 2
+  },
+  "totals": {
+    "approvedAcs": 7,
+    "approvedAcsLinkedToApprovedScenarios": 7,
+    "approvedAcsLinkedToExecutableAutomation": 7,
+    "automatedAcsExecuted": 7,
+    "executedAcsPassed": 7
+  },
+  "coverage": {
+    "acDesignCoveragePct": 100,
+    "automationCoveragePct": 100,
+    "executionCoveragePct": 100,
+    "passCoveragePct": 100
+  },
+  "gaps": {
+    "uncoveredAcIds": [],
+    "deferredAcIds": [
+      "AC-ETA-411-002",
+      "AC-ETA-411-008",
+      "AC-ETA-411-010"
+    ],
+    "blockedAcIds": [],
+    "manualOnlyAcIds": [],
+    "failedAcIds": [],
+    "clarificationRequiredAcIds": []
+  },
+  "notes": [
+    "These percentages describe acceptance-criterion coverage only. They are unrelated to browser code coverage in reports/coverage/, which measures which application JavaScript executed and is never evidence that an acceptance criterion is satisfied.",
+    "The denominator is the seven ACs APPROVED at Gate 1, not the ten the story proposed. AC-ETA-411-002, AC-ETA-411-008 and AC-ETA-411-010 were DEFERRED by the reviewer and are open work, not coverage.",
+    "AC-ETA-411-006 is counted as passed but is NOT settled. TS-ETA-411-005 proves the Organization entry opens the organization administration settings; it cannot prove Organization is a destination distinct from Preferences, because the two share an address and the same seven visible headings. See reports/validation/TP-ETA-411-001-expectation-mismatch.json. A reviewer decision is outstanding.",
+    "AC-ETA-411-009 is counted as passed on the presence of an error message, not its wording. The application tells a never-signed-in visitor that their session timed out, which remains an open observation.",
+    "REQ-ETA-411-006 was DEFERRED in full and carries no approved acceptance criterion, so it appears nowhere in this matrix. Its coverage is unknown, not zero and not complete."
+  ]
+}

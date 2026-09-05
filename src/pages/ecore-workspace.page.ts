@@ -1,5 +1,6 @@
 import type { Page } from '@playwright/test';
 import { expect } from '@playwright/test';
+import { env } from '../utils/env.ts';
 
 /**
  * The Workspace page.
@@ -33,6 +34,23 @@ export class EcoreWorkspacePage {
   async expectArrived(): Promise<void> {
     await expect(this.page).toHaveURL(/\/ssweb\/setup\/workspace\/workspace\.eo/, {
       timeout: 30_000,
+    });
+  }
+
+  /**
+   * Asks the application for this page without going through any menu.
+   *
+   * TS-ETA-411-007 needs a request that no signed-in navigation could have
+   * produced, so the address is requested directly. It is resolved from the one
+   * configured base URL rather than written out, so no host is hardcoded here.
+   *
+   * No assertion follows the navigation on purpose: whether the application
+   * serves this page or refuses it IS the thing under test, so this method must
+   * not presume either outcome.
+   */
+  async requestDirectly(): Promise<void> {
+    await this.page.goto(new URL('workspace/workspace.eo', env.requireBaseUrl()).toString(), {
+      waitUntil: 'domcontentloaded',
     });
   }
 }

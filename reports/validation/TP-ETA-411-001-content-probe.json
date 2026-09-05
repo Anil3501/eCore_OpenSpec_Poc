@@ -1,0 +1,58 @@
+{
+  "probe": "TP-ETA-411-001-content-probe",
+  "story": "ETA-411",
+  "testPlanId": "TP-ETA-411-001",
+  "stage": "PLAYWRIGHT_VALIDATION",
+  "question": "Can arrival at Organization be told apart from arrival at Preferences by page content, as TS-ETA-411-005 requires, given both share /ssweb/setup/prefs/preferences.eo?",
+  "evidenceSource": "Scripted Playwright using the ARIA role engine. Headings are read via getByRole(heading) and filtered by visibility, never via a querySelector over h1/h2/h3/legend/caption.",
+  "startedAt": "2026-09-05T09:56:16.151Z",
+  "viaPreferencesIcon": {
+    "url": "https://qa5.eoriginal.org:8443/ssweb/setup/prefs/preferences.eo",
+    "title": "eOriginal Command Center™",
+    "visibleHeadings": [
+      "Scope",
+      "SmartSign Web",
+      "Command Center",
+      "Workflow Rules",
+      "Organization Administration",
+      "Vault Administration",
+      "Partner Configuration"
+    ],
+    "visibleTabs": [],
+    "mainVisibleText": "Preferences Scope Global Global SmartSign Web Completion Statuses Custom Errors Destination Site Email Templates ESIGN Consent Identity Verification Signature Appearance URL Redirects User Instructions User Interface Preferences Command Center Field Branding Workflow Rules Email Notifications External System Sync Failed External Sync Messages Vault Actions Watermark Rules Watermark Templates Organization Administration Organization Configuration Organization Links Organization Security Vault Administration API Users Approved Domains Certificates Container Permissions Custom Fields Document Retention Policies Document Types External File Location Groups Signature Templates Status Values Transaction Retention Policies Transaction Types Transfer Partners Users Partner Configuration Adobe Connect DocuSign Connect Expere MERS © Sat Sep 05 05:56:32 EDT 2026 eOriginal, Inc. All Rights Reserved. Supported File Types Close The attached documents must be in one of the following formats: Graphics Interchange Format (GIF) (image/gif) Joint Photographic Experts Group (JPEG, JPG) (image/jpeg) Microsoft Excel (application/vnd.ms-excel) Microsoft Excel (application/vnd.openxmlformats-officedocument.spreadsheetml.sheet) Microsoft PowerPoint (application/vnd.openxmlformats-officedocument.presentationml.presentation) Microsoft PowerPoint (application/vnd.ms-powerpoint) Microsoft Word (application/vnd.openxmlformats-officedocument.wordprocessingml.document) Microsoft Word (application/msword) Po"
+  },
+  "viaOrganizationMenu": {
+    "url": "https://qa5.eoriginal.org:8443/ssweb/setup/prefs/preferences.eo",
+    "title": "eOriginal Command Center™",
+    "visibleHeadings": [
+      "Scope",
+      "SmartSign Web",
+      "Command Center",
+      "Workflow Rules",
+      "Organization Administration",
+      "Vault Administration",
+      "Partner Configuration"
+    ],
+    "visibleTabs": [],
+    "mainVisibleText": "Preferences Scope Global Global SmartSign Web Completion Statuses Custom Errors Destination Site Email Templates ESIGN Consent Identity Verification Signature Appearance URL Redirects User Instructions User Interface Preferences Command Center Field Branding Workflow Rules Email Notifications External System Sync Failed External Sync Messages Vault Actions Watermark Rules Watermark Templates Organization Administration Organization Configuration Organization Links Organization Security Vault Administration API Users Approved Domains Certificates Container Permissions Custom Fields Document Retention Policies Document Types External File Location Groups Signature Templates Status Values Transaction Retention Policies Transaction Types Transfer Partners Users Partner Configuration Adobe Connect DocuSign Connect Expere MERS © Sat Sep 05 05:56:38 EDT 2026 eOriginal, Inc. All Rights Reserved. Supported File Types Close The attached documents must be in one of the following formats: Graphics Interchange Format (GIF) (image/gif) Joint Photographic Experts Group (JPEG, JPG) (image/jpeg) Microsoft Excel (application/vnd.ms-excel) Microsoft Excel (application/vnd.openxmlformats-officedocument.spreadsheetml.sheet) Microsoft PowerPoint (application/vnd.openxmlformats-officedocument.presentationml.presentation) Microsoft PowerPoint (application/vnd.ms-powerpoint) Microsoft Word (application/vnd.openxmlformats-officedocument.wordprocessingml.document) Microsoft Word (application/msword) Po"
+  },
+  "viaVaultMenu": {
+    "url": "https://qa5.eoriginal.org:8443/ssweb/setup/vault/vault.eo",
+    "title": "eOriginal Command Center™",
+    "visibleHeadings": [
+      "SmartSign Web",
+      "Command Center",
+      "Workflow Rules",
+      "Vault Administration",
+      "Partner Configuration"
+    ],
+    "visibleTabs": [],
+    "mainVisibleText": "Industry Settings Organization Templates Organization: Active Only? Search by Short Name? Adam Adam Oliner Org AddBE Aditya Ranjan AdobeCM1 AdobeConnectOnlyPartnerConfig ADTestOrg1784800669198 Full Name ADTestOrg1784800811621 Full Name ADULOrg1 ADUserLogin ADUserLogin7 ADUserLogin8 Advance Search Org AIOrganization1 AIOrganization2 AishwaryaNewOrganization AishwaryaOrganization AlejandroOrg AlexOrg AllPartnerConfig AMUR Capital Funding VII, LLC, as borrower, through its designated custodian, Wells Fargo Bank, National Association APITestOrg Approved Organization ApprovedDomainsOrg ApprovedDomainsUserLoginOrg asOrg ATCSVOrg ATCSVOrgg ATCSVOrggg ATCSVOrgggg Authorized Feature Org Authorized IPOrgUserOrg AuthorizedOrg AuthorizedUser Automation Organization Automation Test Partner AutomationOrganization AutoTestOrganization BE Creation Organization Ben's Organization BusinessAction CatOrg Child Child2 Child3A Child3B Child3C ChildOrg ChildReportOrg Collection Organization CollectionWorkspace Organization Consent Automation Organization ContainerOrg ContainerPermission Automation Org ControllerOrg Coverage Test Organization Coverage Testing Transfer Recipient Coverage Tolec Receiving Organization Coverage Tolec Sending Organization Custom Language Organization DCollection Organization DeactivatedOrg Demo Org 1 Demo Org 2 Demo Org 3 Destroy Organization DestroyBEOrganization Document Type Automation Organization DocuSignOnlyPartnerConfig EC-1462 ECCA Automation Org ECCA Permission "
+  },
+  "comparison": {
+    "sameUrl": true,
+    "sameHeadings": true,
+    "sameMainText": false
+  },
+  "finishedAt": "2026-09-05T09:56:42.345Z"
+}

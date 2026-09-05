@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "release": "1.0",
-  "updatedAt": "2026-09-04T18:29:40.000Z",
+  "updatedAt": "2026-09-05T10:25:00.000Z",
   "dataClassification": "REAL_JIRA_DATA",
   "indexes": {
     "byJiraStoryId": {
@@ -18,6 +18,24 @@
             "TRC-ETA-351-006",
             "TRC-ETA-351-007",
             "TRC-ETA-351-008"
+          ]
+        }
+      ],
+      "ETA-411": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-001",
+            "TRC-ETA-411-002",
+            "TRC-ETA-411-003",
+            "TRC-ETA-411-004",
+            "TRC-ETA-411-005",
+            "TRC-ETA-411-006",
+            "TRC-ETA-411-007",
+            "TRC-ETA-411-008",
+            "TRC-ETA-411-009",
+            "TRC-ETA-411-010"
           ]
         }
       ]
@@ -84,6 +102,72 @@
           "rtmPath": "traceability/capabilities/account-access.rtm.json",
           "traceIds": [
             "TRC-ETA-351-008"
+          ]
+        }
+      ],
+      "REQ-ETA-411-001": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-001",
+            "TRC-ETA-411-002"
+          ]
+        }
+      ],
+      "REQ-ETA-411-002": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-003"
+          ]
+        }
+      ],
+      "REQ-ETA-411-003": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-004",
+            "TRC-ETA-411-005"
+          ]
+        }
+      ],
+      "REQ-ETA-411-004": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-006"
+          ]
+        }
+      ],
+      "REQ-ETA-411-005": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-007"
+          ]
+        }
+      ],
+      "REQ-ETA-411-006": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-008"
+          ]
+        }
+      ],
+      "REQ-ETA-411-007": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-009",
+            "TRC-ETA-411-010"
           ]
         }
       ]
@@ -160,6 +244,96 @@
             "TRC-ETA-351-008"
           ]
         }
+      ],
+      "AC-ETA-411-001": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-001"
+          ]
+        }
+      ],
+      "AC-ETA-411-002": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-002"
+          ]
+        }
+      ],
+      "AC-ETA-411-003": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-003"
+          ]
+        }
+      ],
+      "AC-ETA-411-004": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-004"
+          ]
+        }
+      ],
+      "AC-ETA-411-005": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-005"
+          ]
+        }
+      ],
+      "AC-ETA-411-006": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-006"
+          ]
+        }
+      ],
+      "AC-ETA-411-007": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-007"
+          ]
+        }
+      ],
+      "AC-ETA-411-008": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-008"
+          ]
+        }
+      ],
+      "AC-ETA-411-009": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-009"
+          ]
+        }
+      ],
+      "AC-ETA-411-010": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-010"
+          ]
+        }
       ]
     },
     "byTestPlanId": {
@@ -176,6 +350,21 @@
             "TRC-ETA-351-006",
             "TRC-ETA-351-007",
             "TRC-ETA-351-008"
+          ]
+        }
+      ],
+      "TP-ETA-411-001": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-001",
+            "TRC-ETA-411-003",
+            "TRC-ETA-411-004",
+            "TRC-ETA-411-005",
+            "TRC-ETA-411-006",
+            "TRC-ETA-411-007",
+            "TRC-ETA-411-009"
           ]
         }
       ]
@@ -252,6 +441,69 @@
             "TRC-ETA-351-008"
           ]
         }
+      ],
+      "TS-ETA-411-001": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-001"
+          ]
+        }
+      ],
+      "TS-ETA-411-002": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-003"
+          ]
+        }
+      ],
+      "TS-ETA-411-003": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-004"
+          ]
+        }
+      ],
+      "TS-ETA-411-004": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-005"
+          ]
+        }
+      ],
+      "TS-ETA-411-005": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-006"
+          ]
+        }
+      ],
+      "TS-ETA-411-006": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-007"
+          ]
+        }
+      ],
+      "TS-ETA-411-007": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-009"
+          ]
+        }
       ]
     },
     "byFeatureFile": {
@@ -268,6 +520,21 @@
             "TRC-ETA-351-006",
             "TRC-ETA-351-007",
             "TRC-ETA-351-008"
+          ]
+        }
+      ],
+      "features/approved/home-navigation/home-screen-navigation.feature": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-001",
+            "TRC-ETA-411-003",
+            "TRC-ETA-411-004",
+            "TRC-ETA-411-005",
+            "TRC-ETA-411-006",
+            "TRC-ETA-411-007",
+            "TRC-ETA-411-009"
           ]
         }
       ]
@@ -302,6 +569,21 @@
             "TRC-ETA-351-006",
             "TRC-ETA-351-007",
             "TRC-ETA-351-008"
+          ]
+        }
+      ],
+      "EXEC-ETA-411-001": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-001",
+            "TRC-ETA-411-003",
+            "TRC-ETA-411-004",
+            "TRC-ETA-411-005",
+            "TRC-ETA-411-006",
+            "TRC-ETA-411-007",
+            "TRC-ETA-411-009"
           ]
         }
       ]

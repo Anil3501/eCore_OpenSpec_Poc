@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "1.0.0",
+  "approvalId": "APR-AD-ETA-411-001",
+  "gate": "AUTOMATION_DESIGN",
+  "artifactId": "TP-ETA-411-001",
+  "artifactVersion": 1,
+  "release": "1.0",
+  "capability": "home-navigation",
+  "sourceArtifactPath": "features/generated/home-navigation/TP-ETA-411-001-automation-design.md",
+  "decision": "APPROVE",
+  "reviewer": {
+    "name": "Anil",
+    "role": "reviewer",
+    "reference": null
+  },
+  "reviewedAt": "2026-09-05T18:55:00.000Z",
+  "comments": "PROVENANCE: this approval was given verbally in chat by the workflow owner, who instructed the orchestrator to record it under his name and continue. It was transcribed by the orchestrator, not authored by the reviewer, and is therefore weaker evidence than a document the reviewer wrote himself. Q1 and Q2 in the design's Open questions were not answered individually; both are carried by the default the design states, and that default is recorded here so a later reader can see what was decided by silence rather than by judgement. Q1 (Command Center has no accessible name, so it must be reached by CSS id under a VALIDATED waiver): carried as accepted, because the instruction was to proceed rather than to wait for an accessibility defect. The missing accessible name is not thereby judged acceptable in the product - it has simply not been raised. Q2 (scope of TS-ETA-411-006): carried as the orchestrator's reading, the five non-Home modules New Transaction, Workspace, Preferences, Organization and Vault. Every locator in this design remains MCP_VALIDATION_REQUIRED: this gate approves the behaviour only, and PLAYWRIGHT_VALIDATION proves the locators against the running application before any of them may back an assertion.",
+  "itemDecisions": [
+    {
+      "itemId": "TS-ETA-411-001",
+      "decision": "APPROVE",
+      "comment": "Presence of the six named modules, as a data table so the list can change without a step-definition change."
+    },
+    {
+      "itemId": "TS-ETA-411-002",
+      "decision": "APPROVE",
+      "comment": "Dashboard icons. Returns Home directly between icons rather than via Command Center, so TS-ETA-411-006 keeps independent evidence."
+    },
+    {
+      "itemId": "TS-ETA-411-003",
+      "decision": "APPROVE",
+      "comment": "Navigation menu entries. Kept separate from TS-ETA-411-002 so a working menu cannot mask a broken Dashboard icon."
+    },
+    {
+      "itemId": "TS-ETA-411-004",
+      "decision": "APPROVE",
+      "comment": "Preferences offered with Organization and Vault grouped beneath it. Presence only, per AMB-ETA-411-007."
+    },
+    {
+      "itemId": "TS-ETA-411-005",
+      "decision": "APPROVE",
+      "comment": "Organization and Vault open their own pages. Arrival asserted on page content because Organization shares an address with the Preferences icon."
+    },
+    {
+      "itemId": "TS-ETA-411-006",
+      "decision": "APPROVE",
+      "comment": "Command Center returns Home from the five non-Home modules. Approved with the CSS-id waiver of Q1 and the module list of Q2, both carried by default rather than answered."
+    },
+    {
+      "itemId": "TS-ETA-411-007",
+      "decision": "APPROVE",
+      "comment": "Unauthenticated visitor refused. The feature has no Background so this scenario genuinely starts unauthenticated. No credential is entered, so no lockout risk."
+    }
+  ]
+}
