@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactVersion": 1,
+  "release": "REPLACE_WITH_RELEASE_LIKE_1.0",
+  "capability": "REPLACE_WITH_CAPABILITY_SLUG_LIKE_home-navigation",
+  "story": {
+    "jiraId": "REPLACE_WITH_JIRA_ID_LIKE_ABC-123",
+    "summary": "REPLACE_WITH_THE_JIRA_SUMMARY_VERBATIM",
+    "description": "REPLACE_WITH_THE_JIRA_DESCRIPTION_VERBATIM",
+    "issueType": "REPLACE_WITH_ISSUE_TYPE_LIKE_Story",
+    "priority": "REPLACE_WITH_PRIORITY_OR_NULL",
+    "status": "REPLACE_WITH_STATUS_OR_NULL",
+    "labels": [],
+    "components": [],
+    "parent": null,
+    "linkedIssues": [],
+    "sourceRef": "REPLACE_WITH_BROWSE_URL_OR_NULL"
+  },
+  "requirements": [
+    {
+      "requirementId": "REPLACE_WITH_REQ-<JIRA>-nnn",
+      "description": "REPLACE_WITH_THE_REQUIREMENT_IN_PLAIN_LANGUAGE. Never invent a role, limit, message, policy or validation rule the story does not state - raise an ambiguity instead.",
+      "originalText": "REPLACE_WITH_THE_VERBATIM_JIRA_WORDING_OR_NULL",
+      "sourceType": "REPLACE_WITH_EXTRACTED_FROM_JIRA_OR_PROPOSED_BY_REQUIREMENT_ANALYSIS_OR_MODIFIED_DURING_HUMAN_REVIEW",
+      "status": "REPLACE_WITH_PENDING_APPROVAL_OR_APPROVED_OR_REJECTED_OR_DEFERRED_OR_REQUEST_CHANGES_OR_REVIEW_REQUIRED",
+      "version": 1
+    }
+  ],
+  "acceptanceCriteria": [
+    {
+      "acId": "REPLACE_WITH_AC-<JIRA>-nnn",
+      "requirementId": "REPLACE_WITH_THE_REQUIREMENT_THIS_CRITERION_SERVES",
+      "description": "REPLACE_WITH_WHAT_MUST_BE_TRUE. A criterion that covers only part of its requirement must say so, or coverage will be overstated.",
+      "originalText": "REPLACE_WITH_VERBATIM_JIRA_AC_TEXT_OR_NULL. Mandatory when sourceType is EXTRACTED_FROM_JIRA.",
+      "given": "REPLACE_WITH_THE_STARTING_STATE",
+      "when": "REPLACE_WITH_THE_ACTION",
+      "then": "REPLACE_WITH_THE_OBSERVABLE_OUTCOME",
+      "sourceType": "REPLACE_WITH_EXTRACTED_FROM_JIRA_OR_PROPOSED_BY_REQUIREMENT_ANALYSIS_OR_MODIFIED_DURING_HUMAN_REVIEW",
+      "status": "REPLACE_WITH_STATUS. A DEFERRED criterion stays in the artifact so its requirement reports as partially covered rather than met.",
+      "version": 1,
+      "rationale": "REPLACE_WITH_WHY_THIS_CRITERION_EXISTS. Mandatory when sourceType is PROPOSED_BY_REQUIREMENT_ANALYSIS.",
+      "clarificationRefs": []
+    }
+  ],
+  "ambiguities": [
+    {
+      "ambiguityId": "REPLACE_WITH_AMB-<JIRA>-nnn",
+      "question": "REPLACE_WITH_THE_QUESTION_FOR_THE_HUMAN. Anything an agent would otherwise have to invent belongs here.",
+      "impact": "REPLACE_WITH_WHAT_CANNOT_BE_TESTED_HONESTLY_UNTIL_IT_IS_ANSWERED",
+      "relatedTo": [],
+      "status": "REPLACE_WITH_REVIEW_REQUIRED_OR_RESOLVED_OR_DEFERRED",
+      "resolution": null,
+      "resolvedBy": null,
+      "resolvedAt": null
+    }
+  ],
+  "source": {
+    "system": "REPLACE_WITH_JIRA_OR_SAMPLE_DATA",
+    "retrievedVia": "REPLACE_WITH_ATLASSIAN_MCP_OR_JIRA_REST_API_OR_SAMPLE_DATA. Never claim REST unless a REST snapshot genuinely exists.",
+    "dataClassification": "REPLACE_WITH_REAL_JIRA_DATA_OR_SAMPLE_DATA",
+    "rawSnapshotPath": "REPLACE_WITH_requirements/raw/<JIRA-ID>.json_OR_NULL",
+    "retrievedAt": "REPLACE_WITH_ISO_8601_TIMESTAMP"
+  },
+  "approvalStatus": "PENDING_APPROVAL",
+  "approvalRef": null,
+  "timestamps": {
+    "createdAt": "REPLACE_WITH_ISO_8601_TIMESTAMP",
+    "updatedAt": "REPLACE_WITH_ISO_8601_TIMESTAMP"
+  }
+}

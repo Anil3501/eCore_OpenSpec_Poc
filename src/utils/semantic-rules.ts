@@ -74,8 +74,15 @@ export const PATHS = {
   api: 'src/api',
   apiContracts: 'src/models/api',
   openSpecChanges: 'openspec/changes',
+  templatesManifest: 'templates/manifest.json',
   steps: 'steps',
 } as const;
+
+interface TemplateManifest {
+  placeholderPrefix: string;
+  artifacts: { id: string; template: string; schema: string }[];
+  reviews: { id: string; gate: string; template: string; requiredSections: string[] }[];
+}
 
 interface LoadedArtifacts {
   requirements: Map<string, JiraRequirementArtifact>;
@@ -841,6 +848,161 @@ function checkOpenSpecChanges(): CheckResult {
     : fail(id, title, messages);
 }
 
+/**
+ * Templates are the shape authority an agent fills instead of copying another
+ * story. Their placeholder values are deliberately not schema-valid, so only
+ * key and required-property parity is compared - enough to fail the build when
+ * a schema gains a field and its template is left behind.
+ */
+function checkTemplateStructure(): CheckResult {
+  const id = 'TPL-STRUCTURE';
+  const title = 'Artifact templates stay in parity with their schemas';
+
+  if (!exists(PATHS.templatesManifest)) {
+    return skip(id, title, 'No templates/manifest.json found.');
+  }
+
+  const manifest = readJson<TemplateManifest>(PATHS.templatesManifest);
+  const messages: string[] = [];
+
+  for (const entry of manifest.artifacts) {
+    if (!exists(entry.template)) {
+      messages.push(`${entry.id}: template "${entry.template}" does not exist.`);
+      continue;
+    }
+    if (!exists(entry.schema)) {
+      messages.push(`${entry.id}: schema "${entry.schema}" does not exist.`);
+      continue;
+    }
+
+    const template = readJson<unknown>(entry.template);
+    for (const issue of checkSchemaParity(entry.schema, template)) {
+      messages.push(`${entry.template}${issue.path}: ${issue.message}`);
+    }
+
+    if (!readText(entry.template).includes(manifest.placeholderPrefix)) {
+      messages.push(
+        `${entry.template}: contains no "${manifest.placeholderPrefix}" placeholder, so it reads as a filled artifact rather than a blank.`,
+      );
+    }
+  }
+
+  for (const entry of manifest.reviews) {
+    if (!exists(entry.template)) {
+      messages.push(`${entry.id}: review template "${entry.template}" does not exist.`);
+      continue;
+    }
+    const headings = headingLines(readText(entry.template));
+    for (const section of entry.requiredSections) {
+      if (!headings.some((heading) => heading.includes(section.toLowerCase()))) {
+        messages.push(
+          `${entry.template}: the template itself is missing its own required section "${section}".`,
+        );
+      }
+    }
+  }
+
+  return messages.length === 0
+    ? pass(id, title, [
+        `${manifest.artifacts.length} artifact template(s) and ${manifest.reviews.length} review template(s) checked.`,
+      ])
+    : fail(id, title, messages);
+}
+
+function headingLines(markdown: string): string[] {
+  return markdown
+    .split(/\r?\n/)
+    .filter((line) => line.startsWith('#'))
+    .map((line) => line.replace(/^#+\s*/, '').toLowerCase());
+}
+
+/**
+ * Checks the review package a human is about to read.
+ *
+ * Only packages currently blocking a gate are checked. Reshaping one whose gate
+ * is already cleared would rewrite the record of what the reviewer actually
+ * saw, which is worse than the inconsistency it would tidy up.
+ */
+function checkReviewSections(loaded: LoadedArtifacts): CheckResult {
+  const id = 'TPL-REVIEW-SECTIONS';
+  const title = 'A review package blocking a gate carries every required section';
+
+  if (!exists(PATHS.templatesManifest)) {
+    return skip(id, title, 'No templates/manifest.json found.');
+  }
+
+  const manifest = readJson<TemplateManifest>(PATHS.templatesManifest);
+  const pending = [...loaded.workflows].filter(([, workflow]) => workflow.pendingApproval !== null);
+  if (pending.length === 0) {
+    return skip(id, title, 'No workflow is currently waiting at an approval gate.');
+  }
+
+  const messages: string[] = [];
+  let checked = 0;
+
+  for (const [file, workflow] of pending) {
+    const approval = workflow.pendingApproval;
+    if (!approval) continue;
+
+    const spec = manifest.reviews.find((review) => review.gate === approval.gate);
+    if (!spec) {
+      messages.push(`${file}: no review template is registered for gate ${approval.gate}.`);
+      continue;
+    }
+    if (!exists(approval.reviewPackagePath)) {
+      messages.push(`${file}: review package "${approval.reviewPackagePath}" does not exist.`);
+      continue;
+    }
+
+    const headings = headingLines(readText(approval.reviewPackagePath));
+    for (const section of spec.requiredSections) {
+      if (!headings.some((heading) => heading.includes(section.toLowerCase()))) {
+        messages.push(
+          `${approval.reviewPackagePath}: missing required section "${section}". The reviewer would have to approve without it.`,
+        );
+      }
+    }
+    checked += 1;
+  }
+
+  return messages.length === 0
+    ? pass(id, title, [`${checked} pending review package(s) checked.`])
+    : fail(id, title, messages);
+}
+
+/**
+ * A placeholder surviving into an approved artifact means a template was
+ * promoted without being filled in - an approval nobody actually made.
+ */
+function checkNoPlaceholders(): CheckResult {
+  const id = 'SEM-NO-PLACEHOLDERS';
+  const title = 'No approved artifact still carries a template placeholder';
+
+  if (!exists(PATHS.templatesManifest)) {
+    return skip(id, title, 'No templates/manifest.json found.');
+  }
+
+  const prefix = readJson<TemplateManifest>(PATHS.templatesManifest).placeholderPrefix;
+  const approvedRoots = [PATHS.requirementApproved, PATHS.testPlansApproved, PATHS.featuresApproved];
+  const messages: string[] = [];
+  let scanned = 0;
+
+  for (const root of approvedRoots) {
+    for (const extension of ['.json', '.md', '.feature']) {
+      for (const file of listFilesRecursive(root, extension)) {
+        scanned += 1;
+        if (readText(file).includes(prefix)) {
+          messages.push(`${file}: still contains the placeholder "${prefix}".`);
+        }
+      }
+    }
+  }
+
+  return messages.length === 0
+    ? pass(id, title, [`${scanned} approved artifact(s) scanned.`])
+    : fail(id, title, messages);
+}
+
 interface HygieneRule {
   id: string;
   pattern: RegExp;
@@ -1432,6 +1594,9 @@ export function runValidation(
   ]);
 
   const semantic: CheckResult[] = [
+    checkTemplateStructure(),
+    checkReviewSections(loaded),
+    checkNoPlaceholders(),
     checkApprovalEvidence(loaded),
     checkGateOrdering(loaded),
     checkRtmIntegrity(loaded),
@@ -1451,8 +1616,8 @@ export function runValidation(
   if (scope === 'all') return all;
 
   const scopeFilter: Record<Exclude<typeof scope, 'all'>, string[]> = {
-    requirements: ['REQ-STRUCTURE', 'APR-STRUCTURE', 'SEM-APPROVAL-EVIDENCE', 'SEM-VERSIONS', 'SEM-SAMPLE-ISOLATION'],
-    workflow: ['WF-STRUCTURE', 'SEM-GATES', 'SEM-LOCKS'],
+    requirements: ['REQ-STRUCTURE', 'APR-STRUCTURE', 'SEM-APPROVAL-EVIDENCE', 'SEM-VERSIONS', 'SEM-SAMPLE-ISOLATION', 'TPL-STRUCTURE', 'SEM-NO-PLACEHOLDERS'],
+    workflow: ['WF-STRUCTURE', 'SEM-GATES', 'SEM-LOCKS', 'TPL-REVIEW-SECTIONS'],
     rtm: ['RTM-STRUCTURE', 'SEM-RTM', 'SEM-COVERAGE', 'SEM-FEATURE-TAGS', 'SEM-NO-DUPLICATES', 'SEM-OPENSPEC'],
     defects: ['DEF-STRUCTURE', 'SEM-DEFECT-EVIDENCE', 'SEM-SAMPLE-ISOLATION'],
     automation: ['SEM-AUTOMATION-HYGIENE', 'SEM-FEATURE-TAGS', 'SEM-NO-DUPLICATES', 'SEM-API-CONTRACT'],

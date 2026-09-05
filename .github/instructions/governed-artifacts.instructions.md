@@ -11,9 +11,12 @@ Zod model in `src/models/` and structurally compared against a JSON Schema.
 
 ## Always do this
 
-1. **Copy the shape from the `ETA-351` example** instead of inventing fields. `ETA-351` is the
-   only story in the repository and the reference shape for every artifact type; the file-by-file
-   list is in the reference-examples table in [AGENTS.md](../../AGENTS.md). The schemas are
+1. **Fill the template from [templates/](../../templates/README.md), never copy another story.**
+   [templates/manifest.json](../../templates/manifest.json) maps each artifact type to its template
+   and its schema. The schema says which fields may exist; the template says what a blank looks
+   like. A finished story is evidence of one decision, not a standard — copying one lets an earlier
+   agent's choice become the rule and it drifts. Replace every `REPLACE_WITH_` token: a placeholder
+   surviving into an approved artifact fails `SEM-NO-PLACEHOLDERS`. The schemas are
    `additionalProperties: false` / Zod `.strict()` — an extra key is a hard failure.
 2. **Run `npm run validate:artifacts` after every edit.** Do not report success until it passes.
    Read the failure text: it names the file, JSON path and rule.

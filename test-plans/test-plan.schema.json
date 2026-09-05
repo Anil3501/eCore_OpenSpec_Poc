@@ -70,7 +70,7 @@
         "additionalProperties": false,
         "required": ["riskId", "description", "level"],
         "properties": {
-          "riskId": { "type": "string", "minLength": 1 },
+          "riskId": { "type": "string", "pattern": "^RISK-TP-[A-Z0-9-]+-[0-9]{3}$" },
           "description": { "type": "string", "minLength": 1 },
           "level": { "type": "string", "enum": ["LOW", "MEDIUM", "HIGH"] },
           "mitigation": { "type": ["string", "null"] }
@@ -118,7 +118,7 @@
         "additionalProperties": false,
         "required": ["clarificationId", "question", "status"],
         "properties": {
-          "clarificationId": { "type": "string", "minLength": 1 },
+          "clarificationId": { "type": "string", "pattern": "^(AMB|CLR)-[A-Z0-9-]+-[0-9]{3}$" },
           "question": { "type": "string", "minLength": 1 },
           "status": {
             "type": "string",
@@ -194,8 +194,14 @@
           "enum": ["AUTOMATE", "MANUAL_ONLY", "DEFERRED", "REVIEW_REQUIRED"]
         },
         "priority": { "type": "string", "enum": ["LOW", "MEDIUM", "HIGH"] },
-        "riskTag": { "type": ["string", "null"] },
-        "suiteTag": { "type": ["string", "null"] },
+        "riskTag": {
+          "type": ["string", "null"],
+          "enum": ["risk-low", "risk-medium", "risk-high", null]
+        },
+        "suiteTag": {
+          "type": ["string", "null"],
+          "enum": ["suite-smoke", "suite-regression", "suite-critical", null]
+        },
         "scenarioAction": {
           "type": "string",
           "enum": ["REUSE", "UPDATE", "CREATE", "RETIRE", "REGRESSION", "REVIEW_REQUIRED"]

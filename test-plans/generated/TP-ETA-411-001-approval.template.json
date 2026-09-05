@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "1.0.0",
+  "approvalId": "APR-TP-ETA-411-001",
+  "gate": "TEST_PLAN",
+  "artifactId": "TP-ETA-411-001",
+  "artifactVersion": 1,
+  "release": "1.0",
+  "capability": "home-navigation",
+  "sourceArtifactPath": "test-plans/generated/TP-ETA-411-001.json",
+  "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+  "reviewer": {
+    "name": "REPLACE_WITH_YOUR_NAME",
+    "role": "REPLACE_WITH_YOUR_ROLE",
+    "reference": null
+  },
+  "reviewedAt": "REPLACE_WITH_ISO_8601_TIMESTAMP",
+  "comments": "Replace with any overall comment. Approving this plan also settles the two open questions in section 4 of the review: that no acceptance criterion in scope is API-verifiable this release (CLR-TP-ETA-411-001), and that the unauthenticated scenario asserts the presence of an error message rather than its wording (CLR-TP-ETA-411-002). Say so here if you disagree with either.",
+  "itemDecisions": [
+    {
+      "itemId": "TS-ETA-411-001",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "The six named modules are offered. Presence only; openability is carried by TS-002, TS-003 and TS-005. UI."
+    },
+    {
+      "itemId": "TS-ETA-411-002",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "The three Dashboard icons each open their module. UI."
+    },
+    {
+      "itemId": "TS-ETA-411-003",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "The three navigation menu entries each open their module. Kept separate from TS-002 because both entry points exist for the same two modules. UI."
+    },
+    {
+      "itemId": "TS-ETA-411-004",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Preferences is offered with Organization and Vault beneath it. Presence only, per your answer that Preferences is a grouping rather than a destination. UI."
+    },
+    {
+      "itemId": "TS-ETA-411-005",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Organization and Vault open their own pages. Arrival asserted on page content because Organization shares a destination with the Preferences icon. UI."
+    },
+    {
+      "itemId": "TS-ETA-411-006",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Command Center returns to Home from each module. Will need a VALIDATED locator waiver; the control has no accessible name. UI."
+    },
+    {
+      "itemId": "TS-ETA-411-007",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "An unauthenticated visitor is refused and kept on the sign-in page. No credential is entered, so no lockout risk. Message wording not asserted. UI."
+    }
+  ]
+}

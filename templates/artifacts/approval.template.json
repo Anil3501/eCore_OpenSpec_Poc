@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1.0.0",
+  "approvalId": "REPLACE_WITH_APR-AC_OR_APR-TP_OR_APR-AD_FOLLOWED_BY_THE_ARTIFACT_KEY_AND_nnn",
+  "gate": "REPLACE_WITH_ACCEPTANCE_CRITERIA_OR_TEST_PLAN_OR_AUTOMATION_DESIGN",
+  "artifactId": "REPLACE_WITH_THE_ID_OF_THE_ARTIFACT_UNDER_REVIEW",
+  "artifactVersion": 1,
+  "release": "REPLACE_WITH_RELEASE_LIKE_1.0",
+  "capability": "REPLACE_WITH_CAPABILITY_SLUG",
+  "sourceArtifactPath": "REPLACE_WITH_PATH_TO_THE_ARTIFACT_BEING_APPROVED",
+  "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+  "reviewer": {
+    "name": "REPLACE_WITH_YOUR_NAME",
+    "role": "REPLACE_WITH_YOUR_ROLE",
+    "reference": null
+  },
+  "reviewedAt": "REPLACE_WITH_ISO_8601_TIMESTAMP",
+  "comments": "REPLACE_WITH_ANY_OVERALL_COMMENT. Answer every question the review package raised; a question left unanswered here is a decision nobody made.",
+  "itemDecisions": [
+    {
+      "itemId": "REPLACE_WITH_THE_ITEM_ID. Gate 1 needs one entry per acceptance criterion; Gate 2 one per scenario; Gate 3 one per scenario in the design.",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "REPLACE_WITH_A_SHORT_NOTE_ON_THIS_ITEM"
+    }
+  ]
+}

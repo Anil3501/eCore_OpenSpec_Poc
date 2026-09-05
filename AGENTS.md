@@ -10,7 +10,7 @@ and scaling design. This file only covers what an agent cannot discover on its o
 
 ```powershell
 npm run preflight            # RUN THIS FIRST. Node version, deps, CLIs, browsers, env config.
-npm run validate:artifacts   # 20 structural + semantic checks. RUN THIS AFTER ANY ARTIFACT EDIT.
+npm run validate:artifacts   # 23 structural + semantic checks. RUN THIS AFTER ANY ARTIFACT EDIT.
 npm run typecheck            # tsc --noEmit
 npm run bdd                  # bddgen: features/approved/** -> .features-gen/
 npm test                     # bddgen && playwright test
@@ -170,6 +170,7 @@ before creating an artifact rather than guessing a path.
 | `test-data/` | Fabricated inputs, one `<capability>.sample.json` per capability. Never a secret | Orchestrator (`IMPLEMENTATION`) |
 | `defects/` | Governed defect reports (`DEF-*.json`) plus `defects/schemas/`. Evidence copies live in git-ignored `reports/defects/` | Bug Analyzer |
 | `traceability/` | Capability-partitioned RTM, coverage, lookup index, executions | Orchestrator only |
+| `templates/` | The blank an agent fills for every artifact it authors, plus `manifest.json` | Framework (change with the schema) |
 | `openspec/`, `.github/prompts/opsx-*`, `.github/skills/openspec-*` | Spec layer | OpenSpec (tool-owned, do not hand-edit) |
 
 **The workflow definition is the authority on who performs a stage, not this table.** Ownership
@@ -201,6 +202,8 @@ scanned linearly. Never create a monolithic RTM.
 | Trace | `TRC-…-<nnn>` | `TRC-ETA-351-001` |
 | Approval | `APR-{AC\|TP\|AD}-…-<nnn>` | `APR-AC-ETA-351-001` |
 | Defect | `DEF-<JIRA>-<nnn>` | `DEF-ETA-351-001` |
+| Test-plan risk | `RISK-TP-…-<nnn>` | `RISK-TP-ETA-351-001` |
+| Test-plan clarification | `AMB-…-<nnn>` carried forward, `CLR-TP-…-<nnn>` raised by the plan | `CLR-TP-ETA-411-001` |
 
 Regexes live in [src/models/common.model.ts](src/models/common.model.ts).
 
@@ -253,7 +256,7 @@ never evidence about an acceptance criterion.
 **Synthetic data is labelled `SAMPLE_DATA`** and must never mix with `REAL_JIRA_DATA` in one
 artifact. The rule and its `SEM-SAMPLE-ISOLATION` check remain in force, but **no synthetic story
 remains in the repository**: the `SAMPLE-101` and `SAMPLE-900` scaffolding stories were both removed
-on 2026-08-27. `ETA-351` is the reference example for every artifact shape.
+on 2026-08-27.
 
 **A negative scenario must never use the real account.** The eCore login page warns that an account
 can lock out after a configured number of incorrect attempts. Wrong-credential and missing-field
@@ -261,16 +264,37 @@ paths therefore use fabricated values from `test-data/<capability>.sample.json`
 (`dataClassification: SYNTHETIC_INPUTS`); only the happy path calls `env.requireEcoreLogin()`. See
 [src/services/organization-login.service.ts](src/services/organization-login.service.ts).
 
-## Reference examples
+## Where an artifact's shape comes from
 
-When creating a new artifact, copy the shape from these rather than inventing one:
+**Fill a template. Never copy another story.** Authority runs in three tiers, and a completed story
+is not one of them:
 
-| Artifact | Example |
+| Tier | Answers | Where |
+| --- | --- | --- |
+| JSON Schema | Which fields exist, their types and patterns | `*/schemas/*.schema.json` |
+| Template | What a blank looks like, and what each field is for | [templates/](templates/README.md) |
+| A finished story | Nothing. It is evidence of one decision, not a standard | — |
+
+Another story's artifacts are themselves agent output from an earlier run, so copying them lets a
+past agent's choice become the rule without a human ever ratifying it — and it drifts. Two plans
+once produced `RISK-TP-…` and `RSK-TP-…` for the same field, and two Gate 1 review packages shared
+exactly one heading between them. Both are now constrained by pattern and by
+[templates/manifest.json](templates/manifest.json).
+
+`TPL-STRUCTURE` keeps every template in parity with its schema. `TPL-REVIEW-SECTIONS` checks that
+the review package currently blocking a gate carries every required section. `SEM-NO-PLACEHOLDERS`
+fails any approved artifact still containing `REPLACE_WITH_`.
+
+What is deliberately **not** templated, and why, is recorded in the manifest: the RTM (merged by
+key — a blank invites a monolithic file), a defect report (authored from a real execution, with a
+runtime-computed fingerprint) and an OpenSpec change (the CLI owns the shape).
+
+The `ETA-351` and `ETA-411` artifacts remain in the repository as **worked examples**. Read one to
+see how a real story was reasoned about; never open one to find out what shape a field should take.
+
+| Worked example | Path |
 | --- | --- |
-| Requirement | [requirements/approved/ETA-351.json](requirements/approved/ETA-351.json) |
-| Gate 1 approval | [requirements/approved/ETA-351-ac-approval.json](requirements/approved/ETA-351-ac-approval.json) |
-| Review package | [requirements/reviews/ETA-351-ac-review.md](requirements/reviews/ETA-351-ac-review.md) |
-| Gate 1 approval template | [requirements/reviews/ETA-351-ac-approval.template.json](requirements/reviews/ETA-351-ac-approval.template.json) |
+| Requirement + Gate 1 approval | [requirements/approved/ETA-351.json](requirements/approved/ETA-351.json) |
 | Test plan | [test-plans/approved/TP-ETA-351-001.json](test-plans/approved/TP-ETA-351-001.json) |
 | Automation design | [features/generated/account-access/TP-ETA-351-001-automation-design.md](features/generated/account-access/TP-ETA-351-001-automation-design.md) |
 | RTM + coverage | [traceability/capabilities/account-access.rtm.json](traceability/capabilities/account-access.rtm.json) |

@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "1.0.0",
+  "description": "The authoritative shapes for every artifact an agent authors from scratch. An agent fills a template; it never copies another story's artifact. A completed story is evidence of what was decided for that story, not a standard - it is itself agent output, so treating it as authority lets a past agent's choice become the rule with no human having ratified it.",
+  "placeholderPrefix": "REPLACE_WITH_",
+  "artifacts": [
+    {
+      "id": "jira-requirement",
+      "template": "templates/artifacts/jira-requirement.template.json",
+      "schema": "requirements/schemas/jira-requirement.schema.json",
+      "producedAt": "REQUIREMENT_NORMALIZATION",
+      "writtenTo": "requirements/normalized/<JIRA-ID>.json, promoted to requirements/approved/<JIRA-ID>.json at Gate 1"
+    },
+    {
+      "id": "approval",
+      "template": "templates/artifacts/approval.template.json",
+      "schema": "requirements/schemas/approval.schema.json",
+      "producedAt": "AC_REVIEW_PACKAGE, AUTOMATION_REVIEW_PACKAGE and TEST_PLAN_GENERATION",
+      "writtenTo": "The stage writes a pre-filled copy as <ARTIFACT-ID>-approval.template.json. Only a human writes the approved artifact."
+    },
+    {
+      "id": "test-plan",
+      "template": "templates/artifacts/test-plan.template.json",
+      "schema": "test-plans/test-plan.schema.json",
+      "producedAt": "TEST_PLAN_GENERATION",
+      "writtenTo": "test-plans/generated/<TEST-PLAN-ID>.json, promoted to test-plans/approved/ at Gate 2"
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ac-review",
+      "gate": "ACCEPTANCE_CRITERIA",
+      "template": "templates/reviews/ac-review.template.md",
+      "producedAt": "AC_REVIEW_PACKAGE",
+      "writtenTo": "requirements/reviews/<JIRA-ID>-ac-review.md",
+      "requiredSections": [
+        "What you are being asked to approve",
+        "Requirements",
+        "Acceptance criteria",
+        "Ambiguities",
+        "Coverage this produces",
+        "How to approve"
+      ]
+    },
+    {
+      "id": "test-plan-review",
+      "gate": "TEST_PLAN",
+      "template": "templates/reviews/test-plan-review.template.md",
+      "producedAt": "TEST_PLAN_GENERATION",
+      "writtenTo": "test-plans/generated/<TEST-PLAN-ID>-review.md",
+      "requiredSections": [
+        "What this plan covers",
+        "Scenario-by-scenario",
+        "Open questions",
+        "What these scenarios deliberately do not assert",
+        "Risks",
+        "How to record your decision"
+      ]
+    },
+    {
+      "id": "automation-design-review",
+      "gate": "AUTOMATION_DESIGN",
+      "template": "templates/reviews/automation-design.template.md",
+      "producedAt": "AUTOMATION_REVIEW_PACKAGE",
+      "writtenTo": "features/generated/<capability>/<TEST-PLAN-ID>-automation-design.md",
+      "requiredSections": [
+        "What you are being asked to approve",
+        "Scenario-by-scenario design",
+        "Locators and contracts",
+        "Open questions",
+        "What this automation deliberately does not assert",
+        "Risks",
+        "How to record your decision"
+      ]
+    }
+  ],
+  "notTemplated": [
+    {
+      "id": "rtm",
+      "reason": "An RTM partition is merged by key, never authored from a blank. A template would invite a monolithic RTM, which is the one shape the scaling design forbids. The schema at traceability/schemas/rtm.schema.json remains the authority."
+    },
+    {
+      "id": "defect-report",
+      "reason": "Authored by the bug-analyzer from a real execution record, with fields such as the failure fingerprint computed at runtime. A blank would be filled from evidence, not from a shape. The schema at defects/schemas/defect-report.schema.json remains the authority."
+    },
+    {
+      "id": "openspec-change",
+      "reason": "Scaffolded by the OpenSpec CLI with `openspec new change`. The CLI owns the shape; a second definition here would drift from it."
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "1.0.0",
+  "testPlanId": "REPLACE_WITH_TEST_PLAN_ID_LIKE_TP-ABC-123-001",
+  "artifactVersion": 1,
+  "release": "REPLACE_WITH_RELEASE_LIKE_1.0",
+  "capability": "REPLACE_WITH_CAPABILITY_SLUG_LIKE_home-navigation",
+  "jiraStoryIds": ["REPLACE_WITH_JIRA_ID_LIKE_ABC-123"],
+  "requirementIds": ["REPLACE_WITH_REQUIREMENT_ID_LIKE_REQ-ABC-123-001"],
+  "acIds": ["REPLACE_WITH_APPROVED_AC_ID_LIKE_AC-ABC-123-001"],
+  "openSpecRefs": [
+    "REPLACE_WITH_PATH_TO_THE_APPROVED_SPEC_DELTA",
+    "REPLACE_WITH_PATH_TO_THE_PROPOSAL",
+    "REPLACE_WITH_PATH_TO_THE_DESIGN"
+  ],
+  "objective": "REPLACE_WITH_ONE_PARAGRAPH_STATING_WHAT_THIS_PLAN_VERIFIES_IN_BUSINESS_LANGUAGE. Say plainly that each scenario asserts only what its approved acceptance criterion asserts.",
+  "scope": {
+    "inScope": [
+      "REPLACE_WITH_ONE_LINE_PER_APPROVED_AC_NAMING_THE_AC_ID"
+    ],
+    "outOfScope": [
+      "REPLACE_WITH_EVERY_DEFERRED_AC_AND_WHY_IT_IS_NOT_COVERED. Naming these is what stops a green run being read as full requirement coverage."
+    ]
+  },
+  "assumptions": [
+    "REPLACE_WITH_AN_ASSUMPTION_THAT_WOULD_MAKE_SCENARIOS_FAIL_FOR_AN_ENVIRONMENT_REASON_IF_UNTRUE"
+  ],
+  "dependencies": [
+    "REPLACE_WITH_PATH_TO_THE_APPROVED_REQUIREMENT_ARTIFACT",
+    "REPLACE_WITH_PATH_TO_THE_GATE_1_APPROVAL",
+    "REPLACE_WITH_PATH_TO_ANY_PROBE_OR_VALIDATION_EVIDENCE_THE_PLAN_RELIES_ON"
+  ],
+  "risks": [
+    {
+      "riskId": "REPLACE_WITH_RISK_ID_LIKE_RISK-TP-ABC-123-001",
+      "description": "REPLACE_WITH_WHAT_COULD_MAKE_THIS_PLAN_PASS_WITHOUT_PROVING_WHAT_IT_CLAIMS",
+      "level": "REPLACE_WITH_LOW_OR_MEDIUM_OR_HIGH",
+      "mitigation": "REPLACE_WITH_HOW_THE_PLAN_ADDRESSES_IT_OR_NULL"
+    }
+  ],
+  "scenarios": [
+    {
+      "testScenarioId": "REPLACE_WITH_SCENARIO_ID_LIKE_TS-ABC-123-001",
+      "title": "REPLACE_WITH_BUSINESS_LANGUAGE_TITLE_NO_SELECTORS_NO_PAGE_OBJECT_NAMES",
+      "type": "REPLACE_WITH_POSITIVE_OR_NEGATIVE_OR_BOUNDARY",
+      "acIds": ["REPLACE_WITH_THE_AC_THIS_SCENARIO_COVERS"],
+      "preconditions": ["REPLACE_WITH_THE_STATE_THE_SCENARIO_STARTS_FROM"],
+      "steps": ["REPLACE_WITH_A_BUSINESS_STEP"],
+      "expectedResult": "REPLACE_WITH_WHAT_MUST_BE_TRUE_AFTERWARDS. Assert only what the acceptance criterion asserts; never a message string that has not been approved.",
+      "testDataRequirements": [
+        "REPLACE_WITH_THE_DATA_NEEDED. A negative credential path uses fabricated values from test-data/<capability>.sample.json, never the real account."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "REPLACE_WITH_AUTOMATE_OR_MANUAL_ONLY_OR_DEFERRED_OR_REVIEW_REQUIRED",
+      "priority": "REPLACE_WITH_LOW_OR_MEDIUM_OR_HIGH",
+      "riskTag": "REPLACE_WITH_risk-low_OR_risk-medium_OR_risk-high",
+      "suiteTag": "REPLACE_WITH_suite-smoke_OR_suite-regression_OR_suite-critical",
+      "scenarioAction": "REPLACE_WITH_CREATE_OR_REUSE_OR_UPDATE_OR_RETIRE_OR_REGRESSION_OR_REVIEW_REQUIRED",
+      "interfaceType": "REPLACE_WITH_UI_OR_API_OR_HYBRID. Absence means UI. API and HYBRID additionally require an apiContract, and an endpoint, field name or status code is never authored by an agent."
+    }
+  ],
+  "environmentRequirements": {
+    "environment": "REPLACE_WITH_local_OR_dev_OR_qa_OR_uat_OR_staging",
+    "notes": [
+      "REPLACE_WITH_ANYTHING_A_RUNNER_MUST_KNOW. State whether any scenario changes application data."
+    ]
+  },
+  "entryCriteria": [
+    "REPLACE_WITH_WHAT_MUST_BE_TRUE_BEFORE_THIS_PLAN_CAN_RUN. Gate 1 evidence is always one of them."
+  ],
+  "exitCriteria": [
+    "REPLACE_WITH_WHAT_MUST_BE_TRUE_FOR_THE_PLAN_TO_BE_DONE. Include that no DEFERRED acceptance criterion is mapped to a scenario, and that no result is recorded without a real execution record."
+  ],
+  "coverageMappings": [
+    {
+      "acId": "REPLACE_WITH_APPROVED_AC_ID",
+      "testScenarioIds": ["REPLACE_WITH_EVERY_SCENARIO_THAT_GENUINELY_PROVES_IT"]
+    }
+  ],
+  "clarifications": [
+    {
+      "clarificationId": "REPLACE_WITH_AMB-<JIRA>-nnn_WHEN_CARRYING_A_REQUIREMENT_AMBIGUITY_FORWARD_OR_CLR-<TP-ID>-nnn_WHEN_THE_PLAN_RAISES_A_NEW_QUESTION",
+      "question": "REPLACE_WITH_THE_QUESTION_PUT_TO_THE_HUMAN. A testing judgement the story does not state - such as declaring every scenario UI - belongs here rather than being settled silently.",
+      "status": "REPLACE_WITH_REVIEW_REQUIRED_OR_RESOLVED_OR_DEFERRED"
+    }
+  ],
+  "approvalStatus": "PENDING_TEST_PLAN_APPROVAL",
+  "approvalRef": null,
+  "dataClassification": "REPLACE_WITH_REAL_JIRA_DATA_OR_SAMPLE_DATA",
+  "timestamps": {
+    "createdAt": "REPLACE_WITH_ISO_8601_TIMESTAMP",
+    "updatedAt": "REPLACE_WITH_ISO_8601_TIMESTAMP",
+    "approvedAt": null
+  }
+}

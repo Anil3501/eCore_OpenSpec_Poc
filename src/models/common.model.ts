@@ -48,6 +48,23 @@ export const defectIdSchema = z
   .string()
   .regex(/^DEF-[A-Z0-9-]+-\d{3}$/, 'defectId must look like "DEF-ABC-123-001"');
 
+export const riskIdSchema = z
+  .string()
+  .regex(/^RISK-TP-[A-Z0-9-]+-\d{3}$/, 'riskId must look like "RISK-TP-ABC-123-001"');
+
+/**
+ * A plan-level question is one of two different things, and the prefix records
+ * which: `AMB-` carries a requirement ambiguity forward from Gate 1, `CLR-`
+ * raises a question the plan itself created. Collapsing them would lose the
+ * distinction between an unanswered requirement and a testing judgement.
+ */
+export const clarificationIdSchema = z
+  .string()
+  .regex(
+    /^(AMB|CLR)-[A-Z0-9-]+-\d{3}$/,
+    'clarificationId must look like "AMB-ABC-123-001" or "CLR-TP-ABC-123-001"',
+  );
+
 export const isoTimestampSchema = z
   .string()
   .refine((value) => !Number.isNaN(Date.parse(value)), 'must be an ISO-8601 timestamp');

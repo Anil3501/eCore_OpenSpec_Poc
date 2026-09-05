@@ -4,6 +4,7 @@ import {
   artifactVersionSchema,
   AUTHORITATIVE_CONTRACT_SOURCES,
   capabilitySchema,
+  clarificationIdSchema,
   contractSourceSchema,
   dataClassificationSchema,
   httpMethodSchema,
@@ -12,6 +13,7 @@ import {
   jiraIdSchema,
   releaseSchema,
   requirementIdSchema,
+  riskIdSchema,
   scenarioActionSchema,
   SCHEMA_VERSION,
   testPlanIdSchema,
@@ -56,8 +58,16 @@ export const testScenarioSchema = z.object({
     .enum(['AUTOMATE', 'MANUAL_ONLY', 'DEFERRED', 'REVIEW_REQUIRED'])
     .optional(),
   priority: z.enum(['LOW', 'MEDIUM', 'HIGH']),
-  riskTag: z.string().nullable().optional(),
-  suiteTag: z.string().nullable().optional(),
+  // Constrained because these tags become Gherkin tags and then `npm run
+  // test:smoke` grep arguments. A one-off spelling silently selects nothing.
+  riskTag: z
+    .enum(['risk-low', 'risk-medium', 'risk-high'])
+    .nullable()
+    .optional(),
+  suiteTag: z
+    .enum(['suite-smoke', 'suite-regression', 'suite-critical'])
+    .nullable()
+    .optional(),
   scenarioAction: scenarioActionSchema.optional(),
   // Optional so plans approved before API support remain valid unedited.
   interfaceType: interfaceTypeSchema.optional(),
@@ -84,7 +94,7 @@ export const testPlanSchema = z
     dependencies: z.array(z.string()),
     risks: z.array(
       z.object({
-        riskId: z.string().min(1),
+        riskId: riskIdSchema,
         description: z.string().min(1),
         level: z.enum(['LOW', 'MEDIUM', 'HIGH']),
         mitigation: z.string().nullable().optional(),
@@ -105,7 +115,7 @@ export const testPlanSchema = z
     ),
     clarifications: z.array(
       z.object({
-        clarificationId: z.string().min(1),
+        clarificationId: clarificationIdSchema,
         question: z.string().min(1),
         status: z.enum(['REVIEW_REQUIRED', 'RESOLVED', 'DEFERRED']),
       }),

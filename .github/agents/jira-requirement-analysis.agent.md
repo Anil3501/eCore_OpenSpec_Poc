@@ -49,7 +49,9 @@ Do not load the repository into your working context.
 
 Schema: [requirements/schemas/jira-requirement.schema.json](../../requirements/schemas/jira-requirement.schema.json).
 Approval schema: [requirements/schemas/approval.schema.json](../../requirements/schemas/approval.schema.json).
-A worked example: [requirements/approved/ETA-351.json](../../requirements/approved/ETA-351.json).
+Fill [templates/artifacts/jira-requirement.template.json](../../templates/artifacts/jira-requirement.template.json);
+never copy another story. A worked example of the reasoning — not of the shape — is
+[requirements/approved/ETA-351.json](../../requirements/approved/ETA-351.json).
 
 ## Procedure
 

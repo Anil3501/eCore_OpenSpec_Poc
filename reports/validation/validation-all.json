@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-09-05T08:21:50.067Z",
+  "generatedAt": "2026-09-05T08:54:33.543Z",
   "scope": "all",
   "summary": {
-    "total": 20,
-    "passed": 17,
+    "total": 23,
+    "passed": 20,
     "failed": 0,
     "skipped": 3
   },
@@ -29,7 +29,7 @@
       "title": "Test plans validate against schema",
       "status": "PASS",
       "messages": [
-        "2 test plan(s) validated."
+        "3 test plan(s) validated."
       ]
     },
     {
@@ -45,7 +45,7 @@
       "title": "Workflow history events validate against schema",
       "status": "PASS",
       "messages": [
-        "62 history event(s) across 2 file(s) validated."
+        "64 history event(s) across 2 file(s) validated."
       ]
     },
     {
@@ -62,6 +62,30 @@
       "status": "SKIPPED",
       "messages": [
         "No defect reports found."
+      ]
+    },
+    {
+      "id": "TPL-STRUCTURE",
+      "title": "Artifact templates stay in parity with their schemas",
+      "status": "PASS",
+      "messages": [
+        "3 artifact template(s) and 3 review template(s) checked."
+      ]
+    },
+    {
+      "id": "TPL-REVIEW-SECTIONS",
+      "title": "A review package blocking a gate carries every required section",
+      "status": "PASS",
+      "messages": [
+        "1 pending review package(s) checked."
+      ]
+    },
+    {
+      "id": "SEM-NO-PLACEHOLDERS",
+      "title": "No approved artifact still carries a template placeholder",
+      "status": "PASS",
+      "messages": [
+        "8 approved artifact(s) scanned."
       ]
     },
     {
