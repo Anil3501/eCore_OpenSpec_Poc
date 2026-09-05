@@ -70,7 +70,7 @@ Stage order:
 `JIRA_RETRIEVAL → REQUIREMENT_NORMALIZATION → AC_ANALYSIS → AC_REVIEW_PACKAGE → **AC_APPROVAL** →
 OPENSPEC_GENERATION → TEST_PLAN_GENERATION → **TEST_PLAN_APPROVAL** → BDD_DESIGN →
 AUTOMATION_REVIEW_PACKAGE → **AUTOMATION_APPROVAL** → PLAYWRIGHT_VALIDATION → IMPLEMENTATION →
-BDD_GENERATION → EXECUTION → RTM_UPDATE → COMPLETED`
+BDD_GENERATION → EXECUTION → RTM_UPDATE → OPENSPEC_ARCHIVE → COMPLETED`
 
 When `EXECUTION` records at least one failure, the workflow takes the failure-handling branch
 before `RTM_UPDATE`. An all-green run skips the branch entirely:
@@ -183,6 +183,26 @@ A scenario whose approved plan declares `API` or `HYBRID` also carries `@interfa
 `SEM-API-CONTRACT` fails the build when it does not. The Gherkin itself stays business language:
 no endpoints, no status codes, no JSON.
 
+**AUTOMATION_REVIEW_PACKAGE** — assemble what a human needs to decide Gate 3, and nothing more.
+Write `features/generated/<capability>/<TP-ID>-automation-design.md` and
+`features/generated/<capability>/<TP-ID>-automation-approval.template.json`.
+
+The design document states, per scenario: the Gherkin as written, the acceptance criterion it
+covers, the interface it exercises, the page objects and steps it will need, which locators are
+still `MCP_VALIDATION_REQUIRED`, and which API contracts are still `API_CONTRACT_UNVERIFIED`. List
+every open question explicitly. A reviewer approving unverified locators must be able to see that
+that is what they are approving.
+
+The approval template is pre-filled with one item decision per scenario and `decision` left blank.
+Its `artifactId` is the test plan id and its `artifactVersion` is the approved plan's version, so
+the Gate 3 approval binds to a specific plan version — `SEM-APPROVAL-EVIDENCE` and `SEM-GATES`
+check exactly that.
+
+**Feature files stay in `features/generated/` until the gate is recorded.** Only `features/approved/`
+is compiled by `bddgen`, so moving a file early would make an unapproved scenario executable. Set
+the workflow `WAITING_FOR_HUMAN` with `pendingApproval` naming the review package and the template,
+then stop. Never write the approval artifact yourself.
+
 **PLAYWRIGHT_VALIDATION** — delegate to `playwright-test-planner` with the approved OpenSpec
 requirement, approved test plan, approved feature files, approved automation design, the existing
 seed test and the existing fixtures. Constrain it to approved scenarios. Record mismatches between
@@ -248,6 +268,20 @@ protocol like any other proposal.
 refresh `traceability/index/lookup.index.json`, including `byDefectId`. Never report 100% unless the
 RTM proves it. Always list uncovered, deferred, blocked, manual-only, failed and
 clarification-required ACs. A filed bug does **not** turn a failed AC into a covered one.
+
+**OPENSPEC_ARCHIVE** — close the change opened at `OPENSPEC_GENERATION` by delegating to the
+`OpenSpec` agent. Run `npx openspec validate <change-name> --strict` first, then
+`npx openspec archive <change-name>`. **Let the CLI move the files** — never hand-edit
+`openspec/specs/` and never move a directory yourself.
+
+Archive only once the RTM records a real passing execution for the story. Archiving a change whose
+scenarios never ran would file an unproven specification as delivered. If acceptance criteria were
+deferred at Gate 1, only the delivered ones are archived; the deferred ones stay visible as open
+work and are never silently dropped.
+
+If the change cannot be archived — strict validation fails, or execution evidence is missing — set
+the workflow `BLOCKED` with the reason in `errorDetails` rather than advancing to `COMPLETED`. An
+unclosed change is a known state; a change quietly abandoned is not.
 
 ## Environment and secrets
 

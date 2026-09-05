@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-09-05T07:45:47.647Z",
+  "generatedAt": "2026-09-05T08:21:50.067Z",
   "scope": "all",
   "summary": {
-    "total": 18,
-    "passed": 15,
+    "total": 20,
+    "passed": 17,
     "failed": 0,
     "skipped": 3
   },
@@ -38,6 +38,14 @@
       "status": "PASS",
       "messages": [
         "2 workflow instance(s) validated."
+      ]
+    },
+    {
+      "id": "WF-HISTORY-STRUCTURE",
+      "title": "Workflow history events validate against schema",
+      "status": "PASS",
+      "messages": [
+        "62 history event(s) across 2 file(s) validated."
       ]
     },
     {
@@ -85,7 +93,15 @@
       "title": "Every Gherkin scenario carries traceability tags",
       "status": "PASS",
       "messages": [
-        "1 approved feature file(s) checked."
+        "2 approved and generated feature file(s) checked."
+      ]
+    },
+    {
+      "id": "SEM-OPENSPEC",
+      "title": "Open OpenSpec changes pass `openspec validate --strict`",
+      "status": "PASS",
+      "messages": [
+        "2 open change(s) validated: add-home-navigation, add-organization-login."
       ]
     },
     {

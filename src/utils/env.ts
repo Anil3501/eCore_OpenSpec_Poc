@@ -205,6 +205,8 @@ export interface CoverageSettings {
 export interface FrameworkEnvironment {
   readonly testEnvironment: TestEnvironment;
   readonly headless: boolean;
+  /** Set by the CI runner, not by .env. Drives retries and forbidOnly. */
+  readonly isCi: boolean;
   /** Present only when configured. Never assume it exists during scaffolding. */
   readonly baseUrl: string | undefined;
   readonly hasBaseUrl: boolean;
@@ -232,6 +234,11 @@ export interface FrameworkEnvironment {
 
 const hasBaseUrl = values.PLAYWRIGHT_BASE_URL !== undefined;
 const hasApiBaseUrl = values.API_BASE_URL !== undefined;
+
+// Deliberately not part of the .env contract: CI sets this itself, and every
+// provider spells it differently only in casing. Read here so that env.ts stays
+// the single file in the framework that touches process.env.
+const isCi = ['1', 'true', 'TRUE'].includes(process.env.CI ?? '');
 
 // Generic credentials fall back to the eCore values so a credential is stored
 // exactly once in .env instead of being duplicated.
@@ -269,6 +276,7 @@ function missingError(keys: readonly string[], purpose: string): Error {
 export const env: FrameworkEnvironment = {
   testEnvironment: values.TEST_ENVIRONMENT,
   headless: values.HEADLESS,
+  isCi,
   baseUrl: values.PLAYWRIGHT_BASE_URL,
   hasBaseUrl,
   hasApiBaseUrl,
@@ -374,6 +382,7 @@ export const env: FrameworkEnvironment = {
     return {
       testEnvironment: values.TEST_ENVIRONMENT,
       headless: values.HEADLESS,
+      isCi,
       baseUrlConfigured: hasBaseUrl,
       apiBaseUrlConfigured: hasApiBaseUrl,
       apiAuthMode: values.API_AUTH_MODE,

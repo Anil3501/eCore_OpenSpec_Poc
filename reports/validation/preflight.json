@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-05T07:45:45.642Z",
+  "generatedAt": "2026-09-05T08:21:55.803Z",
   "node": "24.19.0",
   "platform": "win32",
   "summary": {
@@ -53,6 +53,7 @@
       "details": [
         "testEnvironment: qa",
         "headless: true",
+        "isCi: false",
         "baseUrlConfigured: true",
         "apiBaseUrlConfigured: true",
         "apiAuthMode: SESSION_COOKIE",

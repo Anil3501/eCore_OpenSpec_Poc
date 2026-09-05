@@ -5,6 +5,9 @@
  * requirements: unique identifiers, existing references, approval evidence,
  * gate ordering, execution honesty and sample-data isolation.
  */
+import { execFileSync } from 'node:child_process';
+import fs from 'node:fs';
+
 import {
   approvalArtifactSchema,
   approvedItemIds,
@@ -27,7 +30,9 @@ import {
   type Rtm,
 } from '../models/rtm.model.ts';
 import { workflowStateSchema, type WorkflowState } from '../models/workflow-state.model.ts';
-import { exists, listFiles, listFilesRecursive, readJson, readText } from './artifact-io.ts';
+import { workflowHistoryEventSchema } from '../models/workflow-history.model.ts';
+import { exists, listFiles, listFilesRecursive, readJson, readText, PROJECT_ROOT, toAbsolute } from './artifact-io.ts';
+import { resolveBinEntry } from './node-bin.ts';
 import { checkSchemaParity } from './schema-parity.ts';
 
 export type CheckStatus = 'PASS' | 'FAIL' | 'SKIPPED';
@@ -43,6 +48,7 @@ export const PATHS = {
   requirementSchema: 'requirements/schemas/jira-requirement.schema.json',
   approvalSchema: 'requirements/schemas/approval.schema.json',
   workflowStateSchema: 'workflow/definitions/workflow-state.schema.json',
+  workflowHistorySchema: 'workflow/definitions/workflow-history.schema.json',
   testPlanSchema: 'test-plans/test-plan.schema.json',
   rtmSchema: 'traceability/schemas/rtm.schema.json',
   coverageSchema: 'traceability/schemas/coverage-matrix.schema.json',
@@ -52,6 +58,7 @@ export const PATHS = {
   requirementNormalized: 'requirements/normalized',
   requirementApproved: 'requirements/approved',
   workflowInstances: 'workflow/instances',
+  workflowHistory: 'workflow/history',
   testPlansGenerated: 'test-plans/generated',
   testPlansApproved: 'test-plans/approved',
   featuresApproved: 'features/approved',
@@ -66,6 +73,7 @@ export const PATHS = {
   fixtures: 'src/fixtures',
   api: 'src/api',
   apiContracts: 'src/models/api',
+  openSpecChanges: 'openspec/changes',
   steps: 'steps',
 } as const;
 
@@ -101,6 +109,82 @@ function formatZodIssues(prefix: string, error: unknown): string[] {
 
 function collectJsonFiles(dir: string): string[] {
   return listFiles(dir, '.json');
+}
+
+/** Values of every tag carrying `prefix`, from anywhere in a feature file. */
+function featureTagsWithPrefix(file: string, prefix: string): string[] {
+  return readText(file)
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter((line) => line.startsWith('@'))
+    .flatMap((line) => line.split(/\s+/))
+    .filter((tag) => tag.startsWith(prefix))
+    .map((tag) => tag.slice(prefix.length));
+}
+
+/**
+ * The append-only history is the evidence a gate decision rests on, so a
+ * truncated or malformed line must fail loudly rather than be silently skipped.
+ */
+function checkWorkflowHistory(): CheckResult {
+  const id = 'WF-HISTORY-STRUCTURE';
+  const title = 'Workflow history events validate against schema';
+
+  const files = listFiles(PATHS.workflowHistory, '.jsonl');
+  if (files.length === 0) return skip(id, title, 'No workflow history files found.');
+
+  const messages: string[] = [];
+  let eventCount = 0;
+
+  for (const file of files) {
+    const expectedWorkflowId = file.split('/').pop()?.replace('.history.jsonl', '') ?? '';
+    const seenEventIds = new Set<string>();
+
+    const lines = readText(file).split(/\r?\n/);
+    for (const [index, line] of lines.entries()) {
+      if (line.trim() === '') continue;
+      const lineNumber = index + 1;
+
+      let raw: unknown;
+      try {
+        raw = JSON.parse(line);
+      } catch {
+        messages.push(`${file}:${lineNumber}: not valid JSON. The history trail is unreadable here.`);
+        continue;
+      }
+
+      const parsed = workflowHistoryEventSchema.safeParse(raw);
+      if (!parsed.success) {
+        messages.push(...formatZodIssues(`${file}:${lineNumber}`, parsed.error));
+        continue;
+      }
+      for (const issue of checkSchemaParity(PATHS.workflowHistorySchema, raw)) {
+        messages.push(`${file}:${lineNumber} -> schema parity ${issue.path}: ${issue.message}`);
+      }
+
+      const event = parsed.data;
+      eventCount += 1;
+
+      if (event.workflowId !== expectedWorkflowId) {
+        messages.push(
+          `${file}:${lineNumber}: workflowId "${event.workflowId}" does not match the file it lives in ("${expectedWorkflowId}").`,
+        );
+      }
+      if (!event.eventId.startsWith(`EVT-${event.workflowId}-`)) {
+        messages.push(
+          `${file}:${lineNumber}: eventId "${event.eventId}" does not belong to ${event.workflowId}.`,
+        );
+      }
+      if (seenEventIds.has(event.eventId)) {
+        messages.push(`${file}:${lineNumber}: duplicate eventId "${event.eventId}".`);
+      }
+      seenEventIds.add(event.eventId);
+    }
+  }
+
+  return messages.length === 0
+    ? pass(id, title, [`${eventCount} history event(s) across ${files.length} file(s) validated.`])
+    : fail(id, title, messages);
 }
 
 /** Loads and structurally validates every structured artifact in the workspace. */
@@ -227,6 +311,8 @@ function loadArtifacts(results: CheckResult[]): LoadedArtifacts {
         : fail('WF-STRUCTURE', 'Workflow states validate against schema', workflowMessages),
   );
 
+  results.push(checkWorkflowHistory());
+
   const rtmFiles = collectJsonFiles(PATHS.rtmCapabilities);
   const rtmMessages: string[] = [];
   for (const file of rtmFiles) {
@@ -339,6 +425,36 @@ function checkApprovalEvidence(loaded: LoadedArtifacts): CheckResult {
       );
     }
   }
+
+  // A plan sitting in test-plans/approved/ carries the same burden of proof as an
+  // approved requirement: its own approval, at its own version.
+  const approvedPlanFiles = new Set(collectJsonFiles(PATHS.testPlansApproved));
+  for (const [file, plan] of loaded.testPlans) {
+    if (!approvedPlanFiles.has(file)) continue;
+    const approval = loaded.approvals.find(
+      (item) => item.gate === 'TEST_PLAN' && item.artifactId === plan.testPlanId,
+    );
+    if (!approval) {
+      messages.push(`${file}: no TEST_PLAN approval artifact found for ${plan.testPlanId}.`);
+      continue;
+    }
+    if (!isGateOpen(approval)) {
+      messages.push(
+        `${file}: test plan gate decision is "${approval.decision}", so the plan must not sit in test-plans/approved/.`,
+      );
+    }
+    if (approval.artifactVersion !== plan.artifactVersion) {
+      messages.push(
+        `${file}: approval covers artifactVersion ${approval.artifactVersion} but the plan is version ${plan.artifactVersion}. Re-approval is required.`,
+      );
+    }
+    if (plan.approvalStatus === 'APPROVED' && (!plan.approvalRef || !exists(plan.approvalRef))) {
+      messages.push(
+        `${file}: approvalRef "${plan.approvalRef ?? 'null'}" is missing or does not exist.`,
+      );
+    }
+  }
+
   return messages.length === 0
     ? pass('SEM-APPROVAL-EVIDENCE', 'Approved artifacts carry validated approval evidence')
     : fail('SEM-APPROVAL-EVIDENCE', 'Approved artifacts carry validated approval evidence', messages);
@@ -372,21 +488,49 @@ function checkGateOrdering(loaded: LoadedArtifacts): CheckResult {
     }
   }
 
-  // Gate 2 -> approved feature files require a recorded TEST_PLAN approval.
-  const approvedFeatures = listFilesRecursive(PATHS.featuresApproved, '.feature');
-  const testPlanApprovals = loaded.approvals.filter((item) => item.gate === 'TEST_PLAN');
-  if (approvedFeatures.length > 0 && testPlanApprovals.length === 0) {
-    messages.push(
-      'Approved feature files exist but no TEST_PLAN approval artifact was found. Gate 2 must not be bypassed.',
-    );
+  // Gate 2 -> EVERY plan in test-plans/approved/ needs its own approval. An
+  // existence check would let one story's approval unlock every later story.
+  const approvedPlanPaths = collectJsonFiles(PATHS.testPlansApproved).filter(
+    (file) => !file.includes('-approval'),
+  );
+  const openTestPlanApprovalIds = new Set(
+    loaded.approvals
+      .filter((item) => item.gate === 'TEST_PLAN' && isGateOpen(item))
+      .map((item) => item.artifactId),
+  );
+  for (const file of approvedPlanPaths) {
+    const planId = loaded.testPlans.get(file)?.testPlanId;
+    if (planId === undefined) continue; // TP-STRUCTURE already reported it.
+    if (!openTestPlanApprovalIds.has(planId)) {
+      messages.push(
+        `${file}: ${planId} sits in test-plans/approved/ with no APPROVE-d TEST_PLAN approval artifact. Gate 2 must not be bypassed.`,
+      );
+    }
   }
 
-  // Gate 3 -> approved features become executable only with AUTOMATION_DESIGN approval.
-  const automationApprovals = loaded.approvals.filter((item) => item.gate === 'AUTOMATION_DESIGN');
-  if (approvedFeatures.length > 0 && automationApprovals.length === 0) {
-    messages.push(
-      'Approved feature files exist but no AUTOMATION_DESIGN approval artifact was found. Gate 3 must not be bypassed.',
-    );
+  // Gate 3 -> every approved feature must name a plan that carries an
+  // AUTOMATION_DESIGN approval, matched through its own @tp- tag.
+  const approvedFeatures = listFilesRecursive(PATHS.featuresApproved, '.feature');
+  const openAutomationApprovalIds = new Set(
+    loaded.approvals
+      .filter((item) => item.gate === 'AUTOMATION_DESIGN' && isGateOpen(item))
+      .map((item) => item.artifactId),
+  );
+  for (const file of approvedFeatures) {
+    const planTags = [...new Set(featureTagsWithPrefix(file, '@tp-'))];
+    if (planTags.length === 0) {
+      messages.push(
+        `${file}: carries no @tp- tag, so it cannot be tied to an AUTOMATION_DESIGN approval and Gate 3 cannot be evidenced.`,
+      );
+      continue;
+    }
+    for (const planId of planTags) {
+      if (!openAutomationApprovalIds.has(planId)) {
+        messages.push(
+          `${file}: ${planId} has no APPROVE-d AUTOMATION_DESIGN approval artifact. Gate 3 must not be bypassed.`,
+        );
+      }
+    }
   }
 
   // A workflow waiting for a human must not already have produced its next-stage output.
@@ -581,9 +725,15 @@ function checkCoverageHonesty(loaded: LoadedArtifacts): CheckResult {
 }
 
 function checkFeatureTraceability(): CheckResult {
-  const featureFiles = listFilesRecursive(PATHS.featuresApproved, '.feature');
+  // Generated features are checked too: a missing tag caught while the file is
+  // still under review is a correction, whereas the same tag missing after
+  // Gate 3 means a human approved something that was never traceable.
+  const featureFiles = [
+    ...listFilesRecursive(PATHS.featuresApproved, '.feature'),
+    ...listFilesRecursive(PATHS.featuresGenerated, '.feature'),
+  ];
   if (featureFiles.length === 0) {
-    return skip('SEM-FEATURE-TAGS', 'Every Gherkin scenario carries traceability tags', 'No approved feature files found.');
+    return skip('SEM-FEATURE-TAGS', 'Every Gherkin scenario carries traceability tags', 'No feature files found.');
   }
 
   const messages: string[] = [];
@@ -630,9 +780,65 @@ function checkFeatureTraceability(): CheckResult {
 
   return messages.length === 0
     ? pass('SEM-FEATURE-TAGS', 'Every Gherkin scenario carries traceability tags', [
-        `${featureFiles.length} approved feature file(s) checked.`,
+        `${featureFiles.length} approved and generated feature file(s) checked.`,
       ])
     : fail('SEM-FEATURE-TAGS', 'Every Gherkin scenario carries traceability tags', messages);
+}
+
+/**
+ * OpenSpec artifacts are markdown owned by the OpenSpec CLI, so this check runs
+ * that CLI rather than inventing a second definition of a valid change. A
+ * hand-written schema here would drift from the tool's own conventions and
+ * would start failing changes the tool considers correct.
+ *
+ * Skips - never fails - when the CLI is absent: `npm run preflight` is the
+ * check that reports missing tooling.
+ */
+function checkOpenSpecChanges(): CheckResult {
+  const id = 'SEM-OPENSPEC';
+  const title = 'Open OpenSpec changes pass `openspec validate --strict`';
+
+  const changesDir = toAbsolute(PATHS.openSpecChanges);
+  if (!fs.existsSync(changesDir)) {
+    return skip(id, title, 'No openspec/changes directory found.');
+  }
+
+  const changeNames = fs
+    .readdirSync(changesDir, { withFileTypes: true })
+    // `archive` holds completed changes; re-validating them would fail a build
+    // for a decision that was already made and closed.
+    .filter((entry) => entry.isDirectory() && entry.name !== 'archive')
+    .map((entry) => entry.name);
+
+  if (changeNames.length === 0) {
+    return skip(id, title, 'No open OpenSpec changes.');
+  }
+
+  const cli = resolveBinEntry('@fission-ai/openspec', 'openspec');
+  if (cli === null) {
+    return skip(id, title, 'The OpenSpec CLI is not installed. Run npm run preflight.');
+  }
+
+  const messages: string[] = [];
+  for (const name of changeNames) {
+    try {
+      execFileSync(process.execPath, [cli, 'validate', name, '--strict'], {
+        cwd: PROJECT_ROOT,
+        encoding: 'utf8',
+        stdio: ['ignore', 'pipe', 'pipe'],
+      });
+    } catch (error) {
+      const output = error as { stdout?: string; stderr?: string };
+      const detail = `${output.stdout ?? ''}${output.stderr ?? ''}`.trim();
+      messages.push(
+        `${PATHS.openSpecChanges}/${name}: openspec validate --strict failed -> ${detail || 'no output'}`,
+      );
+    }
+  }
+
+  return messages.length === 0
+    ? pass(id, title, [`${changeNames.length} open change(s) validated: ${changeNames.join(', ')}.`])
+    : fail(id, title, messages);
 }
 
 interface HygieneRule {
@@ -1231,6 +1437,7 @@ export function runValidation(
     checkRtmIntegrity(loaded),
     checkCoverageHonesty(loaded),
     checkFeatureTraceability(),
+    checkOpenSpecChanges(),
     checkNoDuplicateBusinessScenarios(),
     checkSampleDataIsolation(loaded),
     checkVersionMonotonicity(loaded),
@@ -1246,7 +1453,7 @@ export function runValidation(
   const scopeFilter: Record<Exclude<typeof scope, 'all'>, string[]> = {
     requirements: ['REQ-STRUCTURE', 'APR-STRUCTURE', 'SEM-APPROVAL-EVIDENCE', 'SEM-VERSIONS', 'SEM-SAMPLE-ISOLATION'],
     workflow: ['WF-STRUCTURE', 'SEM-GATES', 'SEM-LOCKS'],
-    rtm: ['RTM-STRUCTURE', 'SEM-RTM', 'SEM-COVERAGE', 'SEM-FEATURE-TAGS', 'SEM-NO-DUPLICATES'],
+    rtm: ['RTM-STRUCTURE', 'SEM-RTM', 'SEM-COVERAGE', 'SEM-FEATURE-TAGS', 'SEM-NO-DUPLICATES', 'SEM-OPENSPEC'],
     defects: ['DEF-STRUCTURE', 'SEM-DEFECT-EVIDENCE', 'SEM-SAMPLE-ISOLATION'],
     automation: ['SEM-AUTOMATION-HYGIENE', 'SEM-FEATURE-TAGS', 'SEM-NO-DUPLICATES', 'SEM-API-CONTRACT'],
   };

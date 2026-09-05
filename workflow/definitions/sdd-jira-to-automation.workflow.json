@@ -272,7 +272,22 @@
         "traceability/index/lookup.index.json",
         "workflow/history/<workflowId>.history.jsonl"
       ],
-      "next": "COMPLETED"
+      "next": "OPENSPEC_ARCHIVE"
+    },
+    {
+      "stage": "OPENSPEC_ARCHIVE",
+      "agent": "OpenSpec",
+      "requires": ["openspec/changes/<change-name>/**", "traceability/capabilities/<capability>.rtm.json"],
+      "invokes": "Existing OpenSpec skills (openspec-archive-change, or openspec-sync-specs when the change stays open). Never hand-edit openspec/specs/.",
+      "outputs": ["openspec/specs/**", "openspec/changes/archive/**"],
+      "next": "COMPLETED",
+      "rules": [
+        "Close the change opened at OPENSPEC_GENERATION. Without this the change list grows forever and openspec/specs/ never becomes the source of truth.",
+        "Archive only after the RTM records real execution evidence. Archiving a change whose scenarios never ran would file an unproven spec as delivered.",
+        "A change with deferred acceptance criteria is archived only for the criteria that were delivered. The deferred ones stay visible as open work; never silently drop them.",
+        "The CLI is the only writer. Run `npx openspec archive <change-name>` and let it move the files."
+      ],
+      "blockedWhen": "`openspec validate <change-name> --strict` fails, or the RTM shows no passing execution for the story."
     },
     {
       "stage": "COMPLETED",

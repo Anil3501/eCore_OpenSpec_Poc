@@ -30,8 +30,8 @@ export default defineConfig({
   globalSetup: './src/utils/coverage-global-setup.ts',
   globalTeardown: './src/utils/coverage-global-teardown.ts',
   fullyParallel: true,
-  forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 1 : 0,
+  forbidOnly: env.isCi,
+  retries: env.isCi ? 1 : 0,
   // Raised from Playwright's 30s default on measured evidence, not on a guess.
   // On qa1, a single sign-in plus one navigation to the Workspace page took
   // 27.3s (ETA-411 TS-004, 2026-09-01), leaving TS-006 - which signs in,

@@ -190,6 +190,7 @@
         "LOCATOR_HEALING",
         "BUG_REPORTING",
         "RTM_UPDATE",
+        "OPENSPEC_ARCHIVE",
         "COMPLETED"
       ]
     },

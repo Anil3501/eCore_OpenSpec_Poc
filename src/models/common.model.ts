@@ -166,6 +166,9 @@ export const workflowStageSchema = z.enum([
   'LOCATOR_HEALING',
   'BUG_REPORTING',
   'RTM_UPDATE',
+  // The OpenSpec change opened at OPENSPEC_GENERATION is closed here. Without
+  // it, changes accumulate forever and openspec/specs/ never becomes the truth.
+  'OPENSPEC_ARCHIVE',
   'COMPLETED',
 ]);
 

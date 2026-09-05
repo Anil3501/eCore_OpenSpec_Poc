@@ -10,7 +10,7 @@ and scaling design. This file only covers what an agent cannot discover on its o
 
 ```powershell
 npm run preflight            # RUN THIS FIRST. Node version, deps, CLIs, browsers, env config.
-npm run validate:artifacts   # 17 structural + semantic checks. RUN THIS AFTER ANY ARTIFACT EDIT.
+npm run validate:artifacts   # 20 structural + semantic checks. RUN THIS AFTER ANY ARTIFACT EDIT.
 npm run typecheck            # tsc --noEmit
 npm run bdd                  # bddgen: features/approved/** -> .features-gen/
 npm test                     # bddgen && playwright test
@@ -164,13 +164,25 @@ before creating an artifact rather than guessing a path.
 | --- | --- | --- |
 | `workflow/instances/` | Durable state, one JSON per story+release (`WF-<STORY>-R<release>.json`) | Orchestrator only |
 | `requirements/` | `raw` → `normalized` → `approved`, plus `reviews`, `examples`, `schemas` | Jira Requirement Analysis |
-| `test-plans/` | `generated` → `approved` | Playwright Test Planner |
-| `features/`, `steps/` | Gherkin behaviour + thin step orchestration | Playwright Test Generator |
-| `src/` | `pages`, `components`, `fixtures`, `services`, `models`, `utils`, `api` | Playwright Test Generator |
-| `test-data/` | Fabricated inputs, one `<capability>.sample.json` per capability. Never a secret | Playwright Test Generator |
+| `test-plans/` | `generated` → `approved` | Orchestrator (`TEST_PLAN_GENERATION`) |
+| `features/`, `steps/` | Gherkin behaviour + thin step orchestration | Orchestrator (`BDD_DESIGN`, `IMPLEMENTATION`) |
+| `src/` | `pages`, `components`, `fixtures`, `services`, `models`, `utils`, `api` | Orchestrator (`IMPLEMENTATION`) |
+| `test-data/` | Fabricated inputs, one `<capability>.sample.json` per capability. Never a secret | Orchestrator (`IMPLEMENTATION`) |
 | `defects/` | Governed defect reports (`DEF-*.json`) plus `defects/schemas/`. Evidence copies live in git-ignored `reports/defects/` | Bug Analyzer |
 | `traceability/` | Capability-partitioned RTM, coverage, lookup index, executions | Orchestrator only |
 | `openspec/`, `.github/prompts/opsx-*`, `.github/skills/openspec-*` | Spec layer | OpenSpec (tool-owned, do not hand-edit) |
+
+**The workflow definition is the authority on who performs a stage, not this table.** Ownership
+above is derived from each stage's `agent` field. The orchestrator may delegate `IMPLEMENTATION` to
+`playwright-test-generator`, but only if that agent's definition is compatible with the installed
+playwright-bdd setup; otherwise it does the work itself. `playwright-test-planner` is assigned to
+`PLAYWRIGHT_VALIDATION` — it validates an approved plan against the running application, it does not
+author one.
+
+Two agent files are deliberately not assigned to any stage. `playwright-test-healer` and
+`playwright-test-generator` are tool-provided and may be regenerated, so their files are left
+untouched; `governed-locator-healer` is the governed wrapper the workflow actually calls. Neither is
+an orphan to be cleaned up.
 
 Scaling to 3,000+ tests relies on **capability partitioning** (one RTM file per business capability)
 plus [traceability/index/lookup.index.json](traceability/index/lookup.index.json) so nothing is
@@ -212,8 +224,10 @@ checks fail. See [src/utils/schema-parity.ts](src/utils/schema-parity.ts).
   no `process.env`, no response body in an error message. A `.delete()` or `.put()` against a shared
   environment needs a `CLEANUP -` waiver naming how the data is restored.
 - All config goes through [src/utils/env.ts](src/utils/env.ts). **Never read `process.env`
-  directly.** Requirements are enforced lazily (`requireBaseUrl()`, `requireCredentials()`,
-  `requireEcoreLogin()`) so scaffolding works without secrets. Errors name variables, never values.
+  directly.** That includes [playwright.config.ts](playwright.config.ts), which uses `env.isCi`
+  rather than `process.env.CI`. Requirements are enforced lazily (`requireBaseUrl()`,
+  `requireCredentials()`, `requireEcoreLogin()`) so scaffolding works without secrets. Errors name
+  variables, never values.
 
 **Every Gherkin scenario needs traceability tags**: `@release-`, `@capability-`, `@req-`, `@ac-`,
 `@tp-`, `@ts-`. Missing any prefix fails `SEM-FEATURE-TAGS`. See

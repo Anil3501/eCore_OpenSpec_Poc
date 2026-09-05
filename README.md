@@ -245,8 +245,14 @@ prompts and skills are installed under `.github/prompts/` and `.github/skills/`.
 | Sync | `/opsx-sync` | Reconcile specs with applied changes |
 | Archive | `/opsx-archive` | Archive a completed change |
 
-The orchestrator enters OpenSpec only at the `OPENSPEC_GENERATION` stage, only with a Gate 1
-approved requirement artifact as input.
+The orchestrator enters OpenSpec at two stages. `OPENSPEC_GENERATION` opens a change from a Gate 1
+approved requirement artifact. `OPENSPEC_ARCHIVE` — the stage immediately before `COMPLETED` —
+closes it once the RTM records a real passing execution, moving the delta spec into
+`openspec/specs/` and the change into `openspec/changes/archive/`.
+
+Both stages call the CLI and let it move the files. **`openspec/specs/` is never hand-edited.**
+A change is archived only for the acceptance criteria that were actually delivered; anything
+deferred at Gate 1 stays visible as open work.
 
 ---
 

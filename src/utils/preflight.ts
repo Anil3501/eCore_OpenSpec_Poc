@@ -18,6 +18,7 @@ import path from 'node:path';
 
 import { PROJECT_ROOT, readJson, toAbsolute } from './artifact-io.ts';
 import { env } from './env.ts';
+import { resolveBinEntry } from './node-bin.ts';
 
 type CheckStatus = 'PASS' | 'FAIL' | 'WARN';
 
@@ -52,23 +53,6 @@ function result(
  * Resolves a CLI to its JavaScript entry point rather than the node_modules/.bin shim: Node
  * refuses to execFile a Windows .cmd without a shell, and this repo's path contains spaces.
  */
-function binaryEntryPoint(pkg: string, bin: string): string | null {
-  const packageDir = path.join(PROJECT_ROOT, 'node_modules', ...pkg.split('/'));
-  const manifestPath = path.join(packageDir, 'package.json');
-  if (!fs.existsSync(manifestPath)) return null;
-
-  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8')) as {
-    bin?: string | Record<string, string>;
-  };
-
-  const relativeEntry =
-    typeof manifest.bin === 'string' ? manifest.bin : (manifest.bin?.[bin] ?? null);
-  if (!relativeEntry) return null;
-
-  const entry = path.join(packageDir, relativeEntry);
-  return fs.existsSync(entry) ? entry : null;
-}
-
 function checkNodeVersion(): CheckResult {
   const major = Number(process.versions.node.split('.')[0]);
   if (Number.isNaN(major) || major < MINIMUM_NODE_MAJOR) {
@@ -123,7 +107,7 @@ function checkBinaries(): CheckResult {
   const failures: string[] = [];
 
   for (const { bin, pkg, neededBy } of REQUIRED_BINARIES) {
-    const entry = binaryEntryPoint(pkg, bin);
+    const entry = resolveBinEntry(pkg, bin);
     if (!entry) {
       failures.push(`${bin} is not installed - expected it from ${pkg} (needed by ${neededBy}).`);
       continue;
