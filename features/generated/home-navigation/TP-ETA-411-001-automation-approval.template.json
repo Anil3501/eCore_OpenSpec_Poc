@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "1.0.0",
+  "approvalId": "APR-AD-ETA-411-001",
+  "gate": "AUTOMATION_DESIGN",
+  "artifactId": "TP-ETA-411-001",
+  "artifactVersion": 1,
+  "release": "1.0",
+  "capability": "home-navigation",
+  "sourceArtifactPath": "features/generated/home-navigation/TP-ETA-411-001-automation-design.md",
+  "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+  "reviewer": {
+    "name": "REPLACE_WITH_YOUR_NAME",
+    "role": "REPLACE_WITH_YOUR_ROLE",
+    "reference": null
+  },
+  "reviewedAt": "REPLACE_WITH_ISO_8601_TIMESTAMP",
+  "comments": "Replace with any overall comment, and answer the two questions in the Open questions section of the design. Q1: is it acceptable for the automation to reach Command Center by CSS id, given the application gives that control no accessible name? Q2: in TS-ETA-411-006, does 'each module reached in this plan' mean the five non-Home modules? That reading is the orchestrator's, not something the plan states. Note also that every locator in this design is still MCP_VALIDATION_REQUIRED: approving this gate approves the behaviour, and the locators are proven afterwards at PLAYWRIGHT_VALIDATION.",
+  "itemDecisions": [
+    {
+      "itemId": "TS-ETA-411-001",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Presence of the six named modules, as a data table so the list can change without a step-definition change."
+    },
+    {
+      "itemId": "TS-ETA-411-002",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Dashboard icons. Returns Home directly between icons rather than via Command Center, so TS-ETA-411-006 keeps independent evidence."
+    },
+    {
+      "itemId": "TS-ETA-411-003",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Navigation menu entries. Kept separate from TS-ETA-411-002 so a working menu cannot mask a broken Dashboard icon."
+    },
+    {
+      "itemId": "TS-ETA-411-004",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Preferences offered with Organization and Vault grouped beneath it. Presence only, per AMB-ETA-411-007."
+    },
+    {
+      "itemId": "TS-ETA-411-005",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Organization and Vault open their own pages. Arrival asserted on page content because Organization shares an address with the Preferences icon."
+    },
+    {
+      "itemId": "TS-ETA-411-006",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Command Center returns Home from each module. Needs a VALIDATED string-selector waiver; the control has no accessible name. See Q1 and Q2."
+    },
+    {
+      "itemId": "TS-ETA-411-007",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Unauthenticated visitor refused. The feature has no Background so this scenario genuinely starts unauthenticated. No credential is entered, so no lockout risk."
+    }
+  ]
+}

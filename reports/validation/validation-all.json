@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-05T08:54:33.543Z",
+  "generatedAt": "2026-09-05T09:17:40.254Z",
   "scope": "all",
   "summary": {
     "total": 23,
@@ -21,7 +21,7 @@
       "title": "Approval artifacts validate against schema",
       "status": "PASS",
       "messages": [
-        "4 approval artifact(s) validated."
+        "5 approval artifact(s) validated."
       ]
     },
     {
@@ -29,7 +29,7 @@
       "title": "Test plans validate against schema",
       "status": "PASS",
       "messages": [
-        "3 test plan(s) validated."
+        "4 test plan(s) validated."
       ]
     },
     {
@@ -45,7 +45,7 @@
       "title": "Workflow history events validate against schema",
       "status": "PASS",
       "messages": [
-        "64 history event(s) across 2 file(s) validated."
+        "68 history event(s) across 2 file(s) validated."
       ]
     },
     {
@@ -85,7 +85,7 @@
       "title": "No approved artifact still carries a template placeholder",
       "status": "PASS",
       "messages": [
-        "8 approved artifact(s) scanned."
+        "10 approved artifact(s) scanned."
       ]
     },
     {
@@ -117,7 +117,7 @@
       "title": "Every Gherkin scenario carries traceability tags",
       "status": "PASS",
       "messages": [
-        "2 approved and generated feature file(s) checked."
+        "3 approved and generated feature file(s) checked."
       ]
     },
     {

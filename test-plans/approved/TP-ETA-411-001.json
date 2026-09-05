@@ -1,0 +1,340 @@
+{
+  "schemaVersion": "1.0.0",
+  "testPlanId": "TP-ETA-411-001",
+  "artifactVersion": 1,
+  "release": "1.0",
+  "capability": "home-navigation",
+  "jiraStoryIds": ["ETA-411"],
+  "requirementIds": [
+    "REQ-ETA-411-001",
+    "REQ-ETA-411-002",
+    "REQ-ETA-411-003",
+    "REQ-ETA-411-004",
+    "REQ-ETA-411-005",
+    "REQ-ETA-411-007"
+  ],
+  "acIds": [
+    "AC-ETA-411-001",
+    "AC-ETA-411-003",
+    "AC-ETA-411-004",
+    "AC-ETA-411-005",
+    "AC-ETA-411-006",
+    "AC-ETA-411-007",
+    "AC-ETA-411-009"
+  ],
+  "openSpecRefs": [
+    "openspec/changes/add-home-navigation/specs/home-navigation/home-screen-navigation/spec.md",
+    "openspec/changes/add-home-navigation/proposal.md",
+    "openspec/changes/add-home-navigation/design.md"
+  ],
+  "objective": "Verify that a signed-in Organization user is offered the six modules named in ETA-411, can open them from the Dashboard icons and from the top-right navigation menu, can reach Organization and Vault grouped beneath Preferences, and can return to the Home page using Command Center - and that a visitor who is not signed in is refused a module and kept on the sign-in page. Each scenario asserts only what its approved acceptance criterion asserts.",
+  "scope": {
+    "inScope": [
+      "Presence of the six named modules Home, New Transaction, Workspace, Preferences, Organization and Vault (AC-ETA-411-001).",
+      "Opening New Transaction, Workspace and Preferences from the Dashboard icons (AC-ETA-411-003).",
+      "Opening Home, New Transaction and Workspace from the top-right navigation menu (AC-ETA-411-004).",
+      "Preferences being offered in the navigation menu with Organization and Vault grouped beneath it, as a presence check only (AC-ETA-411-005).",
+      "Opening Organization and Vault from beneath Preferences (AC-ETA-411-006).",
+      "Returning to the Home page from each module using Command Center (AC-ETA-411-007).",
+      "An unauthenticated visitor requesting a module being shown an error and kept on the sign-in page (AC-ETA-411-009)."
+    ],
+    "outOfScope": [
+      "The absence half of REQ-ETA-411-001 - that no module outside the organization's authorized set is offered. AC-ETA-411-002 carries that claim and is DEFERRED, so REQ-ETA-411-001 is only partially covered by this plan. The test account can reach nineteen navigable destinations while the story names six; verifying six are present says nothing about whether the other thirteen should have been hidden.",
+      "Consistency between the UI and any supporting API (REQ-ETA-411-006 / AC-ETA-411-008). Deferred by the owner, and doubly blocked: walked evidence records all six destinations as full document requests, and anything captured by observation is OBSERVED and may never judge an acceptance criterion.",
+      "Refusal of an authenticated but unauthorized user (AC-ETA-411-010). With scope narrowed to the six modules this account is authorized for, no unauthorized module remains to request, so the scenario cannot be produced at all this release.",
+      "Asserting the exact wording of the unauthenticated error message. The text is captured at PLAYWRIGHT_VALIDATION as OBSERVED and may only be asserted if a human approves that string at this gate.",
+      "The behaviour of the thirteen navigable destinations that ETA-411 does not name, including the analytics and Vault Content entries."
+    ]
+  },
+  "assumptions": [
+    "The configured eCore account is an Organization account authorized for all six named modules. Every positive scenario depends on this; if the account loses an authorization, those scenarios fail for an environment reason rather than a product defect.",
+    "Preferences is a group heading over Organization and Vault rather than a destination of its own in the navigation menu. This is the owner's answer recorded in AMB-ETA-411-007 and is why AC-ETA-411-005 is a presence check. The Dashboard Preferences icon is separate and does navigate.",
+    "The six modules are reachable in a single browser session; no scenario needs a second organization or a second account."
+  ],
+  "dependencies": [
+    "requirements/approved/ETA-411.json - the approved acceptance criteria this plan may cover.",
+    "requirements/approved/ETA-411-ac-approval.json - Gate 1 evidence.",
+    "openspec/changes/add-home-navigation/specs/home-navigation/home-screen-navigation/spec.md - the approved spec delta.",
+    "reports/validation/ETA-411-navigation-validation.json - walked evidence that each Dashboard icon reaches its destination, and that Command Center returns Home.",
+    "reports/validation/ETA-411-home-icons-probe.json - structural observation of the Home page icons and the navigation menu entries.",
+    "A configured ECORE_* organization credential in the local .env, read only through env.requireEcoreLogin()."
+  ],
+  "risks": [
+    {
+      "riskId": "RISK-TP-ETA-411-001",
+      "description": "Organization in the navigation menu and the Preferences icon on the Dashboard resolve to the same destination, /ssweb/setup/prefs/preferences.eo. A scenario that asserts arrival by destination alone would pass while showing the wrong page, and would keep passing if the two were ever wrongly wired together.",
+      "level": "HIGH",
+      "mitigation": "TS-ETA-411-005 asserts arrival on page content rather than on destination. The same constraint is recorded in the rationale of AC-ETA-411-006 so it survives into automation design."
+    },
+    {
+      "riskId": "RISK-TP-ETA-411-002",
+      "description": "The Command Center control is a background-image div with no text, no accessible name and no title, so it cannot be reached by any preferred accessible locator.",
+      "level": "MEDIUM",
+      "mitigation": "TS-ETA-411-006 depends on it, and the automation will need a VALIDATED waiver under SEM-AUTOMATION-HYGIENE. If the missing accessible name is itself judged a defect, that is a separate finding and not something this plan may decide."
+    },
+    {
+      "riskId": "RISK-TP-ETA-411-003",
+      "description": "New Transaction and Workspace each appear twice on the Home page - once as a Dashboard icon and once in the navigation menu - so an unscoped locator matches two elements and fails Playwright strict mode.",
+      "level": "MEDIUM",
+      "mitigation": "TS-ETA-411-002 and TS-ETA-411-003 are deliberately separate scenarios by entry point, so each one scopes to a single container instead of disambiguating by position."
+    },
+    {
+      "riskId": "RISK-TP-ETA-411-004",
+      "description": "This plan can produce a full pass while REQ-ETA-411-001, REQ-ETA-411-006 and REQ-ETA-411-007 remain only partly covered, which invites the coverage figure to be read as completeness.",
+      "level": "MEDIUM",
+      "mitigation": "AC-ETA-411-002, -008 and -010 stay in the requirement artifact as DEFERRED and are never mapped to a scenario here, so the RTM reports those requirements as partial rather than met."
+    },
+    {
+      "riskId": "RISK-TP-ETA-411-005",
+      "description": "The unauthenticated scenario could drift into asserting whatever error text the application currently emits, which would make today's behaviour the definition of correct and would hide a regression to a different wrong message.",
+      "level": "MEDIUM",
+      "mitigation": "TS-ETA-411-007 asserts that an error message is present and that the sign-in page is still displayed. The captured string is presented at this gate; only an approved string may be asserted, and only in a later plan version."
+    }
+  ],
+  "scenarios": [
+    {
+      "testScenarioId": "TS-ETA-411-001",
+      "title": "The six named modules are offered to a signed-in Organization user",
+      "type": "POSITIVE",
+      "acIds": ["AC-ETA-411-001"],
+      "preconditions": [
+        "An Organization user is signed in to eCore.",
+        "The Home page is displayed."
+      ],
+      "steps": [
+        "View the modules offered on the Home page.",
+        "Open the top-right navigation menu and view the modules offered there."
+      ],
+      "expectedResult": "Home, New Transaction, Workspace, Preferences, Organization and Vault are each offered to the user. This scenario covers presence only; that each one opens is carried by TS-ETA-411-002, TS-ETA-411-003 and TS-ETA-411-005.",
+      "testDataRequirements": [
+        "The configured Organization account, read only through env.requireEcoreLogin()."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "HIGH",
+      "riskTag": "risk-medium",
+      "suiteTag": "suite-smoke",
+      "scenarioAction": "CREATE",
+      "interfaceType": "UI"
+    },
+    {
+      "testScenarioId": "TS-ETA-411-002",
+      "title": "The Dashboard icons open New Transaction, Workspace and Preferences",
+      "type": "POSITIVE",
+      "acIds": ["AC-ETA-411-003"],
+      "preconditions": [
+        "An Organization user is signed in to eCore.",
+        "The Home page is displayed."
+      ],
+      "steps": [
+        "Select the New Transaction icon on the Dashboard and confirm its module is shown.",
+        "Return to the Home page.",
+        "Select the Workspace icon on the Dashboard and confirm its module is shown.",
+        "Return to the Home page.",
+        "Select the Preferences icon on the Dashboard and confirm its module is shown."
+      ],
+      "expectedResult": "Each of the three Dashboard icons opens its own module. Arrival is judged on the content of the page reached, not on the address alone.",
+      "testDataRequirements": [
+        "The configured Organization account, read only through env.requireEcoreLogin()."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "HIGH",
+      "riskTag": "risk-high",
+      "suiteTag": "suite-critical",
+      "scenarioAction": "CREATE",
+      "interfaceType": "UI"
+    },
+    {
+      "testScenarioId": "TS-ETA-411-003",
+      "title": "The navigation menu opens Home, New Transaction and Workspace",
+      "type": "POSITIVE",
+      "acIds": ["AC-ETA-411-004"],
+      "preconditions": [
+        "An Organization user is signed in to eCore."
+      ],
+      "steps": [
+        "Open the top-right navigation menu and select New Transaction, then confirm its module is shown.",
+        "Open the navigation menu again and select Workspace, then confirm its module is shown.",
+        "Open the navigation menu again and select Home, then confirm the Home page is shown."
+      ],
+      "expectedResult": "Each of the three menu entries opens its own module. Kept separate from TS-ETA-411-002 because New Transaction and Workspace appear in both the Dashboard and the menu, and each entry point deserves its own evidence.",
+      "testDataRequirements": [
+        "The configured Organization account, read only through env.requireEcoreLogin()."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "HIGH",
+      "riskTag": "risk-high",
+      "suiteTag": "suite-critical",
+      "scenarioAction": "CREATE",
+      "interfaceType": "UI"
+    },
+    {
+      "testScenarioId": "TS-ETA-411-004",
+      "title": "Preferences is offered in the navigation menu with Organization and Vault grouped beneath it",
+      "type": "POSITIVE",
+      "acIds": ["AC-ETA-411-005"],
+      "preconditions": [
+        "An Organization user is signed in to eCore."
+      ],
+      "steps": [
+        "Open the top-right navigation menu.",
+        "View the Preferences entry and the entries grouped beneath it."
+      ],
+      "expectedResult": "Preferences is offered in the menu, and Organization and Vault are grouped beneath it. A presence check by design: the owner confirmed Preferences is a heading over those two entries, so asserting that it opens a page of its own would go beyond both the story and the evidence.",
+      "testDataRequirements": [
+        "The configured Organization account, read only through env.requireEcoreLogin()."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "MEDIUM",
+      "riskTag": "risk-medium",
+      "suiteTag": "suite-regression",
+      "scenarioAction": "CREATE",
+      "interfaceType": "UI"
+    },
+    {
+      "testScenarioId": "TS-ETA-411-005",
+      "title": "Organization and Vault open their own pages from beneath Preferences",
+      "type": "POSITIVE",
+      "acIds": ["AC-ETA-411-006"],
+      "preconditions": [
+        "An Organization user is signed in to eCore."
+      ],
+      "steps": [
+        "Open the top-right navigation menu and select Organization beneath Preferences, then confirm the Organization page is shown.",
+        "Return to the Home page.",
+        "Open the navigation menu again and select Vault beneath Preferences, then confirm the Vault page is shown."
+      ],
+      "expectedResult": "Each entry opens its own page. Arrival must be judged on page content: Organization resolves to the same destination as the Dashboard Preferences icon, so an address-only assertion would pass without proving the right page was reached.",
+      "testDataRequirements": [
+        "The configured Organization account, read only through env.requireEcoreLogin()."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "HIGH",
+      "riskTag": "risk-high",
+      "suiteTag": "suite-regression",
+      "scenarioAction": "CREATE",
+      "interfaceType": "UI"
+    },
+    {
+      "testScenarioId": "TS-ETA-411-006",
+      "title": "Command Center returns the user to the Home page from each module",
+      "type": "POSITIVE",
+      "acIds": ["AC-ETA-411-007"],
+      "preconditions": [
+        "An Organization user is signed in to eCore.",
+        "The user has navigated away from the Home page."
+      ],
+      "steps": [
+        "From each module reached in this plan, select Command Center.",
+        "Confirm the Home page is displayed again before moving to the next module."
+      ],
+      "expectedResult": "Selecting Command Center returns the user to the Home page from every module. The return is confirmed after each module rather than once at the end, so a single failing module is identifiable.",
+      "testDataRequirements": [
+        "The configured Organization account, read only through env.requireEcoreLogin()."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "HIGH",
+      "riskTag": "risk-high",
+      "suiteTag": "suite-regression",
+      "scenarioAction": "CREATE",
+      "interfaceType": "UI"
+    },
+    {
+      "testScenarioId": "TS-ETA-411-007",
+      "title": "An unauthenticated visitor is refused a module and kept on the sign-in page",
+      "type": "NEGATIVE",
+      "acIds": ["AC-ETA-411-009"],
+      "preconditions": [
+        "A fresh browser session carrying no eCore sign-in.",
+        "No credentials are supplied at any point in this scenario."
+      ],
+      "steps": [
+        "Request a module directly without signing in.",
+        "Observe what the application shows."
+      ],
+      "expectedResult": "An error message is shown and the sign-in page is still the page displayed. Two assertions only: that a message is present, and that the visitor has not been admitted. The wording of the message is not asserted in this version of the plan.",
+      "testDataRequirements": [
+        "None. No credential is entered, so this scenario cannot contribute to an account lockout."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "HIGH",
+      "riskTag": "risk-high",
+      "suiteTag": "suite-critical",
+      "scenarioAction": "CREATE",
+      "interfaceType": "UI"
+    }
+  ],
+  "environmentRequirements": {
+    "environment": "qa",
+    "notes": [
+      "eCore Command Center QA. The base URL and the organization credential are read only through src/utils/env.ts.",
+      "All seven scenarios are read-only navigation. Nothing in this plan creates, changes or deletes application data.",
+      "TS-ETA-411-007 needs a browser context with no stored session, so it must not reuse a signed-in state."
+    ]
+  },
+  "entryCriteria": [
+    "Gate 1 is cleared: requirements/approved/ETA-411-ac-approval.json records an APPROVE decision for artifactVersion 1 of requirements/approved/ETA-411.json.",
+    "The approved OpenSpec change add-home-navigation validates strictly.",
+    "The configured account is signed in successfully at least once, proving the six modules are authorized for it."
+  ],
+  "exitCriteria": [
+    "Every APPROVED acceptance criterion in ETA-411 is mapped to at least one scenario in this plan.",
+    "No DEFERRED acceptance criterion is mapped to any scenario, so REQ-ETA-411-001, REQ-ETA-411-006 and REQ-ETA-411-007 report as partially covered rather than met.",
+    "Each scenario has a real execution record; no result is recorded without one.",
+    "No scenario asserts a message string that has not been approved at this gate.",
+    "Arrival at Organization is asserted on page content, never on destination alone."
+  ],
+  "coverageMappings": [
+    {
+      "acId": "AC-ETA-411-001",
+      "testScenarioIds": ["TS-ETA-411-001", "TS-ETA-411-002", "TS-ETA-411-003", "TS-ETA-411-005"]
+    },
+    { "acId": "AC-ETA-411-003", "testScenarioIds": ["TS-ETA-411-002"] },
+    { "acId": "AC-ETA-411-004", "testScenarioIds": ["TS-ETA-411-003"] },
+    { "acId": "AC-ETA-411-005", "testScenarioIds": ["TS-ETA-411-004"] },
+    { "acId": "AC-ETA-411-006", "testScenarioIds": ["TS-ETA-411-005"] },
+    { "acId": "AC-ETA-411-007", "testScenarioIds": ["TS-ETA-411-006"] },
+    { "acId": "AC-ETA-411-009", "testScenarioIds": ["TS-ETA-411-007"] }
+  ],
+  "clarifications": [
+    {
+      "clarificationId": "CLR-TP-ETA-411-001",
+      "question": "Every scenario in this plan is declared interfaceType UI. That is a testing judgement rather than something ETA-411 states, and the workflow requires it to be put to you rather than decided silently. The basis: reports/validation/ETA-411-navigation-validation.json records all six destinations as full document requests to .eo pages, and reports/validation/ecore-api-discovery.json records that eCore has no REST resource model. Do you agree that no acceptance criterion in scope is API-verifiable this release?",
+      "status": "REVIEW_REQUIRED"
+    },
+    {
+      "clarificationId": "CLR-TP-ETA-411-002",
+      "question": "TS-ETA-411-007 asserts that an error message is present, not what it says. The exact text will be captured at PLAYWRIGHT_VALIDATION as OBSERVED. Asserting a captured string would make whatever eCore says today the definition of correct, so it needs your explicit approval in a later plan version. Do you accept the presence-only assertion for this version?",
+      "status": "REVIEW_REQUIRED"
+    },
+    {
+      "clarificationId": "CLR-TP-ETA-411-003",
+      "question": "Organization in the navigation menu and the Preferences icon on the Dashboard both resolve to /ssweb/setup/prefs/preferences.eo. This plan treats that as the application's current shape and works around it by asserting on page content. Recorded so that if it is in fact a wiring defect, the plan is not the thing that hid it.",
+      "status": "RESOLVED"
+    },
+    {
+      "clarificationId": "CLR-TP-ETA-411-004",
+      "question": "The Command Center control is a background-image div with no accessible name, so TS-ETA-411-006 will need a VALIDATED locator waiver. Whether the missing accessible name is itself a defect worth raising is a human judgement this plan does not make.",
+      "status": "RESOLVED"
+    },
+    {
+      "clarificationId": "CLR-TP-ETA-411-005",
+      "question": "AC-ETA-411-002, AC-ETA-411-008 and AC-ETA-411-010 are DEFERRED and are deliberately not covered by any scenario here, so REQ-ETA-411-001, REQ-ETA-411-006 and REQ-ETA-411-007 will report as partially covered. Carried forward from AMB-ETA-411-002, -003 and -005.",
+      "status": "DEFERRED"
+    }
+  ],
+  "approvalStatus": "APPROVED",
+  "approvalRef": "test-plans/approved/TP-ETA-411-001-approval.json",
+  "dataClassification": "REAL_JIRA_DATA",
+  "timestamps": {
+    "createdAt": "2026-09-05T16:10:00.000Z",
+    "updatedAt": "2026-09-05T17:45:00.000Z",
+    "approvedAt": "2026-09-05T17:45:00.000Z"
+  }
+}

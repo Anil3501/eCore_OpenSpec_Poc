@@ -6,9 +6,9 @@
     "release":  "1.0",
     "capability":  "home-navigation",
     "dataClassification":  "REAL_JIRA_DATA",
-    "currentStage":  "TEST_PLAN_APPROVAL",
-    "nextStage":  "BDD_DESIGN",
-    "lastSuccessfulStage":  "TEST_PLAN_GENERATION",
+    "currentStage":  "AUTOMATION_APPROVAL",
+    "nextStage":  "PLAYWRIGHT_VALIDATION",
+    "lastSuccessfulStage":  "AUTOMATION_REVIEW_PACKAGE",
     "status":  "WAITING_FOR_HUMAN",
     "completedStages":  [
                             {
@@ -75,18 +75,46 @@
                                                 "test-plans/generated/TP-ETA-411-001-review.md",
                                                 "test-plans/generated/TP-ETA-411-001-approval.template.json"
                                             ]
+                            },
+                            {
+                                "stage":  "TEST_PLAN_APPROVAL",
+                                "completedAt":  "2026-09-05T17:45:00.000Z",
+                                "agent":  "sdd-workflow-orchestrator",
+                                "outputs":  [
+                                                "test-plans/approved/TP-ETA-411-001-approval.json",
+                                                "test-plans/approved/TP-ETA-411-001.json"
+                                            ]
+                            },
+                            {
+                                "stage":  "BDD_DESIGN",
+                                "completedAt":  "2026-09-05T18:05:00.000Z",
+                                "agent":  "sdd-workflow-orchestrator",
+                                "outputs":  [
+                                                "features/generated/home-navigation/home-screen-navigation.feature",
+                                                "features/generated/home-navigation/TP-ETA-411-001-automation-design.md"
+                                            ]
+                            },
+                            {
+                                "stage":  "AUTOMATION_REVIEW_PACKAGE",
+                                "completedAt":  "2026-09-05T18:20:00.000Z",
+                                "agent":  "sdd-workflow-orchestrator",
+                                "outputs":  [
+                                                "features/generated/home-navigation/TP-ETA-411-001-automation-design.md",
+                                                "features/generated/home-navigation/TP-ETA-411-001-automation-approval.template.json"
+                                            ]
                             }
                         ],
     "pendingApproval":  {
-                            "gate":  "TEST_PLAN",
-                            "reviewPackagePath":  "test-plans/generated/TP-ETA-411-001-review.md",
-                            "approvalTemplatePath":  "test-plans/generated/TP-ETA-411-001-approval.template.json",
-                            "expectedApprovalPath":  "test-plans/approved/TP-ETA-411-001-approval.json",
-                            "requestedAt":  "2026-09-05T16:10:00.000Z"
+                            "gate":  "AUTOMATION_DESIGN",
+                            "reviewPackagePath":  "features/generated/home-navigation/TP-ETA-411-001-automation-design.md",
+                            "approvalTemplatePath":  "features/generated/home-navigation/TP-ETA-411-001-automation-approval.template.json",
+                            "expectedApprovalPath":  "features/approved/home-navigation/TP-ETA-411-001-automation-approval.json",
+                            "requestedAt":  "2026-09-05T18:20:00.000Z"
                         },
     "inputArtifactVersions":  {
                                   "requirements/raw/ETA-411.json":  1,
-                                  "requirements/approved/ETA-411.json":  1
+                                  "requirements/approved/ETA-411.json":  1,
+                                  "test-plans/approved/TP-ETA-411-001.json":  1
                               },
     "outputArtifactPaths":  [
                                 "requirements/raw/ETA-411.json",
@@ -103,11 +131,16 @@
                                 "openspec/changes/add-home-navigation/tasks.md",
                                 "test-plans/generated/TP-ETA-411-001.json",
                                 "test-plans/generated/TP-ETA-411-001-review.md",
-                                "test-plans/generated/TP-ETA-411-001-approval.template.json"
+                                "test-plans/generated/TP-ETA-411-001-approval.template.json",
+                                "test-plans/approved/TP-ETA-411-001-approval.json",
+                                "test-plans/approved/TP-ETA-411-001.json",
+                                "features/generated/home-navigation/home-screen-navigation.feature",
+                                "features/generated/home-navigation/TP-ETA-411-001-automation-design.md",
+                                "features/generated/home-navigation/TP-ETA-411-001-automation-approval.template.json"
                             ],
     "retryCount":  0,
     "createdAt":  "2026-09-04T18:32:00.000Z",
-    "updatedAt":  "2026-09-05T16:10:00.000Z",
+    "updatedAt":  "2026-09-05T18:20:00.000Z",
     "startedAt":  "2026-09-04T18:32:00.000Z",
     "completedAt":  null,
     "errorDetails":  null,
