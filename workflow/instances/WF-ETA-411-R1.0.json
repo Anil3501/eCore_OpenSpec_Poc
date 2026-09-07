@@ -6,9 +6,9 @@
     "release":  "1.0",
     "capability":  "home-navigation",
     "dataClassification":  "REAL_JIRA_DATA",
-    "currentStage":  "RTM_UPDATE",
-    "nextStage":  "OPENSPEC_ARCHIVE",
-    "lastSuccessfulStage":  "BUG_REPORTING",
+    "currentStage":  "OPENSPEC_ARCHIVE",
+    "nextStage":  "COMPLETED",
+    "lastSuccessfulStage":  "RTM_UPDATE",
     "status":  "IN_PROGRESS",
     "completedStages":  [
                             {
@@ -150,22 +150,41 @@
                             },
                             {
                                 "stage":  "EXECUTION",
-                                "completedAt":  "2026-09-05T10:16:53.689Z",
+                                "completedAt":  "2026-09-07T14:03:22.000Z",
                                 "agent":  "sdd-workflow-orchestrator",
                                 "outputs":  [
                                                 "traceability/executions/EXEC-ETA-411-001.json",
+                                                "traceability/executions/EXEC-ETA-411-002.json",
                                                 "reports/execution/results.json",
                                                 "reports/playwright-report/index.html"
                                             ]
                             },
                             {
                                 "stage":  "RTM_UPDATE",
-                                "completedAt":  "2026-09-05T10:25:00.000Z",
+                                "completedAt":  "2026-09-07T14:45:00.000Z",
                                 "agent":  "sdd-workflow-orchestrator",
                                 "outputs":  [
                                                 "traceability/capabilities/home-navigation.rtm.json",
                                                 "traceability/capabilities/home-navigation.coverage.json",
                                                 "traceability/index/lookup.index.json"
+                                            ]
+                            },
+                            {
+                                "stage":  "FAILURE_TRIAGE",
+                                "completedAt":  "2026-09-07T14:06:56.000Z",
+                                "agent":  "bug-analyzer",
+                                "outputs":  [
+                                                "reports/validation/failure-triage.json",
+                                                "defects/DEF-ETA-411-001.json",
+                                                "reports/defects/DEF-ETA-411-001/"
+                                            ]
+                            },
+                            {
+                                "stage":  "BUG_REPORTING",
+                                "completedAt":  "2026-09-07T14:32:00.000Z",
+                                "agent":  "bug-analyzer",
+                                "outputs":  [
+                                                "defects/DEF-ETA-411-001.json"
                                             ]
                             }
                         ],
@@ -203,7 +222,7 @@
                             ],
     "retryCount":  0,
     "createdAt":  "2026-09-04T18:32:00.000Z",
-    "updatedAt":  "2026-09-05T10:25:00.000Z",
+    "updatedAt":  "2026-09-07T14:45:00.000Z",
     "startedAt":  "2026-09-04T18:32:00.000Z",
     "completedAt":  null,
     "errorDetails":  null,

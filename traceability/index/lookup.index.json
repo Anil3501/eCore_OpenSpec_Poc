@@ -586,8 +586,33 @@
             "TRC-ETA-411-009"
           ]
         }
+      ],
+      "EXEC-ETA-411-002": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-001",
+            "TRC-ETA-411-003",
+            "TRC-ETA-411-004",
+            "TRC-ETA-411-005",
+            "TRC-ETA-411-006",
+            "TRC-ETA-411-007",
+            "TRC-ETA-411-009"
+          ]
+        }
       ]
     },
-    "byDefectId": {}
+    "byDefectId": {
+      "DEF-ETA-411-001": [
+        {
+          "capability": "home-navigation",
+          "rtmPath": "traceability/capabilities/home-navigation.rtm.json",
+          "traceIds": [
+            "TRC-ETA-411-009"
+          ]
+        }
+      ]
+    }
   }
 }

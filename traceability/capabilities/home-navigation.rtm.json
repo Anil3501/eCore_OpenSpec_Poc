@@ -2,9 +2,9 @@
   "schemaVersion": "1.0.0",
   "capability": "home-navigation",
   "release": "1.0",
-  "artifactVersion": 2,
+  "artifactVersion": 3,
   "dataClassification": "REAL_JIRA_DATA",
-  "updatedAt": "2026-09-05T10:25:00.000Z",
+  "updatedAt": "2026-09-07T14:26:53.749Z",
   "entries": [
     {
       "traceId": "TRC-ETA-411-001",
@@ -57,6 +57,11 @@
           "executionId": "EXEC-ETA-411-001",
           "result": "PASSED",
           "recordPath": "traceability/executions/EXEC-ETA-411-001.json"
+        },
+        {
+          "executionId": "EXEC-ETA-411-002",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-ETA-411-002.json"
         }
       ]
     },
@@ -133,6 +138,11 @@
           "executionId": "EXEC-ETA-411-001",
           "result": "PASSED",
           "recordPath": "traceability/executions/EXEC-ETA-411-001.json"
+        },
+        {
+          "executionId": "EXEC-ETA-411-002",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-ETA-411-002.json"
         }
       ]
     },
@@ -189,6 +199,11 @@
           "executionId": "EXEC-ETA-411-001",
           "result": "PASSED",
           "recordPath": "traceability/executions/EXEC-ETA-411-001.json"
+        },
+        {
+          "executionId": "EXEC-ETA-411-002",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-ETA-411-002.json"
         }
       ]
     },
@@ -243,6 +258,11 @@
           "executionId": "EXEC-ETA-411-001",
           "result": "PASSED",
           "recordPath": "traceability/executions/EXEC-ETA-411-001.json"
+        },
+        {
+          "executionId": "EXEC-ETA-411-002",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-ETA-411-002.json"
         }
       ]
     },
@@ -299,6 +319,11 @@
           "executionId": "EXEC-ETA-411-001",
           "result": "PASSED",
           "recordPath": "traceability/executions/EXEC-ETA-411-001.json"
+        },
+        {
+          "executionId": "EXEC-ETA-411-002",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-ETA-411-002.json"
         }
       ]
     },
@@ -359,6 +384,11 @@
           "executionId": "EXEC-ETA-411-001",
           "result": "PASSED",
           "recordPath": "traceability/executions/EXEC-ETA-411-001.json"
+        },
+        {
+          "executionId": "EXEC-ETA-411-002",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-ETA-411-002.json"
         }
       ]
     },
@@ -432,6 +462,19 @@
           "executionId": "EXEC-ETA-411-001",
           "result": "PASSED",
           "recordPath": "traceability/executions/EXEC-ETA-411-001.json"
+        },
+        {
+          "executionId": "EXEC-ETA-411-002",
+          "result": "FAILED",
+          "recordPath": "traceability/executions/EXEC-ETA-411-002.json"
+        }
+      ],
+      "defectRefs": [
+        {
+          "defectId": "DEF-ETA-411-001",
+          "status": "REPORTED",
+          "recordPath": "defects/DEF-ETA-411-001.json",
+          "jiraIssueKey": "ETA-417"
         }
       ]
     },

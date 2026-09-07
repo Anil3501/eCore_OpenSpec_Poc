@@ -1,0 +1,54 @@
+{
+  "generatedAt": "2026-09-07T14:27:27.544Z",
+  "scope": "rtm",
+  "summary": {
+    "total": 6,
+    "passed": 6,
+    "failed": 0,
+    "skipped": 0
+  },
+  "results": [
+    {
+      "id": "RTM-STRUCTURE",
+      "title": "RTM and coverage artifacts validate against schema",
+      "status": "PASS",
+      "messages": [
+        "2 RTM partition(s), 2 coverage matrix/matrices, 1 index file(s)."
+      ]
+    },
+    {
+      "id": "SEM-RTM",
+      "title": "RTM relationships resolve to existing, consistent artifacts",
+      "status": "PASS",
+      "messages": []
+    },
+    {
+      "id": "SEM-COVERAGE",
+      "title": "Coverage percentages are derived only from RTM data",
+      "status": "PASS",
+      "messages": []
+    },
+    {
+      "id": "SEM-FEATURE-TAGS",
+      "title": "Every Gherkin scenario carries traceability tags",
+      "status": "PASS",
+      "messages": [
+        "4 approved and generated feature file(s) checked."
+      ]
+    },
+    {
+      "id": "SEM-OPENSPEC",
+      "title": "Open OpenSpec changes pass `openspec validate --strict`",
+      "status": "PASS",
+      "messages": [
+        "2 open change(s) validated: add-home-navigation, add-organization-login."
+      ]
+    },
+    {
+      "id": "SEM-NO-DUPLICATES",
+      "title": "No duplicate executable tests exist for a business scenario",
+      "status": "PASS",
+      "messages": []
+    }
+  ]
+}
