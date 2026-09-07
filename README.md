@@ -5,10 +5,15 @@ approved, traceable, executable Playwright-BDD tests through a **durable, resuma
 workflow with three human approval gates**.
 
 > **POC status.** The framework has been driven end to end by two real Jira stories, `ETA-351`
-> (capability `account-access`) and `ETA-411` (capability `home-navigation`), each from retrieval
-> through three approval gates to a real browser run against the QA environment. Both workflow
-> instances are `COMPLETED` and every scheduled scenario passed — 8 of 8 for `ETA-351`, 11 of 11
-> for `ETA-411`. `ETA-351` remains the reference shape for every artifact type. See
+> (capability `account-access`, 8 scenarios) and `ETA-411` (capability `home-navigation`,
+> 7 scenarios), each from retrieval through three approval gates to a real browser run against the
+> QA environment. `ETA-351` is `COMPLETED`; `ETA-411` is `IN_PROGRESS` at `OPENSPEC_ARCHIVE`, its
+> final stage. `ETA-351` remains the reference shape for every artifact type.
+>
+> **Current suite state: 15 of 16 passing.** On 2026-09-05 a full run on `qa5` failed
+> `TS-ETA-411-007` (unauthenticated visitor refused a module) — a scenario that passed on the
+> preceding run with no code change between them. It is **open and untriaged**; nothing has been
+> healed, re-recorded or archived on the back of it. See
 > [Known POC limitations](#known-poc-limitations).
 
 ---
@@ -32,9 +37,13 @@ flowchart TD
     IMPL --> BDDGEN[bddgen -> .features-gen]
     BDDGEN --> EXEC[playwright test]
     EXEC --> RTM[traceability RTM + coverage + index]
+    RTM --> ARCH[OpenSpec archive - delta spec becomes the living spec]
     ORC[SDD Workflow Orchestrator] -.durable state.-> WF[(workflow/instances)]
-    ORC -.owns every handoff.-> RA & OS & TP & BD & PV & IMPL & BDDGEN & EXEC & RTM
+    ORC -.owns every handoff.-> RA & OS & TP & BD & PV & IMPL & BDDGEN & EXEC & RTM & ARCH
 ```
+
+For the file-by-file list of everything one story creates, in stage order, see
+[docs/framework-file-creation-sequence.md](docs/framework-file-creation-sequence.md).
 
 Layers:
 
@@ -177,9 +186,9 @@ binaries are downloaded, and which environment groups are configured. It writes
 
 It exists because the orchestrator's per-stage `requires` list names **artifact paths only**, so a
 missing CLI is invisible until the stage that shells out to it fails. On 2026-09-05 that happened at
-`OPENSPEC_GENERATION` — stage 6 of 17 — because the OpenSpec CLI was not a declared dependency at
-all, so `npm install` on a fresh clone installed nothing. Both halves are fixed: the CLI is now a
-pinned devDependency, and preflight catches the general case.
+`OPENSPEC_GENERATION` — stage 6 of the 18-stage happy path — because the OpenSpec CLI was not a
+declared dependency at all, so `npm install` on a fresh clone installed nothing. Both halves are
+fixed: the CLI is now a pinned devDependency, and preflight catches the general case.
 
 A `WARN` never fails preflight. Artifact generation and validation are designed to work on a clone
 with no `.env`; only executing against the application needs secrets.
@@ -509,6 +518,8 @@ traceability/            index | capabilities | releases | executions | schemas
 workflow/                definitions | instances | queues | history
 tests/                   Technical (non-BDD) tests
 reports/                 playwright-report | coverage | validation | traceability | execution | defects
+scripts/                 npm-wired tooling plus one-off exploration probes and their evidence
+docs/                    Framework reference documentation
 specs/                   Playwright Planner output (tool-owned)
 ```
 
@@ -520,13 +531,17 @@ specs/                   Playwright Planner output (tool-owned)
    an agent cannot perform unattended. `ETA-351` was retrieved with human-assisted authentication and
    is labelled `REAL_JIRA_DATA`. Jira Server / Data Center is not supported by the configured
    endpoint.
-2. **Execution is proven for two capabilities only.** `account-access` and `home-navigation` ran
-   against the QA environment;
-   [traceability/executions/EXEC-ETA-351-002.json](traceability/executions/EXEC-ETA-351-002.json)
-   records 8 of 8 scenarios passing and
-   [traceability/executions/EXEC-ETA-411-001.json](traceability/executions/EXEC-ETA-411-001.json)
-   records 11 of 11. Nothing else in the repository has been executed, and **no result is ever
+2. **Execution is proven for two capabilities only.** `account-access` ran against `qa1`
+   ([traceability/executions/EXEC-ETA-351-002.json](traceability/executions/EXEC-ETA-351-002.json),
+   8 of 8 passing) and `home-navigation` against `qa5`
+   ([traceability/executions/EXEC-ETA-411-001.json](traceability/executions/EXEC-ETA-411-001.json),
+   7 of 7 passing). Nothing else in the repository has been executed, and **no result is ever
    reported as passing without an execution record**.
+
+   An execution record states what happened at one moment; it is not a standing guarantee. A later
+   run at the same commit failed `TS-ETA-411-007` (limitation 9), so `EXEC-ETA-411-001` is
+   currently **not reproducible**. It has deliberately not been amended — rewriting a record to
+   match a newer outcome would destroy the evidence trail it exists to provide.
 3. **Locator validation was done without Playwright MCP.** The `playwright-test` MCP server exposed
    no callable tools, so locators for both capabilities were validated by driving a real Chromium
    session against the live application instead. The evidence standard held; the mechanism differed.
@@ -536,11 +551,11 @@ specs/                   Playwright Planner output (tool-owned)
 4. **Locking is advisory.** `processingLock` is a cooperative field in the workflow state, adequate
    for a single-orchestrator POC. Multi-runner concurrency needs a real lock service.
 5. **The failure-handling branch has never run.** The `bug-analyzer` and `governed-locator-healer`
-   agents exist and the branch is defined in the workflow, but every execution so far has been
-   green, so no defect artifact has ever been created. `defects/` holds only its schema, and the
-   `DEF-STRUCTURE` and `SEM-DEFECT-EVIDENCE` checks report `SKIPPED` in
-   `reports/validation/validation-all.json`. Triage, evidence preservation, fingerprint
-   deduplication, locator healing and Jira filing are **designed but unproven in practice**.
+   agents exist and the branch is defined in the workflow, but no defect artifact has ever been
+   created. `defects/` holds only its schema, and the `DEF-STRUCTURE` and `SEM-DEFECT-EVIDENCE`
+   checks report `SKIPPED` in `reports/validation/validation-all.json`. Triage, evidence
+   preservation, fingerprint deduplication, locator healing and Jira filing are **designed but
+   unproven in practice**. The failure in limitation 9 is the first real opportunity to exercise it.
 6. **Schema validation is hand-rolled.** `src/utils/schema-parity.ts` performs a structural parity
    check between each JSON Schema and its instances; full JSON Schema keyword evaluation is
    delegated to the Zod models. A production build should add a dedicated JSON Schema validator.
@@ -555,4 +570,23 @@ specs/                   Playwright Planner output (tool-owned)
    `SKIPPED`. The governance rules for API contracts are written but have never been exercised.
    Closing this honestly needs a story with a genuinely API-verifiable criterion — not a synthetic
    scenario invented to make the check run.
+9. **`TS-ETA-411-007` is failing and untriaged.** A full run on 2026-09-05 saw no refusal message
+   shown to an unauthenticated visitor requesting a module directly, so
+   `expectSignInFailureReported()` timed out. The same scenario passed on the preceding run at the
+   same commit. The suspected cause is that eCore's message — *"your session has timed out"*, shown
+   to a visitor who never had a session — appears only when a `JSESSIONID` cookie already exists,
+   which would make the assertion depend on request ordering rather than on product behaviour.
+   That is a hypothesis, not a finding: it is unconfirmed, no defect has been raised, and
+   `AC-ETA-411-009` has **not** been re-worded to match what was observed.
+10. **`openspec/specs/` is empty and no change has ever been archived.** Both
+    `add-organization-login` and `add-home-navigation` are still open in `openspec/changes/`, so the
+    specification layer has no living spec and `OPENSPEC_ARCHIVE` is unexercised. `ETA-351` was
+    marked `COMPLETED` without running that stage — an inconsistency in the workflow record rather
+    than in the framework design.
+11. **The `AC-ETA-411-006` expectation does not match the application.** Organization and
+    Preferences resolve to the same URL *and* present the same visible headings, so the approved
+    expectation of two distinct destinations cannot be asserted. The gap is recorded in
+    [reports/validation/TP-ETA-411-001-expectation-mismatch.json](reports/validation/TP-ETA-411-001-expectation-mismatch.json)
+    with three options for the reviewer. The approved artifact was **not** edited to match observed
+    behaviour.
 

@@ -2,7 +2,8 @@
 
 This document lists **every file created**, in the order it is created, when a Jira story is taken
 end-to-end through this OpenSpec-based, orchestrator-driven Playwright-BDD framework — from the
-first retrieval step to the final traceability update. It follows
+first retrieval step to the traceability update and the spec archive that closes the story. It
+follows
 [workflow/definitions/sdd-jira-to-automation.workflow.json](../workflow/definitions/sdd-jira-to-automation.workflow.json)
 and uses the real reference story `ETA-351` (capability `account-access`, test plan `TP-ETA-351-001`)
 for concrete filenames. Replace `<JIRA-ID>`, `<capability>`, `<TEST-PLAN-ID>`, `<feature>`,
@@ -70,7 +71,7 @@ Agent: **OpenSpec** (via `openspec-propose` skill). Only approved ACs from step 
 | 11 | `openspec/changes/<change-name>/tasks.md` | Implementation checklist |
 | 12 | `openspec/changes/<change-name>/design.md` | Technical design (when warranted) |
 | 13 | `openspec/changes/<change-name>/.openspec.yaml` | Change metadata |
-| 14 | `openspec/changes/<change-name>/specs/<capability>/spec.md` | Delta spec — business behaviour only, no selectors/code |
+| 14 | `openspec/changes/<change-name>/specs/<capability>/<spec-name>/spec.md` | Delta spec — business behaviour only, no selectors/code. A *diff*, not the current state; `OPENSPEC_ARCHIVE` folds it into `openspec/specs/` |
 
 ## Stage 6 — TEST_PLAN_GENERATION
 
@@ -131,7 +132,8 @@ Agent: **playwright-test-planner** (via Playwright MCP, browser-driven). Replace
 | - | --- | --- |
 | 25 | `reports/validation/<TEST-PLAN-ID>-browser-validation.json` | Evidence that scenarios were explored/validated against the live app |
 | 25a | `reports/validation/<TEST-PLAN-ID>-api-validation.json` | **Only when a scenario declares `API`/`HYBRID`.** Contracts observed from real traffic during the approved flow, recorded as `OBSERVED` — evidence of what the application does, never authority for what it should do |
-| 26 | `specs/**` (probe scripts / exploration artifacts as needed) | e.g. `scripts/eta-351-login-probe.ts` style one-off probes, `reports/validation/<JIRA-ID>-*-probe.json` outputs |
+| 26 | `scripts/<jira-id>-<topic>-probe.ts` | One-off exploration probes (e.g. `scripts/eta-351-login-probe.ts`). Never imported by `src/`, `steps/` or `tests/` — they exist to produce evidence and to make a `VALIDATED -` waiver reproducible |
+| 26a | `reports/validation/<JIRA-ID>-<topic>-probe.json` | The probe's captured output — the evidence half of the pair |
 
 ## Stage 10 — IMPLEMENTATION
 
@@ -219,12 +221,41 @@ Agent: **sdd-workflow-orchestrator**
 | 41 | `traceability/capabilities/<capability>.coverage.json` | Coverage matrix — `null` when denominator is zero, never fabricated 0%/100% |
 | 42 | `traceability/index/lookup.index.json` | Cross-capability lookup index so nothing is scanned linearly |
 | 43 | `workflow/history/<workflowId>.history.jsonl` | Append-only workflow history log |
-| — | `workflow/instances/WF-<JIRA-ID>-R<release>.json` (updated to `COMPLETED`) | Final state transition — no new file |
+| — | `workflow/instances/WF-<JIRA-ID>-R<release>.json` (updated to `OPENSPEC_ARCHIVE`) | Stage transition — no new file. The workflow is **not** complete here |
 
-## Stage 16 — COMPLETED
+RTM entries written here carry `openSpecRefs` pointing at
+`openspec/changes/<change-name>/specs/**`. `SEM-RTM` checks that path exists, so archiving the
+change in the next stage moves the target and the refs must be repointed with it.
 
-No files created. The story's automation is now approved, executed, traced and (if applicable)
-release-baselined in `traceability/releases/<release>.baseline.json`.
+## Stage 16 — OPENSPEC_ARCHIVE
+
+Agent: **OpenSpec** (via `openspec-archive-change` skill). Commands:
+`npx openspec validate <change-name> --strict`, then `npx openspec archive <change-name>`.
+
+| # | File | Notes |
+| - | --- | --- |
+| 44 | `openspec/specs/<capability>/<spec-name>/spec.md` | The **living spec** — how the system now behaves. The CLI folds the delta from step 14 into it |
+| 45 | `openspec/changes/archive/<change-name>/**` | The retired change, moved out of `openspec/changes/` by the CLI so it stops counting as open work |
+| — | `traceability/capabilities/<capability>.rtm.json` (updated) | `openSpecRefs` repointed from the change path to the living-spec path; otherwise `SEM-RTM` fails immediately after the move |
+| — | `workflow/instances/WF-<JIRA-ID>-R<release>.json` (updated to `COMPLETED`) | Final state transition |
+
+**The CLI is the only writer.** Never hand-edit `openspec/specs/` and never move a change directory
+manually — a hand-moved change leaves the tool's index disagreeing with the filesystem.
+
+This stage is documentation lifecycle only. It moves **no** feature file and changes **no** tag, so
+every scenario in `features/approved/**` keeps running exactly as before — `bddgen` reads that
+directory and nothing under `openspec/`.
+
+Archive only what was delivered. A story with deferred acceptance criteria is archived for the
+delivered ones; the deferred ones stay visible as open work and are never silently dropped.
+
+**Blocked when** `openspec validate <change-name> --strict` fails, or the RTM shows no passing
+execution for the story. Archiving an unproven change files a spec as delivered on no evidence.
+
+## Stage 17 — COMPLETED
+
+No files created. The story's automation is now approved, executed, traced, specified and (if
+applicable) release-baselined in `traceability/releases/<release>.baseline.json`.
 
 ---
 
@@ -244,7 +275,7 @@ release-baselined in `traceability/releases/<release>.baseline.json`.
 11  openspec/changes/<change-name>/tasks.md
 12  openspec/changes/<change-name>/design.md
 13  openspec/changes/<change-name>/.openspec.yaml
-14  openspec/changes/<change-name>/specs/<capability>/spec.md
+14  openspec/changes/<change-name>/specs/<capability>/<spec-name>/spec.md
 15  test-plans/generated/<TEST-PLAN-ID>.json
 16  test-plans/generated/<TEST-PLAN-ID>-review.md
 17  test-plans/generated/<TEST-PLAN-ID>-approval.template.json
@@ -257,7 +288,8 @@ release-baselined in `traceability/releases/<release>.baseline.json`.
 24  features/approved/<capability>/<feature>.feature
 25  reports/validation/<TEST-PLAN-ID>-browser-validation.json
 25a reports/validation/<TEST-PLAN-ID>-api-validation.json   (API/HYBRID only)
-26  specs/** (probe/exploration artifacts)
+26  scripts/<jira-id>-<topic>-probe.ts
+26a reports/validation/<JIRA-ID>-<topic>-probe.json
 27  steps/<capability-topic>.steps.ts
 28  src/pages/<page-name>.page.ts
 29  src/components/<component-name>.component.ts   (if needed)
@@ -274,6 +306,8 @@ release-baselined in `traceability/releases/<release>.baseline.json`.
 41  traceability/capabilities/<capability>.coverage.json
 42  traceability/index/lookup.index.json
 43  workflow/history/<workflowId>.history.jsonl
+44  openspec/specs/<capability>/<spec-name>/spec.md            (openspec archive)
+45  openspec/changes/archive/<change-name>/**                  (openspec archive)
 ```
 
 Steps 37–39 (`FAILURE_TRIAGE`) and the healing/bug-reporting branches only occur when
@@ -300,3 +334,11 @@ main numbering is unchanged.
 | RTM + coverage | [traceability/capabilities/account-access.rtm.json](../traceability/capabilities/account-access.rtm.json) |
 | Execution record | [traceability/executions/EXEC-ETA-351-001.json](../traceability/executions/EXEC-ETA-351-001.json) |
 | Workflow state | [workflow/instances/WF-ETA-351-R1.0.json](../workflow/instances/WF-ETA-351-R1.0.json) |
+
+`ETA-411` (capability `home-navigation`, plan `TP-ETA-411-001`) is a second worked example, useful
+because it covers a multi-scenario navigation story with deferred acceptance criteria. Read either
+one to see how a real story was reasoned about — **never open one to find out what shape a field
+should take.** That comes from the JSON Schema and the template, in that order.
+
+Neither story has reached `OPENSPEC_ARCHIVE` yet, so `openspec/specs/` is still empty and both
+changes remain open in `openspec/changes/`.
