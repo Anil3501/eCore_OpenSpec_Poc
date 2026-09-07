@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-09-05T11:41:48.069Z",
+  "generatedAt": "2026-09-07T14:23:08.407Z",
   "scope": "all",
   "summary": {
     "total": 23,
-    "passed": 19,
+    "passed": 21,
     "failed": 0,
-    "skipped": 4
+    "skipped": 2
   },
   "results": [
     {
@@ -59,9 +59,9 @@
     {
       "id": "DEF-STRUCTURE",
       "title": "Defect reports validate against schema",
-      "status": "SKIPPED",
+      "status": "PASS",
       "messages": [
-        "No defect reports found."
+        "1 defect report(s) validated."
       ]
     },
     {
@@ -155,9 +155,9 @@
     {
       "id": "SEM-DEFECT-EVIDENCE",
       "title": "Defect reports are backed by real failed executions",
-      "status": "SKIPPED",
+      "status": "PASS",
       "messages": [
-        "No defect reports found."
+        "1 defect report(s) checked."
       ]
     },
     {

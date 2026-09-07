@@ -1,0 +1,34 @@
+{
+  "generatedAt": "2026-09-07T14:17:14.516Z",
+  "scope": "defects",
+  "summary": {
+    "total": 3,
+    "passed": 3,
+    "failed": 0,
+    "skipped": 0
+  },
+  "results": [
+    {
+      "id": "DEF-STRUCTURE",
+      "title": "Defect reports validate against schema",
+      "status": "PASS",
+      "messages": [
+        "1 defect report(s) validated."
+      ]
+    },
+    {
+      "id": "SEM-SAMPLE-ISOLATION",
+      "title": "Synthetic SAMPLE_DATA stays separated from real Jira data",
+      "status": "PASS",
+      "messages": []
+    },
+    {
+      "id": "SEM-DEFECT-EVIDENCE",
+      "title": "Defect reports are backed by real failed executions",
+      "status": "PASS",
+      "messages": [
+        "1 defect report(s) checked."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "1.0.0",
+  "defectId": "DEF-ETA-411-001",
+  "release": "1.0",
+  "capability": "home-navigation",
+  "jiraStoryId": "ETA-411",
+  "dataClassification": "REAL_JIRA_DATA",
+  "executionId": "EXEC-ETA-411-002",
+  "executionRecordPath": "traceability/executions/EXEC-ETA-411-002.json",
+  "testPlanId": "TP-ETA-411-001",
+  "testScenarioId": "TS-ETA-411-007",
+  "acId": "AC-ETA-411-009",
+  "requirementId": "REQ-ETA-411-007",
+  "featureFile": "features/approved/home-navigation/home-screen-navigation.feature",
+  "gherkinScenario": "An unauthenticated visitor is refused a module and kept on the sign-in page",
+  "interfaceType": "UI",
+  "classification": "APPLICATION_DEFECT",
+  "classificationRationale": "Matched application signal(s): ASSERTION_MISMATCH. No locator signal matched. Produced by npm run triage:failures, recorded in reports/validation/failure-triage.json.",
+  "fingerprint": "194395ec812d52d0544307d040dbf47c8f3f3f0aadf39543c3272a424eb1bc89",
+  "failure": {
+    "errorMessage": "Error: Expected the application to report that the sign-in attempt failed.\n\nexpect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n\n   at src\\pages\\ecore-login.page.ts:198",
+    "errorStack": null,
+    "durationSeconds": 8.363,
+    "retryIndex": 0,
+    "observedBehaviour": "A visitor who was not signed in requested the Workspace module directly. The sign-in page remained displayed, but no error message was detected anywhere on it within five seconds. The visitor is given no indication of why the module did not open.",
+    "expectedBehaviour": "An unauthenticated visitor requesting a module is shown an error message and remains on the sign-in page."
+  },
+  "evidence": {
+    "screenshots": ["reports/defects/DEF-ETA-411-001/test-failed-1.png"],
+    "traceFiles": ["reports/defects/DEF-ETA-411-001/trace.zip"],
+    "playwrightReport": "reports/playwright-report/index.html",
+    "attachmentsWithheld": false
+  },
+  "healing": {
+    "attempts": [],
+    "outcome": "NOT_ATTEMPTED"
+  },
+  "jira": {
+    "issueKey": "ETA-417",
+    "issueUrl": "https://eoriginal.atlassian.net/browse/ETA-417",
+    "projectKey": "ETA",
+    "issueType": "Bug",
+    "fixVersions": [],
+    "linkedStory": "ETA-411",
+    "linkType": "Relates",
+    "assigneeAccountId": "712020:8ee7da52-9262-469b-bc7c-71f0537f959d",
+    "attachmentsUploaded": ["test-failed-1.png", "error-context.md", "trace.zip"],
+    "createdAt": "2026-09-07T14:32:00.000Z",
+    "createdVia": "ATLASSIAN_MCP",
+    "dedupeOf": null
+  },
+  "status": "REPORTED",
+  "artifactVersion": 2,
+  "createdAt": "2026-09-07T14:06:56.665Z",
+  "updatedAt": "2026-09-07T14:32:00.000Z",
+  "notes": [
+    "Half of AC-ETA-411-009 still holds: the sign-in page is still displayed, so the visitor was not let in. There is no evidence of an access-control failure. What is missing is the error message the criterion also requires.",
+    "This scenario PASSED in EXEC-ETA-411-001 on 2026-09-05 against the same commit and the same qa5 environment, and fails here. It also passed once when run in isolation on 2026-09-07. The failure is therefore intermittent, and that intermittency is itself part of what a human needs to judge.",
+    "EXEC-ETA-411-001 recorded that the refusal message shown at that time stated the session had timed out, to a visitor who never had a session. Whether that message has since been removed, reworded, or merely became slower than the five second expect timeout is NOT established by this evidence and is raised as an open question rather than a root cause.",
+    "Classified APPLICATION_DEFECT by the deterministic triage signal, so no locator healing was attempted. The assertion checks for the presence of any error message rather than specific wording, so a changed message would not by itself produce this failure.",
+    "ETA-411 carries no fixVersion. Per the governed policy the bug is filed unversioned and the assigned reviewer sets the release.",
+    "The issue was created and linked through the Atlassian MCP. The three evidence files were uploaded through Jira REST because the MCP server exposes no attachment tool, and the assignment was set through Jira REST for the same reason."
+  ]
+}

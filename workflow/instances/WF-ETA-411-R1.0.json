@@ -6,9 +6,9 @@
     "release":  "1.0",
     "capability":  "home-navigation",
     "dataClassification":  "REAL_JIRA_DATA",
-    "currentStage":  "OPENSPEC_ARCHIVE",
-    "nextStage":  "COMPLETED",
-    "lastSuccessfulStage":  "RTM_UPDATE",
+    "currentStage":  "RTM_UPDATE",
+    "nextStage":  "OPENSPEC_ARCHIVE",
+    "lastSuccessfulStage":  "BUG_REPORTING",
     "status":  "IN_PROGRESS",
     "completedStages":  [
                             {

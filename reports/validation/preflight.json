@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-05T08:21:55.803Z",
+  "generatedAt": "2026-09-07T12:49:01.265Z",
   "node": "24.19.0",
   "platform": "win32",
   "summary": {
@@ -60,7 +60,7 @@
         "credentialsConfigured: true",
         "ecoreLoginConfigured: true",
         "jiraConfigured: true",
-        "jiraBugFilingConfigured: false",
+        "jiraBugFilingConfigured: true",
         "coverageEnabled: true",
         "coverageIncludesThirdParty: false",
         "jiraProjectKey: ETA",

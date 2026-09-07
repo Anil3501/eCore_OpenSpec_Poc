@@ -1,0 +1,109 @@
+{
+  "schemaVersion": "1.0.0",
+  "executionId": "EXEC-ETA-411-002",
+  "workflowId": "WF-ETA-411-R1.0",
+  "jiraStoryId": "ETA-411",
+  "release": "1.0",
+  "capability": "home-navigation",
+  "environment": "qa5",
+  "dataClassification": "REAL_JIRA_DATA",
+  "executedAt": "2026-09-07T14:00:00.853Z",
+  "durationMs": 201616,
+  "runner": "playwright-bdd via npm test -- --workers=1",
+  "reportPath": "reports/playwright-report/index.html",
+  "resultsPath": "reports/execution/results.json",
+  "notes": [
+    "Second recorded run of these seven scenarios, two days after EXEC-ETA-411-001. Six passed and TS-ETA-411-007 failed. EXEC-ETA-411-001 is left untouched: it is the true record of what happened on 2026-09-05 and is not a draft to be corrected.",
+    "TS-ETA-411-007 passed in EXEC-ETA-411-001 and fails here against the same commit and the same environment. Nothing in this repository changed between the two runs, so the change in outcome originates outside it. What changed is not established by this evidence and is not asserted here.",
+    "EXEC-ETA-411-001 recorded that this scenario was refused with a message stating the session had timed out. In this run no error message was detected at all within the 5 second expect timeout. Whether the message stopped being shown, changed wording, or is now slower to appear is an open question for the reviewer; the execution evidence does not settle it.",
+    "Run with --workers=1. An earlier two-worker run on the same commit also failed TS-ETA-411-002 (The Dashboard icons open New Transaction, Workspace and Preferences), which passed here. That scenario is therefore sensitive to parallel execution and is NOT recorded as a defect, because a failure that disappears when the suite is serialised is not yet evidence about the application. It remains an open concurrency question rather than a settled pass.",
+    "The run also executed the eight approved ETA-351 scenarios and the seed test. They belong to the account-access capability and are not recorded here.",
+    "Browser code coverage from this run (96.16% of statements, 73.49% of branches) measures which application JavaScript executed. It is not requirement coverage and is no evidence that any acceptance criterion is satisfied."
+  ],
+  "scenarios": [
+    {
+      "traceId": "TRC-ETA-411-001",
+      "requirementId": "REQ-ETA-411-001",
+      "acId": "AC-ETA-411-001",
+      "testPlanId": "TP-ETA-411-001",
+      "testScenarioId": "TS-ETA-411-001",
+      "featureFile": "features/approved/home-navigation/home-screen-navigation.feature",
+      "gherkinScenario": "The six named modules are offered to a signed-in Organization user",
+      "result": "PASSED",
+      "durationMs": 10249,
+      "failureSummary": null
+    },
+    {
+      "traceId": "TRC-ETA-411-003",
+      "requirementId": "REQ-ETA-411-002",
+      "acId": "AC-ETA-411-003",
+      "testPlanId": "TP-ETA-411-001",
+      "testScenarioId": "TS-ETA-411-002",
+      "featureFile": "features/approved/home-navigation/home-screen-navigation.feature",
+      "gherkinScenario": "The Dashboard icons open New Transaction, Workspace and Preferences",
+      "result": "PASSED",
+      "durationMs": 20806,
+      "failureSummary": null
+    },
+    {
+      "traceId": "TRC-ETA-411-004",
+      "requirementId": "REQ-ETA-411-003",
+      "acId": "AC-ETA-411-004",
+      "testPlanId": "TP-ETA-411-001",
+      "testScenarioId": "TS-ETA-411-003",
+      "featureFile": "features/approved/home-navigation/home-screen-navigation.feature",
+      "gherkinScenario": "The navigation menu opens Home, New Transaction and Workspace",
+      "result": "PASSED",
+      "durationMs": 19643,
+      "failureSummary": null
+    },
+    {
+      "traceId": "TRC-ETA-411-005",
+      "requirementId": "REQ-ETA-411-003",
+      "acId": "AC-ETA-411-005",
+      "testPlanId": "TP-ETA-411-001",
+      "testScenarioId": "TS-ETA-411-004",
+      "featureFile": "features/approved/home-navigation/home-screen-navigation.feature",
+      "gherkinScenario": "Preferences is offered in the navigation menu with Organization and Vault grouped beneath it",
+      "result": "PASSED",
+      "durationMs": 9199,
+      "failureSummary": null
+    },
+    {
+      "traceId": "TRC-ETA-411-006",
+      "requirementId": "REQ-ETA-411-004",
+      "acId": "AC-ETA-411-006",
+      "testPlanId": "TP-ETA-411-001",
+      "testScenarioId": "TS-ETA-411-005",
+      "featureFile": "features/approved/home-navigation/home-screen-navigation.feature",
+      "gherkinScenario": "Organization and Vault open their own pages from beneath Preferences",
+      "result": "PASSED",
+      "durationMs": 16377,
+      "failureSummary": null
+    },
+    {
+      "traceId": "TRC-ETA-411-007",
+      "requirementId": "REQ-ETA-411-005",
+      "acId": "AC-ETA-411-007",
+      "testPlanId": "TP-ETA-411-001",
+      "testScenarioId": "TS-ETA-411-006",
+      "featureFile": "features/approved/home-navigation/home-screen-navigation.feature",
+      "gherkinScenario": "Command Center returns the user to the Home page from each module",
+      "result": "PASSED",
+      "durationMs": 29744,
+      "failureSummary": null
+    },
+    {
+      "traceId": "TRC-ETA-411-009",
+      "requirementId": "REQ-ETA-411-007",
+      "acId": "AC-ETA-411-009",
+      "testPlanId": "TP-ETA-411-001",
+      "testScenarioId": "TS-ETA-411-007",
+      "featureFile": "features/approved/home-navigation/home-screen-navigation.feature",
+      "gherkinScenario": "An unauthenticated visitor is refused a module and kept on the sign-in page",
+      "result": "FAILED",
+      "durationMs": 8363,
+      "failureSummary": "No error message was detected on the sign-in page within 5 seconds after an unauthenticated request for the Workspace module. Triaged as DEF-ETA-411-001."
+    }
+  ]
+}

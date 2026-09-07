@@ -1,0 +1,60 @@
+{
+  "generatedAt": "2026-09-07T14:06:56.665Z",
+  "source": "reports/execution/results.json",
+  "summary": {
+    "totalFailures": 1,
+    "LOCATOR_SUSPECT": 0,
+    "APPLICATION_DEFECT": 1,
+    "AMBIGUOUS": 0,
+    "ENVIRONMENT_BLOCKER": 0
+  },
+  "findings": [
+    {
+      "proposedDefectId": "DEF-ETA-411-001",
+      "fingerprint": "194395ec812d52d0544307d040dbf47c8f3f3f0aadf39543c3272a424eb1bc89",
+      "classification": "APPLICATION_DEFECT",
+      "matchedSignals": [
+        "ASSERTION_MISMATCH"
+      ],
+      "classificationRationale": "Matched application signal(s): ASSERTION_MISMATCH. No locator signal matched.",
+      "specTitle": "An unauthenticated visitor is refused a module and kept on the sign-in page",
+      "featureFile": ".features-gen/features/approved/home-navigation/home-screen-navigation.feature.spec.js",
+      "projectName": "bdd",
+      "status": "failed",
+      "retryIndex": 0,
+      "durationSeconds": 8.4,
+      "errorMessage": "Error: Expected the application to report that the sign-in attempt failed.\n\nExpected the application to report that the sign-in attempt failed.\n\nexpect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n\n   at src\\pages\\ecore-login.page.ts:198\n\n  196 |         { message: 'Expected the application to report that the sign-in attempt failed.' },\n  197 |       )\n> 198 |       .toBe(true);\n      |        ^\n  199 |   }\n  200 |\n  201 |   /**\n    at EcoreLoginPage.expectSignInFailureReported (D:\\Anil_Data\\AI Automation Projects\\InterSoft_Git\\eCore_OpenSpec_POC\\src\\pages\\ecore-login.page.ts:198:8)\n    at Object.<anonymous> (D:\\Anil_Data\\AI Automation Projects\\InterSoft_Git\\eCore_OpenSpec_POC\\steps\\home-screen-navigation.steps.ts:271:19)\n    at D:\\Anil_Data\\AI Automation Projects\\InterSoft_Git\\eCore_OpenSpec_POC\\.features-gen\\features\\approved\\home-navigation\\home-screen-navigation.feature.spec.js:47:5",
+      "errorStack": null,
+      "tags": {
+        "release": "1.0",
+        "capability": "home-navigation",
+        "requirementId": "REQ-ETA-411-007",
+        "acId": "AC-ETA-411-009",
+        "testPlanId": "TP-ETA-411-001",
+        "testScenarioId": "TS-ETA-411-007",
+        "jiraStoryId": "ETA-411"
+      },
+      "evidence": [
+        {
+          "name": "screenshot",
+          "contentType": "image/png",
+          "sourcePath": "test-results/features-approved-home-nav-b621b-nd-kept-on-the-sign-in-page-bdd/test-failed-1.png",
+          "preservedPath": "reports/defects/DEF-ETA-411-001/test-failed-1.png"
+        },
+        {
+          "name": "error-context",
+          "contentType": "text/markdown",
+          "sourcePath": "test-results/features-approved-home-nav-b621b-nd-kept-on-the-sign-in-page-bdd/error-context.md",
+          "preservedPath": "reports/defects/DEF-ETA-411-001/error-context.md"
+        },
+        {
+          "name": "trace",
+          "contentType": "application/zip",
+          "sourcePath": "test-results/features-approved-home-nav-b621b-nd-kept-on-the-sign-in-page-bdd/trace.zip",
+          "preservedPath": "reports/defects/DEF-ETA-411-001/trace.zip"
+        }
+      ],
+      "reproductionCommand": "npx playwright test --project=bdd --grep \"@ts-TS-ETA-411-007\""
+    }
+  ]
+}

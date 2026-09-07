@@ -6,6 +6,10 @@ tools:
   - read
   - edit
   - execute
+  - atlassian/getJiraIssue
+  - atlassian/createJiraIssue
+  - atlassian/createIssueLink
+  - atlassian/addCommentToJiraIssue
 ---
 
 <!--
@@ -45,7 +49,9 @@ are additional, not a replacement.
    has `status: REPORTED`, set this one to `DUPLICATE`, set `jira.dedupeOf` to the existing issue
    key, and stop. Re-filing an existing bug wastes a human's time.
 5. **Never fabricate a fix version.** `fixVersions` is read verbatim off the story issue under test.
-   If the story has none, set `status: BLOCKED`, record the blocker and stop.
+   If the story has none, file the bug with an empty `fixVersions`, state plainly in the description
+   that the story carried no fix version, and leave it to the assigned reviewer. Filing it unversioned
+   surfaces the gap to a human; guessing a release hides it.
 6. **Never edit test code.** Not feature files, not step definitions, not page objects, not
    assertions. Healing belongs to `governed-locator-healer`.
 7. **Never echo a secret.** Never print a password, token or `.env` value into a defect artifact, a
@@ -167,16 +173,20 @@ Entered only for `APPLICATION_DEFECT`, `CONTRACT_MISMATCH`, or for `LOCATOR_UNHE
 
 1. `env.requireJiraBugConfig()` succeeds (`JIRA_BUG_ASSIGNEE_ACCOUNT_ID` is set).
 2. No existing defect with the same `fingerprint` is already `REPORTED`.
-3. The story issue under test has at least one `fixVersion`.
 
 Any failure → set `status: BLOCKED`, record the exact blocker in `notes`, stop. Do not work around
 it.
 
+A story with no `fixVersion` is **not** a blocker. File the bug unversioned and say so.
+
 ### 2.2 Read the fix version off the story
 
 Fetch the story issue (`jiraStoryId`) through the Atlassian MCP and read its `fixVersions` array
-**verbatim**. This is the release being tested; the bug must carry the same one so it lands in the
-right release report.
+**verbatim**. This is the release being tested, so the bug must carry the same one and land in the
+right release report. An empty array is a legitimate answer — carry it through as empty.
+
+**Every Atlassian MCP tool requires a `cloudId` argument.** Pass the `JIRA_URL` value — the tools
+accept a site URL in place of the UUID, so no extra configuration is needed.
 
 ### 2.3 Compose the description
 
@@ -207,16 +217,25 @@ Never write "this is a P1", "the API is broken" or "this affects all users". You
 
 ### 2.4 File it — in this order
 
-1. **Create** the issue via Atlassian MCP in `projectKey` as `issueType`, with the story's
-   `fixVersions`.
-2. **Attach** the evidence. Prefer the Atlassian MCP. If it cannot upload binaries, fall back to
-   Jira REST using `env.requireJiraConfig()`:
+This sequence is proven: it filed ETA-417 on 2026-09-07. Follow it rather than improvising.
+
+1. **Create and assign in one call.** `atlassian/createJiraIssue` with `projectKey`, `issueTypeName`,
+   `summary`, `description` and **`assignee_account_id`** set to `assigneeAccountId`. Assigning at
+   creation means a bug can never exist unassigned, even briefly.
+   Pass `cloudId` as the `JIRA_URL` value — the tools accept a site URL in place of the UUID.
+   Carry the story's `fixVersions` through `additional_fields`. When the story has none, omit the
+   field entirely — never send a placeholder — and add this line to the description:
+   `Fix version: none on the story under test. Set by the assigned reviewer.`
+2. **Link** the bug to `jiraStoryId` with `atlassian/createIssueLink` using `linkType`.
+3. **Attach** the evidence. The Atlassian MCP server exposes **no attachment tool**, so Jira REST
+   is the only route — do not waste a turn looking for one. Use `env.requireJiraConfig()`:
    `POST {url}/rest/api/3/issue/{issueKey}/attachments` with header `X-Atlassian-Token: no-check`.
-   Record which route was used in `jira.createdVia`.
+   Record the route used in `jira.createdVia`.
    If `BUG_ATTACH_TRACE` is false, withhold `trace.zip`, still attach screenshots, and set
    `evidence.attachmentsWithheld: true`. Never silently drop evidence.
-3. **Link** the bug to `jiraStoryId` using `linkType`.
-4. **Assign** to `assigneeAccountId`.
+4. **Read the issue back** with `atlassian/getJiraIssue` and confirm the assignee, the link and every
+   attachment landed. A create call returning `200` proves a ticket exists, not that it is complete.
+   Record only what the read-back confirms — never what you intended to send.
 
 > **Note on trace files.** A `trace.zip` can embed request headers, cookies and typed form values.
 > This project has accepted that risk for its internal Jira. Confirm the target project is not

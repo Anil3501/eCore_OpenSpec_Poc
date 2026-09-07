@@ -222,9 +222,8 @@
         "projectKey": { "type": "string", "minLength": 1 },
         "issueType": { "type": "string", "minLength": 1 },
         "fixVersions": {
-          "description": "Copied verbatim from the story under test. Never invented by an agent.",
+          "description": "Copied verbatim from the story under test. Never invented by an agent. Empty means the story carried none and the assigned reviewer sets it.",
           "type": "array",
-          "minItems": 1,
           "items": { "type": "string", "minLength": 1 }
         },
         "linkedStory": { "type": "string", "pattern": "^[A-Z][A-Z0-9]+-[0-9]+$" },

@@ -2,10 +2,11 @@
 name: sdd-workflow-orchestrator
 description: 'Workflow controller for the OpenSpec-driven Playwright-BDD framework. Use this agent to start, resume, inspect or advance a Jira-story automation workflow. It owns delegation, durable workflow state, schema validation, controlled RTM merges, approval-gate enforcement and agent handoffs. It never performs Jira analysis or browser exploration itself.'
 tools:
-  - search
+  - execute
   - read
   - edit
-  - execute
+  - search
+  - atlassian/getJiraIssue
 ---
 
 <!--

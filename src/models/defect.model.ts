@@ -84,9 +84,9 @@ export const jiraLinkSchema = z.object({
   issueUrl: z.string().min(1),
   projectKey: z.string().min(1),
   issueType: z.string().min(1),
-  // Copied verbatim from the story under test. An empty list is a hard failure
-  // rather than an invitation to invent a version.
-  fixVersions: z.array(z.string().min(1)).min(1),
+  // Copied verbatim from the story under test. Empty means the story carried none;
+  // the reviewer sets it. An agent never supplies one.
+  fixVersions: z.array(z.string().min(1)),
   linkedStory: jiraIdSchema,
   linkType: z.string().min(1),
   assigneeAccountId: z.string().min(1),

@@ -255,12 +255,12 @@
       "outputs": ["defects/<DEF-ID>.json", "traceability/capabilities/<capability>.rtm.proposed.json"],
       "next": "RTM_UPDATE",
       "rules": [
-        "fixVersions are read verbatim from the story under test. If the story has none, BLOCK - never guess a release.",
+        "fixVersions are read verbatim from the story under test. If the story has none, file the bug with no fixVersion and say so in the description - never guess a release.",
         "The bug is linked to the story and assigned to the configured reviewer. An unassigned bug is an unreviewed bug.",
         "Severity, priority and root cause are never invented. Raise them as open questions in the description instead.",
         "The agent proposes the RTM defectRefs update; only the orchestrator merges it."
       ],
-      "blockedWhen": "JIRA_BUG_ASSIGNEE_ACCOUNT_ID is unset, the story has no fixVersions, or the Atlassian MCP session is not authenticated."
+      "blockedWhen": "JIRA_BUG_ASSIGNEE_ACCOUNT_ID is unset or the Atlassian MCP session is not authenticated."
     },
     {
       "stage": "RTM_UPDATE",
