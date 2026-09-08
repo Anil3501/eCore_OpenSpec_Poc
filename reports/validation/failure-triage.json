@@ -1,60 +1,109 @@
 {
-  "generatedAt": "2026-09-07T14:06:56.665Z",
+  "generatedAt": "2026-09-08T10:56:14.951Z",
   "source": "reports/execution/results.json",
   "summary": {
-    "totalFailures": 1,
-    "LOCATOR_SUSPECT": 0,
-    "APPLICATION_DEFECT": 1,
+    "totalFailures": 2,
+    "LOCATOR_SUSPECT": 2,
+    "APPLICATION_DEFECT": 0,
     "AMBIGUOUS": 0,
     "ENVIRONMENT_BLOCKER": 0
   },
   "findings": [
     {
-      "proposedDefectId": "DEF-ETA-411-001",
-      "fingerprint": "194395ec812d52d0544307d040dbf47c8f3f3f0aadf39543c3272a424eb1bc89",
-      "classification": "APPLICATION_DEFECT",
+      "proposedDefectId": "DEF-ETA-411-002",
+      "fingerprint": "abfa194c20bbe19c34fca711608ed5daaaa1b9636d8b78adb6f999b4d4185a9f",
+      "classification": "LOCATOR_SUSPECT",
       "matchedSignals": [
-        "ASSERTION_MISMATCH"
+        "WAITING_FOR_LOCATOR",
+        "LOCATOR_TIMEOUT"
       ],
-      "classificationRationale": "Matched application signal(s): ASSERTION_MISMATCH. No locator signal matched.",
-      "specTitle": "An unauthenticated visitor is refused a module and kept on the sign-in page",
+      "classificationRationale": "Matched locator signal(s): WAITING_FOR_LOCATOR, LOCATOR_TIMEOUT. No application-behaviour signal matched.",
+      "specTitle": "Command Center returns the user to the Home page from each module",
       "featureFile": ".features-gen/features/approved/home-navigation/home-screen-navigation.feature.spec.js",
       "projectName": "bdd",
-      "status": "failed",
+      "status": "timedOut",
       "retryIndex": 0,
-      "durationSeconds": 8.4,
-      "errorMessage": "Error: Expected the application to report that the sign-in attempt failed.\n\nExpected the application to report that the sign-in attempt failed.\n\nexpect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n\n   at src\\pages\\ecore-login.page.ts:198\n\n  196 |         { message: 'Expected the application to report that the sign-in attempt failed.' },\n  197 |       )\n> 198 |       .toBe(true);\n      |        ^\n  199 |   }\n  200 |\n  201 |   /**\n    at EcoreLoginPage.expectSignInFailureReported (D:\\Anil_Data\\AI Automation Projects\\InterSoft_Git\\eCore_OpenSpec_POC\\src\\pages\\ecore-login.page.ts:198:8)\n    at Object.<anonymous> (D:\\Anil_Data\\AI Automation Projects\\InterSoft_Git\\eCore_OpenSpec_POC\\steps\\home-screen-navigation.steps.ts:271:19)\n    at D:\\Anil_Data\\AI Automation Projects\\InterSoft_Git\\eCore_OpenSpec_POC\\.features-gen\\features\\approved\\home-navigation\\home-screen-navigation.feature.spec.js:47:5",
+      "durationSeconds": 45.7,
+      "errorMessage": "Test timeout of 45000ms exceeded.\nError: locator.click: Test timeout of 45000ms exceeded.\nCall log:\n  - waiting for locator('#icon-buttons').getByRole('link', { name: 'Vault', exact: true })\n\n\n   at src\\pages\\ecore-home.page.ts:135\n\n  133 |\n  134 |   async activateDashboardIcon(name: string): Promise<void> {\n> 135 |     await this.dashboardIcon(name).click();\n      |                                    ^\n  136 |   }\n  137 | }\n  138 |\n    at EcoreHomePage.activateDashboardIcon (D:\\Anil_Data\\AI Automation Projects\\InterSoft_Git\\eCore_OpenSpec_POC\\src\\pages\\ecore-home.page.ts:135:36)\n    at Object.<anonymous> (D:\\Anil_Data\\AI Automation Projects\\InterSoft_Git\\eCore_OpenSpec_POC\\steps\\home-screen-navigation.steps.ts:185:24)\n    at D:\\Anil_Data\\AI Automation Projects\\InterSoft_Git\\eCore_OpenSpec_POC\\.features-gen\\features\\approved\\home-navigation\\home-screen-navigation.feature.spec.js:40:5",
       "errorStack": null,
       "tags": {
         "release": "1.0",
         "capability": "home-navigation",
-        "requirementId": "REQ-ETA-411-007",
-        "acId": "AC-ETA-411-009",
+        "requirementId": "REQ-ETA-411-005",
+        "acId": "AC-ETA-411-007",
         "testPlanId": "TP-ETA-411-001",
-        "testScenarioId": "TS-ETA-411-007",
+        "testScenarioId": "TS-ETA-411-006",
         "jiraStoryId": "ETA-411"
       },
       "evidence": [
         {
           "name": "screenshot",
           "contentType": "image/png",
-          "sourcePath": "test-results/features-approved-home-nav-b621b-nd-kept-on-the-sign-in-page-bdd/test-failed-1.png",
-          "preservedPath": "reports/defects/DEF-ETA-411-001/test-failed-1.png"
+          "sourcePath": "test-results/features-approved-home-nav-9be09--Home-page-from-each-module-bdd/test-failed-1.png",
+          "preservedPath": "reports/defects/DEF-ETA-411-002/test-failed-1.png"
         },
         {
           "name": "error-context",
           "contentType": "text/markdown",
-          "sourcePath": "test-results/features-approved-home-nav-b621b-nd-kept-on-the-sign-in-page-bdd/error-context.md",
-          "preservedPath": "reports/defects/DEF-ETA-411-001/error-context.md"
+          "sourcePath": "test-results/features-approved-home-nav-9be09--Home-page-from-each-module-bdd/error-context.md",
+          "preservedPath": "reports/defects/DEF-ETA-411-002/error-context.md"
         },
         {
           "name": "trace",
           "contentType": "application/zip",
-          "sourcePath": "test-results/features-approved-home-nav-b621b-nd-kept-on-the-sign-in-page-bdd/trace.zip",
-          "preservedPath": "reports/defects/DEF-ETA-411-001/trace.zip"
+          "sourcePath": "test-results/features-approved-home-nav-9be09--Home-page-from-each-module-bdd/trace.zip",
+          "preservedPath": "reports/defects/DEF-ETA-411-002/trace.zip"
         }
       ],
-      "reproductionCommand": "npx playwright test --project=bdd --grep \"@ts-TS-ETA-411-007\""
+      "reproductionCommand": "npx playwright test --project=bdd --grep \"@ts-TS-ETA-411-006\""
+    },
+    {
+      "proposedDefectId": "DEF-ETA-411-002",
+      "fingerprint": "abfa194c20bbe19c34fca711608ed5daaaa1b9636d8b78adb6f999b4d4185a9f",
+      "classification": "LOCATOR_SUSPECT",
+      "matchedSignals": [
+        "WAITING_FOR_LOCATOR",
+        "LOCATOR_TIMEOUT"
+      ],
+      "classificationRationale": "Matched locator signal(s): WAITING_FOR_LOCATOR, LOCATOR_TIMEOUT. No application-behaviour signal matched.",
+      "specTitle": "Command Center returns the user to the Home page from each module",
+      "featureFile": ".features-gen/features/approved/home-navigation/home-screen-navigation.feature.spec.js",
+      "projectName": "bdd",
+      "status": "timedOut",
+      "retryIndex": 1,
+      "durationSeconds": 46.3,
+      "errorMessage": "Test timeout of 45000ms exceeded.\nError: locator.click: Test timeout of 45000ms exceeded.\nCall log:\n  - waiting for locator('#icon-buttons').getByRole('link', { name: 'Vault', exact: true })\n\n\n   at src\\pages\\ecore-home.page.ts:135\n\n  133 |\n  134 |   async activateDashboardIcon(name: string): Promise<void> {\n> 135 |     await this.dashboardIcon(name).click();\n      |                                    ^\n  136 |   }\n  137 | }\n  138 |\n    at EcoreHomePage.activateDashboardIcon (D:\\Anil_Data\\AI Automation Projects\\InterSoft_Git\\eCore_OpenSpec_POC\\src\\pages\\ecore-home.page.ts:135:36)\n    at Object.<anonymous> (D:\\Anil_Data\\AI Automation Projects\\InterSoft_Git\\eCore_OpenSpec_POC\\steps\\home-screen-navigation.steps.ts:185:24)\n    at D:\\Anil_Data\\AI Automation Projects\\InterSoft_Git\\eCore_OpenSpec_POC\\.features-gen\\features\\approved\\home-navigation\\home-screen-navigation.feature.spec.js:40:5",
+      "errorStack": null,
+      "tags": {
+        "release": "1.0",
+        "capability": "home-navigation",
+        "requirementId": "REQ-ETA-411-005",
+        "acId": "AC-ETA-411-007",
+        "testPlanId": "TP-ETA-411-001",
+        "testScenarioId": "TS-ETA-411-006",
+        "jiraStoryId": "ETA-411"
+      },
+      "evidence": [
+        {
+          "name": "screenshot",
+          "contentType": "image/png",
+          "sourcePath": "test-results/features-approved-home-nav-9be09--Home-page-from-each-module-bdd-retry1/test-failed-1.png",
+          "preservedPath": "reports/defects/DEF-ETA-411-002/test-failed-1.png"
+        },
+        {
+          "name": "error-context",
+          "contentType": "text/markdown",
+          "sourcePath": "test-results/features-approved-home-nav-9be09--Home-page-from-each-module-bdd-retry1/error-context.md",
+          "preservedPath": "reports/defects/DEF-ETA-411-002/error-context.md"
+        },
+        {
+          "name": "trace",
+          "contentType": "application/zip",
+          "sourcePath": "test-results/features-approved-home-nav-9be09--Home-page-from-each-module-bdd-retry1/trace.zip",
+          "preservedPath": "reports/defects/DEF-ETA-411-002/trace.zip"
+        }
+      ],
+      "reproductionCommand": "npx playwright test --project=bdd --grep \"@ts-TS-ETA-411-006\""
     }
   ]
 }

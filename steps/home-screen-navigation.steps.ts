@@ -178,7 +178,8 @@ When(
       vaultPage,
     };
     for (const [module] of dataTable.raw()) {
-      if (module === ORGANIZATION || module === VAULT) {
+      if (module === ORGANIZATION || module === "VAULT_Defeact") {
+      //if (module === ORGANIZATION || module === VAULT) {
         await selectMenuEntry(navigationMenu, module);
       } else {
         await homePage.activateDashboardIcon(module);
