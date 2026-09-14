@@ -25,7 +25,8 @@
     "validate:defects": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON src/utils/validate-artifacts.ts defects",
     "validate:automation": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON src/utils/validate-artifacts.ts automation",
     "validate:artifacts": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON src/utils/validate-artifacts.ts all",
-    "workflow:status": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON src/utils/workflow-status.ts"
+    "workflow:status": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON src/utils/workflow-status.ts",
+    "coverage:preview": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/compute-coverage-preview.ts"
   },
   "devDependencies": {
     "@fission-ai/openspec": "^1.11.0",

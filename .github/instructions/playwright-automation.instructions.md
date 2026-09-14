@@ -114,10 +114,22 @@ private get usernameField(): Locator {
 The marker is expected while automation is being generated. It becomes a **build failure** once the
 file backs Gate 3 approved automation, so an unvalidated locator can never reach an approved suite.
 
-Only the Playwright Test Planner, using Playwright MCP against the real application, may replace an
-`MCP_VALIDATION_REQUIRED` locator with a validated one. If the application contradicts an approved
-expectation, **record the mismatch and return to the owning approval gate** — never silently change
-the expectation.
+Only the orchestrator, driving Playwright MCP directly against the real application (the
+`playwright-test` tool family: `browser_navigate`, `browser_snapshot`, `browser_click`,
+`browser_type`, `browser_select_option`, `browser_network_requests`), may replace an
+`MCP_VALIDATION_REQUIRED` locator or `API_CONTRACT_UNVERIFIED` contract with a validated one. If the
+application contradicts an approved expectation, **record the mismatch and return to the owning
+approval gate** — never silently change the expectation.
+
+**MCP exploration playbook** (PLAYWRIGHT_VALIDATION / IMPLEMENTATION): `browser_navigate` to the
+approved flow's start (reuse a captured session via `npm run capture:session` for an authenticated
+flow — a live password must never pass through an MCP tool argument) → `browser_snapshot` to read
+the real accessibility tree before writing any locator → drive the approved steps with
+`browser_click` / `browser_type` / `browser_select_option` / `browser_wait_for` → for a HYBRID/API
+scenario, read `browser_network_requests` / `browser_network_request` to observe the real calls
+(`contractSource: OBSERVED`, never a guess) → only then replace the placeholder and add the
+`VALIDATED -` waiver comment. Do this against the specific approved scenario only; never explore
+speculative behaviour the plan does not already describe.
 
 ## Configuration and secrets
 

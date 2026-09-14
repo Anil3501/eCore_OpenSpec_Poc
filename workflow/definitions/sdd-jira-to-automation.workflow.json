@@ -39,7 +39,7 @@
     {
       "stage": "JIRA_RETRIEVAL",
       "agent": "jira-requirement-analysis",
-      "tools": ["atlassian-mcp"],
+      "tools": ["atlassian"],
       "requires": [],
       "outputs": ["requirements/raw/<JIRA-ID>.json"],
       "next": "REQUIREMENT_NORMALIZATION",
@@ -164,10 +164,11 @@
     },
     {
       "stage": "PLAYWRIGHT_VALIDATION",
-      "agent": "playwright-test-planner",
-      "tools": ["playwright-test-mcp"],
+      "agent": "sdd-workflow-orchestrator",
+      "agentNote": "Performed by the orchestrator driving playwright-test MCP tools directly (browser_navigate, browser_snapshot, browser_click/type/select_option, browser_network_requests), not by delegating to the generic playwright-test-planner sub-agent - its own built-in output (a markdown test plan via planner_save_plan) does not match the JSON outputs this stage requires. See sdd-workflow-orchestrator.agent.md, 'PLAYWRIGHT_VALIDATION and IMPLEMENTATION ownership'.",
+      "tools": ["playwright-test"],
       "requires": ["features/approved/<capability>/<TEST-PLAN-ID>-automation-approval.json"],
-      "outputs": ["reports/validation/<TEST-PLAN-ID>-browser-validation.json", "reports/validation/<TEST-PLAN-ID>-api-validation.json", "specs/**"],
+      "outputs": ["reports/validation/<TEST-PLAN-ID>-browser-validation.json", "reports/validation/<TEST-PLAN-ID>-api-validation.json"],
       "next": "IMPLEMENTATION",
       "rules": [
         "Explore approved scenarios only.",
@@ -182,6 +183,7 @@
     {
       "stage": "IMPLEMENTATION",
       "agent": "sdd-workflow-orchestrator",
+      "agentNote": "Written directly by the orchestrator (page objects, steps, fixtures, components) following the validated locators/contracts from PLAYWRIGHT_VALIDATION - not by delegating to the generic playwright-test-generator sub-agent, whose own built-in output is a flat .spec.ts file with inline locators and does not fit this framework's strict layering.",
       "requires": ["reports/validation/<TEST-PLAN-ID>-browser-validation.json"],
       "outputs": ["steps/**", "src/pages/**", "src/components/**", "src/fixtures/**", "src/api/**", "src/models/api/**", "test-data/**"],
       "next": "BDD_GENERATION"

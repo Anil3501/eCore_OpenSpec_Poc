@@ -195,16 +195,27 @@ before creating an artifact rather than guessing a path.
 | `openspec/`, `.github/prompts/opsx-*`, `.github/skills/openspec-*` | Spec layer | OpenSpec (tool-owned, do not hand-edit) |
 
 **The workflow definition is the authority on who performs a stage, not this table.** Ownership
-above is derived from each stage's `agent` field. The orchestrator may delegate `IMPLEMENTATION` to
-`playwright-test-generator`, but only if that agent's definition is compatible with the installed
-playwright-bdd setup; otherwise it does the work itself. `playwright-test-planner` is assigned to
-`PLAYWRIGHT_VALIDATION` — it validates an approved plan against the running application, it does not
-author one.
+above is derived from each stage's `agent` field. `PLAYWRIGHT_VALIDATION` and `IMPLEMENTATION` are
+both assigned to `sdd-workflow-orchestrator`, which drives the `playwright-test` MCP tools
+(`browser_navigate`, `browser_snapshot`, `browser_click`/`type`/`select_option`,
+`browser_network_requests`) directly against the real application, rather than delegating to the
+generic `playwright-test-planner` / `playwright-test-generator` sub-agents — those agents' own
+built-in output (a markdown test plan via `planner_save_plan`; a flat `.spec.ts` via
+`generator_write_test`) does not match this framework's governed JSON reports or its strict
+feature/step/page-object/fixture layering. See `sdd-workflow-orchestrator.agent.md`,
+"PLAYWRIGHT_VALIDATION and IMPLEMENTATION ownership".
 
-Two agent files are deliberately not assigned to any stage. `playwright-test-healer` and
-`playwright-test-generator` are tool-provided and may be regenerated, so their files are left
-untouched; `governed-locator-healer` is the governed wrapper the workflow actually calls. Neither is
-an orphan to be cleaned up.
+Three agent files are deliberately not assigned to any stage. `playwright-test-planner`,
+`playwright-test-healer` and `playwright-test-generator` are tool-provided and may be regenerated,
+so their files are left untouched; `governed-locator-healer` is the governed wrapper the workflow
+actually calls for locator repair. None is an orphan to be cleaned up — each remains available for a
+human to invoke manually outside the governed workflow if ever useful.
+
+Their `mcp-servers` blocks invoke `npx playwright run-test-mcp-server`; the installed Playwright CLI
+in this repo currently exposes `mcp` and `cli` subcommands, not that one, so a manual invocation of
+any of the three may fail to start its MCP server. This does not affect the governed workflow, which
+never relies on that config — the orchestrator's own `playwright-test/*` tool access is granted
+directly in its own frontmatter. Flagged here so nobody spends time debugging it as if it were new.
 
 Scaling to 3,000+ tests relies on **capability partitioning** (one RTM file per business capability)
 plus [traceability/index/lookup.index.json](traceability/index/lookup.index.json) so nothing is
