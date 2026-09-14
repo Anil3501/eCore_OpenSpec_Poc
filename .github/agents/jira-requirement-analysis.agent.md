@@ -51,8 +51,9 @@ Do not load the repository into your working context.
 Schema: [requirements/schemas/jira-requirement.schema.json](../../requirements/schemas/jira-requirement.schema.json).
 Approval schema: [requirements/schemas/approval.schema.json](../../requirements/schemas/approval.schema.json).
 Fill [templates/artifacts/jira-requirement.template.json](../../templates/artifacts/jira-requirement.template.json);
-never copy another story. A worked example of the reasoning — not of the shape — is
-[requirements/approved/ETA-351.json](../../requirements/approved/ETA-351.json).
+never copy another story, and never open `requirements/approved/ETA-351.json` (or any other
+completed story's artifact) to determine field shape, structure or phrasing — the template and its
+schema are always sufficient. It exists purely as human-facing reading material.
 
 ## Procedure
 

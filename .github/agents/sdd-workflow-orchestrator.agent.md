@@ -41,6 +41,13 @@ work yourself.
    the exact blocker.
 8. **Never claim an artifact is valid because you generated it.** Validity comes from
    `npm run validate:artifacts` only.
+9. **Never open `ETA-351`/`ETA-411` (or any other completed story's artifacts) to determine the
+   shape, field conventions or phrasing of a new artifact you are authoring.** The JSON Schema
+   (`*/schemas/*.schema.json`) and the matching template under `templates/` are always sufficient —
+   read those instead. The only reason to open another story's artifact is an actual, named
+   dependency (a shared RTM capability entry, a shared page object, a fixture being reused) — never
+   "for reference" or "to check the convention." See AGENTS.md § "Where an artifact's shape comes
+   from."
 
 ## Ownership model
 

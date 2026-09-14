@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "1.0.0",
+  "approvalId": "APR-AD-EC-12000-002",
+  "gate": "AUTOMATION_DESIGN",
+  "artifactId": "TP-EC-12000-001",
+  "artifactVersion": 2,
+  "release": "26.3",
+  "capability": "paper-out-export",
+  "sourceArtifactPath": "features/generated/paper-out-export/paper-out-media-type.feature",
+  "decision": "APPROVE",
+  "reviewer": {
+    "name": "Anil",
+    "role": "Reviewer",
+    "reference": null
+  },
+  "reviewedAt": "2026-09-14T17:20:00.000Z",
+  "comments": "Scoped re-approval only. The test plan moved to artifactVersion 2 at Gate 2 (test-plans/approved/TP-EC-12000-001-approval.json), which revised TS-EC-12000-016 and added TS-EC-12000-020 - every other scenario's content is unchanged from v1 and stays covered by APR-AD-EC-12000-001. This approval covers only the two affected items below. Approving TS-EC-12000-016 also confirms the two MCP_VALIDATION_REQUIRED items named in TP-EC-12000-001-automation-design.md (the Authorized-event reader's target collection/batch, and the activity-history-report download mechanism and format) may be validated by Playwright MCP at PLAYWRIGHT_VALIDATION without a further design review.",
+  "itemDecisions": [
+    {
+      "itemId": "TS-EC-12000-016",
+      "decision": "APPROVE",
+      "comment": "REVISED at Gate 2 v2: now asserts Media Type is recorded on the Submitted Paper Out event, absent from the Authorized Paper Out event, and present in the downloaded document activity history report - the cover-page clause moved to TS-EC-12000-020. UI. The Submitted-event read reuses DocumentHistoryComponent, already proven by TS-EC-12000-007 through -010. The Authorized-event reader and the activity-history-report download/parse helper are both new and MCP_VALIDATION_REQUIRED."
+    },
+    {
+      "itemId": "TS-EC-12000-020",
+      "decision": "APPROVE",
+      "comment": "NEW at Gate 2 v2, split out of TS-EC-12000-016's original cover-page clause. UI, MANUAL_ONLY per the approved plan - step definitions will exist for traceability but the assertion needs a human to open the real downloaded package and look at it."
+    }
+  ]
+}

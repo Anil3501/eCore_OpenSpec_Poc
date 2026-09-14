@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "release": "1.0",
-  "updatedAt": "2026-09-05T10:25:00.000Z",
+  "updatedAt": "2026-09-14T18:55:00.000Z",
   "dataClassification": "REAL_JIRA_DATA",
   "indexes": {
     "byJiraStoryId": {
@@ -36,6 +36,34 @@
             "TRC-ETA-411-008",
             "TRC-ETA-411-009",
             "TRC-ETA-411-010"
+          ]
+        }
+      ],
+      "EC-12000": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-001",
+            "TRC-EC-12000-002",
+            "TRC-EC-12000-003",
+            "TRC-EC-12000-004",
+            "TRC-EC-12000-005",
+            "TRC-EC-12000-006",
+            "TRC-EC-12000-007",
+            "TRC-EC-12000-008",
+            "TRC-EC-12000-009",
+            "TRC-EC-12000-010",
+            "TRC-EC-12000-011",
+            "TRC-EC-12000-012",
+            "TRC-EC-12000-013",
+            "TRC-EC-12000-014",
+            "TRC-EC-12000-015",
+            "TRC-EC-12000-016",
+            "TRC-EC-12000-017",
+            "TRC-EC-12000-018",
+            "TRC-EC-12000-019",
+            "TRC-EC-12000-020"
           ]
         }
       ]
@@ -168,6 +196,82 @@
           "traceIds": [
             "TRC-ETA-411-009",
             "TRC-ETA-411-010"
+          ]
+        }
+      ],
+      "REQ-EC-12000-001": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-001"
+          ]
+        }
+      ],
+      "REQ-EC-12000-002": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-002",
+            "TRC-EC-12000-003",
+            "TRC-EC-12000-004"
+          ]
+        }
+      ],
+      "REQ-EC-12000-003": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-005",
+            "TRC-EC-12000-006"
+          ]
+        }
+      ],
+      "REQ-EC-12000-004": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-007",
+            "TRC-EC-12000-008",
+            "TRC-EC-12000-009",
+            "TRC-EC-12000-010",
+            "TRC-EC-12000-011",
+            "TRC-EC-12000-012",
+            "TRC-EC-12000-013",
+            "TRC-EC-12000-014",
+            "TRC-EC-12000-015"
+          ]
+        }
+      ],
+      "REQ-EC-12000-005": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-016",
+            "TRC-EC-12000-017",
+            "TRC-EC-12000-020"
+          ]
+        }
+      ],
+      "REQ-EC-12000-006": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-018"
+          ]
+        }
+      ],
+      "REQ-EC-12000-007": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-019"
           ]
         }
       ]
@@ -334,6 +438,178 @@
             "TRC-ETA-411-010"
           ]
         }
+      ],
+      "AC-EC-12000-001": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-001"
+          ]
+        }
+      ],
+      "AC-EC-12000-002": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-002"
+          ]
+        }
+      ],
+      "AC-EC-12000-003": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-003"
+          ]
+        }
+      ],
+      "AC-EC-12000-004": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-004"
+          ]
+        }
+      ],
+      "AC-EC-12000-005": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-005"
+          ]
+        }
+      ],
+      "AC-EC-12000-006": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-006"
+          ]
+        }
+      ],
+      "AC-EC-12000-007": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-007"
+          ]
+        }
+      ],
+      "AC-EC-12000-008": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-008"
+          ]
+        }
+      ],
+      "AC-EC-12000-009": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-009"
+          ]
+        }
+      ],
+      "AC-EC-12000-010": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-010"
+          ]
+        }
+      ],
+      "AC-EC-12000-011": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-011"
+          ]
+        }
+      ],
+      "AC-EC-12000-012": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-012"
+          ]
+        }
+      ],
+      "AC-EC-12000-013": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-013"
+          ]
+        }
+      ],
+      "AC-EC-12000-014": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-014"
+          ]
+        }
+      ],
+      "AC-EC-12000-015": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-015"
+          ]
+        }
+      ],
+      "AC-EC-12000-016": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-016",
+            "TRC-EC-12000-020"
+          ]
+        }
+      ],
+      "AC-EC-12000-017": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-017"
+          ]
+        }
+      ],
+      "AC-EC-12000-018": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-018"
+          ]
+        }
+      ],
+      "AC-EC-12000-019": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-019"
+          ]
+        }
       ]
     },
     "byTestPlanId": {
@@ -365,6 +641,32 @@
             "TRC-ETA-411-006",
             "TRC-ETA-411-007",
             "TRC-ETA-411-009"
+          ]
+        }
+      ],
+      "TP-EC-12000-001": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-001",
+            "TRC-EC-12000-002",
+            "TRC-EC-12000-003",
+            "TRC-EC-12000-004",
+            "TRC-EC-12000-007",
+            "TRC-EC-12000-008",
+            "TRC-EC-12000-009",
+            "TRC-EC-12000-010",
+            "TRC-EC-12000-011",
+            "TRC-EC-12000-012",
+            "TRC-EC-12000-013",
+            "TRC-EC-12000-014",
+            "TRC-EC-12000-015",
+            "TRC-EC-12000-016",
+            "TRC-EC-12000-017",
+            "TRC-EC-12000-018",
+            "TRC-EC-12000-019",
+            "TRC-EC-12000-020"
           ]
         }
       ]
@@ -504,6 +806,168 @@
             "TRC-ETA-411-009"
           ]
         }
+      ],
+      "TS-EC-12000-001": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-001"
+          ]
+        }
+      ],
+      "TS-EC-12000-002": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-002"
+          ]
+        }
+      ],
+      "TS-EC-12000-003": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-003"
+          ]
+        }
+      ],
+      "TS-EC-12000-004": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-004"
+          ]
+        }
+      ],
+      "TS-EC-12000-007": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-007"
+          ]
+        }
+      ],
+      "TS-EC-12000-008": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-008"
+          ]
+        }
+      ],
+      "TS-EC-12000-009": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-009"
+          ]
+        }
+      ],
+      "TS-EC-12000-010": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-010"
+          ]
+        }
+      ],
+      "TS-EC-12000-011": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-011"
+          ]
+        }
+      ],
+      "TS-EC-12000-012": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-012"
+          ]
+        }
+      ],
+      "TS-EC-12000-013": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-013"
+          ]
+        }
+      ],
+      "TS-EC-12000-014": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-014"
+          ]
+        }
+      ],
+      "TS-EC-12000-015": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-015"
+          ]
+        }
+      ],
+      "TS-EC-12000-016": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-016"
+          ]
+        }
+      ],
+      "TS-EC-12000-017": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-017"
+          ]
+        }
+      ],
+      "TS-EC-12000-018": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-018"
+          ]
+        }
+      ],
+      "TS-EC-12000-019": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-019"
+          ]
+        }
+      ],
+      "TS-EC-12000-020": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-020"
+          ]
+        }
       ]
     },
     "byFeatureFile": {
@@ -535,6 +999,32 @@
             "TRC-ETA-411-006",
             "TRC-ETA-411-007",
             "TRC-ETA-411-009"
+          ]
+        }
+      ],
+      "features/approved/paper-out-export/paper-out-media-type.feature": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-001",
+            "TRC-EC-12000-002",
+            "TRC-EC-12000-003",
+            "TRC-EC-12000-004",
+            "TRC-EC-12000-007",
+            "TRC-EC-12000-008",
+            "TRC-EC-12000-009",
+            "TRC-EC-12000-010",
+            "TRC-EC-12000-011",
+            "TRC-EC-12000-012",
+            "TRC-EC-12000-013",
+            "TRC-EC-12000-014",
+            "TRC-EC-12000-015",
+            "TRC-EC-12000-016",
+            "TRC-EC-12000-017",
+            "TRC-EC-12000-018",
+            "TRC-EC-12000-019",
+            "TRC-EC-12000-020"
           ]
         }
       ]
@@ -599,6 +1089,31 @@
             "TRC-ETA-411-006",
             "TRC-ETA-411-007",
             "TRC-ETA-411-009"
+          ]
+        }
+      ],
+      "EXEC-EC-12000-001": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-001",
+            "TRC-EC-12000-002",
+            "TRC-EC-12000-003",
+            "TRC-EC-12000-004",
+            "TRC-EC-12000-007",
+            "TRC-EC-12000-008",
+            "TRC-EC-12000-009",
+            "TRC-EC-12000-010",
+            "TRC-EC-12000-011",
+            "TRC-EC-12000-012",
+            "TRC-EC-12000-013",
+            "TRC-EC-12000-014",
+            "TRC-EC-12000-015",
+            "TRC-EC-12000-016",
+            "TRC-EC-12000-017",
+            "TRC-EC-12000-018",
+            "TRC-EC-12000-019"
           ]
         }
       ]

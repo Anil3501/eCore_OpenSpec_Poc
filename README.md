@@ -71,7 +71,7 @@ Layers:
 | **Playwright Test Planner** | `.github/agents/playwright-test-planner.agent.md` (tool-provided) | Business test plans, browser exploration through Playwright MCP | Add unapproved requirements, silently change an approved expectation |
 | **Playwright Test Generator** | `.github/agents/playwright-test-generator.agent.md` (tool-provided) | Feature files, step definitions, page objects, fixtures | Generate tests from an unapproved plan |
 | **Playwright Test Healer** | `.github/agents/playwright-test-healer.agent.md` (tool-provided) | Repairing broken selectors and flaky waits | Change asserted business behaviour |
-| **Bug Analyzer** | `.github/agents/bug-analyzer.agent.md` | Failure triage, evidence preservation, defect artifacts, Jira bug filing | Edit test code, invent severity or root cause, file before healing is exhausted, duplicate a fingerprint |
+| **Bug Analyzer** | `.github/agents/bug-analyzer.agent.md` | Failure triage, evidence preservation, defect artifacts, Jira bug filing | Edit test code, invent severity or root cause, file before healing is exhausted, file without an explicit human confirmation, create a Jira issue link to the story, duplicate a fingerprint |
 | **Governed Locator Healer** | `.github/agents/governed-locator-healer.agent.md` | Locator and wait repair in `src/pages/**` and `src/components/**`, capped at two attempts | Touch feature files, steps, assertions or test data; skip or weaken a test; file a Jira issue |
 
 ### Failure handling
@@ -89,11 +89,14 @@ flowchart LR
   BUG --> RTM
 ```
 
-There is **no fourth approval gate**: a red build must not wait on a human to be recorded. The
-compensating controls are that a failure fingerprint already reported becomes a `DUPLICATE` rather
-than a second ticket, and that every filed bug is assigned to a named human for review. The agent
-may not approve, alter or close anything it filed, and it may not assign severity, priority or root
-cause — those are human judgements.
+There is **no fourth formal approval-artifact gate** (no `APR-*-BUG-*` file), but `createJiraIssue`
+may only run after a human has seen the fully composed bug in chat and explicitly confirmed it; that
+reply is transcribed verbatim into the defect's `notes` before filing. No Jira issue link is created
+between the bug and the story — the relationship is recorded only in the defect artifact's own
+`jira.linkedStory` field. The compensating controls remain: a failure fingerprint already reported
+becomes a `DUPLICATE` rather than a second ticket, and every filed bug is assigned to a named human
+for review. The agent may not approve, alter or close anything it filed, and it may not assign
+severity, priority or root cause — those are human judgements.
 
 > **Accepted risk.** A Playwright `trace.zip` can embed request headers, cookies and typed form
 > values. This project attaches traces to its internal Jira deliberately. Set `BUG_ATTACH_TRACE=false`
@@ -229,7 +232,7 @@ never committed.
 | `JIRA_BUG_PROJECT_KEY` | no | Project bugs are filed in. Falls back to `JIRA_PROJECT_KEY` |
 | `JIRA_BUG_ISSUE_TYPE` | no | Issue type name for filed bugs. Defaults to `Bug` |
 | `JIRA_BUG_ASSIGNEE_ACCOUNT_ID` | for bug filing | Atlassian accountId every filed bug is assigned to for review |
-| `JIRA_BUG_LINK_TYPE` | no | Issue-link type joining bug to story. Defaults to `Relates` |
+| `JIRA_BUG_LINK_TYPE` | no | Label recorded in the defect's `jira.linkType` field only; no live Jira issue link is created. Defaults to `Relates` |
 | `BUG_ATTACH_TRACE` | no | Attach `trace.zip` to filed bugs. Defaults to `true` |
 
 All access goes through the typed loader in [src/utils/env.ts](src/utils/env.ts). Page objects,

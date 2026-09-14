@@ -238,9 +238,14 @@
         "contractProvenance": {
           "type": "string",
           "minLength": 1,
-          "description": "OpenAPI URL, APR-TP-* approval id, or the validation report the traffic was observed in."
+          "description": "OpenAPI URL, APR-TP-* approval id, or the validation report the traffic was observed in. A value beginning AGENT_DRAFTED marks a contract an agent composed on explicit human instruction: it stays UNVERIFIED and must carry DICTATED: and PROPOSED: segments naming which fields a human supplied."
         },
         "responseContractRef": { "type": ["string", "null"], "minLength": 1 },
+        "responseShapeHash": {
+          "type": ["string", "null"],
+          "pattern": "^[a-f0-9]{64}$",
+          "description": "sha256 of the response shape agreed at Gate 2: keys and types only, never values. Lets a later run detect that a HUMAN_APPROVED contract has drifted."
+        },
         "scaffoldingOnly": {
           "type": "boolean",
           "description": "True when the call only reaches a state. Scaffolding never counts as acceptance-criteria coverage."

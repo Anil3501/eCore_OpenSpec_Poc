@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- eOriginal eCore Business Suite Copyright 2009-2026 -->
+<xs:schema elementFormDefault="qualified" targetNamespace="http://www.eoriginal.com/ecore/export"
+           xmlns="http://www.eoriginal.com/ecore/export" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="eoExportInstructions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="batchName" type="xs:string"/>
+        <xs:element name="tokenName" type="xs:string" minOccurs="0"/><!-- Deprecated -->
+        <xs:element name="tokenPassword" type="xs:string" minOccurs="0"/><!-- Deprecated -->
+        <xs:element name="userToApprove" type="xs:string" minOccurs="0"/>
+        <xs:element name="purpose" type="xs:string" minOccurs="0"/>
+        <xs:element name="mediaType" type="mediaTypeEnum" minOccurs="0"/>
+        <xs:choice>
+          <xs:element name="transaction" type="transaction" maxOccurs="unbounded"/>
+          <xs:element name="groupTransactionIdentifier" type="groupTransactionIdentifier"/>
+          <xs:element name="document" type="electronicOriginal" maxOccurs="unbounded"/>
+          <xs:element name="groupDocumentIdentifier" type="groupElectronicOriginalIdentifier"/>
+        </xs:choice>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+<xs:simpleType name="mediaTypeEnum">
+  <xs:restriction base="xs:string">
+    <xs:enumeration value="PrintToPaper"/>
+    <xs:enumeration value="SaveAsElectronicFile"/>
+  </xs:restriction>
+</xs:simpleType>
+
+  <xs:complexType name="groupTransactionIdentifier">
+    <xs:sequence>
+      <xs:element name="retentionPolicy" type="retentionPolicy"/>
+    </xs:sequence>
+    <xs:attribute name="name" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="xref1"/>
+          <xs:enumeration value="xref2"/>
+          <xs:enumeration value="xref3"/>
+          <xs:enumeration value="state"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="value" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="transaction">
+    <xs:choice>
+      <xs:element name="retentionPolicy" type="retentionPolicy"/>
+      <xs:element name="document" type="document" maxOccurs="unbounded"/>
+    </xs:choice>
+    <xs:attribute name="id" type="xs:long" use="required"/>
+    <xs:attribute name="deleteIfEmpty" type="xs:boolean" default="true"/>
+  </xs:complexType>
+
+  <xs:complexType name="document">
+    <xs:attribute name="id" type="xs:long" use="required"/>
+    <xs:attribute name="retain" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="asIs"/><!-- If the document is an eOriginal, a watermarked copy will be exported and the original left untouched.-->
+          <xs:enumeration value="eCopy"/><!-- If the document is not an eOriginal, this will throw an exception.-->
+          <xs:enumeration value="none"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="electronicOriginal">
+    <xs:attribute name="id" type="xs:long" use="required"/>
+    <xs:attribute name="retain" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="eCopy"/>
+          <xs:enumeration value="none"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="groupElectronicOriginalIdentifier">
+    <xs:attribute name="name" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="xref1"/>
+          <xs:enumeration value="xref2"/>
+          <xs:enumeration value="xref3"/>
+          <xs:enumeration value="state"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="value" type="xs:string" use="required"/>
+    <xs:attribute name="retain" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="eCopy"/>
+          <xs:enumeration value="none"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="retentionPolicy">
+    <xs:attribute name="electronicOriginal" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="eCopy"/>
+          <xs:enumeration value="none"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="eStored" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="asIs"/>
+          <xs:enumeration value="none"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="eCopy" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="asIs"/>
+          <xs:enumeration value="none"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="transferReceipt" default="none">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="asIs"/>
+          <xs:enumeration value="none"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+
+</xs:schema>

@@ -62,12 +62,33 @@ models. Violating them fails validation.
    behaviour the definition of correct and a real bug would pass forever. `OBSERVED` may get a
    scenario to a state; only `HUMAN_APPROVED` (agreed at Gate 2) or `OPENAPI` may judge one.
    `SEM-API-CONTRACT` enforces this.
+   **A `HUMAN_APPROVED` contract must also record a `responseShapeHash`**, from
+   `computeResponseShapeHash` in [src/utils/api-contract-shape.ts](src/utils/api-contract-shape.ts).
+   An OpenAPI document is diffable, so drift in it is visible; a human decision is not, and without a
+   recorded shape nothing would ever notice that the contract the reviewer agreed to has since
+   moved. The hash covers keys and types only — values, ids and row counts change every run, and a
+   fingerprint that cried drift constantly would be switched off within a week.
+   **There is one exception, and it authorises drafting only.** When a human explicitly asks for a
+   contract file and confirms it a second time after seeing it composed in chat, an agent may write
+   it — as `contractSource: UNVERIFIED`, never `HUMAN_APPROVED`. Consent is **per contract and
+   single use**; a standing "yes" turns the second checkpoint into a rubber stamp. The provenance
+   must begin `AGENT_DRAFTED` and carry `DICTATED:` and `PROPOSED:` segments naming which fields the
+   human supplied and which the agent proposed, because a drafted contract reads just as fluently
+   whether or not it is right. A drafted Zod response contract in `src/models/api/` stays marked
+   `API_CONTRACT_UNVERIFIED` on the same terms. Gate 2 still decides whether the contract may assert
+   anything, and `SEM-API-CONTRACT` fails any draft claiming otherwise. **This exception is scoped to
+   API contracts alone.** It never extends to a locator, an acceptance criterion, or any business
+   rule under rule 2.
 5. **No agent approves its own output.**
-   **One scoped exception:** the `bug-analyzer` files a Jira bug without a fourth approval gate,
-   because a red build must not wait on a human to be recorded. The compensating controls are
-   mandatory: a failure fingerprint that is already `REPORTED` becomes a `DUPLICATE` instead of a
-   second ticket, and every filed bug is assigned to `JIRA_BUG_ASSIGNEE_ACCOUNT_ID` for review. The
-   agent still may not approve, alter or close anything it filed.
+   The `bug-analyzer` does not get a fourth formal approval-artifact gate (there is no
+   `APR-*-BUG-*` file), but it may not call `createJiraIssue` until a human has seen the fully
+   composed bug in chat and explicitly confirmed it — that reply is transcribed verbatim into the
+   defect's `notes` before filing. The compensating controls remain mandatory regardless: a failure
+   fingerprint that is already `REPORTED` becomes a `DUPLICATE` instead of a second ticket, every
+   filed bug is assigned to `JIRA_BUG_ASSIGNEE_ACCOUNT_ID` for review, and no Jira issue link is
+   created between the bug and the story (the relationship is recorded only in the defect
+   artifact's own `jira.linkedStory` field). The agent still may not approve, alter or close
+   anything it filed.
    A failure that never reached the application (DNS, TLS, proxy, refused connection, missing
    config) is classified `ENVIRONMENT_BLOCKER`: it is never healed and never filed. It proves
    nothing about the product, and filing it would erode trust in every real bug the framework
@@ -225,7 +246,9 @@ checks fail. See [src/utils/schema-parity.ts](src/utils/schema-parity.ts).
   never issues a request itself. Parse the **whole** response against its contract — spot-checking
   three fields and ignoring forty is the API version of a test that never looked. No absolute URLs,
   no `process.env`, no response body in an error message. A `.delete()` or `.put()` against a shared
-  environment needs a `CLEANUP -` waiver naming how the data is restored.
+  environment needs a `CLEANUP -` waiver naming how the data is restored — **and so does an endpoint
+  whose name is destructive whatever its verb**. eCore reaches `deleteTransaction.eo` and
+  `authorizeDestruction.eo` by `POST`, so matching on the HTTP method alone would wave them through.
 - All config goes through [src/utils/env.ts](src/utils/env.ts). **Never read `process.env`
   directly.** That includes [playwright.config.ts](playwright.config.ts), which uses `env.isCi`
   rather than `process.env.CI`. Requirements are enforced lazily (`requireBaseUrl()`,
@@ -289,10 +312,19 @@ What is deliberately **not** templated, and why, is recorded in the manifest: th
 key — a blank invites a monolithic file), a defect report (authored from a real execution, with a
 runtime-computed fingerprint) and an OpenSpec change (the CLI owns the shape).
 
-The `ETA-351` and `ETA-411` artifacts remain in the repository as **worked examples**. Read one to
-see how a real story was reasoned about; never open one to find out what shape a field should take.
+The `ETA-351` and `ETA-411` artifacts remain in the repository purely as **human-facing reading
+material** — for a person who wants to see how a real story was reasoned about. **An agent authoring
+a new artifact must never open one.** Schema + template are always sufficient to determine every
+field's name, type, pattern and purpose; if they are not, that is a gap in the schema or template to
+be raised, not a reason to go read `ETA-351`/`ETA-411`. This applies to every authoring stage —
+requirements, test plans, review packages, approval templates, feature files, automation designs —
+with no allowance for "just checking the convention" or "just checking the phrasing." The one
+exception is an **actual dependency**: a real cross-reference the new artifact must resolve against,
+such as a shared RTM capability entry, a shared page object, or a fixture the new story reuses. That
+is reading a dependency, not copying a shape, and it is always named explicitly as a `requires` input
+— never a silent "for reference."
 
-| Worked example | Path |
+| Human-facing reading material only — never an authoring reference | Path |
 | --- | --- |
 | Requirement + Gate 1 approval | [requirements/approved/ETA-351.json](requirements/approved/ETA-351.json) |
 | Test plan | [test-plans/approved/TP-ETA-351-001.json](test-plans/approved/TP-ETA-351-001.json) |

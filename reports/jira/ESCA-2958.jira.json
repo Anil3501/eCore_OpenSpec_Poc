@@ -1,0 +1,1692 @@
+{
+  "_dataClassification": "REAL_JIRA_DATA",
+  "retrievalMethod": "JIRA_REST_API_V3",
+  "retrievalNote": "Retrieved by src/utils/jira-fetch.ts, the documented REST fallback, because the Atlassian MCP server exposed no issue-fetch tool in this session. The issue payload below is verbatim.",
+  "requestedIssueKey": "ESCA-2958",
+  "requestUrl": "https://eoriginal.atlassian.net/rest/api/3/issue/ESCA-2958?expand=renderedFields%2Cnames",
+  "retrievedAt": "2026-09-11T07:26:59.865Z",
+  "issue": {
+    "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations,customfield_11318.properties,customfield_10900.requestTypePractice,customfield_11319.properties",
+    "id": "103974",
+    "self": "https://eoriginal.atlassian.net/rest/api/3/issue/103974",
+    "key": "ESCA-2958",
+    "renderedFields": {
+      "statuscategorychangedate": "12/May/26 3:29 PM",
+      "customfield_11441": null,
+      "fixVersions": null,
+      "statusCategory": null,
+      "customfield_11443": null,
+      "resolution": null,
+      "customfield_11445": null,
+      "customfield_11323": "",
+      "customfield_11444": null,
+      "customfield_10500": null,
+      "customfield_11435": "",
+      "customfield_11437": "",
+      "customfield_11318": null,
+      "customfield_10900": null,
+      "customfield_11319": null,
+      "customfield_11839": null,
+      "lastViewed": null,
+      "customfield_11391": "Media type was not optional when this was first pushed to POD",
+      "customfield_11674": null,
+      "customfield_10100": null,
+      "priority": null,
+      "labels": null,
+      "customfield_11545": null,
+      "timeestimate": null,
+      "aggregatetimeoriginalestimate": null,
+      "versions": null,
+      "customfield_11708": null,
+      "issuelinks": null,
+      "assignee": null,
+      "status": null,
+      "components": null,
+      "customfield_11384": null,
+      "customfield_11544": null,
+      "customfield_11543": null,
+      "customfield_11535": null,
+      "customfield_11414": "The ticket related to it was in Ready for QA, going to move to on hold and once its fixed we can verify / do additional research as needed. \r<br/>\n&nbsp;&nbsp;",
+      "customfield_11534": null,
+      "customfield_10600": null,
+      "customfield_11416": "23/Apr/26",
+      "customfield_11415": null,
+      "customfield_11418": null,
+      "aggregatetimeestimate": null,
+      "customfield_11417": null,
+      "creator": null,
+      "subtasks": null,
+      "customfield_11370": null,
+      "reporter": null,
+      "customfield_11374": null,
+      "aggregateprogress": null,
+      "customfield_11410": "",
+      "customfield_11530": null,
+      "customfield_11412": "",
+      "customfield_11378": "",
+      "customfield_11411": "",
+      "customfield_11369": null,
+      "customfield_11526": null,
+      "customfield_11525": null,
+      "customfield_11407": "broke their testing. Workaround is to add mediatype",
+      "customfield_11409": "",
+      "customfield_11529": null,
+      "customfield_11408": "",
+      "customfield_11806": null,
+      "progress": null,
+      "votes": null,
+      "worklog": {
+        "startAt": 0,
+        "maxResults": 20,
+        "total": 0,
+        "worklogs": []
+      },
+      "issuetype": null,
+      "timespent": null,
+      "customfield_11483": null,
+      "customfield_11362": "",
+      "project": null,
+      "customfield_11361": null,
+      "customfield_11000": null,
+      "customfield_11364": null,
+      "customfield_11363": null,
+      "aggregatetimespent": null,
+      "customfield_11641": null,
+      "customfield_11365": null,
+      "customfield_11368": null,
+      "customfield_11401": "<div class='table-wrap'>\n<table class='confluenceTable'><tbody>\n<tr>\n<th class='confluenceTh'>Date</th>\n<th class='confluenceTh'>Status(Pass/Fail)</th>\n<th class='confluenceTh'>Version</th>\n<th class='confluenceTh'>Tester</th>\n</tr>\n<tr>\n<td class='confluenceTd'>&nbsp;</td>\n<td class='confluenceTd'>&nbsp;</td>\n<td class='confluenceTd'>&nbsp;</td>\n<td class='confluenceTd'>&nbsp;</td>\n</tr>\n</tbody></table>\n</div>\n",
+      "customfield_11367": "",
+      "customfield_10700": "",
+      "resolutiondate": "23/Apr/26 12:10 PM",
+      "workratio": null,
+      "watches": null,
+      "created": "10/Apr/26 2:03 PM",
+      "customfield_11872": null,
+      "customfield_10300": null,
+      "customfield_11503": "",
+      "updated": "12/May/26 3:29 PM",
+      "customfield_11580": null,
+      "timeoriginalestimate": null,
+      "customfield_11340": null,
+      "customfield_11582": null,
+      "customfield_11581": null,
+      "description": "<p>case 6845527</p>\n\n<p>DealerTrack reported an issue that started on 4/9 when they make the eoRequestExport API call. </p>\n\n<p>{{handleException org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.type.TypeException: Could not set parameters for mapping: ParameterMapping</p>\n{property='mediaType', mode=IN, javaType=class com.eoriginal.commons.request.MediaType, jdbcType=null, numericScale=null, resultMapId='null', jdbcTypeName='null', expression='null'}\n<p>. Cause: org.apache.ibatis.type.TypeException: Error setting null for parameter #1 with JdbcType OTHER . Try setting a different JdbcType for this parameter or a different jdbcTypeForNull configuration property. Cause: java.sql.SQLException: Invalid column type: 1111}}</p>\n\n<p><a href=\"https://wk-asm.splunkcloud.com/en-US/app/search/search?earliest=1775710800&amp;latest=1775883600&amp;q=search%20index%3D%22ecore_stg%22%20DT_DCV_POD%20log_level%3DERROR&amp;display.page.search.mode=verbose&amp;dispatch.sample_ratio=1&amp;sid=1775843299.52012\" class=\"external-link\" rel=\"nofollow noreferrer\">https://wk-asm.splunkcloud.com/en-US/app/search/search?earliest=1775710800&amp;latest=1775883600&amp;q=search index%3D\"ecore_stg\" DT_DCV_POD log_level%3DERROR&amp;display.page.search.mode=verbose&amp;dispatch.sample_ratio=1&amp;sid=1775843299.52012</a></p>\n\n<p>A new element was added in 26.3 for mediatype. In DT’s testing, if they don’t include the mediatype, they get the error. If they include mediatype, then they don’t get an error. It seems to be related to this. </p>\n\n<p>Without mediatype they get:</p>\n\n<p><span class=\"image-wrap\" style=\"\"><img src=\"https://eoriginal.atlassian.net/rest/api/3/attachment/content/107020\" alt=\"image-20260410-180339.png\" width=\"719\" style=\"border: 0px solid black\" /></span></p>\n\n\n\n<p>With mediatype they get:</p>\n\n<p><span class=\"image-wrap\" style=\"\"><img src=\"https://eoriginal.atlassian.net/rest/api/3/attachment/content/107019\" alt=\"image-20260410-175705.png\" width=\"671\" style=\"border: 0px solid black\" /></span></p>",
+      "customfield_11584": "",
+      "customfield_11583": "",
+      "customfield_11100": null,
+      "customfield_11740": null,
+      "customfield_11741": "eCore",
+      "timetracking": {},
+      "customfield_11579": "",
+      "customfield_11458": null,
+      "customfield_11578": null,
+      "security": null,
+      "attachment": [
+        {
+          "self": "https://eoriginal.atlassian.net/rest/api/3/attachment/107019",
+          "id": "107019",
+          "filename": "image-20260410-175705.png",
+          "author": {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5ebecf474e41b90b7b66ccf1",
+            "accountId": "5ebecf474e41b90b7b66ccf1",
+            "emailAddress": "chad.dingmann@wolterskluwer.com",
+            "avatarUrls": {
+              "48x48": "https://secure.gravatar.com/avatar/703f9c369775d0c2fb5535949cf20a25?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCD-6.png",
+              "24x24": "https://secure.gravatar.com/avatar/703f9c369775d0c2fb5535949cf20a25?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCD-6.png",
+              "16x16": "https://secure.gravatar.com/avatar/703f9c369775d0c2fb5535949cf20a25?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCD-6.png",
+              "32x32": "https://secure.gravatar.com/avatar/703f9c369775d0c2fb5535949cf20a25?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCD-6.png"
+            },
+            "displayName": "Chad Dingmann",
+            "active": true,
+            "timeZone": "America/New_York",
+            "accountType": "atlassian"
+          },
+          "created": "10/Apr/26 2:03 PM",
+          "size": "295 kB",
+          "mimeType": "image/png",
+          "content": "https://eoriginal.atlassian.net/rest/api/3/attachment/content/107019",
+          "thumbnail": "https://eoriginal.atlassian.net/rest/api/3/attachment/thumbnail/107019"
+        },
+        {
+          "self": "https://eoriginal.atlassian.net/rest/api/3/attachment/107020",
+          "id": "107020",
+          "filename": "image-20260410-180339.png",
+          "author": {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5ebecf474e41b90b7b66ccf1",
+            "accountId": "5ebecf474e41b90b7b66ccf1",
+            "emailAddress": "chad.dingmann@wolterskluwer.com",
+            "avatarUrls": {
+              "48x48": "https://secure.gravatar.com/avatar/703f9c369775d0c2fb5535949cf20a25?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCD-6.png",
+              "24x24": "https://secure.gravatar.com/avatar/703f9c369775d0c2fb5535949cf20a25?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCD-6.png",
+              "16x16": "https://secure.gravatar.com/avatar/703f9c369775d0c2fb5535949cf20a25?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCD-6.png",
+              "32x32": "https://secure.gravatar.com/avatar/703f9c369775d0c2fb5535949cf20a25?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCD-6.png"
+            },
+            "displayName": "Chad Dingmann",
+            "active": true,
+            "timeZone": "America/New_York",
+            "accountType": "atlassian"
+          },
+          "created": "10/Apr/26 2:03 PM",
+          "size": "270 kB",
+          "mimeType": "image/png",
+          "content": "https://eoriginal.atlassian.net/rest/api/3/attachment/content/107020",
+          "thumbnail": "https://eoriginal.atlassian.net/rest/api/3/attachment/thumbnail/107020"
+        }
+      ],
+      "customfield_10009": null,
+      "summary": null,
+      "customfield_11450": null,
+      "customfield_11452": null,
+      "customfield_11451": null,
+      "customfield_10000": "10/Apr/26 2:07 PM",
+      "customfield_11454": null,
+      "customfield_10001": null,
+      "customfield_11575": null,
+      "customfield_10002": null,
+      "customfield_11453": null,
+      "customfield_11577": null,
+      "customfield_10003": null,
+      "customfield_10400": null,
+      "customfield_11576": null,
+      "customfield_11455": null,
+      "customfield_10004": null,
+      "customfield_11446": null,
+      "environment": "",
+      "customfield_11449": null,
+      "duedate": null,
+      "comment": {
+        "comments": [
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/103974/comment/197708",
+            "id": "197708",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=60ad07cfad76ea0070d1d89e",
+              "accountId": "60ad07cfad76ea0070d1d89e",
+              "emailAddress": "kevin.smith@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png",
+                "24x24": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png",
+                "16x16": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png",
+                "32x32": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png"
+              },
+              "displayName": "Kevin Smith",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": "<p><a href=\"https://eoriginal.atlassian.net/secure/ViewProfile.jspa?accountId=5ebecf474e41b90b7b66ccf1\" class=\"user-hover\" rel=\"5ebecf474e41b90b7b66ccf1\" data-account-id=\"5ebecf474e41b90b7b66ccf1\" accountid=\"5ebecf474e41b90b7b66ccf1\" rel=\"noreferrer\">Chad Dingmann</a> Iv reached out to <a href=\"https://eoriginal.atlassian.net/secure/ViewProfile.jspa?accountId=62d6a5fd3b239b30ebc7ae5d\" class=\"user-hover\" rel=\"62d6a5fd3b239b30ebc7ae5d\" data-account-id=\"62d6a5fd3b239b30ebc7ae5d\" accountid=\"62d6a5fd3b239b30ebc7ae5d\" rel=\"noreferrer\">Pam Baumgarten</a> about this. </p>\n\n<p>I think the problem is there should be a default type in <a href=\"https://eoriginal.atlassian.net/browse/EC-12000?search_id=41bd6133-244b-471d-8b79-e0eccb11dc04\" title=\"smart-link\" class=\"external-link\" rel=\"nofollow noreferrer\">https://eoriginal.atlassian.net/browse/EC-12000?search_id=41bd6133-244b-471d-8b79-e0eccb11dc04</a>  when it does not have that media type, but im not too sure. </p>\n\n<p>Product will need to make that call if its a bug or expected. </p>",
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=60ad07cfad76ea0070d1d89e",
+              "accountId": "60ad07cfad76ea0070d1d89e",
+              "emailAddress": "kevin.smith@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png",
+                "24x24": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png",
+                "16x16": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png",
+                "32x32": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png"
+              },
+              "displayName": "Kevin Smith",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "10/Apr/26 2:07 PM",
+            "updated": "10/Apr/26 2:07 PM",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/103974/comment/197709",
+            "id": "197709",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=60fef35f8c15ca006ffd43a9",
+              "accountId": "60fef35f8c15ca006ffd43a9",
+              "emailAddress": "rae.kaphle@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/60774dff41da819a9e1743462642ffec?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRK-0.png",
+                "24x24": "https://secure.gravatar.com/avatar/60774dff41da819a9e1743462642ffec?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRK-0.png",
+                "16x16": "https://secure.gravatar.com/avatar/60774dff41da819a9e1743462642ffec?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRK-0.png",
+                "32x32": "https://secure.gravatar.com/avatar/60774dff41da819a9e1743462642ffec?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRK-0.png"
+              },
+              "displayName": "Rae Kaphle",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": "<p><a href=\"https://eoriginal.atlassian.net/secure/ViewProfile.jspa?accountId=60ad07cfad76ea0070d1d89e\" class=\"user-hover\" rel=\"60ad07cfad76ea0070d1d89e\" data-account-id=\"60ad07cfad76ea0070d1d89e\" accountid=\"60ad07cfad76ea0070d1d89e\" rel=\"noreferrer\">Kevin Smith</a> <a href=\"https://eoriginal.atlassian.net/secure/ViewProfile.jspa?accountId=62d6a5fd3b239b30ebc7ae5d\" class=\"user-hover\" rel=\"62d6a5fd3b239b30ebc7ae5d\" data-account-id=\"62d6a5fd3b239b30ebc7ae5d\" accountid=\"62d6a5fd3b239b30ebc7ae5d\" rel=\"noreferrer\">Pam Baumgarten</a> mediatype should be an optional parameter for the API call. I am going to send the ticket back to Dev to work on it. </p>",
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=60fef35f8c15ca006ffd43a9",
+              "accountId": "60fef35f8c15ca006ffd43a9",
+              "emailAddress": "rae.kaphle@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/60774dff41da819a9e1743462642ffec?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRK-0.png",
+                "24x24": "https://secure.gravatar.com/avatar/60774dff41da819a9e1743462642ffec?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRK-0.png",
+                "16x16": "https://secure.gravatar.com/avatar/60774dff41da819a9e1743462642ffec?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRK-0.png",
+                "32x32": "https://secure.gravatar.com/avatar/60774dff41da819a9e1743462642ffec?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRK-0.png"
+              },
+              "displayName": "Rae Kaphle",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "10/Apr/26 2:16 PM",
+            "updated": "10/Apr/26 2:16 PM",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/103974/comment/197711",
+            "id": "197711",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=60ad07cfad76ea0070d1d89e",
+              "accountId": "60ad07cfad76ea0070d1d89e",
+              "emailAddress": "kevin.smith@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png",
+                "24x24": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png",
+                "16x16": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png",
+                "32x32": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png"
+              },
+              "displayName": "Kevin Smith",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": "<p><a href=\"https://eoriginal.atlassian.net/secure/ViewProfile.jspa?accountId=60fef35f8c15ca006ffd43a9\" class=\"user-hover\" rel=\"60fef35f8c15ca006ffd43a9\" data-account-id=\"60fef35f8c15ca006ffd43a9\" accountid=\"60fef35f8c15ca006ffd43a9\" rel=\"noreferrer\">Rae Kaphle</a>OK, im going to not submit a ticket since it was in QA ready and link this to the POD monitoring.</p>\n\n<p>Ill just assign this one to myself and move it to on hold until its fixed in the EC ticket.</p>\n\n<p><a href=\"https://eoriginal.atlassian.net/secure/ViewProfile.jspa?accountId=5ebecf474e41b90b7b66ccf1\" class=\"user-hover\" rel=\"5ebecf474e41b90b7b66ccf1\" data-account-id=\"5ebecf474e41b90b7b66ccf1\" accountid=\"5ebecf474e41b90b7b66ccf1\" rel=\"noreferrer\">Chad Dingmann</a>  </p>",
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=60ad07cfad76ea0070d1d89e",
+              "accountId": "60ad07cfad76ea0070d1d89e",
+              "emailAddress": "kevin.smith@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png",
+                "24x24": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png",
+                "16x16": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png",
+                "32x32": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png"
+              },
+              "displayName": "Kevin Smith",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "10/Apr/26 2:17 PM",
+            "updated": "10/Apr/26 2:18 PM",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/103974/comment/197712",
+            "id": "197712",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=62d6a5fd3b239b30ebc7ae5d",
+              "accountId": "62d6a5fd3b239b30ebc7ae5d",
+              "emailAddress": "pam.baumgarten@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/85a9a04c232bd666efd9977b31cb51a5?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPB-1.png",
+                "24x24": "https://secure.gravatar.com/avatar/85a9a04c232bd666efd9977b31cb51a5?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPB-1.png",
+                "16x16": "https://secure.gravatar.com/avatar/85a9a04c232bd666efd9977b31cb51a5?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPB-1.png",
+                "32x32": "https://secure.gravatar.com/avatar/85a9a04c232bd666efd9977b31cb51a5?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPB-1.png"
+              },
+              "displayName": "Pam Baumgarten",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": "<p><a href=\"https://eoriginal.atlassian.net/secure/ViewProfile.jspa?accountId=60fef35f8c15ca006ffd43a9\" class=\"user-hover\" rel=\"60fef35f8c15ca006ffd43a9\" data-account-id=\"60fef35f8c15ca006ffd43a9\" accountid=\"60fef35f8c15ca006ffd43a9\" rel=\"noreferrer\">Rae Kaphle</a> Yep.  A/C 3b (<b>“mediaType</b> is optional since requiring it would break existing integrators”).</p>",
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=62d6a5fd3b239b30ebc7ae5d",
+              "accountId": "62d6a5fd3b239b30ebc7ae5d",
+              "emailAddress": "pam.baumgarten@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/85a9a04c232bd666efd9977b31cb51a5?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPB-1.png",
+                "24x24": "https://secure.gravatar.com/avatar/85a9a04c232bd666efd9977b31cb51a5?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPB-1.png",
+                "16x16": "https://secure.gravatar.com/avatar/85a9a04c232bd666efd9977b31cb51a5?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPB-1.png",
+                "32x32": "https://secure.gravatar.com/avatar/85a9a04c232bd666efd9977b31cb51a5?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPB-1.png"
+              },
+              "displayName": "Pam Baumgarten",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "10/Apr/26 2:18 PM",
+            "updated": "10/Apr/26 2:18 PM",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/103974/comment/198657",
+            "id": "198657",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=60ad07cfad76ea0070d1d89e",
+              "accountId": "60ad07cfad76ea0070d1d89e",
+              "emailAddress": "kevin.smith@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png",
+                "24x24": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png",
+                "16x16": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png",
+                "32x32": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png"
+              },
+              "displayName": "Kevin Smith",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": "<p><a href=\"https://eoriginal.atlassian.net/secure/ViewProfile.jspa?accountId=5ebecf474e41b90b7b66ccf1\" class=\"user-hover\" rel=\"5ebecf474e41b90b7b66ccf1\" data-account-id=\"5ebecf474e41b90b7b66ccf1\" accountid=\"5ebecf474e41b90b7b66ccf1\" rel=\"noreferrer\">Chad Dingmann</a>  Looks like this should be fixed as of the POD release this morning. </p>",
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=60ad07cfad76ea0070d1d89e",
+              "accountId": "60ad07cfad76ea0070d1d89e",
+              "emailAddress": "kevin.smith@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png",
+                "24x24": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png",
+                "16x16": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png",
+                "32x32": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png"
+              },
+              "displayName": "Kevin Smith",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "23/Apr/26 12:09 PM",
+            "updated": "23/Apr/26 12:09 PM",
+            "jsdPublic": true
+          }
+        ],
+        "self": "https://eoriginal.atlassian.net/rest/api/3/issue/103974/comment",
+        "maxResults": 5,
+        "total": 5,
+        "startAt": 0
+      }
+    },
+    "names": {
+      "statuscategorychangedate": "Status Category Changed",
+      "customfield_11441": "Team",
+      "fixVersions": "Fix versions",
+      "statusCategory": "Status Category",
+      "customfield_11443": "Satisfaction date",
+      "resolution": "Resolution",
+      "customfield_11445": "Affected services",
+      "customfield_11323": "Business Value",
+      "customfield_11444": "Request language",
+      "customfield_10500": "Customer",
+      "customfield_11435": "Notes to Team",
+      "customfield_11437": "Steps to Reproduce",
+      "customfield_11318": "Tempo Team",
+      "customfield_10900": "Request Type",
+      "customfield_11319": "Account",
+      "customfield_11839": "Agent Sessions",
+      "lastViewed": "Last Viewed",
+      "customfield_11391": "Root Cause",
+      "customfield_11674": "Reported by Customer?",
+      "customfield_10100": "Flagged",
+      "priority": "Priority",
+      "labels": "Labels",
+      "customfield_11545": "Environment",
+      "timeestimate": "Remaining Estimate",
+      "aggregatetimeoriginalestimate": "Σ Original Estimate",
+      "versions": "Affects versions",
+      "customfield_11708": "Tech Debt Type",
+      "issuelinks": "Linked Issues",
+      "assignee": "Assignee",
+      "status": "Status",
+      "components": "Components",
+      "customfield_11384": "Actual Dev Hours",
+      "customfield_11544": "Goals",
+      "customfield_11543": "Sentiment",
+      "customfield_11535": "Project overview status",
+      "customfield_11414": "Blocked Reason",
+      "customfield_11534": "Project overview key",
+      "customfield_10600": "Organizations",
+      "customfield_11416": "Resolution Date",
+      "customfield_11415": "Original Due Date",
+      "customfield_11418": "Target end",
+      "aggregatetimeestimate": "Σ Remaining Estimate",
+      "customfield_11417": "Target start",
+      "creator": "Creator",
+      "subtasks": "Sub-tasks",
+      "customfield_11370": "Estimated Hours Total",
+      "reporter": "Reporter",
+      "customfield_11374": "Satisfaction",
+      "aggregateprogress": "Σ Progress",
+      "customfield_11410": "Case Error Message",
+      "customfield_11530": "Technology Investment Category",
+      "customfield_11412": "Escalation Feedback",
+      "customfield_11378": "Configuration Changes",
+      "customfield_11411": "Internal Instructions",
+      "customfield_11369": "Est QA Hours",
+      "customfield_11526": "Times in QA",
+      "customfield_11525": "Design",
+      "customfield_11407": "Customer Urgency Statement",
+      "customfield_11409": "Escalation Data",
+      "customfield_11529": "Vulnerability",
+      "customfield_11408": "Customer Impact Statement",
+      "customfield_11806": "Work item created forms",
+      "progress": "Progress",
+      "votes": "Votes",
+      "worklog": "Log Work",
+      "issuetype": "Issue Type",
+      "timespent": "Time Spent",
+      "customfield_11483": "Veracode Link",
+      "customfield_11362": "Engineering Summary",
+      "project": "Project",
+      "customfield_11361": "Start date",
+      "customfield_11000": "QA",
+      "customfield_11364": "Request participants",
+      "customfield_11363": "Create QA Automation Task",
+      "aggregatetimespent": "Σ Time Spent",
+      "customfield_11641": "Focus Areas",
+      "customfield_11365": "Story point estimate",
+      "customfield_11368": "Est Dev Hours",
+      "customfield_11401": "Test History",
+      "customfield_11367": "Issue colour",
+      "customfield_10700": "Acceptance Criteria",
+      "resolutiondate": "Resolved",
+      "workratio": "Work Ratio",
+      "watches": "Watchers",
+      "created": "Created",
+      "customfield_11872": "Incident manager",
+      "customfield_10300": "Development",
+      "customfield_11503": "Workaround",
+      "updated": "Updated",
+      "customfield_11580": "Insights",
+      "timeoriginalestimate": "Original estimate",
+      "customfield_11340": "Priority Level",
+      "customfield_11582": "Linked items",
+      "customfield_11581": "Comments",
+      "description": "Description",
+      "customfield_11584": "Delivery status",
+      "customfield_11583": "Delivery progress",
+      "customfield_11100": "Developer",
+      "customfield_11740": "Development Phase",
+      "customfield_11741": "Asset",
+      "timetracking": "Time tracking",
+      "customfield_11579": "Atlassian project status",
+      "customfield_11458": "Category",
+      "customfield_11578": "Atlassian project",
+      "security": "Security Level",
+      "attachment": "Attachment",
+      "customfield_10009": "Approvals",
+      "summary": "Summary",
+      "customfield_11450": "Associations",
+      "customfield_11452": "Open forms",
+      "customfield_11451": "API Test Required?",
+      "customfield_10000": "[CHART] Date of First Response",
+      "customfield_11454": "Locked forms",
+      "customfield_10001": "[CHART] Time in Status",
+      "customfield_11575": "Idea archived",
+      "customfield_10002": "Rank",
+      "customfield_11453": "Submitted forms",
+      "customfield_11577": "Idea archived on",
+      "customfield_10003": "Sprint",
+      "customfield_10400": "Team",
+      "customfield_11576": "Idea archived by",
+      "customfield_11455": "Total forms",
+      "customfield_10004": "Epic Link",
+      "customfield_11446": "Release Notes Required?",
+      "environment": "Environment",
+      "customfield_11449": "Association Count",
+      "duedate": "Due date",
+      "comment": "Comment"
+    },
+    "fields": {
+      "statuscategorychangedate": "2026-05-12T15:29:25.000-0400",
+      "customfield_11441": null,
+      "fixVersions": [],
+      "statusCategory": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/statuscategory/3",
+        "id": 3,
+        "key": "done",
+        "colorName": "green",
+        "name": "Done"
+      },
+      "customfield_11443": null,
+      "resolution": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/resolution/10000",
+        "id": "10000",
+        "description": "Work has been completed on this issue.",
+        "name": "Done"
+      },
+      "customfield_11445": null,
+      "customfield_11323": null,
+      "customfield_11444": null,
+      "customfield_10500": [
+        "DealerTrack",
+        "RouteOne"
+      ],
+      "customfield_11435": null,
+      "customfield_11437": null,
+      "customfield_11318": null,
+      "customfield_10900": null,
+      "customfield_11319": null,
+      "customfield_11839": null,
+      "lastViewed": null,
+      "customfield_11391": {
+        "type": "doc",
+        "version": 1,
+        "content": [
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Media type was not optional when this was first pushed to POD"
+              }
+            ]
+          }
+        ]
+      },
+      "customfield_11674": null,
+      "customfield_10100": null,
+      "priority": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/priority/3",
+        "iconUrl": "https://eoriginal.atlassian.net/images/icons/priorities/medium_new.svg",
+        "name": "Medium",
+        "id": "3"
+      },
+      "labels": [
+        "DealerTrack",
+        "RouteOne"
+      ],
+      "customfield_11545": null,
+      "timeestimate": null,
+      "aggregatetimeoriginalestimate": null,
+      "versions": [],
+      "customfield_11708": null,
+      "issuelinks": [
+        {
+          "id": "83603",
+          "self": "https://eoriginal.atlassian.net/rest/api/3/issueLink/83603",
+          "type": {
+            "id": "10400",
+            "name": "Discovered during",
+            "inward": "was discovered by",
+            "outward": "discovered",
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issueLinkType/10400"
+          },
+          "inwardIssue": {
+            "id": "102363",
+            "key": "ESCA-2947",
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/102363",
+            "fields": {
+              "summary": "Monitor 26.3 POD issues",
+              "status": {
+                "self": "https://eoriginal.atlassian.net/rest/api/3/status/10002",
+                "description": "",
+                "iconUrl": "https://eoriginal.atlassian.net/",
+                "name": "Done",
+                "id": "10002",
+                "statusCategory": {
+                  "self": "https://eoriginal.atlassian.net/rest/api/3/statuscategory/3",
+                  "id": 3,
+                  "key": "done",
+                  "colorName": "green",
+                  "name": "Done"
+                }
+              },
+              "priority": {
+                "self": "https://eoriginal.atlassian.net/rest/api/3/priority/3",
+                "iconUrl": "https://eoriginal.atlassian.net/images/icons/priorities/medium_new.svg",
+                "name": "Medium",
+                "id": "3"
+              },
+              "issuetype": {
+                "self": "https://eoriginal.atlassian.net/rest/api/3/issuetype/10002",
+                "id": "10002",
+                "description": "A small, distinct piece of work.",
+                "iconUrl": "https://eoriginal.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
+                "name": "Task",
+                "subtask": false,
+                "avatarId": 10318,
+                "hierarchyLevel": 0
+              }
+            }
+          }
+        },
+        {
+          "id": "83800",
+          "self": "https://eoriginal.atlassian.net/rest/api/3/issueLink/83800",
+          "type": {
+            "id": "10201",
+            "name": "Problem/Incident",
+            "inward": "is caused by",
+            "outward": "causes",
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issueLinkType/10201"
+          },
+          "inwardIssue": {
+            "id": "79203",
+            "key": "EC-12000",
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/79203",
+            "fields": {
+              "summary": "Phase 2_04: Improve Paper Out/Export to track if saving digital or papering out",
+              "status": {
+                "self": "https://eoriginal.atlassian.net/rest/api/3/status/6",
+                "description": "The work item is considered finished, the resolution is correct. Work items which are closed can be reopened.",
+                "iconUrl": "https://eoriginal.atlassian.net/images/icons/statuses/closed.png",
+                "name": "Closed",
+                "id": "6",
+                "statusCategory": {
+                  "self": "https://eoriginal.atlassian.net/rest/api/3/statuscategory/3",
+                  "id": 3,
+                  "key": "done",
+                  "colorName": "green",
+                  "name": "Done"
+                }
+              },
+              "priority": {
+                "self": "https://eoriginal.atlassian.net/rest/api/3/priority/3",
+                "iconUrl": "https://eoriginal.atlassian.net/images/icons/priorities/medium_new.svg",
+                "name": "Medium",
+                "id": "3"
+              },
+              "issuetype": {
+                "self": "https://eoriginal.atlassian.net/rest/api/3/issuetype/10001",
+                "id": "10001",
+                "description": "Created by Jira Agile - do not edit or delete. Issue type for a user story.",
+                "iconUrl": "https://eoriginal.atlassian.net/images/icons/issuetypes/story.svg",
+                "name": "Story",
+                "subtask": false,
+                "hierarchyLevel": 0
+              }
+            }
+          }
+        }
+      ],
+      "assignee": null,
+      "status": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/status/10002",
+        "description": "",
+        "iconUrl": "https://eoriginal.atlassian.net/",
+        "name": "Done",
+        "id": "10002",
+        "statusCategory": {
+          "self": "https://eoriginal.atlassian.net/rest/api/3/statuscategory/3",
+          "id": 3,
+          "key": "done",
+          "colorName": "green",
+          "name": "Done"
+        }
+      },
+      "components": [],
+      "customfield_11384": null,
+      "customfield_11544": null,
+      "customfield_11543": null,
+      "customfield_11535": null,
+      "customfield_11414": {
+        "type": "doc",
+        "version": 1,
+        "content": [
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "The ticket related to it was in Ready for QA, going to move to on hold and once its fixed we can verify / do additional research as needed. "
+              }
+            ]
+          }
+        ]
+      },
+      "customfield_11534": null,
+      "customfield_10600": [],
+      "customfield_11416": "2026-04-23",
+      "customfield_11415": null,
+      "customfield_11418": null,
+      "aggregatetimeestimate": null,
+      "customfield_11417": null,
+      "creator": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5ebecf474e41b90b7b66ccf1",
+        "accountId": "5ebecf474e41b90b7b66ccf1",
+        "emailAddress": "chad.dingmann@wolterskluwer.com",
+        "avatarUrls": {
+          "48x48": "https://secure.gravatar.com/avatar/703f9c369775d0c2fb5535949cf20a25?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCD-6.png",
+          "24x24": "https://secure.gravatar.com/avatar/703f9c369775d0c2fb5535949cf20a25?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCD-6.png",
+          "16x16": "https://secure.gravatar.com/avatar/703f9c369775d0c2fb5535949cf20a25?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCD-6.png",
+          "32x32": "https://secure.gravatar.com/avatar/703f9c369775d0c2fb5535949cf20a25?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCD-6.png"
+        },
+        "displayName": "Chad Dingmann",
+        "active": true,
+        "timeZone": "America/New_York",
+        "accountType": "atlassian"
+      },
+      "subtasks": [],
+      "customfield_11370": null,
+      "reporter": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5ebecf474e41b90b7b66ccf1",
+        "accountId": "5ebecf474e41b90b7b66ccf1",
+        "emailAddress": "chad.dingmann@wolterskluwer.com",
+        "avatarUrls": {
+          "48x48": "https://secure.gravatar.com/avatar/703f9c369775d0c2fb5535949cf20a25?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCD-6.png",
+          "24x24": "https://secure.gravatar.com/avatar/703f9c369775d0c2fb5535949cf20a25?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCD-6.png",
+          "16x16": "https://secure.gravatar.com/avatar/703f9c369775d0c2fb5535949cf20a25?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCD-6.png",
+          "32x32": "https://secure.gravatar.com/avatar/703f9c369775d0c2fb5535949cf20a25?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCD-6.png"
+        },
+        "displayName": "Chad Dingmann",
+        "active": true,
+        "timeZone": "America/New_York",
+        "accountType": "atlassian"
+      },
+      "customfield_11374": null,
+      "aggregateprogress": {
+        "progress": 0,
+        "total": 0
+      },
+      "customfield_11410": null,
+      "customfield_11530": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/customFieldOption/10542",
+        "value": "Maintenance",
+        "id": "10542"
+      },
+      "customfield_11412": null,
+      "customfield_11378": null,
+      "customfield_11411": null,
+      "customfield_11369": null,
+      "customfield_11526": null,
+      "customfield_11525": null,
+      "customfield_11407": {
+        "type": "doc",
+        "version": 1,
+        "content": [
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "broke their testing. Workaround is to add mediatype"
+              }
+            ]
+          }
+        ]
+      },
+      "customfield_11409": null,
+      "customfield_11529": null,
+      "customfield_11408": null,
+      "customfield_11806": null,
+      "progress": {
+        "progress": 0,
+        "total": 0
+      },
+      "votes": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/issue/ESCA-2958/votes",
+        "votes": 0,
+        "hasVoted": false
+      },
+      "worklog": {
+        "startAt": 0,
+        "maxResults": 20,
+        "total": 0,
+        "worklogs": []
+      },
+      "issuetype": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/issuetype/10438",
+        "id": "10438",
+        "description": "",
+        "iconUrl": "https://eoriginal.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10300?size=medium",
+        "name": "SF Case Escalation",
+        "subtask": false,
+        "avatarId": 10300,
+        "hierarchyLevel": 0
+      },
+      "timespent": null,
+      "customfield_11483": null,
+      "customfield_11362": null,
+      "project": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/project/10523",
+        "id": "10523",
+        "key": "ESCA",
+        "name": "Escalation_v2",
+        "projectTypeKey": "software",
+        "simplified": false,
+        "avatarUrls": {
+          "48x48": "https://eoriginal.atlassian.net/rest/api/3/universal_avatar/view/type/project/avatar/10712",
+          "24x24": "https://eoriginal.atlassian.net/rest/api/3/universal_avatar/view/type/project/avatar/10712?size=small",
+          "16x16": "https://eoriginal.atlassian.net/rest/api/3/universal_avatar/view/type/project/avatar/10712?size=xsmall",
+          "32x32": "https://eoriginal.atlassian.net/rest/api/3/universal_avatar/view/type/project/avatar/10712?size=medium"
+        }
+      },
+      "customfield_11361": null,
+      "customfield_11000": null,
+      "customfield_11364": [],
+      "customfield_11363": null,
+      "aggregatetimespent": null,
+      "customfield_11641": null,
+      "customfield_11365": null,
+      "customfield_11368": null,
+      "customfield_11401": {
+        "type": "doc",
+        "version": 1,
+        "content": [
+          {
+            "type": "table",
+            "attrs": {
+              "isNumberColumnEnabled": false,
+              "layout": "default"
+            },
+            "content": [
+              {
+                "type": "tableRow",
+                "content": [
+                  {
+                    "type": "tableHeader",
+                    "attrs": {},
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "Date",
+                            "marks": [
+                              {
+                                "type": "strong"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableHeader",
+                    "attrs": {},
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "Status(Pass/Fail)",
+                            "marks": [
+                              {
+                                "type": "strong"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableHeader",
+                    "attrs": {},
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "Version",
+                            "marks": [
+                              {
+                                "type": "strong"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableHeader",
+                    "attrs": {},
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "Tester",
+                            "marks": [
+                              {
+                                "type": "strong"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "tableRow",
+                "content": [
+                  {
+                    "type": "tableCell",
+                    "attrs": {},
+                    "content": [
+                      {
+                        "type": "paragraph"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {},
+                    "content": [
+                      {
+                        "type": "paragraph"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {},
+                    "content": [
+                      {
+                        "type": "paragraph"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {},
+                    "content": [
+                      {
+                        "type": "paragraph"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "customfield_11367": null,
+      "customfield_10700": null,
+      "resolutiondate": "2026-04-23T12:10:19.460-0400",
+      "workratio": -1,
+      "watches": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/issue/ESCA-2958/watchers",
+        "watchCount": 8,
+        "isWatching": false
+      },
+      "created": "2026-04-10T14:03:25.787-0400",
+      "customfield_11872": null,
+      "customfield_10300": "{}",
+      "customfield_11503": null,
+      "updated": "2026-05-12T15:29:24.999-0400",
+      "customfield_11580": null,
+      "timeoriginalestimate": null,
+      "customfield_11340": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/customFieldOption/10300",
+        "value": "Normal",
+        "id": "10300"
+      },
+      "customfield_11582": null,
+      "customfield_11581": null,
+      "description": {
+        "type": "doc",
+        "version": 1,
+        "content": [
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "case 6845527"
+              }
+            ],
+            "attrs": {
+              "localId": "8f8fbec90050"
+            }
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "DealerTrack reported an issue that started on 4/9 when they make the eoRequestExport API call. "
+              }
+            ],
+            "attrs": {
+              "localId": "c1b7e57aaf95"
+            }
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "handleException org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.type.TypeException: Could not set parameters for mapping: ParameterMapping{property='mediaType', mode=IN, javaType=class com.eoriginal.commons.request.MediaType, jdbcType=null, numericScale=null, resultMapId='null', jdbcTypeName='null', expression='null'}. Cause: org.apache.ibatis.type.TypeException: Error setting null for parameter #1 with JdbcType OTHER . Try setting a different JdbcType for this parameter or a different jdbcTypeForNull configuration property. Cause: java.sql.SQLException: Invalid column type: 1111",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ]
+              }
+            ],
+            "attrs": {
+              "localId": "6dfb5f3b5fd6"
+            }
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "https://wk-asm.splunkcloud.com/en-US/app/search/search?earliest=1775710800&latest=1775883600&q=search index%3D\"ecore_stg\" DT_DCV_POD log_level%3DERROR&display.page.search.mode=verbose&dispatch.sample_ratio=1&sid=1775843299.52012",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://wk-asm.splunkcloud.com/en-US/app/search/search?earliest=1775710800&latest=1775883600&q=search%20index%3D%22ecore_stg%22%20DT_DCV_POD%20log_level%3DERROR&display.page.search.mode=verbose&dispatch.sample_ratio=1&sid=1775843299.52012"
+                    }
+                  }
+                ]
+              }
+            ],
+            "attrs": {
+              "localId": "b9f46b4a7998"
+            }
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "A new element was added in 26.3 for mediatype. In DT’s testing, if they don’t include the mediatype, they get the error. If they include mediatype, then they don’t get an error. It seems to be related to this. "
+              }
+            ],
+            "attrs": {
+              "localId": "be8777652f89"
+            }
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Without mediatype they get:"
+              }
+            ],
+            "attrs": {
+              "localId": "991ede8fa1e9"
+            }
+          },
+          {
+            "type": "mediaSingle",
+            "attrs": {
+              "width": 719,
+              "widthType": "pixel",
+              "localId": "b3176544ab61",
+              "layout": "align-start"
+            },
+            "content": [
+              {
+                "type": "media",
+                "attrs": {
+                  "type": "file",
+                  "id": "ad5cbb13-186c-4195-affc-58c94919c86c",
+                  "alt": "image-20260410-180339.png",
+                  "collection": "",
+                  "localId": "2e9cfef94df8",
+                  "height": 797,
+                  "width": 1435
+                }
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "localId": "6fddf7f585fc"
+            }
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "With mediatype they get:"
+              }
+            ],
+            "attrs": {
+              "localId": "6fddf7f585fc"
+            }
+          },
+          {
+            "type": "mediaSingle",
+            "attrs": {
+              "width": 671,
+              "widthType": "pixel",
+              "localId": "39921000bbba",
+              "layout": "align-start"
+            },
+            "content": [
+              {
+                "type": "media",
+                "attrs": {
+                  "type": "file",
+                  "id": "be3a1d74-105d-46f1-9c86-00e7dd1812c3",
+                  "alt": "image-20260410-175705.png",
+                  "collection": "",
+                  "localId": "2469c9f596cc",
+                  "height": 795,
+                  "width": 1737
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "customfield_11584": null,
+      "customfield_11583": null,
+      "customfield_11100": null,
+      "customfield_11740": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/customFieldOption/10709",
+        "value": "Post-Release",
+        "id": "10709"
+      },
+      "customfield_11741": "eCore",
+      "timetracking": {},
+      "customfield_11579": null,
+      "customfield_11458": null,
+      "customfield_11578": null,
+      "security": null,
+      "attachment": [
+        {
+          "self": "https://eoriginal.atlassian.net/rest/api/3/attachment/107019",
+          "id": "107019",
+          "filename": "image-20260410-175705.png",
+          "author": {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5ebecf474e41b90b7b66ccf1",
+            "accountId": "5ebecf474e41b90b7b66ccf1",
+            "emailAddress": "chad.dingmann@wolterskluwer.com",
+            "avatarUrls": {
+              "48x48": "https://secure.gravatar.com/avatar/703f9c369775d0c2fb5535949cf20a25?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCD-6.png",
+              "24x24": "https://secure.gravatar.com/avatar/703f9c369775d0c2fb5535949cf20a25?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCD-6.png",
+              "16x16": "https://secure.gravatar.com/avatar/703f9c369775d0c2fb5535949cf20a25?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCD-6.png",
+              "32x32": "https://secure.gravatar.com/avatar/703f9c369775d0c2fb5535949cf20a25?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCD-6.png"
+            },
+            "displayName": "Chad Dingmann",
+            "active": true,
+            "timeZone": "America/New_York",
+            "accountType": "atlassian"
+          },
+          "created": "2026-04-10T14:03:26.000-0400",
+          "size": 302158,
+          "mimeType": "image/png",
+          "content": "https://eoriginal.atlassian.net/rest/api/3/attachment/content/107019",
+          "thumbnail": "https://eoriginal.atlassian.net/rest/api/3/attachment/thumbnail/107019"
+        },
+        {
+          "self": "https://eoriginal.atlassian.net/rest/api/3/attachment/107020",
+          "id": "107020",
+          "filename": "image-20260410-180339.png",
+          "author": {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5ebecf474e41b90b7b66ccf1",
+            "accountId": "5ebecf474e41b90b7b66ccf1",
+            "emailAddress": "chad.dingmann@wolterskluwer.com",
+            "avatarUrls": {
+              "48x48": "https://secure.gravatar.com/avatar/703f9c369775d0c2fb5535949cf20a25?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCD-6.png",
+              "24x24": "https://secure.gravatar.com/avatar/703f9c369775d0c2fb5535949cf20a25?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCD-6.png",
+              "16x16": "https://secure.gravatar.com/avatar/703f9c369775d0c2fb5535949cf20a25?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCD-6.png",
+              "32x32": "https://secure.gravatar.com/avatar/703f9c369775d0c2fb5535949cf20a25?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCD-6.png"
+            },
+            "displayName": "Chad Dingmann",
+            "active": true,
+            "timeZone": "America/New_York",
+            "accountType": "atlassian"
+          },
+          "created": "2026-04-10T14:03:48.235-0400",
+          "size": 276019,
+          "mimeType": "image/png",
+          "content": "https://eoriginal.atlassian.net/rest/api/3/attachment/content/107020",
+          "thumbnail": "https://eoriginal.atlassian.net/rest/api/3/attachment/thumbnail/107020"
+        }
+      ],
+      "customfield_10009": null,
+      "summary": "POD - MyBatisSystemException Invalid column type: 1111",
+      "customfield_11450": null,
+      "customfield_11452": null,
+      "customfield_11451": null,
+      "customfield_10000": "2026-04-10T14:07:49.711-0400",
+      "customfield_11454": null,
+      "customfield_10001": "10000_*:*_1_*:*_926412_*|*_10101_*:*_1_*:*_0",
+      "customfield_11575": null,
+      "customfield_10002": "2|i01e2n:",
+      "customfield_11453": null,
+      "customfield_11577": null,
+      "customfield_10003": null,
+      "customfield_10400": null,
+      "customfield_11576": null,
+      "customfield_11455": null,
+      "customfield_10004": null,
+      "customfield_11446": null,
+      "environment": null,
+      "customfield_11449": null,
+      "duedate": null,
+      "comment": {
+        "comments": [
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/103974/comment/197708",
+            "id": "197708",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=60ad07cfad76ea0070d1d89e",
+              "accountId": "60ad07cfad76ea0070d1d89e",
+              "emailAddress": "kevin.smith@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png",
+                "24x24": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png",
+                "16x16": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png",
+                "32x32": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png"
+              },
+              "displayName": "Kevin Smith",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": {
+              "type": "doc",
+              "version": 1,
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "mention",
+                      "attrs": {
+                        "id": "5ebecf474e41b90b7b66ccf1",
+                        "text": "@Chad Dingmann",
+                        "accessLevel": "",
+                        "localId": "ebe9d5a1-f734-442e-b974-d38032e73f8d"
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "text": " Iv reached out to "
+                    },
+                    {
+                      "type": "mention",
+                      "attrs": {
+                        "id": "62d6a5fd3b239b30ebc7ae5d",
+                        "text": "@Pam Baumgarten",
+                        "accessLevel": "",
+                        "localId": "58bec75d-6911-4d8f-999d-b1500e2ab249"
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "text": " about this. "
+                    }
+                  ],
+                  "attrs": {
+                    "localId": "3d33117baecb"
+                  }
+                },
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "I think the problem is there should be a default type in "
+                    },
+                    {
+                      "type": "inlineCard",
+                      "attrs": {
+                        "url": "https://eoriginal.atlassian.net/browse/EC-12000?search_id=41bd6133-244b-471d-8b79-e0eccb11dc04",
+                        "localId": "949dd75070ca"
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "text": "  when it does not have that media type, but im not too sure. "
+                    }
+                  ],
+                  "attrs": {
+                    "localId": "9d707d37e13a"
+                  }
+                },
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Product will need to make that call if its a bug or expected. "
+                    }
+                  ],
+                  "attrs": {
+                    "localId": "fff829b3babe"
+                  }
+                }
+              ]
+            },
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=60ad07cfad76ea0070d1d89e",
+              "accountId": "60ad07cfad76ea0070d1d89e",
+              "emailAddress": "kevin.smith@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png",
+                "24x24": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png",
+                "16x16": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png",
+                "32x32": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png"
+              },
+              "displayName": "Kevin Smith",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "2026-04-10T14:07:49.711-0400",
+            "updated": "2026-04-10T14:07:49.711-0400",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/103974/comment/197709",
+            "id": "197709",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=60fef35f8c15ca006ffd43a9",
+              "accountId": "60fef35f8c15ca006ffd43a9",
+              "emailAddress": "rae.kaphle@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/60774dff41da819a9e1743462642ffec?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRK-0.png",
+                "24x24": "https://secure.gravatar.com/avatar/60774dff41da819a9e1743462642ffec?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRK-0.png",
+                "16x16": "https://secure.gravatar.com/avatar/60774dff41da819a9e1743462642ffec?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRK-0.png",
+                "32x32": "https://secure.gravatar.com/avatar/60774dff41da819a9e1743462642ffec?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRK-0.png"
+              },
+              "displayName": "Rae Kaphle",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": {
+              "type": "doc",
+              "version": 1,
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "mention",
+                      "attrs": {
+                        "id": "60ad07cfad76ea0070d1d89e",
+                        "text": "@Kevin Smith",
+                        "accessLevel": "",
+                        "localId": "92462a65-6f42-462c-a150-5b30b068d263"
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "text": " "
+                    },
+                    {
+                      "type": "mention",
+                      "attrs": {
+                        "id": "62d6a5fd3b239b30ebc7ae5d",
+                        "text": "@Pam Baumgarten",
+                        "accessLevel": "",
+                        "localId": "16e64edf-389b-47c1-9776-40e58539ca2a"
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "text": " mediatype should be an optional parameter for the API call. I am going to send the ticket back to Dev to work on it. "
+                    }
+                  ],
+                  "attrs": {
+                    "localId": "00a5ec7305c8"
+                  }
+                }
+              ]
+            },
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=60fef35f8c15ca006ffd43a9",
+              "accountId": "60fef35f8c15ca006ffd43a9",
+              "emailAddress": "rae.kaphle@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/60774dff41da819a9e1743462642ffec?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRK-0.png",
+                "24x24": "https://secure.gravatar.com/avatar/60774dff41da819a9e1743462642ffec?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRK-0.png",
+                "16x16": "https://secure.gravatar.com/avatar/60774dff41da819a9e1743462642ffec?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRK-0.png",
+                "32x32": "https://secure.gravatar.com/avatar/60774dff41da819a9e1743462642ffec?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRK-0.png"
+              },
+              "displayName": "Rae Kaphle",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "2026-04-10T14:16:07.042-0400",
+            "updated": "2026-04-10T14:16:07.042-0400",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/103974/comment/197711",
+            "id": "197711",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=60ad07cfad76ea0070d1d89e",
+              "accountId": "60ad07cfad76ea0070d1d89e",
+              "emailAddress": "kevin.smith@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png",
+                "24x24": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png",
+                "16x16": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png",
+                "32x32": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png"
+              },
+              "displayName": "Kevin Smith",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": {
+              "type": "doc",
+              "version": 1,
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "mention",
+                      "attrs": {
+                        "id": "60fef35f8c15ca006ffd43a9",
+                        "text": "@Rae Kaphle",
+                        "accessLevel": "",
+                        "localId": "e889486e3df1"
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "text": "OK, im going to not submit a ticket since it was in QA ready and link this to the POD monitoring."
+                    }
+                  ],
+                  "attrs": {
+                    "localId": "106ea9c12301"
+                  }
+                },
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Ill just assign this one to myself and move it to on hold until its fixed in the EC ticket."
+                    }
+                  ],
+                  "attrs": {
+                    "localId": "db312bf7ea21"
+                  }
+                },
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "mention",
+                      "attrs": {
+                        "id": "5ebecf474e41b90b7b66ccf1",
+                        "text": "@Chad Dingmann",
+                        "accessLevel": "",
+                        "localId": "5132d322-18f2-42d6-ad47-5091111d4b96"
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "text": "  "
+                    }
+                  ],
+                  "attrs": {
+                    "localId": "be9428165be9"
+                  }
+                }
+              ]
+            },
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=60ad07cfad76ea0070d1d89e",
+              "accountId": "60ad07cfad76ea0070d1d89e",
+              "emailAddress": "kevin.smith@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png",
+                "24x24": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png",
+                "16x16": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png",
+                "32x32": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png"
+              },
+              "displayName": "Kevin Smith",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "2026-04-10T14:17:55.753-0400",
+            "updated": "2026-04-10T14:18:14.971-0400",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/103974/comment/197712",
+            "id": "197712",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=62d6a5fd3b239b30ebc7ae5d",
+              "accountId": "62d6a5fd3b239b30ebc7ae5d",
+              "emailAddress": "pam.baumgarten@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/85a9a04c232bd666efd9977b31cb51a5?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPB-1.png",
+                "24x24": "https://secure.gravatar.com/avatar/85a9a04c232bd666efd9977b31cb51a5?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPB-1.png",
+                "16x16": "https://secure.gravatar.com/avatar/85a9a04c232bd666efd9977b31cb51a5?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPB-1.png",
+                "32x32": "https://secure.gravatar.com/avatar/85a9a04c232bd666efd9977b31cb51a5?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPB-1.png"
+              },
+              "displayName": "Pam Baumgarten",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": {
+              "type": "doc",
+              "version": 1,
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "mention",
+                      "attrs": {
+                        "id": "60fef35f8c15ca006ffd43a9",
+                        "text": "@Rae Kaphle",
+                        "accessLevel": "",
+                        "localId": "a7bb8784b6ed"
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "text": " Yep.  A/C 3b ("
+                    },
+                    {
+                      "type": "text",
+                      "text": "“mediaType ",
+                      "marks": [
+                        {
+                          "type": "strong"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "text": "is optional since requiring it would break existing integrators”)."
+                    }
+                  ],
+                  "attrs": {
+                    "localId": "57fc4f560ccf"
+                  }
+                }
+              ]
+            },
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=62d6a5fd3b239b30ebc7ae5d",
+              "accountId": "62d6a5fd3b239b30ebc7ae5d",
+              "emailAddress": "pam.baumgarten@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/85a9a04c232bd666efd9977b31cb51a5?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPB-1.png",
+                "24x24": "https://secure.gravatar.com/avatar/85a9a04c232bd666efd9977b31cb51a5?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPB-1.png",
+                "16x16": "https://secure.gravatar.com/avatar/85a9a04c232bd666efd9977b31cb51a5?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPB-1.png",
+                "32x32": "https://secure.gravatar.com/avatar/85a9a04c232bd666efd9977b31cb51a5?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPB-1.png"
+              },
+              "displayName": "Pam Baumgarten",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "2026-04-10T14:18:27.117-0400",
+            "updated": "2026-04-10T14:18:27.117-0400",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/103974/comment/198657",
+            "id": "198657",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=60ad07cfad76ea0070d1d89e",
+              "accountId": "60ad07cfad76ea0070d1d89e",
+              "emailAddress": "kevin.smith@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png",
+                "24x24": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png",
+                "16x16": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png",
+                "32x32": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png"
+              },
+              "displayName": "Kevin Smith",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": {
+              "type": "doc",
+              "version": 1,
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "mention",
+                      "attrs": {
+                        "id": "5ebecf474e41b90b7b66ccf1",
+                        "text": "@Chad Dingmann",
+                        "accessLevel": "",
+                        "localId": "ef1cfdad-3a57-49df-bbe1-b7cb47cecc2a"
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "text": "  Looks like this should be fixed as of the POD release this morning. "
+                    }
+                  ],
+                  "attrs": {
+                    "localId": "8158d2659c88"
+                  }
+                }
+              ]
+            },
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=60ad07cfad76ea0070d1d89e",
+              "accountId": "60ad07cfad76ea0070d1d89e",
+              "emailAddress": "kevin.smith@wolterskluwer.com",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png",
+                "24x24": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png",
+                "16x16": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png",
+                "32x32": "https://secure.gravatar.com/avatar/df1fb4f9cce5cd6f279726cfc10a57a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKS-2.png"
+              },
+              "displayName": "Kevin Smith",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "2026-04-23T12:09:57.577-0400",
+            "updated": "2026-04-23T12:09:57.577-0400",
+            "jsdPublic": true
+          }
+        ],
+        "self": "https://eoriginal.atlassian.net/rest/api/3/issue/103974/comment",
+        "maxResults": 5,
+        "total": 5,
+        "startAt": 0
+      }
+    }
+  }
+}

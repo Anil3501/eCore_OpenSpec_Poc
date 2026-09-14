@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "1.0.0",
+  "approvalId": "REPLACE_WITH_APR-AC-EC-12000-001",
+  "gate": "ACCEPTANCE_CRITERIA",
+  "artifactId": "EC-12000",
+  "artifactVersion": 1,
+  "release": "26.3",
+  "capability": "paper-out-export",
+  "sourceArtifactPath": "requirements/normalized/EC-12000.json",
+  "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+  "reviewer": {
+    "name": "REPLACE_WITH_YOUR_NAME",
+    "role": "REPLACE_WITH_YOUR_ROLE",
+    "reference": null
+  },
+  "reviewedAt": "REPLACE_WITH_ISO_8601_TIMESTAMP",
+  "comments": "REPLACE_WITH_ANY_OVERALL_COMMENT. Answer every question the review package raised, including whether AMB-EC-12000-001, -002 and -003 are resolved, deferred, or left REVIEW_REQUIRED.",
+  "itemDecisions": [
+    {
+      "itemId": "AC-EC-12000-001",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "REPLACE_WITH_A_SHORT_NOTE_ON_THIS_ITEM"
+    },
+    {
+      "itemId": "AC-EC-12000-002",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "REPLACE_WITH_A_SHORT_NOTE_ON_THIS_ITEM"
+    },
+    {
+      "itemId": "AC-EC-12000-003",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "REPLACE_WITH_A_SHORT_NOTE_ON_THIS_ITEM"
+    },
+    {
+      "itemId": "AC-EC-12000-004",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "REPLACE_WITH_A_SHORT_NOTE_ON_THIS_ITEM"
+    },
+    {
+      "itemId": "AC-EC-12000-005",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "REPLACE_WITH_A_SHORT_NOTE_ON_THIS_ITEM"
+    },
+    {
+      "itemId": "AC-EC-12000-006",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "REPLACE_WITH_A_SHORT_NOTE_ON_THIS_ITEM"
+    },
+    {
+      "itemId": "AC-EC-12000-007",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "REPLACE_WITH_A_SHORT_NOTE_ON_THIS_ITEM"
+    },
+    {
+      "itemId": "AC-EC-12000-008",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "REPLACE_WITH_A_SHORT_NOTE_ON_THIS_ITEM"
+    },
+    {
+      "itemId": "AC-EC-12000-009",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "REPLACE_WITH_A_SHORT_NOTE_ON_THIS_ITEM"
+    },
+    {
+      "itemId": "AC-EC-12000-010",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "REPLACE_WITH_A_SHORT_NOTE_ON_THIS_ITEM"
+    },
+    {
+      "itemId": "AC-EC-12000-011",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "REPLACE_WITH_A_SHORT_NOTE_ON_THIS_ITEM"
+    },
+    {
+      "itemId": "AC-EC-12000-012",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "REPLACE_WITH_A_SHORT_NOTE_ON_THIS_ITEM"
+    },
+    {
+      "itemId": "AC-EC-12000-013",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "REPLACE_WITH_A_SHORT_NOTE_ON_THIS_ITEM"
+    },
+    {
+      "itemId": "AC-EC-12000-014",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "REPLACE_WITH_A_SHORT_NOTE_ON_THIS_ITEM"
+    },
+    {
+      "itemId": "AC-EC-12000-015",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "REPLACE_WITH_A_SHORT_NOTE_ON_THIS_ITEM"
+    },
+    {
+      "itemId": "AC-EC-12000-016",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "REPLACE_WITH_A_SHORT_NOTE_ON_THIS_ITEM"
+    },
+    {
+      "itemId": "AC-EC-12000-017",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "REPLACE_WITH_A_SHORT_NOTE_ON_THIS_ITEM"
+    },
+    {
+      "itemId": "AC-EC-12000-018",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "REPLACE_WITH_A_SHORT_NOTE_ON_THIS_ITEM"
+    },
+    {
+      "itemId": "AC-EC-12000-019",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "REPLACE_WITH_A_SHORT_NOTE_ON_THIS_ITEM"
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "1.0.0",
+  "approvalId": "APR-AC-EC-12000-001",
+  "gate": "ACCEPTANCE_CRITERIA",
+  "artifactId": "EC-12000",
+  "artifactVersion": 1,
+  "release": "26.3",
+  "capability": "paper-out-export",
+  "sourceArtifactPath": "requirements/normalized/EC-12000.json",
+  "decision": "APPROVE",
+  "reviewer": {
+    "name": "Anil",
+    "role": "Product/QA Reviewer",
+    "reference": null
+  },
+  "reviewedAt": "2026-09-11T10:01:23.802Z",
+  "comments": "All 19 acceptance criteria approved. AMB-EC-12000-001, -002 and -003 are RESOLVED (see requirements/normalized/EC-12000.json ambiguities array): (1) Collections Paper Out reuses the existing modal via Collections accordion > Batch > Paper Out Request; (2) eoRequestExport has no authoritative contract today - it is marked OBSERVED / API_CONTRACT_UNVERIFIED and will be captured via Playwright MCP at PLAYWRIGHT_VALIDATION, requiring human promotion to HUMAN_APPROVED before it can back any assertion; (3) required fields gating the acknowledgement modal are Name of Request and Approver, with test data Approver = logged-in user, Name of Request = Anil Kumar.",
+  "itemDecisions": [
+    {
+      "itemId": "AC-EC-12000-001",
+      "decision": "APPROVE",
+      "comment": "Approved as written; ambiguities affecting this AC resolved and recorded in requirements/normalized/EC-12000.json."
+    },
+    {
+      "itemId": "AC-EC-12000-002",
+      "decision": "APPROVE",
+      "comment": "Approved as written; ambiguities affecting this AC resolved and recorded in requirements/normalized/EC-12000.json."
+    },
+    {
+      "itemId": "AC-EC-12000-003",
+      "decision": "APPROVE",
+      "comment": "Approved as written; ambiguities affecting this AC resolved and recorded in requirements/normalized/EC-12000.json."
+    },
+    {
+      "itemId": "AC-EC-12000-004",
+      "decision": "APPROVE",
+      "comment": "Approved as written; ambiguities affecting this AC resolved and recorded in requirements/normalized/EC-12000.json."
+    },
+    {
+      "itemId": "AC-EC-12000-005",
+      "decision": "APPROVE",
+      "comment": "Approved as written; ambiguities affecting this AC resolved and recorded in requirements/normalized/EC-12000.json."
+    },
+    {
+      "itemId": "AC-EC-12000-006",
+      "decision": "APPROVE",
+      "comment": "Approved as written; ambiguities affecting this AC resolved and recorded in requirements/normalized/EC-12000.json."
+    },
+    {
+      "itemId": "AC-EC-12000-007",
+      "decision": "APPROVE",
+      "comment": "Approved as written; ambiguities affecting this AC resolved and recorded in requirements/normalized/EC-12000.json."
+    },
+    {
+      "itemId": "AC-EC-12000-008",
+      "decision": "APPROVE",
+      "comment": "Approved as written; ambiguities affecting this AC resolved and recorded in requirements/normalized/EC-12000.json."
+    },
+    {
+      "itemId": "AC-EC-12000-009",
+      "decision": "APPROVE",
+      "comment": "Approved as written; ambiguities affecting this AC resolved and recorded in requirements/normalized/EC-12000.json."
+    },
+    {
+      "itemId": "AC-EC-12000-010",
+      "decision": "APPROVE",
+      "comment": "Approved as written; ambiguities affecting this AC resolved and recorded in requirements/normalized/EC-12000.json."
+    },
+    {
+      "itemId": "AC-EC-12000-011",
+      "decision": "APPROVE",
+      "comment": "Approved as written; ambiguities affecting this AC resolved and recorded in requirements/normalized/EC-12000.json."
+    },
+    {
+      "itemId": "AC-EC-12000-012",
+      "decision": "APPROVE",
+      "comment": "Approved as written; ambiguities affecting this AC resolved and recorded in requirements/normalized/EC-12000.json."
+    },
+    {
+      "itemId": "AC-EC-12000-013",
+      "decision": "APPROVE",
+      "comment": "Approved as written; ambiguities affecting this AC resolved and recorded in requirements/normalized/EC-12000.json."
+    },
+    {
+      "itemId": "AC-EC-12000-014",
+      "decision": "APPROVE",
+      "comment": "Approved as written; ambiguities affecting this AC resolved and recorded in requirements/normalized/EC-12000.json."
+    },
+    {
+      "itemId": "AC-EC-12000-015",
+      "decision": "APPROVE",
+      "comment": "Approved as written; ambiguities affecting this AC resolved and recorded in requirements/normalized/EC-12000.json."
+    },
+    {
+      "itemId": "AC-EC-12000-016",
+      "decision": "APPROVE",
+      "comment": "Approved as written; ambiguities affecting this AC resolved and recorded in requirements/normalized/EC-12000.json."
+    },
+    {
+      "itemId": "AC-EC-12000-017",
+      "decision": "APPROVE",
+      "comment": "Approved as written; ambiguities affecting this AC resolved and recorded in requirements/normalized/EC-12000.json."
+    },
+    {
+      "itemId": "AC-EC-12000-018",
+      "decision": "APPROVE",
+      "comment": "Approved as written; ambiguities affecting this AC resolved and recorded in requirements/normalized/EC-12000.json."
+    },
+    {
+      "itemId": "AC-EC-12000-019",
+      "decision": "APPROVE",
+      "comment": "Approved as written; ambiguities affecting this AC resolved and recorded in requirements/normalized/EC-12000.json."
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 ---
 name: bug-analyzer
-description: 'Triages a failed Playwright execution, classifies it as an application defect or a locator problem, preserves screenshots and trace.zip as evidence, and - only once locator healing has genuinely been exhausted - files a human-readable bug in Jira against the story under test using that story''s own fix version, links it to the story and assigns it for review. Never edits test code and never invents a business rule.'
+description: 'Triages a failed Playwright execution, classifies it as an application defect or a locator problem, preserves screenshots and trace.zip as evidence, and - only once locator healing has genuinely been exhausted, the composed bug has been shown to a human, and that human has explicitly confirmed it - files a human-readable bug in Jira against the story under test using that story''s own fix version, and assigns it for review. Does not create a Jira issue link to the story. Never edits test code and never invents a business rule.'
 tools:
   - search
   - read
@@ -8,7 +8,6 @@ tools:
   - execute
   - atlassian/getJiraIssue
   - atlassian/createJiraIssue
-  - atlassian/createIssueLink
   - atlassian/addCommentToJiraIssue
 ---
 
@@ -58,6 +57,14 @@ are additional, not a replacement.
    Jira description or the chat. Name variables, never values.
 8. **Never write to `traceability/` directly.** That directory is orchestrator-owned. You write
    `traceability/capabilities/<capability>.rtm.proposed.json` and let the orchestrator merge it.
+9. **Never file a bug without an explicit human confirmation.** `createJiraIssue` may only be called
+   after the composed bug (summary, description, classification, evidence) has been shown to a human
+   in chat and that human has given an explicit affirmative reply. `jira.linkedStory` is a governed
+   traceability field, not proof that a human agreed to file — only a transcribed confirmation is.
+10. **Never create a Jira issue link to the story.** This agent no longer calls
+    `atlassian/createIssueLink`. The relationship between the bug and the story is recorded only in
+    `jira.linkedStory` (this repository's own governed metadata) and in the description's `Story:`
+    line — not as a live Jira "relates to" link.
 
 ## What you own
 
@@ -215,9 +222,27 @@ Open questions:
 
 Never write "this is a P1", "the API is broken" or "this affects all users". You do not know that.
 
+### 2.3a Human confirmation gate — required before filing
+
+`createJiraIssue` is an irreversible, external side effect. It may only run after a human has seen
+the fully composed bug and explicitly said to file it.
+
+1. Set `status: REVIEW_REQUIRED` and save the defect artifact with the composed description from
+   §2.3 already in `notes`.
+2. Show the human, in chat: the summary line, the full description, the classification, and the
+   evidence file names. Ask a plain yes/no question — do not bury it in other output.
+3. **Stop here and wait.** Do not call `createJiraIssue` in the same turn you asked. A chat message
+   from *you* is never a confirmation; only the human's reply is.
+4. If the human declines, changes the description, or asks a question: apply the change (if any),
+   leave `status: REVIEW_REQUIRED`, and stop again. Re-ask after any material change.
+5. If the human confirms: transcribe their reply verbatim into `notes` with a timestamp (the same
+   pattern already used for chat-given Gate approvals elsewhere in this framework), then proceed to
+   §2.4. A confirmation from an earlier, different bug's chat never carries over.
+
 ### 2.4 File it — in this order
 
-This sequence is proven: it filed ETA-417 on 2026-09-07. Follow it rather than improvising.
+This sequence filed ETA-417 on 2026-09-07 with a link step that no longer applies — no issue link is
+created (see Non-negotiable rule 10). Follow the remaining order rather than improvising.
 
 1. **Create and assign in one call.** `atlassian/createJiraIssue` with `projectKey`, `issueTypeName`,
    `summary`, `description` and **`assignee_account_id`** set to `assigneeAccountId`. Assigning at
@@ -226,16 +251,17 @@ This sequence is proven: it filed ETA-417 on 2026-09-07. Follow it rather than i
    Carry the story's `fixVersions` through `additional_fields`. When the story has none, omit the
    field entirely — never send a placeholder — and add this line to the description:
    `Fix version: none on the story under test. Set by the assigned reviewer.`
-2. **Link** the bug to `jiraStoryId` with `atlassian/createIssueLink` using `linkType`.
-3. **Attach** the evidence. The Atlassian MCP server exposes **no attachment tool**, so Jira REST
+2. **Attach** the evidence. The Atlassian MCP server exposes **no attachment tool**, so Jira REST
    is the only route — do not waste a turn looking for one. Use `env.requireJiraConfig()`:
    `POST {url}/rest/api/3/issue/{issueKey}/attachments` with header `X-Atlassian-Token: no-check`.
    Record the route used in `jira.createdVia`.
    If `BUG_ATTACH_TRACE` is false, withhold `trace.zip`, still attach screenshots, and set
    `evidence.attachmentsWithheld: true`. Never silently drop evidence.
-4. **Read the issue back** with `atlassian/getJiraIssue` and confirm the assignee, the link and every
+3. **Read the issue back** with `atlassian/getJiraIssue` and confirm the assignee and every
    attachment landed. A create call returning `200` proves a ticket exists, not that it is complete.
-   Record only what the read-back confirms — never what you intended to send.
+   Record only what the read-back confirms — never what you intended to send. `jira.linkedStory`
+   still records `jiraStoryId` in the defect artifact for this framework's own traceability, but no
+   corresponding link exists inside Jira itself.
 
 > **Note on trace files.** A `trace.zip` can embed request headers, cookies and typed form values.
 > This project has accepted that risk for its internal Jira. Confirm the target project is not

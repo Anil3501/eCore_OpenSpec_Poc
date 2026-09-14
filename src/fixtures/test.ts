@@ -12,7 +12,13 @@ import { EcoreOrganizationPage } from '../pages/ecore-organization.page.ts';
 import { EcoreVaultPage } from '../pages/ecore-vault.page.ts';
 import { NavigationMenuComponent } from '../components/navigation-menu.component.ts';
 import { CommandCenterComponent } from '../components/command-center.component.ts';
+import { PaperOutRequestModalComponent } from '../components/paper-out-request-modal.component.ts';
+import { AcknowledgementModalComponent } from '../components/acknowledgement-modal.component.ts';
+import { WorkQueueComponent } from '../components/work-queue.component.ts';
+import { VerifyPaperOutModalComponent } from '../components/verify-paper-out-modal.component.ts';
+import { DocumentHistoryComponent } from '../components/document-history.component.ts';
 import { OrganizationLoginService } from '../services/organization-login.service.ts';
+import { PaperOutExportService } from '../services/paper-out-export.service.ts';
 
 /**
  * Scenario-scoped scratch space.
@@ -43,6 +49,43 @@ export interface NavigationOutcome {
   arrived: boolean;
   /** The failure as the assertion reported it. Empty when the arrival held. */
   detail: string;
+}
+
+/**
+ * What TS-EC-12000-018's When step read from the Verify Paper Out modal.
+ *
+ * The scenario reads a label in its When and judges it in its Then. Holding
+ * the reading here keeps the Then asserting over the *same* observation the
+ * When made, rather than quietly taking a second reading of its own - which
+ * would make the Then pass even if the When had never looked.
+ */
+export interface VerifyModalReading {
+  lastCheckboxLabel?: string;
+}
+
+/**
+ * The text of the Paper Out package downloaded for TS-EC-12000-016.
+ *
+ * A single download answers all three of AC-EC-12000-016's questions (the
+ * Submitted event, the Authorized event and the activity history report), so
+ * the When step that triggers the download caches its text here and every
+ * Then step reads the same cached text rather than re-downloading it.
+ */
+export interface DocumentActivityReport {
+  text?: string;
+}
+
+/**
+ * The Name of Request a scenario submitted its Paper Out under.
+ *
+ * The audit-trail scenarios generate a unique name at submit time so the
+ * Submitted Paper Out event they later read is unambiguously their own, and
+ * the cleanup hook needs that same name to cancel the right request. Holding
+ * it in a fixture keeps the When, the Then and the After hook all referring
+ * to one value instead of each regenerating one.
+ */
+export interface PaperOutSubmission {
+  nameOfRequest?: string;
 }
 
 /**
@@ -81,7 +124,30 @@ export interface FrameworkFixtures {
    */
   navigationMenu: NavigationMenuComponent;
   commandCenter: CommandCenterComponent;
+  /**
+   * EC-12000 Paper Out modals. Components rather than page objects: both
+   * overlay whichever page opened them (collection, transaction or document),
+   * confirmed identical at all three levels live against qa5 on 2026-09-11.
+   */
+  paperOutRequestModal: PaperOutRequestModalComponent;
+  acknowledgementModal: AcknowledgementModalComponent;
+  workQueue: WorkQueueComponent;
+  /**
+   * The Verify Paper Out modal (TS-EC-12000-018). Read-only by design - see
+   * the component's own note on why it never presses Verify.
+   */
+  verifyPaperOutModal: VerifyPaperOutModalComponent;
+  /**
+   * The Document History dialog - the only surface that records a Paper Out
+   * and its Media Type. The transaction history records no Paper Out event at
+   * all; see the component for the evidence.
+   */
+  documentHistory: DocumentHistoryComponent;
+  verifyModalReading: VerifyModalReading;
+  documentActivityReport: DocumentActivityReport;
+  paperOutSubmission: PaperOutSubmission;
   organizationLogin: OrganizationLoginService;
+  paperOutExport: PaperOutExportService;
   signInResponseMemory: SignInResponseMemory;
   navigationOutcomes: NavigationOutcome[];
   /**
@@ -135,9 +201,49 @@ export const test = bddTest.extend<FrameworkFixtures>({
     await use(new CommandCenterComponent(page));
   },
 
+  paperOutRequestModal: async ({ page }, use) => {
+    await use(new PaperOutRequestModalComponent(page));
+  },
+
+  acknowledgementModal: async ({ page }, use) => {
+    await use(new AcknowledgementModalComponent(page));
+  },
+
+  workQueue: async ({ page }, use) => {
+    await use(new WorkQueueComponent(page));
+  },
+
+  verifyPaperOutModal: async ({ page }, use) => {
+    await use(new VerifyPaperOutModalComponent(page));
+  },
+
+  documentHistory: async ({ page }, use) => {
+    await use(new DocumentHistoryComponent(page));
+  },
+
+  // eslint-disable-next-line no-empty-pattern
+  verifyModalReading: async ({}, use) => {
+    await use({});
+  },
+
+  // eslint-disable-next-line no-empty-pattern
+  documentActivityReport: async ({}, use) => {
+    await use({});
+  },
+
+  // eslint-disable-next-line no-empty-pattern
+  paperOutSubmission: async ({}, use) => {
+    await use({});
+  },
+
   // eslint-disable-next-line no-empty-pattern
   organizationLogin: async ({}, use) => {
     await use(new OrganizationLoginService());
+  },
+
+  // eslint-disable-next-line no-empty-pattern
+  paperOutExport: async ({}, use) => {
+    await use(new PaperOutExportService());
   },
 
   // eslint-disable-next-line no-empty-pattern

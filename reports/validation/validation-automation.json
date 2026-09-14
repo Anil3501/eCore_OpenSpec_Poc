@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-08-31T16:27:24.436Z",
+  "generatedAt": "2026-09-14T18:27:40.159Z",
   "scope": "automation",
   "summary": {
-    "total": 3,
-    "passed": 3,
+    "total": 4,
+    "passed": 4,
     "failed": 0,
     "skipped": 0
   },
@@ -13,7 +13,7 @@
       "title": "Every Gherkin scenario carries traceability tags",
       "status": "PASS",
       "messages": [
-        "1 approved feature file(s) checked."
+        "6 approved and generated feature file(s) checked."
       ]
     },
     {
@@ -27,7 +27,16 @@
       "title": "Automation code follows the approved locator and wait policy",
       "status": "PASS",
       "messages": [
-        "5 automation source file(s) and 1 approved feature file(s) checked against 5 locator/wait rules."
+        "21 automation source file(s) and 3 approved feature file(s) checked against 5 locator/wait rules.",
+        "1 API client file(s) checked against 6 API hygiene rules."
+      ]
+    },
+    {
+      "id": "SEM-API-CONTRACT",
+      "title": "API scenarios rest on an authoritative, tagged contract",
+      "status": "PASS",
+      "messages": [
+        "10 API/hybrid scenario(s) checked."
       ]
     }
   ]

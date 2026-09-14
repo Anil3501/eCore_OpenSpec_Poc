@@ -1,0 +1,4034 @@
+{
+  "_dataClassification": "REAL_JIRA_DATA",
+  "retrievalMethod": "JIRA_REST_API_V3",
+  "retrievalNote": "Retrieved by src/utils/jira-fetch.ts, the documented REST fallback, because the Atlassian MCP server exposed no issue-fetch tool in this session. The issue payload below is verbatim.",
+  "requestedIssueKey": "EC-3239",
+  "requestUrl": "https://eoriginal.atlassian.net/rest/api/3/issue/EC-3239?expand=renderedFields%2Cnames",
+  "retrievedAt": "2026-09-10T07:25:59.094Z",
+  "issue": {
+    "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations,customfield_11318.properties,customfield_10900.requestTypePractice,customfield_11319.properties",
+    "id": "25567",
+    "self": "https://eoriginal.atlassian.net/rest/api/3/issue/25567",
+    "key": "EC-3239",
+    "renderedFields": {
+      "statuscategorychangedate": "05/May/22 2:00 PM",
+      "customfield_11440": null,
+      "fixVersions": null,
+      "statusCategory": null,
+      "customfield_11200": "<p>Tested in Trunk</p>\n\n<p>Show/Hide Columns  - Option available for both Loan ID and GUID columns to be displayed.  When shown they do display.<br/>\nTransaction Snapshot - Transaction GUID and Loan Origination ID appear under the Creation Date<br/>\nAdd New Transaction - The New Transaction dialog accessed from Workspace after a search is conducted allows for the addition of a Loan Origination ID.<br/>\nUpdate Document Properties - GUID and Loan ID are displayed in the properties but are not editable<br/>\nUpdate Transaction Properties - GUID is displayed and is not editable.  The Loan ID is displayed in a text box and may be edited or removed.<br/>\nTransfer Receipt - Loan ID and GUID displayed in the Transfer Content Summary of the receipt document<br/>\nEvent History/Audit Trail – Viewable in the extra_data field of event<br/>\nCertified Print and Paper Out Packages - Loan ID and the GUID appear in the Transaction Activity History Report header information </p>\n\n\n<p>QA Accepts Solution</p>",
+      "customfield_11443": null,
+      "resolution": null,
+      "customfield_11445": null,
+      "customfield_11323": ".",
+      "customfield_11444": null,
+      "customfield_10500": null,
+      "customfield_11435": "",
+      "customfield_11437": "",
+      "customfield_11318": null,
+      "customfield_10900": null,
+      "customfield_11319": null,
+      "customfield_11839": null,
+      "lastViewed": null,
+      "customfield_11391": "",
+      "customfield_11390": "",
+      "customfield_11397": "",
+      "customfield_11430": null,
+      "customfield_10100": null,
+      "priority": null,
+      "customfield_11674": null,
+      "customfield_11434": "",
+      "labels": null,
+      "customfield_11545": null,
+      "customfield_11426": null,
+      "aggregatetimeoriginalestimate": null,
+      "timeestimate": null,
+      "customfield_11429": null,
+      "versions": null,
+      "customfield_11708": null,
+      "issuelinks": null,
+      "assignee": null,
+      "status": null,
+      "components": null,
+      "customfield_11380": null,
+      "customfield_11382": null,
+      "customfield_11381": null,
+      "customfield_11384": null,
+      "customfield_11383": null,
+      "customfield_11386": null,
+      "customfield_11385": null,
+      "customfield_11388": "",
+      "customfield_11542": null,
+      "customfield_11423": null,
+      "customfield_11544": null,
+      "customfield_11389": "",
+      "customfield_11543": null,
+      "customfield_11535": null,
+      "customfield_10600": null,
+      "customfield_11534": null,
+      "customfield_11415": null,
+      "customfield_11418": null,
+      "aggregatetimeestimate": null,
+      "customfield_11417": null,
+      "customfield_11419": "",
+      "creator": null,
+      "subtasks": null,
+      "customfield_11371": null,
+      "customfield_11370": null,
+      "reporter": null,
+      "customfield_11374": null,
+      "aggregateprogress": null,
+      "customfield_11410": "",
+      "customfield_11530": null,
+      "customfield_11533": null,
+      "customfield_11378": "",
+      "customfield_11532": null,
+      "customfield_11411": "",
+      "customfield_11524": null,
+      "customfield_11369": null,
+      "customfield_11523": null,
+      "customfield_11402": "",
+      "customfield_11526": null,
+      "customfield_11525": null,
+      "customfield_11407": "",
+      "customfield_11527": null,
+      "customfield_11409": "",
+      "customfield_11529": null,
+      "customfield_11408": "",
+      "progress": null,
+      "customfield_11806": null,
+      "votes": null,
+      "worklog": {
+        "startAt": 0,
+        "maxResults": 20,
+        "total": 0,
+        "worklogs": []
+      },
+      "issuetype": null,
+      "customfield_11360": "",
+      "timespent": null,
+      "customfield_11362": "<p>Show/Hide Columns  - includes guid &amp; loan id<br/>\nTransaction Snapshot - includes guid &amp; loan id<br/>\nAdd New Transaction - loan id only<br/>\nUpdate Document Properties - guid &amp; loan id (neither editable)<br/>\nUpdate Transaction Properties - guid  (not editable)-  &amp; loan id (editable)<br/>\nTransfer Receipt - loan id &amp; guid (under creation date)<br/>\nEvent History/Audit Trail &#8211; included in extra_data field of event<br/>\nCertified Print Package - loan id &amp; guid in transaction heading and in event history Additional Information<br/>\nPaper Out Package -loan id &amp; guid in transaction heading and in event history Additional Information</p>",
+      "customfield_11483": null,
+      "project": null,
+      "customfield_11361": null,
+      "customfield_11000": null,
+      "customfield_11364": null,
+      "customfield_11484": "",
+      "customfield_11363": null,
+      "aggregatetimespent": null,
+      "customfield_11641": null,
+      "customfield_11486": "",
+      "customfield_11365": null,
+      "customfield_11368": null,
+      "customfield_11401": "",
+      "customfield_11367": "",
+      "customfield_10700": "<p>Transaction GUID and Origination Loan ID visible in Workspace in the following places: </p>\n\n<ul>\n\t<li>Show/Hide Columns</li>\n\t<li>Transaction Snapshot</li>\n\t<li>Add New Transaction</li>\n\t<li>Update Document Properties</li>\n\t<li>Update Transaction Properties</li>\n\t<li>Transfer Receipt</li>\n\t<li>Event History/Audit Trail</li>\n\t<li>Certified Print Package</li>\n\t<li>Paper Out Package</li>\n</ul>\n\n\n<p>Please see attached document from research story \n    <span class=\"jira-issue-macro resolved\" data-jira-key=\"EC-3123\" >\n                <a href=\"https://eoriginal.atlassian.net/browse/EC-3123\" class=\"jira-issue-macro-key issue-link\"  title=\"RESEARCH: Document where Loan ID will appear in UI/API \" >\n            <img class=\"icon\" src=\"https://eoriginal.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium\" />\n            EC-3123\n        </a>\n                                                    <span class=\"aui-lozenge aui-lozenge-subtle aui-lozenge-success jira-macro-single-issue-export-pdf\">Closed</span>\n            </span>\n.</p>",
+      "resolutiondate": "19/Sep/19 12:19 PM",
+      "workratio": null,
+      "watches": null,
+      "created": "29/Aug/19 1:13 PM",
+      "customfield_11872": null,
+      "customfield_10300": null,
+      "customfield_11873": null,
+      "customfield_11504": "",
+      "customfield_11503": "",
+      "updated": "02/Oct/19 11:12 AM",
+      "customfield_11580": null,
+      "timeoriginalestimate": null,
+      "customfield_11461": null,
+      "customfield_11340": null,
+      "customfield_11582": null,
+      "customfield_11460": null,
+      "customfield_11581": null,
+      "description": "<p>Add Transaction GUID &amp; Origination Loan ID into Workspace.</p>",
+      "customfield_11584": "",
+      "customfield_11463": null,
+      "customfield_11462": null,
+      "customfield_11583": "",
+      "customfield_11100": null,
+      "customfield_11465": "",
+      "customfield_11740": null,
+      "customfield_11464": null,
+      "customfield_11466": null,
+      "timetracking": {},
+      "customfield_11741": "",
+      "customfield_11458": null,
+      "customfield_11579": "",
+      "customfield_11578": null,
+      "security": null,
+      "customfield_10800": null,
+      "customfield_11459": null,
+      "customfield_10009": null,
+      "attachment": [
+        {
+          "self": "https://eoriginal.atlassian.net/rest/api/3/attachment/25462",
+          "id": "25462",
+          "filename": "client_model_transactionId FINAL (2c278cb2-a5ae-491e-81f1-e06fec5c8c2b).pdf",
+          "author": {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5d07efd4d3177c0bcccd38e4",
+            "accountId": "5d07efd4d3177c0bcccd38e4",
+            "avatarUrls": {
+              "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+              "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+              "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+              "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png"
+            },
+            "displayName": "Kristen Jones",
+            "active": true,
+            "timeZone": "America/New_York",
+            "accountType": "atlassian"
+          },
+          "created": "29/Aug/19 1:19 PM",
+          "size": "3.50 MB",
+          "mimeType": "application/pdf",
+          "content": "https://eoriginal.atlassian.net/rest/api/3/attachment/content/25462"
+        },
+        {
+          "self": "https://eoriginal.atlassian.net/rest/api/3/attachment/25574",
+          "id": "25574",
+          "filename": "ec-3239_v2.diff",
+          "author": {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5b8e99a56d3a2a2be1b19409",
+            "accountId": "5b8e99a56d3a2a2be1b19409",
+            "avatarUrls": {
+              "48x48": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+              "24x24": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+              "16x16": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+              "32x32": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png"
+            },
+            "displayName": "Mike Livingston",
+            "active": true,
+            "timeZone": "America/New_York",
+            "accountType": "atlassian"
+          },
+          "created": "09/Sep/19 1:51 PM",
+          "size": "36 kB",
+          "mimeType": "text/x-patch",
+          "content": "https://eoriginal.atlassian.net/rest/api/3/attachment/content/25574"
+        },
+        {
+          "self": "https://eoriginal.atlassian.net/rest/api/3/attachment/25575",
+          "id": "25575",
+          "filename": "ec-3239_v3.diff",
+          "author": {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5b8e99a56d3a2a2be1b19409",
+            "accountId": "5b8e99a56d3a2a2be1b19409",
+            "avatarUrls": {
+              "48x48": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+              "24x24": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+              "16x16": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+              "32x32": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png"
+            },
+            "displayName": "Mike Livingston",
+            "active": true,
+            "timeZone": "America/New_York",
+            "accountType": "atlassian"
+          },
+          "created": "09/Sep/19 2:19 PM",
+          "size": "35 kB",
+          "mimeType": "text/x-patch",
+          "content": "https://eoriginal.atlassian.net/rest/api/3/attachment/content/25575"
+        },
+        {
+          "self": "https://eoriginal.atlassian.net/rest/api/3/attachment/25675",
+          "id": "25675",
+          "filename": "ec-3239_v4.diff",
+          "author": {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5b8e99a56d3a2a2be1b19409",
+            "accountId": "5b8e99a56d3a2a2be1b19409",
+            "avatarUrls": {
+              "48x48": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+              "24x24": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+              "16x16": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+              "32x32": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png"
+            },
+            "displayName": "Mike Livingston",
+            "active": true,
+            "timeZone": "America/New_York",
+            "accountType": "atlassian"
+          },
+          "created": "12/Sep/19 12:53 PM",
+          "size": "28 kB",
+          "mimeType": "binary/octet-stream",
+          "content": "https://eoriginal.atlassian.net/rest/api/3/attachment/content/25675"
+        },
+        {
+          "self": "https://eoriginal.atlassian.net/rest/api/3/attachment/25558",
+          "id": "25558",
+          "filename": "ec-3239.diff",
+          "author": {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5b8e99a56d3a2a2be1b19409",
+            "accountId": "5b8e99a56d3a2a2be1b19409",
+            "avatarUrls": {
+              "48x48": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+              "24x24": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+              "16x16": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+              "32x32": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png"
+            },
+            "displayName": "Mike Livingston",
+            "active": true,
+            "timeZone": "America/New_York",
+            "accountType": "atlassian"
+          },
+          "created": "09/Sep/19 9:09 AM",
+          "size": "33 kB",
+          "mimeType": "binary/octet-stream",
+          "content": "https://eoriginal.atlassian.net/rest/api/3/attachment/content/25558"
+        }
+      ],
+      "summary": null,
+      "customfield_11450": null,
+      "customfield_11331": "",
+      "customfield_11452": null,
+      "customfield_11451": null,
+      "customfield_11330": "",
+      "customfield_11333": "",
+      "customfield_11575": null,
+      "customfield_11454": null,
+      "customfield_10002": null,
+      "customfield_11453": null,
+      "customfield_11332": "",
+      "customfield_11574": null,
+      "customfield_11577": null,
+      "customfield_11335": "<div class=\"panel\" style=\"border-width: 1px;\"><div class=\"panelHeader\" style=\"border-bottom-width: 1px;\"><b>ecore revision 19987 (trunk)</b></div><div class=\"panelContent\">\n<p><b>Date</b>: Mon Sep 09 14:34:04 UTC 2019<br/>\n<b>User</b>: mlivingston<br/>\n<b>Message</b>: EC-3239: Transaction GUID &amp; Origination Loan ID appearing in Workspace</p>\n\n<p><b>Files Changed</b>:</p>\n<ul>\n\t<li><font color=\"#00a7cb\">UPDATED</font> trunk/abstract-war/src/main/resources/config/spring/service-config.xml</li>\n\t<li><font color=\"#00a7cb\">UPDATED</font> trunk/ecore-commons/src/main/java/com/eoriginal/commons/ContainerSearchCriteria.java</li>\n\t<li><font color=\"#00a7cb\">UPDATED</font> trunk/ecore-jar/src/main/java/com/eoriginal/ecore/container/ContainerService.java</li>\n\t<li><font color=\"#14892c\">ADDED</font> trunk/ecore-jar/src/main/java/com/eoriginal/ecore/container/IdentifierLabels.java</li>\n\t<li><font color=\"#00a7cb\">UPDATED</font> trunk/ecore-jar/src/main/java/com/eoriginal/ecore/transaction/TransactionService.java</li>\n\t<li><font color=\"#00a7cb\">UPDATED</font> trunk/ecore-jar/src/main/java/com/eoriginal/ecore/transfer/TransferReceiptTransformer.java</li>\n\t<li><font color=\"#00a7cb\">UPDATED</font> trunk/ecore-jar/src/main/resources/config/ibatis/maps/com/eoriginal/ecore/event/EventLog.xml</li>\n\t<li><font color=\"#00a7cb\">UPDATED</font> trunk/ecore-jar/src/test/java/com/eoriginal/ecore/report/ReportServiceTest.java</li>\n\t<li><font color=\"#14892c\">ADDED</font> trunk/src/main/resources/setup/database/conf/templates/migrations/oracle/alters/ec-3239.sql</li>\n\t<li><font color=\"#00a7cb\">UPDATED</font> trunk/src/main/resources/setup/database/conf/templates/migrations/oracle/upgrade-steps.xml</li>\n\t<li><font color=\"#00a7cb\">UPDATED</font> trunk/src/main/resources/setup/database/conf/templates/ssweb/tables/container_search.sql</li>\n\t<li><font color=\"#00a7cb\">UPDATED</font> trunk/websign/websign-dao-hibernate/src/main/resources/com/eoriginal/websign/setup/ContainerSearch.hbm.xml</li>\n\t<li><font color=\"#00a7cb\">UPDATED</font> trunk/websign/websign-struts2/src/main/java/com/eoriginal/websign/setup/DatatableUtil.java</li>\n\t<li><font color=\"#00a7cb\">UPDATED</font> trunk/websign/websign-struts2/src/main/java/com/eoriginal/websign/setup/DocumentProfileForm.java</li>\n\t<li><font color=\"#00a7cb\">UPDATED</font> trunk/websign/websign-struts2/src/main/java/com/eoriginal/websign/setup/DocumentSnapshotAction.java</li>\n\t<li><font color=\"#00a7cb\">UPDATED</font> trunk/websign/websign-web/src/main/resources/applicationContext-services.xml</li>\n\t<li><font color=\"#00a7cb\">UPDATED</font> trunk/websign/websign-web/src/main/resources/applicationContext-struts.xml</li>\n\t<li><font color=\"#00a7cb\">UPDATED</font> trunk/websign/websign-web/src/main/webapp/WEB-INF/ftl/setup/workspace/datatableJSONResponse.ftl</li>\n\t<li><font color=\"#00a7cb\">UPDATED</font> trunk/websign/websign-web/src/main/webapp/WEB-INF/ftl/setup/workspace/documentProperties.ftl</li>\n\t<li><font color=\"#00a7cb\">UPDATED</font> trunk/websign/websign-web/src/main/webapp/WEB-INF/ftl/setup/workspace/transactionProperties.ftl</li>\n\t<li><font color=\"#00a7cb\">UPDATED</font> trunk/websign/websign-web/src/main/webapp/WEB-INF/ftl/setup/workspace/transactionSnapshot.ftl</li>\n</ul>\n</div></div>\n\n<div class=\"panel\" style=\"border-width: 1px;\"><div class=\"panelHeader\" style=\"border-bottom-width: 1px;\"><b>ecore revision 19988 (trunk)</b></div><div class=\"panelContent\">\n<p><b>Date</b>: Mon Sep 09 21:00:04 UTC 2019<br/>\n<b>User</b>: mlivingston<br/>\n<b>Message</b>: EC-3239: Guid &amp; Loan ID</p>\n\n<p><b>Files Changed</b>:</p>\n<ul>\n\t<li><font color=\"#00a7cb\">UPDATED</font> trunk/ecore-jar/src/main/resources/config/ibatis/maps/com/eoriginal/ecore/event/EventLog.xml</li>\n</ul>\n</div></div>\n\n<div class=\"panel\" style=\"border-width: 1px;\"><div class=\"panelHeader\" style=\"border-bottom-width: 1px;\"><b>ecore revision 20003 (trunk)</b></div><div class=\"panelContent\">\n<p><b>Date</b>: Thu Sep 12 13:30:04 UTC 2019<br/>\n<b>User</b>: mlivingston<br/>\n<b>Message</b>: EC-3239: Transaction GUID &amp; Origination Loan ID appearing in Workspace</p>\n\n<p><b>Files Changed</b>:</p>\n<ul>\n\t<li><font color=\"#00a7cb\">UPDATED</font> trunk/abstract-war/src/main/resources/config/spring/service-config.xml</li>\n\t<li><font color=\"#00a7cb\">UPDATED</font> trunk/ecore-jar/src/main/java/com/eoriginal/ecore/report/ReportService.java</li>\n\t<li><font color=\"#00a7cb\">UPDATED</font> trunk/ecore-jar/src/main/java/com/eoriginal/ecore/transfer/TransferReceiptTransformer.java</li>\n\t<li><font color=\"#00a7cb\">UPDATED</font> trunk/ecore-jar/src/main/java/com/eoriginal/ecore/transfer/TransferService.java</li>\n\t<li><font color=\"#00a7cb\">UPDATED</font> trunk/ecore-jar/src/main/resources/config/ecore/xml/frot.fo</li>\n\t<li><font color=\"#00a7cb\">UPDATED</font> trunk/ecore-jar/src/main/resources/config/ecore/xml/trans-history.xsl</li>\n\t<li><font color=\"#00a7cb\">UPDATED</font> trunk/ecore-jar/src/test/resources/testfiles/frot.fo</li>\n\t<li><font color=\"#00a7cb\">UPDATED</font> trunk/websign/websign-web/src/main/static/css/websign-setup.css</li>\n\t<li><font color=\"#00a7cb\">UPDATED</font> trunk/websign/websign-web/src/main/webapp/WEB-INF/ftl/plain/transactionInformation.ftl</li>\n\t<li><font color=\"#00a7cb\">UPDATED</font> trunk/websign/websign-web/src/main/webapp/WEB-INF/ftl/setup/pathSummary.ftl</li>\n\t<li><font color=\"#00a7cb\">UPDATED</font> trunk/websign/websign-web/src/main/webapp/WEB-INF/ftl/setup/workspace/documentProperties.ftl</li>\n\t<li><font color=\"#00a7cb\">UPDATED</font> trunk/websign/websign-web/src/main/webapp/WEB-INF/ftl/setup/workspace/transactionProperties.ftl</li>\n\t<li><font color=\"#00a7cb\">UPDATED</font> trunk/websign/websign-web/src/main/webapp/WEB-INF/ftl/setup/workspace/transactionSnapshot.ftl</li>\n</ul>\n</div></div>",
+      "customfield_10003": null,
+      "customfield_11455": null,
+      "customfield_10004": null,
+      "customfield_11576": null,
+      "customfield_10400": null,
+      "customfield_11446": null,
+      "customfield_11449": null,
+      "customfield_11448": null,
+      "customfield_11327": null,
+      "customfield_11329": "",
+      "duedate": null,
+      "comment": {
+        "comments": [
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/25567/comment/46630",
+            "id": "46630",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3A1598fb37-7e87-4231-9d1b-ff5b2cecead4",
+              "accountId": "557058:1598fb37-7e87-4231-9d1b-ff5b2cecead4",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png"
+              },
+              "displayName": "Dan Bender",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": "<p>I would use a StringBuilder instead of a StringBuffer on line 96.</p>\n\n<p>Does the container_search table need the loan_id and transaction_guid columns?</p>",
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3A1598fb37-7e87-4231-9d1b-ff5b2cecead4",
+              "accountId": "557058:1598fb37-7e87-4231-9d1b-ff5b2cecead4",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png"
+              },
+              "displayName": "Dan Bender",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "09/Sep/19 9:33 AM",
+            "updated": "09/Sep/19 9:33 AM",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/25567/comment/46631",
+            "id": "46631",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3Ad75842c7-d43a-437e-a045-109076143dc1",
+              "accountId": "557058:d75842c7-d43a-437e-a045-109076143dc1",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png"
+              },
+              "displayName": "Ken Hopkins",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": "<p>Not sure if this is significant, but previously, if the event wasn’t going to have any extra data in line 111, the extra data parameter would be <em>null</em>.  Now, if the event doesn’t have any extra data in line 112, the extra data parameter is an <em>empty string</em>.  May be inconsequential, but a difference we should be aware of.</p>\n\n<p>Is line 321 something that needs to be addressed?</p>\n\n<p>I’m a little curious as to why there is a <em>?xhtml</em> in line 430, but there isn’t on in any of the other lines 427 - 434?  Is it possible you’re doubly escaping in line 430?  Or are all those other values not being escaped?</p>\n\n<p>Indentation is off in lines 473 and 474.</p>\n\n<p>Line 11 and 12 kind of seem like they are duplicating 388 and 394.  Not sure if that’s avoidable or not.</p>",
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3Ad75842c7-d43a-437e-a045-109076143dc1",
+              "accountId": "557058:d75842c7-d43a-437e-a045-109076143dc1",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png"
+              },
+              "displayName": "Ken Hopkins",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "09/Sep/19 9:38 AM",
+            "updated": "09/Sep/19 9:38 AM",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/25567/comment/46634",
+            "id": "46634",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5b8e99a56d3a2a2be1b19409",
+              "accountId": "5b8e99a56d3a2a2be1b19409",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "24x24": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "16x16": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "32x32": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png"
+              },
+              "displayName": "Mike Livingston",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": "<p><a href=\"https://eoriginal.atlassian.net/secure/ViewProfile.jspa?accountId=557058%3A1598fb37-7e87-4231-9d1b-ff5b2cecead4\" class=\"user-hover\" rel=\"557058:1598fb37-7e87-4231-9d1b-ff5b2cecead4\" data-account-id=\"557058:1598fb37-7e87-4231-9d1b-ff5b2cecead4\" accountid=\"557058:1598fb37-7e87-4231-9d1b-ff5b2cecead4\" rel=\"noreferrer\">Dan Bender</a> I forgot to add the db script for container_search.  Good catch.</p>\n\n<p><a href=\"https://eoriginal.atlassian.net/secure/ViewProfile.jspa?accountId=557058%3Ad75842c7-d43a-437e-a045-109076143dc1\" class=\"user-hover\" rel=\"557058:d75842c7-d43a-437e-a045-109076143dc1\" data-account-id=\"557058:d75842c7-d43a-437e-a045-109076143dc1\" accountid=\"557058:d75842c7-d43a-437e-a045-109076143dc1\" rel=\"noreferrer\">Ken Hopkins</a>I will update 111 &amp; 112 to pass in a null again.  Line 321 I do want to address.  The field order in the hide/show columns is inconsistent.   I’ll look into the escaping in datatableJSONResponse and try to consolidate the label text assignments.</p>\n",
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5b8e99a56d3a2a2be1b19409",
+              "accountId": "5b8e99a56d3a2a2be1b19409",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "24x24": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "16x16": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "32x32": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png"
+              },
+              "displayName": "Mike Livingston",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "09/Sep/19 9:49 AM",
+            "updated": "09/Sep/19 9:49 AM",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/25567/comment/46689",
+            "id": "46689",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5b8e99a56d3a2a2be1b19409",
+              "accountId": "5b8e99a56d3a2a2be1b19409",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "24x24": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "16x16": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "32x32": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png"
+              },
+              "displayName": "Mike Livingston",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": "<ul>\n\t<li>Change StringBuffer to StringBuilder</li>\n\t<li>Added database scripts</li>\n\t<li>if additionalInfo is empty, then pass eventExtraData.</li>\n\t<li>For the previous <b>todo</b>  - Show /hide column order (top-down) actually corresponds to the search results column order(left-right). This seems okay.</li>\n\t<li>updated indentation</li>\n\t<li>populate the DatatableColumn <b>text</b> field from bean property reference.</li>\n</ul>\n",
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5b8e99a56d3a2a2be1b19409",
+              "accountId": "5b8e99a56d3a2a2be1b19409",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "24x24": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "16x16": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "32x32": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png"
+              },
+              "displayName": "Mike Livingston",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "09/Sep/19 1:52 PM",
+            "updated": "09/Sep/19 1:52 PM",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/25567/comment/46690",
+            "id": "46690",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3A1598fb37-7e87-4231-9d1b-ff5b2cecead4",
+              "accountId": "557058:1598fb37-7e87-4231-9d1b-ff5b2cecead4",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png"
+              },
+              "displayName": "Dan Bender",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": "<p>I’m curious why, in the migration script, you are dropping the columns if they exist and recreating them - rather than creating the columns when they don’t exist?  It seems like, if this were run on an existing database, with existing data, that data would be wiped out.  Is that intentional?</p>",
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3A1598fb37-7e87-4231-9d1b-ff5b2cecead4",
+              "accountId": "557058:1598fb37-7e87-4231-9d1b-ff5b2cecead4",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png"
+              },
+              "displayName": "Dan Bender",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "09/Sep/19 2:00 PM",
+            "updated": "09/Sep/19 2:00 PM",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/25567/comment/46695",
+            "id": "46695",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5b8e99a56d3a2a2be1b19409",
+              "accountId": "5b8e99a56d3a2a2be1b19409",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "24x24": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "16x16": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "32x32": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png"
+              },
+              "displayName": "Mike Livingston",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": "<p><a href=\"https://eoriginal.atlassian.net/secure/ViewProfile.jspa?accountId=557058%3A1598fb37-7e87-4231-9d1b-ff5b2cecead4\" class=\"user-hover\" rel=\"557058:1598fb37-7e87-4231-9d1b-ff5b2cecead4\" data-account-id=\"557058:1598fb37-7e87-4231-9d1b-ff5b2cecead4\" accountid=\"557058:1598fb37-7e87-4231-9d1b-ff5b2cecead4\" rel=\"noreferrer\">Dan Bender</a> Old habits resurfacing. It provides “rollback” code. </p>\n\n<p>I’m not attached to it.  I guess I should be following the norm.  I’ll update to only add is the column is not there. </p>",
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5b8e99a56d3a2a2be1b19409",
+              "accountId": "5b8e99a56d3a2a2be1b19409",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "24x24": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "16x16": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "32x32": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png"
+              },
+              "displayName": "Mike Livingston",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "09/Sep/19 2:11 PM",
+            "updated": "09/Sep/19 2:11 PM",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/25567/comment/46696",
+            "id": "46696",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5b8e99a56d3a2a2be1b19409",
+              "accountId": "5b8e99a56d3a2a2be1b19409",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "24x24": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "16x16": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "32x32": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png"
+              },
+              "displayName": "Mike Livingston",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": "<p>don't wipe out existing data if script is re-applied. </p>",
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5b8e99a56d3a2a2be1b19409",
+              "accountId": "5b8e99a56d3a2a2be1b19409",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "24x24": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "16x16": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "32x32": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png"
+              },
+              "displayName": "Mike Livingston",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "09/Sep/19 2:19 PM",
+            "updated": "09/Sep/19 2:19 PM",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/25567/comment/46697",
+            "id": "46697",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3A1598fb37-7e87-4231-9d1b-ff5b2cecead4",
+              "accountId": "557058:1598fb37-7e87-4231-9d1b-ff5b2cecead4",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png"
+              },
+              "displayName": "Dan Bender",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": "<p>Approve</p>",
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3A1598fb37-7e87-4231-9d1b-ff5b2cecead4",
+              "accountId": "557058:1598fb37-7e87-4231-9d1b-ff5b2cecead4",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png"
+              },
+              "displayName": "Dan Bender",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "09/Sep/19 2:22 PM",
+            "updated": "09/Sep/19 2:22 PM",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/25567/comment/46698",
+            "id": "46698",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5b607344c7b34d2cbe171ca1",
+              "accountId": "5b607344c7b34d2cbe171ca1",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/PS-0.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/PS-0.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/PS-0.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/PS-0.png"
+              },
+              "displayName": "Paul Semple",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": "<p>I approve</p>",
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5b607344c7b34d2cbe171ca1",
+              "accountId": "5b607344c7b34d2cbe171ca1",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/PS-0.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/PS-0.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/PS-0.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/PS-0.png"
+              },
+              "displayName": "Paul Semple",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "09/Sep/19 2:24 PM",
+            "updated": "09/Sep/19 2:24 PM",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/25567/comment/46699",
+            "id": "46699",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3Ad75842c7-d43a-437e-a045-109076143dc1",
+              "accountId": "557058:d75842c7-d43a-437e-a045-109076143dc1",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png"
+              },
+              "displayName": "Ken Hopkins",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": "<p>I approve.</p>",
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3Ad75842c7-d43a-437e-a045-109076143dc1",
+              "accountId": "557058:d75842c7-d43a-437e-a045-109076143dc1",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png"
+              },
+              "displayName": "Ken Hopkins",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "09/Sep/19 2:25 PM",
+            "updated": "09/Sep/19 2:25 PM",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/25567/comment/46960",
+            "id": "46960",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3Ad75842c7-d43a-437e-a045-109076143dc1",
+              "accountId": "557058:d75842c7-d43a-437e-a045-109076143dc1",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png"
+              },
+              "displayName": "Ken Hopkins",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": "<p>I approve.</p>",
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3Ad75842c7-d43a-437e-a045-109076143dc1",
+              "accountId": "557058:d75842c7-d43a-437e-a045-109076143dc1",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png"
+              },
+              "displayName": "Ken Hopkins",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "12/Sep/19 1:01 PM",
+            "updated": "12/Sep/19 1:01 PM",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/25567/comment/47300",
+            "id": "47300",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5d07efd4d3177c0bcccd38e4",
+              "accountId": "5d07efd4d3177c0bcccd38e4",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png"
+              },
+              "displayName": "Kristen Jones",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": "<p>Product accepts. </p>",
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5d07efd4d3177c0bcccd38e4",
+              "accountId": "5d07efd4d3177c0bcccd38e4",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png"
+              },
+              "displayName": "Kristen Jones",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "19/Sep/19 12:19 PM",
+            "updated": "19/Sep/19 12:19 PM",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/25567/comment/48169",
+            "id": "48169",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3A1598fb37-7e87-4231-9d1b-ff5b2cecead4",
+              "accountId": "557058:1598fb37-7e87-4231-9d1b-ff5b2cecead4",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png"
+              },
+              "displayName": "Dan Bender",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": "<p>Not a huge deal, but I don’t think the Setter annotation in TransferReceiptTransformer.java is needed.</p>",
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3A1598fb37-7e87-4231-9d1b-ff5b2cecead4",
+              "accountId": "557058:1598fb37-7e87-4231-9d1b-ff5b2cecead4",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png"
+              },
+              "displayName": "Dan Bender",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "02/Oct/19 11:12 AM",
+            "updated": "02/Oct/19 11:12 AM",
+            "jsdPublic": true
+          }
+        ],
+        "self": "https://eoriginal.atlassian.net/rest/api/3/issue/25567/comment",
+        "maxResults": 13,
+        "total": 13,
+        "startAt": 0
+      }
+    },
+    "names": {
+      "statuscategorychangedate": "Status Category Changed",
+      "parent": "Parent",
+      "customfield_11440": "Response Due Date",
+      "fixVersions": "Fix versions",
+      "statusCategory": "Status Category",
+      "customfield_11200": "QA Feedback and Resolution",
+      "customfield_11443": "Satisfaction date",
+      "resolution": "Resolution",
+      "customfield_11445": "Affected services",
+      "customfield_11323": "Business Value",
+      "customfield_11444": "Request language",
+      "customfield_10500": "Customer",
+      "customfield_11435": "Notes to Team",
+      "customfield_11437": "Steps to Reproduce",
+      "customfield_11318": "Tempo Team",
+      "customfield_10900": "Request Type",
+      "customfield_11319": "Account",
+      "customfield_11839": "Agent Sessions",
+      "lastViewed": "Last Viewed",
+      "customfield_11391": "Root Cause",
+      "customfield_11390": "UI Changes",
+      "customfield_11397": "Test Scenario Details",
+      "customfield_11430": "Changes Required",
+      "customfield_10100": "Flagged",
+      "priority": "Priority",
+      "customfield_11674": "Reported by Customer?",
+      "customfield_11434": "Documentation Pages",
+      "labels": "Labels",
+      "customfield_11545": "Environment",
+      "customfield_11426": "Test Type",
+      "aggregatetimeoriginalestimate": "Σ Original Estimate",
+      "timeestimate": "Remaining Estimate",
+      "customfield_11429": "ETC Ticket Created?",
+      "versions": "Affects versions",
+      "customfield_11708": "Tech Debt Type",
+      "issuelinks": "Linked Issues",
+      "assignee": "Assignee",
+      "status": "Status",
+      "components": "Components",
+      "customfield_11380": "System Availability",
+      "customfield_11382": "Compliance",
+      "customfield_11381": "Infrastructure or System Changes",
+      "customfield_11384": "Actual Dev Hours",
+      "customfield_11383": "User Experience",
+      "customfield_11386": "Tested Browsers",
+      "customfield_11385": "Actual QA Hours",
+      "customfield_11388": "API Changes",
+      "customfield_11542": "Reopened Date",
+      "customfield_11423": "UAT",
+      "customfield_11544": "Goals",
+      "customfield_11389": "Notes to QA",
+      "customfield_11543": "Sentiment",
+      "customfield_11535": "Project overview status",
+      "customfield_10600": "Organizations",
+      "customfield_11534": "Project overview key",
+      "customfield_11415": "Original Due Date",
+      "customfield_11418": "Target end",
+      "aggregatetimeestimate": "Σ Remaining Estimate",
+      "customfield_11417": "Target start",
+      "customfield_11419": "QA Test Cases",
+      "creator": "Creator",
+      "subtasks": "Sub-tasks",
+      "customfield_11371": "Actual Hours Total",
+      "customfield_11370": "Estimated Hours Total",
+      "reporter": "Reporter",
+      "customfield_11374": "Satisfaction",
+      "aggregateprogress": "Σ Progress",
+      "customfield_11410": "Case Error Message",
+      "customfield_11530": "Technology Investment Category",
+      "customfield_11533": "Times in CR",
+      "customfield_11378": "Configuration Changes",
+      "customfield_11532": "Date Refined",
+      "customfield_11411": "Internal Instructions",
+      "customfield_11524": "Product Owner",
+      "customfield_11369": "Est QA Hours",
+      "customfield_11523": "Feature Env URL",
+      "customfield_11402": "Code Review",
+      "customfield_11526": "Times in QA",
+      "customfield_11525": "Design",
+      "customfield_11407": "Customer Urgency Statement",
+      "customfield_11527": "DevOps Ticket Created?",
+      "customfield_11409": "Escalation Data",
+      "customfield_11529": "Vulnerability",
+      "customfield_11408": "Customer Impact Statement",
+      "progress": "Progress",
+      "customfield_11806": "Work item created forms",
+      "votes": "Votes",
+      "worklog": "Log Work",
+      "issuetype": "Issue Type",
+      "customfield_11360": "Modified API",
+      "timespent": "Time Spent",
+      "customfield_11362": "Engineering Summary",
+      "customfield_11483": "Veracode Link",
+      "project": "Project",
+      "customfield_11361": "Start date",
+      "customfield_11000": "QA",
+      "customfield_11364": "Request participants",
+      "customfield_11484": "Mitigation Status and Comments",
+      "customfield_11363": "Create QA Automation Task",
+      "aggregatetimespent": "Σ Time Spent",
+      "customfield_11641": "Focus Areas",
+      "customfield_11486": "Environment",
+      "customfield_11365": "Story point estimate",
+      "customfield_11368": "Est Dev Hours",
+      "customfield_11401": "Test History",
+      "customfield_11367": "Issue colour",
+      "customfield_10700": "Acceptance Criteria",
+      "resolutiondate": "Resolved",
+      "workratio": "Work Ratio",
+      "watches": "Watchers",
+      "created": "Created",
+      "customfield_11872": "Incident manager",
+      "customfield_10300": "Development",
+      "customfield_11873": "Safe-AI Impact",
+      "customfield_11504": "Automation Goal",
+      "customfield_11503": "Workaround",
+      "updated": "Updated",
+      "customfield_11580": "Insights",
+      "timeoriginalestimate": "Original estimate",
+      "customfield_11461": "Automation Failed Envs",
+      "customfield_11340": "Priority Level",
+      "customfield_11582": "Linked items",
+      "customfield_11460": "Automation Type",
+      "customfield_11581": "Comments",
+      "description": "Description",
+      "customfield_11584": "Delivery status",
+      "customfield_11463": "External Tool",
+      "customfield_11462": "Severity",
+      "customfield_11583": "Delivery progress",
+      "customfield_11100": "Developer",
+      "customfield_11465": "Elapsed Days",
+      "customfield_11740": "Development Phase",
+      "customfield_11464": "External Tool Report Date",
+      "customfield_11466": "Impacted Area",
+      "timetracking": "Time tracking",
+      "customfield_11741": "Asset",
+      "customfield_11458": "Category",
+      "customfield_11579": "Atlassian project status",
+      "customfield_11578": "Atlassian project",
+      "security": "Security Level",
+      "customfield_10800": "Impact",
+      "customfield_11459": "Automation Scripts Failed Count",
+      "customfield_10009": "Approvals",
+      "attachment": "Attachment",
+      "summary": "Summary",
+      "customfield_11450": "Associations",
+      "customfield_11331": "Message",
+      "customfield_11452": "Open forms",
+      "customfield_11451": "API Test Required?",
+      "customfield_11330": "Repository",
+      "customfield_11333": "Last Commit Date",
+      "customfield_11575": "Idea archived",
+      "customfield_11454": "Locked forms",
+      "customfield_10002": "Rank",
+      "customfield_11453": "Submitted forms",
+      "customfield_11332": "Files Changed",
+      "customfield_11574": "Documentation Complete?",
+      "customfield_11577": "Idea archived on",
+      "customfield_11335": "SVN",
+      "customfield_10003": "Sprint",
+      "customfield_11455": "Total forms",
+      "customfield_10004": "Epic Link",
+      "customfield_11576": "Idea archived by",
+      "customfield_10400": "Team",
+      "customfield_11446": "Release Notes Required?",
+      "customfield_11449": "Association Count",
+      "customfield_11448": "In Docs",
+      "customfield_11327": "SF Case Number",
+      "customfield_11329": "Revision",
+      "duedate": "Due date",
+      "comment": "Comment"
+    },
+    "fields": {
+      "statuscategorychangedate": "2022-05-05T14:00:51.473-0400",
+      "parent": {
+        "id": "25190",
+        "key": "EC-3059",
+        "self": "https://eoriginal.atlassian.net/rest/api/3/issue/25190",
+        "fields": {
+          "summary": "Transaction Persistent IDs",
+          "status": {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/status/6",
+            "description": "The work item is considered finished, the resolution is correct. Work items which are closed can be reopened.",
+            "iconUrl": "https://eoriginal.atlassian.net/images/icons/statuses/closed.png",
+            "name": "Closed",
+            "id": "6",
+            "statusCategory": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/statuscategory/3",
+              "id": 3,
+              "key": "done",
+              "colorName": "green",
+              "name": "Done"
+            }
+          },
+          "priority": {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/priority/3",
+            "iconUrl": "https://eoriginal.atlassian.net/images/icons/priorities/medium_new.svg",
+            "name": "Medium",
+            "id": "3"
+          },
+          "issuetype": {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issuetype/10000",
+            "id": "10000",
+            "description": "A collection of related bugs, stories, and tasks.",
+            "iconUrl": "https://eoriginal.atlassian.net/images/icons/issuetypes/epic.svg",
+            "name": "Epic",
+            "subtask": false,
+            "hierarchyLevel": 1
+          }
+        }
+      },
+      "customfield_11440": null,
+      "fixVersions": [
+        {
+          "self": "https://eoriginal.atlassian.net/rest/api/3/version/10855",
+          "id": "10855",
+          "description": "",
+          "name": "10.3",
+          "archived": false,
+          "released": true,
+          "releaseDate": "2019-11-03"
+        }
+      ],
+      "statusCategory": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/statuscategory/3",
+        "id": 3,
+        "key": "done",
+        "colorName": "green",
+        "name": "Done"
+      },
+      "customfield_11200": {
+        "type": "doc",
+        "version": 1,
+        "content": [
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Tested in Trunk"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Show/Hide Columns  - Option available for both Loan ID and GUID columns to be displayed.  When shown they do display."
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Transaction Snapshot - Transaction GUID and Loan Origination ID appear under the Creation Date"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Add New Transaction - The New Transaction dialog accessed from Workspace after a search is conducted allows for the addition of a Loan Origination ID."
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Update Document Properties - GUID and Loan ID are displayed in the properties but are not editable"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Update Transaction Properties - GUID is displayed and is not editable.  The Loan ID is displayed in a text box and may be edited or removed."
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Transfer Receipt - Loan ID and GUID displayed in the Transfer Content Summary of the receipt document"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Event History/Audit Trail – Viewable in the extra_data field of event"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Certified Print and Paper Out Packages - Loan ID and the GUID appear in the Transaction Activity History Report header information "
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "QA Accepts Solution"
+              }
+            ]
+          }
+        ]
+      },
+      "customfield_11443": null,
+      "resolution": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/resolution/10000",
+        "id": "10000",
+        "description": "Work has been completed on this issue.",
+        "name": "Done"
+      },
+      "customfield_11445": null,
+      "customfield_11323": {
+        "type": "doc",
+        "version": 1,
+        "content": [
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "."
+              }
+            ]
+          }
+        ]
+      },
+      "customfield_11444": null,
+      "customfield_10500": null,
+      "customfield_11435": null,
+      "customfield_11437": null,
+      "customfield_11318": null,
+      "customfield_10900": null,
+      "customfield_11319": null,
+      "customfield_11839": null,
+      "lastViewed": null,
+      "customfield_11391": null,
+      "customfield_11390": null,
+      "customfield_11397": null,
+      "customfield_11430": null,
+      "customfield_10100": null,
+      "priority": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/priority/3",
+        "iconUrl": "https://eoriginal.atlassian.net/images/icons/priorities/medium_new.svg",
+        "name": "Medium",
+        "id": "3"
+      },
+      "customfield_11674": null,
+      "customfield_11434": null,
+      "labels": [
+        "3"
+      ],
+      "customfield_11545": null,
+      "customfield_11426": null,
+      "aggregatetimeoriginalestimate": null,
+      "timeestimate": null,
+      "customfield_11429": null,
+      "versions": [],
+      "customfield_11708": null,
+      "issuelinks": [
+        {
+          "id": "25290",
+          "self": "https://eoriginal.atlassian.net/rest/api/3/issueLink/25290",
+          "type": {
+            "id": "10300",
+            "name": "Issue split",
+            "inward": "split from",
+            "outward": "split to",
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issueLinkType/10300"
+          },
+          "inwardIssue": {
+            "id": "25217",
+            "key": "EC-3081",
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/25217",
+            "fields": {
+              "summary": "Transaction GUID and Origination Loan ID Searchable and Appearing everywhere Transaction ID appears.",
+              "status": {
+                "self": "https://eoriginal.atlassian.net/rest/api/3/status/6",
+                "description": "The work item is considered finished, the resolution is correct. Work items which are closed can be reopened.",
+                "iconUrl": "https://eoriginal.atlassian.net/images/icons/statuses/closed.png",
+                "name": "Closed",
+                "id": "6",
+                "statusCategory": {
+                  "self": "https://eoriginal.atlassian.net/rest/api/3/statuscategory/3",
+                  "id": 3,
+                  "key": "done",
+                  "colorName": "green",
+                  "name": "Done"
+                }
+              },
+              "priority": {
+                "self": "https://eoriginal.atlassian.net/rest/api/3/priority/3",
+                "iconUrl": "https://eoriginal.atlassian.net/images/icons/priorities/medium_new.svg",
+                "name": "Medium",
+                "id": "3"
+              },
+              "issuetype": {
+                "self": "https://eoriginal.atlassian.net/rest/api/3/issuetype/10001",
+                "id": "10001",
+                "description": "Created by Jira Agile - do not edit or delete. Issue type for a user story.",
+                "iconUrl": "https://eoriginal.atlassian.net/images/icons/issuetypes/story.svg",
+                "name": "Story",
+                "subtask": false,
+                "hierarchyLevel": 0
+              }
+            }
+          }
+        },
+        {
+          "id": "25449",
+          "self": "https://eoriginal.atlassian.net/rest/api/3/issueLink/25449",
+          "type": {
+            "id": "10003",
+            "name": "Relates",
+            "inward": "relates to",
+            "outward": "relates to",
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issueLinkType/10003"
+          },
+          "outwardIssue": {
+            "id": "25696",
+            "key": "EC-3302",
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/25696",
+            "fields": {
+              "summary": "Transaction snapshot Properties section displays incorrectly",
+              "status": {
+                "self": "https://eoriginal.atlassian.net/rest/api/3/status/6",
+                "description": "The work item is considered finished, the resolution is correct. Work items which are closed can be reopened.",
+                "iconUrl": "https://eoriginal.atlassian.net/images/icons/statuses/closed.png",
+                "name": "Closed",
+                "id": "6",
+                "statusCategory": {
+                  "self": "https://eoriginal.atlassian.net/rest/api/3/statuscategory/3",
+                  "id": 3,
+                  "key": "done",
+                  "colorName": "green",
+                  "name": "Done"
+                }
+              },
+              "priority": {
+                "self": "https://eoriginal.atlassian.net/rest/api/3/priority/3",
+                "iconUrl": "https://eoriginal.atlassian.net/images/icons/priorities/medium_new.svg",
+                "name": "Medium",
+                "id": "3"
+              },
+              "issuetype": {
+                "self": "https://eoriginal.atlassian.net/rest/api/3/issuetype/10004",
+                "id": "10004",
+                "description": "A problem or error.",
+                "iconUrl": "https://eoriginal.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium",
+                "name": "Bug",
+                "subtask": false,
+                "avatarId": 10303,
+                "hierarchyLevel": 0
+              }
+            }
+          }
+        },
+        {
+          "id": "25569",
+          "self": "https://eoriginal.atlassian.net/rest/api/3/issueLink/25569",
+          "type": {
+            "id": "10003",
+            "name": "Relates",
+            "inward": "relates to",
+            "outward": "relates to",
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issueLinkType/10003"
+          },
+          "inwardIssue": {
+            "id": "25817",
+            "key": "EC-3379",
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/25817",
+            "fields": {
+              "summary": "Code review EC-3239 Transaction GUID & Origination Loan ID appearing in Workspace",
+              "status": {
+                "self": "https://eoriginal.atlassian.net/rest/api/3/status/10002",
+                "description": "",
+                "iconUrl": "https://eoriginal.atlassian.net/",
+                "name": "Done",
+                "id": "10002",
+                "statusCategory": {
+                  "self": "https://eoriginal.atlassian.net/rest/api/3/statuscategory/3",
+                  "id": 3,
+                  "key": "done",
+                  "colorName": "green",
+                  "name": "Done"
+                }
+              },
+              "issuetype": {
+                "self": "https://eoriginal.atlassian.net/rest/api/3/issuetype/10429",
+                "id": "10429",
+                "description": "A simple task for engineering with a minimized workflow that doesn't have UAT.",
+                "iconUrl": "https://eoriginal.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
+                "name": "Engineering Task",
+                "subtask": false,
+                "avatarId": 10318,
+                "hierarchyLevel": 0
+              }
+            }
+          }
+        }
+      ],
+      "assignee": null,
+      "status": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/status/6",
+        "description": "The work item is considered finished, the resolution is correct. Work items which are closed can be reopened.",
+        "iconUrl": "https://eoriginal.atlassian.net/images/icons/statuses/closed.png",
+        "name": "Closed",
+        "id": "6",
+        "statusCategory": {
+          "self": "https://eoriginal.atlassian.net/rest/api/3/statuscategory/3",
+          "id": 3,
+          "key": "done",
+          "colorName": "green",
+          "name": "Done"
+        }
+      },
+      "components": [],
+      "customfield_11380": null,
+      "customfield_11382": null,
+      "customfield_11381": null,
+      "customfield_11384": 12,
+      "customfield_11383": null,
+      "customfield_11386": [
+        {
+          "self": "https://eoriginal.atlassian.net/rest/api/3/customFieldOption/10359",
+          "value": "IE11",
+          "id": "10359"
+        },
+        {
+          "self": "https://eoriginal.atlassian.net/rest/api/3/customFieldOption/10360",
+          "value": "Edge",
+          "id": "10360"
+        },
+        {
+          "self": "https://eoriginal.atlassian.net/rest/api/3/customFieldOption/10361",
+          "value": "Chrome",
+          "id": "10361"
+        },
+        {
+          "self": "https://eoriginal.atlassian.net/rest/api/3/customFieldOption/10362",
+          "value": "Firefox",
+          "id": "10362"
+        }
+      ],
+      "customfield_11385": 5,
+      "customfield_11388": null,
+      "customfield_11542": null,
+      "customfield_11423": null,
+      "customfield_11544": null,
+      "customfield_11389": null,
+      "customfield_11543": null,
+      "customfield_11535": null,
+      "customfield_10600": [],
+      "customfield_11534": null,
+      "customfield_11415": null,
+      "customfield_11418": null,
+      "aggregatetimeestimate": null,
+      "customfield_11417": null,
+      "customfield_11419": null,
+      "creator": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5d07efd4d3177c0bcccd38e4",
+        "accountId": "5d07efd4d3177c0bcccd38e4",
+        "avatarUrls": {
+          "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+          "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+          "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+          "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png"
+        },
+        "displayName": "Kristen Jones",
+        "active": true,
+        "timeZone": "America/New_York",
+        "accountType": "atlassian"
+      },
+      "subtasks": [],
+      "customfield_11371": null,
+      "customfield_11370": 9,
+      "reporter": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5d07efd4d3177c0bcccd38e4",
+        "accountId": "5d07efd4d3177c0bcccd38e4",
+        "avatarUrls": {
+          "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+          "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+          "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+          "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png"
+        },
+        "displayName": "Kristen Jones",
+        "active": true,
+        "timeZone": "America/New_York",
+        "accountType": "atlassian"
+      },
+      "customfield_11374": null,
+      "aggregateprogress": {
+        "progress": 0,
+        "total": 0
+      },
+      "customfield_11410": null,
+      "customfield_11530": null,
+      "customfield_11533": null,
+      "customfield_11378": null,
+      "customfield_11532": null,
+      "customfield_11411": null,
+      "customfield_11524": null,
+      "customfield_11369": 3,
+      "customfield_11523": null,
+      "customfield_11402": null,
+      "customfield_11526": null,
+      "customfield_11525": null,
+      "customfield_11407": null,
+      "customfield_11527": null,
+      "customfield_11409": null,
+      "customfield_11529": null,
+      "customfield_11408": null,
+      "progress": {
+        "progress": 0,
+        "total": 0
+      },
+      "customfield_11806": null,
+      "votes": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/issue/EC-3239/votes",
+        "votes": 0,
+        "hasVoted": false
+      },
+      "worklog": {
+        "startAt": 0,
+        "maxResults": 20,
+        "total": 0,
+        "worklogs": []
+      },
+      "issuetype": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/issuetype/10001",
+        "id": "10001",
+        "description": "Created by Jira Agile - do not edit or delete. Issue type for a user story.",
+        "iconUrl": "https://eoriginal.atlassian.net/images/icons/issuetypes/story.svg",
+        "name": "Story",
+        "subtask": false,
+        "hierarchyLevel": 0
+      },
+      "customfield_11360": null,
+      "timespent": null,
+      "customfield_11362": {
+        "type": "doc",
+        "version": 1,
+        "content": [
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Show/Hide Columns  - includes guid & loan id"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Transaction Snapshot - includes guid & loan id"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Add New Transaction - loan id only"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Update Document Properties - guid & loan id (neither editable)"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Update Transaction Properties - guid  (not editable)-  & loan id (editable)"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Transfer Receipt - loan id & guid (under creation date)"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Event History/Audit Trail – included in extra_data field of event"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Certified Print Package - loan id & guid in transaction heading and in event history Additional Information"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Paper Out Package -loan id & guid in transaction heading and in event history Additional Information"
+              }
+            ]
+          }
+        ]
+      },
+      "customfield_11483": null,
+      "project": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/project/10200",
+        "id": "10200",
+        "key": "EC",
+        "name": "ECORE",
+        "projectTypeKey": "software",
+        "simplified": false,
+        "avatarUrls": {
+          "48x48": "https://eoriginal.atlassian.net/rest/api/3/universal_avatar/view/type/project/avatar/10324",
+          "24x24": "https://eoriginal.atlassian.net/rest/api/3/universal_avatar/view/type/project/avatar/10324?size=small",
+          "16x16": "https://eoriginal.atlassian.net/rest/api/3/universal_avatar/view/type/project/avatar/10324?size=xsmall",
+          "32x32": "https://eoriginal.atlassian.net/rest/api/3/universal_avatar/view/type/project/avatar/10324?size=medium"
+        }
+      },
+      "customfield_11361": null,
+      "customfield_11000": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3A7040d88b-d77f-4dfd-808c-611abd30224d",
+        "accountId": "557058:7040d88b-d77f-4dfd-808c-611abd30224d",
+        "avatarUrls": {
+          "48x48": "https://secure.gravatar.com/avatar/891cc4e53a09d3fe9811d67656326360?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FJH-4.png",
+          "24x24": "https://secure.gravatar.com/avatar/891cc4e53a09d3fe9811d67656326360?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FJH-4.png",
+          "16x16": "https://secure.gravatar.com/avatar/891cc4e53a09d3fe9811d67656326360?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FJH-4.png",
+          "32x32": "https://secure.gravatar.com/avatar/891cc4e53a09d3fe9811d67656326360?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FJH-4.png"
+        },
+        "displayName": "Jeff Hurd",
+        "active": true,
+        "timeZone": "America/New_York",
+        "accountType": "atlassian"
+      },
+      "customfield_11364": [],
+      "customfield_11484": null,
+      "customfield_11363": [
+        {
+          "self": "https://eoriginal.atlassian.net/rest/api/3/customFieldOption/10337",
+          "value": "Yes",
+          "id": "10337"
+        }
+      ],
+      "aggregatetimespent": null,
+      "customfield_11641": null,
+      "customfield_11486": null,
+      "customfield_11365": null,
+      "customfield_11368": 6,
+      "customfield_11401": null,
+      "customfield_11367": null,
+      "customfield_10700": {
+        "type": "doc",
+        "version": 1,
+        "content": [
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Transaction GUID and Origination Loan ID visible in Workspace in the following places: "
+              }
+            ]
+          },
+          {
+            "type": "bulletList",
+            "content": [
+              {
+                "type": "listItem",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "Show/Hide Columns "
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "listItem",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "Transaction Snapshot"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "listItem",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "Add New Transaction"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "listItem",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "Update Document Properties"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "listItem",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "Update Transaction Properties"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "listItem",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "Transfer Receipt"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "listItem",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "Event History/Audit Trail"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "listItem",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "Certified Print Package"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "listItem",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "Paper Out Package"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Please see attached document from research story EC-3123."
+              }
+            ]
+          }
+        ]
+      },
+      "resolutiondate": "2019-09-19T12:19:41.315-0400",
+      "workratio": -1,
+      "watches": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/issue/EC-3239/watchers",
+        "watchCount": 4,
+        "isWatching": false
+      },
+      "created": "2019-08-29T13:13:15.374-0400",
+      "customfield_11872": null,
+      "customfield_10300": "{}",
+      "customfield_11873": null,
+      "customfield_11504": null,
+      "customfield_11503": null,
+      "updated": "2019-10-02T11:12:48.547-0400",
+      "customfield_11580": null,
+      "timeoriginalestimate": null,
+      "customfield_11461": null,
+      "customfield_11340": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/customFieldOption/10300",
+        "value": "Normal",
+        "id": "10300"
+      },
+      "customfield_11582": null,
+      "customfield_11460": null,
+      "customfield_11581": null,
+      "description": {
+        "type": "doc",
+        "version": 1,
+        "content": [
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Add Transaction GUID & Origination Loan ID into Workspace."
+              }
+            ]
+          }
+        ]
+      },
+      "customfield_11584": null,
+      "customfield_11463": null,
+      "customfield_11462": null,
+      "customfield_11583": null,
+      "customfield_11100": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5b8e99a56d3a2a2be1b19409",
+        "accountId": "5b8e99a56d3a2a2be1b19409",
+        "avatarUrls": {
+          "48x48": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+          "24x24": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+          "16x16": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+          "32x32": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png"
+        },
+        "displayName": "Mike Livingston",
+        "active": true,
+        "timeZone": "America/New_York",
+        "accountType": "atlassian"
+      },
+      "customfield_11465": null,
+      "customfield_11740": null,
+      "customfield_11464": null,
+      "customfield_11466": null,
+      "timetracking": {},
+      "customfield_11741": null,
+      "customfield_11458": null,
+      "customfield_11579": null,
+      "customfield_11578": null,
+      "security": null,
+      "customfield_10800": [
+        {
+          "self": "https://eoriginal.atlassian.net/rest/api/3/customFieldOption/10202",
+          "value": "Database Structure",
+          "id": "10202"
+        }
+      ],
+      "customfield_11459": null,
+      "customfield_10009": null,
+      "attachment": [
+        {
+          "self": "https://eoriginal.atlassian.net/rest/api/3/attachment/25462",
+          "id": "25462",
+          "filename": "client_model_transactionId FINAL (2c278cb2-a5ae-491e-81f1-e06fec5c8c2b).pdf",
+          "author": {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5d07efd4d3177c0bcccd38e4",
+            "accountId": "5d07efd4d3177c0bcccd38e4",
+            "avatarUrls": {
+              "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+              "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+              "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+              "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png"
+            },
+            "displayName": "Kristen Jones",
+            "active": true,
+            "timeZone": "America/New_York",
+            "accountType": "atlassian"
+          },
+          "created": "2019-08-29T13:19:04.040-0400",
+          "size": 3669361,
+          "mimeType": "application/pdf",
+          "content": "https://eoriginal.atlassian.net/rest/api/3/attachment/content/25462"
+        },
+        {
+          "self": "https://eoriginal.atlassian.net/rest/api/3/attachment/25574",
+          "id": "25574",
+          "filename": "ec-3239_v2.diff",
+          "author": {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5b8e99a56d3a2a2be1b19409",
+            "accountId": "5b8e99a56d3a2a2be1b19409",
+            "avatarUrls": {
+              "48x48": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+              "24x24": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+              "16x16": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+              "32x32": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png"
+            },
+            "displayName": "Mike Livingston",
+            "active": true,
+            "timeZone": "America/New_York",
+            "accountType": "atlassian"
+          },
+          "created": "2019-09-09T13:51:43.001-0400",
+          "size": 36455,
+          "mimeType": "text/x-patch",
+          "content": "https://eoriginal.atlassian.net/rest/api/3/attachment/content/25574"
+        },
+        {
+          "self": "https://eoriginal.atlassian.net/rest/api/3/attachment/25575",
+          "id": "25575",
+          "filename": "ec-3239_v3.diff",
+          "author": {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5b8e99a56d3a2a2be1b19409",
+            "accountId": "5b8e99a56d3a2a2be1b19409",
+            "avatarUrls": {
+              "48x48": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+              "24x24": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+              "16x16": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+              "32x32": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png"
+            },
+            "displayName": "Mike Livingston",
+            "active": true,
+            "timeZone": "America/New_York",
+            "accountType": "atlassian"
+          },
+          "created": "2019-09-09T14:19:31.414-0400",
+          "size": 36270,
+          "mimeType": "text/x-patch",
+          "content": "https://eoriginal.atlassian.net/rest/api/3/attachment/content/25575"
+        },
+        {
+          "self": "https://eoriginal.atlassian.net/rest/api/3/attachment/25675",
+          "id": "25675",
+          "filename": "ec-3239_v4.diff",
+          "author": {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5b8e99a56d3a2a2be1b19409",
+            "accountId": "5b8e99a56d3a2a2be1b19409",
+            "avatarUrls": {
+              "48x48": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+              "24x24": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+              "16x16": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+              "32x32": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png"
+            },
+            "displayName": "Mike Livingston",
+            "active": true,
+            "timeZone": "America/New_York",
+            "accountType": "atlassian"
+          },
+          "created": "2019-09-12T12:53:55.554-0400",
+          "size": 29127,
+          "mimeType": "binary/octet-stream",
+          "content": "https://eoriginal.atlassian.net/rest/api/3/attachment/content/25675"
+        },
+        {
+          "self": "https://eoriginal.atlassian.net/rest/api/3/attachment/25558",
+          "id": "25558",
+          "filename": "ec-3239.diff",
+          "author": {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5b8e99a56d3a2a2be1b19409",
+            "accountId": "5b8e99a56d3a2a2be1b19409",
+            "avatarUrls": {
+              "48x48": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+              "24x24": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+              "16x16": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+              "32x32": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png"
+            },
+            "displayName": "Mike Livingston",
+            "active": true,
+            "timeZone": "America/New_York",
+            "accountType": "atlassian"
+          },
+          "created": "2019-09-09T09:09:07.912-0400",
+          "size": 33598,
+          "mimeType": "binary/octet-stream",
+          "content": "https://eoriginal.atlassian.net/rest/api/3/attachment/content/25558"
+        }
+      ],
+      "summary": "Transaction GUID & Origination Loan ID appearing in Workspace",
+      "customfield_11450": null,
+      "customfield_11331": null,
+      "customfield_11452": null,
+      "customfield_11451": null,
+      "customfield_11330": null,
+      "customfield_11333": null,
+      "customfield_11575": null,
+      "customfield_11454": null,
+      "customfield_10002": "2|hzt7uv:",
+      "customfield_11453": null,
+      "customfield_11332": null,
+      "customfield_11574": null,
+      "customfield_11577": null,
+      "customfield_11335": {
+        "type": "doc",
+        "version": 1,
+        "content": [
+          {
+            "type": "panel",
+            "content": [
+              {
+                "type": "paragraph",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "ecore revision 19987 (trunk)",
+                    "marks": [
+                      {
+                        "type": "strong"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "paragraph",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "Date",
+                    "marks": [
+                      {
+                        "type": "strong"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "text": ": Mon Sep 09 14:34:04 UTC 2019"
+                  },
+                  {
+                    "type": "hardBreak"
+                  },
+                  {
+                    "type": "text",
+                    "text": "User",
+                    "marks": [
+                      {
+                        "type": "strong"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "text": ": mlivingston"
+                  },
+                  {
+                    "type": "hardBreak"
+                  },
+                  {
+                    "type": "text",
+                    "text": "Message",
+                    "marks": [
+                      {
+                        "type": "strong"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "text": ": EC-3239: Transaction GUID & Origination Loan ID appearing in Workspace"
+                  }
+                ]
+              },
+              {
+                "type": "paragraph",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "Files Changed",
+                    "marks": [
+                      {
+                        "type": "strong"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "text": ":"
+                  }
+                ]
+              },
+              {
+                "type": "bulletList",
+                "content": [
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "UPDATED",
+                            "marks": [
+                              {
+                                "type": "textColor",
+                                "attrs": {
+                                  "color": "#00a7cb"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "text",
+                            "text": " trunk/abstract-war/src/main/resources/config/spring/service-config.xml"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "UPDATED",
+                            "marks": [
+                              {
+                                "type": "textColor",
+                                "attrs": {
+                                  "color": "#00a7cb"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "text",
+                            "text": " trunk/ecore-commons/src/main/java/com/eoriginal/commons/ContainerSearchCriteria.java"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "UPDATED",
+                            "marks": [
+                              {
+                                "type": "textColor",
+                                "attrs": {
+                                  "color": "#00a7cb"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "text",
+                            "text": " trunk/ecore-jar/src/main/java/com/eoriginal/ecore/container/ContainerService.java"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "ADDED",
+                            "marks": [
+                              {
+                                "type": "textColor",
+                                "attrs": {
+                                  "color": "#14892c"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "text",
+                            "text": " trunk/ecore-jar/src/main/java/com/eoriginal/ecore/container/IdentifierLabels.java"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "UPDATED",
+                            "marks": [
+                              {
+                                "type": "textColor",
+                                "attrs": {
+                                  "color": "#00a7cb"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "text",
+                            "text": " trunk/ecore-jar/src/main/java/com/eoriginal/ecore/transaction/TransactionService.java"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "UPDATED",
+                            "marks": [
+                              {
+                                "type": "textColor",
+                                "attrs": {
+                                  "color": "#00a7cb"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "text",
+                            "text": " trunk/ecore-jar/src/main/java/com/eoriginal/ecore/transfer/TransferReceiptTransformer.java"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "UPDATED",
+                            "marks": [
+                              {
+                                "type": "textColor",
+                                "attrs": {
+                                  "color": "#00a7cb"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "text",
+                            "text": " trunk/ecore-jar/src/main/resources/config/ibatis/maps/com/eoriginal/ecore/event/EventLog.xml"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "UPDATED",
+                            "marks": [
+                              {
+                                "type": "textColor",
+                                "attrs": {
+                                  "color": "#00a7cb"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "text",
+                            "text": " trunk/ecore-jar/src/test/java/com/eoriginal/ecore/report/ReportServiceTest.java"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "ADDED",
+                            "marks": [
+                              {
+                                "type": "textColor",
+                                "attrs": {
+                                  "color": "#14892c"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "text",
+                            "text": " trunk/src/main/resources/setup/database/conf/templates/migrations/oracle/alters/ec-3239.sql"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "UPDATED",
+                            "marks": [
+                              {
+                                "type": "textColor",
+                                "attrs": {
+                                  "color": "#00a7cb"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "text",
+                            "text": " trunk/src/main/resources/setup/database/conf/templates/migrations/oracle/upgrade-steps.xml"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "UPDATED",
+                            "marks": [
+                              {
+                                "type": "textColor",
+                                "attrs": {
+                                  "color": "#00a7cb"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "text",
+                            "text": " trunk/src/main/resources/setup/database/conf/templates/ssweb/tables/container_search.sql"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "UPDATED",
+                            "marks": [
+                              {
+                                "type": "textColor",
+                                "attrs": {
+                                  "color": "#00a7cb"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "text",
+                            "text": " trunk/websign/websign-dao-hibernate/src/main/resources/com/eoriginal/websign/setup/ContainerSearch.hbm.xml"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "UPDATED",
+                            "marks": [
+                              {
+                                "type": "textColor",
+                                "attrs": {
+                                  "color": "#00a7cb"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "text",
+                            "text": " trunk/websign/websign-struts2/src/main/java/com/eoriginal/websign/setup/DatatableUtil.java"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "UPDATED",
+                            "marks": [
+                              {
+                                "type": "textColor",
+                                "attrs": {
+                                  "color": "#00a7cb"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "text",
+                            "text": " trunk/websign/websign-struts2/src/main/java/com/eoriginal/websign/setup/DocumentProfileForm.java"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "UPDATED",
+                            "marks": [
+                              {
+                                "type": "textColor",
+                                "attrs": {
+                                  "color": "#00a7cb"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "text",
+                            "text": " trunk/websign/websign-struts2/src/main/java/com/eoriginal/websign/setup/DocumentSnapshotAction.java"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "UPDATED",
+                            "marks": [
+                              {
+                                "type": "textColor",
+                                "attrs": {
+                                  "color": "#00a7cb"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "text",
+                            "text": " trunk/websign/websign-web/src/main/resources/applicationContext-services.xml"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "UPDATED",
+                            "marks": [
+                              {
+                                "type": "textColor",
+                                "attrs": {
+                                  "color": "#00a7cb"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "text",
+                            "text": " trunk/websign/websign-web/src/main/resources/applicationContext-struts.xml"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "UPDATED",
+                            "marks": [
+                              {
+                                "type": "textColor",
+                                "attrs": {
+                                  "color": "#00a7cb"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "text",
+                            "text": " trunk/websign/websign-web/src/main/webapp/WEB-INF/ftl/setup/workspace/datatableJSONResponse.ftl"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "UPDATED",
+                            "marks": [
+                              {
+                                "type": "textColor",
+                                "attrs": {
+                                  "color": "#00a7cb"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "text",
+                            "text": " trunk/websign/websign-web/src/main/webapp/WEB-INF/ftl/setup/workspace/documentProperties.ftl"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "UPDATED",
+                            "marks": [
+                              {
+                                "type": "textColor",
+                                "attrs": {
+                                  "color": "#00a7cb"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "text",
+                            "text": " trunk/websign/websign-web/src/main/webapp/WEB-INF/ftl/setup/workspace/transactionProperties.ftl"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "UPDATED",
+                            "marks": [
+                              {
+                                "type": "textColor",
+                                "attrs": {
+                                  "color": "#00a7cb"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "text",
+                            "text": " trunk/websign/websign-web/src/main/webapp/WEB-INF/ftl/setup/workspace/transactionSnapshot.ftl"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "attrs": {
+              "panelType": "info"
+            }
+          },
+          {
+            "type": "panel",
+            "content": [
+              {
+                "type": "paragraph",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "ecore revision 19988 (trunk)",
+                    "marks": [
+                      {
+                        "type": "strong"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "paragraph",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "Date",
+                    "marks": [
+                      {
+                        "type": "strong"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "text": ": Mon Sep 09 21:00:04 UTC 2019"
+                  },
+                  {
+                    "type": "hardBreak"
+                  },
+                  {
+                    "type": "text",
+                    "text": "User",
+                    "marks": [
+                      {
+                        "type": "strong"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "text": ": mlivingston"
+                  },
+                  {
+                    "type": "hardBreak"
+                  },
+                  {
+                    "type": "text",
+                    "text": "Message",
+                    "marks": [
+                      {
+                        "type": "strong"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "text": ": EC-3239: Guid & Loan ID"
+                  }
+                ]
+              },
+              {
+                "type": "paragraph",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "Files Changed",
+                    "marks": [
+                      {
+                        "type": "strong"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "text": ":"
+                  }
+                ]
+              },
+              {
+                "type": "bulletList",
+                "content": [
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "UPDATED",
+                            "marks": [
+                              {
+                                "type": "textColor",
+                                "attrs": {
+                                  "color": "#00a7cb"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "text",
+                            "text": " trunk/ecore-jar/src/main/resources/config/ibatis/maps/com/eoriginal/ecore/event/EventLog.xml"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "attrs": {
+              "panelType": "info"
+            }
+          },
+          {
+            "type": "panel",
+            "content": [
+              {
+                "type": "paragraph",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "ecore revision 20003 (trunk)",
+                    "marks": [
+                      {
+                        "type": "strong"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "paragraph",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "Date",
+                    "marks": [
+                      {
+                        "type": "strong"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "text": ": Thu Sep 12 13:30:04 UTC 2019"
+                  },
+                  {
+                    "type": "hardBreak"
+                  },
+                  {
+                    "type": "text",
+                    "text": "User",
+                    "marks": [
+                      {
+                        "type": "strong"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "text": ": mlivingston"
+                  },
+                  {
+                    "type": "hardBreak"
+                  },
+                  {
+                    "type": "text",
+                    "text": "Message",
+                    "marks": [
+                      {
+                        "type": "strong"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "text": ": EC-3239: Transaction GUID & Origination Loan ID appearing in Workspace"
+                  }
+                ]
+              },
+              {
+                "type": "paragraph",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "Files Changed",
+                    "marks": [
+                      {
+                        "type": "strong"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "text": ":"
+                  }
+                ]
+              },
+              {
+                "type": "bulletList",
+                "content": [
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "UPDATED",
+                            "marks": [
+                              {
+                                "type": "textColor",
+                                "attrs": {
+                                  "color": "#00a7cb"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "text",
+                            "text": " trunk/abstract-war/src/main/resources/config/spring/service-config.xml"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "UPDATED",
+                            "marks": [
+                              {
+                                "type": "textColor",
+                                "attrs": {
+                                  "color": "#00a7cb"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "text",
+                            "text": " trunk/ecore-jar/src/main/java/com/eoriginal/ecore/report/ReportService.java"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "UPDATED",
+                            "marks": [
+                              {
+                                "type": "textColor",
+                                "attrs": {
+                                  "color": "#00a7cb"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "text",
+                            "text": " trunk/ecore-jar/src/main/java/com/eoriginal/ecore/transfer/TransferReceiptTransformer.java"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "UPDATED",
+                            "marks": [
+                              {
+                                "type": "textColor",
+                                "attrs": {
+                                  "color": "#00a7cb"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "text",
+                            "text": " trunk/ecore-jar/src/main/java/com/eoriginal/ecore/transfer/TransferService.java"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "UPDATED",
+                            "marks": [
+                              {
+                                "type": "textColor",
+                                "attrs": {
+                                  "color": "#00a7cb"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "text",
+                            "text": " trunk/ecore-jar/src/main/resources/config/ecore/xml/frot.fo"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "UPDATED",
+                            "marks": [
+                              {
+                                "type": "textColor",
+                                "attrs": {
+                                  "color": "#00a7cb"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "text",
+                            "text": " trunk/ecore-jar/src/main/resources/config/ecore/xml/trans-history.xsl"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "UPDATED",
+                            "marks": [
+                              {
+                                "type": "textColor",
+                                "attrs": {
+                                  "color": "#00a7cb"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "text",
+                            "text": " trunk/ecore-jar/src/test/resources/testfiles/frot.fo"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "UPDATED",
+                            "marks": [
+                              {
+                                "type": "textColor",
+                                "attrs": {
+                                  "color": "#00a7cb"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "text",
+                            "text": " trunk/websign/websign-web/src/main/static/css/websign-setup.css"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "UPDATED",
+                            "marks": [
+                              {
+                                "type": "textColor",
+                                "attrs": {
+                                  "color": "#00a7cb"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "text",
+                            "text": " trunk/websign/websign-web/src/main/webapp/WEB-INF/ftl/plain/transactionInformation.ftl"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "UPDATED",
+                            "marks": [
+                              {
+                                "type": "textColor",
+                                "attrs": {
+                                  "color": "#00a7cb"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "text",
+                            "text": " trunk/websign/websign-web/src/main/webapp/WEB-INF/ftl/setup/pathSummary.ftl"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "UPDATED",
+                            "marks": [
+                              {
+                                "type": "textColor",
+                                "attrs": {
+                                  "color": "#00a7cb"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "text",
+                            "text": " trunk/websign/websign-web/src/main/webapp/WEB-INF/ftl/setup/workspace/documentProperties.ftl"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "UPDATED",
+                            "marks": [
+                              {
+                                "type": "textColor",
+                                "attrs": {
+                                  "color": "#00a7cb"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "text",
+                            "text": " trunk/websign/websign-web/src/main/webapp/WEB-INF/ftl/setup/workspace/transactionProperties.ftl"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "UPDATED",
+                            "marks": [
+                              {
+                                "type": "textColor",
+                                "attrs": {
+                                  "color": "#00a7cb"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "text",
+                            "text": " trunk/websign/websign-web/src/main/webapp/WEB-INF/ftl/setup/workspace/transactionSnapshot.ftl"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "attrs": {
+              "panelType": "info"
+            }
+          }
+        ]
+      },
+      "customfield_10003": [
+        {
+          "id": 130,
+          "name": "ECORE Sprint 61",
+          "state": "closed",
+          "boardId": 6,
+          "goal": "",
+          "startDate": "2019-08-29T18:47:50.164Z",
+          "endDate": "2019-09-12T18:47:00.000Z",
+          "completeDate": "2019-09-12T18:08:32.980Z"
+        },
+        {
+          "id": 131,
+          "name": "ECORE Sprint 62",
+          "state": "closed",
+          "boardId": 6,
+          "goal": "",
+          "startDate": "2019-09-12T18:39:01.561Z",
+          "endDate": "2019-09-26T18:39:00.000Z",
+          "completeDate": "2019-09-30T15:19:31.506Z"
+        }
+      ],
+      "customfield_11455": null,
+      "customfield_10004": "EC-3059",
+      "customfield_11576": null,
+      "customfield_10400": null,
+      "customfield_11446": null,
+      "customfield_11449": null,
+      "customfield_11448": null,
+      "customfield_11327": null,
+      "customfield_11329": null,
+      "duedate": null,
+      "comment": {
+        "comments": [
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/25567/comment/46630",
+            "id": "46630",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3A1598fb37-7e87-4231-9d1b-ff5b2cecead4",
+              "accountId": "557058:1598fb37-7e87-4231-9d1b-ff5b2cecead4",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png"
+              },
+              "displayName": "Dan Bender",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": {
+              "type": "doc",
+              "version": 1,
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "I would use a StringBuilder instead of a StringBuffer on line 96."
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Does the container_search table need the loan_id and transaction_guid columns?"
+                    }
+                  ]
+                }
+              ]
+            },
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3A1598fb37-7e87-4231-9d1b-ff5b2cecead4",
+              "accountId": "557058:1598fb37-7e87-4231-9d1b-ff5b2cecead4",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png"
+              },
+              "displayName": "Dan Bender",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "2019-09-09T09:33:14.258-0400",
+            "updated": "2019-09-09T09:33:14.258-0400",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/25567/comment/46631",
+            "id": "46631",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3Ad75842c7-d43a-437e-a045-109076143dc1",
+              "accountId": "557058:d75842c7-d43a-437e-a045-109076143dc1",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png"
+              },
+              "displayName": "Ken Hopkins",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": {
+              "type": "doc",
+              "version": 1,
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Not sure if this is significant, but previously, if the event wasn’t going to have any extra data in line 111, the extra data parameter would be "
+                    },
+                    {
+                      "type": "text",
+                      "text": "null",
+                      "marks": [
+                        {
+                          "type": "em"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "text": ".  Now, if the event doesn’t have any extra data in line 112, the extra data parameter is an "
+                    },
+                    {
+                      "type": "text",
+                      "text": "empty string",
+                      "marks": [
+                        {
+                          "type": "em"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "text": ".  May be inconsequential, but a difference we should be aware of."
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Is line 321 something that needs to be addressed?"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "I’m a little curious as to why there is a "
+                    },
+                    {
+                      "type": "text",
+                      "text": "?xhtml",
+                      "marks": [
+                        {
+                          "type": "em"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "text": " in line 430, but there isn’t on in any of the other lines 427 - 434?  Is it possible you’re doubly escaping in line 430?  Or are all those other values not being escaped?"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Indentation is off in lines 473 and 474."
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Line 11 and 12 kind of seem like they are duplicating 388 and 394.  Not sure if that’s avoidable or not."
+                    }
+                  ]
+                }
+              ]
+            },
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3Ad75842c7-d43a-437e-a045-109076143dc1",
+              "accountId": "557058:d75842c7-d43a-437e-a045-109076143dc1",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png"
+              },
+              "displayName": "Ken Hopkins",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "2019-09-09T09:38:56.957-0400",
+            "updated": "2019-09-09T09:38:56.957-0400",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/25567/comment/46634",
+            "id": "46634",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5b8e99a56d3a2a2be1b19409",
+              "accountId": "5b8e99a56d3a2a2be1b19409",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "24x24": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "16x16": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "32x32": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png"
+              },
+              "displayName": "Mike Livingston",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": {
+              "type": "doc",
+              "version": 1,
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "mention",
+                      "attrs": {
+                        "id": "557058:1598fb37-7e87-4231-9d1b-ff5b2cecead4",
+                        "text": "@Dan Bender",
+                        "accessLevel": ""
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "text": " I forgot to add the db script for container_search.  Good catch."
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "mention",
+                      "attrs": {
+                        "id": "557058:d75842c7-d43a-437e-a045-109076143dc1",
+                        "text": "@Ken Hopkins",
+                        "accessLevel": ""
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "text": "I will update 111 & 112 to pass in a null again.  Line 321 I do want to address.  The field order in the hide/show columns is inconsistent.   I’ll look into the escaping in datatableJSONResponse and try to consolidate the label text assignments."
+                    }
+                  ]
+                }
+              ]
+            },
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5b8e99a56d3a2a2be1b19409",
+              "accountId": "5b8e99a56d3a2a2be1b19409",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "24x24": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "16x16": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "32x32": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png"
+              },
+              "displayName": "Mike Livingston",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "2019-09-09T09:49:33.725-0400",
+            "updated": "2019-09-09T09:49:33.725-0400",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/25567/comment/46689",
+            "id": "46689",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5b8e99a56d3a2a2be1b19409",
+              "accountId": "5b8e99a56d3a2a2be1b19409",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "24x24": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "16x16": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "32x32": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png"
+              },
+              "displayName": "Mike Livingston",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": {
+              "type": "doc",
+              "version": 1,
+              "content": [
+                {
+                  "type": "bulletList",
+                  "content": [
+                    {
+                      "type": "listItem",
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "Change StringBuffer to StringBuilder"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "Added database scripts"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "if additionalInfo is empty, then pass eventExtraData."
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "For the previous "
+                            },
+                            {
+                              "type": "text",
+                              "text": "todo",
+                              "marks": [
+                                {
+                                  "type": "strong"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "text": "  - Show /hide column order (top-down) actually corresponds to the search results column order(left-right). This seems okay."
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "updated indentation"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "populate the DatatableColumn "
+                            },
+                            {
+                              "type": "text",
+                              "text": "text",
+                              "marks": [
+                                {
+                                  "type": "strong"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "text": " field from bean property reference. "
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5b8e99a56d3a2a2be1b19409",
+              "accountId": "5b8e99a56d3a2a2be1b19409",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "24x24": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "16x16": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "32x32": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png"
+              },
+              "displayName": "Mike Livingston",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "2019-09-09T13:52:43.544-0400",
+            "updated": "2019-09-09T13:52:43.544-0400",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/25567/comment/46690",
+            "id": "46690",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3A1598fb37-7e87-4231-9d1b-ff5b2cecead4",
+              "accountId": "557058:1598fb37-7e87-4231-9d1b-ff5b2cecead4",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png"
+              },
+              "displayName": "Dan Bender",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": {
+              "type": "doc",
+              "version": 1,
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "I’m curious why, in the migration script, you are dropping the columns if they exist and recreating them - rather than creating the columns when they don’t exist?  It seems like, if this were run on an existing database, with existing data, that data would be wiped out.  Is that intentional?"
+                    }
+                  ]
+                }
+              ]
+            },
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3A1598fb37-7e87-4231-9d1b-ff5b2cecead4",
+              "accountId": "557058:1598fb37-7e87-4231-9d1b-ff5b2cecead4",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png"
+              },
+              "displayName": "Dan Bender",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "2019-09-09T14:00:08.689-0400",
+            "updated": "2019-09-09T14:00:08.689-0400",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/25567/comment/46695",
+            "id": "46695",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5b8e99a56d3a2a2be1b19409",
+              "accountId": "5b8e99a56d3a2a2be1b19409",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "24x24": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "16x16": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "32x32": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png"
+              },
+              "displayName": "Mike Livingston",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": {
+              "type": "doc",
+              "version": 1,
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "mention",
+                      "attrs": {
+                        "id": "557058:1598fb37-7e87-4231-9d1b-ff5b2cecead4",
+                        "text": "@Dan Bender",
+                        "accessLevel": ""
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "text": " Old habits resurfacing. It provides “rollback” code. "
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "I’m not attached to it.  I guess I should be following the norm.  I’ll update to only add is the column is not there. "
+                    }
+                  ]
+                }
+              ]
+            },
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5b8e99a56d3a2a2be1b19409",
+              "accountId": "5b8e99a56d3a2a2be1b19409",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "24x24": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "16x16": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "32x32": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png"
+              },
+              "displayName": "Mike Livingston",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "2019-09-09T14:11:42.237-0400",
+            "updated": "2019-09-09T14:11:42.237-0400",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/25567/comment/46696",
+            "id": "46696",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5b8e99a56d3a2a2be1b19409",
+              "accountId": "5b8e99a56d3a2a2be1b19409",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "24x24": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "16x16": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "32x32": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png"
+              },
+              "displayName": "Mike Livingston",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": {
+              "type": "doc",
+              "version": 1,
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "don't wipe out existing data if script is re-applied. "
+                    }
+                  ]
+                }
+              ]
+            },
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5b8e99a56d3a2a2be1b19409",
+              "accountId": "5b8e99a56d3a2a2be1b19409",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "24x24": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "16x16": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png",
+                "32x32": "https://secure.gravatar.com/avatar/0ee77f09abefa2bbd5b5c4ff31c70d21?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FML-4.png"
+              },
+              "displayName": "Mike Livingston",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "2019-09-09T14:19:54.154-0400",
+            "updated": "2019-09-09T14:19:54.154-0400",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/25567/comment/46697",
+            "id": "46697",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3A1598fb37-7e87-4231-9d1b-ff5b2cecead4",
+              "accountId": "557058:1598fb37-7e87-4231-9d1b-ff5b2cecead4",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png"
+              },
+              "displayName": "Dan Bender",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": {
+              "type": "doc",
+              "version": 1,
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Approve"
+                    }
+                  ]
+                }
+              ]
+            },
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3A1598fb37-7e87-4231-9d1b-ff5b2cecead4",
+              "accountId": "557058:1598fb37-7e87-4231-9d1b-ff5b2cecead4",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png"
+              },
+              "displayName": "Dan Bender",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "2019-09-09T14:22:13.213-0400",
+            "updated": "2019-09-09T14:22:13.213-0400",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/25567/comment/46698",
+            "id": "46698",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5b607344c7b34d2cbe171ca1",
+              "accountId": "5b607344c7b34d2cbe171ca1",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/PS-0.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/PS-0.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/PS-0.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/PS-0.png"
+              },
+              "displayName": "Paul Semple",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": {
+              "type": "doc",
+              "version": 1,
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "I approve"
+                    }
+                  ]
+                }
+              ]
+            },
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5b607344c7b34d2cbe171ca1",
+              "accountId": "5b607344c7b34d2cbe171ca1",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/PS-0.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/PS-0.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/PS-0.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/PS-0.png"
+              },
+              "displayName": "Paul Semple",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "2019-09-09T14:24:49.503-0400",
+            "updated": "2019-09-09T14:24:49.503-0400",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/25567/comment/46699",
+            "id": "46699",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3Ad75842c7-d43a-437e-a045-109076143dc1",
+              "accountId": "557058:d75842c7-d43a-437e-a045-109076143dc1",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png"
+              },
+              "displayName": "Ken Hopkins",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": {
+              "type": "doc",
+              "version": 1,
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "I approve."
+                    }
+                  ]
+                }
+              ]
+            },
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3Ad75842c7-d43a-437e-a045-109076143dc1",
+              "accountId": "557058:d75842c7-d43a-437e-a045-109076143dc1",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png"
+              },
+              "displayName": "Ken Hopkins",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "2019-09-09T14:25:03.556-0400",
+            "updated": "2019-09-09T14:25:03.556-0400",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/25567/comment/46960",
+            "id": "46960",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3Ad75842c7-d43a-437e-a045-109076143dc1",
+              "accountId": "557058:d75842c7-d43a-437e-a045-109076143dc1",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png"
+              },
+              "displayName": "Ken Hopkins",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": {
+              "type": "doc",
+              "version": 1,
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "I approve."
+                    }
+                  ]
+                }
+              ]
+            },
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3Ad75842c7-d43a-437e-a045-109076143dc1",
+              "accountId": "557058:d75842c7-d43a-437e-a045-109076143dc1",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KH-0.png"
+              },
+              "displayName": "Ken Hopkins",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "2019-09-12T13:01:28.307-0400",
+            "updated": "2019-09-12T13:01:28.307-0400",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/25567/comment/47300",
+            "id": "47300",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5d07efd4d3177c0bcccd38e4",
+              "accountId": "5d07efd4d3177c0bcccd38e4",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png"
+              },
+              "displayName": "Kristen Jones",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": {
+              "type": "doc",
+              "version": 1,
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Product accepts. "
+                    }
+                  ]
+                }
+              ]
+            },
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5d07efd4d3177c0bcccd38e4",
+              "accountId": "5d07efd4d3177c0bcccd38e4",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png"
+              },
+              "displayName": "Kristen Jones",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "2019-09-19T12:19:34.661-0400",
+            "updated": "2019-09-19T12:19:34.661-0400",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/25567/comment/48169",
+            "id": "48169",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3A1598fb37-7e87-4231-9d1b-ff5b2cecead4",
+              "accountId": "557058:1598fb37-7e87-4231-9d1b-ff5b2cecead4",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png"
+              },
+              "displayName": "Dan Bender",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": {
+              "type": "doc",
+              "version": 1,
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Not a huge deal, but I don’t think the Setter annotation in TransferReceiptTransformer.java is needed."
+                    }
+                  ]
+                }
+              ]
+            },
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3A1598fb37-7e87-4231-9d1b-ff5b2cecead4",
+              "accountId": "557058:1598fb37-7e87-4231-9d1b-ff5b2cecead4",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/DB-4.png"
+              },
+              "displayName": "Dan Bender",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "2019-10-02T11:12:48.547-0400",
+            "updated": "2019-10-02T11:12:48.547-0400",
+            "jsdPublic": true
+          }
+        ],
+        "self": "https://eoriginal.atlassian.net/rest/api/3/issue/25567/comment",
+        "maxResults": 13,
+        "total": 13,
+        "startAt": 0
+      }
+    }
+  }
+}

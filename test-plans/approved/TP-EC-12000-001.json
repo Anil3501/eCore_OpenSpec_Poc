@@ -1,0 +1,801 @@
+{
+  "schemaVersion": "1.0.0",
+  "testPlanId": "TP-EC-12000-001",
+  "artifactVersion": 2,
+  "release": "26.3",
+  "capability": "paper-out-export",
+  "jiraStoryIds": [
+    "EC-12000"
+  ],
+  "requirementIds": [
+    "REQ-EC-12000-001",
+    "REQ-EC-12000-002",
+    "REQ-EC-12000-003",
+    "REQ-EC-12000-004",
+    "REQ-EC-12000-005",
+    "REQ-EC-12000-006",
+    "REQ-EC-12000-007"
+  ],
+  "acIds": [
+    "AC-EC-12000-001",
+    "AC-EC-12000-002",
+    "AC-EC-12000-003",
+    "AC-EC-12000-004",
+    "AC-EC-12000-005",
+    "AC-EC-12000-006",
+    "AC-EC-12000-007",
+    "AC-EC-12000-008",
+    "AC-EC-12000-009",
+    "AC-EC-12000-010",
+    "AC-EC-12000-011",
+    "AC-EC-12000-012",
+    "AC-EC-12000-013",
+    "AC-EC-12000-014",
+    "AC-EC-12000-015",
+    "AC-EC-12000-016",
+    "AC-EC-12000-017",
+    "AC-EC-12000-018",
+    "AC-EC-12000-019"
+  ],
+  "openSpecRefs": [
+    "openspec/changes/track-paper-out-media-type/specs/paper-out-export/spec.md",
+    "openspec/changes/track-paper-out-media-type/proposal.md",
+    "openspec/changes/track-paper-out-media-type/design.md"
+  ],
+  "objective": "Verify that a Paper Out/Export package's Media Type is derived from what the requester (UI user or API integrator) actually declares - not from the submission channel alone - that the acknowledgement flow for Save as Electronic File behaves as specified, that the mediaType element is correctly optional on eoRequestExport, that Media Type is logged on the Submitted Paper Out event and never backfilled retroactively, and that the two small UI text/layout fixes ship. Each scenario asserts only what its approved acceptance criterion asserts.",
+  "scope": {
+    "inScope": [
+      "Media Type for Paper Out Package section on the Paper Out Request modal (AC-EC-12000-001).",
+      "Acknowledgement modal behavior for Save as Electronic File: gated OK, always-enabled Cancel, Work Queue item creation on confirm, no side effect on cancel (AC-EC-12000-002 through -004).",
+      "eoRequestExport / export.xsd optional mediaType element and backward compatibility (AC-EC-12000-005, -006).",
+      "Media Type determination logic for UI and API paths, at transaction and document level (AC-EC-12000-007 through -015).",
+      "Media Type Additional Information logged on Submitted Paper Out, visible on cover page/audit trail/activity history reports, and never backfilled (AC-EC-12000-016, -017).",
+      "Verify Paper Out modal checkbox verbiage update (AC-EC-12000-018).",
+      "Paper Out Request modal right-side border alignment (AC-EC-12000-019).",
+      "Collections-initiated Paper Out reusing the same modal and logic, per AMB-EC-12000-001's resolution (Collections accordion > Batch > Paper Out Request)."
+    ],
+    "outOfScope": [
+      "Any part of the eoRequestExport / export.xsd contract beyond the new mediaType element - not defined by this story and not authored here.",
+      "Retroactive Media Type backfill on historical transactions/documents - explicitly excluded by the story (AC-EC-12000-017 asserts the exclusion itself).",
+      "The full authoritative eoRequestExport request/response contract - unresolved as AMB-EC-12000-002 until captured via Playwright MCP at PLAYWRIGHT_VALIDATION and promoted to HUMAN_APPROVED by a human reviewer."
+    ]
+  },
+  "assumptions": [
+    "The eCore Command Center application under test is reachable at the configured base URL from the executing network.",
+    "A user account with permission to initiate a Paper Out Request (transaction and document level, including via Collections) exists and is supplied through environment configuration, never through this artifact.",
+    "The approved acceptance criteria are the only source of expected behavior; where a criterion is deliberately abstract, the corresponding scenario stays abstract.",
+    "Approver = the currently logged-in user, and Name of Request (requester name) = \"Anil Kumar\", per AMB-EC-12000-003's resolution, are used as the fabricated test data values for the required Paper Out Request modal fields."
+  ],
+  "dependencies": [
+    "requirements/approved/EC-12000.json at artifactVersion 1.",
+    "requirements/approved/EC-12000-ac-approval.json - Gate 1 decision APPROVE for all 19 criteria.",
+    "openspec/changes/track-paper-out-media-type/specs/paper-out-export/spec.md.",
+    "reports/validation/ecore-api-discovery.json - confirms eoRequestExport does not appear in observedEndpoints or declaredButNotObserved, i.e. it is genuinely unverified rather than merely unobserved.",
+    "Application observation at the PLAYWRIGHT_VALIDATION stage to capture the real eoRequestExport request/response and to confirm the Collections navigation path resolved in AMB-EC-12000-001.",
+    "test-data/paper-out-export.sample.json (to be created at IMPLEMENTATION) for the fabricated requester/approver values."
+  ],
+  "risks": [
+    {
+      "riskId": "RISK-TP-EC-12000-001",
+      "description": "eoRequestExport has no authoritative contract and does not even appear in reports/validation/ecore-api-discovery.json's declaredButNotObserved list, so its request/response shape is completely unverified, not merely unconfirmed.",
+      "level": "HIGH",
+      "mitigation": "AC-EC-12000-005, -006 and -011 through -015 are declared interfaceType API with apiContract.contractSource UNVERIFIED. They cannot back an assertion until Playwright MCP observation at PLAYWRIGHT_VALIDATION produces a contract that a human promotes to HUMAN_APPROVED with a recorded responseShapeHash. No endpoint path or status code is guessed."
+    },
+    {
+      "riskId": "RISK-TP-EC-12000-002",
+      "description": "Confirming the acknowledgement modal creates a real Work Queue approval item against shared QA data, which is a write with a downstream effect (an approval workflow item).",
+      "level": "MEDIUM",
+      "mitigation": "Only fabricated requester/approver test data is used (never a real business identity); the created Work Queue item is a normal, reversible approval-queue entry rather than a destructive call, and its creation is itself the behavior AC-EC-12000-003 requires being verified."
+    },
+    {
+      "riskId": "RISK-TP-EC-12000-003",
+      "description": "Moving Media Type Additional Information from the Authorized Paper Out event to the Submitted Paper Out event could break any pre-existing automation or report that reads the old event location.",
+      "level": "MEDIUM",
+      "mitigation": "AC-EC-12000-016 and -017 assert the new location and the no-retroactive-update rule explicitly, so this is treated as a deliberate, visible behavior change. Any pre-existing automation asserting the old event must be reviewed at IMPLEMENTATION time rather than left silently broken."
+    },
+    {
+      "riskId": "RISK-TP-EC-12000-004",
+      "description": "The Collections entry point's reuse of the same modal (AMB-EC-12000-001) is a human-supplied answer, not yet confirmed against the running application.",
+      "level": "LOW",
+      "mitigation": "The Collections navigation path is validated against the real application via Playwright MCP at PLAYWRIGHT_VALIDATION before automation asserts it as fact."
+    }
+  ],
+  "scenarios": [
+    {
+      "testScenarioId": "TS-EC-12000-001",
+      "title": "The Paper Out Request modal shows the Media Type section with Print to Paper selected by default",
+      "type": "POSITIVE",
+      "acIds": [
+        "AC-EC-12000-001"
+      ],
+      "preconditions": [
+        "A user opens the Paper Out Request modal, at either transaction or document level."
+      ],
+      "steps": [
+        "Open the Paper Out Request modal.",
+        "Observe the modal as it renders."
+      ],
+      "expectedResult": "A \"Media Type for Paper Out Package\" section is shown with two radio buttons, \"Print to Paper\" (selected by default) and \"Save as Electronic File\".",
+      "testDataRequirements": [
+        "None. No fields are filled in."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "HIGH",
+      "riskTag": "risk-low",
+      "suiteTag": "suite-smoke",
+      "scenarioAction": "CREATE",
+      "interfaceType": "UI"
+    },
+    {
+      "testScenarioId": "TS-EC-12000-002",
+      "title": "Selecting Save as Electronic File and completing required fields opens a checkbox-gated acknowledgement modal",
+      "type": "POSITIVE",
+      "acIds": [
+        "AC-EC-12000-002"
+      ],
+      "preconditions": [
+        "The Paper Out Request modal is open.",
+        "\"Save as Electronic File\" is selected.",
+        "The required fields \"Name of Request:\" and \"Approver:\" are completed."
+      ],
+      "steps": [
+        "Select \"Save as Electronic File\".",
+        "Complete the required fields.",
+        "Click OK."
+      ],
+      "expectedResult": "An acknowledgement modal opens with an unchecked checkbox, and its OK button stays disabled until the checkbox is checked.",
+      "testDataRequirements": [
+        "Fabricated Name of Request = \"Anil Kumar\"; Approver = the logged-in test user, from test-data/paper-out-export.sample.json."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "HIGH",
+      "riskTag": "risk-medium",
+      "suiteTag": "suite-critical",
+      "scenarioAction": "CREATE",
+      "interfaceType": "UI"
+    },
+    {
+      "testScenarioId": "TS-EC-12000-003",
+      "title": "Confirming the acknowledgement modal closes both modals and creates the Work Queue approval item",
+      "type": "POSITIVE",
+      "acIds": [
+        "AC-EC-12000-003"
+      ],
+      "preconditions": [
+        "The acknowledgement modal is open and its checkbox is checked."
+      ],
+      "steps": [
+        "Check the acknowledgement modal's checkbox.",
+        "Click the acknowledgement modal's OK button."
+      ],
+      "expectedResult": "The acknowledgement modal closes, the Paper Out Request modal closes, and a Work Queue item is created for approval.",
+      "testDataRequirements": [
+        "Same fabricated requester/approver values as TS-EC-12000-002."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "HIGH",
+      "riskTag": "risk-medium",
+      "suiteTag": "suite-critical",
+      "scenarioAction": "CREATE",
+      "interfaceType": "UI"
+    },
+    {
+      "testScenarioId": "TS-EC-12000-004",
+      "title": "Cancelling the acknowledgement modal leaves the Paper Out Request modal open with no Work Queue item created",
+      "type": "NEGATIVE",
+      "acIds": [
+        "AC-EC-12000-004"
+      ],
+      "preconditions": [
+        "The acknowledgement modal is open."
+      ],
+      "steps": [
+        "Click Cancel on the acknowledgement modal."
+      ],
+      "expectedResult": "Only the acknowledgement modal closes; the Paper Out Request modal remains open and no Work Queue item is created.",
+      "testDataRequirements": [
+        "Same fabricated requester/approver values as TS-EC-12000-002."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "MEDIUM",
+      "riskTag": "risk-low",
+      "suiteTag": "suite-regression",
+      "scenarioAction": "CREATE",
+      "interfaceType": "UI"
+    },
+    {
+      "testScenarioId": "TS-EC-12000-007",
+      "title": "UI Print to Paper at transaction level determines Media Type Paper",
+      "type": "POSITIVE",
+      "acIds": [
+        "AC-EC-12000-007"
+      ],
+      "preconditions": [
+        "A transaction-level Paper Out is submitted via the UI with \"Print to Paper\" selected."
+      ],
+      "steps": [
+        "Submit a transaction-level Paper Out via the UI with \"Print to Paper\" selected."
+      ],
+      "expectedResult": "The Media Type is recorded as \"Paper\".",
+      "testDataRequirements": [
+        "A transaction eligible for Paper Out."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "HIGH",
+      "riskTag": "risk-medium",
+      "suiteTag": "suite-regression",
+      "scenarioAction": "CREATE",
+      "interfaceType": "UI"
+    },
+    {
+      "testScenarioId": "TS-EC-12000-008",
+      "title": "UI Print to Paper at document level determines Media Type Paper",
+      "type": "POSITIVE",
+      "acIds": [
+        "AC-EC-12000-008"
+      ],
+      "preconditions": [
+        "A document-level Paper Out is submitted via the UI with \"Print to Paper\" selected."
+      ],
+      "steps": [
+        "Submit a document-level Paper Out via the UI with \"Print to Paper\" selected."
+      ],
+      "expectedResult": "The Media Type is recorded as \"Paper\".",
+      "testDataRequirements": [
+        "A document eligible for Paper Out."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "HIGH",
+      "riskTag": "risk-medium",
+      "suiteTag": "suite-regression",
+      "scenarioAction": "CREATE",
+      "interfaceType": "UI"
+    },
+    {
+      "testScenarioId": "TS-EC-12000-009",
+      "title": "UI Save as Electronic File at transaction level determines Media Type Electronic",
+      "type": "POSITIVE",
+      "acIds": [
+        "AC-EC-12000-009"
+      ],
+      "preconditions": [
+        "A transaction-level Paper Out is submitted via the UI with \"Save as Electronic File\" selected."
+      ],
+      "steps": [
+        "Submit a transaction-level Paper Out via the UI with \"Save as Electronic File\" selected, completing the acknowledgement flow."
+      ],
+      "expectedResult": "The Media Type is recorded as \"Electronic\".",
+      "testDataRequirements": [
+        "A transaction eligible for Paper Out; fabricated requester/approver values."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "HIGH",
+      "riskTag": "risk-medium",
+      "suiteTag": "suite-regression",
+      "scenarioAction": "CREATE",
+      "interfaceType": "UI"
+    },
+    {
+      "testScenarioId": "TS-EC-12000-010",
+      "title": "UI Save as Electronic File at document level determines Media Type Electronic",
+      "type": "POSITIVE",
+      "acIds": [
+        "AC-EC-12000-010"
+      ],
+      "preconditions": [
+        "A document-level Paper Out is submitted via the UI with \"Save as Electronic File\" selected."
+      ],
+      "steps": [
+        "Submit a document-level Paper Out via the UI with \"Save as Electronic File\" selected, completing the acknowledgement flow."
+      ],
+      "expectedResult": "The Media Type is recorded as \"Electronic\".",
+      "testDataRequirements": [
+        "A document eligible for Paper Out; fabricated requester/approver values."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "HIGH",
+      "riskTag": "risk-medium",
+      "suiteTag": "suite-regression",
+      "scenarioAction": "CREATE",
+      "interfaceType": "UI"
+    },
+    {
+      "testScenarioId": "TS-EC-12000-011",
+      "title": "API mediaType=PrintToPaper at transaction level determines Media Type Paper",
+      "type": "POSITIVE",
+      "acIds": [
+        "AC-EC-12000-011"
+      ],
+      "preconditions": [
+        "eoRequestExport is called at the transaction level with mediaType=PrintToPaper."
+      ],
+      "steps": [
+        "Call eoRequestExport at the transaction level with mediaType=PrintToPaper.",
+        "Open the transaction's Submitted Paper Out audit trail entry (Additional Information) in the UI."
+      ],
+      "expectedResult": "The API call succeeds and the Media Type is recorded as \"Paper\", confirmed via the Additional Information shown on the Submitted Paper Out event in the audit trail.",
+      "testDataRequirements": [
+        "A valid eoRequestExport request payload, once its contract is observed."
+      ],
+      "automationCandidate": false,
+      "automationDecision": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "riskTag": "risk-high",
+      "suiteTag": "suite-regression",
+      "scenarioAction": "REVIEW_REQUIRED",
+      "interfaceType": "HYBRID",
+      "apiContract": {
+        "method": "POST",
+        "path": "UNVERIFIED - eoRequestExport does not appear in reports/validation/ecore-api-discovery.json observedEndpoints or declaredButNotObserved; no path is known. To be captured via Playwright MCP at PLAYWRIGHT_VALIDATION.",
+        "expectedStatusCodes": [
+          200
+        ],
+        "contractSource": "UNVERIFIED",
+        "contractProvenance": "No entry exists in this framework's API-surface inventory for eoRequestExport. AMB-EC-12000-002 resolution: capture via Playwright MCP network observation at PLAYWRIGHT_VALIDATION, promote to HUMAN_APPROVED only by a human reviewer before this can back any assertion. Declared HYBRID at Gate 2 (reviewer decision on CLR-TP-EC-12000-001): the API call sets state, but Media Type is currently only observable via the UI audit trail (AC-016), so the assertion needs both.",
+        "scaffoldingOnly": true
+      }
+    },
+    {
+      "testScenarioId": "TS-EC-12000-012",
+      "title": "API mediaType=PrintToPaper at document level determines Media Type Paper",
+      "type": "POSITIVE",
+      "acIds": [
+        "AC-EC-12000-012"
+      ],
+      "preconditions": [
+        "eoRequestExport is called at the document level with mediaType=PrintToPaper."
+      ],
+      "steps": [
+        "Call eoRequestExport at the document level with mediaType=PrintToPaper.",
+        "Open the document's Submitted Paper Out audit trail entry (Additional Information) in the UI."
+      ],
+      "expectedResult": "The API call succeeds and the Media Type is recorded as \"Paper\", confirmed via the Additional Information shown on the Submitted Paper Out event in the audit trail.",
+      "testDataRequirements": [
+        "A valid eoRequestExport request payload, once its contract is observed."
+      ],
+      "automationCandidate": false,
+      "automationDecision": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "riskTag": "risk-high",
+      "suiteTag": "suite-regression",
+      "scenarioAction": "REVIEW_REQUIRED",
+      "interfaceType": "HYBRID",
+      "apiContract": {
+        "method": "POST",
+        "path": "UNVERIFIED - eoRequestExport does not appear in reports/validation/ecore-api-discovery.json observedEndpoints or declaredButNotObserved; no path is known. To be captured via Playwright MCP at PLAYWRIGHT_VALIDATION.",
+        "expectedStatusCodes": [
+          200
+        ],
+        "contractSource": "UNVERIFIED",
+        "contractProvenance": "No entry exists in this framework's API-surface inventory for eoRequestExport. AMB-EC-12000-002 resolution: capture via Playwright MCP network observation at PLAYWRIGHT_VALIDATION, promote to HUMAN_APPROVED only by a human reviewer before this can back any assertion. Declared HYBRID at Gate 2 (reviewer decision on CLR-TP-EC-12000-001): the API call sets state, but Media Type is currently only observable via the UI audit trail (AC-016), so the assertion needs both.",
+        "scaffoldingOnly": true
+      }
+    },
+    {
+      "testScenarioId": "TS-EC-12000-013",
+      "title": "API mediaType=SaveAsElectronicFile at transaction level determines Media Type Electronic",
+      "type": "POSITIVE",
+      "acIds": [
+        "AC-EC-12000-013"
+      ],
+      "preconditions": [
+        "eoRequestExport is called at the transaction level with mediaType=SaveAsElectronicFile."
+      ],
+      "steps": [
+        "Call eoRequestExport at the transaction level with mediaType=SaveAsElectronicFile.",
+        "Open the transaction's Submitted Paper Out audit trail entry (Additional Information) in the UI."
+      ],
+      "expectedResult": "The API call succeeds and the Media Type is recorded as \"Electronic\", confirmed via the Additional Information shown on the Submitted Paper Out event in the audit trail.",
+      "testDataRequirements": [
+        "A valid eoRequestExport request payload, once its contract is observed."
+      ],
+      "automationCandidate": false,
+      "automationDecision": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "riskTag": "risk-high",
+      "suiteTag": "suite-regression",
+      "scenarioAction": "REVIEW_REQUIRED",
+      "interfaceType": "HYBRID",
+      "apiContract": {
+        "method": "POST",
+        "path": "UNVERIFIED - eoRequestExport does not appear in reports/validation/ecore-api-discovery.json observedEndpoints or declaredButNotObserved; no path is known. To be captured via Playwright MCP at PLAYWRIGHT_VALIDATION.",
+        "expectedStatusCodes": [
+          200
+        ],
+        "contractSource": "UNVERIFIED",
+        "contractProvenance": "No entry exists in this framework's API-surface inventory for eoRequestExport. AMB-EC-12000-002 resolution: capture via Playwright MCP network observation at PLAYWRIGHT_VALIDATION, promote to HUMAN_APPROVED only by a human reviewer before this can back any assertion. Declared HYBRID at Gate 2 (reviewer decision on CLR-TP-EC-12000-001): the API call sets state, but Media Type is currently only observable via the UI audit trail (AC-016), so the assertion needs both.",
+        "scaffoldingOnly": true
+      }
+    },
+    {
+      "testScenarioId": "TS-EC-12000-014",
+      "title": "API mediaType=SaveAsElectronicFile at document level determines Media Type Electronic",
+      "type": "POSITIVE",
+      "acIds": [
+        "AC-EC-12000-014"
+      ],
+      "preconditions": [
+        "eoRequestExport is called at the document level with mediaType=SaveAsElectronicFile."
+      ],
+      "steps": [
+        "Call eoRequestExport at the document level with mediaType=SaveAsElectronicFile.",
+        "Open the document's Submitted Paper Out audit trail entry (Additional Information) in the UI."
+      ],
+      "expectedResult": "The API call succeeds and the Media Type is recorded as \"Electronic\", confirmed via the Additional Information shown on the Submitted Paper Out event in the audit trail.",
+      "testDataRequirements": [
+        "A valid eoRequestExport request payload, once its contract is observed."
+      ],
+      "automationCandidate": false,
+      "automationDecision": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "riskTag": "risk-high",
+      "suiteTag": "suite-regression",
+      "scenarioAction": "REVIEW_REQUIRED",
+      "interfaceType": "HYBRID",
+      "apiContract": {
+        "method": "POST",
+        "path": "UNVERIFIED - eoRequestExport does not appear in reports/validation/ecore-api-discovery.json observedEndpoints or declaredButNotObserved; no path is known. To be captured via Playwright MCP at PLAYWRIGHT_VALIDATION.",
+        "expectedStatusCodes": [
+          200
+        ],
+        "contractSource": "UNVERIFIED",
+        "contractProvenance": "No entry exists in this framework's API-surface inventory for eoRequestExport. AMB-EC-12000-002 resolution: capture via Playwright MCP network observation at PLAYWRIGHT_VALIDATION, promote to HUMAN_APPROVED only by a human reviewer before this can back any assertion. Declared HYBRID at Gate 2 (reviewer decision on CLR-TP-EC-12000-001): the API call sets state, but Media Type is currently only observable via the UI audit trail (AC-016), so the assertion needs both.",
+        "scaffoldingOnly": true
+      }
+    },
+    {
+      "testScenarioId": "TS-EC-12000-015",
+      "title": "API call omitting mediaType entirely determines Media Type Electronic",
+      "type": "POSITIVE",
+      "acIds": [
+        "AC-EC-12000-015"
+      ],
+      "preconditions": [
+        "eoRequestExport is called, at transaction or document level, with no mediaType element passed."
+      ],
+      "steps": [
+        "Call eoRequestExport without a mediaType element, at transaction level.",
+        "Repeat at document level.",
+        "Open the Submitted Paper Out audit trail entry (Additional Information) in the UI for both."
+      ],
+      "expectedResult": "Both API calls succeed and the Media Type is recorded as \"Electronic\" in both cases, confirmed via the Additional Information shown on the Submitted Paper Out event in the audit trail.",
+      "testDataRequirements": [
+        "A valid eoRequestExport request payload, once its contract is observed."
+      ],
+      "automationCandidate": false,
+      "automationDecision": "REVIEW_REQUIRED",
+      "priority": "HIGH",
+      "riskTag": "risk-high",
+      "suiteTag": "suite-regression",
+      "scenarioAction": "REVIEW_REQUIRED",
+      "interfaceType": "HYBRID",
+      "apiContract": {
+        "method": "POST",
+        "path": "UNVERIFIED - eoRequestExport does not appear in reports/validation/ecore-api-discovery.json observedEndpoints or declaredButNotObserved; no path is known. To be captured via Playwright MCP at PLAYWRIGHT_VALIDATION.",
+        "expectedStatusCodes": [
+          200
+        ],
+        "contractSource": "UNVERIFIED",
+        "contractProvenance": "No entry exists in this framework's API-surface inventory for eoRequestExport. AMB-EC-12000-002 resolution: capture via Playwright MCP network observation at PLAYWRIGHT_VALIDATION, promote to HUMAN_APPROVED only by a human reviewer before this can back any assertion. Declared HYBRID at Gate 2 (reviewer decision on CLR-TP-EC-12000-001): the API call sets state, but Media Type is currently only observable via the UI audit trail (AC-016), so the assertion needs both.",
+        "scaffoldingOnly": true
+      }
+    },
+    {
+      "testScenarioId": "TS-EC-12000-016",
+      "title": "Media Type is recorded on the Submitted Paper Out event, not the Authorized one, and appears in the downloaded activity history report",
+      "type": "POSITIVE",
+      "acIds": [
+        "AC-EC-12000-016"
+      ],
+      "preconditions": [
+        "A Paper Out is submitted, at transaction or document level, after this change ships."
+      ],
+      "steps": [
+        "Submit a Paper Out.",
+        "Inspect the Submitted Paper Out event's Additional Information in the document history.",
+        "Inspect the Authorized Paper Out event's Additional Information.",
+        "Download the document activity history report and inspect it."
+      ],
+      "expectedResult": "Media Type appears as Additional Information on the Submitted Paper Out event and is absent from the Authorized Paper Out event, and is present in the downloaded document activity history report. The package cover page is covered separately by TS-EC-12000-020.",
+      "testDataRequirements": [
+        "A transaction or document eligible for Paper Out.",
+        "An already-Authorized Paper Out batch, for the Authorized-event half of the assertion."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "HIGH",
+      "riskTag": "risk-medium",
+      "suiteTag": "suite-regression",
+      "scenarioAction": "UPDATE",
+      "interfaceType": "UI"
+    },
+    {
+      "testScenarioId": "TS-EC-12000-020",
+      "title": "Media Type is visible on the Paper Out package cover page",
+      "type": "POSITIVE",
+      "acIds": [
+        "AC-EC-12000-016"
+      ],
+      "preconditions": [
+        "A Paper Out has been submitted and authorized, so the package is downloadable."
+      ],
+      "steps": [
+        "Open the authorized batch in the Work Queue and choose Print.",
+        "In the Verify Paper Out modal, download the Paper Out package.",
+        "Inspect the cover page of the downloaded package."
+      ],
+      "expectedResult": "Media Type is visible on the package cover page.",
+      "testDataRequirements": [
+        "A Paper Out batch in the Authorized/Verification state whose package may be downloaded."
+      ],
+      "automationCandidate": false,
+      "automationDecision": "MANUAL_ONLY",
+      "priority": "MEDIUM",
+      "riskTag": "risk-medium",
+      "suiteTag": "suite-regression",
+      "scenarioAction": "CREATE",
+      "interfaceType": "UI"
+    },
+    {
+      "testScenarioId": "TS-EC-12000-017",
+      "title": "Historical Paper Out records are not retroactively updated with Media Type",
+      "type": "NEGATIVE",
+      "acIds": [
+        "AC-EC-12000-017"
+      ],
+      "preconditions": [
+        "A transaction or document had Paper Out/Export performed before this change was deployed."
+      ],
+      "steps": [
+        "Locate a transaction/document with Paper Out/Export performed before deployment.",
+        "Inspect its Additional Information/audit trail after deployment."
+      ],
+      "expectedResult": "The existing record is not retroactively updated with Media Type information.",
+      "testDataRequirements": [
+        "A pre-existing transaction/document with Paper Out already performed, predating this change."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "MEDIUM",
+      "riskTag": "risk-low",
+      "suiteTag": "suite-regression",
+      "scenarioAction": "CREATE",
+      "interfaceType": "UI"
+    },
+    {
+      "testScenarioId": "TS-EC-12000-018",
+      "title": "Verify Paper Out modal's last checkbox reads the updated verbiage",
+      "type": "POSITIVE",
+      "acIds": [
+        "AC-EC-12000-018"
+      ],
+      "preconditions": [
+        "The Verify Paper Out modal is displayed."
+      ],
+      "steps": [
+        "Open the Verify Paper Out modal.",
+        "Read the last checkbox's label."
+      ],
+      "expectedResult": "The label reads \"Verify the downloaded package has been successfully printed to paper or saved to a secure location\".",
+      "testDataRequirements": [
+        "None."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "LOW",
+      "riskTag": "risk-low",
+      "suiteTag": "suite-regression",
+      "scenarioAction": "CREATE",
+      "interfaceType": "UI"
+    },
+    {
+      "testScenarioId": "TS-EC-12000-019",
+      "title": "Paper Out Request modal's right-side section borders are visually aligned",
+      "type": "POSITIVE",
+      "acIds": [
+        "AC-EC-12000-019"
+      ],
+      "preconditions": [
+        "The redesigned Paper Out Request modal, including the new Media Type section, is rendered."
+      ],
+      "steps": [
+        "Open the Paper Out Request modal.",
+        "Observe the right side of the modal."
+      ],
+      "expectedResult": "The section borders are visually aligned rather than misaligned or overlapping.",
+      "testDataRequirements": [
+        "None."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "MANUAL_ONLY",
+      "priority": "LOW",
+      "riskTag": "risk-low",
+      "suiteTag": "suite-regression",
+      "scenarioAction": "CREATE",
+      "interfaceType": "UI"
+    }
+  ],
+  "environmentRequirements": {
+    "environment": "qa",
+    "notes": [
+      "The eCore Command Center application on the qa host. Network access requires VPN.",
+      "One test user account with permission to submit Paper Out/Export at transaction and document level, including via Collections, supplied through environment configuration and never written into a governed artifact.",
+      "Fabricated requester/approver values in test-data/paper-out-export.sample.json for every scenario that opens the acknowledgement modal.",
+      "eoRequestExport-facing scenarios (TS-EC-12000-005, -006, -011 through -015) cannot execute until a contract is observed at PLAYWRIGHT_VALIDATION; until then they are recorded BLOCKED, never PASSED.",
+      "If the application cannot be reached, affected scenarios are recorded as BLOCKED with the unreachable host named. A blocked scenario is never reported as passed and never filed as a defect."
+    ]
+  },
+  "entryCriteria": [
+    "Gate 1 is cleared: requirements/approved/EC-12000-ac-approval.json records decision APPROVE for all 19 acceptance criteria.",
+    "The OpenSpec change track-paper-out-media-type validates (`npx openspec validate --strict`) and its spec delta covers all 19 approved criteria.",
+    "This test plan is approved at Gate 2 before any feature file is written."
+  ],
+  "exitCriteria": [
+    "Every scenario in this plan has a recorded execution result of PASSED, FAILED or BLOCKED - never an inferred one.",
+    "Every approved acceptance criterion maps to at least one executed scenario in the paper-out-export capability RTM, or is explicitly recorded as BLOCKED pending the eoRequestExport contract.",
+    "No API-facing acceptance criterion (AC-EC-12000-005, -006, -011 through -015) is reported as PASSED while its apiContract.contractSource remains UNVERIFIED.",
+    "Coverage is computed from RTM data only, and any uncovered, deferred, blocked or failed criterion is listed rather than rounded away.",
+    "Every clarification listed below is still visible with its current status; none has been silently resolved by observation."
+  ],
+  "coverageMappings": [
+    {
+      "acId": "AC-EC-12000-001",
+      "testScenarioIds": [
+        "TS-EC-12000-001"
+      ]
+    },
+    {
+      "acId": "AC-EC-12000-002",
+      "testScenarioIds": [
+        "TS-EC-12000-002"
+      ]
+    },
+    {
+      "acId": "AC-EC-12000-003",
+      "testScenarioIds": [
+        "TS-EC-12000-003"
+      ]
+    },
+    {
+      "acId": "AC-EC-12000-004",
+      "testScenarioIds": [
+        "TS-EC-12000-004"
+      ]
+    },
+    {
+      "acId": "AC-EC-12000-005",
+      "testScenarioIds": []
+    },
+    {
+      "acId": "AC-EC-12000-006",
+      "testScenarioIds": []
+    },
+    {
+      "acId": "AC-EC-12000-007",
+      "testScenarioIds": [
+        "TS-EC-12000-007"
+      ]
+    },
+    {
+      "acId": "AC-EC-12000-008",
+      "testScenarioIds": [
+        "TS-EC-12000-008"
+      ]
+    },
+    {
+      "acId": "AC-EC-12000-009",
+      "testScenarioIds": [
+        "TS-EC-12000-009"
+      ]
+    },
+    {
+      "acId": "AC-EC-12000-010",
+      "testScenarioIds": [
+        "TS-EC-12000-010"
+      ]
+    },
+    {
+      "acId": "AC-EC-12000-011",
+      "testScenarioIds": [
+        "TS-EC-12000-011"
+      ]
+    },
+    {
+      "acId": "AC-EC-12000-012",
+      "testScenarioIds": [
+        "TS-EC-12000-012"
+      ]
+    },
+    {
+      "acId": "AC-EC-12000-013",
+      "testScenarioIds": [
+        "TS-EC-12000-013"
+      ]
+    },
+    {
+      "acId": "AC-EC-12000-014",
+      "testScenarioIds": [
+        "TS-EC-12000-014"
+      ]
+    },
+    {
+      "acId": "AC-EC-12000-015",
+      "testScenarioIds": [
+        "TS-EC-12000-015"
+      ]
+    },
+    {
+      "acId": "AC-EC-12000-016",
+      "testScenarioIds": [
+        "TS-EC-12000-016",
+        "TS-EC-12000-020"
+      ]
+    },
+    {
+      "acId": "AC-EC-12000-017",
+      "testScenarioIds": [
+        "TS-EC-12000-017"
+      ]
+    },
+    {
+      "acId": "AC-EC-12000-018",
+      "testScenarioIds": [
+        "TS-EC-12000-018"
+      ]
+    },
+    {
+      "acId": "AC-EC-12000-019",
+      "testScenarioIds": [
+        "TS-EC-12000-019"
+      ]
+    }
+  ],
+  "clarifications": [
+    {
+      "clarificationId": "AMB-EC-12000-001",
+      "question": "Does a Paper Out initiated from Collections use the same Paper Out Request modal, or a separate flow?",
+      "status": "RESOLVED"
+    },
+    {
+      "clarificationId": "AMB-EC-12000-002",
+      "question": "Who captures and approves the authoritative eoRequestExport contract before any API-facing criterion can be judged?",
+      "status": "RESOLVED"
+    },
+    {
+      "clarificationId": "AMB-EC-12000-003",
+      "question": "Which fields are the required field edits that gate the acknowledgement modal?",
+      "status": "RESOLVED"
+    },
+    {
+      "clarificationId": "CLR-TP-EC-12000-001",
+      "question": "TS-EC-12000-005, -006 and -011 through -015 are currently declared API-only with an UNVERIFIED contract (per AMB-EC-12000-002's resolution). Once Playwright MCP observation at PLAYWRIGHT_VALIDATION produces a contract, should these be promoted straight to HUMAN_APPROVED as pure API scenarios, or does any of them also need a UI-observable assertion (HYBRID) to be fully covered? RESOLVED at Gate 2 (reviewer Anil): TS-005/006 stay pure API (they assert only on the eoRequestExport request/response itself). TS-011 through TS-015 are HYBRID (the API call sets Media Type, but the only currently-confirmed observation channel is the UI audit trail per AC-016), unless PLAYWRIGHT_VALIDATION later confirms a verified read API exists, at which point this may be revisited.",
+      "status": "RESOLVED"
+    },
+    {
+      "clarificationId": "CLR-TP-EC-12000-002",
+      "question": "AC-EC-12000-016 names four surfaces: the Submitted Paper Out event, the Authorized Paper Out event, the package cover page and the downloaded activity history report. Three were confirmed observable and automatable live against qa5 on 2026-09-14. The fourth, the cover page, was not: the package is served by getPrintableDocumentContents.eo, which returns HTML rather than a PDF while the batch is merely Submitted and yields the package only once the batch is Authorized. Authorizing the fixture is a one-way door - a Submitted request can be cancelled, but the only exit after authorization is Verify, which permanently removes the source documents from the vault and would consume the single qa5 collection that qualifies for Paper Out at all. Should the cover-page clause therefore be split into its own MANUAL_ONLY scenario (TS-EC-12000-020), leaving TS-EC-12000-016 to automate the other three surfaces?",
+      "status": "REVIEW_REQUIRED"
+    },
+    {
+      "clarificationId": "CLR-TP-EC-12000-003",
+      "question": "TS-EC-12000-017 requires a Paper Out record created BEFORE this change was deployed, so that it can be shown not to have been retroactively given a Media Type. No such record is reachable in qa5: the fixture document and four other collections were scanned on 2026-09-14 and every Submitted Paper Out event carries a Media Type, because all of them originate from this automation run. Note that Canceled Paper Out events legitimately carry no Media Type, so \"any event lacking one\" is not a safe proxy and would pass for the wrong reason. Which specific pre-deployment transaction or document should this scenario use, or should it be DEFERRED until one is identified?",
+      "status": "REVIEW_REQUIRED"
+    }
+  ],
+  "approvalStatus": "PENDING_TEST_PLAN_APPROVAL",
+  "approvalRef": null,
+  "dataClassification": "REAL_JIRA_DATA",
+  "timestamps": {
+    "createdAt": "2026-09-11T10:20:00.000Z",
+    "updatedAt": "2026-09-14T14:20:00.000Z",
+    "approvedAt": null
+  }
+}

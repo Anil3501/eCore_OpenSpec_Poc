@@ -112,6 +112,7 @@
         "Whether an acceptance criterion is API-verifiable is a testing judgement, not a stated requirement. Propose it with a rationale and mark it REVIEW_REQUIRED; never decide it silently.",
         "An API scenario may ADD coverage. It may never REPLACE a UI scenario - that would delete the only end-to-end proof of a journey while leaving the coverage number unchanged.",
         "An API or HYBRID scenario must carry an apiContract. Never guess an endpoint, a field name or a status code.",
+        "An agent may compose a contract only when a human explicitly asks for it and confirms it a second time after seeing it in chat. Consent is per contract and single use. The draft is written UNVERIFIED, its provenance begins AGENT_DRAFTED, and it names which fields were dictated and which were proposed.",
         "The review package lists every proposed contract so the human approving Gate 2 is agreeing to it explicitly."
       ]
     },
@@ -126,7 +127,9 @@
       "haltsWorkflow": true,
       "rules": [
         "This gate is where an OBSERVED contract becomes HUMAN_APPROVED. A human agreeing to the endpoint, status codes and response shape is exactly as authoritative as an OpenAPI document.",
-        "An approved plan may not assert an acceptance criterion against an OBSERVED or UNVERIFIED contract. Observed traffic records what the application does, not what it should do, so it would make a current bug the definition of correct."
+        "An approved plan may not assert an acceptance criterion against an OBSERVED or UNVERIFIED contract. Observed traffic records what the application does, not what it should do, so it would make a current bug the definition of correct.",
+        "When a contract becomes HUMAN_APPROVED, record responseShapeHash from computeResponseShapeHash in src/utils/api-contract-shape.ts. An OpenAPI document is diffable so its drift is visible; a human decision is not, and an unrecorded shape can move without anyone noticing.",
+        "An AGENT_DRAFTED contract reaching this gate deserves more scrutiny, not less: read its PROPOSED: fields as open questions, since nothing outside this gate has ever checked them against the real endpoint."
       ]
     },
     {
@@ -256,7 +259,9 @@
       "next": "RTM_UPDATE",
       "rules": [
         "fixVersions are read verbatim from the story under test. If the story has none, file the bug with no fixVersion and say so in the description - never guess a release.",
-        "The bug is linked to the story and assigned to the configured reviewer. An unassigned bug is an unreviewed bug.",
+        "The bug is filed only after a human has seen the fully composed bug in chat and explicitly confirmed it; the confirmation is transcribed into the defect's notes before createJiraIssue is called. No createJiraIssue call may occur in the same turn the human was asked.",
+        "The bug is assigned to the configured reviewer at creation. An unassigned bug is an unreviewed bug.",
+        "No Jira issue link is created between the bug and the story. The relationship is recorded only in the defect artifact's own jira.linkedStory field.",
         "Severity, priority and root cause are never invented. Raise them as open questions in the description instead.",
         "The agent proposes the RTM defectRefs update; only the orchestrator merges it."
       ],

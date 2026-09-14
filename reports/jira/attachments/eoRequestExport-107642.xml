@@ -1,0 +1,27 @@
+<eoExportInstructions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.eoriginal.com/ecore/export" xsi:schemaLocation="http://www.eoriginal.com/ecore/export http://schemas.eoriginal.com/releases/26.3/export.xsd">
+<!-- destructionMode sets a note for when you will call verifyExport - valid values are destructionOnPrep (default) | destructionOrgReceipt | destructionOnRecipientReceipt. -->
+<batchName>PB Export Batch</batchName>
+<!-- This is a name you will recognize the batch by in Command Center - this is NOT the batchID the approve/cancel requests require -->
+<!-- use either documentList or transactionList  or groupTransactionIdentifier or groupDocumentIdentifier - you cannot use more than one in the same XML file -->
+<!-- 
+	<recipientAddress firstName="" lastName="" email="" streetAddress1="" city="" state="" zip="" country="" phone=""/>
+	 -->
+<mediaType>PrintToPaper</mediaType>
+<!-- <transaction id="9044960" deleteIfEmpty="false"> -->
+<retentionPolicy electronicOriginal="none" eStored="none" eCopy="none"/>
+
+<!-- populate the id attribute with the transactionSid - element may repeat.  Populate the deleteIfEmpty attribute true (default) | false to delete the transaction if it is empty after the export completes. -->
+<!-- use one or the other:  retentionPolicy or document.  Use of retentionPolicy will export the entire transaction.  Use of document will export only the requested document(s). -->
+
+<document id="9044961" retain="none"/>
+<!-- populate retain with the desired retention policy for the exported document  asIs, eCopy, none -->
+<!-- </transaction> -->
+<!--<groupTransactionIdentifier name="put option here" value="put value here">-->
+<!-- use groupTransactionIdentifier if you want to export all transactions that match the given criteria.  The name attribute must be one of the following:  
+		xref1 (will trigger export for all transactions where the value attribute matches the value of transactionXRef1 on any transaction in your organization)
+		xref2 (will trigger export for all transactions where the value attribute matches the value of transactionXRef2 on any transaction in your organization)
+		xref3 (will trigger export for all transactions where the value attribute matches the value of transactionXRef3 on any transaction in your organization)
+		state (will trigger export for all transactions where the value attribute matches the status value on any transaction in your organization ). -->
+<!-- <retentionPolicy/> -->
+</groupDocumentIdentifier>
+</eoExportInstructions>

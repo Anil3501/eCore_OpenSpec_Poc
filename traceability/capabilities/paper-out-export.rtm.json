@@ -1,0 +1,933 @@
+{
+  "schemaVersion": "1.0.0",
+  "capability": "paper-out-export",
+  "release": "26.3",
+  "artifactVersion": 3,
+  "dataClassification": "REAL_JIRA_DATA",
+  "updatedAt": "2026-09-14T18:55:00.000Z",
+  "entries": [
+    {
+      "traceId": "TRC-EC-12000-001",
+      "jiraStoryId": "EC-12000",
+      "requirementId": "REQ-EC-12000-001",
+      "acId": "AC-EC-12000-001",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/EC-12000.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/EC-12000-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-EC-12000-001-approval.json",
+        "automationDesign": "features/approved/paper-out-export/TP-EC-12000-001-automation-approval.json"
+      },
+      "openSpecRefs": [],
+      "testPlan": {
+        "testPlanId": "TP-EC-12000-001",
+        "testScenarioId": "TS-EC-12000-001",
+        "path": "test-plans/approved/TP-EC-12000-001.json",
+        "version": 1,
+        "interfaceType": "UI"
+      },
+      "automation": {
+        "featureFile": "features/approved/paper-out-export/paper-out-media-type.feature",
+        "gherkinScenario": "The Paper Out Request modal shows the Media Type section with Print to Paper selected by default",
+        "stepDefinitions": [
+          "steps/paper-out-media-type.steps.ts"
+        ],
+        "pageObjects": [
+          "src/pages/ecore-workspace.page.ts"
+        ],
+        "components": [
+          "src/components/paper-out-request-modal.component.ts"
+        ],
+        "fixtures": [
+          "src/fixtures/test.ts"
+        ],
+        "generatedTest": ".features-gen/features/approved/paper-out-export/paper-out-media-type.feature.spec.js",
+        "automationStatus": "EXECUTABLE",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-EC-12000-001",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-EC-12000-001.json"
+        }
+      ]
+    },
+    {
+      "traceId": "TRC-EC-12000-002",
+      "jiraStoryId": "EC-12000",
+      "requirementId": "REQ-EC-12000-002",
+      "acId": "AC-EC-12000-002",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/EC-12000.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/EC-12000-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-EC-12000-001-approval.json",
+        "automationDesign": "features/approved/paper-out-export/TP-EC-12000-001-automation-approval.json"
+      },
+      "openSpecRefs": [],
+      "testPlan": {
+        "testPlanId": "TP-EC-12000-001",
+        "testScenarioId": "TS-EC-12000-002",
+        "path": "test-plans/approved/TP-EC-12000-001.json",
+        "version": 1,
+        "interfaceType": "UI"
+      },
+      "automation": {
+        "featureFile": "features/approved/paper-out-export/paper-out-media-type.feature",
+        "gherkinScenario": "Selecting Save as Electronic File and completing required fields opens a checkbox-gated acknowledgement modal",
+        "stepDefinitions": [
+          "steps/paper-out-media-type.steps.ts"
+        ],
+        "pageObjects": [
+          "src/pages/ecore-workspace.page.ts"
+        ],
+        "components": [
+          "src/components/paper-out-request-modal.component.ts",
+          "src/components/acknowledgement-modal.component.ts"
+        ],
+        "fixtures": [
+          "src/fixtures/test.ts"
+        ],
+        "generatedTest": ".features-gen/features/approved/paper-out-export/paper-out-media-type.feature.spec.js",
+        "automationStatus": "EXECUTABLE",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-EC-12000-001",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-EC-12000-001.json"
+        }
+      ]
+    },
+    {
+      "traceId": "TRC-EC-12000-003",
+      "jiraStoryId": "EC-12000",
+      "requirementId": "REQ-EC-12000-002",
+      "acId": "AC-EC-12000-003",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/EC-12000.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/EC-12000-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-EC-12000-001-approval.json",
+        "automationDesign": "features/approved/paper-out-export/TP-EC-12000-001-automation-approval.json"
+      },
+      "openSpecRefs": [],
+      "testPlan": {
+        "testPlanId": "TP-EC-12000-001",
+        "testScenarioId": "TS-EC-12000-003",
+        "path": "test-plans/approved/TP-EC-12000-001.json",
+        "version": 1,
+        "interfaceType": "UI"
+      },
+      "automation": {
+        "featureFile": "features/approved/paper-out-export/paper-out-media-type.feature",
+        "gherkinScenario": "Confirming the acknowledgement modal closes both modals and creates the Work Queue approval item",
+        "stepDefinitions": [
+          "steps/paper-out-media-type.steps.ts"
+        ],
+        "pageObjects": [
+          "src/pages/ecore-workspace.page.ts"
+        ],
+        "components": [
+          "src/components/paper-out-request-modal.component.ts",
+          "src/components/acknowledgement-modal.component.ts",
+          "src/components/work-queue.component.ts"
+        ],
+        "fixtures": [
+          "src/fixtures/test.ts"
+        ],
+        "generatedTest": ".features-gen/features/approved/paper-out-export/paper-out-media-type.feature.spec.js",
+        "automationStatus": "EXECUTABLE",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-EC-12000-001",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-EC-12000-001.json"
+        }
+      ]
+    },
+    {
+      "traceId": "TRC-EC-12000-004",
+      "jiraStoryId": "EC-12000",
+      "requirementId": "REQ-EC-12000-002",
+      "acId": "AC-EC-12000-004",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/EC-12000.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/EC-12000-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-EC-12000-001-approval.json",
+        "automationDesign": "features/approved/paper-out-export/TP-EC-12000-001-automation-approval.json"
+      },
+      "openSpecRefs": [],
+      "testPlan": {
+        "testPlanId": "TP-EC-12000-001",
+        "testScenarioId": "TS-EC-12000-004",
+        "path": "test-plans/approved/TP-EC-12000-001.json",
+        "version": 1,
+        "interfaceType": "UI"
+      },
+      "automation": {
+        "featureFile": "features/approved/paper-out-export/paper-out-media-type.feature",
+        "gherkinScenario": "Cancelling the acknowledgement modal leaves the Paper Out Request modal open with no Work Queue item created",
+        "stepDefinitions": [
+          "steps/paper-out-media-type.steps.ts"
+        ],
+        "pageObjects": [
+          "src/pages/ecore-workspace.page.ts"
+        ],
+        "components": [
+          "src/components/paper-out-request-modal.component.ts",
+          "src/components/acknowledgement-modal.component.ts",
+          "src/components/work-queue.component.ts"
+        ],
+        "fixtures": [
+          "src/fixtures/test.ts"
+        ],
+        "generatedTest": ".features-gen/features/approved/paper-out-export/paper-out-media-type.feature.spec.js",
+        "automationStatus": "EXECUTABLE",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-EC-12000-001",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-EC-12000-001.json"
+        }
+      ]
+    },
+    {
+      "traceId": "TRC-EC-12000-005",
+      "jiraStoryId": "EC-12000",
+      "requirementId": "REQ-EC-12000-003",
+      "acId": "AC-EC-12000-005",
+      "status": "DEFERRED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/EC-12000.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/EC-12000-ac-approval.json",
+        "testPlan": null,
+        "automationDesign": null
+      },
+      "openSpecRefs": [],
+      "testPlan": null,
+      "automation": null,
+      "executionRefs": []
+    },
+    {
+      "traceId": "TRC-EC-12000-006",
+      "jiraStoryId": "EC-12000",
+      "requirementId": "REQ-EC-12000-003",
+      "acId": "AC-EC-12000-006",
+      "status": "DEFERRED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/EC-12000.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/EC-12000-ac-approval.json",
+        "testPlan": null,
+        "automationDesign": null
+      },
+      "openSpecRefs": [],
+      "testPlan": null,
+      "automation": null,
+      "executionRefs": []
+    },
+    {
+      "traceId": "TRC-EC-12000-007",
+      "jiraStoryId": "EC-12000",
+      "requirementId": "REQ-EC-12000-004",
+      "acId": "AC-EC-12000-007",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/EC-12000.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/EC-12000-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-EC-12000-001-approval.json",
+        "automationDesign": "features/approved/paper-out-export/TP-EC-12000-001-automation-approval.json"
+      },
+      "openSpecRefs": [],
+      "testPlan": {
+        "testPlanId": "TP-EC-12000-001",
+        "testScenarioId": "TS-EC-12000-007",
+        "path": "test-plans/approved/TP-EC-12000-001.json",
+        "version": 1,
+        "interfaceType": "UI"
+      },
+      "automation": {
+        "featureFile": "features/approved/paper-out-export/paper-out-media-type.feature",
+        "gherkinScenario": "UI Print to Paper at transaction level determines Media Type Paper",
+        "stepDefinitions": [
+          "steps/paper-out-media-type.steps.ts"
+        ],
+        "pageObjects": [
+          "src/pages/ecore-workspace.page.ts"
+        ],
+        "components": [
+          "src/components/paper-out-request-modal.component.ts",
+          "src/components/document-history.component.ts"
+        ],
+        "fixtures": [
+          "src/fixtures/test.ts"
+        ],
+        "generatedTest": ".features-gen/features/approved/paper-out-export/paper-out-media-type.feature.spec.js",
+        "automationStatus": "EXECUTABLE",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-EC-12000-001",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-EC-12000-001.json"
+        }
+      ]
+    },
+    {
+      "traceId": "TRC-EC-12000-008",
+      "jiraStoryId": "EC-12000",
+      "requirementId": "REQ-EC-12000-004",
+      "acId": "AC-EC-12000-008",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/EC-12000.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/EC-12000-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-EC-12000-001-approval.json",
+        "automationDesign": "features/approved/paper-out-export/TP-EC-12000-001-automation-approval.json"
+      },
+      "openSpecRefs": [],
+      "testPlan": {
+        "testPlanId": "TP-EC-12000-001",
+        "testScenarioId": "TS-EC-12000-008",
+        "path": "test-plans/approved/TP-EC-12000-001.json",
+        "version": 1,
+        "interfaceType": "UI"
+      },
+      "automation": {
+        "featureFile": "features/approved/paper-out-export/paper-out-media-type.feature",
+        "gherkinScenario": "UI Print to Paper at document level determines Media Type Paper",
+        "stepDefinitions": [
+          "steps/paper-out-media-type.steps.ts"
+        ],
+        "pageObjects": [
+          "src/pages/ecore-workspace.page.ts"
+        ],
+        "components": [
+          "src/components/paper-out-request-modal.component.ts",
+          "src/components/document-history.component.ts"
+        ],
+        "fixtures": [
+          "src/fixtures/test.ts"
+        ],
+        "generatedTest": ".features-gen/features/approved/paper-out-export/paper-out-media-type.feature.spec.js",
+        "automationStatus": "EXECUTABLE",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-EC-12000-001",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-EC-12000-001.json"
+        }
+      ]
+    },
+    {
+      "traceId": "TRC-EC-12000-009",
+      "jiraStoryId": "EC-12000",
+      "requirementId": "REQ-EC-12000-004",
+      "acId": "AC-EC-12000-009",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/EC-12000.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/EC-12000-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-EC-12000-001-approval.json",
+        "automationDesign": "features/approved/paper-out-export/TP-EC-12000-001-automation-approval.json"
+      },
+      "openSpecRefs": [],
+      "testPlan": {
+        "testPlanId": "TP-EC-12000-001",
+        "testScenarioId": "TS-EC-12000-009",
+        "path": "test-plans/approved/TP-EC-12000-001.json",
+        "version": 1,
+        "interfaceType": "UI"
+      },
+      "automation": {
+        "featureFile": "features/approved/paper-out-export/paper-out-media-type.feature",
+        "gherkinScenario": "UI Save as Electronic File at transaction level determines Media Type Electronic",
+        "stepDefinitions": [
+          "steps/paper-out-media-type.steps.ts"
+        ],
+        "pageObjects": [
+          "src/pages/ecore-workspace.page.ts"
+        ],
+        "components": [
+          "src/components/paper-out-request-modal.component.ts",
+          "src/components/acknowledgement-modal.component.ts",
+          "src/components/document-history.component.ts"
+        ],
+        "fixtures": [
+          "src/fixtures/test.ts"
+        ],
+        "generatedTest": ".features-gen/features/approved/paper-out-export/paper-out-media-type.feature.spec.js",
+        "automationStatus": "EXECUTABLE",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-EC-12000-001",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-EC-12000-001.json"
+        }
+      ]
+    },
+    {
+      "traceId": "TRC-EC-12000-010",
+      "jiraStoryId": "EC-12000",
+      "requirementId": "REQ-EC-12000-004",
+      "acId": "AC-EC-12000-010",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/EC-12000.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/EC-12000-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-EC-12000-001-approval.json",
+        "automationDesign": "features/approved/paper-out-export/TP-EC-12000-001-automation-approval.json"
+      },
+      "openSpecRefs": [],
+      "testPlan": {
+        "testPlanId": "TP-EC-12000-001",
+        "testScenarioId": "TS-EC-12000-010",
+        "path": "test-plans/approved/TP-EC-12000-001.json",
+        "version": 1,
+        "interfaceType": "UI"
+      },
+      "automation": {
+        "featureFile": "features/approved/paper-out-export/paper-out-media-type.feature",
+        "gherkinScenario": "UI Save as Electronic File at document level determines Media Type Electronic",
+        "stepDefinitions": [
+          "steps/paper-out-media-type.steps.ts"
+        ],
+        "pageObjects": [
+          "src/pages/ecore-workspace.page.ts"
+        ],
+        "components": [
+          "src/components/paper-out-request-modal.component.ts",
+          "src/components/acknowledgement-modal.component.ts",
+          "src/components/document-history.component.ts"
+        ],
+        "fixtures": [
+          "src/fixtures/test.ts"
+        ],
+        "generatedTest": ".features-gen/features/approved/paper-out-export/paper-out-media-type.feature.spec.js",
+        "automationStatus": "EXECUTABLE",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-EC-12000-001",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-EC-12000-001.json"
+        }
+      ]
+    },
+    {
+      "traceId": "TRC-EC-12000-011",
+      "jiraStoryId": "EC-12000",
+      "requirementId": "REQ-EC-12000-004",
+      "acId": "AC-EC-12000-011",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/EC-12000.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/EC-12000-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-EC-12000-001-approval.json",
+        "automationDesign": "features/approved/paper-out-export/TP-EC-12000-001-automation-approval.json"
+      },
+      "openSpecRefs": [],
+      "testPlan": {
+        "testPlanId": "TP-EC-12000-001",
+        "testScenarioId": "TS-EC-12000-011",
+        "path": "test-plans/approved/TP-EC-12000-001.json",
+        "version": 1,
+        "interfaceType": "HYBRID"
+      },
+      "automation": {
+        "featureFile": "features/approved/paper-out-export/paper-out-media-type.feature",
+        "gherkinScenario": "API mediaType=PrintToPaper at transaction level determines Media Type Paper",
+        "stepDefinitions": [
+          "steps/paper-out-media-type-blocked.steps.ts"
+        ],
+        "pageObjects": [],
+        "components": [],
+        "fixtures": [],
+        "generatedTest": ".features-gen/features/approved/paper-out-export/paper-out-media-type.feature.spec.js",
+        "automationStatus": "BLOCKED",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-EC-12000-001",
+          "result": "BLOCKED",
+          "recordPath": "traceability/executions/EXEC-EC-12000-001.json"
+        }
+      ]
+    },
+    {
+      "traceId": "TRC-EC-12000-012",
+      "jiraStoryId": "EC-12000",
+      "requirementId": "REQ-EC-12000-004",
+      "acId": "AC-EC-12000-012",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/EC-12000.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/EC-12000-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-EC-12000-001-approval.json",
+        "automationDesign": "features/approved/paper-out-export/TP-EC-12000-001-automation-approval.json"
+      },
+      "openSpecRefs": [],
+      "testPlan": {
+        "testPlanId": "TP-EC-12000-001",
+        "testScenarioId": "TS-EC-12000-012",
+        "path": "test-plans/approved/TP-EC-12000-001.json",
+        "version": 1,
+        "interfaceType": "HYBRID"
+      },
+      "automation": {
+        "featureFile": "features/approved/paper-out-export/paper-out-media-type.feature",
+        "gherkinScenario": "API mediaType=PrintToPaper at document level determines Media Type Paper",
+        "stepDefinitions": [
+          "steps/paper-out-media-type-blocked.steps.ts"
+        ],
+        "pageObjects": [],
+        "components": [],
+        "fixtures": [],
+        "generatedTest": ".features-gen/features/approved/paper-out-export/paper-out-media-type.feature.spec.js",
+        "automationStatus": "BLOCKED",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-EC-12000-001",
+          "result": "BLOCKED",
+          "recordPath": "traceability/executions/EXEC-EC-12000-001.json"
+        }
+      ]
+    },
+    {
+      "traceId": "TRC-EC-12000-013",
+      "jiraStoryId": "EC-12000",
+      "requirementId": "REQ-EC-12000-004",
+      "acId": "AC-EC-12000-013",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/EC-12000.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/EC-12000-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-EC-12000-001-approval.json",
+        "automationDesign": "features/approved/paper-out-export/TP-EC-12000-001-automation-approval.json"
+      },
+      "openSpecRefs": [],
+      "testPlan": {
+        "testPlanId": "TP-EC-12000-001",
+        "testScenarioId": "TS-EC-12000-013",
+        "path": "test-plans/approved/TP-EC-12000-001.json",
+        "version": 1,
+        "interfaceType": "HYBRID"
+      },
+      "automation": {
+        "featureFile": "features/approved/paper-out-export/paper-out-media-type.feature",
+        "gherkinScenario": "API mediaType=SaveAsElectronicFile at transaction level determines Media Type Electronic",
+        "stepDefinitions": [
+          "steps/paper-out-media-type-blocked.steps.ts"
+        ],
+        "pageObjects": [],
+        "components": [],
+        "fixtures": [],
+        "generatedTest": ".features-gen/features/approved/paper-out-export/paper-out-media-type.feature.spec.js",
+        "automationStatus": "BLOCKED",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-EC-12000-001",
+          "result": "BLOCKED",
+          "recordPath": "traceability/executions/EXEC-EC-12000-001.json"
+        }
+      ]
+    },
+    {
+      "traceId": "TRC-EC-12000-014",
+      "jiraStoryId": "EC-12000",
+      "requirementId": "REQ-EC-12000-004",
+      "acId": "AC-EC-12000-014",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/EC-12000.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/EC-12000-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-EC-12000-001-approval.json",
+        "automationDesign": "features/approved/paper-out-export/TP-EC-12000-001-automation-approval.json"
+      },
+      "openSpecRefs": [],
+      "testPlan": {
+        "testPlanId": "TP-EC-12000-001",
+        "testScenarioId": "TS-EC-12000-014",
+        "path": "test-plans/approved/TP-EC-12000-001.json",
+        "version": 1,
+        "interfaceType": "HYBRID"
+      },
+      "automation": {
+        "featureFile": "features/approved/paper-out-export/paper-out-media-type.feature",
+        "gherkinScenario": "API mediaType=SaveAsElectronicFile at document level determines Media Type Electronic",
+        "stepDefinitions": [
+          "steps/paper-out-media-type-blocked.steps.ts"
+        ],
+        "pageObjects": [],
+        "components": [],
+        "fixtures": [],
+        "generatedTest": ".features-gen/features/approved/paper-out-export/paper-out-media-type.feature.spec.js",
+        "automationStatus": "BLOCKED",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-EC-12000-001",
+          "result": "BLOCKED",
+          "recordPath": "traceability/executions/EXEC-EC-12000-001.json"
+        }
+      ]
+    },
+    {
+      "traceId": "TRC-EC-12000-015",
+      "jiraStoryId": "EC-12000",
+      "requirementId": "REQ-EC-12000-004",
+      "acId": "AC-EC-12000-015",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/EC-12000.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/EC-12000-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-EC-12000-001-approval.json",
+        "automationDesign": "features/approved/paper-out-export/TP-EC-12000-001-automation-approval.json"
+      },
+      "openSpecRefs": [],
+      "testPlan": {
+        "testPlanId": "TP-EC-12000-001",
+        "testScenarioId": "TS-EC-12000-015",
+        "path": "test-plans/approved/TP-EC-12000-001.json",
+        "version": 1,
+        "interfaceType": "HYBRID"
+      },
+      "automation": {
+        "featureFile": "features/approved/paper-out-export/paper-out-media-type.feature",
+        "gherkinScenario": "API call omitting mediaType entirely determines Media Type Electronic",
+        "stepDefinitions": [
+          "steps/paper-out-media-type-blocked.steps.ts"
+        ],
+        "pageObjects": [],
+        "components": [],
+        "fixtures": [],
+        "generatedTest": ".features-gen/features/approved/paper-out-export/paper-out-media-type.feature.spec.js",
+        "automationStatus": "BLOCKED",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-EC-12000-001",
+          "result": "BLOCKED",
+          "recordPath": "traceability/executions/EXEC-EC-12000-001.json"
+        }
+      ]
+    },
+    {
+      "traceId": "TRC-EC-12000-016",
+      "jiraStoryId": "EC-12000",
+      "requirementId": "REQ-EC-12000-005",
+      "acId": "AC-EC-12000-016",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/EC-12000.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/EC-12000-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-EC-12000-001-approval.json",
+        "automationDesign": "features/approved/paper-out-export/TP-EC-12000-001-v2-automation-approval.json"
+      },
+      "openSpecRefs": [],
+      "testPlan": {
+        "testPlanId": "TP-EC-12000-001",
+        "testScenarioId": "TS-EC-12000-016",
+        "path": "test-plans/approved/TP-EC-12000-001.json",
+        "version": 2,
+        "interfaceType": "UI"
+      },
+      "automation": {
+        "featureFile": "features/approved/paper-out-export/paper-out-media-type.feature",
+        "gherkinScenario": "Media Type is recorded on the Submitted Paper Out event, not the Authorized one, and appears in the downloaded activity history report",
+        "stepDefinitions": [
+          "steps/paper-out-media-type.steps.ts"
+        ],
+        "pageObjects": [],
+        "components": [
+          "src/components/work-queue.component.ts",
+          "src/components/verify-paper-out-modal.component.ts"
+        ],
+        "fixtures": [
+          "src/fixtures/test.ts"
+        ],
+        "generatedTest": ".features-gen/features/approved/paper-out-export/paper-out-media-type.feature.spec.js",
+        "automationStatus": "EXECUTABLE",
+        "scenarioAction": "UPDATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-EC-12000-001",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-EC-12000-001.json"
+        }
+      ]
+    },
+    {
+      "traceId": "TRC-EC-12000-020",
+      "jiraStoryId": "EC-12000",
+      "requirementId": "REQ-EC-12000-005",
+      "acId": "AC-EC-12000-016",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/EC-12000.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/EC-12000-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-EC-12000-001-approval.json",
+        "automationDesign": "features/approved/paper-out-export/TP-EC-12000-001-v2-automation-approval.json"
+      },
+      "openSpecRefs": [],
+      "testPlan": {
+        "testPlanId": "TP-EC-12000-001",
+        "testScenarioId": "TS-EC-12000-020",
+        "path": "test-plans/approved/TP-EC-12000-001.json",
+        "version": 2,
+        "interfaceType": "UI"
+      },
+      "automation": {
+        "featureFile": "features/approved/paper-out-export/paper-out-media-type.feature",
+        "gherkinScenario": "Media Type is visible on the Paper Out package cover page",
+        "stepDefinitions": [
+          "steps/paper-out-media-type-blocked.steps.ts"
+        ],
+        "pageObjects": [],
+        "components": [],
+        "fixtures": [],
+        "generatedTest": ".features-gen/features/approved/paper-out-export/paper-out-media-type.feature.spec.js",
+        "automationStatus": "MANUAL_ONLY",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-EC-12000-001",
+          "result": "BLOCKED",
+          "recordPath": "traceability/executions/EXEC-EC-12000-001.json"
+        }
+      ]
+    },
+    {
+      "traceId": "TRC-EC-12000-017",
+      "jiraStoryId": "EC-12000",
+      "requirementId": "REQ-EC-12000-005",
+      "acId": "AC-EC-12000-017",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/EC-12000.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/EC-12000-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-EC-12000-001-approval.json",
+        "automationDesign": "features/approved/paper-out-export/TP-EC-12000-001-automation-approval.json"
+      },
+      "openSpecRefs": [],
+      "testPlan": {
+        "testPlanId": "TP-EC-12000-001",
+        "testScenarioId": "TS-EC-12000-017",
+        "path": "test-plans/approved/TP-EC-12000-001.json",
+        "version": 1,
+        "interfaceType": "UI"
+      },
+      "automation": {
+        "featureFile": "features/approved/paper-out-export/paper-out-media-type.feature",
+        "gherkinScenario": "Historical Paper Out records are not retroactively updated with Media Type",
+        "stepDefinitions": [
+          "steps/paper-out-media-type-blocked.steps.ts"
+        ],
+        "pageObjects": [],
+        "components": [],
+        "fixtures": [],
+        "generatedTest": ".features-gen/features/approved/paper-out-export/paper-out-media-type.feature.spec.js",
+        "automationStatus": "BLOCKED",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-EC-12000-001",
+          "result": "BLOCKED",
+          "recordPath": "traceability/executions/EXEC-EC-12000-001.json"
+        }
+      ]
+    },
+    {
+      "traceId": "TRC-EC-12000-018",
+      "jiraStoryId": "EC-12000",
+      "requirementId": "REQ-EC-12000-006",
+      "acId": "AC-EC-12000-018",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/EC-12000.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/EC-12000-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-EC-12000-001-approval.json",
+        "automationDesign": "features/approved/paper-out-export/TP-EC-12000-001-automation-approval.json"
+      },
+      "openSpecRefs": [],
+      "testPlan": {
+        "testPlanId": "TP-EC-12000-001",
+        "testScenarioId": "TS-EC-12000-018",
+        "path": "test-plans/approved/TP-EC-12000-001.json",
+        "version": 1,
+        "interfaceType": "UI"
+      },
+      "automation": {
+        "featureFile": "features/approved/paper-out-export/paper-out-media-type.feature",
+        "gherkinScenario": "Verify Paper Out modal's last checkbox reads the updated verbiage",
+        "stepDefinitions": [
+          "steps/paper-out-media-type.steps.ts"
+        ],
+        "pageObjects": [
+          "src/pages/ecore-workspace.page.ts"
+        ],
+        "components": [
+          "src/components/work-queue.component.ts",
+          "src/components/verify-paper-out-modal.component.ts"
+        ],
+        "fixtures": [
+          "src/fixtures/test.ts"
+        ],
+        "generatedTest": ".features-gen/features/approved/paper-out-export/paper-out-media-type.feature.spec.js",
+        "automationStatus": "EXECUTABLE",
+        "scenarioAction": "CREATE"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-EC-12000-001",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-EC-12000-001.json"
+        }
+      ]
+    },
+    {
+      "traceId": "TRC-EC-12000-019",
+      "jiraStoryId": "EC-12000",
+      "requirementId": "REQ-EC-12000-007",
+      "acId": "AC-EC-12000-019",
+      "status": "APPROVED",
+      "changeType": "NEW",
+      "requirementArtifact": {
+        "path": "requirements/approved/EC-12000.json",
+        "version": 1
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/EC-12000-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-EC-12000-001-approval.json",
+        "automationDesign": "features/approved/paper-out-export/TP-EC-12000-001-automation-approval.json"
+      },
+      "openSpecRefs": [],
+      "testPlan": {
+        "testPlanId": "TP-EC-12000-001",
+        "testScenarioId": "TS-EC-12000-019",
+        "path": "test-plans/approved/TP-EC-12000-001.json",
+        "version": 1,
+        "interfaceType": "UI"
+      },
+      "automation": {
+        "featureFile": "features/approved/paper-out-export/paper-out-media-type.feature",
+        "gherkinScenario": "Paper Out Request modal's right-side section borders are visually aligned",
+        "stepDefinitions": [
+          "steps/paper-out-media-type-blocked.steps.ts"
+        ],
+        "pageObjects": [],
+        "components": [],
+        "fixtures": [],
+        "generatedTest": ".features-gen/features/approved/paper-out-export/paper-out-media-type.feature.spec.js",
+        "automationStatus": "MANUAL_ONLY",
+        "scenarioAction": "REVIEW_REQUIRED"
+      },
+      "executionRefs": [
+        {
+          "executionId": "EXEC-EC-12000-001",
+          "result": "BLOCKED",
+          "recordPath": "traceability/executions/EXEC-EC-12000-001.json"
+        }
+      ]
+    }
+  ]
+}

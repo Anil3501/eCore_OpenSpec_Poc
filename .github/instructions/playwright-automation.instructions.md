@@ -66,6 +66,7 @@ Enforced by `SEM-AUTOMATION-HYGIENE` over `src/api`:
 | `HARDCODED_URL` — absolute `http(s)://` literal | none |
 | `DIRECT_ENV_READ` — `process.env.*` instead of `env` | none |
 | `DESTRUCTIVE_CALL` — `.delete()` / `.put()` against a shared environment | `CLEANUP - <strategy>` |
+| `DESTRUCTIVE_PATH` — an endpoint named `delete`/`remove`/`void`/`destruct`/`purge`/`revoke`/`transfer`, whatever the verb | `CLEANUP - <strategy>` |
 | `HARD_WAIT` — `waitForTimeout()` | `JUSTIFIED-WAIT:` |
 | `DISABLED_TEST` — `test.skip/fixme/slow()` | none |
 

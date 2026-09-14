@@ -1078,6 +1078,15 @@ const API_HYGIENE_RULES: HygieneRule[] = [
     waiver: 'CLEANUP -',
   },
   {
+    // The HTTP verb is not the whole story: eCore's destructive operations are
+    // RPC paths reached by POST, so DESTRUCTIVE_CALL alone never sees them.
+    id: 'DESTRUCTIVE_PATH',
+    pattern: /['"`][^'"`\n]*(delete|remove|destroy|destruct|purge|revoke|void|transfer)/i,
+    problem:
+      'names an endpoint whose verb has side effects, which an idempotent-looking .get() or .post() hides',
+    waiver: 'CLEANUP -',
+  },
+  {
     id: 'HARD_WAIT',
     pattern: /waitForTimeout\s*\(/,
     problem: 'uses a fixed sleep instead of polling or a web-first assertion',
@@ -1215,6 +1224,7 @@ function checkAutomationHygiene(loaded: LoadedArtifacts): CheckResult {
   return messages.length === 0
     ? pass('SEM-AUTOMATION-HYGIENE', title, [
         `${sourceFiles.length} automation source file(s) and ${featureFiles.length} approved feature file(s) checked against ${HYGIENE_RULES.length} locator/wait rules.`,
+        `${apiFiles.length} API client file(s) checked against ${API_HYGIENE_RULES.length} API hygiene rules.`,
       ])
     : fail('SEM-AUTOMATION-HYGIENE', title, messages);
 }
@@ -1257,6 +1267,26 @@ function checkApiContracts(loaded: LoadedArtifacts): CheckResult {
         );
       }
 
+      // A contract an agent drafted on request is a proposal, not evidence: it
+      // is allowed to exist, and never allowed to claim authority for itself.
+      if (contract.contractProvenance.startsWith('AGENT_DRAFTED')) {
+        if (contract.contractSource !== 'UNVERIFIED') {
+          messages.push(
+            `${file}: ${scenario.testScenarioId} carries an AGENT_DRAFTED provenance but claims contractSource "${contract.contractSource}". ` +
+              'A chat confirmation authorises the draft, never its authority. Leave it UNVERIFIED until Gate 2 says otherwise.',
+          );
+        }
+        if (
+          !contract.contractProvenance.includes('DICTATED:') ||
+          !contract.contractProvenance.includes('PROPOSED:')
+        ) {
+          messages.push(
+            `${file}: ${scenario.testScenarioId} has an AGENT_DRAFTED provenance without both "DICTATED:" and "PROPOSED:" segments. ` +
+              'A drafted contract reads just as fluently whether or not it is right, so a reviewer must be told which fields came from a human and which the agent proposed.',
+          );
+        }
+      }
+
       const authoritative = contract.contractSource === 'OPENAPI' || contract.contractSource === 'HUMAN_APPROVED';
       if (isApproved && contract.scaffoldingOnly !== true && !authoritative) {
         messages.push(
@@ -1269,6 +1299,17 @@ function checkApiContracts(loaded: LoadedArtifacts): CheckResult {
       if (contract.scaffoldingOnly === true && interfaceType === 'API') {
         messages.push(
           `${file}: ${scenario.testScenarioId} is API-only and scaffoldingOnly. A scenario that only reaches a state asserts nothing, so it cannot cover ${scenario.acIds.join(', ')}. Use HYBRID, or drop scaffoldingOnly and agree the contract.`,
+        );
+      }
+
+      // OPENAPI needs no fingerprint: the spec is itself diffable. A human
+      // decision is not, so without a recorded shape nothing can ever notice
+      // that the contract the reviewer agreed to has since moved.
+      const assertsAnAc = isApproved && contract.scaffoldingOnly !== true;
+      if (assertsAnAc && contract.contractSource === 'HUMAN_APPROVED' && !contract.responseShapeHash) {
+        messages.push(
+          `${file}: ${scenario.testScenarioId} asserts ${scenario.acIds.join(', ')} against a HUMAN_APPROVED contract that carries no responseShapeHash. ` +
+            'Record the shape agreed at Gate 2 with computeResponseShapeHash from src/utils/api-contract-shape.ts, or drift will go undetected.',
         );
       }
     }

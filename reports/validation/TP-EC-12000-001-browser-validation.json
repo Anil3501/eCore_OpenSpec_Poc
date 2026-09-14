@@ -1,0 +1,202 @@
+{
+  "schemaVersion": "1.0.0",
+  "reportType": "PLAYWRIGHT_VALIDATION_BROWSER",
+  "testPlanId": "TP-EC-12000-001",
+  "jiraStoryId": "EC-12000",
+  "capability": "paper-out-export",
+  "release": "26.3",
+  "featureFile": "features/approved/paper-out-export/paper-out-media-type.feature",
+  "automationDesignDoc": "features/generated/paper-out-export/TP-EC-12000-001-automation-design.md",
+  "validatedBy": {
+    "agent": "playwright-test-planner",
+    "tool": "playwright-test-mcp (Playwright Test MCP server, seed project, .auth/ecore-session.json resume)",
+    "applicationUnderTest": "https://qa5.eoriginal.org:8443/ssweb/setup/workspace/workspace.eo"
+  },
+  "validatedAt": "2026-09-14T11:50:00.000Z",
+  "scenarios": [
+    {
+      "scenarioId": "TS-EC-12000-001",
+      "acIds": [
+        "AC-EC-12000-001"
+      ],
+      "status": "VALIDATED",
+      "summary": "Paper Out Request modal shows the Media Type for Paper Out Package section with Print to Paper selected by default.",
+      "locators": [
+        "getByRole('dialog', { name: 'Paper Out® Request' })",
+        "getByRole('radio', { name: 'Print to Paper' }) -- checked by default",
+        "getByRole('radio', { name: 'Save as Electronic File', exact: true })"
+      ],
+      "evidenceRefs": [
+        ".playwright-mcp/paper-out-collection-dialog-reference.yml"
+      ]
+    },
+    {
+      "scenarioId": "TS-EC-12000-002",
+      "acIds": [
+        "AC-EC-12000-002"
+      ],
+      "status": "VALIDATED",
+      "summary": "Selecting Save as Electronic File and completing required fields opens a checkbox-gated Acknowledgement modal; OK stays disabled until the checkbox is checked.",
+      "locators": [
+        "getByRole('dialog', { name: 'Acknowledgement' })",
+        "#mediaTypeElectronicConfirmCheckbox",
+        "getByLabel('Acknowledgement').getByRole('button', { name: 'OK' }) -- disabled until checkbox checked"
+      ],
+      "evidenceRefs": []
+    },
+    {
+      "scenarioId": "TS-EC-12000-003",
+      "acIds": [
+        "AC-EC-12000-003"
+      ],
+      "status": "VALIDATED",
+      "summary": "Confirming the acknowledgement modal closes both modals and creates a real Work Queue approval item. Implemented and passing live on 2026-09-14, including a repeat run to prove the cleanup hook releases the transaction lock its own submission places.",
+      "locators": [
+        "tr.batch[data-batch-name][data-batch-status=\"Submitted\"][data-next-step=\"Approval\"] -- the created Work Queue item",
+        "getByRole('dialog', { name: 'Confirm Cancellation' }) -- cleanup, button 'Cancel Request', posts cancelPaperOut.eo"
+      ],
+      "evidenceRefs": [],
+      "notes": "BLOCKER-EC-12000-001 resolved without human fixture creation: all eleven qa5 collections were surveyed by driving a real submission against each and cancelling every success, and \"test collection\" qualified. The previously recorded remedy (add a document to an existing collection) could not have worked, because a collection-level Paper Out covers every transaction in the collection, so one ineligible or locked transaction disqualifies the whole collection."
+    },
+    {
+      "scenarioId": "TS-EC-12000-004",
+      "acIds": [
+        "AC-EC-12000-004"
+      ],
+      "status": "VALIDATED",
+      "summary": "Cancelling the Acknowledgement modal closes only that modal; the Paper Out Request modal remains open with all field values retained and no Work Queue item is created.",
+      "locators": [
+        "getByLabel('Acknowledgement').getByRole('button', { name: 'Cancel' })"
+      ],
+      "evidenceRefs": []
+    },
+    {
+      "scenarioId": "TS-EC-12000-007",
+      "acIds": [
+        "AC-EC-12000-007"
+      ],
+      "status": "BLOCKED",
+      "summary": "Transaction-level Print to Paper: opening 'Paper Out® Request' from a transaction's own row-level Actions menu opens the identical PaperOutRequestModal seen at collection level.",
+      "locators": [
+        "div.paperOutTransaction inside td#transactionNameActions .snapshot-dropdown-action -- transaction-level entry, revealed by selecting the transaction row",
+        "div.paperOutDocument inside tr.documentRow .snapshot-dropdown-action -- document-level entry"
+      ],
+      "evidenceRefs": [],
+      "blockedReason": "BLOCKER-EC-12000-004: the entry point and the submission both work, but the assertion does not. A real transaction-level Paper Out with the default \"Print to Paper\" was submitted successfully against \"test collection\" transaction 16509517 and cancelled again on 2026-09-14, so this is NOT the fixture gap previously recorded here. What cannot be done is observing the recorded Media Type: the string appears nowhere on the Workspace after submission, nowhere in the Work Queue, and nowhere in the transaction History dialog."
+    },
+    {
+      "scenarioId": "TS-EC-12000-008",
+      "acIds": [
+        "AC-EC-12000-008"
+      ],
+      "status": "BLOCKED",
+      "summary": "Document-level Print to Paper: opening 'Paper Out® Request' from a document's own row-level context menu opens the identical PaperOutRequestModal.",
+      "locators": [
+        "div.paperOutTransaction inside td#transactionNameActions .snapshot-dropdown-action -- transaction-level entry, revealed by selecting the transaction row",
+        "div.paperOutDocument inside tr.documentRow .snapshot-dropdown-action -- document-level entry"
+      ],
+      "evidenceRefs": [],
+      "blockedReason": "BLOCKER-EC-12000-004: the entry point and the submission both work, but the assertion does not. A real transaction-level Paper Out with the default \"Print to Paper\" was submitted successfully against \"test collection\" transaction 16509517 and cancelled again on 2026-09-14, so this is NOT the fixture gap previously recorded here. What cannot be done is observing the recorded Media Type: the string appears nowhere on the Workspace after submission, nowhere in the Work Queue, and nowhere in the transaction History dialog."
+    },
+    {
+      "scenarioId": "TS-EC-12000-009",
+      "acIds": [
+        "AC-EC-12000-009"
+      ],
+      "status": "BLOCKED",
+      "summary": "Transaction-level Save as Electronic File: same modal/entry point as TS-007, media type radio confirmed present and selectable.",
+      "locators": [
+        "div.paperOutTransaction inside td#transactionNameActions .snapshot-dropdown-action -- transaction-level entry, revealed by selecting the transaction row",
+        "div.paperOutDocument inside tr.documentRow .snapshot-dropdown-action -- document-level entry"
+      ],
+      "evidenceRefs": [],
+      "blockedReason": "BLOCKER-EC-12000-004: the entry point and the submission both work, but the assertion does not. A real transaction-level Paper Out with the default \"Print to Paper\" was submitted successfully against \"test collection\" transaction 16509517 and cancelled again on 2026-09-14, so this is NOT the fixture gap previously recorded here. What cannot be done is observing the recorded Media Type: the string appears nowhere on the Workspace after submission, nowhere in the Work Queue, and nowhere in the transaction History dialog."
+    },
+    {
+      "scenarioId": "TS-EC-12000-010",
+      "acIds": [
+        "AC-EC-12000-010"
+      ],
+      "status": "BLOCKED",
+      "summary": "Document-level Save as Electronic File: same modal/entry point as TS-008, media type radio confirmed present and selectable.",
+      "locators": [
+        "div.paperOutTransaction inside td#transactionNameActions .snapshot-dropdown-action -- transaction-level entry, revealed by selecting the transaction row",
+        "div.paperOutDocument inside tr.documentRow .snapshot-dropdown-action -- document-level entry"
+      ],
+      "evidenceRefs": [],
+      "blockedReason": "BLOCKER-EC-12000-004: the entry point and the submission both work, but the assertion does not. A real transaction-level Paper Out with the default \"Print to Paper\" was submitted successfully against \"test collection\" transaction 16509517 and cancelled again on 2026-09-14, so this is NOT the fixture gap previously recorded here. What cannot be done is observing the recorded Media Type: the string appears nowhere on the Workspace after submission, nowhere in the Work Queue, and nowhere in the transaction History dialog."
+    },
+    {
+      "scenarioId": "TS-EC-12000-016",
+      "acIds": [
+        "AC-EC-12000-016"
+      ],
+      "status": "BLOCKED",
+      "summary": "Media Type as Additional Information on the Submitted Paper Out event, cover page, audit trail and activity history report could not be observed.",
+      "blockedReason": "BLOCKER-EC-12000-004: no discoverable place to observe the recorded Media Type. The transaction History dialog (#historyDialog) exposes columns Date / Signed / Action / Recorded By / User / IP Address / Details and records no Paper Out event of any kind - its latest entries remain \"Transaction Fully Signed\", \"Document Added\" and \"Created Transaction\" from 07/08/2026, despite a Paper Out being submitted against that exact transaction minutes earlier. AC-EC-12000-016 expects Media Type as Additional Information on a \"Submitted Paper Out\" event, and no such event is visible in the only history view the transaction offers.",
+      "evidenceRefs": []
+    },
+    {
+      "scenarioId": "TS-EC-12000-018",
+      "acIds": [
+        "AC-EC-12000-018"
+      ],
+      "status": "VALIDATED",
+      "summary": "Verify Paper Out modal's last checkbox carries the updated verbiage. Implemented and passing live 2026-09-14.",
+      "evidenceRefs": [],
+      "locators": [
+        "#verifyPaperOutDialog -- title \"Verify Paper Out® Request\", posts verifyPaperOut.eo",
+        "#certificationReviewed, #packageDownloaded (disabled), #multimediaDownloaded (disabled), #packagePrinted -- the four checkboxes in DOM order"
+      ],
+      "notes": "The component is deliberately read-only: it never checks a box and never presses Verify, because Verify permanently removes all source documents from the vault. \"Last checkbox\" is resolved by reading the ordered ids from the DOM rather than .nth(), which SEM-AUTOMATION-HYGIENE bans, and which also lets the scenario prove which checkbox is last rather than assume it."
+    },
+    {
+      "scenarioId": "TS-EC-12000-019",
+      "acIds": [
+        "AC-EC-12000-019"
+      ],
+      "status": "MANUAL_ONLY",
+      "summary": "Right-side border alignment. Per the approved plan's automationDecision, this is not a reliable Playwright assertion target and is expected to require a human visual check rather than pass/fail automation.",
+      "evidenceRefs": []
+    }
+  ],
+  "crossCuttingFindings": [
+    {
+      "id": "FIND-EC-12000-001",
+      "title": "Collections dropdown menu is click-triggered; nested Batch submenu is CSS-hover-gated",
+      "detail": "The dropdown (.collection-dropdown-actions) opens on click of .collection-dropdown-action (not hover). The nested 'Batch' cascading submenu (.cascading, containing .paperOutTransactionCollection) stays CSS visibility:hidden until real cursor dwell; real Playwright hover() calls did not reliably trigger it in this session. Recommended automation strategy: click the top-level icon normally, then click({ force: true }) directly on .paperOutTransactionCollection once the top-level menu is open -- its click handler fires regardless of the submenu's own CSS visibility."
+    },
+    {
+      "id": "FIND-EC-12000-002",
+      "title": "Paper Out Request modal 'Collection:' label is a stale display artifact across re-opens",
+      "detail": "On repeated opens against different collections within one page session, the 'Collection:' label text did not update, but the actual submitted collectionOfWorkId in the network request was verified correct each time. Not a functional defect; flagged so no assertion is ever written against that on-screen label without accounting for this."
+    },
+    {
+      "id": "FIND-EC-12000-003",
+      "title": "No QA5 sample collection/transaction currently qualifies for electronic Paper Out",
+      "detail": "Confirmed via live submission attempts against 'demo collection' and 'results 21 july' -- both rejected with the same real app validation message about requiring at least 1 electronic original document. Blocks TS-003 (full assertion), TS-016, and TS-018. See TS-EC-12000-003's blockedReason for the fixture-creation attempt and why it was not completed."
+    },
+    {
+      "title": "Paper Out eligibility is enforced only at submit time, and at collection scope",
+      "detail": "An open Paper Out Request modal is not evidence of eligibility - the modal opens and renders its full Media Type section for collections the application will still refuse. Eligibility can only be established by attempting a real submission. A survey built on the modal opening reported four qualifying collections on 2026-09-14 and was wrong; driving real submissions showed only \"test collection\" qualifies. Two further rules were observed: a collection-level Paper Out covers every transaction in the collection, so one ineligible or locked transaction disqualifies the whole collection; and three collections are refused because their transactions are \"included in an active signature path\", a distinct constraint from the electronic-original rule."
+    },
+    {
+      "title": "The Work Queue pane is AJAX-refreshed and reads empty before it settles",
+      "detail": "A read taken immediately after page load reported zero batches and appeared to show that TS-EC-12000-018's fixture batch had been destroyed; re-reading with a wait showed it intact at Authorized/Verification. Any assertion or cleanup over this pane must wait for the row rather than branch on an early count, and a count of zero must never be treated as evidence of absence."
+    }
+  ],
+  "openBlockers": [
+    {
+      "id": "BLOCKER-EC-12000-004",
+      "affects": [
+        "TS-EC-12000-007",
+        "TS-EC-12000-008",
+        "TS-EC-12000-009",
+        "TS-EC-12000-010",
+        "TS-EC-12000-016"
+      ],
+      "description": "The recorded Media Type cannot be observed anywhere in the application, so the Then of all five scenarios cannot be asserted. Confirmed live 2026-09-14 after a real transaction-level Paper Out submission: \"Media Type\" appears nowhere on the Workspace, nowhere in the Work Queue, and nowhere in the transaction History dialog. The transaction History records no Submitted Paper Out event at all. This supersedes BLOCKER-EC-12000-001 as the reason these scenarios are blocked - that fixture gap is resolved, and the submission itself succeeds.",
+      "recommendedResolution": "A human must answer two questions. (1) Where is the recorded Media Type expected to surface in 26.3 - batch-level history, package cover page, activity history report, or elsewhere? (2) Is the EC-12000 recording change actually deployed to qa5? TS-018's verbiage change is deployed and passes, but that proves only that one part of the story shipped, not that Media Type recording did. This was deliberately not resolved by guessing: the remaining candidate observation points named by the approved plan (package cover page, downloaded activity history report) are reachable only through the Print/Verify action, which permanently removes source documents from the vault, so a wrong guess is irreversible."
+    }
+  ]
+}

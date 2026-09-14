@@ -1,0 +1,110 @@
+{
+  "schemaVersion": "1.0.0",
+  "approvalId": "APR-TP-EC-12000-001",
+  "gate": "TEST_PLAN",
+  "artifactId": "TP-EC-12000-001",
+  "artifactVersion": 2,
+  "release": "26.3",
+  "capability": "paper-out-export",
+  "sourceArtifactPath": "test-plans/generated/TP-EC-12000-001.json",
+  "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+  "reviewer": {
+    "name": "REPLACE_WITH_YOUR_NAME",
+    "role": "REPLACE_WITH_YOUR_ROLE",
+    "reference": null
+  },
+  "reviewedAt": "REPLACE_WITH_ISO_8601_TIMESTAMP",
+  "comments": "REPLACE_WITH_YOUR_ANSWER_TO_CLR-TP-EC-12000-002 (split the cover-page clause into the MANUAL_ONLY TS-EC-12000-020?) AND CLR-TP-EC-12000-003 (which pre-deployment record should TS-EC-12000-017 use, or should it be DEFERRED?). A question left unanswered here is a decision nobody made.",
+  "itemDecisions": [
+    {
+      "itemId": "TS-EC-12000-001",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "Unchanged from approved v1. The Paper Out Request modal shows the Media Type section with Print to Paper selected by default"
+    },
+    {
+      "itemId": "TS-EC-12000-002",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "Unchanged from approved v1. Selecting Save as Electronic File and completing required fields opens a checkbox-gated acknowledgement modal"
+    },
+    {
+      "itemId": "TS-EC-12000-003",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "Unchanged from approved v1. Confirming the acknowledgement modal closes both modals and creates the Work Queue approval item"
+    },
+    {
+      "itemId": "TS-EC-12000-004",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "Unchanged from approved v1. Cancelling the acknowledgement modal leaves the Paper Out Request modal open with no Work Queue item created"
+    },
+    {
+      "itemId": "TS-EC-12000-007",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "Unchanged from approved v1. UI Print to Paper at transaction level determines Media Type Paper"
+    },
+    {
+      "itemId": "TS-EC-12000-008",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "Unchanged from approved v1. UI Print to Paper at document level determines Media Type Paper"
+    },
+    {
+      "itemId": "TS-EC-12000-009",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "Unchanged from approved v1. UI Save as Electronic File at transaction level determines Media Type Electronic"
+    },
+    {
+      "itemId": "TS-EC-12000-010",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "Unchanged from approved v1. UI Save as Electronic File at document level determines Media Type Electronic"
+    },
+    {
+      "itemId": "TS-EC-12000-011",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "Unchanged from approved v1. API mediaType=PrintToPaper at transaction level determines Media Type Paper"
+    },
+    {
+      "itemId": "TS-EC-12000-012",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "Unchanged from approved v1. API mediaType=PrintToPaper at document level determines Media Type Paper"
+    },
+    {
+      "itemId": "TS-EC-12000-013",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "Unchanged from approved v1. API mediaType=SaveAsElectronicFile at transaction level determines Media Type Electronic"
+    },
+    {
+      "itemId": "TS-EC-12000-014",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "Unchanged from approved v1. API mediaType=SaveAsElectronicFile at document level determines Media Type Electronic"
+    },
+    {
+      "itemId": "TS-EC-12000-015",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "Unchanged from approved v1. API call omitting mediaType entirely determines Media Type Electronic"
+    },
+    {
+      "itemId": "TS-EC-12000-016",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "CHANGED IN v2 - read this one. Media Type is recorded on the Submitted Paper Out event, not the Authorized one, and appears in the downloaded activity history report"
+    },
+    {
+      "itemId": "TS-EC-12000-020",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "CHANGED IN v2 - read this one. Media Type is visible on the Paper Out package cover page"
+    },
+    {
+      "itemId": "TS-EC-12000-017",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "Unchanged from approved v1. Historical Paper Out records are not retroactively updated with Media Type"
+    },
+    {
+      "itemId": "TS-EC-12000-018",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "Unchanged from approved v1. Verify Paper Out modal's last checkbox reads the updated verbiage"
+    },
+    {
+      "itemId": "TS-EC-12000-019",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "Unchanged from approved v1. Paper Out Request modal's right-side section borders are visually aligned"
+    }
+  ]
+}

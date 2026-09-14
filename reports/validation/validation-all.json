@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-09-07T14:30:10.874Z",
+  "generatedAt": "2026-09-14T19:06:59.485Z",
   "scope": "all",
   "summary": {
     "total": 23,
-    "passed": 21,
+    "passed": 22,
     "failed": 0,
-    "skipped": 2
+    "skipped": 1
   },
   "results": [
     {
@@ -13,7 +13,7 @@
       "title": "Requirement artifacts validate against schema",
       "status": "PASS",
       "messages": [
-        "4 artifact(s) validated."
+        "6 artifact(s) validated."
       ]
     },
     {
@@ -21,7 +21,7 @@
       "title": "Approval artifacts validate against schema",
       "status": "PASS",
       "messages": [
-        "6 approval artifact(s) validated."
+        "10 approval artifact(s) validated."
       ]
     },
     {
@@ -29,7 +29,7 @@
       "title": "Test plans validate against schema",
       "status": "PASS",
       "messages": [
-        "4 test plan(s) validated."
+        "6 test plan(s) validated."
       ]
     },
     {
@@ -37,7 +37,7 @@
       "title": "Workflow states validate against schema",
       "status": "PASS",
       "messages": [
-        "2 workflow instance(s) validated."
+        "3 workflow instance(s) validated."
       ]
     },
     {
@@ -45,7 +45,7 @@
       "title": "Workflow history events validate against schema",
       "status": "PASS",
       "messages": [
-        "78 history event(s) across 2 file(s) validated."
+        "119 history event(s) across 3 file(s) validated."
       ]
     },
     {
@@ -53,7 +53,7 @@
       "title": "RTM and coverage artifacts validate against schema",
       "status": "PASS",
       "messages": [
-        "2 RTM partition(s), 2 coverage matrix/matrices, 1 index file(s)."
+        "3 RTM partition(s), 3 coverage matrix/matrices, 1 index file(s)."
       ]
     },
     {
@@ -85,7 +85,7 @@
       "title": "No approved artifact still carries a template placeholder",
       "status": "PASS",
       "messages": [
-        "12 approved artifact(s) scanned."
+        "19 approved artifact(s) scanned."
       ]
     },
     {
@@ -117,7 +117,7 @@
       "title": "Every Gherkin scenario carries traceability tags",
       "status": "PASS",
       "messages": [
-        "4 approved and generated feature file(s) checked."
+        "6 approved and generated feature file(s) checked."
       ]
     },
     {
@@ -125,7 +125,7 @@
       "title": "Open OpenSpec changes pass `openspec validate --strict`",
       "status": "PASS",
       "messages": [
-        "2 open change(s) validated: add-home-navigation, add-organization-login."
+        "3 open change(s) validated: add-home-navigation, add-organization-login, track-paper-out-media-type."
       ]
     },
     {
@@ -165,15 +165,16 @@
       "title": "Automation code follows the approved locator and wait policy",
       "status": "PASS",
       "messages": [
-        "13 automation source file(s) and 2 approved feature file(s) checked against 5 locator/wait rules."
+        "21 automation source file(s) and 3 approved feature file(s) checked against 5 locator/wait rules.",
+        "1 API client file(s) checked against 6 API hygiene rules."
       ]
     },
     {
       "id": "SEM-API-CONTRACT",
       "title": "API scenarios rest on an authoritative, tagged contract",
-      "status": "SKIPPED",
+      "status": "PASS",
       "messages": [
-        "No API or hybrid scenarios are declared in any test plan."
+        "10 API/hybrid scenario(s) checked."
       ]
     }
   ]

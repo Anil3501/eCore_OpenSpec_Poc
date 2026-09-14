@@ -1,0 +1,1833 @@
+{
+  "_dataClassification": "REAL_JIRA_DATA",
+  "retrievalMethod": "JIRA_REST_API_V3",
+  "retrievalNote": "Retrieved by src/utils/jira-fetch.ts, the documented REST fallback, because the Atlassian MCP server exposed no issue-fetch tool in this session. The issue payload below is verbatim.",
+  "requestedIssueKey": "EC-2857",
+  "requestUrl": "https://eoriginal.atlassian.net/rest/api/3/issue/EC-2857?expand=renderedFields%2Cnames",
+  "retrievedAt": "2026-09-09T18:35:33.548Z",
+  "issue": {
+    "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations,customfield_11318.properties,customfield_10900.requestTypePractice,customfield_11319.properties",
+    "id": "24690",
+    "self": "https://eoriginal.atlassian.net/rest/api/3/issue/24690",
+    "key": "EC-2857",
+    "renderedFields": {
+      "statuscategorychangedate": "05/May/22 2:00 PM",
+      "customfield_11440": null,
+      "fixVersions": null,
+      "statusCategory": null,
+      "customfield_11200": "",
+      "customfield_11443": null,
+      "resolution": null,
+      "customfield_11445": null,
+      "customfield_11323": "The current process is a major annoyance for customers.",
+      "customfield_11444": null,
+      "customfield_10500": null,
+      "customfield_11435": "",
+      "customfield_11437": "",
+      "customfield_11318": null,
+      "customfield_10900": null,
+      "customfield_11319": null,
+      "customfield_11839": null,
+      "lastViewed": null,
+      "customfield_11391": "",
+      "customfield_11390": "",
+      "customfield_11397": "",
+      "customfield_11430": null,
+      "customfield_10100": null,
+      "priority": null,
+      "customfield_11674": null,
+      "customfield_11434": "",
+      "labels": null,
+      "customfield_11545": null,
+      "customfield_11426": null,
+      "aggregatetimeoriginalestimate": null,
+      "timeestimate": null,
+      "customfield_11429": null,
+      "versions": null,
+      "customfield_11708": null,
+      "issuelinks": null,
+      "assignee": null,
+      "status": null,
+      "components": null,
+      "customfield_11380": null,
+      "customfield_11382": null,
+      "customfield_11381": null,
+      "customfield_11384": null,
+      "customfield_11383": null,
+      "customfield_11386": null,
+      "customfield_11385": null,
+      "customfield_11388": "",
+      "customfield_11542": null,
+      "customfield_11423": null,
+      "customfield_11544": null,
+      "customfield_11389": "",
+      "customfield_11543": null,
+      "customfield_11535": null,
+      "customfield_10600": null,
+      "customfield_11534": null,
+      "customfield_11415": null,
+      "customfield_11418": null,
+      "aggregatetimeestimate": null,
+      "customfield_11417": null,
+      "customfield_11419": "",
+      "creator": null,
+      "subtasks": null,
+      "customfield_11371": null,
+      "customfield_11370": null,
+      "reporter": null,
+      "customfield_11374": null,
+      "aggregateprogress": null,
+      "customfield_11410": "",
+      "customfield_11530": null,
+      "customfield_11533": null,
+      "customfield_11378": "",
+      "customfield_11532": null,
+      "customfield_11411": "",
+      "customfield_11524": null,
+      "customfield_11369": null,
+      "customfield_11523": null,
+      "customfield_11402": "",
+      "customfield_11526": null,
+      "customfield_11525": null,
+      "customfield_11407": "",
+      "customfield_11527": null,
+      "customfield_11409": "",
+      "customfield_11529": null,
+      "customfield_11408": "",
+      "progress": null,
+      "customfield_11806": null,
+      "votes": null,
+      "worklog": {
+        "startAt": 0,
+        "maxResults": 20,
+        "total": 0,
+        "worklogs": []
+      },
+      "issuetype": null,
+      "customfield_11360": "",
+      "timespent": null,
+      "customfield_11362": "",
+      "customfield_11483": null,
+      "project": null,
+      "customfield_11361": null,
+      "customfield_11000": null,
+      "customfield_11364": null,
+      "customfield_11484": "",
+      "customfield_11363": null,
+      "aggregatetimespent": null,
+      "customfield_11641": null,
+      "customfield_11486": "",
+      "customfield_11365": null,
+      "customfield_11368": null,
+      "customfield_11401": "",
+      "customfield_11367": "",
+      "customfield_10700": "<p>An enhancement request to make it easier for customers to perform a PaperOut on x (20, 50, etc) documents at a time.</p>",
+      "resolutiondate": "03/Feb/21 7:40 AM",
+      "workratio": null,
+      "watches": null,
+      "created": "16/Apr/19 12:13 PM",
+      "customfield_11872": null,
+      "customfield_10300": null,
+      "customfield_11873": null,
+      "customfield_11504": "",
+      "customfield_11503": "",
+      "updated": "03/Feb/21 7:40 AM",
+      "customfield_11580": null,
+      "timeoriginalestimate": null,
+      "customfield_11461": null,
+      "customfield_11340": null,
+      "customfield_11582": null,
+      "customfield_11460": null,
+      "customfield_11581": null,
+      "description": "<p>Customers are regularly annoyed that they can not perform a PaperOut process on more than x number of documents.  We need to find a way to give them a better process for performing batch PaperOuts in Command Center.</p>\n\n<p>An argument can be made that PaperOut diminishes our value, but I think it just gives customers a bad experience with eOriginal when trying to perform actions that are part of their normal business process.</p>\n\n<p>NOTES: </p>\n\n<ul>\n\t<li>Current limitation is due to technical limitation</li>\n\t<li>Check with Dev on directory limits to implement this particular feature</li>\n\t<li>Check with Dev as to how we're currently storing paper out packages and determine if we should change that process</li>\n</ul>\n\n\n<p>Things to think about:</p>\n\n<ul>\n\t<li>The Export API returns a zip file in base64 encoded format, we will still need to limit the size of this package to ensure we don’t have timeouts.</li>\n\t<li>What is the max file size that we expect a customer to be able to download (50MB, 100MB)?</li>\n</ul>\n\n\n\n",
+      "customfield_11584": "",
+      "customfield_11463": null,
+      "customfield_11462": null,
+      "customfield_11583": "",
+      "customfield_11100": null,
+      "customfield_11465": "",
+      "customfield_11740": null,
+      "customfield_11464": null,
+      "customfield_11466": null,
+      "timetracking": {},
+      "customfield_11741": "",
+      "customfield_11458": null,
+      "customfield_11579": "",
+      "customfield_11578": null,
+      "security": null,
+      "customfield_10800": null,
+      "customfield_11459": null,
+      "customfield_10009": null,
+      "attachment": [],
+      "summary": null,
+      "customfield_11450": null,
+      "customfield_11331": "",
+      "customfield_11452": null,
+      "customfield_11451": null,
+      "customfield_11330": "",
+      "customfield_11333": "",
+      "customfield_11575": null,
+      "customfield_11454": null,
+      "customfield_10002": null,
+      "customfield_11453": null,
+      "customfield_11332": "",
+      "customfield_11574": null,
+      "customfield_11577": null,
+      "customfield_11335": "",
+      "customfield_10003": null,
+      "customfield_11455": null,
+      "customfield_10004": null,
+      "customfield_11576": null,
+      "customfield_10400": null,
+      "customfield_11446": null,
+      "customfield_11449": null,
+      "customfield_11448": null,
+      "customfield_11327": null,
+      "customfield_11329": "",
+      "duedate": null,
+      "comment": {
+        "comments": [
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/24690/comment/40412",
+            "id": "40412",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3A816785d1-c1aa-44dd-a676-9cae1219a6dc",
+              "accountId": "557058:816785d1-c1aa-44dd-a676-9cae1219a6dc",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KM-2.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KM-2.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KM-2.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KM-2.png"
+              },
+              "displayName": "Karl Matthews",
+              "active": false,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": "<p>From a recent customer interview ...<br/>\nThe Paper Out process is a current pain point for Westlake, and volume is only going to increase. Paper Out is required when the loan is paid off. Today, papering out is a manual process performed in Command Center. Westlake needs this process to be automated, and ideally to integrate directly with their third-party mailing service for lower cost of handling. Westlake has an extensive IT team, and would likely build the integration themselves if they had eOriginal’s support.</p>",
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3A816785d1-c1aa-44dd-a676-9cae1219a6dc",
+              "accountId": "557058:816785d1-c1aa-44dd-a676-9cae1219a6dc",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KM-2.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KM-2.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KM-2.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KM-2.png"
+              },
+              "displayName": "Karl Matthews",
+              "active": false,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "16/Apr/19 2:13 PM",
+            "updated": "16/Apr/19 2:13 PM",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/24690/comment/44658",
+            "id": "44658",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5d07efd4d3177c0bcccd38e4",
+              "accountId": "5d07efd4d3177c0bcccd38e4",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png"
+              },
+              "displayName": "Kristen Jones",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": "<p>Kristen meeting with <a href=\"https://eoriginal.atlassian.net/secure/ViewProfile.jspa?accountId=557058%3Ab745464c-a644-40b0-a88d-f437b1ef559e\" class=\"user-hover\" rel=\"557058:b745464c-a644-40b0-a88d-f437b1ef559e\" data-account-id=\"557058:b745464c-a644-40b0-a88d-f437b1ef559e\" accountid=\"557058:b745464c-a644-40b0-a88d-f437b1ef559e\" rel=\"noreferrer\">Wyatt Deiaco</a> to discuss. </p>",
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5d07efd4d3177c0bcccd38e4",
+              "accountId": "5d07efd4d3177c0bcccd38e4",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png"
+              },
+              "displayName": "Kristen Jones",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "24/Jul/19 9:56 AM",
+            "updated": "24/Jul/19 9:56 AM",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/24690/comment/44706",
+            "id": "44706",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3Ab745464c-a644-40b0-a88d-f437b1ef559e",
+              "accountId": "557058:b745464c-a644-40b0-a88d-f437b1ef559e",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png",
+                "24x24": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png",
+                "16x16": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png",
+                "32x32": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png"
+              },
+              "displayName": "Wyatt Deiaco",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": "<p><a href=\"https://eoriginal.atlassian.net/secure/ViewProfile.jspa?accountId=5abe540932e2e12e48c8397e\" class=\"user-hover\" rel=\"5abe540932e2e12e48c8397e\" data-account-id=\"5abe540932e2e12e48c8397e\" accountid=\"5abe540932e2e12e48c8397e\" rel=\"noreferrer\">HuiYing Li</a> </p>\n\n<p>Can you confirm where the paper out package is created during the process?  Does it go into the database, or does it get stored on the servers file system?</p>",
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3Ab745464c-a644-40b0-a88d-f437b1ef559e",
+              "accountId": "557058:b745464c-a644-40b0-a88d-f437b1ef559e",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png",
+                "24x24": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png",
+                "16x16": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png",
+                "32x32": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png"
+              },
+              "displayName": "Wyatt Deiaco",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "25/Jul/19 11:19 AM",
+            "updated": "25/Jul/19 11:19 AM",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/24690/comment/44707",
+            "id": "44707",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3A816785d1-c1aa-44dd-a676-9cae1219a6dc",
+              "accountId": "557058:816785d1-c1aa-44dd-a676-9cae1219a6dc",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KM-2.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KM-2.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KM-2.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KM-2.png"
+              },
+              "displayName": "Karl Matthews",
+              "active": false,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": "<p><a href=\"https://eoriginal.atlassian.net/secure/ViewProfile.jspa?accountId=5d07efd4d3177c0bcccd38e4\" class=\"user-hover\" rel=\"5d07efd4d3177c0bcccd38e4\" data-account-id=\"5d07efd4d3177c0bcccd38e4\" accountid=\"5d07efd4d3177c0bcccd38e4\" rel=\"noreferrer\">Kristen Jones</a> , please make sure my initial comment on Westlake is considered. Maybe even you should talk to Westlake directly to understand their use case and pain points.</p>",
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3A816785d1-c1aa-44dd-a676-9cae1219a6dc",
+              "accountId": "557058:816785d1-c1aa-44dd-a676-9cae1219a6dc",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KM-2.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KM-2.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KM-2.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KM-2.png"
+              },
+              "displayName": "Karl Matthews",
+              "active": false,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "25/Jul/19 11:33 AM",
+            "updated": "25/Jul/19 11:33 AM",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/24690/comment/45248",
+            "id": "45248",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3Ab745464c-a644-40b0-a88d-f437b1ef559e",
+              "accountId": "557058:b745464c-a644-40b0-a88d-f437b1ef559e",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png",
+                "24x24": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png",
+                "16x16": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png",
+                "32x32": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png"
+              },
+              "displayName": "Wyatt Deiaco",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": "<p>Internal question:</p>\n\n<p>How does it fail, do we do a check during the request process against our max file size setting?</p>\n\n<p>For Westlake:</p>\n\n<p>How many transactions need to be included?</p>\n\n<p>What documents need to be included (ie entire deal jacket, just the Retail Installment Contract)?</p>\n\n<p>Do they know that they can just include the Retail Installment Contract?</p>",
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3Ab745464c-a644-40b0-a88d-f437b1ef559e",
+              "accountId": "557058:b745464c-a644-40b0-a88d-f437b1ef559e",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png",
+                "24x24": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png",
+                "16x16": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png",
+                "32x32": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png"
+              },
+              "displayName": "Wyatt Deiaco",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "08/Aug/19 11:14 AM",
+            "updated": "08/Aug/19 11:14 AM",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/24690/comment/45552",
+            "id": "45552",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5d07efd4d3177c0bcccd38e4",
+              "accountId": "5d07efd4d3177c0bcccd38e4",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png"
+              },
+              "displayName": "Kristen Jones",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": "<p><a href=\"https://eoriginal.atlassian.net/secure/ViewProfile.jspa?accountId=5c35140f553b6b6604ec758f\" class=\"user-hover\" rel=\"5c35140f553b6b6604ec758f\" data-account-id=\"5c35140f553b6b6604ec758f\" accountid=\"5c35140f553b6b6604ec758f\" rel=\"noreferrer\">Neal Pettingill</a> is coordinating a call with Westlake to revisit their use case. Will add requirements after we are able to discuss. </p>",
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5d07efd4d3177c0bcccd38e4",
+              "accountId": "5d07efd4d3177c0bcccd38e4",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png"
+              },
+              "displayName": "Kristen Jones",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "15/Aug/19 9:02 AM",
+            "updated": "15/Aug/19 9:02 AM",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/24690/comment/46536",
+            "id": "46536",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5d07efd4d3177c0bcccd38e4",
+              "accountId": "5d07efd4d3177c0bcccd38e4",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png"
+              },
+              "displayName": "Kristen Jones",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": "<p>We still need requirements and to scope this story out. With timing this isn’t going to make 10.3. <a href=\"https://eoriginal.atlassian.net/secure/ViewProfile.jspa?accountId=5c35140f553b6b6604ec758f\" class=\"user-hover\" rel=\"5c35140f553b6b6604ec758f\" data-account-id=\"5c35140f553b6b6604ec758f\" accountid=\"5c35140f553b6b6604ec758f\" rel=\"noreferrer\">Neal Pettingill</a> if we can regroup and get a call set up with Westlake we can start getting movement on this story. </p>",
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5d07efd4d3177c0bcccd38e4",
+              "accountId": "5d07efd4d3177c0bcccd38e4",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png"
+              },
+              "displayName": "Kristen Jones",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "05/Sep/19 3:05 PM",
+            "updated": "05/Sep/19 3:05 PM",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/24690/comment/46539",
+            "id": "46539",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5c35140f553b6b6604ec758f",
+              "accountId": "5c35140f553b6b6604ec758f",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/251c742ac141a073c4bc35de8e3cb54b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNP-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/251c742ac141a073c4bc35de8e3cb54b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNP-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/251c742ac141a073c4bc35de8e3cb54b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNP-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/251c742ac141a073c4bc35de8e3cb54b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNP-6.png"
+              },
+              "displayName": "Neal Pettingill",
+              "active": false,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": "<p><a href=\"https://eoriginal.atlassian.net/secure/ViewProfile.jspa?accountId=5d07efd4d3177c0bcccd38e4\" class=\"user-hover\" rel=\"5d07efd4d3177c0bcccd38e4\" data-account-id=\"5d07efd4d3177c0bcccd38e4\" accountid=\"5d07efd4d3177c0bcccd38e4\" rel=\"noreferrer\">Kristen Jones</a> Re-engaging Westlake, and I’ll push to get a meeting on the books.</p>",
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5c35140f553b6b6604ec758f",
+              "accountId": "5c35140f553b6b6604ec758f",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/251c742ac141a073c4bc35de8e3cb54b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNP-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/251c742ac141a073c4bc35de8e3cb54b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNP-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/251c742ac141a073c4bc35de8e3cb54b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNP-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/251c742ac141a073c4bc35de8e3cb54b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNP-6.png"
+              },
+              "displayName": "Neal Pettingill",
+              "active": false,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "05/Sep/19 3:12 PM",
+            "updated": "05/Sep/19 3:12 PM",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/24690/comment/46568",
+            "id": "46568",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5c35140f553b6b6604ec758f",
+              "accountId": "5c35140f553b6b6604ec758f",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/251c742ac141a073c4bc35de8e3cb54b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNP-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/251c742ac141a073c4bc35de8e3cb54b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNP-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/251c742ac141a073c4bc35de8e3cb54b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNP-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/251c742ac141a073c4bc35de8e3cb54b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNP-6.png"
+              },
+              "displayName": "Neal Pettingill",
+              "active": false,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": "<p>1st requirements gathering session scheduled for Monday, Sept 9.</p>",
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5c35140f553b6b6604ec758f",
+              "accountId": "5c35140f553b6b6604ec758f",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/251c742ac141a073c4bc35de8e3cb54b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNP-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/251c742ac141a073c4bc35de8e3cb54b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNP-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/251c742ac141a073c4bc35de8e3cb54b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNP-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/251c742ac141a073c4bc35de8e3cb54b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNP-6.png"
+              },
+              "displayName": "Neal Pettingill",
+              "active": false,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "06/Sep/19 10:21 AM",
+            "updated": "06/Sep/19 10:21 AM",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/24690/comment/82478",
+            "id": "82478",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5e4adcffe7724a0e7262ffc5",
+              "accountId": "5e4adcffe7724a0e7262ffc5",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/MM-3.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/MM-3.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/MM-3.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/MM-3.png"
+              },
+              "displayName": "Matt Myers",
+              "active": false,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": "<p>closing. will re-open with a larger initiative </p>",
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5e4adcffe7724a0e7262ffc5",
+              "accountId": "5e4adcffe7724a0e7262ffc5",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/MM-3.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/MM-3.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/MM-3.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/MM-3.png"
+              },
+              "displayName": "Matt Myers",
+              "active": false,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "03/Feb/21 7:40 AM",
+            "updated": "03/Feb/21 7:40 AM",
+            "jsdPublic": true
+          }
+        ],
+        "self": "https://eoriginal.atlassian.net/rest/api/3/issue/24690/comment",
+        "maxResults": 10,
+        "total": 10,
+        "startAt": 0
+      }
+    },
+    "names": {
+      "statuscategorychangedate": "Status Category Changed",
+      "customfield_11440": "Response Due Date",
+      "fixVersions": "Fix versions",
+      "statusCategory": "Status Category",
+      "customfield_11200": "QA Feedback and Resolution",
+      "customfield_11443": "Satisfaction date",
+      "resolution": "Resolution",
+      "customfield_11445": "Affected services",
+      "customfield_11323": "Business Value",
+      "customfield_11444": "Request language",
+      "customfield_10500": "Customer",
+      "customfield_11435": "Notes to Team",
+      "customfield_11437": "Steps to Reproduce",
+      "customfield_11318": "Tempo Team",
+      "customfield_10900": "Request Type",
+      "customfield_11319": "Account",
+      "customfield_11839": "Agent Sessions",
+      "lastViewed": "Last Viewed",
+      "customfield_11391": "Root Cause",
+      "customfield_11390": "UI Changes",
+      "customfield_11397": "Test Scenario Details",
+      "customfield_11430": "Changes Required",
+      "customfield_10100": "Flagged",
+      "priority": "Priority",
+      "customfield_11674": "Reported by Customer?",
+      "customfield_11434": "Documentation Pages",
+      "labels": "Labels",
+      "customfield_11545": "Environment",
+      "customfield_11426": "Test Type",
+      "aggregatetimeoriginalestimate": "Σ Original Estimate",
+      "timeestimate": "Remaining Estimate",
+      "customfield_11429": "ETC Ticket Created?",
+      "versions": "Affects versions",
+      "customfield_11708": "Tech Debt Type",
+      "issuelinks": "Linked Issues",
+      "assignee": "Assignee",
+      "status": "Status",
+      "components": "Components",
+      "customfield_11380": "System Availability",
+      "customfield_11382": "Compliance",
+      "customfield_11381": "Infrastructure or System Changes",
+      "customfield_11384": "Actual Dev Hours",
+      "customfield_11383": "User Experience",
+      "customfield_11386": "Tested Browsers",
+      "customfield_11385": "Actual QA Hours",
+      "customfield_11388": "API Changes",
+      "customfield_11542": "Reopened Date",
+      "customfield_11423": "UAT",
+      "customfield_11544": "Goals",
+      "customfield_11389": "Notes to QA",
+      "customfield_11543": "Sentiment",
+      "customfield_11535": "Project overview status",
+      "customfield_10600": "Organizations",
+      "customfield_11534": "Project overview key",
+      "customfield_11415": "Original Due Date",
+      "customfield_11418": "Target end",
+      "aggregatetimeestimate": "Σ Remaining Estimate",
+      "customfield_11417": "Target start",
+      "customfield_11419": "QA Test Cases",
+      "creator": "Creator",
+      "subtasks": "Sub-tasks",
+      "customfield_11371": "Actual Hours Total",
+      "customfield_11370": "Estimated Hours Total",
+      "reporter": "Reporter",
+      "customfield_11374": "Satisfaction",
+      "aggregateprogress": "Σ Progress",
+      "customfield_11410": "Case Error Message",
+      "customfield_11530": "Technology Investment Category",
+      "customfield_11533": "Times in CR",
+      "customfield_11378": "Configuration Changes",
+      "customfield_11532": "Date Refined",
+      "customfield_11411": "Internal Instructions",
+      "customfield_11524": "Product Owner",
+      "customfield_11369": "Est QA Hours",
+      "customfield_11523": "Feature Env URL",
+      "customfield_11402": "Code Review",
+      "customfield_11526": "Times in QA",
+      "customfield_11525": "Design",
+      "customfield_11407": "Customer Urgency Statement",
+      "customfield_11527": "DevOps Ticket Created?",
+      "customfield_11409": "Escalation Data",
+      "customfield_11529": "Vulnerability",
+      "customfield_11408": "Customer Impact Statement",
+      "progress": "Progress",
+      "customfield_11806": "Work item created forms",
+      "votes": "Votes",
+      "worklog": "Log Work",
+      "issuetype": "Issue Type",
+      "customfield_11360": "Modified API",
+      "timespent": "Time Spent",
+      "customfield_11362": "Engineering Summary",
+      "customfield_11483": "Veracode Link",
+      "project": "Project",
+      "customfield_11361": "Start date",
+      "customfield_11000": "QA",
+      "customfield_11364": "Request participants",
+      "customfield_11484": "Mitigation Status and Comments",
+      "customfield_11363": "Create QA Automation Task",
+      "aggregatetimespent": "Σ Time Spent",
+      "customfield_11641": "Focus Areas",
+      "customfield_11486": "Environment",
+      "customfield_11365": "Story point estimate",
+      "customfield_11368": "Est Dev Hours",
+      "customfield_11401": "Test History",
+      "customfield_11367": "Issue colour",
+      "customfield_10700": "Acceptance Criteria",
+      "resolutiondate": "Resolved",
+      "workratio": "Work Ratio",
+      "watches": "Watchers",
+      "created": "Created",
+      "customfield_11872": "Incident manager",
+      "customfield_10300": "Development",
+      "customfield_11873": "Safe-AI Impact",
+      "customfield_11504": "Automation Goal",
+      "customfield_11503": "Workaround",
+      "updated": "Updated",
+      "customfield_11580": "Insights",
+      "timeoriginalestimate": "Original estimate",
+      "customfield_11461": "Automation Failed Envs",
+      "customfield_11340": "Priority Level",
+      "customfield_11582": "Linked items",
+      "customfield_11460": "Automation Type",
+      "customfield_11581": "Comments",
+      "description": "Description",
+      "customfield_11584": "Delivery status",
+      "customfield_11463": "External Tool",
+      "customfield_11462": "Severity",
+      "customfield_11583": "Delivery progress",
+      "customfield_11100": "Developer",
+      "customfield_11465": "Elapsed Days",
+      "customfield_11740": "Development Phase",
+      "customfield_11464": "External Tool Report Date",
+      "customfield_11466": "Impacted Area",
+      "timetracking": "Time tracking",
+      "customfield_11741": "Asset",
+      "customfield_11458": "Category",
+      "customfield_11579": "Atlassian project status",
+      "customfield_11578": "Atlassian project",
+      "security": "Security Level",
+      "customfield_10800": "Impact",
+      "customfield_11459": "Automation Scripts Failed Count",
+      "customfield_10009": "Approvals",
+      "attachment": "Attachment",
+      "summary": "Summary",
+      "customfield_11450": "Associations",
+      "customfield_11331": "Message",
+      "customfield_11452": "Open forms",
+      "customfield_11451": "API Test Required?",
+      "customfield_11330": "Repository",
+      "customfield_11333": "Last Commit Date",
+      "customfield_11575": "Idea archived",
+      "customfield_11454": "Locked forms",
+      "customfield_10002": "Rank",
+      "customfield_11453": "Submitted forms",
+      "customfield_11332": "Files Changed",
+      "customfield_11574": "Documentation Complete?",
+      "customfield_11577": "Idea archived on",
+      "customfield_11335": "SVN",
+      "customfield_10003": "Sprint",
+      "customfield_11455": "Total forms",
+      "customfield_10004": "Epic Link",
+      "customfield_11576": "Idea archived by",
+      "customfield_10400": "Team",
+      "customfield_11446": "Release Notes Required?",
+      "customfield_11449": "Association Count",
+      "customfield_11448": "In Docs",
+      "customfield_11327": "SF Case Number",
+      "customfield_11329": "Revision",
+      "duedate": "Due date",
+      "comment": "Comment"
+    },
+    "fields": {
+      "statuscategorychangedate": "2022-05-05T14:00:51.473-0400",
+      "customfield_11440": null,
+      "fixVersions": [],
+      "statusCategory": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/statuscategory/3",
+        "id": 3,
+        "key": "done",
+        "colorName": "green",
+        "name": "Done"
+      },
+      "customfield_11200": null,
+      "customfield_11443": null,
+      "resolution": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/resolution/10000",
+        "id": "10000",
+        "description": "Work has been completed on this issue.",
+        "name": "Done"
+      },
+      "customfield_11445": null,
+      "customfield_11323": {
+        "type": "doc",
+        "version": 1,
+        "content": [
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "The current process is a major annoyance for customers."
+              }
+            ]
+          }
+        ]
+      },
+      "customfield_11444": null,
+      "customfield_10500": null,
+      "customfield_11435": null,
+      "customfield_11437": null,
+      "customfield_11318": null,
+      "customfield_10900": null,
+      "customfield_11319": null,
+      "customfield_11839": null,
+      "lastViewed": null,
+      "customfield_11391": null,
+      "customfield_11390": null,
+      "customfield_11397": null,
+      "customfield_11430": null,
+      "customfield_10100": null,
+      "priority": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/priority/3",
+        "iconUrl": "https://eoriginal.atlassian.net/images/icons/priorities/medium_new.svg",
+        "name": "Medium",
+        "id": "3"
+      },
+      "customfield_11674": null,
+      "customfield_11434": null,
+      "labels": [
+        "4"
+      ],
+      "customfield_11545": null,
+      "customfield_11426": null,
+      "aggregatetimeoriginalestimate": null,
+      "timeestimate": null,
+      "customfield_11429": null,
+      "versions": [],
+      "customfield_11708": null,
+      "issuelinks": [
+        {
+          "id": "25106",
+          "self": "https://eoriginal.atlassian.net/rest/api/3/issueLink/25106",
+          "type": {
+            "id": "10003",
+            "name": "Relates",
+            "inward": "relates to",
+            "outward": "relates to",
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issueLinkType/10003"
+          },
+          "inwardIssue": {
+            "id": "25357",
+            "key": "PCM-198",
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/25357",
+            "fields": {
+              "summary": "Increase MaximumPackageSize for Paper Out ",
+              "status": {
+                "self": "https://eoriginal.atlassian.net/rest/api/3/status/6",
+                "description": "The work item is considered finished, the resolution is correct. Work items which are closed can be reopened.",
+                "iconUrl": "https://eoriginal.atlassian.net/images/icons/statuses/closed.png",
+                "name": "Closed",
+                "id": "6",
+                "statusCategory": {
+                  "self": "https://eoriginal.atlassian.net/rest/api/3/statuscategory/3",
+                  "id": 3,
+                  "key": "done",
+                  "colorName": "green",
+                  "name": "Done"
+                }
+              },
+              "issuetype": {
+                "self": "https://eoriginal.atlassian.net/rest/api/3/issuetype/10400",
+                "id": "10400",
+                "description": "A request for a change to the production environment, whether that change be installation of new software, a firewall setting change, etc.",
+                "iconUrl": "https://eoriginal.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium",
+                "name": "Production Change Request",
+                "subtask": false,
+                "avatarId": 10303,
+                "hierarchyLevel": 0
+              }
+            }
+          }
+        }
+      ],
+      "assignee": null,
+      "status": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/status/6",
+        "description": "The work item is considered finished, the resolution is correct. Work items which are closed can be reopened.",
+        "iconUrl": "https://eoriginal.atlassian.net/images/icons/statuses/closed.png",
+        "name": "Closed",
+        "id": "6",
+        "statusCategory": {
+          "self": "https://eoriginal.atlassian.net/rest/api/3/statuscategory/3",
+          "id": 3,
+          "key": "done",
+          "colorName": "green",
+          "name": "Done"
+        }
+      },
+      "components": [
+        {
+          "self": "https://eoriginal.atlassian.net/rest/api/3/component/11306",
+          "id": "11306",
+          "name": "Core",
+          "description": "Core-specific features in the ECORE project"
+        }
+      ],
+      "customfield_11380": null,
+      "customfield_11382": null,
+      "customfield_11381": null,
+      "customfield_11384": null,
+      "customfield_11383": null,
+      "customfield_11386": null,
+      "customfield_11385": null,
+      "customfield_11388": null,
+      "customfield_11542": null,
+      "customfield_11423": null,
+      "customfield_11544": null,
+      "customfield_11389": null,
+      "customfield_11543": null,
+      "customfield_11535": null,
+      "customfield_10600": [],
+      "customfield_11534": null,
+      "customfield_11415": null,
+      "customfield_11418": null,
+      "aggregatetimeestimate": null,
+      "customfield_11417": null,
+      "customfield_11419": null,
+      "creator": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3Ab745464c-a644-40b0-a88d-f437b1ef559e",
+        "accountId": "557058:b745464c-a644-40b0-a88d-f437b1ef559e",
+        "avatarUrls": {
+          "48x48": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png",
+          "24x24": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png",
+          "16x16": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png",
+          "32x32": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png"
+        },
+        "displayName": "Wyatt Deiaco",
+        "active": true,
+        "timeZone": "America/New_York",
+        "accountType": "atlassian"
+      },
+      "subtasks": [],
+      "customfield_11371": null,
+      "customfield_11370": null,
+      "reporter": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3Ab745464c-a644-40b0-a88d-f437b1ef559e",
+        "accountId": "557058:b745464c-a644-40b0-a88d-f437b1ef559e",
+        "avatarUrls": {
+          "48x48": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png",
+          "24x24": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png",
+          "16x16": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png",
+          "32x32": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png"
+        },
+        "displayName": "Wyatt Deiaco",
+        "active": true,
+        "timeZone": "America/New_York",
+        "accountType": "atlassian"
+      },
+      "customfield_11374": null,
+      "aggregateprogress": {
+        "progress": 0,
+        "total": 0
+      },
+      "customfield_11410": null,
+      "customfield_11530": null,
+      "customfield_11533": null,
+      "customfield_11378": null,
+      "customfield_11532": null,
+      "customfield_11411": null,
+      "customfield_11524": null,
+      "customfield_11369": null,
+      "customfield_11523": null,
+      "customfield_11402": null,
+      "customfield_11526": null,
+      "customfield_11525": null,
+      "customfield_11407": null,
+      "customfield_11527": null,
+      "customfield_11409": null,
+      "customfield_11529": null,
+      "customfield_11408": null,
+      "progress": {
+        "progress": 0,
+        "total": 0
+      },
+      "customfield_11806": null,
+      "votes": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/issue/EC-2857/votes",
+        "votes": 0,
+        "hasVoted": false
+      },
+      "worklog": {
+        "startAt": 0,
+        "maxResults": 20,
+        "total": 0,
+        "worklogs": []
+      },
+      "issuetype": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/issuetype/10001",
+        "id": "10001",
+        "description": "Created by Jira Agile - do not edit or delete. Issue type for a user story.",
+        "iconUrl": "https://eoriginal.atlassian.net/images/icons/issuetypes/story.svg",
+        "name": "Story",
+        "subtask": false,
+        "hierarchyLevel": 0
+      },
+      "customfield_11360": null,
+      "timespent": null,
+      "customfield_11362": null,
+      "customfield_11483": null,
+      "project": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/project/10200",
+        "id": "10200",
+        "key": "EC",
+        "name": "ECORE",
+        "projectTypeKey": "software",
+        "simplified": false,
+        "avatarUrls": {
+          "48x48": "https://eoriginal.atlassian.net/rest/api/3/universal_avatar/view/type/project/avatar/10324",
+          "24x24": "https://eoriginal.atlassian.net/rest/api/3/universal_avatar/view/type/project/avatar/10324?size=small",
+          "16x16": "https://eoriginal.atlassian.net/rest/api/3/universal_avatar/view/type/project/avatar/10324?size=xsmall",
+          "32x32": "https://eoriginal.atlassian.net/rest/api/3/universal_avatar/view/type/project/avatar/10324?size=medium"
+        }
+      },
+      "customfield_11361": null,
+      "customfield_11000": null,
+      "customfield_11364": [],
+      "customfield_11484": null,
+      "customfield_11363": null,
+      "aggregatetimespent": null,
+      "customfield_11641": null,
+      "customfield_11486": null,
+      "customfield_11365": null,
+      "customfield_11368": null,
+      "customfield_11401": null,
+      "customfield_11367": null,
+      "customfield_10700": {
+        "type": "doc",
+        "version": 1,
+        "content": [
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "An enhancement request to make it easier for customers to perform a PaperOut on x (20, 50, etc) documents at a time."
+              }
+            ]
+          }
+        ]
+      },
+      "resolutiondate": "2021-02-03T07:40:35.764-0500",
+      "workratio": -1,
+      "watches": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/issue/EC-2857/watchers",
+        "watchCount": 4,
+        "isWatching": false
+      },
+      "created": "2019-04-16T12:13:05.402-0400",
+      "customfield_11872": null,
+      "customfield_10300": "{}",
+      "customfield_11873": null,
+      "customfield_11504": null,
+      "customfield_11503": null,
+      "updated": "2021-02-03T07:40:35.893-0500",
+      "customfield_11580": null,
+      "timeoriginalestimate": null,
+      "customfield_11461": null,
+      "customfield_11340": {
+        "self": "https://eoriginal.atlassian.net/rest/api/3/customFieldOption/10300",
+        "value": "Normal",
+        "id": "10300"
+      },
+      "customfield_11582": null,
+      "customfield_11460": null,
+      "customfield_11581": null,
+      "description": {
+        "type": "doc",
+        "version": 1,
+        "content": [
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Customers are regularly annoyed that they can not perform a PaperOut process on more than x number of documents.  We need to find a way to give them a better process for performing batch PaperOuts in Command Center."
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "An argument can be made that PaperOut diminishes our value, but I think it just gives customers a bad experience with eOriginal when trying to perform actions that are part of their normal business process."
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "NOTES: "
+              }
+            ]
+          },
+          {
+            "type": "bulletList",
+            "content": [
+              {
+                "type": "listItem",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "Current limitation is due to technical limitation"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "listItem",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "Check with Dev on directory limits to implement this particular feature"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "listItem",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "Check with Dev as to how we're currently storing paper out packages and determine if we should change that process"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Things to think about:"
+              }
+            ]
+          },
+          {
+            "type": "bulletList",
+            "content": [
+              {
+                "type": "listItem",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "The Export API returns a zip file in base64 encoded format, we will still need to limit the size of this package to ensure we don’t have timeouts."
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "listItem",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "What is the max file size that we expect a customer to be able to download (50MB, 100MB)?"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "paragraph"
+          },
+          {
+            "type": "paragraph"
+          }
+        ]
+      },
+      "customfield_11584": null,
+      "customfield_11463": null,
+      "customfield_11462": null,
+      "customfield_11583": null,
+      "customfield_11100": null,
+      "customfield_11465": null,
+      "customfield_11740": null,
+      "customfield_11464": null,
+      "customfield_11466": null,
+      "timetracking": {},
+      "customfield_11741": null,
+      "customfield_11458": null,
+      "customfield_11579": null,
+      "customfield_11578": null,
+      "security": null,
+      "customfield_10800": null,
+      "customfield_11459": null,
+      "customfield_10009": null,
+      "attachment": [],
+      "summary": "Make it easier to PaperOut more docs in Command Center",
+      "customfield_11450": null,
+      "customfield_11331": null,
+      "customfield_11452": null,
+      "customfield_11451": null,
+      "customfield_11330": null,
+      "customfield_11333": null,
+      "customfield_11575": null,
+      "customfield_11454": null,
+      "customfield_10002": "2|hzuixb:",
+      "customfield_11453": null,
+      "customfield_11332": null,
+      "customfield_11574": null,
+      "customfield_11577": null,
+      "customfield_11335": null,
+      "customfield_10003": null,
+      "customfield_11455": null,
+      "customfield_10004": null,
+      "customfield_11576": null,
+      "customfield_10400": null,
+      "customfield_11446": null,
+      "customfield_11449": null,
+      "customfield_11448": null,
+      "customfield_11327": null,
+      "customfield_11329": null,
+      "duedate": null,
+      "comment": {
+        "comments": [
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/24690/comment/40412",
+            "id": "40412",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3A816785d1-c1aa-44dd-a676-9cae1219a6dc",
+              "accountId": "557058:816785d1-c1aa-44dd-a676-9cae1219a6dc",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KM-2.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KM-2.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KM-2.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KM-2.png"
+              },
+              "displayName": "Karl Matthews",
+              "active": false,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": {
+              "type": "doc",
+              "version": 1,
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "From a recent customer interview ..."
+                    },
+                    {
+                      "type": "hardBreak"
+                    },
+                    {
+                      "type": "text",
+                      "text": "The Paper Out process is a current pain point for Westlake, and volume is only going to increase. Paper Out is required when the loan is paid off. Today, papering out is a manual process performed in Command Center. Westlake needs this process to be automated, and ideally to integrate directly with their third-party mailing service for lower cost of handling. Westlake has an extensive IT team, and would likely build the integration themselves if they had eOriginal’s support."
+                    }
+                  ]
+                }
+              ]
+            },
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3A816785d1-c1aa-44dd-a676-9cae1219a6dc",
+              "accountId": "557058:816785d1-c1aa-44dd-a676-9cae1219a6dc",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KM-2.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KM-2.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KM-2.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KM-2.png"
+              },
+              "displayName": "Karl Matthews",
+              "active": false,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "2019-04-16T14:13:08.412-0400",
+            "updated": "2019-04-16T14:13:08.412-0400",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/24690/comment/44658",
+            "id": "44658",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5d07efd4d3177c0bcccd38e4",
+              "accountId": "5d07efd4d3177c0bcccd38e4",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png"
+              },
+              "displayName": "Kristen Jones",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": {
+              "type": "doc",
+              "version": 1,
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Kristen meeting with "
+                    },
+                    {
+                      "type": "mention",
+                      "attrs": {
+                        "id": "557058:b745464c-a644-40b0-a88d-f437b1ef559e",
+                        "text": "@Wyatt Deiaco",
+                        "accessLevel": ""
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "text": " to discuss. "
+                    }
+                  ]
+                }
+              ]
+            },
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5d07efd4d3177c0bcccd38e4",
+              "accountId": "5d07efd4d3177c0bcccd38e4",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png"
+              },
+              "displayName": "Kristen Jones",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "2019-07-24T09:56:08.779-0400",
+            "updated": "2019-07-24T09:56:08.779-0400",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/24690/comment/44706",
+            "id": "44706",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3Ab745464c-a644-40b0-a88d-f437b1ef559e",
+              "accountId": "557058:b745464c-a644-40b0-a88d-f437b1ef559e",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png",
+                "24x24": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png",
+                "16x16": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png",
+                "32x32": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png"
+              },
+              "displayName": "Wyatt Deiaco",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": {
+              "type": "doc",
+              "version": 1,
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "mention",
+                      "attrs": {
+                        "id": "5abe540932e2e12e48c8397e",
+                        "text": "@HuiYing Li",
+                        "accessLevel": ""
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "text": " "
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Can you confirm where the paper out package is created during the process?  Does it go into the database, or does it get stored on the servers file system?"
+                    }
+                  ]
+                }
+              ]
+            },
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3Ab745464c-a644-40b0-a88d-f437b1ef559e",
+              "accountId": "557058:b745464c-a644-40b0-a88d-f437b1ef559e",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png",
+                "24x24": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png",
+                "16x16": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png",
+                "32x32": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png"
+              },
+              "displayName": "Wyatt Deiaco",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "2019-07-25T11:19:21.809-0400",
+            "updated": "2019-07-25T11:19:21.809-0400",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/24690/comment/44707",
+            "id": "44707",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3A816785d1-c1aa-44dd-a676-9cae1219a6dc",
+              "accountId": "557058:816785d1-c1aa-44dd-a676-9cae1219a6dc",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KM-2.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KM-2.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KM-2.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KM-2.png"
+              },
+              "displayName": "Karl Matthews",
+              "active": false,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": {
+              "type": "doc",
+              "version": 1,
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "mention",
+                      "attrs": {
+                        "id": "5d07efd4d3177c0bcccd38e4",
+                        "text": "@Kristen Jones",
+                        "accessLevel": ""
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "text": " , please make sure my initial comment on Westlake is considered. Maybe even you should talk to Westlake directly to understand their use case and pain points."
+                    }
+                  ]
+                }
+              ]
+            },
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3A816785d1-c1aa-44dd-a676-9cae1219a6dc",
+              "accountId": "557058:816785d1-c1aa-44dd-a676-9cae1219a6dc",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KM-2.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KM-2.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KM-2.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KM-2.png"
+              },
+              "displayName": "Karl Matthews",
+              "active": false,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "2019-07-25T11:33:10.855-0400",
+            "updated": "2019-07-25T11:33:10.855-0400",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/24690/comment/45248",
+            "id": "45248",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3Ab745464c-a644-40b0-a88d-f437b1ef559e",
+              "accountId": "557058:b745464c-a644-40b0-a88d-f437b1ef559e",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png",
+                "24x24": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png",
+                "16x16": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png",
+                "32x32": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png"
+              },
+              "displayName": "Wyatt Deiaco",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": {
+              "type": "doc",
+              "version": 1,
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Internal question:"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "How does it fail, do we do a check during the request process against our max file size setting?"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "For Westlake:"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "How many transactions need to be included?"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "What documents need to be included (ie entire deal jacket, just the Retail Installment Contract)?"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Do they know that they can just include the Retail Installment Contract?"
+                    }
+                  ]
+                }
+              ]
+            },
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=557058%3Ab745464c-a644-40b0-a88d-f437b1ef559e",
+              "accountId": "557058:b745464c-a644-40b0-a88d-f437b1ef559e",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png",
+                "24x24": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png",
+                "16x16": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png",
+                "32x32": "https://secure.gravatar.com/avatar/357b5666026d62c88ac889fb6d354358?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FWD-1.png"
+              },
+              "displayName": "Wyatt Deiaco",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "2019-08-08T11:14:34.501-0400",
+            "updated": "2019-08-08T11:14:34.501-0400",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/24690/comment/45552",
+            "id": "45552",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5d07efd4d3177c0bcccd38e4",
+              "accountId": "5d07efd4d3177c0bcccd38e4",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png"
+              },
+              "displayName": "Kristen Jones",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": {
+              "type": "doc",
+              "version": 1,
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "mention",
+                      "attrs": {
+                        "id": "5c35140f553b6b6604ec758f",
+                        "text": "@Neal Pettingill",
+                        "accessLevel": ""
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "text": " is coordinating a call with Westlake to revisit their use case. Will add requirements after we are able to discuss. "
+                    }
+                  ]
+                }
+              ]
+            },
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5d07efd4d3177c0bcccd38e4",
+              "accountId": "5d07efd4d3177c0bcccd38e4",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png"
+              },
+              "displayName": "Kristen Jones",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "2019-08-15T09:02:19.703-0400",
+            "updated": "2019-08-15T09:02:19.703-0400",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/24690/comment/46536",
+            "id": "46536",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5d07efd4d3177c0bcccd38e4",
+              "accountId": "5d07efd4d3177c0bcccd38e4",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png"
+              },
+              "displayName": "Kristen Jones",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": {
+              "type": "doc",
+              "version": 1,
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "We still need requirements and to scope this story out. With timing this isn’t going to make 10.3. "
+                    },
+                    {
+                      "type": "mention",
+                      "attrs": {
+                        "id": "5c35140f553b6b6604ec758f",
+                        "text": "@Neal Pettingill",
+                        "accessLevel": ""
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "text": " if we can regroup and get a call set up with Westlake we can start getting movement on this story. "
+                    }
+                  ]
+                }
+              ]
+            },
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5d07efd4d3177c0bcccd38e4",
+              "accountId": "5d07efd4d3177c0bcccd38e4",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/KJ-6.png"
+              },
+              "displayName": "Kristen Jones",
+              "active": true,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "2019-09-05T15:05:22.920-0400",
+            "updated": "2019-09-05T15:05:22.920-0400",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/24690/comment/46539",
+            "id": "46539",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5c35140f553b6b6604ec758f",
+              "accountId": "5c35140f553b6b6604ec758f",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/251c742ac141a073c4bc35de8e3cb54b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNP-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/251c742ac141a073c4bc35de8e3cb54b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNP-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/251c742ac141a073c4bc35de8e3cb54b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNP-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/251c742ac141a073c4bc35de8e3cb54b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNP-6.png"
+              },
+              "displayName": "Neal Pettingill",
+              "active": false,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": {
+              "type": "doc",
+              "version": 1,
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "mention",
+                      "attrs": {
+                        "id": "5d07efd4d3177c0bcccd38e4",
+                        "text": "@Kristen Jones",
+                        "accessLevel": ""
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "text": " Re-engaging Westlake, and I’ll push to get a meeting on the books."
+                    }
+                  ]
+                }
+              ]
+            },
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5c35140f553b6b6604ec758f",
+              "accountId": "5c35140f553b6b6604ec758f",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/251c742ac141a073c4bc35de8e3cb54b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNP-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/251c742ac141a073c4bc35de8e3cb54b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNP-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/251c742ac141a073c4bc35de8e3cb54b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNP-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/251c742ac141a073c4bc35de8e3cb54b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNP-6.png"
+              },
+              "displayName": "Neal Pettingill",
+              "active": false,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "2019-09-05T15:12:03.725-0400",
+            "updated": "2019-09-05T15:12:03.725-0400",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/24690/comment/46568",
+            "id": "46568",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5c35140f553b6b6604ec758f",
+              "accountId": "5c35140f553b6b6604ec758f",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/251c742ac141a073c4bc35de8e3cb54b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNP-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/251c742ac141a073c4bc35de8e3cb54b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNP-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/251c742ac141a073c4bc35de8e3cb54b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNP-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/251c742ac141a073c4bc35de8e3cb54b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNP-6.png"
+              },
+              "displayName": "Neal Pettingill",
+              "active": false,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": {
+              "type": "doc",
+              "version": 1,
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "1st requirements gathering session scheduled for Monday, Sept 9."
+                    }
+                  ]
+                }
+              ]
+            },
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5c35140f553b6b6604ec758f",
+              "accountId": "5c35140f553b6b6604ec758f",
+              "avatarUrls": {
+                "48x48": "https://secure.gravatar.com/avatar/251c742ac141a073c4bc35de8e3cb54b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNP-6.png",
+                "24x24": "https://secure.gravatar.com/avatar/251c742ac141a073c4bc35de8e3cb54b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNP-6.png",
+                "16x16": "https://secure.gravatar.com/avatar/251c742ac141a073c4bc35de8e3cb54b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNP-6.png",
+                "32x32": "https://secure.gravatar.com/avatar/251c742ac141a073c4bc35de8e3cb54b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNP-6.png"
+              },
+              "displayName": "Neal Pettingill",
+              "active": false,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "2019-09-06T10:21:07.153-0400",
+            "updated": "2019-09-06T10:21:07.153-0400",
+            "jsdPublic": true
+          },
+          {
+            "self": "https://eoriginal.atlassian.net/rest/api/3/issue/24690/comment/82478",
+            "id": "82478",
+            "author": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5e4adcffe7724a0e7262ffc5",
+              "accountId": "5e4adcffe7724a0e7262ffc5",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/MM-3.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/MM-3.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/MM-3.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/MM-3.png"
+              },
+              "displayName": "Matt Myers",
+              "active": false,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "body": {
+              "type": "doc",
+              "version": 1,
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "closing. will re-open with a larger initiative "
+                    }
+                  ]
+                }
+              ]
+            },
+            "updateAuthor": {
+              "self": "https://eoriginal.atlassian.net/rest/api/3/user?accountId=5e4adcffe7724a0e7262ffc5",
+              "accountId": "5e4adcffe7724a0e7262ffc5",
+              "avatarUrls": {
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/MM-3.png",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/MM-3.png",
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/MM-3.png",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/MM-3.png"
+              },
+              "displayName": "Matt Myers",
+              "active": false,
+              "timeZone": "America/New_York",
+              "accountType": "atlassian"
+            },
+            "created": "2021-02-03T07:40:35.855-0500",
+            "updated": "2021-02-03T07:40:35.855-0500",
+            "jsdPublic": true
+          }
+        ],
+        "self": "https://eoriginal.atlassian.net/rest/api/3/issue/24690/comment",
+        "maxResults": 10,
+        "total": 10,
+        "startAt": 0
+      }
+    }
+  }
+}

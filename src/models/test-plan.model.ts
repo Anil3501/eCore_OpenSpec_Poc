@@ -26,6 +26,10 @@ import {
  * `contractProvenance` is what makes `contractSource` auditable: an OpenAPI URL,
  * the `APR-TP-*` approval that agreed it, or the validation report the traffic
  * was observed in. A source without a provenance is an unsourced claim.
+ *
+ * A provenance beginning `AGENT_DRAFTED` marks a contract an agent composed on
+ * explicit human instruction. It stays `UNVERIFIED`, and it must name which
+ * fields a human dictated and which the agent proposed - see `SEM-API-CONTRACT`.
  */
 export const apiContractSchema = z
   .object({
@@ -36,6 +40,16 @@ export const apiContractSchema = z
     contractProvenance: z.string().min(1),
     /** Path to the Zod response contract, once one exists. */
     responseContractRef: z.string().min(1).nullable().optional(),
+    /**
+     * sha256 of the response shape agreed at Gate 2, from
+     * `computeResponseShapeHash`. Keys and types only, never values, so drift
+     * means the contract moved rather than the data changing between runs.
+     */
+    responseShapeHash: z
+      .string()
+      .regex(/^[a-f0-9]{64}$/, 'responseShapeHash must be a sha256 hex digest')
+      .nullable()
+      .optional(),
     /**
      * True when the call only reaches a state the scenario then asserts
      * elsewhere. Scaffolding proves nothing and never counts as AC coverage.

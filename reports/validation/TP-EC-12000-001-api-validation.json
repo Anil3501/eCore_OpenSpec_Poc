@@ -1,0 +1,98 @@
+{
+  "schemaVersion": "1.0.0",
+  "reportType": "PLAYWRIGHT_VALIDATION_API",
+  "testPlanId": "TP-EC-12000-001",
+  "jiraStoryId": "EC-12000",
+  "capability": "paper-out-export",
+  "release": "26.3",
+  "validatedAt": "2026-09-11T12:31:00.000Z",
+  "endpoint": {
+    "name": "eoRequestExport",
+    "description": "XML-instruction based integration API used to request Paper Out / Export of a transaction, document, or group thereof, with an optional mediaType element (PrintToPaper | SaveAsElectronicFile).",
+    "urlOrMethod": "UNKNOWN -- not discoverable through this session's tools",
+    "architecturalNote": "Confirmed this session to live entirely outside the ssweb browser application that Playwright MCP drives against qa5. It has zero references anywhere in reports/validation/ecore-api-discovery.json (the browser-app endpoint inventory), and real Jira dev-team evidence (EC-12000 comments) shows it is exercised via Postman, not the browser UI. Browser-network-trace capture via Playwright MCP is therefore the wrong tool for this contract; a human must supply the integration endpoint's base URL/credentials or an existing WSDL/integration-guide reference."
+  },
+  "requestContract": {
+    "contractSource": "OPENAPI",
+    "provenance": "Real, versioned, publicly-hosted XSD referenced by xsi:schemaLocation in three real dev-tested sample XML attachments on the EC-12000 Jira issue. Fetched and saved verbatim this session (not authored/guessed).",
+    "schemaUrl": "https://schemas.eoriginal.com/releases/26.3/export.xsd",
+    "localEvidenceFiles": [
+      "reports/jira/attachments/export-26.3.xsd",
+      "reports/jira/attachments/eoRequestExport-107302.xml",
+      "reports/jira/attachments/eoRequestExport-107642.xml",
+      "reports/jira/attachments/eoRequestExport-107697.xml"
+    ],
+    "rootElement": "eoExportInstructions",
+    "fields": {
+      "batchName": "string, required",
+      "tokenName": "string, optional -- deprecated",
+      "tokenPassword": "string, optional -- deprecated",
+      "userToApprove": "string, optional",
+      "purpose": "string, optional",
+      "mediaType": "enum [PrintToPaper, SaveAsElectronicFile], optional -- confirms AC-EC-12000-005/-006's optionality and back-compat"
+      },
+    "exactlyOneOf": [
+      "transaction (repeatable; attributes id [long, required], deleteIfEmpty [boolean, default true]; contains retentionPolicy OR document)",
+      "groupTransactionIdentifier (attributes name [xref1|xref2|xref3|state], value; contains retentionPolicy)",
+      "document (repeatable; attributes id [long, required], retain [asIs|eCopy|none, required])",
+      "groupDocumentIdentifier (attributes name [xref1|xref2|xref3|state], value, retain [eCopy|none, required])"
+    ],
+    "retentionPolicyAttributes": {
+      "electronicOriginal": "enum [eCopy, none], required",
+      "eStored": "enum [asIs, none], required",
+      "eCopy": "enum [asIs, none], required",
+      "transferReceipt": "enum [asIs, none], default none"
+    },
+    "realFailureModeObserved": "Jira comment (POD issue 103974) documents org.mybatis.spring.MyBatisSystemException / Invalid column type: 1111 when mediaType is omitted on a pre-26.3 release -- corroborates AC-EC-12000-005/-006's release-gating, not fabricated."
+  },
+  "responseContract": {
+    "contractSource": "NONE",
+    "status": "UNVERIFIED",
+    "reason": "The only response evidence in Jira is a screenshot image (not transcribed text) of a Postman response; no response body, status code, or success/error shape was captured as text. Not guessed here per AGENTS.md."
+  },
+  "scenarios": [
+    {
+      "scenarioId": "TS-EC-12000-011",
+      "acIds": ["AC-EC-12000-011"],
+      "status": "BLOCKED",
+      "summary": "API mediaType=PrintToPaper at transaction level determines Media Type Paper, confirmed via UI audit trail.",
+      "blockedReason": "eoRequestExport endpoint/response unverified (see endpoint.urlOrMethod and responseContract above); also depends on the same audit-trail access needed for TS-016, itself blocked on the data-fixture gap (see TP-EC-12000-001-browser-validation.json openBlockers)."
+    },
+    {
+      "scenarioId": "TS-EC-12000-012",
+      "acIds": ["AC-EC-12000-012"],
+      "status": "BLOCKED",
+      "summary": "API mediaType=SaveAsElectronicFile at transaction level determines Media Type Electronic, confirmed via UI audit trail.",
+      "blockedReason": "Same as TS-011."
+    },
+    {
+      "scenarioId": "TS-EC-12000-013",
+      "acIds": ["AC-EC-12000-013"],
+      "status": "BLOCKED",
+      "summary": "API mediaType omitted at transaction level determines Media Type Electronic (default), confirmed via UI audit trail.",
+      "blockedReason": "Same as TS-011."
+    },
+    {
+      "scenarioId": "TS-EC-12000-014",
+      "acIds": ["AC-EC-12000-014"],
+      "status": "BLOCKED",
+      "summary": "API mediaType=PrintToPaper at document level determines Media Type Paper, confirmed via UI audit trail.",
+      "blockedReason": "Same as TS-011, document-level variant."
+    },
+    {
+      "scenarioId": "TS-EC-12000-015",
+      "acIds": ["AC-EC-12000-015"],
+      "status": "BLOCKED",
+      "summary": "API mediaType=SaveAsElectronicFile at document level determines Media Type Electronic, confirmed via UI audit trail.",
+      "blockedReason": "Same as TS-011, document-level variant."
+    }
+  ],
+  "openBlockers": [
+    {
+      "id": "BLOCKER-EC-12000-002",
+      "affects": ["TS-EC-12000-011", "TS-EC-12000-012", "TS-EC-12000-013", "TS-EC-12000-014", "TS-EC-12000-015"],
+      "description": "eoRequestExport's request shape is now schema-backed (real, versioned export.xsd plus 3 real dev-tested sample XMLs), but its endpoint URL/HTTP method and response shape remain unknown. It is confirmed to live entirely outside the ssweb browser app (Postman-only in dev usage, absent from ecore-api-discovery.json), so Playwright MCP cannot observe it.",
+      "recommendedResolution": "A human supplies the integration endpoint's base URL/credentials (or the team's existing WSDL/integration-guide reference) so a real request/response pair can be captured outside the browser -- e.g. directly from an EoRequestExportClient in src/api/ per AGENTS.md's API-client layering -- and promoted to HUMAN_APPROVED with a responseShapeHash once a human confirms it judges the acceptance criteria."
+    }
+  ]
+}
