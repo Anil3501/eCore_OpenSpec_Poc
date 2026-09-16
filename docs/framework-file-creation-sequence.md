@@ -146,7 +146,8 @@ Agent: **sdd-workflow-orchestrator** (invoking Playwright Test Generator)
 | 29 | `src/components/<component-name>.component.ts` | Shared UI components (when needed) |
 | 29a | `src/api/<capability>.api.ts` | **Only for `API`/`HYBRID` scenarios.** API clients extending `ApiClient` — own all endpoints the way page objects own locators. No absolute URLs, no `process.env` |
 | 29b | `src/models/api/<capability>.contract.ts` | **Only for `API`/`HYBRID` scenarios.** Zod response contracts. The whole response is parsed, never spot-checked |
-| 30 | `src/fixtures/test.ts` | Playwright-BDD fixture wiring (created once, extended per capability) |
+| 30 | `src/fixtures/<capability>.fixture.ts` | Modular capability fixture slice (e.g. `account-access.fixture.ts`, `home-navigation.fixture.ts`, `paper-out-export.fixture.ts`, `api.fixture.ts`, `coverage.fixture.ts`) |
+| 30a | `src/fixtures/test.ts` | Shared fixture composition and re-export (`FrameworkFixtures`, `test`, `expect`) — maintains 100% backward compatibility for all step definitions |
 | 31 | `src/services/<capability>.service.ts` | Business/service helpers used by steps (e.g. `organization-login.service.ts`) |
 | 32 | `test-data/<capability>.sample.json` | Fabricated `SAMPLE_DATA` inputs for negative/edge scenarios — never the real account |
 
@@ -183,13 +184,13 @@ Command: `npm run triage:failures`. Agent: **bug-analyzer**.
 | - | --- | --- |
 | 37 | `defects/<DEF-ID>.json` | Governed defect report, classification `LOCATOR_SUSPECT` / `APPLICATION_DEFECT` / `CONTRACT_MISMATCH` / `AMBIGUOUS` / `ENVIRONMENT_BLOCKER` |
 | 38 | `reports/defects/<DEF-ID>/**` | Preserved evidence copied out of `test-results/` (screenshots, `trace.zip`) before the next run overwrites it. An API-only failure has no screenshot — its evidence is the redacted exchange in `evidence.apiExchanges` |
-| 39 | `reports/validation/failure-triage.json` | Triage summary |
+| 39 | `reports/validation/failure-triage.json` | Triage summary with deterministic signal matching and suggested routing (`LOCATOR_HEALING` / `BUG_REPORTING` / `ENVIRONMENT_HALT`) |
 
-`ENVIRONMENT_BLOCKER` halts the workflow here — never healed, never filed.
+`ENVIRONMENT_BLOCKER` halts the workflow here — never healed, never filed. `CONTRACT_MISMATCH` and `APPLICATION_DEFECT` bypass locator healing and route directly to Stage 14b (`BUG_REPORTING`).
 
-## Stage 14a — LOCATOR_HEALING (when locator-suspect/ambiguous)
+## Stage 14a — LOCATOR_HEALING (when locator-suspect/ambiguous on UI scenarios)
 
-Agent: **governed-locator-healer**, capped at 2 attempts.
+Agent: **governed-locator-healer**, capped at 2 attempts. Bypassed for `CONTRACT_MISMATCH` and `@interface-api` failures.
 
 | # | File | Notes |
 | - | --- | --- |
@@ -199,7 +200,7 @@ Agent: **governed-locator-healer**, capped at 2 attempts.
 
 If healed → back to Stage 12 re-run → Stage 15. If not healed after 2 attempts → Stage 14b.
 
-## Stage 14b — BUG_REPORTING (application defect, or locator healing exhausted)
+## Stage 14b — BUG_REPORTING (application defect, contract mismatch, or locator healing exhausted)
 
 Agent: **bug-analyzer** (via Atlassian MCP). No fourth approval gate — compensating controls
 (fingerprint de-duplication, mandatory reviewer assignment) apply instead.

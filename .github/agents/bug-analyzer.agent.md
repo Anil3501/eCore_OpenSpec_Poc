@@ -42,8 +42,9 @@ are additional, not a replacement.
    evidence does not tell you something, write an explicit open question in the Jira description.
 3. **Never file before healing is exhausted.** A defect whose classification is `LOCATOR_SUSPECT`
    or `AMBIGUOUS` must reach `LOCATOR_UNHEALABLE` (two recorded failed healing attempts) before it
-   may be reported. Only `APPLICATION_DEFECT` may go straight to `BUG_REPORTING`.
-   An `ENVIRONMENT_BLOCKER` is **never** reported and **never** healed — it halts the workflow.
+   may be reported. Only `APPLICATION_DEFECT` and `CONTRACT_MISMATCH` may go straight to
+   `BUG_REPORTING`. An `ENVIRONMENT_BLOCKER` is **never** reported and **never** healed — it halts
+   the workflow.
 4. **Never duplicate a fingerprint.** If another defect artifact with the same `fingerprint` already
    has `status: REPORTED`, set this one to `DUPLICATE`, set `jira.dedupeOf` to the existing issue
    key, and stop. Re-filing an existing bug wastes a human's time.

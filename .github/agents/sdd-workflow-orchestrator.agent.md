@@ -137,7 +137,7 @@ before `RTM_UPDATE`. An all-green run skips the branch entirely:
 
 - healed → `RTM_UPDATE`
 - not healed after two attempts → `BUG_REPORTING` → `RTM_UPDATE`
-- `FAILURE_TRIAGE` classifying `APPLICATION_DEFECT` → `BUG_REPORTING` directly
+- `FAILURE_TRIAGE` classifying `APPLICATION_DEFECT` or `CONTRACT_MISMATCH` → `BUG_REPORTING` directly
 
 The branch adds **no fourth approval gate**. Bugs are filed automatically and assigned to the
 configured reviewer; the compensating controls are fingerprint deduplication and mandatory human

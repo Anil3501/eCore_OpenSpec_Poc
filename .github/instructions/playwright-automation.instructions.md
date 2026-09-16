@@ -32,7 +32,7 @@ applyTo: ["features/**", "steps/**", "src/pages/**", "src/components/**", "src/f
 | `src/api/` | Endpoints, headers, request/response shaping | Absolute URLs, `process.env`, business assertions, secrets |
 | `src/models/api/` | Zod response contracts | Endpoints, request logic |
 | `src/components/` | Genuinely reused cross-page widgets | Single-use wrappers created "for symmetry" |
-| `src/fixtures/` | Composition of page objects, API clients, env and services | New browser/context/page creation, hard-coded secrets |
+| `src/fixtures/` | Composition of page objects, API clients, env and services in capability slices (`<capability>.fixture.ts`, `api.fixture.ts`, `coverage.fixture.ts`) composed in `test.ts` | New browser/context/page creation, hard-coded secrets |
 | `src/services/` | Test-data resolution and reusable business flows | Secrets — those come from `env` at runtime |
 | `test-data/` | Fabricated inputs, one `<capability>.sample.json` per capability | Any real credential or production value |
 
@@ -172,6 +172,9 @@ cache exists to avoid.
 ## Configuration and secrets
 
 - Import `env` from `src/utils/env.ts`. **Never touch `process.env` directly.**
+- Multi-environment profiles (`config/environments/<profile>.json` or `.env.<profile>`) are
+  resolved via `TEST_ENV_PROFILE` or `--env=<name>`, falling back to `.env`. `TEST_ENVIRONMENTS`
+  recognizes `local`, `dev`, `qa`, `uat`, `staging`, and `prod`.
 - Require values lazily inside the method that needs them (`env.requireBaseUrl()`,
   `env.requireCredentials()`, `env.requireEcoreLogin()`) so scaffolding and validation work with an
   empty `.env`.

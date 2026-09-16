@@ -58,11 +58,12 @@ Reuse [src/utils/artifact-io.ts](../../src/utils/artifact-io.ts) (`PROJECT_ROOT`
 
 ## Adding an environment variable
 
-`src/utils/env.ts` is the **only** module permitted to read `process.env`. Adding a variable means
-touching all six of these, or something will silently drift:
+`src/utils/env.ts` is the **only** module permitted to read `process.env` (and load optional profiles
+from `config/environments/<profile>.json` or `.env.<profile>` via `TEST_ENV_PROFILE`). Adding a
+variable means touching all six of these, or something will silently drift:
 
 1. `environmentSchema` — a Zod field with an explicit default.
-2. The `safeParse({...})` mapping.
+2. The `safeParse({...})` mapping using `getEnvValue(...)`.
 3. The `FrameworkEnvironment` interface (and a `require*()` accessor if it is mandatory).
 4. The `env` object literal.
 5. `describe()` — only if the value is **not** a secret.

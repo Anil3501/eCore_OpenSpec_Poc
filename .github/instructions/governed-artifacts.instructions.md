@@ -73,7 +73,9 @@ Zod model in `src/models/` and structurally compared against a JSON Schema.
 - `failure.expectedBehaviour` is the approved acceptance criterion **verbatim**. Never paraphrase
   it and never author one.
 - Every path in `evidence` must exist. Evidence is copied into `reports/defects/<DEF-ID>/` because
-  `test-results/` is overwritten by the next run.
+  `test-results/` is overwritten by the next run. API-only failures provide redacted `evidence.apiExchanges`.
+- `classification` includes `LOCATOR_SUSPECT`, `APPLICATION_DEFECT`, `CONTRACT_MISMATCH`, `AMBIGUOUS`,
+  and `ENVIRONMENT_BLOCKER`. `CONTRACT_MISMATCH` bypasses locator healing and routes directly to `BUG_REPORTING`.
 - `healing.attempts` is capped at **two**. `LOCATOR_UNHEALABLE` requires exactly two attempts, none
   of which re-ran green.
 - `status: HEALED` requires `jira === null`. A stale locator is not an application bug.

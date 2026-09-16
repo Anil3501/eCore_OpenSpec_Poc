@@ -63,7 +63,7 @@ flowchart TD
     S9 --> S10
 
     subgraph IMPL["Implementation — Agent: sdd-workflow-orchestrator"]
-        S10["IMPLEMENTATION\nsteps/**, src/pages/**, src/components/**\nsrc/api/** + src/models/api/** (API/HYBRID only)\nsrc/fixtures/test.ts, src/services/**\ntest-data/&lt;capability&gt;.sample.json"]
+        S10["IMPLEMENTATION\nsteps/**, src/pages/**, src/components/**\nsrc/api/** + src/models/api/** (API/HYBRID only)\nsrc/fixtures/&lt;capability&gt;.fixture.ts + test.ts\nsrc/services/**, test-data/&lt;capability&gt;.sample.json"]
     end
 
     S10 --> S11["BDD_GENERATION\nnpm run bdd -> .features-gen/** (generated, never hand-edited)"]
@@ -74,11 +74,11 @@ flowchart TD
     D -->|No| S13
 
     subgraph TRIAGE["Failure Handling"]
-        S13["FAILURE_TRIAGE\nAgent: bug-analyzer\ndefects/&lt;DEF-ID&gt;.json\nreports/defects/&lt;DEF-ID&gt;/**"]
+        S13["FAILURE_TRIAGE\nAgent: bug-analyzer (npm run triage:failures)\ndefects/&lt;DEF-ID&gt;.json\nreports/defects/&lt;DEF-ID&gt;/**"]
         S13 --> E{"Classification"}
         E -->|ENVIRONMENT_BLOCKER| Halt["Halt.\nNever healed, never filed."]
         E -->|LOCATOR_SUSPECT / AMBIGUOUS| S14a["LOCATOR_HEALING\nAgent: governed-locator-healer\n(max 2 attempts; locators/waits only)"]
-        E -->|APPLICATION_DEFECT /\nhealing exhausted| S14b["BUG_REPORTING\nAgent: bug-analyzer (via Atlassian MCP)\nHuman confirms bug in chat first;\nno 4th approval gate — compensating controls apply"]
+        E -->|APPLICATION_DEFECT / CONTRACT_MISMATCH /\nhealing exhausted| S14b["BUG_REPORTING\nAgent: bug-analyzer (via Atlassian MCP)\nHuman confirms bug in chat first;\nno 4th approval gate — compensating controls apply"]
         S14a -->|Healed| S12
         S14a -->|Not healed after 2 attempts| S14b
         S14b --> S15

@@ -286,11 +286,16 @@ checks fail. See [src/utils/schema-parity.ts](src/utils/schema-parity.ts).
   environment needs a `CLEANUP -` waiver naming how the data is restored — **and so does an endpoint
   whose name is destructive whatever its verb**. eCore reaches `deleteTransaction.eo` and
   `authorizeDestruction.eo` by `POST`, so matching on the HTTP method alone would wave them through.
+- **Fixtures are capability-partitioned.** Rather than a monolithic registry, domain fixtures live
+  in modular slices (`src/fixtures/<capability>.fixture.ts`, `api.fixture.ts`, `coverage.fixture.ts`)
+  and are composed and re-exported in `src/fixtures/test.ts` for clean scaling without merge bottlenecks.
 - All config goes through [src/utils/env.ts](src/utils/env.ts). **Never read `process.env`
   directly.** That includes [playwright.config.ts](playwright.config.ts), which uses `env.isCi`
   rather than `process.env.CI`. Requirements are enforced lazily (`requireBaseUrl()`,
   `requireCredentials()`, `requireEcoreLogin()`) so scaffolding works without secrets. Errors name
-  variables, never values.
+  variables, never values. Multi-environment profiles (`config/environments/<profile>.json` or
+  `.env.<profile>`) are loaded via `TEST_ENV_PROFILE` or `--env=<name>` with fallback to `.env`,
+  and `'prod'` is recognized in `TEST_ENVIRONMENTS`.
 
 **Every Gherkin scenario needs traceability tags**: `@release-`, `@capability-`, `@req-`, `@ac-`,
 `@tp-`, `@ts-`. Missing any prefix fails `SEM-FEATURE-TAGS`. See
@@ -303,9 +308,10 @@ and its plan disagree.
 
 **An API failure is not a locator failure.** An `@interface-api` defect never enters
 `LOCATOR_HEALING` — it exercises no locator, so the healer would burn both attempts against a DOM
-the test never touched and the defect would reach Jira described as a locator bug it never was. Use
-`CONTRACT_MISMATCH` (the call completed but violated the approved contract), `APPLICATION_DEFECT`,
-or `ENVIRONMENT_BLOCKER`, and route straight to `BUG_REPORTING`. An API-only failure has no
+the test never touched and the defect would reach Jira described as a locator bug it never was.
+`npm run triage:failures` deterministically classifies `CONTRACT_MISMATCH` (the call completed but
+violated the approved Zod contract or HTTP expectation), `APPLICATION_DEFECT`, or
+`ENVIRONMENT_BLOCKER`, and routes straight to `BUG_REPORTING`. An API-only failure has no
 screenshot: its evidence is the redacted request/response pair in `evidence.apiExchanges`.
 
 **Browser code coverage does not measure API tests.** An API-only scenario never loads the

@@ -39,20 +39,21 @@ agent never has to choose between inventing one and stalling the workflow.
 
 **"Just ask for the environment URL" does not scale, and the framework does not actually work that
 way.** Confirmed in [src/utils/env.ts](../src/utils/env.ts): a story never carries a URL. Execution
-resolves `PLAYWRIGHT_BASE_URL` / `API_BASE_URL` from `.env`/CI secrets at run time, keyed only by a
-logical `TEST_ENVIRONMENT` tier (`local | dev | qa | uat | staging` — **`prod` is not in that enum
-today**). A URL embedded in a story would (a) go stale the moment a fifth `dev` box or a rotated
-`staging` host appears, and (b) itself be exactly the kind of hard-coded value
-`SEM-AUTOMATION-HYGIENE` forbids in `src/`. So the story must describe environment facts that stay
-true across however many physical hosts a tier has — never a host.
+resolves `PLAYWRIGHT_BASE_URL` / `API_BASE_URL` dynamically from multi-environment profile configs
+(`config/environments/<profile>.json` or `.env.<profile>`) or `.env`/CI secrets at run time, keyed
+by a logical `TEST_ENVIRONMENT` tier (`local | dev | qa | uat | staging | prod`). A URL embedded in
+a story would (a) go stale the moment a fifth `dev` box or a rotated `staging` host appears, and
+(b) itself be exactly the kind of hard-coded value `SEM-AUTOMATION-HYGIENE` forbids in `src/`. So the
+story must describe environment facts that stay true across however many physical hosts a tier has —
+never a host.
 
-The prod gap is real and this document does not close it by itself: `TEST_ENVIRONMENT` has no
-`prod` value, and the one built-in safety net for negative scenarios (fabricated `SAMPLE_DATA`
-instead of the real account) exists because a real account can lock out — a risk that is far more
-expensive to trigger against production. **A story that will eventually run against prod must say so
-explicitly and declare what "prod-safe" means for each of its scenarios** (§2 and §6 below); whether
-the framework's `TEST_ENVIRONMENT` enum should be extended to include `prod` is a schema decision for
-the team, not something this document or an agent may quietly assume.
+**Production safety requires explicit scenario tagging.** While `prod` is supported in
+`TEST_ENVIRONMENTS`, running tests against production carries real operational risk: destructive
+endpoints, data mutation, and lockout-triggering negative tests. The framework's built-in safety net
+for negative scenarios (fabricated `SAMPLE_DATA` instead of the real account) exists because a real
+account can lock out — a risk far more expensive to trigger against production. **A story that will
+eventually run against prod must say so explicitly and declare what "prod-safe" means for each of its
+scenarios** (§2 and §6 below). A `prod-safe: no` scenario must run only against pre-prod tiers.
 
 **"The story author will supply all the test data" is also not true in practice**, and the schema
 reflects that: `test-plans/test-plan.schema.json`'s `testDataRequirements` is today just an array of
@@ -79,13 +80,12 @@ One sentence: who does what, and why.
 
 ## 2. Preconditions / environment
 - Which logical tier(s) this must pass on — by TIER NAME (`dev` / `qa` / `uat` / `staging` / `prod`),
-  never a URL or hostname. A URL is resolved per physical run from `.env`/CI secrets and would go
-  stale the moment a second `dev` box exists; naming one here would itself violate the framework's
-  no-hard-coded-URL rule.
+  never a URL or hostname. A URL is resolved per physical run from profile configs (`config/environments/<profile>.json`)
+  or `.env`/CI secrets and would go stale the moment a second `dev` box exists; naming one here would
+  itself violate the framework's no-hard-coded-URL rule.
 - If `prod` is one of the target tiers: say so explicitly and mark every scenario below (§3/§6)
   `prod-safe: yes/no`. A `prod-safe: no` scenario runs only on pre-prod tiers — name which one stands
-  in for it. Today the framework's `TEST_ENVIRONMENT` configuration has no `prod` value; flag this
-  story as needing that decided (schema/config, not this story) rather than assuming it already works.
+  in for it.
 - Which role/account type is required (be explicit — "a user" is not enough; name the role).
 - Any state the account/data must already be in before the scenario starts — describe it here by
   reference to §6 (Test Data Contract) rather than inline, so it isn't duplicated or contradicted.
@@ -215,8 +215,8 @@ a fixture or stall waiting for one. This story would generate at least six open 
 > **1. Summary:** An organization user searches their workspace for transactions matching a
 > container name, and the matching rows appear in the results grid.
 >
-> **2. Preconditions:** Target tiers: `qa`, `staging`; not yet run against `prod` (all scenarios
-> below marked `prod-safe: no` pending a decision on extending `TEST_ENVIRONMENT`). Role:
+> **2. Preconditions:** Target tiers: `qa`, `staging`; not yet approved for `prod` (all scenarios
+> below marked `prod-safe: no` pending prod security/data clearance). Role:
 > `Organization User` with `Workspace` access, already signed in (see `ETA-351` for sign-in — reuse,
 > do not re-derive). Data preconditions are fully enumerated in §6, not here.
 >
