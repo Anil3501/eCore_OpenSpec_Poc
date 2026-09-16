@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-14T19:28:56.586Z",
+  "generatedAt": "2026-09-16T11:13:38.603Z",
   "node": "24.19.0",
   "platform": "win32",
   "summary": {
@@ -59,6 +59,7 @@
         "apiAuthMode: SESSION_COOKIE",
         "credentialsConfigured: true",
         "ecoreLoginConfigured: true",
+        "eoApiConfigured: true",
         "jiraConfigured: true",
         "jiraBugFilingConfigured: true",
         "coverageEnabled: true",

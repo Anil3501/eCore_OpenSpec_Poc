@@ -1229,6 +1229,116 @@ function checkAutomationHygiene(loaded: LoadedArtifacts): CheckResult {
     : fail('SEM-AUTOMATION-HYGIENE', title, messages);
 }
 
+const DISCOVERY_INTERACTION_PATTERN = /\.(check|click|fill|selectOption)\(/;
+const DISCOVERY_CONTENT_ASSERTION_PATTERN =
+  /(toBeVisible|toHaveText|toHaveValue|toBeChecked|toBeEnabled)\(|\.expect(?!Open\()[A-Z]\w*\(/;
+const DISCOVERY_BLOCK_BOUNDARY_PATTERN = /^\}\s*catch\b|^catch\s*[({]/;
+
+/**
+ * A multi-candidate discovery loop (try a collection/queue-item/search, catch
+ * and move on to the next) must disqualify a candidate on real page content,
+ * never on container chrome alone.
+ *
+ * Confirmed live against qa5 on 2026-09-16 (EC-12000): the application reuses
+ * one dialog title for both its genuine modal and an unrelated "transactions
+ * are currently locked" error response. A loop that only asserts
+ * `expectOpen()` before interacting with the modal cannot tell the two apart,
+ * silently caches a locked/ineligible candidate as usable, and - because
+ * every later scenario reuses that cached choice - fails scenarios that never
+ * touch the actual defect. It is also slow: an interaction call
+ * (`.check()`/`.click()`/`.fill()`/`.selectOption()`) against a locator that
+ * does not exist on the rejected state polls out Playwright's default
+ * actionability timeout before the surrounding `catch` ever runs, which by
+ * itself can push an otherwise-healthy scenario over its test timeout.
+ *
+ * This is a heuristic, line-based scan (the same style as
+ * `checkAutomationHygiene`'s HYGIENE_RULES), not a parser: it flags a
+ * `.expectOpen(` call that sits directly inside a `try {` block - the
+ * "try a candidate, catch and move on" discovery shape - and is followed,
+ * before the next `catch` and before any interaction call, by no assertion of
+ * a kind that could only be true on the genuine success state. An
+ * `expectOpen()` outside a `try` block (an ordinary "open then act" flow) is
+ * not this rule's business and is left alone. See "Multi-candidate discovery
+ * helpers" in .github/instructions/playwright-automation.instructions.md.
+ */
+function checkDiscoverySignal(): CheckResult {
+  const id = 'SEM-DISCOVERY-SIGNAL';
+  const title = 'Multi-candidate discovery loops disqualify on content, not container chrome';
+  const sourceFiles = [
+    ...listFilesRecursive(PATHS.pages, '.ts'),
+    ...listFilesRecursive(PATHS.components, '.ts'),
+    ...listFilesRecursive(PATHS.services, '.ts'),
+    ...listFilesRecursive(PATHS.fixtures, '.ts'),
+    ...listFilesRecursive(PATHS.steps, '.ts'),
+  ];
+
+  if (sourceFiles.length === 0) {
+    return skip(id, title, 'No automation source files found.');
+  }
+
+  const messages: string[] = [];
+  let expectOpenCallsChecked = 0;
+
+  for (const file of sourceFiles) {
+    const lines = readText(file).split(/\r?\n/);
+    for (let index = 0; index < lines.length; index += 1) {
+      const rawLine = lines[index] ?? '';
+      const line = rawLine.trim();
+      if (line.startsWith('//') || line.startsWith('*')) continue;
+      if (!line.includes('.expectOpen(')) continue;
+
+      // This rule targets the specific "try a candidate, catch and move on"
+      // discovery pattern, not every expectOpen() call in the codebase - most
+      // of those simply open a modal and proceed, which is correct and none
+      // of this rule's business. Only evaluate a candidate whose expectOpen()
+      // sits directly inside a `try {` block (the last non-blank,
+      // non-comment line above it, allowing for an opening try on the same
+      // preceding line).
+      let insideTryBlock = false;
+      for (let back = index - 1; back >= 0 && index - back <= 5; back -= 1) {
+        const backward = (lines[back] ?? '').trim();
+        if (backward === '') continue;
+        if (backward.startsWith('//') || backward.startsWith('*')) continue;
+        insideTryBlock = backward === 'try {' || backward.endsWith('try {');
+        break;
+      }
+      if (!insideTryBlock) continue;
+
+      expectOpenCallsChecked += 1;
+      let sawContentAssertion = false;
+      let interactionLineNumber = -1;
+
+      for (let lookahead = index + 1; lookahead < lines.length; lookahead += 1) {
+        const forward = (lines[lookahead] ?? '').trim();
+        if (DISCOVERY_BLOCK_BOUNDARY_PATTERN.test(forward)) break;
+        if (forward.includes('.expectOpen(')) break; // a new, unrelated discovery attempt
+        if (DISCOVERY_CONTENT_ASSERTION_PATTERN.test(forward)) {
+          sawContentAssertion = true;
+          break;
+        }
+        if (DISCOVERY_INTERACTION_PATTERN.test(forward)) {
+          interactionLineNumber = lookahead + 1;
+          break;
+        }
+      }
+
+      if (!sawContentAssertion && interactionLineNumber !== -1) {
+        messages.push(
+          `${file}:${index + 1}: DISCOVERY_SIGNAL_TOO_WEAK - "${line}" is followed by an interaction ` +
+            `at line ${interactionLineNumber} with no content assertion (only "toBeVisible"/"toHaveText"/` +
+            `"toHaveValue"/"toBeChecked"/"toBeEnabled" or a component-specific "expect*Shown()"-style call) ` +
+            'in between. A candidate rejected by the application under this same dialog title would be ' +
+            'misread as eligible. Assert real content before interacting.',
+        );
+      }
+    }
+  }
+
+  return messages.length === 0
+    ? pass(id, title, [`${expectOpenCallsChecked} expectOpen() discovery site(s) checked across ${sourceFiles.length} file(s).`])
+    : fail(id, title, messages);
+}
+
 /**
  * Every API scenario rests on a contract nobody guessed.
  *
@@ -1650,6 +1760,7 @@ export function runValidation(
     checkWorkflowLocks(loaded),
     checkDefectEvidence(loaded),
     checkAutomationHygiene(loaded),
+    checkDiscoverySignal(),
     checkApiContracts(loaded),
   ];
 
@@ -1661,7 +1772,7 @@ export function runValidation(
     workflow: ['WF-STRUCTURE', 'SEM-GATES', 'SEM-LOCKS', 'TPL-REVIEW-SECTIONS'],
     rtm: ['RTM-STRUCTURE', 'SEM-RTM', 'SEM-COVERAGE', 'SEM-FEATURE-TAGS', 'SEM-NO-DUPLICATES', 'SEM-OPENSPEC'],
     defects: ['DEF-STRUCTURE', 'SEM-DEFECT-EVIDENCE', 'SEM-SAMPLE-ISOLATION'],
-    automation: ['SEM-AUTOMATION-HYGIENE', 'SEM-FEATURE-TAGS', 'SEM-NO-DUPLICATES', 'SEM-API-CONTRACT'],
+    automation: ['SEM-AUTOMATION-HYGIENE', 'SEM-DISCOVERY-SIGNAL', 'SEM-FEATURE-TAGS', 'SEM-NO-DUPLICATES', 'SEM-API-CONTRACT'],
   };
 
   const wanted = new Set(scopeFilter[scope]);

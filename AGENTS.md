@@ -10,7 +10,7 @@ and scaling design. This file only covers what an agent cannot discover on its o
 
 ```powershell
 npm run preflight            # RUN THIS FIRST. Node version, deps, CLIs, browsers, env config.
-npm run validate:artifacts   # 23 structural + semantic checks. RUN THIS AFTER ANY ARTIFACT EDIT.
+npm run validate:artifacts   # 24 structural + semantic checks. RUN THIS AFTER ANY ARTIFACT EDIT.
 npm run typecheck            # tsc --noEmit
 npm run bdd                  # bddgen: features/approved/** -> .features-gen/
 npm test                     # bddgen && playwright test
@@ -168,6 +168,32 @@ that shortcut — they must always exercise the real sign-in.
 - **`.gitignore` is verified by observation**, not by assumption: `.env`, `.npmrc`, `.auth/` and
   `.playwright-mcp/` all stay out of `git status`. Re-check after adding any file that holds a
   credential, a session or captured application data.
+- **A Work Queue item's lifecycle is not uniformly reversible, and this changes what a fixture is
+  allowed to do.** Confirmed live against qa5 on 2026-09-16 (EC-12000, investigating whether
+  TS-EC-12000-016/018 could self-provision their own Authorized fixture instead of depending on a
+  human to leave one standing):
+  - `Submitted`/`Approval` → dropdown offers `View Transactions`, `Approve`, `Cancel`. `Cancel` is
+    reversible and is what every existing cleanup hook already relies on.
+  - Approving transitions asynchronously through `Processing`/`Confirmation` to
+    `Authorized`/`Verification` — the Work Queue pane does not auto-poll a state change on an
+    *existing* item, so a full page navigate/reload is needed to observe it.
+  - `Authorized`/`Verification` → dropdown offers **only** `View Transactions` and `Print`. There is
+    **no reversible action at this state.** `Print` raises the Verify Paper Out modal, and Verifying
+    is already documented elsewhere in this codebase as irreversibly destroying the vault's source
+    documents.
+  - **Rule that follows from this:** a scenario must never self-provision a fixture that has no
+    reversible teardown path. If reaching a required state (e.g. Authorized) cannot be undone
+    without either destroying real documents or leaving a permanent stray item, the fixture must be
+    provided by a human and the scenario must depend on it being present — not create it itself on
+    every run. See `src/components/work-queue.component.ts` for where this is enforced today
+    (`BLOCKER-EC-12000-003`).
+  - **A second, related trap:** the app reuses the *same* `Paper Out® Request` dialog title for its
+    real modal and for its "Cannot process paper out request. The following transactions are
+    currently locked:" error response when a collection's transaction is already locked (e.g. by an
+    Authorized item sitting on it). A check that only asserts a dialog with that title is visible
+    will silently treat a locked collection as eligible. Always assert real modal content (e.g. the
+    Media Type section, a specific field) before treating a collection/candidate as usable — see
+    `SEM-DISCOVERY-SIGNAL` in `src/utils/semantic-rules.ts`.
 
 ## Architecture
 

@@ -131,6 +131,44 @@ scenario, read `browser_network_requests` / `browser_network_request` to observe
 `VALIDATED -` waiver comment. Do this against the specific approved scenario only; never explore
 speculative behaviour the plan does not already describe.
 
+## Multi-candidate discovery helpers
+
+A step file sometimes has to find *which* of several live candidates (a collection, a saved search,
+a queue item) currently qualifies for a scenario, rather than being told which one to use. This
+pattern is legitimate — see `resolveOpenCancelCollectionName`, `resolveSecondaryOpenCancelCollectionName`
+and `resolveSubmittableCollectionName` in
+[steps/paper-out-media-type.steps.ts](../../steps/paper-out-media-type.steps.ts) — but it has two
+rules of its own.
+
+**A candidate is eligible only once real content, not container chrome, has been asserted.**
+Confirmed live against qa5 on 2026-09-16: the application reuses the exact same dialog title for its
+real modal and for an unrelated error response (a locked-transaction rejection). A `try`/`catch`
+loop that only asserts a dialog/role/title is visible will silently accept a candidate that is
+actually ineligible — and because the wrong one gets cached, every later scenario that reuses the
+cached choice fails for a reason that has nothing to do with what it is testing. Always assert a
+piece of content that exists **only** on the genuine success state (a specific section heading, a
+field, a value) before treating a candidate as usable. This is enforced by `SEM-DISCOVERY-SIGNAL`
+(`npm run validate:automation`), which flags a discovery-style `try { expectOpen(); ... } catch` loop
+that never asserts anything beyond opening the container.
+
+**An ineligible candidate must be disqualified quickly, not by absorbing a default action timeout.**
+A `.check()`/`.click()`/`.fill()` call against a locator that does not exist on the rejected state
+does not fail instantly — it polls for Playwright's default actionability timeout (~30s) before the
+surrounding `catch` ever runs. Multiply that by several rejected candidates in one discovery loop and
+an otherwise-healthy scenario can exceed its test timeout. Put the cheapest content assertion
+(`expect(...).toBeVisible()` on the distinguishing element) **before** any interaction call, so a bad
+candidate is rejected in milliseconds, not tens of seconds per candidate.
+
+**Caching the resolved candidate for the rest of the worker's run is intentional, not a shortcut to
+be "fixed."** `resolveOpenCancelCollectionName` and `resolveSubmittableCollectionName` cache their
+result in a module-level variable so a discovery loop that may try every candidate in the pool only
+pays that cost once per run, not once per scenario. The trade-off this accepts: if the environment's
+state changes *after* the cache is populated (a fixture appears, a collection becomes locked), the
+cached choice is not re-validated. That is acceptable because every candidate is re-screened by the
+content assertion above on the one occasion the cache is populated — it is not acceptable to add a
+second, uncached discovery path "to be safe," since that reintroduces the exact per-scenario cost the
+cache exists to avoid.
+
 ## Configuration and secrets
 
 - Import `env` from `src/utils/env.ts`. **Never touch `process.env` directly.**

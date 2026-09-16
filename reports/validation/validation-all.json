@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-09-16T08:30:59.129Z",
+  "generatedAt": "2026-09-16T11:13:57.199Z",
   "scope": "all",
   "summary": {
-    "total": 23,
-    "passed": 22,
+    "total": 24,
+    "passed": 23,
     "failed": 0,
     "skipped": 1
   },
@@ -167,6 +167,14 @@
       "messages": [
         "21 automation source file(s) and 3 approved feature file(s) checked against 5 locator/wait rules.",
         "2 API client file(s) checked against 6 API hygiene rules."
+      ]
+    },
+    {
+      "id": "SEM-DISCOVERY-SIGNAL",
+      "title": "Multi-candidate discovery loops disqualify on content, not container chrome",
+      "status": "PASS",
+      "messages": [
+        "3 expectOpen() discovery site(s) checked across 21 file(s)."
       ]
     },
     {

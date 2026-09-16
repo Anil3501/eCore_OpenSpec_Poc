@@ -108,6 +108,12 @@ followed:
    above a waived locator per `.github/instructions/playwright-automation.instructions.md`.
 6. If the live application contradicts an approved expectation, record the mismatch and return to
    the owning gate — never silently change the expectation to match what you observed.
+7. If this exploration leaves a real, live side effect standing in the shared environment (a
+   fixture deliberately left in place, a state transition with no reversible teardown — see
+   "Environment gotchas" in `AGENTS.md`), do not report the exploration complete until you have
+   identified every other approved scenario that shares the same resource pool (the same
+   collection, queue or record) and re-verified it against the change. See the same guardrail in
+   the `playwright-mcp-validate` skill.
 
 This does not add, remove or reorder any stage, and it does not touch `AC_APPROVAL`,
 `TEST_PLAN_APPROVAL` or `AUTOMATION_APPROVAL` — those remain exactly as defined.
