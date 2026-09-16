@@ -1,0 +1,9 @@
+{
+  "PLAYWRIGHT_BASE_URL": "https://qa-ecore.company.internal",
+  "API_BASE_URL": "https://qa-api.company.internal",
+  "TEST_ENVIRONMENT": "qa",
+  "HEADLESS": true,
+  "ECORE_LOGIN_TYPE": "Organization Login",
+  "ECORE_ORGANIZATION": "InterSoft QA",
+  "ECORE_ORGANIZATION_ID": "QA_ORG_01"
+}

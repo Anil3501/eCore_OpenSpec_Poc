@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-16T11:13:38.603Z",
+  "generatedAt": "2026-09-16T12:01:07.144Z",
   "node": "24.19.0",
   "platform": "win32",
   "summary": {
@@ -52,6 +52,7 @@
       "status": "PASS",
       "details": [
         "testEnvironment: qa",
+        "profile: (default)",
         "headless: true",
         "isCi: false",
         "baseUrlConfigured: true",

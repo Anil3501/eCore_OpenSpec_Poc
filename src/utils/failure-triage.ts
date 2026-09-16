@@ -30,7 +30,8 @@ export type FailureClassification =
   | 'LOCATOR_SUSPECT'
   | 'APPLICATION_DEFECT'
   | 'AMBIGUOUS'
-  | 'ENVIRONMENT_BLOCKER';
+  | 'ENVIRONMENT_BLOCKER'
+  | 'CONTRACT_MISMATCH';
 
 /**
  * Signals that the test never reached the application at all: DNS, TLS, proxy,
@@ -49,6 +50,17 @@ const ENVIRONMENT_SIGNALS: { id: string; pattern: RegExp }[] = [
   { id: 'PROXY_FAILURE', pattern: /err_(proxy_connection_failed|tunnel_connection_failed)/i },
   { id: 'TLS_FAILURE', pattern: /err_cert_|err_ssl_|unable to verify the first certificate/i },
   { id: 'MISSING_CONFIGURATION', pattern: /missing configuration for|is not set\. browser execution is blocked/i },
+];
+
+/**
+ * Signals that an API response violated its Zod schema, HTTP status code expectation,
+ * or API contract constraint. These never enter locator healing.
+ */
+const API_CONTRACT_SIGNALS: { id: string; pattern: RegExp }[] = [
+  { id: 'ZOD_SCHEMA_VALIDATION_ERROR', pattern: /(zoderror|invalid_type|invalid_enum_value|unrecognized_keys|contract validation failed)/i },
+  { id: 'HTTP_STATUS_MISMATCH', pattern: /(expected status code \d+|received status code \d+|status code mismatch|unexpected status)/i },
+  { id: 'API_CONTRACT_VIOLATION', pattern: /(api contract violation|response shape mismatch|contract mismatch|field missing in api response)/i },
+  { id: 'API_BODY_DESERIALIZATION_FAILED', pattern: /(failed to parse json response|unexpected token in json|invalid json response)/i },
 ];
 
 /**
@@ -86,6 +98,7 @@ interface TagSet {
   testPlanId: string | null;
   testScenarioId: string | null;
   jiraStoryId: string | null;
+  interfaceType: 'UI' | 'API' | 'HYBRID';
 }
 
 interface EvidenceFile {
@@ -95,12 +108,22 @@ interface EvidenceFile {
   preservedPath: string;
 }
 
+export interface TriageApiExchange {
+  method: string;
+  path: string;
+  expectedStatusCodes: number[];
+  actualStatus: number;
+  contractViolations: string[];
+  redactedResponseBody: string;
+}
+
 export interface TriageFinding {
   proposedDefectId: string | null;
   fingerprint: string;
   classification: FailureClassification;
   matchedSignals: string[];
   classificationRationale: string;
+  suggestedRouting: 'LOCATOR_HEALING' | 'BUG_REPORTING' | 'ENVIRONMENT_HALT' | 'HUMAN_REVIEW';
   specTitle: string;
   featureFile: string;
   projectName: string;
@@ -111,6 +134,7 @@ export interface TriageFinding {
   errorStack: string | null;
   tags: TagSet;
   evidence: EvidenceFile[];
+  apiExchanges?: TriageApiExchange[];
   reproductionCommand: string;
 }
 
@@ -148,15 +172,15 @@ function fingerprintOf(tags: TagSet, capability: string, signature: string): str
   return crypto.createHash('sha256').update(material, 'utf8').digest('hex');
 }
 
-function classify(errorText: string): {
+function classify(
+  errorText: string,
+  interfaceType: 'UI' | 'API' | 'HYBRID' = 'UI',
+): {
   classification: FailureClassification;
   matchedSignals: string[];
   rationale: string;
+  suggestedRouting: 'LOCATOR_HEALING' | 'BUG_REPORTING' | 'ENVIRONMENT_HALT' | 'HUMAN_REVIEW';
 } {
-  const locator = LOCATOR_SIGNALS.filter((signal) => signal.pattern.test(errorText)).map((s) => s.id);
-  const application = APPLICATION_SIGNALS.filter((signal) => signal.pattern.test(errorText)).map(
-    (s) => s.id,
-  );
   const environment = ENVIRONMENT_SIGNALS.filter((signal) => signal.pattern.test(errorText)).map(
     (s) => s.id,
   );
@@ -171,6 +195,29 @@ function classify(errorText: string): {
         `Matched environment signal(s): ${environment.join(', ')}. ` +
         'The application under test was never reached, so this failure proves nothing about it. ' +
         'Halt and tell a human what is unreachable. Never heal it and never file it as a bug.',
+      suggestedRouting: 'ENVIRONMENT_HALT',
+    };
+  }
+
+  const apiContract = API_CONTRACT_SIGNALS.filter((signal) => signal.pattern.test(errorText)).map(
+    (s) => s.id,
+  );
+  const locator = LOCATOR_SIGNALS.filter((signal) => signal.pattern.test(errorText)).map((s) => s.id);
+  const application = APPLICATION_SIGNALS.filter((signal) => signal.pattern.test(errorText)).map(
+    (s) => s.id,
+  );
+
+  // API contract mismatch: if API contract violation signals matched, or an API scenario failed
+  if (apiContract.length > 0 || (interfaceType === 'API' && application.length > 0)) {
+    const matched = apiContract.length > 0 ? apiContract : application;
+    return {
+      classification: 'CONTRACT_MISMATCH',
+      matchedSignals: matched,
+      rationale:
+        `Matched API contract signal(s): ${matched.join(', ')}. ` +
+        'The API answered, but violated the agreed response contract or HTTP expectation. ' +
+        'There is no locator to repair, so this routes directly to BUG_REPORTING, bypassing LOCATOR_HEALING.',
+      suggestedRouting: 'BUG_REPORTING',
     };
   }
 
@@ -179,6 +226,7 @@ function classify(errorText: string): {
       classification: 'LOCATOR_SUSPECT',
       matchedSignals: locator,
       rationale: `Matched locator signal(s): ${locator.join(', ')}. No application-behaviour signal matched.`,
+      suggestedRouting: 'LOCATOR_HEALING',
     };
   }
   if (application.length > 0 && locator.length === 0) {
@@ -186,6 +234,7 @@ function classify(errorText: string): {
       classification: 'APPLICATION_DEFECT',
       matchedSignals: application,
       rationale: `Matched application signal(s): ${application.join(', ')}. No locator signal matched.`,
+      suggestedRouting: 'BUG_REPORTING',
     };
   }
   const matched = [...locator, ...application];
@@ -196,6 +245,7 @@ function classify(errorText: string): {
       matched.length === 0
         ? 'No known signal matched. Routed to healing first so a real defect is never masked by a stale locator.'
         : `Both locator (${locator.join(', ')}) and application (${application.join(', ')}) signals matched. Routed to healing first.`,
+    suggestedRouting: interfaceType === 'API' ? 'BUG_REPORTING' : 'LOCATOR_HEALING',
   };
 }
 
@@ -210,6 +260,10 @@ function readTag(tags: string[], prefix: string): string | null {
 function collectTags(rawTags: string[]): TagSet {
   const acId = readTag(rawTags, 'ac-');
   const storyFromAc = acId ? /^AC-([A-Z][A-Z0-9]+-\d+)-\d{3}$/.exec(acId) : null;
+  const isApi = rawTags.some((t) => t.includes('interface-api'));
+  const isHybrid = rawTags.some((t) => t.includes('interface-hybrid'));
+  const interfaceType: 'UI' | 'API' | 'HYBRID' = isApi ? 'API' : isHybrid ? 'HYBRID' : 'UI';
+
   return {
     release: readTag(rawTags, 'release-'),
     capability: readTag(rawTags, 'capability-'),
@@ -218,6 +272,7 @@ function collectTags(rawTags: string[]): TagSet {
     testPlanId: readTag(rawTags, 'tp-'),
     testScenarioId: readTag(rawTags, 'ts-'),
     jiraStoryId: storyFromAc ? (storyFromAc[1] ?? null) : null,
+    interfaceType,
   };
 }
 
@@ -374,7 +429,10 @@ export function triage(): TriageFinding[] {
         const errorStack = errors.find((error) => error.stack)?.stack ?? null;
         const errorText = `${errorMessage}\n${errorStack ?? ''}`;
 
-        const { classification, matchedSignals, rationale } = classify(errorText);
+        const { classification, matchedSignals, rationale, suggestedRouting } = classify(
+          errorText,
+          tags.interfaceType,
+        );
         const capability = tags.capability ?? 'unknown-capability';
         const fingerprint = fingerprintOf(tags, capability, normalizeErrorSignature(errorMessage));
         const proposedDefectId = allocateDefectId(fingerprint, tags.jiraStoryId);
@@ -385,6 +443,7 @@ export function triage(): TriageFinding[] {
           classification,
           matchedSignals,
           classificationRationale: rationale,
+          suggestedRouting,
           specTitle: spec.title ?? '(untitled scenario)',
           featureFile: file,
           projectName: test.projectName ?? 'unknown',
@@ -412,7 +471,8 @@ function render(findings: TriageFinding[]): string {
   const lines: string[] = [];
   for (const finding of findings) {
     lines.push(`[${finding.classification}] ${finding.proposedDefectId ?? '(no defect id)'} - ${finding.specTitle}`);
-    lines.push(`        ac: ${finding.tags.acId ?? 'unknown'} | ts: ${finding.tags.testScenarioId ?? 'unknown'}`);
+    lines.push(`        ac: ${finding.tags.acId ?? 'unknown'} | ts: ${finding.tags.testScenarioId ?? 'unknown'} | iface: ${finding.tags.interfaceType}`);
+    lines.push(`        routing: ${finding.suggestedRouting}`);
     lines.push(`        signals: ${finding.matchedSignals.join(', ') || 'none'}`);
     lines.push(`        evidence: ${finding.evidence.length} file(s) preserved`);
     lines.push(`        repro: ${finding.reproductionCommand}`);
@@ -426,6 +486,7 @@ function main(): void {
   const byClassification = {
     LOCATOR_SUSPECT: findings.filter((f) => f.classification === 'LOCATOR_SUSPECT').length,
     APPLICATION_DEFECT: findings.filter((f) => f.classification === 'APPLICATION_DEFECT').length,
+    CONTRACT_MISMATCH: findings.filter((f) => f.classification === 'CONTRACT_MISMATCH').length,
     AMBIGUOUS: findings.filter((f) => f.classification === 'AMBIGUOUS').length,
     ENVIRONMENT_BLOCKER: findings.filter((f) => f.classification === 'ENVIRONMENT_BLOCKER').length,
   };
@@ -443,7 +504,7 @@ function main(): void {
 
   console.log(render(findings));
   console.log(
-    `\nFailures: ${findings.length} | locator-suspect: ${byClassification.LOCATOR_SUSPECT} | application: ${byClassification.APPLICATION_DEFECT} | ambiguous: ${byClassification.AMBIGUOUS} | environment: ${byClassification.ENVIRONMENT_BLOCKER}`,
+    `\nFailures: ${findings.length} | locator-suspect: ${byClassification.LOCATOR_SUSPECT} | application: ${byClassification.APPLICATION_DEFECT} | contract-mismatch: ${byClassification.CONTRACT_MISMATCH} | ambiguous: ${byClassification.AMBIGUOUS} | environment: ${byClassification.ENVIRONMENT_BLOCKER}`,
   );
 
   if (byClassification.ENVIRONMENT_BLOCKER > 0) {

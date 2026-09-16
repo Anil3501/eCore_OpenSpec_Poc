@@ -10,13 +10,72 @@
  * - Page objects, fixtures and step definitions must import from this module
  *   instead of reading `process.env` directly.
  */
+import fs from 'node:fs';
 import path from 'node:path';
 import { config as loadDotenv } from 'dotenv';
 import { z } from 'zod';
 
+function resolveProfileName(): string | undefined {
+  if (process.env.TEST_ENV_PROFILE && process.env.TEST_ENV_PROFILE.trim() !== '') {
+    return process.env.TEST_ENV_PROFILE.trim();
+  }
+  if (process.env.ENV_PROFILE && process.env.ENV_PROFILE.trim() !== '') {
+    return process.env.ENV_PROFILE.trim();
+  }
+  for (const arg of process.argv) {
+    if (arg.startsWith('--env=')) {
+      const val = arg.slice(6).trim();
+      if (val) return val;
+    }
+    if (arg.startsWith('--profile=')) {
+      const val = arg.slice(10).trim();
+      if (val) return val;
+    }
+  }
+  return undefined;
+}
+
+const activeProfile = resolveProfileName();
+
+// Load primary .env
 loadDotenv({ path: path.resolve(process.cwd(), '.env'), quiet: true });
 
-export const TEST_ENVIRONMENTS = ['local', 'dev', 'qa', 'uat', 'staging'] as const;
+// If an active profile is specified, overlay from config/environments/<profile>.json or .env.<profile>
+const profileConfig: Record<string, string> = {};
+if (activeProfile) {
+  const jsonProfile = path.resolve(process.cwd(), 'config', 'environments', `${activeProfile}.json`);
+  const envProfile = path.resolve(process.cwd(), `.env.${activeProfile}`);
+
+  if (fs.existsSync(jsonProfile)) {
+    try {
+      const parsedJson = JSON.parse(fs.readFileSync(jsonProfile, 'utf8'));
+      if (typeof parsedJson === 'object' && parsedJson !== null) {
+        for (const [key, value] of Object.entries(parsedJson)) {
+          if (value !== undefined && value !== null) {
+            profileConfig[key] = String(value);
+          }
+        }
+      }
+    } catch (err) {
+      console.warn(`[env] Warning: failed to parse profile config at ${jsonProfile}: ${(err as Error).message}`);
+    }
+  } else if (fs.existsSync(envProfile)) {
+    loadDotenv({ path: envProfile, override: true, quiet: true });
+  }
+}
+
+/** Helper to get config value with precedence: process.env > profileConfig */
+function getEnvValue(key: string): string | undefined {
+  if (process.env[key] !== undefined && process.env[key] !== '') {
+    return process.env[key];
+  }
+  if (profileConfig[key] !== undefined && profileConfig[key] !== '') {
+    return profileConfig[key];
+  }
+  return process.env[key];
+}
+
+export const TEST_ENVIRONMENTS = ['local', 'dev', 'qa', 'uat', 'staging', 'prod'] as const;
 export type TestEnvironment = (typeof TEST_ENVIRONMENTS)[number];
 
 export const API_AUTH_MODES = ['NONE', 'BEARER', 'BASIC', 'SESSION_COOKIE'] as const;
@@ -102,33 +161,33 @@ const environmentSchema = z.object({
 });
 
 const parsed = environmentSchema.safeParse({
-  PLAYWRIGHT_BASE_URL: process.env.PLAYWRIGHT_BASE_URL,
-  API_BASE_URL: process.env.API_BASE_URL,
-  API_AUTH_MODE: process.env.API_AUTH_MODE,
-  API_AUTH_TOKEN: process.env.API_AUTH_TOKEN,
-  TEST_ENVIRONMENT: process.env.TEST_ENVIRONMENT,
-  HEADLESS: process.env.HEADLESS,
-  COVERAGE_ENABLED: process.env.COVERAGE_ENABLED,
-  COVERAGE_INCLUDE_THIRD_PARTY: process.env.COVERAGE_INCLUDE_THIRD_PARTY,
-  TEST_USERNAME: process.env.TEST_USERNAME,
-  TEST_PASSWORD: process.env.TEST_PASSWORD,
-  ECORE_LOGIN_TYPE: process.env.ECORE_LOGIN_TYPE,
-  ECORE_USERNAME: process.env.ECORE_USERNAME,
-  ECORE_ORGANIZATION: process.env.ECORE_ORGANIZATION,
-  ECORE_ORGANIZATION_ID: process.env.ECORE_ORGANIZATION_ID,
-  ECORE_PASSWORD: process.env.ECORE_PASSWORD,
-  ECORE_API_BASE_URL: process.env.ECORE_API_BASE_URL,
-  ECORE_API_LOGIN_USERNAME: process.env.ECORE_API_LOGIN_USERNAME,
-  ECORE_API_KEY: process.env.ECORE_API_KEY,
-  JIRA_URL: process.env.JIRA_URL,
-  JIRA_EMAIL: process.env.JIRA_EMAIL,
-  JIRA_API_TOKEN: process.env.JIRA_API_TOKEN,
-  JIRA_PROJECT_KEY: process.env.JIRA_PROJECT_KEY,
-  JIRA_BUG_PROJECT_KEY: process.env.JIRA_BUG_PROJECT_KEY,
-  JIRA_BUG_ISSUE_TYPE: process.env.JIRA_BUG_ISSUE_TYPE,
-  JIRA_BUG_ASSIGNEE_ACCOUNT_ID: process.env.JIRA_BUG_ASSIGNEE_ACCOUNT_ID,
-  JIRA_BUG_LINK_TYPE: process.env.JIRA_BUG_LINK_TYPE,
-  BUG_ATTACH_TRACE: process.env.BUG_ATTACH_TRACE,
+  PLAYWRIGHT_BASE_URL: getEnvValue('PLAYWRIGHT_BASE_URL'),
+  API_BASE_URL: getEnvValue('API_BASE_URL'),
+  API_AUTH_MODE: getEnvValue('API_AUTH_MODE'),
+  API_AUTH_TOKEN: getEnvValue('API_AUTH_TOKEN'),
+  TEST_ENVIRONMENT: getEnvValue('TEST_ENVIRONMENT'),
+  HEADLESS: getEnvValue('HEADLESS'),
+  COVERAGE_ENABLED: getEnvValue('COVERAGE_ENABLED'),
+  COVERAGE_INCLUDE_THIRD_PARTY: getEnvValue('COVERAGE_INCLUDE_THIRD_PARTY'),
+  TEST_USERNAME: getEnvValue('TEST_USERNAME'),
+  TEST_PASSWORD: getEnvValue('TEST_PASSWORD'),
+  ECORE_LOGIN_TYPE: getEnvValue('ECORE_LOGIN_TYPE'),
+  ECORE_USERNAME: getEnvValue('ECORE_USERNAME'),
+  ECORE_ORGANIZATION: getEnvValue('ECORE_ORGANIZATION'),
+  ECORE_ORGANIZATION_ID: getEnvValue('ECORE_ORGANIZATION_ID'),
+  ECORE_PASSWORD: getEnvValue('ECORE_PASSWORD'),
+  ECORE_API_BASE_URL: getEnvValue('ECORE_API_BASE_URL'),
+  ECORE_API_LOGIN_USERNAME: getEnvValue('ECORE_API_LOGIN_USERNAME'),
+  ECORE_API_KEY: getEnvValue('ECORE_API_KEY'),
+  JIRA_URL: getEnvValue('JIRA_URL'),
+  JIRA_EMAIL: getEnvValue('JIRA_EMAIL'),
+  JIRA_API_TOKEN: getEnvValue('JIRA_API_TOKEN'),
+  JIRA_PROJECT_KEY: getEnvValue('JIRA_PROJECT_KEY'),
+  JIRA_BUG_PROJECT_KEY: getEnvValue('JIRA_BUG_PROJECT_KEY'),
+  JIRA_BUG_ISSUE_TYPE: getEnvValue('JIRA_BUG_ISSUE_TYPE'),
+  JIRA_BUG_ASSIGNEE_ACCOUNT_ID: getEnvValue('JIRA_BUG_ASSIGNEE_ACCOUNT_ID'),
+  JIRA_BUG_LINK_TYPE: getEnvValue('JIRA_BUG_LINK_TYPE'),
+  BUG_ATTACH_TRACE: getEnvValue('BUG_ATTACH_TRACE'),
 });
 
 if (!parsed.success) {
@@ -229,6 +288,7 @@ export interface CoverageSettings {
 
 export interface FrameworkEnvironment {
   readonly testEnvironment: TestEnvironment;
+  readonly profileName: string | undefined;
   readonly headless: boolean;
   /** Set by the CI runner, not by .env. Drives retries and forbidOnly. */
   readonly isCi: boolean;
@@ -305,6 +365,7 @@ function missingError(keys: readonly string[], purpose: string): Error {
 
 export const env: FrameworkEnvironment = {
   testEnvironment: values.TEST_ENVIRONMENT,
+  profileName: activeProfile,
   headless: values.HEADLESS,
   isCi,
   baseUrl: values.PLAYWRIGHT_BASE_URL,
@@ -424,6 +485,7 @@ export const env: FrameworkEnvironment = {
   describe(): Record<string, string | boolean> {
     return {
       testEnvironment: values.TEST_ENVIRONMENT,
+      profile: activeProfile ?? '(default)',
       headless: values.HEADLESS,
       isCi,
       baseUrlConfigured: hasBaseUrl,
