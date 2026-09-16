@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "1.0.0",
+  "executionId": "EXEC-EC-12000-002",
+  "jiraStoryId": "EC-12000",
+  "release": "26.3",
+  "capability": "paper-out-export",
+  "testPlanId": "TP-EC-12000-001",
+  "dataClassification": "REAL_JIRA_DATA",
+  "executedAt": "2026-09-16T02:30:00.000Z",
+  "environment": {
+    "name": "qa5",
+    "baseUrlRef": "ECORE_BASE_URL",
+    "browser": "chromium",
+    "project": "bdd"
+  },
+  "command": "npx playwright test --grep \"TS-EC-12000-01[1-5]\"",
+  "reportPath": "reports/playwright-report/index.html",
+  "resultsPath": "reports/execution/results.json",
+  "totals": {
+    "executed": 5,
+    "passed": 5,
+    "failed": 0,
+    "timedOut": 0,
+    "durationMs": 258000,
+    "blocked": 0,
+    "scenariosInPlan": 18
+  },
+  "scope": {
+    "description": "TS-EC-12000-011 through -015 - the five eoRequestExport HYBRID scenarios previously BLOCKED on BLOCKER-EC-12000-002 - are now implemented for real and pass live against qa5, superseding their BLOCKED result in EXEC-EC-12000-001. BLOCKER-EC-12000-002 is resolved: the eoRequestExport endpoint, method and response were confirmed live (POST, dedicated API credentials ECORE_API_LOGIN_USERNAME/ECORE_API_KEY), and each scenario's asserted Media Type is confirmed via the UI audit trail (Document History's Submitted Paper Out event), never via the API response itself. This run also exercises a corrected transaction-document reveal mechanism in EcoreWorkspacePage (see VALIDATED comment on revealDocumentsOfSelectedTransaction) discovered while debugging an intermittent 'document row not found' failure, and a two-collection fixture design for TS-EC-12000-015 (its two eoRequestExport calls must target distinct documents - confirmed live that the application rejects a second export against a document its own transaction-level export already locked, with DOCUMENT_LOCK_ERROR)."
+  },
+  "scenarios": [
+    {
+      "testScenarioId": "TS-EC-12000-011",
+      "requirementId": "REQ-EC-12000-004",
+      "acId": "AC-EC-12000-011",
+      "testPlanId": "TP-EC-12000-001",
+      "featureFile": "features/approved/paper-out-export/paper-out-media-type.feature",
+      "gherkinScenario": "API mediaType=PrintToPaper at transaction level determines Media Type Paper",
+      "result": "PASSED",
+      "durationMs": 55700,
+      "failureSummary": null,
+      "tracePath": null
+    },
+    {
+      "testScenarioId": "TS-EC-12000-012",
+      "requirementId": "REQ-EC-12000-004",
+      "acId": "AC-EC-12000-012",
+      "testPlanId": "TP-EC-12000-001",
+      "featureFile": "features/approved/paper-out-export/paper-out-media-type.feature",
+      "gherkinScenario": "API mediaType=PrintToPaper at document level determines Media Type Paper",
+      "result": "PASSED",
+      "durationMs": 44100,
+      "failureSummary": null,
+      "tracePath": null
+    },
+    {
+      "testScenarioId": "TS-EC-12000-013",
+      "requirementId": "REQ-EC-12000-004",
+      "acId": "AC-EC-12000-013",
+      "testPlanId": "TP-EC-12000-001",
+      "featureFile": "features/approved/paper-out-export/paper-out-media-type.feature",
+      "gherkinScenario": "API mediaType=SaveAsElectronicFile at transaction level determines Media Type Electronic",
+      "result": "PASSED",
+      "durationMs": 37700,
+      "failureSummary": null,
+      "tracePath": null
+    },
+    {
+      "testScenarioId": "TS-EC-12000-014",
+      "requirementId": "REQ-EC-12000-004",
+      "acId": "AC-EC-12000-014",
+      "testPlanId": "TP-EC-12000-001",
+      "featureFile": "features/approved/paper-out-export/paper-out-media-type.feature",
+      "gherkinScenario": "API mediaType=SaveAsElectronicFile at document level determines Media Type Electronic",
+      "result": "PASSED",
+      "durationMs": 36700,
+      "failureSummary": null,
+      "tracePath": null
+    },
+    {
+      "testScenarioId": "TS-EC-12000-015",
+      "requirementId": "REQ-EC-12000-004",
+      "acId": "AC-EC-12000-015",
+      "testPlanId": "TP-EC-12000-001",
+      "featureFile": "features/approved/paper-out-export/paper-out-media-type.feature",
+      "gherkinScenario": "API call omitting mediaType entirely determines Media Type Electronic",
+      "result": "PASSED",
+      "durationMs": 72000,
+      "failureSummary": null,
+      "tracePath": null
+    }
+  ]
+}

@@ -2,22 +2,22 @@
   "schemaVersion": "1.0.0",
   "capability": "paper-out-export",
   "release": "26.3",
-  "generatedAt": "2026-09-14T18:55:00.000Z",
+  "generatedAt": "2026-09-16T02:36:00.000Z",
   "dataClassification": "REAL_JIRA_DATA",
   "sourceRtm": {
     "path": "traceability/capabilities/paper-out-export.rtm.json",
-    "version": 3
+    "version": 5
   },
   "totals": {
     "approvedAcs": 17,
     "approvedAcsLinkedToApprovedScenarios": 17,
-    "approvedAcsLinkedToExecutableAutomation": 10,
-    "automatedAcsExecuted": 10,
-    "executedAcsPassed": 10
+    "approvedAcsLinkedToExecutableAutomation": 15,
+    "automatedAcsExecuted": 15,
+    "executedAcsPassed": 15
   },
   "coverage": {
     "acDesignCoveragePct": 100,
-    "automationCoveragePct": 58.82,
+    "automationCoveragePct": 88.24,
     "executionCoveragePct": 100,
     "passCoveragePct": 100,
     "byInterface": {
@@ -41,12 +41,12 @@
       },
       "HYBRID": {
         "acsWithScenarios": 5,
-        "acsWithExecutableAutomation": 0,
-        "acsExecuted": 0,
-        "acsPassed": 0,
-        "automationCoveragePct": 0,
-        "executionCoveragePct": null,
-        "passCoveragePct": null
+        "acsWithExecutableAutomation": 5,
+        "acsExecuted": 5,
+        "acsPassed": 5,
+        "automationCoveragePct": 100,
+        "executionCoveragePct": 100,
+        "passCoveragePct": 100
       }
     }
   },
@@ -57,11 +57,6 @@
       "AC-EC-12000-006"
     ],
     "blockedAcIds": [
-      "AC-EC-12000-011",
-      "AC-EC-12000-012",
-      "AC-EC-12000-013",
-      "AC-EC-12000-014",
-      "AC-EC-12000-015",
       "AC-EC-12000-017"
     ],
     "manualOnlyAcIds": [
@@ -72,10 +67,11 @@
   },
   "notes": [
     "17 of 19 acceptance criteria are status APPROVED in the RTM and have an approved test plan scenario (TP-EC-12000-001 v2, Gate 2 v2 cleared by reviewer Anil), so acDesignCoveragePct reads 100% of that 17-AC denominator - it is not a claim about all 19. AC-EC-12000-005 and AC-EC-12000-006 are RTM status DEFERRED, which removes them from every coverage denominator entirely.",
-    "automationCoveragePct is 58.82%: 10 of the 17 approved ACs (AC-001 through AC-004, AC-007 through AC-010, AC-016 and AC-018) now have executable automation. BLOCKER-EC-12000-004 was resolved live on 2026-09-14: the recorded Media Type is observable in the DOCUMENT history's 'Submitted Paper Out' event (AC-007 through AC-010), and the Verify Paper Out modal's package download bundles the same activity history report for an Authorized fixture (AC-016), unblocking five scenarios that were previously BLOCKED.",
-    "executionCoveragePct and passCoveragePct both read 100%, and neither means the story is complete. Their denominator is the 10 ACs that have executable automation, not the 17 approved ACs. They say \"every scenario that could run, ran, and passed\" - nothing more.",
+    "automationCoveragePct is 88.24%: 15 of the 17 approved ACs (AC-001 through AC-004, AC-007 through AC-016 except AC-017) now have executable automation. AC-EC-12000-011 through -015 (TS-EC-12000-011 through -015) moved from DESIGNED to EXECUTABLE and PASSED for real against qa5 on 2026-09-16 (EXEC-EC-12000-002), superseding their BLOCKED result in EXEC-EC-12000-001 - see traceability/executions/EXEC-EC-12000-002.json.",
+    "executionCoveragePct and passCoveragePct both read 100%, and neither means the story is complete. Their denominator is the 15 ACs that have executable automation, not the 17 approved ACs. They say \"every scenario that could run, ran, and passed\" - nothing more.",
     "AC-EC-12000-016 has two approved scenarios: TS-EC-12000-016 (automated, PASSED - the Submitted/Authorized Additional Information and the downloaded activity history report) and TS-EC-12000-020 (MANUAL_ONLY - the package cover page, split out at Gate 2 v2 via CLR-TP-EC-12000-002 because confirming a printed cover page needs a human to open the real downloaded file). AC-016 is counted as covered because its primary scenario passed; it does not appear in manualOnlyAcIds because that list is reserved for ACs with no automated scenario at all.",
-    "The 6 remaining BLOCKED ACs are not failures. AC-011 through AC-015 are gated by BLOCKER-EC-12000-002 (the eoRequestExport contract is unverified and lives outside the ssweb browser app) and additionally need a Gate 2 plan revision, since the approved plan marks them automationCandidate: false. AC-017 is gated by CLR-TP-EC-12000-003 (no pre-deployment Paper Out fixture is reachable in qa5 to prove non-retroactive recording).",
+    "AC-EC-12000-011 through -015 required a two-collection fixture design for TS-EC-12000-015 specifically: its two eoRequestExport calls (one transaction-level, one document-level) must target two distinct documents, because the application was confirmed live to reject a document-level export against a document its own transaction-level export already locked, with DOCUMENT_LOCK_ERROR. This is a real, observed application behaviour, not an invented business rule - the test now resolves two independent open-cancel-eligible collections rather than reusing one.",
+    "AC-EC-12000-017 remains the only genuinely BLOCKED AC in this capability, gated by CLR-TP-EC-12000-003 (no pre-deployment Paper Out fixture is reachable in qa5 to prove non-retroactive recording).",
     "AC-EC-12000-019 (cosmetic border alignment) is approved but MANUAL_ONLY - it will never contribute to automationCoveragePct or executionCoveragePct.",
     "Their step definitions throw with the exact blocker rather than skipping, so a blocked AC is always visible as a real failure in a full run and can never be mistaken for a pass.",
     "Browser code coverage from reports/coverage/ is deliberately absent from this file. It measures which application JavaScript executed and is never evidence that an acceptance criterion is satisfied.",

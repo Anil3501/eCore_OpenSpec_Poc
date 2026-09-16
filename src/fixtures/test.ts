@@ -19,6 +19,7 @@ import { VerifyPaperOutModalComponent } from '../components/verify-paper-out-mod
 import { DocumentHistoryComponent } from '../components/document-history.component.ts';
 import { OrganizationLoginService } from '../services/organization-login.service.ts';
 import { PaperOutExportService } from '../services/paper-out-export.service.ts';
+import { EoRequestExportClient } from '../api/eo-request-export.client.ts';
 
 /**
  * Scenario-scoped scratch space.
@@ -86,6 +87,38 @@ export interface DocumentActivityReport {
  */
 export interface PaperOutSubmission {
   nameOfRequest?: string;
+}
+
+/**
+ * The transaction/document reached for TS-EC-12000-011 through -015 and the
+ * unique batch name(s) their eoRequestExport call(s) create.
+ *
+ * These scenarios reach a transaction and/or document through the UI to
+ * capture its vault id (`transactionId`/`documentId`), call eoRequestExport
+ * with that id, and then re-navigate to the same document to read its
+ * Submitted Paper Out event by batch name. TS-EC-12000-015 makes two calls
+ * against two distinct documents (one transaction-level, one document-level -
+ * see `transactionCollectionName`/`documentCollectionName` below for why),
+ * so it needs two independent batch names rather than the single name every
+ * other scenario in this feature uses - see `PaperOutSubmission`, which
+ * cannot hold both without one silently overwriting the other.
+ */
+export interface HybridExportContext {
+  transactionId?: string;
+  documentId?: string;
+  transactionBatchName?: string;
+  documentBatchName?: string;
+  /**
+   * The Collections-accordion name each id above was reached through.
+   * TS-EC-12000-015 targets two distinct transactions/documents: a
+   * transaction-level export locks its own document, so a second
+   * document-level export against that same document is rejected by the
+   * application with DOCUMENT_LOCK_ERROR (confirmed live against qa5 on
+   * 2026-09-15), and each must be re-opened from its own collection to read
+   * its audit trail.
+   */
+  transactionCollectionName?: string;
+  documentCollectionName?: string;
 }
 
 /**
@@ -157,6 +190,16 @@ export interface FrameworkFixtures {
    * API_BASE_URL configured still runs exactly as it does today.
    */
   apiRequest: APIRequestContext;
+  /**
+   * EC-12000's TS-EC-12000-011 through -015 (HYBRID). A dedicated
+   * APIRequestContext against ECORE_API_BASE_URL, distinct from `apiRequest`
+   * (which targets the generic API_BASE_URL/SESSION_COOKIE config) - eoLogin
+   * uses its own account and session, never the browser's UI session. Created
+   * lazily and already authenticated via eoLogin() by the time a step
+   * receives it.
+   */
+  eoExportApi: EoRequestExportClient;
+  hybridExportContext: HybridExportContext;
 }
 
 export const test = bddTest.extend<FrameworkFixtures>({
@@ -273,6 +316,21 @@ export const test = bddTest.extend<FrameworkFixtures>({
     });
     await use(apiContext);
     await apiContext.dispose();
+  },
+
+  // eslint-disable-next-line no-empty-pattern
+  eoExportApi: async ({}, use) => {
+    const config = env.requireEoApiConfig();
+    const apiContext = await playwrightRequest.newContext({ baseURL: config.baseUrl });
+    const client = new EoRequestExportClient(apiContext);
+    await client.login();
+    await use(client);
+    await apiContext.dispose();
+  },
+
+  // eslint-disable-next-line no-empty-pattern
+  hybridExportContext: async ({}, use) => {
+    await use({});
   },
 
   browserCoverage: [

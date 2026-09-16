@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "1.0.0",
+  "approvalId": "APR-AD-EC-12000-003",
+  "gate": "AUTOMATION_DESIGN",
+  "artifactId": "TP-EC-12000-001",
+  "artifactVersion": 3,
+  "release": "26.3",
+  "capability": "paper-out-export",
+  "sourceArtifactPath": "features/generated/paper-out-export/paper-out-media-type.feature",
+  "decision": "APPROVE",
+  "reviewer": {
+    "name": "Anil",
+    "role": "Reviewer",
+    "reference": null
+  },
+  "reviewedAt": "2026-09-15T11:17:55.618Z",
+  "comments": "Approved. Scoped re-approval only. The test plan moved to artifactVersion 3 at Gate 2 (test-plans/approved/TP-EC-12000-001-approval.json), resolving CLR-TP-EC-12000-004 for TS-EC-12000-011 through -015 only - every other scenario stays covered by APR-AD-EC-12000-001 and APR-AD-EC-12000-002. This approval covers only the five affected items: the dictated (AGENT_DRAFTED/UNVERIFIED, permanently scaffoldingOnly) eoRequestExport endpoint, the confirmed CLEANUP mechanism (Print -> Verify Paper Out modal -> select all -> Verify -> confirm alert), and dynamic (never hard-coded) fixture/Collection selection at run time.",
+  "itemDecisions": [
+    {
+      "itemId": "TS-EC-12000-011",
+      "decision": "APPROVE",
+      "comment": "REVISED at Gate 2 v3: HYBRID. eoRequestExport call (dictated endpoint, AGENT_DRAFTED/UNVERIFIED, permanently scaffoldingOnly) sets mediaType=PrintToPaper at transaction level; the UI audit trail (shared DocumentHistoryComponent reader) is the sole judge of AC-EC-12000-011. Requires the confirmed CLEANUP flow after assertion and dynamic Collection selection at run time. EoRequestExportClient request construction remains MCP_VALIDATION_REQUIRED."
+    },
+    {
+      "itemId": "TS-EC-12000-012",
+      "decision": "APPROVE",
+      "comment": "REVISED at Gate 2 v3: same basis as TS-EC-12000-011, document level, mediaType=PrintToPaper."
+    },
+    {
+      "itemId": "TS-EC-12000-013",
+      "decision": "APPROVE",
+      "comment": "REVISED at Gate 2 v3: same basis as TS-EC-12000-011, transaction level, mediaType=SaveAsElectronicFile."
+    },
+    {
+      "itemId": "TS-EC-12000-014",
+      "decision": "APPROVE",
+      "comment": "REVISED at Gate 2 v3: same basis as TS-EC-12000-011, document level, mediaType=SaveAsElectronicFile."
+    },
+    {
+      "itemId": "TS-EC-12000-015",
+      "decision": "APPROVE",
+      "comment": "REVISED at Gate 2 v3: same basis as TS-EC-12000-011, mediaType omitted entirely at both transaction and document level."
+    }
+  ]
+}

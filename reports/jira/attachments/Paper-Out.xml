@@ -1,0 +1,11 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:exp="http://www.eoriginal.com/ecore/export">
+<soapenv:Header/>
+<soapenv:Body>
+<exp:eoExportInstructions>
+<exp:batchName>soapy_paper_out</exp:batchName>
+<exp:transaction id="${tsid}" deleteIfEmpty="true">
+<exp:retentionPolicy electronicOriginal="eCopy" eStored="none" eCopy="none"/>
+</exp:transaction>
+</exp:eoExportInstructions>
+</soapenv:Body>
+</soapenv:Envelope>

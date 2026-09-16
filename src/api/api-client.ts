@@ -22,9 +22,12 @@ export abstract class ApiClient {
   protected readonly request: APIRequestContext;
   private readonly baseUrl: string;
 
-  constructor(request: APIRequestContext) {
+  constructor(request: APIRequestContext, baseUrl?: string) {
     this.request = request;
-    this.baseUrl = env.requireApiConfig().baseUrl;
+    // Some capabilities (e.g. eoRequestExport) use a dedicated integration API
+    // base URL rather than the generic API_BASE_URL, so a client may supply
+    // its own; the default preserves every existing client's behaviour.
+    this.baseUrl = baseUrl ?? env.requireApiConfig().baseUrl;
   }
 
   /** Joins a contract path onto the configured base, preserving any path prefix. */

@@ -1,0 +1,51 @@
+{
+  "capability": "paper-out-export",
+  "sourceRtm": {
+    "path": "traceability/capabilities/paper-out-export.rtm.json",
+    "version": 4
+  },
+  "computedAt": "2026-09-15T18:48:41.617Z",
+  "totals": {
+    "approvedAcs": 17,
+    "approvedAcsLinkedToApprovedScenarios": 17,
+    "approvedAcsLinkedToExecutableAutomation": 10,
+    "automatedAcsExecuted": 10,
+    "executedAcsPassed": 10
+  },
+  "coverage": {
+    "acDesignCoveragePct": 100,
+    "automationCoveragePct": 58.82,
+    "executionCoveragePct": 100,
+    "passCoveragePct": 100,
+    "byInterface": {
+      "UI": {
+        "acsWithScenarios": 12,
+        "acsWithExecutableAutomation": 10,
+        "acsExecuted": 10,
+        "acsPassed": 10,
+        "automationCoveragePct": 83.33,
+        "executionCoveragePct": 100,
+        "passCoveragePct": 100
+      },
+      "API": {
+        "acsWithScenarios": 0,
+        "acsWithExecutableAutomation": 0,
+        "acsExecuted": 0,
+        "acsPassed": 0,
+        "automationCoveragePct": null,
+        "executionCoveragePct": null,
+        "passCoveragePct": null
+      },
+      "HYBRID": {
+        "acsWithScenarios": 5,
+        "acsWithExecutableAutomation": 0,
+        "acsExecuted": 0,
+        "acsPassed": 0,
+        "automationCoveragePct": 0,
+        "executionCoveragePct": null,
+        "passCoveragePct": null
+      }
+    }
+  },
+  "note": "Preview only, generated from computeCoverage() in src/models/rtm.model.ts - the same function SEM-COVERAGE validates against. Never written automatically into traceability/; copy by hand into the governed coverage.json."
+}

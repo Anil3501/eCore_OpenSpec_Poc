@@ -6,23 +6,29 @@ import type { EcoreHomePage } from '../src/pages/ecore-home.page.ts';
 import type { EcoreWorkspacePage } from '../src/pages/ecore-workspace.page.ts';
 import type { PaperOutRequestModalComponent } from '../src/components/paper-out-request-modal.component.ts';
 import type { PaperOutExportService } from '../src/services/paper-out-export.service.ts';
+import type { MediaType } from '../src/api/eo-request-export.client.ts';
 
 /**
  * Step definitions for
  * features/approved/paper-out-export/paper-out-media-type.feature.
  *
- * TS-EC-12000-001, -002, -003, -004, -007 through -010, -016 and -018 are
- * implemented here. The remaining approved scenarios (TS-EC-12000-011
- * through -015, -017, -019 and -020) are deliberately left to
- * steps/paper-out-media-type-blocked.steps.ts, where each throws with the
- * exact blocker that prevents it: BLOCKER-EC-12000-004 (still open for -017's
- * pre-change fixture) or BLOCKER-EC-12000-002 (the eoRequestExport contract
- * is unverified and lives outside the ssweb browser app) for TS-011 through
- * -015. TS-019 and -020 are MANUAL_ONLY per the approved plan. Writing a
- * locator or an assertion for any of them here would mean guessing one -
- * exactly what AGENTS.md forbids. See
- * features/generated/paper-out-export/TP-EC-12000-001-automation-design.md
+ * TS-EC-12000-001 through -004, -007 through -016 and -018 are implemented
+ * here. The remaining approved scenarios (TS-EC-12000-017, -019 and -020) are
+ * deliberately left to steps/paper-out-media-type-blocked.steps.ts, where
+ * each throws with the exact blocker that prevents it: BLOCKER-EC-12000-004
+ * (still open for -017's pre-change fixture). TS-019 and -020 are
+ * MANUAL_ONLY per the approved plan. Writing a locator or an assertion for
+ * any of them here would mean guessing one - exactly what AGENTS.md forbids.
+ * See features/generated/paper-out-export/TP-EC-12000-001-automation-design.md
  * and reports/validation/TP-EC-12000-001-{browser,api}-validation.json.
+ *
+ * TS-EC-12000-011 through -015 (HYBRID) were implemented once
+ * BLOCKER-EC-12000-002 was resolved: `eoRequestExport`'s contract was
+ * captured live against qa5 on 2026-09-15/16 (see
+ * src/api/eo-request-export.client.ts and
+ * reports/validation/TP-EC-12000-001-api-validation.json), and Gate 3 v4
+ * (`APR-AD-EC-12000-004`) approved judging their AC exclusively through the
+ * UI audit trail - the API call only ever seeds state, per AGENTS.md rule 4.
  *
  * TS-002 and TS-004 never submit the Paper Out Request modal to completion
  * (TS-002 stops at the Acknowledgement modal opening, TS-004 cancels it), so
@@ -34,7 +40,7 @@ import type { PaperOutExportService } from '../src/services/paper-out-export.ser
  * request locks its transactions and would otherwise make the scenario pass
  * exactly once.
  */
-const { Given, When, Then, After } = createBdd(test);
+const { Given, When, Then, Before, After } = createBdd(test);
 
 /**
  * Which collection each flow used, discovered once per run and reused for
@@ -48,6 +54,7 @@ const { Given, When, Then, After } = createBdd(test);
  */
 let openCancelCollectionName: string | undefined;
 let submittableCollectionName: string | undefined;
+let secondaryOpenCancelCollectionName: string | undefined;
 
 /**
  * Returns to a clean Workspace, discarding whatever modal or dropdown state
@@ -84,6 +91,17 @@ async function resolveOpenCancelCollectionName(
     await workspacePage.openPaperOutRequestModal(name);
     try {
       await paperOutRequestModal.expectOpen();
+      // VALIDATED - confirmed live against qa5 on 2026-09-16: when a
+      // collection's only transaction is locked (e.g. sitting at
+      // Authorized/Verification), opening the Paper Out Request modal shows
+      // a "Cannot process paper out request. The following transactions are
+      // currently locked:" error, rendered inside a dialog that reuses the
+      // exact same "Paper Out® Request" title as the real modal. expectOpen()
+      // alone cannot tell the two apart, so a locked collection was
+      // previously misidentified as eligible. Asserting the Media Type
+      // section - present only on the real modal - is what actually proves
+      // this collection is usable.
+      await paperOutRequestModal.expectMediaTypeSectionShown();
     } catch {
       await resetToWorkspace(homePage, workspacePage);
       continue;
@@ -95,6 +113,51 @@ async function resolveOpenCancelCollectionName(
   throw new Error(
     'No collection in the Collections accordion currently opens the Paper Out Request modal. ' +
       `Collections checked: ${names.join(', ') || '(none found)'}.`,
+  );
+}
+
+/**
+ * Finds a second, distinct open-cancel-eligible collection for
+ * TS-EC-12000-015, which needs two independent transaction/document targets:
+ * a transaction-level export locks the document it targets, so re-using the
+ * single collection `resolveOpenCancelCollectionName` already cached for a
+ * document-level call against the very same document is rejected by the
+ * application with DOCUMENT_LOCK_ERROR (confirmed live against qa5 on
+ * 2026-09-15). Reuses the same open-cancel eligibility check, just applied to
+ * whichever remaining collection differs from the primary one.
+ */
+async function resolveSecondaryOpenCancelCollectionName(
+  homePage: EcoreHomePage,
+  workspacePage: EcoreWorkspacePage,
+  paperOutRequestModal: PaperOutRequestModalComponent,
+  primaryCollectionName: string,
+): Promise<string> {
+  if (secondaryOpenCancelCollectionName !== undefined) return secondaryOpenCancelCollectionName;
+
+  const names = await workspacePage.collectionNames();
+  for (const name of names) {
+    if (name === primaryCollectionName) continue;
+    await workspacePage.openPaperOutRequestModal(name);
+    try {
+      await paperOutRequestModal.expectOpen();
+      // VALIDATED - see the identical check and its 2026-09-16 evidence in
+      // resolveOpenCancelCollectionName above: a locked-transaction
+      // collection's error dialog shares expectOpen()'s title with the real
+      // modal, so the Media Type section must also be confirmed.
+      await paperOutRequestModal.expectMediaTypeSectionShown();
+    } catch {
+      await resetToWorkspace(homePage, workspacePage);
+      continue;
+    }
+    await resetToWorkspace(homePage, workspacePage);
+    secondaryOpenCancelCollectionName = name;
+    return name;
+  }
+  throw new Error(
+    'No collection other than ' +
+      `"${primaryCollectionName}" currently opens the Paper Out Request modal, so TS-EC-12000-015 ` +
+      'has no second, distinct target. Collections checked: ' +
+      `${names.filter((n) => n !== primaryCollectionName).join(', ') || '(none found)'}.`,
   );
 }
 
@@ -131,6 +194,15 @@ async function resolveSubmittableCollectionName(
     await workspacePage.openPaperOutRequestModal(name);
     try {
       await paperOutRequestModal.expectOpen();
+      // VALIDATED - same 2026-09-16 finding as resolveOpenCancelCollectionName:
+      // a collection with a locked transaction renders an error dialog under
+      // the identical "Paper Out® Request" title, with no Media Type section
+      // and no radios at all. Without this check, selectSaveAsElectronicFile()
+      // below waits out its own ~30s actionability timeout per locked
+      // collection before this catch ever runs - slow enough by itself to
+      // exceed this scenario's test timeout. Confirming the Media Type
+      // section first makes a locked collection fail in milliseconds instead.
+      await paperOutRequestModal.expectMediaTypeSectionShown();
       await paperOutRequestModal.selectSaveAsElectronicFile();
       await paperOutRequestModal.completeRequiredFields(paperOutExport.fabricatedNameOfRequest());
       await paperOutRequestModal.clickOk();
@@ -806,3 +878,367 @@ After({ tags: '@ts-TS-EC-12000-003' }, async ({ workQueue, paperOutExport }) => 
     );
   }
 });
+
+// --- TS-EC-12000-011 through -015 (eoRequestExport, HYBRID) ---
+//
+// These scenarios reach a transaction and/or document through the UI to
+// capture its vault id, call eoRequestExport with that id (the only
+// authoritative source of a real id - AGENTS.md forbids inventing one), and
+// then judge the outcome exclusively through the same UI audit trail every
+// other scenario in this feature uses (DocumentHistoryComponent). The API
+// call never itself proves the AC, matching Gate 3 v4's approved design.
+//
+// A Paper Out event - transaction-level or document-level - is logged only
+// in the DOCUMENT's history, never the transaction's (BLOCKER-EC-12000-004's
+// resolution, 2026-09-14), so every "open ... audit trail entry" step below
+// re-reaches the same document regardless of which level its API call
+// targeted.
+
+/**
+ * These five scenarios chain more real network round trips than any other
+ * scenario in this feature: a UI sign-in and navigation, `eoLogin` (observed
+ * live against qa5 at ~12.5s on its own, via a throwaway diagnostic script
+ * since removed - it was never part of the governed suite), the
+ * `eoRequestExport` call itself, a second UI re-navigation to reopen the
+ * document, and the Document History dialog. The framework default of 45s
+ * (playwright.config.ts) was exceeded by the real first run on 2026-09-16.
+ * Raising it only for these five scenarios - rather than globally - keeps
+ * every faster scenario's timeout as a real regression signal.
+ */
+Before(
+  {
+    tags:
+      '@ts-TS-EC-12000-011 or @ts-TS-EC-12000-012 or @ts-TS-EC-12000-013 or @ts-TS-EC-12000-014 or @ts-TS-EC-12000-015',
+  },
+  async () => {
+    test.setTimeout(120_000);
+  },
+);
+
+
+/**
+ * Casts a Gherkin mediaType string to the API's own enum, refusing anything
+ * that is not one of the two values `export-26.3.xsd` defines. Guards
+ * against a future scenario silently binding to this step with a value the
+ * client was never validated against.
+ */
+function toApiMediaType(value: string): MediaType {
+  if (value === 'PrintToPaper' || value === 'SaveAsElectronicFile') return value;
+  throw new Error(`Unsupported eoRequestExport mediaType "${value}". Only PrintToPaper and SaveAsElectronicFile are validated.`);
+}
+
+Given('eoRequestExport is available at the transaction level', async ({
+  loginPage,
+  homePage,
+  organizationLogin,
+  workspacePage,
+  paperOutRequestModal,
+  hybridExportContext,
+}) => {
+  await loginPage.open();
+  await loginPage.chooseOrganizationSignIn();
+  await loginPage.enterOrganizationDetails(organizationLogin.correctDetails());
+  await loginPage.submit();
+  await homePage.expectArrived();
+  await homePage.activateDashboardIcon('Workspace');
+  await workspacePage.expectArrived();
+  const collectionName = await resolveOpenCancelCollectionName(homePage, workspacePage, paperOutRequestModal);
+  await workspacePage.openCollection(collectionName);
+  hybridExportContext.transactionId = await workspacePage.selectFirstTransaction();
+});
+
+Given('eoRequestExport is available at the document level', async ({
+  loginPage,
+  homePage,
+  organizationLogin,
+  workspacePage,
+  paperOutRequestModal,
+  hybridExportContext,
+}) => {
+  await loginPage.open();
+  await loginPage.chooseOrganizationSignIn();
+  await loginPage.enterOrganizationDetails(organizationLogin.correctDetails());
+  await loginPage.submit();
+  await homePage.expectArrived();
+  await homePage.activateDashboardIcon('Workspace');
+  await workspacePage.expectArrived();
+  const collectionName = await resolveOpenCancelCollectionName(homePage, workspacePage, paperOutRequestModal);
+  await workspacePage.openCollection(collectionName);
+  // A document is only reachable through its transaction - see the identical
+  // note on the "a document eligible for Paper Out" Given above.
+  await workspacePage.selectFirstTransaction();
+  hybridExportContext.documentId = await workspacePage.selectFirstDocumentId();
+});
+
+Given('eoRequestExport is available at both transaction and document level', async ({
+  loginPage,
+  homePage,
+  organizationLogin,
+  workspacePage,
+  paperOutRequestModal,
+  hybridExportContext,
+}) => {
+  await loginPage.open();
+  await loginPage.chooseOrganizationSignIn();
+  await loginPage.enterOrganizationDetails(organizationLogin.correctDetails());
+  await loginPage.submit();
+  await homePage.expectArrived();
+  await homePage.activateDashboardIcon('Workspace');
+  await workspacePage.expectArrived();
+  // Two distinct collections are required here (see the doc comment on
+  // resolveSecondaryOpenCancelCollectionName): the transaction-level call
+  // locks the document it targets, so a document-level call against that
+  // same document is rejected with DOCUMENT_LOCK_ERROR.
+  const transactionCollectionName = await resolveOpenCancelCollectionName(homePage, workspacePage, paperOutRequestModal);
+  await workspacePage.openCollection(transactionCollectionName);
+  hybridExportContext.transactionId = await workspacePage.selectFirstTransaction();
+  hybridExportContext.transactionCollectionName = transactionCollectionName;
+
+  const documentCollectionName = await resolveSecondaryOpenCancelCollectionName(
+    homePage,
+    workspacePage,
+    paperOutRequestModal,
+    transactionCollectionName,
+  );
+  await resetToWorkspace(homePage, workspacePage);
+  await workspacePage.openCollection(documentCollectionName);
+  // A document is only reachable through its transaction - see the identical
+  // note on the "a document eligible for Paper Out" Given above.
+  await workspacePage.selectFirstTransaction();
+  hybridExportContext.documentId = await workspacePage.selectFirstDocumentId();
+  hybridExportContext.documentCollectionName = documentCollectionName;
+});
+
+When('I call eoRequestExport at the transaction level with mediaType {string}', async ({
+  eoExportApi,
+  paperOutExport,
+  hybridExportContext,
+  $tags,
+}, mediaType: string) => {
+  const transactionId = hybridExportContext.transactionId;
+  expect(transactionId, 'No transaction id was captured by a preceding Given step.').toBeDefined();
+  const batchName = paperOutExport.uniqueNameOfRequest(testScenarioLabel($tags));
+  await eoExportApi.requestExport({
+    level: 'transaction',
+    id: transactionId as string,
+    batchName,
+    mediaType: toApiMediaType(mediaType),
+  });
+  hybridExportContext.transactionBatchName = batchName;
+});
+
+When('I call eoRequestExport at the document level with mediaType {string}', async ({
+  eoExportApi,
+  paperOutExport,
+  hybridExportContext,
+  $tags,
+}, mediaType: string) => {
+  const documentId = hybridExportContext.documentId;
+  expect(documentId, 'No document id was captured by a preceding Given step.').toBeDefined();
+  const batchName = paperOutExport.uniqueNameOfRequest(testScenarioLabel($tags));
+  await eoExportApi.requestExport({
+    level: 'document',
+    id: documentId as string,
+    batchName,
+    mediaType: toApiMediaType(mediaType),
+  });
+  hybridExportContext.documentBatchName = batchName;
+});
+
+When('I call eoRequestExport without a mediaType element at transaction level', async ({
+  eoExportApi,
+  paperOutExport,
+  hybridExportContext,
+  $tags,
+}) => {
+  const transactionId = hybridExportContext.transactionId;
+  expect(transactionId, 'No transaction id was captured by a preceding Given step.').toBeDefined();
+  const batchName = paperOutExport.uniqueNameOfRequest(testScenarioLabel($tags));
+  await eoExportApi.requestExport({ level: 'transaction', id: transactionId as string, batchName });
+  hybridExportContext.transactionBatchName = batchName;
+});
+
+When('I call eoRequestExport without a mediaType element at document level', async ({
+  eoExportApi,
+  paperOutExport,
+  hybridExportContext,
+  $tags,
+}) => {
+  const documentId = hybridExportContext.documentId;
+  expect(documentId, 'No document id was captured by a preceding Given step.').toBeDefined();
+  const batchName = paperOutExport.uniqueNameOfRequest(testScenarioLabel($tags));
+  await eoExportApi.requestExport({ level: 'document', id: documentId as string, batchName });
+  hybridExportContext.documentBatchName = batchName;
+});
+
+/**
+ * Re-reaches a document whose id was captured by the scenario's Given step,
+ * so the Submitted Paper Out event(s) just created via the API can be read
+ * from the UI audit trail.
+ *
+ * Submitting via the API does not reload the browser's Workspace results
+ * table itself, but the table may still be showing whatever it did before
+ * the Given step's own selections, and the document history dialog can only
+ * be opened from a currently-rendered document row - re-navigating from the
+ * cached collection is therefore necessary, not defensive duplication,
+ * mirroring the identical re-navigation the UI-submission Then step performs.
+ */
+async function reopenAuditTrailDocumentInCollection(
+  homePage: EcoreHomePage,
+  workspacePage: EcoreWorkspacePage,
+  collectionName: string,
+): Promise<void> {
+  await resetToWorkspace(homePage, workspacePage);
+  await workspacePage.openCollection(collectionName);
+  await workspacePage.selectFirstTransaction();
+  await workspacePage.selectFirstDocument();
+  await workspacePage.openDocumentHistory();
+}
+
+When("I open the transaction's Submitted Paper Out audit trail entry", async ({
+  homePage,
+  workspacePage,
+  paperOutRequestModal,
+  documentHistory,
+}) => {
+  const collectionName = await resolveOpenCancelCollectionName(homePage, workspacePage, paperOutRequestModal);
+  await reopenAuditTrailDocumentInCollection(homePage, workspacePage, collectionName);
+  await documentHistory.expectOpen();
+});
+
+When("I open the document's Submitted Paper Out audit trail entry", async ({
+  homePage,
+  workspacePage,
+  paperOutRequestModal,
+  documentHistory,
+}) => {
+  const collectionName = await resolveOpenCancelCollectionName(homePage, workspacePage, paperOutRequestModal);
+  await reopenAuditTrailDocumentInCollection(homePage, workspacePage, collectionName);
+  await documentHistory.expectOpen();
+});
+
+When('I open the Submitted Paper Out audit trail entry for both', async ({
+  homePage,
+  workspacePage,
+  documentHistory,
+  hybridExportContext,
+}) => {
+  // TS-EC-12000-015 targets two distinct documents (see the Given step and
+  // resolveSecondaryOpenCancelCollectionName), so both audit trail entries
+  // are reached and confirmed open in turn.
+  const transactionCollectionName = hybridExportContext.transactionCollectionName;
+  const documentCollectionName = hybridExportContext.documentCollectionName;
+  expect(transactionCollectionName, 'No transaction-level collection was captured by the Given step.').toBeDefined();
+  expect(documentCollectionName, 'No document-level collection was captured by the Given step.').toBeDefined();
+
+  await reopenAuditTrailDocumentInCollection(homePage, workspacePage, transactionCollectionName as string);
+  await documentHistory.expectOpen();
+
+  await reopenAuditTrailDocumentInCollection(homePage, workspacePage, documentCollectionName as string);
+  await documentHistory.expectOpen();
+});
+
+Then('the API call succeeds', async ({ hybridExportContext }) => {
+  // eoRequestExport() throws on any non-"ok" response (see
+  // EoRequestExportClient.requestExport), so reaching this step at all is
+  // already proof the call succeeded. The batch name recorded by the When
+  // step is asserted here as the concrete, checkable evidence of that.
+  const succeeded = hybridExportContext.transactionBatchName ?? hybridExportContext.documentBatchName;
+  expect(succeeded, 'No eoRequestExport call recorded a batch name - the preceding When step did not run.').toBeDefined();
+});
+
+Then('both API calls succeed', async ({ hybridExportContext }) => {
+  expect(
+    hybridExportContext.transactionBatchName,
+    'The transaction-level eoRequestExport call recorded no batch name.',
+  ).toBeDefined();
+  expect(
+    hybridExportContext.documentBatchName,
+    'The document-level eoRequestExport call recorded no batch name.',
+  ).toBeDefined();
+});
+
+Then("the Media Type is recorded as {string} in the audit trail's Additional Information", async ({
+  documentHistory,
+  paperOutExport,
+  hybridExportContext,
+}, mediaType: string) => {
+  const nameOfRequest = hybridExportContext.transactionBatchName ?? hybridExportContext.documentBatchName;
+  expect(nameOfRequest, 'No eoRequestExport call recorded a batch name to look up.').toBeDefined();
+  const recorded = await documentHistory.recordedMediaType(nameOfRequest as string);
+  expect(recorded).toBe(paperOutExport.recordedMediaTypeValueFor(mediaType));
+});
+
+Then('the Media Type is recorded as {string} in both audit trail entries', async ({
+  homePage,
+  workspacePage,
+  documentHistory,
+  paperOutExport,
+  hybridExportContext,
+}, mediaType: string) => {
+  const expected = paperOutExport.recordedMediaTypeValueFor(mediaType);
+  const transactionCollectionName = hybridExportContext.transactionCollectionName;
+  const documentCollectionName = hybridExportContext.documentCollectionName;
+  expect(hybridExportContext.transactionBatchName, 'The transaction-level call recorded no batch name.').toBeDefined();
+  expect(hybridExportContext.documentBatchName, 'The document-level call recorded no batch name.').toBeDefined();
+  expect(transactionCollectionName, 'No transaction-level collection was captured by the Given step.').toBeDefined();
+  expect(documentCollectionName, 'No document-level collection was captured by the Given step.').toBeDefined();
+
+  // Both entries live in different documents (see the Given step), so each
+  // is re-reached in turn rather than assumed still visible from the
+  // preceding When step's own navigation.
+  await reopenAuditTrailDocumentInCollection(homePage, workspacePage, transactionCollectionName as string);
+  const transactionRecorded = await documentHistory.recordedMediaType(hybridExportContext.transactionBatchName as string);
+  expect(transactionRecorded).toBe(expected);
+
+  await reopenAuditTrailDocumentInCollection(homePage, workspacePage, documentCollectionName as string);
+  const documentRecorded = await documentHistory.recordedMediaType(hybridExportContext.documentBatchName as string);
+  expect(documentRecorded).toBe(expected);
+});
+
+/**
+ * CLEANUP - TS-EC-12000-011 through -015 each call eoRequestExport for real,
+ * creating a real Work Queue item exactly as a UI submission would, and Gate
+ * 3 v4 approved the same reversible mechanism used elsewhere in this file:
+ * `workQueue.cancelApprovalItem(batchName)`. TS-EC-12000-015 creates two
+ * items (one per level) and both must be cancelled independently.
+ *
+ * Reloads the Workspace first for the same reason the
+ * TS-EC-12000-007..-010 hook does: the scenario ends with the Document
+ * History dialog open, which is modal and would intercept every pointer
+ * event a Work Queue interaction needs.
+ */
+After(
+  {
+    tags:
+      '@ts-TS-EC-12000-011 or @ts-TS-EC-12000-012 or @ts-TS-EC-12000-013 or @ts-TS-EC-12000-014 or @ts-TS-EC-12000-015',
+  },
+  async ({ page, workQueue, workspacePage, hybridExportContext }) => {
+    const names = [hybridExportContext.transactionBatchName, hybridExportContext.documentBatchName].filter(
+      (name): name is string => name !== undefined,
+    );
+    if (names.length === 0) return;
+    try {
+      await page.reload({ waitUntil: 'domcontentloaded' });
+      await workspacePage.expectArrived();
+    } catch (error) {
+      console.warn(
+        `[EC-12000 cleanup] Could not reload the Workspace before cancelling: ${
+          error instanceof Error ? error.message : String(error)
+        }`,
+      );
+    }
+    for (const name of names) {
+      try {
+        await workQueue.cancelApprovalItem(name);
+      } catch (error) {
+        console.warn(
+          `[EC-12000 cleanup] Could not cancel the Paper Out request "${name}". It is still pending approval ` +
+            `and will lock its transaction against the next run until resolved by hand. Reason: ${
+              error instanceof Error ? error.message : String(error)
+            }`,
+        );
+      }
+    }
+  },
+);

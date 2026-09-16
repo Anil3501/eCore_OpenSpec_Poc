@@ -2,9 +2,9 @@
   "schemaVersion": "1.0.0",
   "capability": "paper-out-export",
   "release": "26.3",
-  "artifactVersion": 3,
+  "artifactVersion": 5,
   "dataClassification": "REAL_JIRA_DATA",
-  "updatedAt": "2026-09-14T18:55:00.000Z",
+  "updatedAt": "2026-09-16T02:35:00.000Z",
   "entries": [
     {
       "traceId": "TRC-EC-12000-001",
@@ -488,20 +488,26 @@
         "testPlanId": "TP-EC-12000-001",
         "testScenarioId": "TS-EC-12000-011",
         "path": "test-plans/approved/TP-EC-12000-001.json",
-        "version": 1,
+        "version": 3,
         "interfaceType": "HYBRID"
       },
       "automation": {
         "featureFile": "features/approved/paper-out-export/paper-out-media-type.feature",
         "gherkinScenario": "API mediaType=PrintToPaper at transaction level determines Media Type Paper",
         "stepDefinitions": [
-          "steps/paper-out-media-type-blocked.steps.ts"
+          "steps/paper-out-media-type.steps.ts"
         ],
-        "pageObjects": [],
-        "components": [],
-        "fixtures": [],
+        "pageObjects": [
+          "src/pages/ecore-workspace.page.ts"
+        ],
+        "components": [
+          "src/components/document-history.component.ts"
+        ],
+        "fixtures": [
+          "src/fixtures/test.ts"
+        ],
         "generatedTest": ".features-gen/features/approved/paper-out-export/paper-out-media-type.feature.spec.js",
-        "automationStatus": "BLOCKED",
+        "automationStatus": "EXECUTABLE",
         "scenarioAction": "CREATE"
       },
       "executionRefs": [
@@ -509,6 +515,11 @@
           "executionId": "EXEC-EC-12000-001",
           "result": "BLOCKED",
           "recordPath": "traceability/executions/EXEC-EC-12000-001.json"
+        },
+        {
+          "executionId": "EXEC-EC-12000-002",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-EC-12000-002.json"
         }
       ]
     },
@@ -533,20 +544,26 @@
         "testPlanId": "TP-EC-12000-001",
         "testScenarioId": "TS-EC-12000-012",
         "path": "test-plans/approved/TP-EC-12000-001.json",
-        "version": 1,
+        "version": 3,
         "interfaceType": "HYBRID"
       },
       "automation": {
         "featureFile": "features/approved/paper-out-export/paper-out-media-type.feature",
         "gherkinScenario": "API mediaType=PrintToPaper at document level determines Media Type Paper",
         "stepDefinitions": [
-          "steps/paper-out-media-type-blocked.steps.ts"
+          "steps/paper-out-media-type.steps.ts"
         ],
-        "pageObjects": [],
-        "components": [],
-        "fixtures": [],
+        "pageObjects": [
+          "src/pages/ecore-workspace.page.ts"
+        ],
+        "components": [
+          "src/components/document-history.component.ts"
+        ],
+        "fixtures": [
+          "src/fixtures/test.ts"
+        ],
         "generatedTest": ".features-gen/features/approved/paper-out-export/paper-out-media-type.feature.spec.js",
-        "automationStatus": "BLOCKED",
+        "automationStatus": "EXECUTABLE",
         "scenarioAction": "CREATE"
       },
       "executionRefs": [
@@ -554,6 +571,11 @@
           "executionId": "EXEC-EC-12000-001",
           "result": "BLOCKED",
           "recordPath": "traceability/executions/EXEC-EC-12000-001.json"
+        },
+        {
+          "executionId": "EXEC-EC-12000-002",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-EC-12000-002.json"
         }
       ]
     },
@@ -578,20 +600,26 @@
         "testPlanId": "TP-EC-12000-001",
         "testScenarioId": "TS-EC-12000-013",
         "path": "test-plans/approved/TP-EC-12000-001.json",
-        "version": 1,
+        "version": 3,
         "interfaceType": "HYBRID"
       },
       "automation": {
         "featureFile": "features/approved/paper-out-export/paper-out-media-type.feature",
         "gherkinScenario": "API mediaType=SaveAsElectronicFile at transaction level determines Media Type Electronic",
         "stepDefinitions": [
-          "steps/paper-out-media-type-blocked.steps.ts"
+          "steps/paper-out-media-type.steps.ts"
         ],
-        "pageObjects": [],
-        "components": [],
-        "fixtures": [],
+        "pageObjects": [
+          "src/pages/ecore-workspace.page.ts"
+        ],
+        "components": [
+          "src/components/document-history.component.ts"
+        ],
+        "fixtures": [
+          "src/fixtures/test.ts"
+        ],
         "generatedTest": ".features-gen/features/approved/paper-out-export/paper-out-media-type.feature.spec.js",
-        "automationStatus": "BLOCKED",
+        "automationStatus": "EXECUTABLE",
         "scenarioAction": "CREATE"
       },
       "executionRefs": [
@@ -599,6 +627,11 @@
           "executionId": "EXEC-EC-12000-001",
           "result": "BLOCKED",
           "recordPath": "traceability/executions/EXEC-EC-12000-001.json"
+        },
+        {
+          "executionId": "EXEC-EC-12000-002",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-EC-12000-002.json"
         }
       ]
     },
@@ -623,20 +656,26 @@
         "testPlanId": "TP-EC-12000-001",
         "testScenarioId": "TS-EC-12000-014",
         "path": "test-plans/approved/TP-EC-12000-001.json",
-        "version": 1,
+        "version": 3,
         "interfaceType": "HYBRID"
       },
       "automation": {
         "featureFile": "features/approved/paper-out-export/paper-out-media-type.feature",
         "gherkinScenario": "API mediaType=SaveAsElectronicFile at document level determines Media Type Electronic",
         "stepDefinitions": [
-          "steps/paper-out-media-type-blocked.steps.ts"
+          "steps/paper-out-media-type.steps.ts"
         ],
-        "pageObjects": [],
-        "components": [],
-        "fixtures": [],
+        "pageObjects": [
+          "src/pages/ecore-workspace.page.ts"
+        ],
+        "components": [
+          "src/components/document-history.component.ts"
+        ],
+        "fixtures": [
+          "src/fixtures/test.ts"
+        ],
         "generatedTest": ".features-gen/features/approved/paper-out-export/paper-out-media-type.feature.spec.js",
-        "automationStatus": "BLOCKED",
+        "automationStatus": "EXECUTABLE",
         "scenarioAction": "CREATE"
       },
       "executionRefs": [
@@ -644,6 +683,11 @@
           "executionId": "EXEC-EC-12000-001",
           "result": "BLOCKED",
           "recordPath": "traceability/executions/EXEC-EC-12000-001.json"
+        },
+        {
+          "executionId": "EXEC-EC-12000-002",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-EC-12000-002.json"
         }
       ]
     },
@@ -668,20 +712,26 @@
         "testPlanId": "TP-EC-12000-001",
         "testScenarioId": "TS-EC-12000-015",
         "path": "test-plans/approved/TP-EC-12000-001.json",
-        "version": 1,
+        "version": 3,
         "interfaceType": "HYBRID"
       },
       "automation": {
         "featureFile": "features/approved/paper-out-export/paper-out-media-type.feature",
         "gherkinScenario": "API call omitting mediaType entirely determines Media Type Electronic",
         "stepDefinitions": [
-          "steps/paper-out-media-type-blocked.steps.ts"
+          "steps/paper-out-media-type.steps.ts"
         ],
-        "pageObjects": [],
-        "components": [],
-        "fixtures": [],
+        "pageObjects": [
+          "src/pages/ecore-workspace.page.ts"
+        ],
+        "components": [
+          "src/components/document-history.component.ts"
+        ],
+        "fixtures": [
+          "src/fixtures/test.ts"
+        ],
         "generatedTest": ".features-gen/features/approved/paper-out-export/paper-out-media-type.feature.spec.js",
-        "automationStatus": "BLOCKED",
+        "automationStatus": "EXECUTABLE",
         "scenarioAction": "CREATE"
       },
       "executionRefs": [
@@ -689,6 +739,11 @@
           "executionId": "EXEC-EC-12000-001",
           "result": "BLOCKED",
           "recordPath": "traceability/executions/EXEC-EC-12000-001.json"
+        },
+        {
+          "executionId": "EXEC-EC-12000-002",
+          "result": "PASSED",
+          "recordPath": "traceability/executions/EXEC-EC-12000-002.json"
         }
       ]
     },

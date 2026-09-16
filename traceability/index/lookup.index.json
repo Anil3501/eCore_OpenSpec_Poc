@@ -1116,6 +1116,19 @@
             "TRC-EC-12000-019"
           ]
         }
+      ],
+      "EXEC-EC-12000-002": [
+        {
+          "capability": "paper-out-export",
+          "rtmPath": "traceability/capabilities/paper-out-export.rtm.json",
+          "traceIds": [
+            "TRC-EC-12000-011",
+            "TRC-EC-12000-012",
+            "TRC-EC-12000-013",
+            "TRC-EC-12000-014",
+            "TRC-EC-12000-015"
+          ]
+        }
       ]
     },
     "byDefectId": {

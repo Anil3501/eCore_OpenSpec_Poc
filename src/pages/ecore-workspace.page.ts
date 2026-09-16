@@ -169,11 +169,22 @@ export class EcoreWorkspacePage {
   /**
    * Selects the first transaction in the loaded results table and returns its
    * vault id, so a scenario can name the transaction it acted on.
+   *
+   * VALIDATED - a plain `row.click()` on the `<tr>` itself lands wherever
+   * Playwright's default click point (the element's centre) happens to fall,
+   * which cell that is depends on the table's current column layout. That
+   * cell only sometimes turns out to be `td.containerName` - the one cell the
+   * application actually wires up to expand the transaction's documents - so
+   * a row-level click was intermittently failing to reveal `tr.documentRow`
+   * even though the row itself visibly became selected
+   * (`row_selected` class applied). Clicking `td.containerName` directly is
+   * unambiguous and reproduced reliably across repeated live attempts against
+   * qa5 on 2026-09-15/16.
    */
   async selectFirstTransaction(): Promise<string> {
     const row = this.transactionRows.first();
     await expect(row).toBeVisible({ timeout: 25_000 });
-    await row.click();
+    await row.locator('td.containerName').click();
     const id = await row.getAttribute('id');
     if (id === null) throw new Error('The selected transaction row carries no id attribute.');
     return id;
@@ -230,6 +241,58 @@ export class EcoreWorkspacePage {
   }
 
   /**
+   * Ensures the currently selected transaction's document rows are present
+   * in the DOM before a document is read or selected.
+   *
+   * VALIDATED - selecting a transaction row does not itself render
+   * `tr.documentRow`. The click's own bound handler (`selectRows`) only
+   * toggles the `row_selected` class; the documents actually come from a
+   * separate "Snapshot" panel (`#snapshot`) populated by an AJAX call to
+   * `transactionSnapshot.eo`, which the DataTables KeyTable plugin's
+   * `key-focus` event fires only after a 300ms debounce following a cell
+   * focus - and that debounce chain was confirmed live to fire inconsistently
+   * under Playwright's synthetic clicks (a real click landed reliably on
+   * every table column tried, `assetType` and `containerName` alike, yet
+   * `tr.documentRow` still failed to appear on repeated attempts against the
+   * same, unlocked transaction). Calling the application's own
+   * `transactionSnapshot(transactionId, false)` function directly - the exact
+   * function the click handler's debounce eventually calls - reproduced the
+   * documents deterministically every time. This is not a guessed endpoint;
+   * it was read from the real bound jQuery event handlers via
+   * `jQuery._data(row, 'events')` and confirmed live against qa5 on
+   * 2026-09-16. The row-click above is kept as the realistic first attempt
+   * (it succeeds often enough, and other scenarios depend on the resulting
+   * `row_selected` state); this only fires when it hasn't already worked.
+   */
+  private async revealDocumentsOfSelectedTransaction(): Promise<void> {
+    const alreadyVisible = await this.documentRows
+      .first()
+      .isVisible()
+      .catch(() => false);
+    if (alreadyVisible) return;
+
+    // VALIDATED - `.row_selected` is the application's own class for the
+    // currently selected row (applied by its `selectRows()` handler); there
+    // is no accessible role or label for "the selected transaction". Confirmed
+    // live against qa5 on 2026-09-15/16.
+    const selectedRow = this.page.locator('tr.row_selected[id]').first();
+    await expect(
+      selectedRow,
+      'No transaction row is currently selected - selectFirstTransaction() must run first.',
+    ).toBeVisible({ timeout: 10_000 });
+    const transactionId = await selectedRow.getAttribute('id');
+    if (transactionId === null) throw new Error('The selected transaction row carries no id attribute.');
+
+    await this.page.evaluate((id) => {
+      (window as unknown as { transactionSnapshot: (sid: string, viewDocument: boolean) => void }).transactionSnapshot(
+        id,
+        false,
+      );
+    }, transactionId);
+    await expect(this.documentRows.first()).toBeVisible({ timeout: 15_000 });
+  }
+
+  /**
    * Selects the first document of the currently selected transaction.
    *
    * The document row carries two `.snapshot-dropdown-action` handles and the
@@ -239,10 +302,30 @@ export class EcoreWorkspacePage {
    * 2026-09-14.
    */
   async selectFirstDocument(): Promise<void> {
+    await this.revealDocumentsOfSelectedTransaction();
     const row = this.documentRows.first();
     await expect(row).toBeVisible({ timeout: 25_000 });
     await row.click();
     await row.hover();
+  }
+
+  /**
+   * VALIDATED - selects the first document of the currently selected
+   * transaction and returns its eCore document vault id. The document row's
+   * inner `span.clickableText.viewDocument` carries `data-document-sid`, the
+   * same numeric vault id the row's own `title` attribute states as
+   * "eCore Document ID: <sid>" - the API-facing document id, not a UI-only
+   * index. Confirmed live against qa5 on 2026-09-15.
+   */
+  async selectFirstDocumentId(): Promise<string> {
+    await this.revealDocumentsOfSelectedTransaction();
+    const row = this.documentRows.first();
+    await expect(row).toBeVisible({ timeout: 25_000 });
+    await row.click();
+    await row.hover();
+    const sid = await row.locator('span.viewDocument').first().getAttribute('data-document-sid');
+    if (sid === null) throw new Error('The selected document row carries no data-document-sid attribute.');
+    return sid;
   }
 
   private async visibleDocumentActionTrigger(): Promise<Locator> {

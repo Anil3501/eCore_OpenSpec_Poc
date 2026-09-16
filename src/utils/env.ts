@@ -81,6 +81,13 @@ const environmentSchema = z.object({
   ECORE_ORGANIZATION: optionalTrimmed,
   ECORE_ORGANIZATION_ID: optionalTrimmed,
   ECORE_PASSWORD: optionalTrimmed,
+  // eoLogin / eoRequestExport integration API (BLOCKER-EC-12000-005). A
+  // separate, dedicated API-enabled account - never ECORE_USERNAME/PASSWORD.
+  // Organization is deliberately not duplicated here: it reuses
+  // ECORE_ORGANIZATION (same value confirmed live 2026-09-15).
+  ECORE_API_BASE_URL: optionalTrimmed,
+  ECORE_API_LOGIN_USERNAME: optionalTrimmed,
+  ECORE_API_KEY: optionalTrimmed,
   JIRA_URL: optionalTrimmed,
   JIRA_EMAIL: optionalTrimmed,
   JIRA_API_TOKEN: optionalTrimmed,
@@ -110,6 +117,9 @@ const parsed = environmentSchema.safeParse({
   ECORE_ORGANIZATION: process.env.ECORE_ORGANIZATION,
   ECORE_ORGANIZATION_ID: process.env.ECORE_ORGANIZATION_ID,
   ECORE_PASSWORD: process.env.ECORE_PASSWORD,
+  ECORE_API_BASE_URL: process.env.ECORE_API_BASE_URL,
+  ECORE_API_LOGIN_USERNAME: process.env.ECORE_API_LOGIN_USERNAME,
+  ECORE_API_KEY: process.env.ECORE_API_KEY,
   JIRA_URL: process.env.JIRA_URL,
   JIRA_EMAIL: process.env.JIRA_EMAIL,
   JIRA_API_TOKEN: process.env.JIRA_API_TOKEN,
@@ -143,6 +153,21 @@ export interface EcoreLogin {
   organization: string;
   organizationId: string;
   password: string;
+}
+
+/**
+ * eoLogin / eoRequestExport integration API configuration (BLOCKER-EC-12000-005).
+ *
+ * A dedicated, API-enabled account distinct from the UI `ECORE_USERNAME`
+ * account - eCore rejects `eoLogin` for a non-API account with
+ * `API_KEY_INVALID_FOR_NON_APIUSER`. `organization` reuses `ECORE_ORGANIZATION`
+ * (same value, confirmed live 2026-09-15) rather than duplicating it.
+ */
+export interface EoApiConfig {
+  baseUrl: string;
+  loginUsername: string;
+  apiKey: string;
+  organization: string;
 }
 
 /**
@@ -213,6 +238,7 @@ export interface FrameworkEnvironment {
   readonly hasApiBaseUrl: boolean;
   readonly hasCredentials: boolean;
   readonly hasEcoreLogin: boolean;
+  readonly hasEoApiConfig: boolean;
   readonly hasJiraConfig: boolean;
   readonly hasJiraBugConfig: boolean;
   readonly coverage: CoverageSettings;
@@ -224,6 +250,8 @@ export interface FrameworkEnvironment {
   requireCredentials(): Credentials;
   /** Required lazily, only for the eCore organization login form. */
   requireEcoreLogin(): EcoreLogin;
+  /** Required lazily, only by an eoRequestExport-calling (HYBRID) scenario. */
+  requireEoApiConfig(): EoApiConfig;
   /** Required lazily, only by a direct Jira REST fallback. */
   requireJiraConfig(): JiraConfig;
   /** Required lazily, only when the bug-analyzer files a defect in Jira. */
@@ -256,6 +284,8 @@ const ECORE_KEYS = [
 const JIRA_KEYS = ['JIRA_URL', 'JIRA_EMAIL', 'JIRA_API_TOKEN', 'JIRA_PROJECT_KEY'] as const;
 
 const hasEcoreLogin = ECORE_KEYS.every((key) => values[key] !== undefined);
+const EO_API_KEYS = ['ECORE_API_BASE_URL', 'ECORE_API_LOGIN_USERNAME', 'ECORE_API_KEY', 'ECORE_ORGANIZATION'] as const;
+const hasEoApiConfig = EO_API_KEYS.every((key) => values[key] !== undefined);
 const hasJiraConfig = JIRA_KEYS.every((key) => values[key] !== undefined);
 
 // The bug project falls back to the story project; only the assignee is truly
@@ -282,6 +312,7 @@ export const env: FrameworkEnvironment = {
   hasApiBaseUrl,
   hasCredentials,
   hasEcoreLogin,
+  hasEoApiConfig,
   hasJiraConfig,
   hasJiraBugConfig,
   coverage: {
@@ -347,6 +378,18 @@ export const env: FrameworkEnvironment = {
     };
   },
 
+  requireEoApiConfig(): EoApiConfig {
+    if (!hasEoApiConfig) {
+      throw missingError(EO_API_KEYS, 'the eoLogin/eoRequestExport integration API');
+    }
+    return {
+      baseUrl: values.ECORE_API_BASE_URL as string,
+      loginUsername: values.ECORE_API_LOGIN_USERNAME as string,
+      apiKey: values.ECORE_API_KEY as string,
+      organization: values.ECORE_ORGANIZATION as string,
+    };
+  },
+
   requireJiraConfig(): JiraConfig {
     if (!hasJiraConfig) {
       throw missingError(JIRA_KEYS, 'the Jira REST fallback');
@@ -388,6 +431,7 @@ export const env: FrameworkEnvironment = {
       apiAuthMode: values.API_AUTH_MODE,
       credentialsConfigured: hasCredentials,
       ecoreLoginConfigured: hasEcoreLogin,
+      eoApiConfigured: hasEoApiConfig,
       jiraConfigured: hasJiraConfig,
       jiraBugFilingConfigured: hasJiraBugConfig,
       coverageEnabled: values.COVERAGE_ENABLED,

@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "testPlanId": "TP-EC-12000-001",
-  "artifactVersion": 2,
+  "artifactVersion": 3,
   "release": "26.3",
   "capability": "paper-out-export",
   "jiraStoryIds": [
@@ -72,7 +72,9 @@
     "openspec/changes/track-paper-out-media-type/specs/paper-out-export/spec.md.",
     "reports/validation/ecore-api-discovery.json - confirms eoRequestExport does not appear in observedEndpoints or declaredButNotObserved, i.e. it is genuinely unverified rather than merely unobserved.",
     "Application observation at the PLAYWRIGHT_VALIDATION stage to capture the real eoRequestExport request/response and to confirm the Collections navigation path resolved in AMB-EC-12000-001.",
-    "test-data/paper-out-export.sample.json (to be created at IMPLEMENTATION) for the fabricated requester/approver values."
+    "test-data/paper-out-export.sample.json (to be created at IMPLEMENTATION) for the fabricated requester/approver values.",
+    "reports/validation/TP-EC-12000-001-api-validation.json - records the AGENT_DRAFTED, human-dictated eoRequestExport endpoint description (contractSource UNVERIFIED); see CLR-TP-EC-12000-004 for the open reviewer decision this depends on.",
+    "reports/jira/attachments/eoRequestExport.xml and Paper-Out.xml - added 2026-09-15; SoapUI operation metadata and a fourth SOAP-enveloped request sample respectively. Neither is a response sample."
   ],
   "risks": [
     {
@@ -98,6 +100,18 @@
       "description": "The Collections entry point's reuse of the same modal (AMB-EC-12000-001) is a human-supplied answer, not yet confirmed against the running application.",
       "level": "LOW",
       "mitigation": "The Collections navigation path is validated against the real application via Playwright MCP at PLAYWRIGHT_VALIDATION before automation asserts it as fact."
+    },
+    {
+      "riskId": "RISK-TP-EC-12000-005",
+      "description": "The eoRequestExport endpoint (method, path, content-type and form-part names) was supplied by a human reviewer in chat rather than an independently observed or documented source -- no WSDL, integration guide, or captured network trace corroborates it. Per AGENTS.md rule 4's drafting exception it is recorded as AGENT_DRAFTED with contractSource UNVERIFIED. If the dictated endpoint is wrong, the call may fail safely, or may reach an unintended host/operation with a real side effect, because the request is genuinely issued rather than merely observed.",
+      "level": "HIGH",
+      "mitigation": "TS-EC-12000-011 through -015 remain scaffoldingOnly: true; Media Type continues to be asserted exclusively via the UI audit trail (CLR-TP-EC-12000-001), never via the API response, so a wrong or malformed response cannot produce a false pass. expectedStatusCodes=[200] is PROPOSED only and does not gate the acceptance criterion."
+    },
+    {
+      "riskId": "RISK-TP-EC-12000-006",
+      "description": "eoRequestExport is destructive-by-name (its own request schema carries deleteIfEmpty and irreversible retentionPolicy attributes) and would now be called for real, against the shared qa5 fixture, by TS-EC-12000-011 through -015 -- in addition to the eight UI-driven Submit+Cancel scenarios (TS-EC-12000-003, -007 through -010, -016) already approved in v1/v2 against the same single qualifying fixture collection.",
+      "level": "HIGH",
+      "mitigation": "CLEANUP mechanism confirmed at Gate 2 (reviewer Anil, 2026-09-15) and observed live against qa5: Print the Work Queue item, select all in the Verify Paper Out modal, click Verify, confirm the alert -- this clears the item from the Work Queue (mirrors the existing MANUAL_ONLY flow documented in TS-EC-12000-020). Fixtures must be selected dynamically from the currently available Collections list at run time (never a hard-coded id), reducing contention with the eight already-approved UI scenarios sharing the same pool."
     }
   ],
   "scenarios": [
@@ -323,23 +337,25 @@
       ],
       "expectedResult": "The API call succeeds and the Media Type is recorded as \"Paper\", confirmed via the Additional Information shown on the Submitted Paper Out event in the audit trail.",
       "testDataRequirements": [
-        "A valid eoRequestExport request payload, once its contract is observed."
+        "A valid eoRequestExport request payload built from export-26.3.xsd, following the pattern in reports/jira/attachments/eoRequestExport-107302.xml, -107642.xml, -107697.xml, eoRequestExport.xml and Paper-Out.xml (the last two added 2026-09-15).",
+        "Fixture (Collection) must be selected dynamically from the currently available Collections list at run time -- never a hard-coded collection id -- per CLR-TP-EC-12000-004 (resolved 2026-09-15).",
+        "After asserting the UI audit trail, the created Work Queue item must be cleared via: Print -> Verify Paper Out modal -> select all -> Verify -> confirm alert (CLR-TP-EC-12000-004 resolution)."
       ],
-      "automationCandidate": false,
-      "automationDecision": "REVIEW_REQUIRED",
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
       "priority": "HIGH",
       "riskTag": "risk-high",
       "suiteTag": "suite-regression",
-      "scenarioAction": "REVIEW_REQUIRED",
+      "scenarioAction": "UPDATE",
       "interfaceType": "HYBRID",
       "apiContract": {
         "method": "POST",
-        "path": "UNVERIFIED - eoRequestExport does not appear in reports/validation/ecore-api-discovery.json observedEndpoints or declaredButNotObserved; no path is known. To be captured via Playwright MCP at PLAYWRIGHT_VALIDATION.",
+        "path": "${ecoreBaseUrl}/ecore/ (e.g. https://qa5.eoriginal.org:8443/ecore/) -- POST, multipart/form-data with parts action=eoRequestExport and instructionsXML=<eoExportInstructions XML>. AGENT_DRAFTED from human dictation; not independently corroborated.",
         "expectedStatusCodes": [
           200
         ],
         "contractSource": "UNVERIFIED",
-        "contractProvenance": "No entry exists in this framework's API-surface inventory for eoRequestExport. AMB-EC-12000-002 resolution: capture via Playwright MCP network observation at PLAYWRIGHT_VALIDATION, promote to HUMAN_APPROVED only by a human reviewer before this can back any assertion. Declared HYBRID at Gate 2 (reviewer decision on CLR-TP-EC-12000-001): the API call sets state, but Media Type is currently only observable via the UI audit trail (AC-016), so the assertion needs both.",
+        "contractProvenance": "AGENT_DRAFTED - DICTATED: method=POST, path=${ecoreBaseUrl}/ecore/ (e.g. https://qa5.eoriginal.org:8443/ecore/), content-type=multipart/form-data, form parts action=eoRequestExport and instructionsXML (the eoExportInstructions XML file part). Dictated verbatim by a human reviewer in chat on 2026-09-15 and confirmed a second time after being composed back to them; see reports/validation/TP-EC-12000-001-api-validation.json#endpoint. PROPOSED: expectedStatusCodes=[200] (agent-proposed only; no success or fault response has been observed or dictated). Request body fields remain OPENAPI-sourced from export-26.3.xsd (unchanged from v2). No independent source (WSDL, integration guide, captured network trace) corroborates the endpoint, so this stays UNVERIFIED and can never become HUMAN_APPROVED without a responseShapeHash, which requires a real observed response body. AC-EC-12000-011 therefore continues to be proven exclusively via the UI audit trail (CLR-TP-EC-12000-001), never via the API response; scaffoldingOnly remains true.",
         "scaffoldingOnly": true
       }
     },
@@ -359,23 +375,25 @@
       ],
       "expectedResult": "The API call succeeds and the Media Type is recorded as \"Paper\", confirmed via the Additional Information shown on the Submitted Paper Out event in the audit trail.",
       "testDataRequirements": [
-        "A valid eoRequestExport request payload, once its contract is observed."
+        "A valid eoRequestExport request payload built from export-26.3.xsd, following the pattern in reports/jira/attachments/eoRequestExport-107302.xml, -107642.xml, -107697.xml, eoRequestExport.xml and Paper-Out.xml (the last two added 2026-09-15).",
+        "Fixture (Collection) must be selected dynamically from the currently available Collections list at run time -- never a hard-coded collection id -- per CLR-TP-EC-12000-004 (resolved 2026-09-15).",
+        "After asserting the UI audit trail, the created Work Queue item must be cleared via: Print -> Verify Paper Out modal -> select all -> Verify -> confirm alert (CLR-TP-EC-12000-004 resolution)."
       ],
-      "automationCandidate": false,
-      "automationDecision": "REVIEW_REQUIRED",
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
       "priority": "HIGH",
       "riskTag": "risk-high",
       "suiteTag": "suite-regression",
-      "scenarioAction": "REVIEW_REQUIRED",
+      "scenarioAction": "UPDATE",
       "interfaceType": "HYBRID",
       "apiContract": {
         "method": "POST",
-        "path": "UNVERIFIED - eoRequestExport does not appear in reports/validation/ecore-api-discovery.json observedEndpoints or declaredButNotObserved; no path is known. To be captured via Playwright MCP at PLAYWRIGHT_VALIDATION.",
+        "path": "${ecoreBaseUrl}/ecore/ (e.g. https://qa5.eoriginal.org:8443/ecore/) -- POST, multipart/form-data with parts action=eoRequestExport and instructionsXML=<eoExportInstructions XML>. AGENT_DRAFTED from human dictation; not independently corroborated.",
         "expectedStatusCodes": [
           200
         ],
         "contractSource": "UNVERIFIED",
-        "contractProvenance": "No entry exists in this framework's API-surface inventory for eoRequestExport. AMB-EC-12000-002 resolution: capture via Playwright MCP network observation at PLAYWRIGHT_VALIDATION, promote to HUMAN_APPROVED only by a human reviewer before this can back any assertion. Declared HYBRID at Gate 2 (reviewer decision on CLR-TP-EC-12000-001): the API call sets state, but Media Type is currently only observable via the UI audit trail (AC-016), so the assertion needs both.",
+        "contractProvenance": "AGENT_DRAFTED - DICTATED: method=POST, path=${ecoreBaseUrl}/ecore/ (e.g. https://qa5.eoriginal.org:8443/ecore/), content-type=multipart/form-data, form parts action=eoRequestExport and instructionsXML (the eoExportInstructions XML file part). Dictated verbatim by a human reviewer in chat on 2026-09-15 and confirmed a second time after being composed back to them; see reports/validation/TP-EC-12000-001-api-validation.json#endpoint. PROPOSED: expectedStatusCodes=[200] (agent-proposed only; no success or fault response has been observed or dictated). Request body fields remain OPENAPI-sourced from export-26.3.xsd (unchanged from v2). No independent source (WSDL, integration guide, captured network trace) corroborates the endpoint, so this stays UNVERIFIED and can never become HUMAN_APPROVED without a responseShapeHash, which requires a real observed response body. AC-EC-12000-012 therefore continues to be proven exclusively via the UI audit trail (CLR-TP-EC-12000-001), never via the API response; scaffoldingOnly remains true.",
         "scaffoldingOnly": true
       }
     },
@@ -395,23 +413,25 @@
       ],
       "expectedResult": "The API call succeeds and the Media Type is recorded as \"Electronic\", confirmed via the Additional Information shown on the Submitted Paper Out event in the audit trail.",
       "testDataRequirements": [
-        "A valid eoRequestExport request payload, once its contract is observed."
+        "A valid eoRequestExport request payload built from export-26.3.xsd, following the pattern in reports/jira/attachments/eoRequestExport-107302.xml, -107642.xml, -107697.xml, eoRequestExport.xml and Paper-Out.xml (the last two added 2026-09-15).",
+        "Fixture (Collection) must be selected dynamically from the currently available Collections list at run time -- never a hard-coded collection id -- per CLR-TP-EC-12000-004 (resolved 2026-09-15).",
+        "After asserting the UI audit trail, the created Work Queue item must be cleared via: Print -> Verify Paper Out modal -> select all -> Verify -> confirm alert (CLR-TP-EC-12000-004 resolution)."
       ],
-      "automationCandidate": false,
-      "automationDecision": "REVIEW_REQUIRED",
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
       "priority": "HIGH",
       "riskTag": "risk-high",
       "suiteTag": "suite-regression",
-      "scenarioAction": "REVIEW_REQUIRED",
+      "scenarioAction": "UPDATE",
       "interfaceType": "HYBRID",
       "apiContract": {
         "method": "POST",
-        "path": "UNVERIFIED - eoRequestExport does not appear in reports/validation/ecore-api-discovery.json observedEndpoints or declaredButNotObserved; no path is known. To be captured via Playwright MCP at PLAYWRIGHT_VALIDATION.",
+        "path": "${ecoreBaseUrl}/ecore/ (e.g. https://qa5.eoriginal.org:8443/ecore/) -- POST, multipart/form-data with parts action=eoRequestExport and instructionsXML=<eoExportInstructions XML>. AGENT_DRAFTED from human dictation; not independently corroborated.",
         "expectedStatusCodes": [
           200
         ],
         "contractSource": "UNVERIFIED",
-        "contractProvenance": "No entry exists in this framework's API-surface inventory for eoRequestExport. AMB-EC-12000-002 resolution: capture via Playwright MCP network observation at PLAYWRIGHT_VALIDATION, promote to HUMAN_APPROVED only by a human reviewer before this can back any assertion. Declared HYBRID at Gate 2 (reviewer decision on CLR-TP-EC-12000-001): the API call sets state, but Media Type is currently only observable via the UI audit trail (AC-016), so the assertion needs both.",
+        "contractProvenance": "AGENT_DRAFTED - DICTATED: method=POST, path=${ecoreBaseUrl}/ecore/ (e.g. https://qa5.eoriginal.org:8443/ecore/), content-type=multipart/form-data, form parts action=eoRequestExport and instructionsXML (the eoExportInstructions XML file part). Dictated verbatim by a human reviewer in chat on 2026-09-15 and confirmed a second time after being composed back to them; see reports/validation/TP-EC-12000-001-api-validation.json#endpoint. PROPOSED: expectedStatusCodes=[200] (agent-proposed only; no success or fault response has been observed or dictated). Request body fields remain OPENAPI-sourced from export-26.3.xsd (unchanged from v2). No independent source (WSDL, integration guide, captured network trace) corroborates the endpoint, so this stays UNVERIFIED and can never become HUMAN_APPROVED without a responseShapeHash, which requires a real observed response body. AC-EC-12000-013 therefore continues to be proven exclusively via the UI audit trail (CLR-TP-EC-12000-001), never via the API response; scaffoldingOnly remains true.",
         "scaffoldingOnly": true
       }
     },
@@ -431,23 +451,25 @@
       ],
       "expectedResult": "The API call succeeds and the Media Type is recorded as \"Electronic\", confirmed via the Additional Information shown on the Submitted Paper Out event in the audit trail.",
       "testDataRequirements": [
-        "A valid eoRequestExport request payload, once its contract is observed."
+        "A valid eoRequestExport request payload built from export-26.3.xsd, following the pattern in reports/jira/attachments/eoRequestExport-107302.xml, -107642.xml, -107697.xml, eoRequestExport.xml and Paper-Out.xml (the last two added 2026-09-15).",
+        "Fixture (Collection) must be selected dynamically from the currently available Collections list at run time -- never a hard-coded collection id -- per CLR-TP-EC-12000-004 (resolved 2026-09-15).",
+        "After asserting the UI audit trail, the created Work Queue item must be cleared via: Print -> Verify Paper Out modal -> select all -> Verify -> confirm alert (CLR-TP-EC-12000-004 resolution)."
       ],
-      "automationCandidate": false,
-      "automationDecision": "REVIEW_REQUIRED",
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
       "priority": "HIGH",
       "riskTag": "risk-high",
       "suiteTag": "suite-regression",
-      "scenarioAction": "REVIEW_REQUIRED",
+      "scenarioAction": "UPDATE",
       "interfaceType": "HYBRID",
       "apiContract": {
         "method": "POST",
-        "path": "UNVERIFIED - eoRequestExport does not appear in reports/validation/ecore-api-discovery.json observedEndpoints or declaredButNotObserved; no path is known. To be captured via Playwright MCP at PLAYWRIGHT_VALIDATION.",
+        "path": "${ecoreBaseUrl}/ecore/ (e.g. https://qa5.eoriginal.org:8443/ecore/) -- POST, multipart/form-data with parts action=eoRequestExport and instructionsXML=<eoExportInstructions XML>. AGENT_DRAFTED from human dictation; not independently corroborated.",
         "expectedStatusCodes": [
           200
         ],
         "contractSource": "UNVERIFIED",
-        "contractProvenance": "No entry exists in this framework's API-surface inventory for eoRequestExport. AMB-EC-12000-002 resolution: capture via Playwright MCP network observation at PLAYWRIGHT_VALIDATION, promote to HUMAN_APPROVED only by a human reviewer before this can back any assertion. Declared HYBRID at Gate 2 (reviewer decision on CLR-TP-EC-12000-001): the API call sets state, but Media Type is currently only observable via the UI audit trail (AC-016), so the assertion needs both.",
+        "contractProvenance": "AGENT_DRAFTED - DICTATED: method=POST, path=${ecoreBaseUrl}/ecore/ (e.g. https://qa5.eoriginal.org:8443/ecore/), content-type=multipart/form-data, form parts action=eoRequestExport and instructionsXML (the eoExportInstructions XML file part). Dictated verbatim by a human reviewer in chat on 2026-09-15 and confirmed a second time after being composed back to them; see reports/validation/TP-EC-12000-001-api-validation.json#endpoint. PROPOSED: expectedStatusCodes=[200] (agent-proposed only; no success or fault response has been observed or dictated). Request body fields remain OPENAPI-sourced from export-26.3.xsd (unchanged from v2). No independent source (WSDL, integration guide, captured network trace) corroborates the endpoint, so this stays UNVERIFIED and can never become HUMAN_APPROVED without a responseShapeHash, which requires a real observed response body. AC-EC-12000-014 therefore continues to be proven exclusively via the UI audit trail (CLR-TP-EC-12000-001), never via the API response; scaffoldingOnly remains true.",
         "scaffoldingOnly": true
       }
     },
@@ -468,23 +490,25 @@
       ],
       "expectedResult": "Both API calls succeed and the Media Type is recorded as \"Electronic\" in both cases, confirmed via the Additional Information shown on the Submitted Paper Out event in the audit trail.",
       "testDataRequirements": [
-        "A valid eoRequestExport request payload, once its contract is observed."
+        "A valid eoRequestExport request payload built from export-26.3.xsd, following the pattern in reports/jira/attachments/eoRequestExport-107302.xml, -107642.xml, -107697.xml, eoRequestExport.xml and Paper-Out.xml (the last two added 2026-09-15).",
+        "Fixture (Collection) must be selected dynamically from the currently available Collections list at run time -- never a hard-coded collection id -- per CLR-TP-EC-12000-004 (resolved 2026-09-15).",
+        "After asserting the UI audit trail, the created Work Queue item must be cleared via: Print -> Verify Paper Out modal -> select all -> Verify -> confirm alert (CLR-TP-EC-12000-004 resolution)."
       ],
-      "automationCandidate": false,
-      "automationDecision": "REVIEW_REQUIRED",
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
       "priority": "HIGH",
       "riskTag": "risk-high",
       "suiteTag": "suite-regression",
-      "scenarioAction": "REVIEW_REQUIRED",
+      "scenarioAction": "UPDATE",
       "interfaceType": "HYBRID",
       "apiContract": {
         "method": "POST",
-        "path": "UNVERIFIED - eoRequestExport does not appear in reports/validation/ecore-api-discovery.json observedEndpoints or declaredButNotObserved; no path is known. To be captured via Playwright MCP at PLAYWRIGHT_VALIDATION.",
+        "path": "${ecoreBaseUrl}/ecore/ (e.g. https://qa5.eoriginal.org:8443/ecore/) -- POST, multipart/form-data with parts action=eoRequestExport and instructionsXML=<eoExportInstructions XML>. AGENT_DRAFTED from human dictation; not independently corroborated.",
         "expectedStatusCodes": [
           200
         ],
         "contractSource": "UNVERIFIED",
-        "contractProvenance": "No entry exists in this framework's API-surface inventory for eoRequestExport. AMB-EC-12000-002 resolution: capture via Playwright MCP network observation at PLAYWRIGHT_VALIDATION, promote to HUMAN_APPROVED only by a human reviewer before this can back any assertion. Declared HYBRID at Gate 2 (reviewer decision on CLR-TP-EC-12000-001): the API call sets state, but Media Type is currently only observable via the UI audit trail (AC-016), so the assertion needs both.",
+        "contractProvenance": "AGENT_DRAFTED - DICTATED: method=POST, path=${ecoreBaseUrl}/ecore/ (e.g. https://qa5.eoriginal.org:8443/ecore/), content-type=multipart/form-data, form parts action=eoRequestExport and instructionsXML (the eoExportInstructions XML file part). Dictated verbatim by a human reviewer in chat on 2026-09-15 and confirmed a second time after being composed back to them; see reports/validation/TP-EC-12000-001-api-validation.json#endpoint. PROPOSED: expectedStatusCodes=[200] (agent-proposed only; no success or fault response has been observed or dictated). Request body fields remain OPENAPI-sourced from export-26.3.xsd (unchanged from v2). No independent source (WSDL, integration guide, captured network trace) corroborates the endpoint, so this stays UNVERIFIED and can never become HUMAN_APPROVED without a responseShapeHash, which requires a real observed response body. AC-EC-12000-015 therefore continues to be proven exclusively via the UI audit trail (CLR-TP-EC-12000-001), never via the API response; scaffoldingOnly remains true.",
         "scaffoldingOnly": true
       }
     },
@@ -788,6 +812,11 @@
       "clarificationId": "CLR-TP-EC-12000-003",
       "question": "TS-EC-12000-017 requires a Paper Out record created BEFORE this change was deployed, so that it can be shown not to have been retroactively given a Media Type. No such record is reachable in qa5: the fixture document and four other collections were scanned on 2026-09-14 and every Submitted Paper Out event carries a Media Type, because all of them originate from this automation run. Note that Canceled Paper Out events legitimately carry no Media Type, so \"any event lacking one\" is not a safe proxy and would pass for the wrong reason. Which specific pre-deployment transaction or document should this scenario use, or should it be DEFERRED until one is identified?",
       "status": "REVIEW_REQUIRED"
+    },
+    {
+      "clarificationId": "CLR-TP-EC-12000-004",
+      "question": "TS-EC-12000-011 through -015 would now call eoRequestExport for real, using a human-dictated (AGENT_DRAFTED, contractSource UNVERIFIED) endpoint: POST ${ecoreBaseUrl}/ecore/, multipart/form-data with parts action=eoRequestExport and instructionsXML. Three things need the reviewer's explicit decision: (1) Do you accept automating these five scenarios against this dictated-only endpoint, understanding nothing else corroborates it and its response is completely unobserved -- the assertion continues to rely solely on the UI audit trail, never on the API response? (2) eoRequestExport is destructive-by-name (deleteIfEmpty, retention policy). What is the required CLEANUP mechanism -- does each scenario cancel the submitted batch after asserting the audit trail, the same pattern TS-EC-12000-003 already uses, or does a real export/authorization proceed that would consume the fixture? Name the exact mechanism; the agent must not choose one. (3) The same single qualifying qa5 fixture collection already used by 8 approved UI scenarios (TS-003, -007..-010, -016) would now also be used by these 5 new scenarios. Confirm whether sequential reuse of that same fixture across all 13 scenarios is acceptable, or whether a separate fixture must be nominated for the API-originated submissions. RESOLVED at Gate 2 (reviewer Anil, 2026-09-15): (1) Accepted -- automate TS-EC-12000-011 through -015 against the dictated-only endpoint; the assertion continues to rely solely on the UI audit trail, never the API response. (2) CLEANUP mechanism confirmed by the reviewer and observed live against qa5: on the Work Queue item, click Print, in the Verify Paper Out modal select the select-all checkbox, click Verify, then confirm the alert dialog -- this resolves/clears the item from the Work Queue. This mirrors the flow already documented (MANUAL_ONLY) in TS-EC-12000-020; it is not TS-EC-12000-003's Submit+Cancel pattern. Live verification on 2026-09-15 confirmed the Work Queue returned to empty after this action. (3) Fixture selection: do not hard-code a single fixture/collection id. Each scenario must dynamically select an available item from the current Collections list (observed as c1 through c5 on 2026-09-15) at run time rather than assuming a fixed identifier, to reduce cross-scenario contention on one hard-coded fixture.",
+      "status": "RESOLVED"
     }
   ],
   "approvalStatus": "PENDING_TEST_PLAN_APPROVAL",
@@ -795,7 +824,7 @@
   "dataClassification": "REAL_JIRA_DATA",
   "timestamps": {
     "createdAt": "2026-09-11T10:20:00.000Z",
-    "updatedAt": "2026-09-14T14:20:00.000Z",
+    "updatedAt": "2026-09-15T10:45:00.000Z",
     "approvedAt": null
   }
 }

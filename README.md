@@ -225,6 +225,9 @@ never committed.
 | `ECORE_PASSWORD` | for authenticated scenarios | Application password |
 | `TEST_USERNAME` | no | Generic alias; falls back to `ECORE_USERNAME` when empty |
 | `TEST_PASSWORD` | no | Generic alias; falls back to `ECORE_PASSWORD` when empty |
+| `ECORE_API_BASE_URL` | for eoRequestExport (HYBRID) scenarios | Base URL of the `/ecore/` integration API, e.g. `https://qa5.eoriginal.org:8443/ecore/` |
+| `ECORE_API_LOGIN_USERNAME` | for eoRequestExport (HYBRID) scenarios | A dedicated API-enabled account, distinct from `ECORE_USERNAME` |
+| `ECORE_API_KEY` | for eoRequestExport (HYBRID) scenarios | The API key for `ECORE_API_LOGIN_USERNAME`. Organization reuses `ECORE_ORGANIZATION` above |
 | `JIRA_URL` | no | Jira Cloud site URL, for a direct REST fallback |
 | `JIRA_EMAIL` | no | Atlassian account e-mail, for a direct REST fallback |
 | `JIRA_API_TOKEN` | no | Atlassian API token. **Not used by the MCP server**, which uses OAuth |

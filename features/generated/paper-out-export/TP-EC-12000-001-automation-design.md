@@ -148,6 +148,59 @@ below), the shared audit-trail reader. **The API step reaches a state; only the 
 assertion may judge the acceptance criterion**, per each scenario's `apiContract.scaffoldingOnly:
 true`.
 
+> **REVISED at Gate 2 v3 (2026-09-15).** The test plan now carries a concrete, human-dictated
+> `eoRequestExport` endpoint (`POST ${ecoreBaseUrl}/ecore/`, `multipart/form-data`, parts
+> `action=eoRequestExport` and `instructionsXML`) — `contractSource: UNVERIFIED`,
+> `contractProvenance: AGENT_DRAFTED` per `AGENTS.md` rule 4's drafting exception. It can never
+> become `HUMAN_APPROVED` (no observed response body exists anywhere to compute a
+> `responseShapeHash` from), so `scaffoldingOnly: true` remains permanent, not temporary — the
+> API step sets state only, the UI audit trail keeps sole responsibility for the assertion.
+>
+> Three things `CLR-TP-EC-12000-004` left open at Gate 2 are now resolved and must be reflected in
+> the `EoRequestExportClient` and step implementation:
+> 1. **Endpoint acceptance** — automate against the dictated endpoint as-is; do not wait for
+>    independent corroboration that will not arrive.
+> 2. ~~**CLEANUP mechanism (confirmed live against qa5, 2026-09-15)** — after the audit-trail
+>    assertion, clear the created Work Queue item via: click **Print** on the item, in the Verify
+>    Paper Out modal select the select-all checkbox, click **Verify**, then confirm the alert
+>    dialog. This is the same flow already documented (`MANUAL_ONLY`) for `TS-EC-12000-020`, not
+>    `TS-EC-12000-003`'s Submit+Cancel pattern — do not conflate the two. This is a real,
+>    irreversible action (Verify), so a `CLEANUP -` waiver comment is required above the client
+>    call per the API-client layering rule.~~ **SUPERSEDED — see the v4 correction below.**
+> 3. **Fixture selection** — do **not** hard-code a single Collection id. Each of TS-011 through
+>    -015 must read the currently available Collections list at run time and select one
+>    dynamically (observed live as `c1` through `c5` on 2026-09-15), rather than assuming a fixed
+>    identifier — this avoids contention with the eight already-approved UI scenarios sharing the
+>    same fixture pool.
+>
+> `EoRequestExportClient.submit()`'s request path, multipart body construction, and the
+> `action`/`instructionsXML` parts remain `MCP_VALIDATION_REQUIRED` until confirmed live at
+> `PLAYWRIGHT_VALIDATION` — the endpoint is dictated, not yet exercised by this framework.
+>
+> **CORRECTED at Gate 3 v4 (2026-09-16) — CLEANUP mechanism mismatch found during real
+> `PLAYWRIGHT_VALIDATION`.** The v3 cleanup step above was never actually exercised before it was
+> approved; it assumed the API-created batch would reach `Authorized`/`Verification` state. Live
+> validation against qa5 on 2026-09-16 shows otherwise: calling the real, now-working
+> `EoRequestExportClient.requestExport()` (fixed to include the required
+> `xsi:schemaLocation` attribute — see the client's docblock) produces a batch that lands in the
+> Work Queue as `data-batch-status="Submitted"`, `data-next-step="Approval"` — the **same** state
+> `TS-EC-12000-003`'s UI-submitted batches reach, not `Authorized`. The v3 destructive Verify flow
+> (permanently deletes source documents from the vault) does not apply to this state and must not
+> be used.
+>
+> **Corrected CLEANUP mechanism for TS-EC-12000-011 through -015**: after the audit-trail
+> assertion, cancel the created Work Queue item via the existing reversible flow already
+> implemented in `WorkQueueComponent.cancelApprovalItem()` — hover the batch row, click the
+> `.batch-dropdown-action` trigger, click `.cancelPaperOut`, then confirm **Cancel Request** in the
+> "Confirm Cancellation" dialog. This is the same mechanism `TS-EC-12000-003` already uses; no new
+> component method is needed. This action is reversible, so no `CLEANUP -` waiver comment is
+> required above the client call (the waiver requirement applies to irreversible actions only).
+> Confirmed live against qa5 on 2026-09-16: cancelling a real batch (`DEBUG-1789499020791`) via
+> this flow returned the Work Queue to empty within ~8 seconds (status transitions
+> `Submitted` → `Processing` → removed).
+>
+> Fixture selection (item 3 above) is unaffected by this correction and remains as approved.
+
 **TS-EC-12000-016 — Media Type is recorded on the Submitted Paper Out event, not the Authorized one, and appears in the downloaded activity history report** (covers AC-EC-12000-016, UI)
 
 ```gherkin

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:operation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://eviware.com/soapui/config" action="http://www.eoriginal.com/eoRequestExport" anonymous="optional" bindingOperationName="eoRequestExport" id="c2a2baa2-4da1-4ddd-b470-ddf5eb6571c2" inputName="exportRequest" isOneWay="false" name="eoRequestExport" outputName="export" receivesAttachments="false" sendsAttachments="false" type="Request-Response">
+  <con:settings>
+    <con:setting id="c2a2baa2-4da1-4ddd-b470-ddf5eb6571c2fileName">eoRequestExport</con:setting>
+  </con:settings>
+</con:operation>

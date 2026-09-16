@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "1.0.0",
+  "approvalId": "APR-AD-EC-12000-004",
+  "gate": "AUTOMATION_DESIGN",
+  "artifactId": "TP-EC-12000-001",
+  "artifactVersion": 3,
+  "release": "26.3",
+  "capability": "paper-out-export",
+  "sourceArtifactPath": "features/generated/paper-out-export/paper-out-media-type.feature",
+  "decision": "APPROVE",
+  "reviewer": {
+    "name": "Anil",
+    "role": "Reviewer",
+    "reference": null
+  },
+  "reviewedAt": "2026-09-16T00:53:01.336+05:30",
+  "comments": "Approved. Scoped correction only, superseding APR-AD-EC-12000-003 for TS-EC-12000-011 through -015: the v3 approval's CLEANUP mechanism (Print -> Verify Paper Out modal -> select-all -> Verify -> confirm alert, an irreversible action that permanently deletes source documents from the vault) was never actually exercised before being approved. Live PLAYWRIGHT_VALIDATION against qa5 on 2026-09-16 shows the eoRequestExport-created batch lands in Work Queue status Submitted / next-step Approval (the same state TS-EC-12000-003's UI-submitted batches reach), not Authorized/Verification, so the Verify flow does not apply. The corrected mechanism is the existing reversible Cancel Request flow (WorkQueueComponent.cancelApprovalItem(): hover row -> .batch-dropdown-action -> .cancelPaperOut -> confirm Cancel Request), confirmed live by cancelling a real test batch (DEBUG-1789499020791) end to end. No other part of the v3 approval (dictated eoRequestExport endpoint, scaffoldingOnly contract, dynamic Collection selection) changes.",
+  "itemDecisions": [
+    {
+      "itemId": "TS-EC-12000-011",
+      "decision": "APPROVE",
+      "comment": "CORRECTED at Gate 3 v4: same scope as APR-AD-EC-12000-003 (HYBRID, eoRequestExport sets mediaType=PrintToPaper at transaction level, UI audit trail is sole judge), but cleanup after assertion is now the reversible Cancel Request flow, not the destructive Verify flow."
+    },
+    {
+      "itemId": "TS-EC-12000-012",
+      "decision": "APPROVE",
+      "comment": "CORRECTED at Gate 3 v4: same basis as TS-EC-12000-011, document level, mediaType=PrintToPaper; cleanup corrected to Cancel Request."
+    },
+    {
+      "itemId": "TS-EC-12000-013",
+      "decision": "APPROVE",
+      "comment": "CORRECTED at Gate 3 v4: same basis as TS-EC-12000-011, transaction level, mediaType=SaveAsElectronicFile; cleanup corrected to Cancel Request."
+    },
+    {
+      "itemId": "TS-EC-12000-014",
+      "decision": "APPROVE",
+      "comment": "CORRECTED at Gate 3 v4: same basis as TS-EC-12000-011, document level, mediaType=SaveAsElectronicFile; cleanup corrected to Cancel Request."
+    },
+    {
+      "itemId": "TS-EC-12000-015",
+      "decision": "APPROVE",
+      "comment": "CORRECTED at Gate 3 v4: same basis as TS-EC-12000-011, mediaType omitted entirely at both transaction and document level; cleanup corrected to Cancel Request."
+    }
+  ]
+}

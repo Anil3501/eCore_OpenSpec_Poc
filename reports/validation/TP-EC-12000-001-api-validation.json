@@ -5,22 +5,33 @@
   "jiraStoryId": "EC-12000",
   "capability": "paper-out-export",
   "release": "26.3",
-  "validatedAt": "2026-09-11T12:31:00.000Z",
+  "validatedAt": "2026-09-15T18:45:00.000Z",
   "endpoint": {
     "name": "eoRequestExport",
     "description": "XML-instruction based integration API used to request Paper Out / Export of a transaction, document, or group thereof, with an optional mediaType element (PrintToPaper | SaveAsElectronicFile).",
-    "urlOrMethod": "UNKNOWN -- not discoverable through this session's tools",
-    "architecturalNote": "Confirmed this session to live entirely outside the ssweb browser application that Playwright MCP drives against qa5. It has zero references anywhere in reports/validation/ecore-api-discovery.json (the browser-app endpoint inventory), and real Jira dev-team evidence (EC-12000 comments) shows it is exercised via Postman, not the browser UI. Browser-network-trace capture via Playwright MCP is therefore the wrong tool for this contract; a human must supply the integration endpoint's base URL/credentials or an existing WSDL/integration-guide reference."
+    "urlOrMethod": "AGENT_DRAFTED - DICTATED: method=POST, path=${ecoreBaseUrl}/ecore/ (e.g. https://qa5.eoriginal.org:8443/ecore/), content-type=multipart/form-data with parts action=eoRequestExport and instructionsXML=<eoExportInstructions XML file part>. Dictated verbatim by a human reviewer in chat on 2026-09-15 and confirmed a second time after being composed back to them. No WSDL or integration guide independently corroborates the URL/method; it remains UNVERIFIED by that standard, but is now corroborated by a real, successful, OBSERVED exchange (see liveProbeEvidence below).",
+    "contractSource": "UNVERIFIED",
+    "architecturalNote": "Confirmed this session to live entirely outside the ssweb browser application that Playwright MCP drives against qa5. It has zero references anywhere in reports/validation/ecore-api-discovery.json (the browser-app endpoint inventory), and real Jira dev-team evidence (EC-12000 comments) shows it is exercised via Postman, not the browser UI. Browser-network-trace capture via Playwright MCP is therefore the wrong tool for this contract. Per AGENTS.md rule 4's drafting exception, a human dictated the endpoint/method/content-type; nothing here may be treated as HUMAN_APPROVED or OPENAPI until an independent source (WSDL, integration guide) corroborates it and a human promotes it at Gate 2 with a responseShapeHash. A real successful OBSERVED exchange (below) may seed automation and prove reachability, but per AGENTS.md rule 4 it still may not by itself judge an acceptance criterion -- these scenarios remain HYBRID, judged only by the UI audit trail, exactly as approved at Gate 2 v3.",
+    "liveProbeEvidence": "OBSERVED (2026-09-15, two probes): (1) Before authentication was resolved: POST https://qa5.eoriginal.org:8443/ecore/ with action=eoRequestExport + instructionsXML (transaction id=16808932, mediaType=PrintToPaper) returned HTTP 200 with a real eowebapp-response.xsd-shaped body: status=\"error\", code=LOGIN_REQUIRED. Confirmed the endpoint is real/reachable at the dictated path, authenticating independently of the /ssweb/ browser session. (2) After authentication was resolved (see authentication below): the identical call, corrected per requestContract.correctionsFromLiveProbe below, returned HTTP 200 with status=\"ok\" and a real success body (batchId=367021, batchStatus=Submitted). The resulting real batch was cleaned up the same session via the UI's Cancel Request flow on the Work Queue item (Confirm Cancellation dialog, qa5, 2026-09-15) -- qa5 Work Queue confirmed empty afterward. No production data was altered; the underlying fixture transaction (16808932, in Collection c1) is unaffected and remains available for TS-EC-12000-011's real run."
+  },
+  "authentication": {
+    "mechanism": "eoLogin (legacy ReadyAPI-style flow), dictated verbatim by a human reviewer in chat on 2026-09-15 and confirmed a second time. POST the same /ecore/ URL, form-encoded (not multipart), with action=eoLogin, loginUsername, apiKey, loginOrganization. Response carries a Set-Cookie: JSESSIONID which must be replayed on the subsequent eoRequestExport call.",
+    "contractSource": "UNVERIFIED (mechanism dictated) / OBSERVED (real success recorded 2026-09-15)",
+    "credentialSeparation": "Requires a distinct API-enabled account, never the UI ECORE_USERNAME/ECORE_PASSWORD account. Confirmed by two real error codes observed this session: API_KEY_INVALID_FOR_NON_APIUSER (original UI account -- account category itself ineligible) and LOGIN_FAILED (a since-superseded API user/key combination).",
+    "resolution": "RESOLVED 2026-09-15. A human supplied a dedicated API user (loginUsername=Nitin_Saini, apiKey, loginOrganization=NSaini, same value as ECORE_ORGANIZATION). eoLogin returned status=\"ok\" with a real JSESSIONID; the session was then used successfully for eoRequestExport (see endpoint.liveProbeEvidence). Credentials stored in .env as ECORE_API_BASE_URL, ECORE_API_LOGIN_USERNAME and ECORE_API_KEY -- never committed, never echoed in chat or this report.",
+    "supersedes": "BLOCKER-EC-12000-005 (see openBlockers below, now RESOLVED)."
   },
   "requestContract": {
     "contractSource": "OPENAPI",
-    "provenance": "Real, versioned, publicly-hosted XSD referenced by xsi:schemaLocation in three real dev-tested sample XML attachments on the EC-12000 Jira issue. Fetched and saved verbatim this session (not authored/guessed).",
+    "provenance": "Real, versioned, publicly-hosted XSD referenced by xsi:schemaLocation in three real dev-tested sample XML attachments on the EC-12000 Jira issue. Fetched and saved verbatim this session (not authored/guessed). A fourth sample (Paper-Out.xml) adds the full SOAP 1.1 envelope wrapper (soapenv:Envelope/Header/Body) around the same eoExportInstructions element, for a transaction-level, mediaType-omitted case.",
     "schemaUrl": "https://schemas.eoriginal.com/releases/26.3/export.xsd",
     "localEvidenceFiles": [
       "reports/jira/attachments/export-26.3.xsd",
       "reports/jira/attachments/eoRequestExport-107302.xml",
       "reports/jira/attachments/eoRequestExport-107642.xml",
-      "reports/jira/attachments/eoRequestExport-107697.xml"
+      "reports/jira/attachments/eoRequestExport-107697.xml",
+      "reports/jira/attachments/eoRequestExport.xml",
+      "reports/jira/attachments/Paper-Out.xml"
     ],
     "rootElement": "eoExportInstructions",
     "fields": {
@@ -43,48 +54,56 @@
       "eCopy": "enum [asIs, none], required",
       "transferReceipt": "enum [asIs, none], default none"
     },
-    "realFailureModeObserved": "Jira comment (POD issue 103974) documents org.mybatis.spring.MyBatisSystemException / Invalid column type: 1111 when mediaType is omitted on a pre-26.3 release -- corroborates AC-EC-12000-005/-006's release-gating, not fabricated."
+    "realFailureModeObserved": "Jira comment (POD issue 103974) documents org.mybatis.spring.MyBatisSystemException / Invalid column type: 1111 when mediaType is omitted on a pre-26.3 release -- corroborates AC-EC-12000-005/-006's release-gating, not fabricated.",
+    "correctionsFromLiveProbe": "OBSERVED (2026-09-15): two agent-drafted assumptions were wrong and corrected by the live server's own schema-validation error messages (not guessed): (1) the root element's default namespace is http://www.eoriginal.com/ecore/export, not http://www.eoriginal.com/export -- confirmed against reports/jira/attachments/eoRequestExport-107302.xml, which the agent had misread. (2) transaction (and document/groupTransactionIdentifier/groupDocumentIdentifier) is a direct child of eoExportInstructions -- there is no wrapping transactionList element. Both were caught by real PARSE_ERR responses from the server before any incorrect assumption was baked into an approved artifact; the XSD-derived field list above (exactlyOneOf, retentionPolicyAttributes) was already correct and required no change."
   },
   "responseContract": {
-    "contractSource": "NONE",
-    "status": "UNVERIFIED",
-    "reason": "The only response evidence in Jira is a screenshot image (not transcribed text) of a Postman response; no response body, status code, or success/error shape was captured as text. Not guessed here per AGENTS.md."
+    "contractSource": "OBSERVED",
+    "status": "OBSERVED (2026-09-15) -- a real, successful eoRequestExport response was captured after authentication was resolved. Never HUMAN_APPROVED or OPENAPI, and per AGENTS.md rule 4 may not itself judge an acceptance criterion; it exists solely so client code can distinguish success from error, and TS-EC-12000-011 through -015 continue to judge the AC only via the UI audit trail, exactly as approved at Gate 2 v3.",
+    "successShape": "<response status=\"ok\" xmlns=\"http://www.eoriginal.com/eowebapp-response\"><eventResponse><export batchId=\"{long}\" batchName=\"{string}\" batchRequestDate=\"{ISO-8601 datetime}\" batchStatus=\"Submitted\"/></eventResponse></response>",
+    "errorShapeAlreadyObserved": "<response status=\"error\" xmlns=\"http://www.eoriginal.com/eowebapp-response\"><errorList><error><code>{string}</code><minorCode>{string}</minorCode><message>{string}</message></error></errorList></response> -- seen for LOGIN_REQUIRED, PARSE_ERR and API_KEY_INVALID_FOR_NON_APIUSER/LOGIN_FAILED (the last two on the /ecore/ eoLogin action, same response shape).",
+    "reason": "The only response evidence in Jira remains a screenshot image (not transcribed text); this successShape was captured directly from a live qa5 exchange this session, not from that screenshot."
   },
   "scenarios": [
     {
       "scenarioId": "TS-EC-12000-011",
       "acIds": ["AC-EC-12000-011"],
-      "status": "BLOCKED",
+      "status": "READY_FOR_IMPLEMENTATION",
       "summary": "API mediaType=PrintToPaper at transaction level determines Media Type Paper, confirmed via UI audit trail.",
-      "blockedReason": "eoRequestExport endpoint/response unverified (see endpoint.urlOrMethod and responseContract above); also depends on the same audit-trail access needed for TS-016, itself blocked on the data-fixture gap (see TP-EC-12000-001-browser-validation.json openBlockers)."
+      "blockedReason": null,
+      "note": "BLOCKER-EC-12000-002 and BLOCKER-EC-12000-005 both RESOLVED 2026-09-15 (see openBlockers below). Endpoint, auth and request/response shapes are all now OBSERVED via a real successful qa5 exchange. Remaining work is IMPLEMENTATION (EoRequestExportClient + Zod contract + wiring into the step definitions, replacing the always-throws placeholder) and then a real EXECUTION run -- no PASSED result exists yet for this scenario."
     },
     {
       "scenarioId": "TS-EC-12000-012",
       "acIds": ["AC-EC-12000-012"],
-      "status": "BLOCKED",
+      "status": "READY_FOR_IMPLEMENTATION",
       "summary": "API mediaType=SaveAsElectronicFile at transaction level determines Media Type Electronic, confirmed via UI audit trail.",
-      "blockedReason": "Same as TS-011."
+      "blockedReason": null,
+      "note": "Same as TS-011."
     },
     {
       "scenarioId": "TS-EC-12000-013",
       "acIds": ["AC-EC-12000-013"],
-      "status": "BLOCKED",
+      "status": "READY_FOR_IMPLEMENTATION",
       "summary": "API mediaType omitted at transaction level determines Media Type Electronic (default), confirmed via UI audit trail.",
-      "blockedReason": "Same as TS-011."
+      "blockedReason": null,
+      "note": "Same as TS-011."
     },
     {
       "scenarioId": "TS-EC-12000-014",
       "acIds": ["AC-EC-12000-014"],
-      "status": "BLOCKED",
+      "status": "READY_FOR_IMPLEMENTATION",
       "summary": "API mediaType=PrintToPaper at document level determines Media Type Paper, confirmed via UI audit trail.",
-      "blockedReason": "Same as TS-011, document-level variant."
+      "blockedReason": null,
+      "note": "Same as TS-011, document-level variant."
     },
     {
       "scenarioId": "TS-EC-12000-015",
       "acIds": ["AC-EC-12000-015"],
-      "status": "BLOCKED",
+      "status": "READY_FOR_IMPLEMENTATION",
       "summary": "API mediaType=SaveAsElectronicFile at document level determines Media Type Electronic, confirmed via UI audit trail.",
-      "blockedReason": "Same as TS-011, document-level variant."
+      "blockedReason": null,
+      "note": "Same as TS-011, document-level variant."
     }
   ],
   "openBlockers": [
@@ -92,7 +111,16 @@
       "id": "BLOCKER-EC-12000-002",
       "affects": ["TS-EC-12000-011", "TS-EC-12000-012", "TS-EC-12000-013", "TS-EC-12000-014", "TS-EC-12000-015"],
       "description": "eoRequestExport's request shape is now schema-backed (real, versioned export.xsd plus 3 real dev-tested sample XMLs), but its endpoint URL/HTTP method and response shape remain unknown. It is confirmed to live entirely outside the ssweb browser app (Postman-only in dev usage, absent from ecore-api-discovery.json), so Playwright MCP cannot observe it.",
-      "recommendedResolution": "A human supplies the integration endpoint's base URL/credentials (or the team's existing WSDL/integration-guide reference) so a real request/response pair can be captured outside the browser -- e.g. directly from an EoRequestExportClient in src/api/ per AGENTS.md's API-client layering -- and promoted to HUMAN_APPROVED with a responseShapeHash once a human confirms it judges the acceptance criteria."
+      "recommendedResolution": "A human supplies the integration endpoint's base URL/credentials (or the team's existing WSDL/integration-guide reference) so a real request/response pair can be captured outside the browser -- e.g. directly from an EoRequestExportClient in src/api/ per AGENTS.md's API-client layering -- and promoted to HUMAN_APPROVED with a responseShapeHash once a human confirms it judges the acceptance criteria.",
+      "status": "RESOLVED - endpoint URL/method dictated and accepted at Gate 2 v3 (2026-09-15); response shape now OBSERVED via a real successful exchange on 2026-09-15 (see responseContract above and BLOCKER-EC-12000-005)."
+    },
+    {
+      "id": "BLOCKER-EC-12000-005",
+      "affects": ["TS-EC-12000-011", "TS-EC-12000-012", "TS-EC-12000-013", "TS-EC-12000-014", "TS-EC-12000-015"],
+      "description": "eoRequestExport requires its own authenticated session, independent of the /ssweb/ browser session this framework signs into for every UI scenario. The documented legacy flow is: POST the same /ecore/ endpoint with action=eoLogin, loginUsername, apiKey and loginOrganization, capture the returned JSESSIONID, then reuse it for eoRequestExport. Live-tested 2026-09-15 using the only credentials configured in .env (ECORE_USERNAME/ECORE_PASSWORD/ECORE_ORGANIZATION, i.e. requireEcoreLogin()): eCore rejected the eoLogin attempt with code API_KEY_INVALID_FOR_NON_APIUSER, message \"Your login attempt failed. Non-API users cannot enter an apiKey.\" A JSESSIONID cookie was returned anyway, but because eoLogin itself errored, that session is not authenticated -- the subsequent eoRequestExport call with it still returned LOGIN_REQUIRED. The reviewer (Anil) confirmed on 2026-09-15 that no separate API user account existed for QA5 at that time.",
+      "recommendedResolution": "A dedicated eCore API user (with a real apiKey, provisioned by an eCore administrator, distinct from the UI ECORE_USERNAME account) must exist before TS-EC-12000-011 through -015 can call eoRequestExport for real. Once provisioned, add its credentials to .env (e.g. ECORE_API_LOGIN_USERNAME / ECORE_API_KEY / ECORE_API_LOGIN_ORGANIZATION -- never reusing ECORE_USERNAME/ECORE_PASSWORD) and wire EoRequestExportClient to perform eoLogin once per run and reuse the resulting session, per the legacy ReadyAPI flow.",
+      "status": "RESOLVED (2026-09-15). A human (Anil/Nitin Saini) supplied a dedicated API user (loginUsername=Nitin_Saini, apiKey, loginOrganization=NSaini). Live-tested: eoLogin returned status=\"ok\" with a real JSESSIONID; the session was reused successfully for eoRequestExport (batchId=367021, batchStatus=Submitted). The resulting real batch was cancelled via the UI afterward -- qa5 restored to its pre-probe state. Credentials stored in .env as ECORE_API_BASE_URL / ECORE_API_LOGIN_USERNAME / ECORE_API_KEY, distinct from ECORE_USERNAME/ECORE_PASSWORD as recommended. IMPLEMENTATION (EoRequestExportClient, Zod response contract, step-definition wiring) is the only remaining work before a real EXECUTION run can produce a PASSED/FAILED result for TS-EC-12000-011 through -015."
     }
   ]
 }
+

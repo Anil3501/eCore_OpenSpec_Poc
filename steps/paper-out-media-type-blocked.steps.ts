@@ -8,22 +8,22 @@ import { test } from '../src/fixtures/test.ts';
  * playwright-bdd's generator (`npm run bdd`) requires every step text used by
  * an approved feature file to resolve to *some* definition, or generation
  * fails outright for the whole file - it does not skip just the affected
- * scenario. TS-EC-12000-011 through -015 and -017 cannot be given a real
- * implementation yet: either the recorded Media Type is not observable
- * anywhere in qa5 (BLOCKER-EC-12000-004, still open for -017's pre-change
- * fixture) or the eoRequestExport contract is unverified and lives outside
- * the ssweb browser app (BLOCKER-EC-12000-002). TS-EC-12000-019 and -020 are
- * MANUAL_ONLY per the approved plan. See
+ * scenario. TS-EC-12000-017 cannot be given a real implementation yet: the
+ * recorded Media Type is not observable anywhere in qa5 for a pre-change
+ * fixture (BLOCKER-EC-12000-004, still open for -017 specifically).
+ * TS-EC-12000-019 and -020 are MANUAL_ONLY per the approved plan. See
  * features/generated/paper-out-export/TP-EC-12000-001-automation-design.md
  * and reports/validation/TP-EC-12000-001-{browser,api}-validation.json.
  * Writing a real assertion here would mean guessing a locator or an endpoint -
  * exactly what AGENTS.md forbids.
  *
- * TS-EC-12000-007 through -010, -016 and -018 have all been implemented for
- * real in steps/paper-out-media-type.steps.ts: BLOCKER-EC-12000-004 was
- * resolved on 2026-09-14 for a currently-Authorized fixture once the Verify
- * Paper Out modal's package download was found to bundle the same activity
- * history report the Document History dialog reads.
+ * TS-EC-12000-001 through -004, -007 through -016 and -018 have all been
+ * implemented for real in steps/paper-out-media-type.steps.ts.
+ * BLOCKER-EC-12000-004 was resolved on 2026-09-14 for a currently-Authorized
+ * fixture once the Verify Paper Out modal's package download was found to
+ * bundle the same activity history report the Document History dialog reads,
+ * and BLOCKER-EC-12000-002 (the eoRequestExport contract) was resolved
+ * 2026-09-15/16 through live MCP exploration against qa5.
  *
  * Every step below therefore throws a specific, honest failure identifying
  * the exact blocker rather than asserting anything. This is a real, visible
@@ -49,14 +49,6 @@ const OBSERVABILITY_GAP =
   '(BLOCKER-EC-12000-001, the earlier "no qualifying fixture" gap, is RESOLVED: "test collection" ' +
   'qualifies and now backs TS-EC-12000-003.)';
 
-const API_CONTRACT_GAP =
-  'BLOCKER-EC-12000-002: eoRequestExport\'s endpoint URL, HTTP method and response shape remain ' +
-  'unverified. It is confirmed to live entirely outside the ssweb browser app Playwright MCP ' +
-  'drives (Postman-only in dev usage, absent from reports/validation/ecore-api-discovery.json), so ' +
-  'its contract cannot be captured through browser exploration. A human must supply the ' +
-  'integration endpoint (base URL/credentials) or an existing WSDL/integration-guide reference. ' +
-  'See reports/validation/TP-EC-12000-001-api-validation.json.';
-
 const MANUAL_ONLY =
   'TS-EC-12000-019 is MANUAL_ONLY per the approved test plan (test-plans/approved/TP-EC-12000-001.json): ' +
   'visual border alignment is not a reliable Playwright assertion target. A human reviewer must confirm ' +
@@ -74,35 +66,9 @@ function blocked(reason: string): never {
 }
 
 // --- TS-EC-12000-011 through -015 (eoRequestExport, HYBRID) ---
-//
-// TS-EC-12000-007 through -010 have been implemented for real in
-// steps/paper-out-media-type.steps.ts: BLOCKER-EC-12000-004 was resolved on
-// 2026-09-14 when the recorded Media Type was found in the DOCUMENT history's
-// "Submitted Paper Out" event, a surface every earlier probe missed because it
-// looked at the transaction history, where no Paper Out event is ever logged.
-
-Given('eoRequestExport is available at the transaction level', async () => blocked(API_CONTRACT_GAP));
-Given('eoRequestExport is available at the document level', async () => blocked(API_CONTRACT_GAP));
-Given('eoRequestExport is available at both transaction and document level', async () => blocked(API_CONTRACT_GAP));
-When('I call eoRequestExport at the transaction level with mediaType {string}', async ({}, _mediaType: string) =>
-  blocked(API_CONTRACT_GAP),
-);
-When('I call eoRequestExport at the document level with mediaType {string}', async ({}, _mediaType: string) =>
-  blocked(API_CONTRACT_GAP),
-);
-When('I call eoRequestExport without a mediaType element at transaction level', async () => blocked(API_CONTRACT_GAP));
-When('I call eoRequestExport without a mediaType element at document level', async () => blocked(API_CONTRACT_GAP));
-When("I open the transaction's Submitted Paper Out audit trail entry", async () => blocked(API_CONTRACT_GAP));
-When("I open the document's Submitted Paper Out audit trail entry", async () => blocked(API_CONTRACT_GAP));
-When('I open the Submitted Paper Out audit trail entry for both', async () => blocked(API_CONTRACT_GAP));
-Then('the API call succeeds', async () => blocked(API_CONTRACT_GAP));
-Then("the Media Type is recorded as {string} in the audit trail's Additional Information", async ({}, _mediaType: string) =>
-  blocked(API_CONTRACT_GAP),
-);
-Then('both API calls succeed', async () => blocked(API_CONTRACT_GAP));
-Then('the Media Type is recorded as {string} in both audit trail entries', async ({}, _mediaType: string) =>
-  blocked(API_CONTRACT_GAP),
-);
+// Implemented for real - see steps/paper-out-media-type.steps.ts.
+// BLOCKER-EC-12000-002 was resolved on 2026-09-15/16: the eoRequestExport
+// contract was captured live against qa5.
 
 // --- TS-EC-12000-016 (Additional Information / activity history report) ---
 // Implemented for real - see steps/paper-out-media-type.steps.ts. Its
