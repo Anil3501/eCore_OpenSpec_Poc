@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "1.0.0",
+  "approvalId": "APR-TP-EC-11358-001",
+  "gate": "TEST_PLAN",
+  "artifactId": "TP-EC-11358-001",
+  "artifactVersion": 1,
+  "release": "26.3",
+  "capability": "document-activity-history",
+  "sourceArtifactPath": "test-plans/generated/TP-EC-11358-001.json",
+  "decision": "APPROVE",
+  "reviewer": {
+    "name": "Nitin Saini",
+    "role": "Senior QA",
+    "reference": null
+  },
+  "reviewedAt": "2026-09-14T11:36:43.918Z",
+  "comments": "Gate 2 approved. Option A selected for the two report-API scenarios: TS-EC-11358-006 (eoRequestExport) and TS-EC-11358-007 (eoGetDocumentActivityHistoryReport) are ratified as HUMAN_APPROVED on the strength of the EC-11358 story (which explicitly verified both APIs) and the form-POST .eo pattern in reports/validation/ecore-api-discovery.json. PLAYWRIGHT_VALIDATION must confirm the live request/response shape and record any discrepancy against this approved contract; a discrepancy is a finding, never a silent edit. CLR-TP-EC-11358-002 accepted: the UI download, Certified Print package, Paper Out and retention-copy surfaces remain manual-only this release.",
+  "itemDecisions": [
+    { "itemId": "TS-EC-11358-001", "decision": "APPROVE", "comment": "Transferred financial asset shows the Control History table (AC-001). UI." },
+    { "itemId": "TS-EC-11358-002", "decision": "APPROVE", "comment": "Each row shows transfer date + both orgs (AC-002). UI. Structural presence only, per AMB-EC-11358-003." },
+    { "itemId": "TS-EC-11358-003", "decision": "APPROVE", "comment": "No confirmed transfer shows no table (AC-003). UI." },
+    { "itemId": "TS-EC-11358-004", "decision": "APPROVE", "comment": "Multiple transfers ordered newest to oldest (AC-004). UI." },
+    { "itemId": "TS-EC-11358-005", "decision": "APPROVE", "comment": "Table appears in the UI view (AC-005). UI. Authoritative coverage of AC-005." },
+    { "itemId": "TS-EC-11358-006", "decision": "APPROVE", "comment": "Table appears via eoRequestExport report API (AC-005). API contract ratified HUMAN_APPROVED (Option A); live shape confirmed at PLAYWRIGHT_VALIDATION." },
+    { "itemId": "TS-EC-11358-007", "decision": "APPROVE", "comment": "Table appears via eoGetDocumentActivityHistoryReport report API (AC-005). API contract ratified HUMAN_APPROVED (Option A); live shape confirmed at PLAYWRIGHT_VALIDATION." },
+    { "itemId": "TS-EC-11358-008", "decision": "APPROVE", "comment": "Document type decides whether the table is produced (AC-006). UI. Financial Asset + Addendum show it; Supplemental Doc does not." }
+  ]
+}

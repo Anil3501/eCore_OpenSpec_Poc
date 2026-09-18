@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1.0.0",
+  "testPlanId": "TP-EC-11358-001",
+  "stage": "PLAYWRIGHT_VALIDATION",
+  "capturedAt": "2026-09-17T10:51:16.415Z",
+  "evidenceSource": "reports/validation/EC-11358-workspace-scan.json; reports/validation/EC-11358-document-history-api-probe.json; reports/validation/TP-EC-12000-001-api-validation.json; reports/jira/attachments/eoGetDocumentActivityHistoryReport-login-required-response.xml",
+  "observationMethod": "Authenticated scripted Playwright and API fallback against QA5. The supplied API account authenticated successfully through eoLogin. No credentials, cookies, tokens, headers, raw response messages, or business values were recorded by the API probe.",
+  "validatedTarget": {
+    "transactionId": "16809591",
+    "documentId": "16809592"
+  },
+  "approvedNonDestructiveSurfacesDriven": [
+    "View History",
+    "Document Download History Report",
+    "Transaction Download History Report"
+  ],
+  "observedReportTraffic": [
+    {
+      "path": "/ssweb/setup/workspace/container/ajax/viewDocumentHistory.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/container/ajax/getControllerHistory.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/getHistoryReport.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/getTransactionHistoryReport.eo",
+      "method": "POST",
+      "status": 200
+    }
+  ],
+  "outcome": "API_SCENARIOS_DEFERRED_AT_GATE_2",
+  "observedSupportingCall": {
+    "path": "/ssweb/setup/workspace/container/ajax/getControllerHistory.eo",
+    "method": "POST",
+    "status": 200,
+    "responseKind": "HTML fragment",
+    "purpose": "Supports the approved UI View History flow; it is not either report API named by TS-EC-11358-006 or TS-EC-11358-007."
+  },
+  "scenarioContracts": [
+    {
+      "testScenarioId": "TS-EC-11358-006",
+      "approvedSurface": "eoRequestExport",
+      "observationStatus": "OPERATION_OBSERVED_ELSEWHERE_SCENARIO_ASSERTION_UNRESOLVED",
+      "requestShape": "POST /ecore/ multipart action=eoRequestExport plus instructionsXML conforming to export-26.3.xsd. This operation creates a Work Queue export request.",
+      "responseShape": "Observed success is batch metadata: response status, batchId, batchName, batchRequestDate, and batchStatus. It does not contain the Document Activity History Report or a Control History section.",
+      "responseShapeHash": "194374ce9509b4caf989a2fbac6b437c8d1d558c0491c09340495d92fa222041",
+      "contractSource": "OPENAPI request / OBSERVED response",
+      "dependency": "Gate 2 must redesign this as a HYBRID package-verification scenario or defer it. Reaching an Authorized package has no reversible teardown, so automation must not self-provision it without a human-provided reversible fixture/workflow."
+    },
+    {
+      "testScenarioId": "TS-EC-11358-007",
+      "approvedSurface": "eoGetDocumentActivityHistoryReport",
+      "observationStatus": "REQUEST_AND_ACKNOWLEDGMENT_OBSERVED_ASSERTION_UNRESOLVED",
+      "requestShape": "POST /ecore/ with raw text/xml SOAP 1.1 Envelope. Body contains ecorews:documents with one or more ecorews:document elements carrying vaultId. No SOAPAction header was required by the successful QA5 observation.",
+      "responseShape": "HTTP 200 XML acknowledgment with response status=ok only. The 312-byte response is not a PDF, carries no report element, and exposes no Control History content.",
+      "responseShapeHash": "516bbd4036a66d8e095d1a3fa52959ac4f43542757fd1c2fafe6a40fdd12ea10",
+      "observedErrorResponseShapeHash": "dce8570fe74155d3338fd14a549b358005873bb0988d02222a267ad30fbfd358",
+      "contractSource": "OBSERVED request and acknowledgment response",
+      "dependency": "Gate 2 must define how the generated report is retrieved and inspected, redesign this as HYBRID with a safe fixture/output route, or defer it. status=ok alone cannot assert Control History."
+    }
+  ],
+  "blocker": "Credentials, QA5 transaction access, both API request shapes, and both acknowledgment response hashes are resolved. Neither API response contains the generated Document Activity History Report, so neither can directly assert Control History. eoRequestExport returns batch metadata; eoGetDocumentActivityHistoryReport returns status=ok only.",
+  "humanInputRequired": "Resolved for release 26.3 by Gate 2 deferral APR-TP-EC-11358-003. TS-EC-11358-006 remains deferred until a safe existing Authorized/Verification fixture tied to the target document is available. TS-EC-11358-007 remains deferred until an authoritative generated-report retrieval route is provided. The observed contracts remain technical evidence and do not count as AC coverage."
+}

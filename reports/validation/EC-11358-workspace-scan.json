@@ -1,0 +1,1575 @@
+{
+  "probe": "EC-11358-workspace-scan",
+  "story": "EC-11358",
+  "testPlanId": "TP-EC-11358-001",
+  "stage": "PLAYWRIGHT_VALIDATION",
+  "evidenceSource": "Scripted Playwright navigation (no Playwright MCP browser tools in this session). Observation only; no transaction-mutating .eo verb invoked, no approved expectation edited. When the headless layout keeps the loaded snapshot pane hidden, the probe dispatches the application-owned delegated click on its observed .viewDocumentHistory element.",
+  "startedAt": "2026-09-17T12:11:28.644Z",
+  "baseUrlHost": "qa5.eoriginal.org:8443",
+  "targetTransactionId": null,
+  "pageLengthOptions": [
+    "10",
+    "20",
+    "50",
+    "100"
+  ],
+  "workspaceTableData": {
+    "recordsTotal": 2,
+    "recordsFiltered": 2,
+    "rowCount": 2
+  },
+  "renderedTables": [
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 1,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 12,
+      "links": [
+        {
+          "text": "",
+          "href": null,
+          "hasOnClick": false
+        },
+        {
+          "text": "",
+          "href": null,
+          "hasOnClick": false
+        }
+      ]
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 3,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 3,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 3,
+      "links": [
+        {
+          "text": "",
+          "href": null,
+          "hasOnClick": false
+        }
+      ]
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 2,
+      "links": [
+        {
+          "text": "",
+          "href": null,
+          "hasOnClick": false
+        }
+      ]
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 1,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [
+        "Container ID",
+        "Creation Date",
+        "Status",
+        "eCore Transaction ID",
+        "Billing Type",
+        "Asset Type",
+        "Transaction Creator"
+      ],
+      "rowCount": 0,
+      "links": []
+    },
+    {
+      "id": "datatable",
+      "headers": [
+        "Container ID",
+        "Creation Date",
+        "Status",
+        "eCore Transaction ID",
+        "Billing Type",
+        "Asset Type",
+        "Transaction Creator"
+      ],
+      "rowCount": 2,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 2,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 1,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 0,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 2,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 1,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 0,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 2,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 1,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 0,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 1,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 17,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 5,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 5,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 6,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 1,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 1,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 3,
+      "links": [
+        {
+          "text": "eCore Transaction ID",
+          "href": null,
+          "hasOnClick": false
+        }
+      ]
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 2,
+      "links": [
+        {
+          "text": "eCore Transaction ID",
+          "href": null,
+          "hasOnClick": false
+        }
+      ]
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 3,
+      "links": []
+    },
+    {
+      "id": "DataTables_Table_0",
+      "headers": [
+        "eCore Transaction ID",
+        "Transaction ID"
+      ],
+      "rowCount": 1,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [
+        "eCore Transaction ID",
+        "Transaction ID",
+        "Document ID"
+      ],
+      "rowCount": 0,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 1,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 3,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 3,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 3,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 3,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 3,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 1,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 1,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 3,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 3,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 3,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 3,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 3,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 3,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 1,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 3,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 3,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 3,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 1,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 3,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 2,
+      "links": []
+    },
+    {
+      "id": null,
+      "headers": [
+        "Su",
+        "Mo",
+        "Tu",
+        "We",
+        "Th",
+        "Fr",
+        "Sa"
+      ],
+      "rowCount": 5,
+      "links": [
+        {
+          "text": "1",
+          "href": "#",
+          "hasOnClick": false
+        },
+        {
+          "text": "2",
+          "href": "#",
+          "hasOnClick": false
+        },
+        {
+          "text": "3",
+          "href": "#",
+          "hasOnClick": false
+        },
+        {
+          "text": "4",
+          "href": "#",
+          "hasOnClick": false
+        },
+        {
+          "text": "5",
+          "href": "#",
+          "hasOnClick": false
+        }
+      ]
+    },
+    {
+      "id": null,
+      "headers": [],
+      "rowCount": 3,
+      "links": []
+    }
+  ],
+  "searchState": {
+    "url": "https://qa5.eoriginal.org:8443/ssweb/setup/workspace/workspace.eo",
+    "transactionId": "",
+    "formAction": "/ssweb/setup/workspace/container/ajax/submitTransactionSearch.eo",
+    "tableText": "\n    \n      eCore Transaction IDTransaction IDNo data available in table\n  "
+  },
+  "gridRowsRendered": 2,
+  "firstResultRow": {
+    "id": "16809591",
+    "className": "selectable draggable draggable-transaction odd ui-draggable ui-draggable-handle",
+    "attributes": [
+      {
+        "name": "id",
+        "value": "16809591"
+      },
+      {
+        "name": "class",
+        "value": "selectable draggable draggable-transaction odd ui-draggable ui-draggable-handle"
+      }
+    ],
+    "cells": [
+      {
+        "className": " containerName",
+        "text": "test_shr_6001"
+      },
+      {
+        "className": " dateCreated",
+        "text": "09/16/2026 08:36:10 AM EDT"
+      },
+      {
+        "className": " status",
+        "text": "All States"
+      },
+      {
+        "className": " containerVaultId",
+        "text": "16809591"
+      },
+      {
+        "className": " billingType",
+        "text": ""
+      },
+      {
+        "className": " assetType",
+        "text": ""
+      },
+      {
+        "className": " transactionCreator",
+        "text": "Command Center"
+      }
+    ]
+  },
+  "interactionEvents": {
+    "firstResultRow": [
+      "remove",
+      "mousedown",
+      "click"
+    ],
+    "snapshotToggler": [
+      "mouseover",
+      "mouseout",
+      "click"
+    ]
+  },
+  "sampleRows": [
+    {
+      "ref": "test_shr_600109/16/2026 08:36:10 AM EDTAll States16809591Com"
+    },
+    {
+      "ref": "testtransfershresh00109/16/2026 08:21:09 AM EDTAll States168"
+    }
+  ],
+  "transactionsOpened": [
+    {
+      "ref": "test_shr_600109/16/2026 08:36:10 AM EDTA",
+      "url": "https://qa5.eoriginal.org:8443/ssweb/setup/workspace/workspace.eo",
+      "historyUrl": "/ssweb/setup/workspace/container/ajax/viewDocumentHistory.eo",
+      "controlHistoryFound": true,
+      "historySummary": "Transaction ID: test_shr_6001Organization: NSOrganization Event History Date Signed Action Recorded By User IP Address Details 09/17/2026 08:10:50 AM EDT Returned Document History Report Command Center Nitin Saini <nitin.saini@wolterskluwer.com> 10.10.22.132 09/17/2026 06:45:12 AM EDT Returned Document History Report Command Center Nitin Saini <nitin.saini@wolterskluwer.com> 10.10.22.132 09/17/2026 05:34:13 AM EDT Returned Document History Report Command Center Nitin Saini <nitin.saini@wolterskluwer.com> 10.10.22.132 09/17/2026 05:32:50 AM EDT Returned Document History Report Command Center Nitin Saini <nitin.saini@wolterskluwer.com> 10.10.22.132 09/17/2026 05:02:32 AM EDT Returned Document History Report Command Center Nitin Saini <nitin.saini@wolterskluwer.com> 10.10.22.132 09/17/2026 05:01:09 AM EDT Returned Document History Report Command Center Nitin Saini <nitin.saini@wolterskluwer.com> 10.10.22.132 09/17/2026 05:00:00 AM EDT Returned Document History Report Command Center Nitin Saini <nitin.saini@wolterskluwer.com> 10.10.22.132 09/17/2026 04:59:47 AM EDT Returned Document History Report Command Center Nitin Saini <nitin.saini@wolterskluwer.com> 10.10.22.132 09/17/2026 04:59:",
+      "historyResponseKeys": [
+        "strutsTokenName",
+        "strutsToken",
+        "content"
+      ],
+      "historyTables": [
+        {
+          "headers": [],
+          "rowCount": 2,
+          "text": "Transaction ID: test_shr_6001Organization: NSOrganization"
+        },
+        {
+          "headers": [
+            "Date",
+            "Signed",
+            "Action",
+            "Recorded By",
+            "User",
+            "IP Address",
+            "Details"
+          ],
+          "rowCount": 28,
+          "text": "Date Signed Action Recorded By User IP Address Details 09/17/2026 08:10:50 AM EDT Returned Document History Report Command Center Nitin Saini <nitin.saini@wolterskluwer.com> 10.10.22.132 09/17/2026 06:45:12 AM EDT Returned Document History Report Command Center Nitin Saini <nitin.saini@wolterskluwer.com> 10.10.22.132 09/17/2026 05:34:13 AM EDT Returned Document History Report Command Center Nitin Saini <nitin.saini@wolterskluwer.com> 10.10.22.132 09/17/2026 05:32:50 AM EDT Returned Document Hist"
+        },
+        {
+          "headers": [
+            "Details",
+            "Digital Certificate Information"
+          ],
+          "rowCount": 1,
+          "text": "Details Digital Certificate Information Name: Shreya M J Block: signature1722413406439 Date: 07/31/2024 04:09:09 AM EDT Reason: I agree to the terms and conditions of this document Location: IP: 10.10.22.129 Issued to: Wolters Kluwer United States, Inc. Issued by: Entrust, Inc. Hash: dxaH1k+jueksh+yp6R41r55Ip+9sIafPB5jRHUdPbuOFQIiidPwd1mlArhgTM/MC/83AGG7898ogHYq9NyzlUcMc4GOsvw1f8Zjmgx7KNhmKplA5SOOLGBK9Yr5YpkEbonQcnHsPEJ4E2C39OUQAwOBgFW7x2gQ8SIUqUIb3CAgXn/rRqO1RdxxW9iqb9YWiU5R3gxOXyprgSs7wqgdaAQj"
+        },
+        {
+          "headers": [
+            "Date",
+            "Transferred From",
+            "Transferred To"
+          ],
+          "rowCount": 1,
+          "text": "Date Transferred From Transferred To 09/16/2026 08:36:10 AM EDT SJTestOrganization NSOrganization"
+        },
+        {
+          "headers": [
+            "Date",
+            "Name",
+            "Creator",
+            "Revision"
+          ],
+          "rowCount": 1,
+          "text": "Date Name Creator Revision 07/31/2024 04:09:09 AM EDT Sample Shreya J 1 Download"
+        }
+      ],
+      "controllerHistory": {
+        "path": "/ssweb/setup/workspace/container/ajax/getControllerHistory.eo",
+        "status": 200,
+        "text": "Control History Date Transferred From Transferred To 09/16/2026 08:36:10 AM EDT SJTestOrganization NSOrganization",
+        "tables": [
+          {
+            "headers": [
+              "Date",
+              "Transferred From",
+              "Transferred To"
+            ],
+            "rowCount": 1,
+            "text": "Date Transferred From Transferred To 09/16/2026 08:36:10 AM EDT SJTestOrganization NSOrganization"
+          }
+        ]
+      },
+      "downloadedReport": {
+        "suggestedFilename": "AuditTrail-16809592.pdf",
+        "textLength": 8383,
+        "controlHistoryFound": true,
+        "controlHistoryExcerpt": "a/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0 Controller History Date Transferred From Transferred To 09/16/2026 08:36:10 AM EDT SJTestOrganization NSOrganization Signature Information Details Digital Certificate Information Displayed Value Signature Block: signature1722413406439 Date: 07/31/2024 04:09:09 AM EDT Reason: I agree to the terms and conditions of this document Location: IP: 10.10.22.129 Issued to: Wolters Kluwer United States, Inc. Issued by: Entrust, Inc. Hash: dxaH1k+jueksh+yp6R41r55Ip+9sIafPB5jRHUdP buOFQIiidPwd1mlArhgTM/MC/83AGG7898ogHYq9 NyzlUcMc4GOsvw1f8Zjmgx7KNhmKplA5SOOLGBK9 Yr5YpkEbonQcnHsPEJ4E2C39OUQAwOBgFW7x2gQ8 SIU",
+        "confirmedTransferFound": true,
+        "confirmedTransferExcerpt": "eport Command Center Nitin Saini <nitin.saini@wolterskluwer.com> NSOrganization 10.10.22.168 09/16/2026 08:36:10 AM EDT Confirmed Transfer of Control from SJTestOrganization to NSOrganization Command Center Shreshta Jain <shreshta.jain@wolterskluwer.com> SJTestOrganization 10.10.22.168 X 09/16/2026 08:35:33 AM EDT Accepted Transfer of Control from SJTestOrganization to NSOrganization Command Center Nitin Saini <nitin.saini@wolterskluwer.com> NSOrganization 10.10.22.168 X 09/16/2026 08:34:59 AM EDT Initiated Transfer of Control from SJTestOrganization to NSOrganization Command Center Shreshta Jain <shreshta.jain@wolterskluwer.com> SJTestOrganization 10.10.22.168 X 07/31/2024 04:09:09 AM EDT Created Signed Versio"
+      },
+      "documentMenuState": {
+        "triggerCount": 1,
+        "triggerVisibleBefore": false,
+        "historyVisibleBefore": false,
+        "historyVisibleAfter": false
+      },
+      "historyControls": [
+        {
+          "text": "NSOrganization",
+          "href": "/ssweb/setup/viewOrganizationData.eo?orgSid=6414",
+          "id": null
+        },
+        {
+          "text": "Download Documents",
+          "href": "/ssweb/setup/workspace/getTransactionDocuments.eo?transactionSid=16809591",
+          "id": null
+        },
+        {
+          "text": "Download History Report",
+          "href": "/ssweb/setup/workspace/getTransactionHistoryReport.eo?transactionSid=16809591",
+          "id": null
+        }
+      ],
+      "snapshotElements": [
+        {
+          "tag": "div",
+          "id": "bannerNavLinks",
+          "className": null,
+          "text": "Home New Transaction Workspace Reports Configuration Changes eAsset® Analytics Event Analytics Infographics Manage Scheduled Reports Open Requests Permission Analysis Transaction Retention Analysis User Activity Analysis Vault Content Prefe",
+          "hasOnClick": false
+        },
+        {
+          "tag": "div",
+          "id": "layout",
+          "className": "layout ui-layout-container",
+          "text": "Find Transactions Advanced From: To: Loan Origination ID: ID: Status: Complete Incomplete Signed Destroyed Paper Out Transferred In Transferred Out Transaction GUID: Transaction Type: Document Type: Sample Locked: Yes No eCore Doc Classific",
+          "hasOnClick": false
+        },
+        {
+          "tag": "div",
+          "id": "content",
+          "className": "widecolumn",
+          "text": "Find Transactions Advanced From: To: Loan Origination ID: ID: Status: Complete Incomplete Signed Destroyed Paper Out Transferred In Transferred Out Transaction GUID: Transaction Type: Document Type: Sample Locked: Yes No eCore Doc Classific",
+          "hasOnClick": false
+        },
+        {
+          "tag": "div",
+          "id": "contentText",
+          "className": null,
+          "text": "Find Transactions Advanced From: To: Loan Origination ID: ID: Status: Complete Incomplete Signed Destroyed Paper Out Transferred In Transferred Out Transaction GUID: Transaction Type: Document Type: Sample Locked: Yes No eCore Doc Classific",
+          "hasOnClick": false
+        },
+        {
+          "tag": "div",
+          "id": "north",
+          "className": "ui-widget eo-hidden ui-layout-pane ui-layout-pane-north",
+          "text": "Find Transactions Advanced From: To: Loan Origination ID: ID: Status: Complete Incomplete Signed Destroyed Paper Out Transferred In Transferred Out Transaction GUID: Transaction Type: Document Type: Sample Locked: Yes No eCore Doc Classific",
+          "hasOnClick": false
+        },
+        {
+          "tag": "div",
+          "id": "searchDiv",
+          "className": "hide-overflow",
+          "text": "Find Transactions Advanced From: To: Loan Origination ID: ID: Status: Complete Incomplete Signed Destroyed Paper Out Transferred In Transferred Out Transaction GUID: Transaction Type: Document Type: Sample Locked: Yes No eCore Doc Classific",
+          "hasOnClick": false
+        },
+        {
+          "tag": "div",
+          "id": "quickSearch",
+          "className": null,
+          "text": "Find Transactions Advanced From: To: Loan Origination ID: ID: Status: Complete Incomplete Signed Destroyed Paper Out Transferred In Transferred Out Transaction GUID: Transaction Type: Document Type: Sample Locked: Yes No eCore Doc Classific",
+          "hasOnClick": false
+        },
+        {
+          "tag": "div",
+          "id": null,
+          "className": "ui-widget-content",
+          "text": "From: To: Loan Origination ID: ID: Status: Complete Incomplete Signed Destroyed Paper Out Transferred In Transferred Out Transaction GUID: Transaction Type: Document Type: Sample Locked: Yes No eCore Doc Classification: Digital Original eSt",
+          "hasOnClick": false
+        },
+        {
+          "tag": "table",
+          "id": null,
+          "className": "searchTable",
+          "text": "From: To: Loan Origination ID: ID: Status: Complete Incomplete Signed Destroyed Paper Out Transferred In Transferred Out Transaction GUID: Transaction Type: Document Type: Sample Locked: Yes No eCore Doc Classification: Digital Original eSt",
+          "hasOnClick": false
+        },
+        {
+          "tag": "tr",
+          "id": null,
+          "className": null,
+          "text": "From: To: Loan Origination ID: ID: Status: Complete Incomplete Signed Destroyed Paper Out Transferred In Transferred Out Transaction GUID: Transaction Type: Document Type: Sample Locked: Yes No eCore Doc Classification: Digital Original eSt",
+          "hasOnClick": false
+        },
+        {
+          "tag": "table",
+          "id": null,
+          "className": null,
+          "text": "Transaction Type: Document Type: Sample Locked: Yes No",
+          "hasOnClick": false
+        },
+        {
+          "tag": "tr",
+          "id": null,
+          "className": null,
+          "text": "Document Type: Sample",
+          "hasOnClick": false
+        },
+        {
+          "tag": "div",
+          "id": "wwgrp_searchDocumentType",
+          "className": "wwgrp",
+          "text": "Sample",
+          "hasOnClick": false
+        },
+        {
+          "tag": "div",
+          "id": "wwctrl_searchDocumentType",
+          "className": "wwctrl",
+          "text": "Sample",
+          "hasOnClick": false
+        },
+        {
+          "tag": "div",
+          "id": "searchDocumentType_chosen",
+          "className": "chosen-container chosen-container-multi",
+          "text": "",
+          "hasOnClick": false
+        },
+        {
+          "tag": "div",
+          "id": "snapshot",
+          "className": "ui-widget eo-hidden ui-layout-pane ui-layout-pane-east",
+          "text": "test_shr_6001 Actions Download Documents View History Download History Report Properties Certified Print® Request Merge Paper Out® Request Destroy Documents: New Document Sample Incomplete View Download View History Download History Report ",
+          "hasOnClick": false
+        },
+        {
+          "tag": "div",
+          "id": null,
+          "className": "ui-widget-header content-header",
+          "text": "test_shr_6001 Actions Download Documents View History Download History Report Properties Certified Print® Request Merge Paper Out® Request Destroy",
+          "hasOnClick": false
+        },
+        {
+          "tag": "table",
+          "id": null,
+          "className": "fixed-width-table",
+          "text": "test_shr_6001 Actions Download Documents View History Download History Report Properties Certified Print® Request Merge Paper Out® Request Destroy",
+          "hasOnClick": false
+        },
+        {
+          "tag": "tr",
+          "id": null,
+          "className": "header-table",
+          "text": "test_shr_6001 Actions Download Documents View History Download History Report Properties Certified Print® Request Merge Paper Out® Request Destroy",
+          "hasOnClick": false
+        },
+        {
+          "tag": "div",
+          "id": null,
+          "className": "snapshot-dropdown-action snapshot-dropdown-action-block dropdown-action",
+          "text": "Actions Download Documents View History Download History Report Properties Certified Print® Request Merge Paper Out® Request Destroy",
+          "hasOnClick": false
+        },
+        {
+          "tag": "div",
+          "id": null,
+          "className": "snapshot-dropdown-actions transaction-dropdown-actions dropdown-actions",
+          "text": "Download Documents View History Download History Report Properties Certified Print® Request Merge Paper Out® Request Destroy",
+          "hasOnClick": false
+        },
+        {
+          "tag": "a",
+          "id": null,
+          "className": "postlink",
+          "text": "Download Documents",
+          "hasOnClick": false
+        },
+        {
+          "tag": "div",
+          "id": null,
+          "className": null,
+          "text": "Download Documents",
+          "hasOnClick": false
+        },
+        {
+          "tag": "div",
+          "id": null,
+          "className": "viewTransactionHistory",
+          "text": "View History",
+          "hasOnClick": false
+        },
+        {
+          "tag": "a",
+          "id": null,
+          "className": "postlink",
+          "text": "Download History Report",
+          "hasOnClick": false
+        },
+        {
+          "tag": "div",
+          "id": null,
+          "className": null,
+          "text": "Download History Report",
+          "hasOnClick": false
+        },
+        {
+          "tag": "div",
+          "id": null,
+          "className": "ui-widget-content",
+          "text": "Documents: New Document Sample Incomplete View Download View History Download History Report Properties Certified Print® Request Paper Out® Request Destroy Void Properties: eCore Transaction ID 16809591 Organization NSOrganization Creation ",
+          "hasOnClick": false
+        },
+        {
+          "tag": "div",
+          "id": null,
+          "className": "snapshot-component snapshot-component-border",
+          "text": "Documents: New Document Sample Incomplete View Download View History Download History Report Properties Certified Print® Request Paper Out® Request Destroy Void",
+          "hasOnClick": false
+        },
+        {
+          "tag": "table",
+          "id": null,
+          "className": "fullWidth",
+          "text": "Documents: New Document",
+          "hasOnClick": false
+        },
+        {
+          "tag": "tr",
+          "id": null,
+          "className": null,
+          "text": "Documents: New Document",
+          "hasOnClick": false
+        }
+      ],
+      "snapshotResponse": {
+        "status": 200,
+        "contentType": "text/html;charset=UTF-8",
+        "text": "test_shr_6001 Actions Download Documents View History Download History Report Properties Certified Print® Request Merge Paper Out® Request Destroy Documents: New Document Sample Incomplete View Download View History Download History Report Properties Certified Print® Request Paper Out® Request Destroy Void Properties: eCore Transaction ID 16809591 Organization NSOrganization Creation Date 09/16/2026 08:36:10 AM EDT Transaction GUID 1e879841-afbd-66c8-e063-460c030adfe2 Status All States Container Permissions Default Container Permissions Transferred From SJTestOrganization Transferred From Date 09/16/2026 08:36:10 AM EDT Asset Type Billing Type Transaction Creator Command Center Comments: Add Comment",
+        "controls": [
+          {
+            "tag": "a",
+            "id": null,
+            "text": "Download Documents",
+            "href": "/ssweb/setup/workspace/getTransactionDocuments.eo?transactionSid=16809591",
+            "onClick": null,
+            "className": "postlink",
+            "parentClassName": "snapshot-dropdown-actions transaction-dropdown-actions dropdown-actions",
+            "previousSiblingClassName": null,
+            "previousSiblingText": ""
+          },
+          {
+            "tag": "div",
+            "id": null,
+            "text": "View History",
+            "href": null,
+            "onClick": null,
+            "className": "viewTransactionHistory",
+            "parentClassName": "snapshot-dropdown-actions transaction-dropdown-actions dropdown-actions",
+            "previousSiblingClassName": "postlink",
+            "previousSiblingText": "Download Documents"
+          },
+          {
+            "tag": "a",
+            "id": null,
+            "text": "Download History Report",
+            "href": "/ssweb/setup/workspace/getTransactionHistoryReport.eo?transactionSid=16809591",
+            "onClick": null,
+            "className": "postlink",
+            "parentClassName": "snapshot-dropdown-actions transaction-dropdown-actions dropdown-actions",
+            "previousSiblingClassName": "viewTransactionHistory",
+            "previousSiblingText": "View History"
+          },
+          {
+            "tag": "a",
+            "id": null,
+            "text": "Download",
+            "href": "/ssweb/setup/retrieveDocument.eo?dpSid=16809592",
+            "onClick": null,
+            "className": "postlink",
+            "parentClassName": "snapshot-dropdown-actions document-dropdown-actions dropdown-actions",
+            "previousSiblingClassName": "viewDocument",
+            "previousSiblingText": "View"
+          },
+          {
+            "tag": "div",
+            "id": null,
+            "text": "View History",
+            "href": null,
+            "onClick": null,
+            "className": "viewDocumentHistory",
+            "parentClassName": "snapshot-dropdown-actions document-dropdown-actions dropdown-actions",
+            "previousSiblingClassName": "postlink",
+            "previousSiblingText": "Download"
+          },
+          {
+            "tag": "a",
+            "id": null,
+            "text": "Download History Report",
+            "href": "/ssweb/setup/getHistoryReport.eo?dpSid=16809592",
+            "onClick": null,
+            "className": "postlink",
+            "parentClassName": "snapshot-dropdown-actions document-dropdown-actions dropdown-actions",
+            "previousSiblingClassName": "viewDocumentHistory",
+            "previousSiblingText": "View History"
+          }
+        ]
+      },
+      "note": "Control History text present on opened view"
+    },
+    {
+      "ref": "testtransfershresh00109/16/2026 08:21:09",
+      "url": "https://qa5.eoriginal.org:8443/ssweb/setup/workspace/workspace.eo",
+      "historyUrl": "/ssweb/setup/workspace/container/ajax/viewDocumentHistory.eo",
+      "controlHistoryFound": false,
+      "historySummary": "Transaction ID: testtransfershresh001Organization: NSOrganization Event History Date Signed Action Recorded By User IP Address Details 09/17/2026 04:40:18 AM EDT Returned Document History Report Command Center Nitin Saini <nitin.saini@wolterskluwer.com> 10.10.22.132 09/17/2026 04:38:58 AM EDT Returned Document History Report Command Center Nitin Saini <nitin.saini@wolterskluwer.com> 10.10.22.132 09/16/2026 08:23:31 AM EDT Returned Watermarked Copy Command Center Nitin Saini <nitin.saini@wolterskluwer.com> 10.10.22.168 09/16/2026 08:22:05 AM EDT User Signs Document SmartSign Web Nitin Saini <nitin.saini@wolterskluwer.com> 10.10.22.168 09/16/2026 08:22:05 AM EDT Created Signed Version SmartSign Web Nitin Saini <nitin.saini@wolterskluwer.com> 10.10.22.168 09/16/2026 08:22:05 AM EDT Signature Areas Acknowledged SmartSign Web Nitin Saini <nitin.saini@wolterskluwer.com> 10.10.22.168 09/16/2026 08:21:52 AM EDT Presented Review Copy SmartSign Web Nitin Saini <nitin.saini@wolterskluwer.com> 10.10.22.168 09/16/2026 08:21:51 AM EDT Returned Watermarked Copy SmartSign Web Nitin Saini <nitin.saini@wolterskluwer.com> 10.10.22.168 09/16/2026 08:21:50 AM EDT Provided eRecords Consent Command Cente",
+      "historyResponseKeys": [
+        "strutsTokenName",
+        "strutsToken",
+        "content"
+      ],
+      "historyTables": [
+        {
+          "headers": [],
+          "rowCount": 2,
+          "text": "Transaction ID: testtransfershresh001Organization: NSOrganization"
+        },
+        {
+          "headers": [
+            "Date",
+            "Signed",
+            "Action",
+            "Recorded By",
+            "User",
+            "IP Address",
+            "Details"
+          ],
+          "rowCount": 14,
+          "text": "Date Signed Action Recorded By User IP Address Details 09/17/2026 04:40:18 AM EDT Returned Document History Report Command Center Nitin Saini <nitin.saini@wolterskluwer.com> 10.10.22.132 09/17/2026 04:38:58 AM EDT Returned Document History Report Command Center Nitin Saini <nitin.saini@wolterskluwer.com> 10.10.22.132 09/16/2026 08:23:31 AM EDT Returned Watermarked Copy Command Center Nitin Saini <nitin.saini@wolterskluwer.com> 10.10.22.168 09/16/2026 08:22:05 AM EDT User Signs Document SmartSign"
+        },
+        {
+          "headers": [
+            "Details",
+            "Digital Certificate Information"
+          ],
+          "rowCount": 1,
+          "text": "Details Digital Certificate Information Name: Nitin Saini Block: signature1789561278328 Date: 09/16/2026 08:22:05 AM EDT Location: IP: 10.10.22.168 Issued to: Unknown Issued by: Unknown Hash: OwWV4cogMMrWXv85LDJUsXShsJ6VW1eejdVJ7fZKyqKqpZ8LLwuzXLOPy0soy9jYLxU4cvpEgFKMLhitZbOGoWinoqokippSTkY2IZ7RrGt6VoKLxIygmD4kObr9XxRwQSl/UUrx091aLZHkSIRwCsQgiPzlq4lKEyWhEmSWCoxZqny7hrnpbVOiVs4y+EF4ydSsLyD3b1GduMu8WQju/FzsW0bgtukU8QRWSP6OG4BdCKeibIS0qAbB35RYJbsUTX0OfVEfWyV0ZiIv46E52MFmdQhlV7NW6R6q69tV5Cz+O1o91E3c"
+        },
+        {
+          "headers": [
+            "Date",
+            "Name",
+            "Creator",
+            "Revision"
+          ],
+          "rowCount": 1,
+          "text": "Date Name Creator Revision 09/16/2026 08:22:05 AM EDT Sample Nitin Saini 3 Download"
+        }
+      ],
+      "controllerHistory": {
+        "path": "/ssweb/setup/workspace/container/ajax/getControllerHistory.eo",
+        "status": 200,
+        "text": "",
+        "tables": []
+      },
+      "downloadedReport": {
+        "suggestedFilename": "AuditTrail-16809587.pdf",
+        "textLength": 5162,
+        "controlHistoryFound": false,
+        "confirmedTransferFound": false
+      },
+      "documentMenuState": {
+        "triggerCount": 1,
+        "triggerVisibleBefore": false,
+        "historyVisibleBefore": false,
+        "historyVisibleAfter": false
+      },
+      "historyControls": [
+        {
+          "text": "NSOrganization",
+          "href": "/ssweb/setup/viewOrganizationData.eo?orgSid=6414",
+          "id": null
+        },
+        {
+          "text": "Download Documents",
+          "href": "/ssweb/setup/workspace/getTransactionDocuments.eo?transactionSid=16809586",
+          "id": null
+        },
+        {
+          "text": "Download History Report",
+          "href": "/ssweb/setup/workspace/getTransactionHistoryReport.eo?transactionSid=16809586",
+          "id": null
+        }
+      ],
+      "snapshotElements": [
+        {
+          "tag": "div",
+          "id": "bannerNavLinks",
+          "className": null,
+          "text": "Home New Transaction Workspace Reports Configuration Changes eAsset® Analytics Event Analytics Infographics Manage Scheduled Reports Open Requests Permission Analysis Transaction Retention Analysis User Activity Analysis Vault Content Prefe",
+          "hasOnClick": false
+        },
+        {
+          "tag": "div",
+          "id": "layout",
+          "className": "layout ui-layout-container",
+          "text": "Find Transactions Advanced From: To: Loan Origination ID: ID: Status: Complete Incomplete Signed Destroyed Paper Out Transferred In Transferred Out Transaction GUID: Transaction Type: Document Type: Sample Locked: Yes No eCore Doc Classific",
+          "hasOnClick": false
+        },
+        {
+          "tag": "div",
+          "id": "content",
+          "className": "widecolumn",
+          "text": "Find Transactions Advanced From: To: Loan Origination ID: ID: Status: Complete Incomplete Signed Destroyed Paper Out Transferred In Transferred Out Transaction GUID: Transaction Type: Document Type: Sample Locked: Yes No eCore Doc Classific",
+          "hasOnClick": false
+        },
+        {
+          "tag": "div",
+          "id": "contentText",
+          "className": null,
+          "text": "Find Transactions Advanced From: To: Loan Origination ID: ID: Status: Complete Incomplete Signed Destroyed Paper Out Transferred In Transferred Out Transaction GUID: Transaction Type: Document Type: Sample Locked: Yes No eCore Doc Classific",
+          "hasOnClick": false
+        },
+        {
+          "tag": "div",
+          "id": "north",
+          "className": "ui-widget eo-hidden ui-layout-pane ui-layout-pane-north",
+          "text": "Find Transactions Advanced From: To: Loan Origination ID: ID: Status: Complete Incomplete Signed Destroyed Paper Out Transferred In Transferred Out Transaction GUID: Transaction Type: Document Type: Sample Locked: Yes No eCore Doc Classific",
+          "hasOnClick": false
+        },
+        {
+          "tag": "div",
+          "id": "searchDiv",
+          "className": "hide-overflow",
+          "text": "Find Transactions Advanced From: To: Loan Origination ID: ID: Status: Complete Incomplete Signed Destroyed Paper Out Transferred In Transferred Out Transaction GUID: Transaction Type: Document Type: Sample Locked: Yes No eCore Doc Classific",
+          "hasOnClick": false
+        },
+        {
+          "tag": "div",
+          "id": "quickSearch",
+          "className": null,
+          "text": "Find Transactions Advanced From: To: Loan Origination ID: ID: Status: Complete Incomplete Signed Destroyed Paper Out Transferred In Transferred Out Transaction GUID: Transaction Type: Document Type: Sample Locked: Yes No eCore Doc Classific",
+          "hasOnClick": false
+        },
+        {
+          "tag": "div",
+          "id": null,
+          "className": "ui-widget-content",
+          "text": "From: To: Loan Origination ID: ID: Status: Complete Incomplete Signed Destroyed Paper Out Transferred In Transferred Out Transaction GUID: Transaction Type: Document Type: Sample Locked: Yes No eCore Doc Classification: Digital Original eSt",
+          "hasOnClick": false
+        },
+        {
+          "tag": "table",
+          "id": null,
+          "className": "searchTable",
+          "text": "From: To: Loan Origination ID: ID: Status: Complete Incomplete Signed Destroyed Paper Out Transferred In Transferred Out Transaction GUID: Transaction Type: Document Type: Sample Locked: Yes No eCore Doc Classification: Digital Original eSt",
+          "hasOnClick": false
+        },
+        {
+          "tag": "tr",
+          "id": null,
+          "className": null,
+          "text": "From: To: Loan Origination ID: ID: Status: Complete Incomplete Signed Destroyed Paper Out Transferred In Transferred Out Transaction GUID: Transaction Type: Document Type: Sample Locked: Yes No eCore Doc Classification: Digital Original eSt",
+          "hasOnClick": false
+        },
+        {
+          "tag": "table",
+          "id": null,
+          "className": null,
+          "text": "Transaction Type: Document Type: Sample Locked: Yes No",
+          "hasOnClick": false
+        },
+        {
+          "tag": "tr",
+          "id": null,
+          "className": null,
+          "text": "Document Type: Sample",
+          "hasOnClick": false
+        },
+        {
+          "tag": "div",
+          "id": "wwgrp_searchDocumentType",
+          "className": "wwgrp",
+          "text": "Sample",
+          "hasOnClick": false
+        },
+        {
+          "tag": "div",
+          "id": "wwctrl_searchDocumentType",
+          "className": "wwctrl",
+          "text": "Sample",
+          "hasOnClick": false
+        },
+        {
+          "tag": "div",
+          "id": "searchDocumentType_chosen",
+          "className": "chosen-container chosen-container-multi",
+          "text": "",
+          "hasOnClick": false
+        },
+        {
+          "tag": "div",
+          "id": "snapshot",
+          "className": "ui-widget eo-hidden ui-layout-pane ui-layout-pane-east",
+          "text": "testtransfershresh001 Actions Download Documents View History Download History Report Properties Certified Print® Request Merge Paper Out® Request Destroy Configure Signing Rules View Signing Rules Documents: New Document Sample Incomplete ",
+          "hasOnClick": false
+        },
+        {
+          "tag": "div",
+          "id": null,
+          "className": "ui-widget-header content-header",
+          "text": "testtransfershresh001 Actions Download Documents View History Download History Report Properties Certified Print® Request Merge Paper Out® Request Destroy Configure Signing Rules View Signing Rules",
+          "hasOnClick": false
+        },
+        {
+          "tag": "table",
+          "id": null,
+          "className": "fixed-width-table",
+          "text": "testtransfershresh001 Actions Download Documents View History Download History Report Properties Certified Print® Request Merge Paper Out® Request Destroy Configure Signing Rules View Signing Rules",
+          "hasOnClick": false
+        },
+        {
+          "tag": "tr",
+          "id": null,
+          "className": "header-table",
+          "text": "testtransfershresh001 Actions Download Documents View History Download History Report Properties Certified Print® Request Merge Paper Out® Request Destroy Configure Signing Rules View Signing Rules",
+          "hasOnClick": false
+        },
+        {
+          "tag": "div",
+          "id": null,
+          "className": "snapshot-dropdown-action snapshot-dropdown-action-block dropdown-action",
+          "text": "Actions Download Documents View History Download History Report Properties Certified Print® Request Merge Paper Out® Request Destroy Configure Signing Rules View Signing Rules",
+          "hasOnClick": false
+        },
+        {
+          "tag": "div",
+          "id": null,
+          "className": "snapshot-dropdown-actions transaction-dropdown-actions dropdown-actions",
+          "text": "Download Documents View History Download History Report Properties Certified Print® Request Merge Paper Out® Request Destroy Configure Signing Rules View Signing Rules",
+          "hasOnClick": false
+        },
+        {
+          "tag": "a",
+          "id": null,
+          "className": "postlink",
+          "text": "Download Documents",
+          "hasOnClick": false
+        },
+        {
+          "tag": "div",
+          "id": null,
+          "className": null,
+          "text": "Download Documents",
+          "hasOnClick": false
+        },
+        {
+          "tag": "div",
+          "id": null,
+          "className": "viewTransactionHistory",
+          "text": "View History",
+          "hasOnClick": false
+        },
+        {
+          "tag": "a",
+          "id": null,
+          "className": "postlink",
+          "text": "Download History Report",
+          "hasOnClick": false
+        },
+        {
+          "tag": "div",
+          "id": null,
+          "className": null,
+          "text": "Download History Report",
+          "hasOnClick": false
+        },
+        {
+          "tag": "div",
+          "id": null,
+          "className": "ui-widget-content",
+          "text": "Documents: New Document Sample Incomplete View Download View History Download History Report Properties Certified Print® Request Paper Out® Request Destroy Void SmartSign Participant Info: Name Role Status Order Nitin Saini Buyer Completed ",
+          "hasOnClick": false
+        },
+        {
+          "tag": "div",
+          "id": null,
+          "className": "snapshot-component snapshot-component-border",
+          "text": "Documents: New Document Sample Incomplete View Download View History Download History Report Properties Certified Print® Request Paper Out® Request Destroy Void",
+          "hasOnClick": false
+        },
+        {
+          "tag": "table",
+          "id": null,
+          "className": "fullWidth",
+          "text": "Documents: New Document",
+          "hasOnClick": false
+        },
+        {
+          "tag": "tr",
+          "id": null,
+          "className": null,
+          "text": "Documents: New Document",
+          "hasOnClick": false
+        }
+      ],
+      "snapshotResponse": {
+        "status": 200,
+        "contentType": "text/html;charset=UTF-8",
+        "text": "testtransfershresh001 Actions Download Documents View History Download History Report Properties Certified Print® Request Merge Paper Out® Request Destroy Configure Signing Rules View Signing Rules Documents: New Document Sample Incomplete View Download View History Download History Report Properties Certified Print® Request Paper Out® Request Destroy Void SmartSign Participant Info: Name Role Status Order Nitin Saini Buyer Completed 0 View Details Properties: eCore Transaction ID 16809586 Organization NSOrganization Creation Date 09/16/2026 08:21:09 AM EDT Transaction GUID 5b99b3c8-3bca-d9b6-e065-10759632ff53 Status All States Container Permissions Default Container Permissions Asset Type Billing Type Transaction Creator Command Center Comments: Add Comment Signing Rules Creation Date: 09/16/2026 08:21:10 AM EDT Participant Name Role Routing Order State Required Signature Mode Last Invitation Email Sent Nitin Saini Buyer No Email Completed Acknowledged",
+        "controls": [
+          {
+            "tag": "a",
+            "id": null,
+            "text": "Download Documents",
+            "href": "/ssweb/setup/workspace/getTransactionDocuments.eo?transactionSid=16809586",
+            "onClick": null,
+            "className": "postlink",
+            "parentClassName": "snapshot-dropdown-actions transaction-dropdown-actions dropdown-actions",
+            "previousSiblingClassName": null,
+            "previousSiblingText": ""
+          },
+          {
+            "tag": "div",
+            "id": null,
+            "text": "View History",
+            "href": null,
+            "onClick": null,
+            "className": "viewTransactionHistory",
+            "parentClassName": "snapshot-dropdown-actions transaction-dropdown-actions dropdown-actions",
+            "previousSiblingClassName": "postlink",
+            "previousSiblingText": "Download Documents"
+          },
+          {
+            "tag": "a",
+            "id": null,
+            "text": "Download History Report",
+            "href": "/ssweb/setup/workspace/getTransactionHistoryReport.eo?transactionSid=16809586",
+            "onClick": null,
+            "className": "postlink",
+            "parentClassName": "snapshot-dropdown-actions transaction-dropdown-actions dropdown-actions",
+            "previousSiblingClassName": "viewTransactionHistory",
+            "previousSiblingText": "View History"
+          },
+          {
+            "tag": "a",
+            "id": null,
+            "text": "Configure Signing Rules",
+            "href": "/ssweb/setup/container/edit/transactionInformation.eo?transactionSid=16809586",
+            "onClick": null,
+            "className": "setup-app-only postlink",
+            "parentClassName": "snapshot-dropdown-actions transaction-dropdown-actions dropdown-actions",
+            "previousSiblingClassName": "setup-app-only",
+            "previousSiblingText": ""
+          },
+          {
+            "tag": "a",
+            "id": null,
+            "text": "Download",
+            "href": "/ssweb/setup/retrieveDocument.eo?dpSid=16809587",
+            "onClick": null,
+            "className": "postlink",
+            "parentClassName": "snapshot-dropdown-actions document-dropdown-actions dropdown-actions",
+            "previousSiblingClassName": "viewDocument",
+            "previousSiblingText": "View"
+          },
+          {
+            "tag": "div",
+            "id": null,
+            "text": "View History",
+            "href": null,
+            "onClick": null,
+            "className": "viewDocumentHistory",
+            "parentClassName": "snapshot-dropdown-actions document-dropdown-actions dropdown-actions",
+            "previousSiblingClassName": "postlink",
+            "previousSiblingText": "Download"
+          },
+          {
+            "tag": "a",
+            "id": null,
+            "text": "Download History Report",
+            "href": "/ssweb/setup/getHistoryReport.eo?dpSid=16809587",
+            "onClick": null,
+            "className": "postlink",
+            "parentClassName": "snapshot-dropdown-actions document-dropdown-actions dropdown-actions",
+            "previousSiblingClassName": "viewDocumentHistory",
+            "previousSiblingText": "View History"
+          }
+        ]
+      },
+      "note": "opened; no Control History text"
+    }
+  ],
+  "transactionAttempts": 2,
+  "snapshotsOpened": 2,
+  "historyReportsOpened": 2,
+  "controlHistoryFoundAnywhere": true,
+  "reportApiHits": [
+    {
+      "path": "/ssweb/setup/workspace/container/ajax/viewDocumentHistory.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/container/ajax/viewDocumentHistory.eo",
+      "method": "POST",
+      "status": 200
+    }
+  ],
+  "targetContractObservations": [],
+  "approvedReportSurfacesDriven": [
+    "View History",
+    "Document Download History Report",
+    "Transaction Download History Report",
+    "View History",
+    "Document Download History Report",
+    "Transaction Download History Report"
+  ],
+  "workspaceCalls": [
+    {
+      "path": "/ssweb/setup/workspace/workspace.eo",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/getSearchTransactionTypes.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/container/ajax/submitTransactionSearch.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/container/ajax/getWorkspaceTableData.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/container/ajax/getWorkspaceTableData.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/container/ajax/transactionSnapshot.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/container/ajax/viewDocumentHistory.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/container/ajax/getControllerHistory.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/getTransactionHistoryReport.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/workspace.eo",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/getSearchTransactionTypes.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/container/ajax/submitTransactionSearch.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/container/ajax/getWorkspaceTableData.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/container/ajax/getWorkspaceTableData.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/container/ajax/transactionSnapshot.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/container/ajax/viewDocumentHistory.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/container/ajax/getControllerHistory.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/getTransactionHistoryReport.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/workspace.eo",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/getSearchTransactionTypes.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/container/ajax/submitTransactionSearch.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/container/ajax/getWorkspaceTableData.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/container/ajax/getWorkspaceTableData.eo",
+      "method": "POST",
+      "status": 200
+    }
+  ],
+  "allEoCalls": [
+    {
+      "path": "/ssweb/setup/showLogin.eo",
+      "method": "GET",
+      "status": 302
+    },
+    {
+      "path": "/ssweb/setup/browserDetectionPage.eo",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/browserDetectionSubmit.eo",
+      "method": "GET",
+      "status": 302
+    },
+    {
+      "path": "/ssweb/setup/showLogin.eo",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/welcome.eo",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/workspace.eo",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/getSearchTransactionTypes.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/container/ajax/submitTransactionSearch.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/container/ajax/getWorkspaceTableData.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/container/ajax/getWorkspaceTableData.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/container/ajax/transactionSnapshot.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/container/ajax/viewDocumentHistory.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/container/ajax/getControllerHistory.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/getHistoryReport.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/getTransactionHistoryReport.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/workspace.eo",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/getSearchTransactionTypes.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/container/ajax/submitTransactionSearch.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/container/ajax/getWorkspaceTableData.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/container/ajax/getWorkspaceTableData.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/container/ajax/transactionSnapshot.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/container/ajax/viewDocumentHistory.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/container/ajax/getControllerHistory.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/getHistoryReport.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/getTransactionHistoryReport.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/workspace.eo",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/getSearchTransactionTypes.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/container/ajax/submitTransactionSearch.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/container/ajax/getWorkspaceTableData.eo",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/ssweb/setup/workspace/container/ajax/getWorkspaceTableData.eo",
+      "method": "POST",
+      "status": 200
+    }
+  ],
+  "finishedAt": "2026-09-17T12:12:25.638Z"
+}

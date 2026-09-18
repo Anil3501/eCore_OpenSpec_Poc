@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1.0.0",
+  "reportType": "HYBRID_FIXTURE_PROBE",
+  "jiraStoryId": "EC-11358",
+  "observedAt": "2026-09-17T11:27:48.705Z",
+  "evidenceSource": "Authenticated scripted Playwright read-only observation.",
+  "targetTransactionId": "16809591",
+  "targetDocumentId": "16809592",
+  "batchCount": 0,
+  "authorizedBatchCount": 0,
+  "authorizedBatches": [],
+  "batchDetails": []
+}

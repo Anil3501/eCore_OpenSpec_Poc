@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-14T19:04:31.837Z",
+  "generatedAt": "2026-09-17T11:59:37.343Z",
   "scope": "rtm",
   "summary": {
     "total": 6,
@@ -13,7 +13,7 @@
       "title": "RTM and coverage artifacts validate against schema",
       "status": "PASS",
       "messages": [
-        "3 RTM partition(s), 3 coverage matrix/matrices, 1 index file(s)."
+        "4 RTM partition(s), 3 coverage matrix/matrices, 1 index file(s)."
       ]
     },
     {
@@ -33,7 +33,7 @@
       "title": "Every Gherkin scenario carries traceability tags",
       "status": "PASS",
       "messages": [
-        "6 approved and generated feature file(s) checked."
+        "7 approved and generated feature file(s) checked."
       ]
     },
     {
@@ -41,7 +41,7 @@
       "title": "Open OpenSpec changes pass `openspec validate --strict`",
       "status": "PASS",
       "messages": [
-        "3 open change(s) validated: add-home-navigation, add-organization-login, track-paper-out-media-type."
+        "4 open change(s) validated: add-control-history-section, add-home-navigation, add-organization-login, track-paper-out-media-type."
       ]
     },
     {

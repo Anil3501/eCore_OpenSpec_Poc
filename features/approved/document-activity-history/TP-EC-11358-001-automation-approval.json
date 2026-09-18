@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "1.0.0",
+  "approvalId": "APR-AD-EC-11358-001",
+  "gate": "AUTOMATION_DESIGN",
+  "artifactId": "TP-EC-11358-001",
+  "artifactVersion": 1,
+  "release": "26.3",
+  "capability": "document-activity-history",
+  "sourceArtifactPath": "features/generated/document-activity-history/TP-EC-11358-001-automation-design.md",
+  "decision": "APPROVE",
+  "reviewer": {
+    "name": "Nitin Saini",
+    "role": "Senior QA",
+    "reference": null
+  },
+  "reviewedAt": "2026-09-14T11:44:48.719Z",
+  "comments": "Gate 3 approved. Authorises implementation and execution of all eight scenarios against approved plan TP-EC-11358-001 v1. Open questions Q-EC-11358-001 (concrete documents and organization accounts reproducing each precondition) and Q-EC-11358-002 (the live request shape and Control-History marker for each report API) are deferred to PLAYWRIGHT_VALIDATION, where they are captured from the running application as OBSERVED evidence and judged against the HUMAN_APPROVED method/path/status contract. Every Control History locator stays MCP_VALIDATION_REQUIRED until PLAYWRIGHT_VALIDATION resolves it, and the two report-API request/response shapes stay API_CONTRACT_UNVERIFIED until captured live; no scenario asserts against an unverified field before then.",
+  "itemDecisions": [
+    {
+      "itemId": "TS-EC-11358-001",
+      "decision": "APPROVE",
+      "comment": "A transferred financial asset shows a consolidated Control History table (AC-EC-11358-001, UI). Precondition seeded per AMB-EC-11358-001; concrete document confirmed at PLAYWRIGHT_VALIDATION."
+    },
+    {
+      "itemId": "TS-EC-11358-002",
+      "decision": "APPROVE",
+      "comment": "Each Control History row shows the transfer date and both organizations (AC-EC-11358-002, UI). Structural presence of the three columns only, per AMB-EC-11358-003; no label or date-format assertion."
+    },
+    {
+      "itemId": "TS-EC-11358-003",
+      "decision": "APPROVE",
+      "comment": "A document with no confirmed transfer shows no Control History table (AC-EC-11358-003, UI). Absence assertion."
+    },
+    {
+      "itemId": "TS-EC-11358-004",
+      "decision": "APPROVE",
+      "comment": "Multiple transfers are ordered newest to oldest (AC-EC-11358-004, UI). Requires a document with at least two confirmed transfers."
+    },
+    {
+      "itemId": "TS-EC-11358-005",
+      "decision": "APPROVE",
+      "comment": "The Control History table appears in the on-screen report view (AC-EC-11358-005, UI). Authoritative coverage of AC-EC-11358-005."
+    },
+    {
+      "itemId": "TS-EC-11358-006",
+      "decision": "APPROVE",
+      "comment": "The Control History table appears when the report is exported via eoRequestExport (AC-EC-11358-005, API). Method/path/200 HUMAN_APPROVED at Gate 2; request params and response marker API_CONTRACT_UNVERIFIED until PLAYWRIGHT_VALIDATION."
+    },
+    {
+      "itemId": "TS-EC-11358-007",
+      "decision": "APPROVE",
+      "comment": "The Control History table appears when the report is requested via eoGetDocumentActivityHistoryReport (AC-EC-11358-005, API). Same authoritative-vs-unverified split as TS-EC-11358-006."
+    },
+    {
+      "itemId": "TS-EC-11358-008",
+      "decision": "APPROVE",
+      "comment": "Document type determines whether the Control History table is produced (AC-EC-11358-006, UI). Financial Asset and Financial Asset Addendum show it; Supplemental Doc does not."
+    }
+  ]
+}

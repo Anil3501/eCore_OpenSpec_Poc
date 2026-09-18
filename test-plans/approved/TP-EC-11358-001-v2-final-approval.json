@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "1.0.0",
+  "approvalId": "APR-TP-EC-11358-003",
+  "gate": "TEST_PLAN",
+  "artifactId": "TP-EC-11358-001",
+  "artifactVersion": 2,
+  "release": "26.3",
+  "capability": "document-activity-history",
+  "sourceArtifactPath": "test-plans/generated/TP-EC-11358-001.json",
+  "decision": "APPROVE",
+  "reviewer": {
+    "name": "Nitin Saini",
+    "role": "Senior QA",
+    "reference": null
+  },
+  "reviewedAt": "2026-09-17T11:40:10.412Z",
+  "comments": "Approved per Nitin Saini's instruction to proceed with the recommendation and preserve the reasons for traceability. TS-EC-11358-006 and TS-EC-11358-007 are deferred because both APIs return acknowledgments rather than report content, the generated-report retrieval route is not established, NSOrg has no safe Authorized/Verification package fixture, and creating an irreversible fixture is prohibited. The six approved UI scenarios proceed; the API coverage gap remains explicit.",
+  "itemDecisions": [
+    { "itemId": "TS-EC-11358-001", "decision": "APPROVE", "comment": "Transferred financial asset shows the Control History table (AC-001)." },
+    { "itemId": "TS-EC-11358-002", "decision": "APPROVE", "comment": "Each row shows transfer date and both organizations (AC-002)." },
+    { "itemId": "TS-EC-11358-003", "decision": "APPROVE", "comment": "No confirmed transfer shows no Control History table (AC-003)." },
+    { "itemId": "TS-EC-11358-004", "decision": "APPROVE", "comment": "Multiple transfers are ordered newest to oldest (AC-004)." },
+    { "itemId": "TS-EC-11358-005", "decision": "APPROVE", "comment": "The UI view remains authoritative executable coverage for AC-005." },
+    { "itemId": "TS-EC-11358-006", "decision": "DEFER", "comment": "eoRequestExport returns batch metadata rather than report content. Package inspection requires an Authorized/Verification fixture; NSOrg currently has none, and automation must not create an irreversible fixture." },
+    { "itemId": "TS-EC-11358-007", "decision": "DEFER", "comment": "The successful API response is an api.xml status acknowledgment with no report content, report identifier, redirect, or authoritative retrieval route." },
+    { "itemId": "TS-EC-11358-008", "decision": "APPROVE", "comment": "Document type determines whether the Control History table is produced (AC-006)." }
+  ]
+}

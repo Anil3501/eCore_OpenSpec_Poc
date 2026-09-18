@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0.0",
+  "approvalId": "APR-AD-EC-11358-002",
+  "gate": "AUTOMATION_DESIGN",
+  "artifactId": "TP-EC-11358-001",
+  "artifactVersion": 2,
+  "release": "26.3",
+  "capability": "document-activity-history",
+  "sourceArtifactPath": "features/generated/document-activity-history/TP-EC-11358-001-automation-design.md",
+  "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+  "reviewer": {
+    "name": "REPLACE_WITH_YOUR_NAME",
+    "role": "REPLACE_WITH_YOUR_ROLE",
+    "reference": null
+  },
+  "reviewedAt": "REPLACE_WITH_ISO_8601_TIMESTAMP",
+  "comments": "Confirm that the remaining no-transfer, multiple-transfer, Financial Asset Addendum, and Supplemental Doc fixtures may be resolved at PLAYWRIGHT_VALIDATION. Transaction 16809591 / document 16809592 is already observed for the single-transfer scenarios. Approving authorises implementation and execution of the six UI scenarios against approved plan TP-EC-11358-001 v2. Every locator remains MCP_VALIDATION_REQUIRED until Playwright MCP confirms it. TS-EC-11358-006 and TS-EC-11358-007 remain deferred and are not part of this approval.",
+  "itemDecisions": [
+    {
+      "itemId": "TS-EC-11358-001",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "A transferred financial asset shows a consolidated Control History table (AC-EC-11358-001, UI). Transaction 16809591 / document 16809592 is observed supporting evidence; locators remain pending Playwright MCP validation."
+    },
+    {
+      "itemId": "TS-EC-11358-002",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Each Control History row shows the transfer date and both organizations (AC-EC-11358-002, UI). Structural presence only; exact labels and date format are not asserted."
+    },
+    {
+      "itemId": "TS-EC-11358-003",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "A document with no confirmed transfer shows no Control History table (AC-EC-11358-003, UI). The concrete no-transfer fixture remains to be resolved at PLAYWRIGHT_VALIDATION."
+    },
+    {
+      "itemId": "TS-EC-11358-004",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Multiple transfers are ordered newest to oldest (AC-EC-11358-004, UI). The concrete multiple-transfer fixture remains to be resolved at PLAYWRIGHT_VALIDATION."
+    },
+    {
+      "itemId": "TS-EC-11358-005",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "The Control History table appears in the UI view (AC-EC-11358-005). This is authoritative executable coverage while both API scenarios remain deferred."
+    },
+    {
+      "itemId": "TS-EC-11358-008",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Document type determines whether the Control History table is produced (AC-EC-11358-006, UI). The Financial Asset Addendum and Supplemental Doc fixtures remain to be resolved at PLAYWRIGHT_VALIDATION."
+    }
+  ]
+}

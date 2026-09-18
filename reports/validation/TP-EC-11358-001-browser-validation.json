@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.0.0",
+  "testPlanId": "TP-EC-11358-001",
+  "stage": "PLAYWRIGHT_VALIDATION",
+  "capturedAt": "2026-09-17T12:12:51.287Z",
+  "environment": "qa5.eoriginal.org:8443",
+  "evidenceSource": "reports/validation/EC-11358-workspace-scan.json",
+  "outcome": "BLOCKED_FIXTURE_VALIDATION",
+  "mcpValidation": {
+    "session": "Authenticated storage state captured successfully; no credential entered through MCP.",
+    "confirmedLocators": [
+      "getByRole('link', { name: 'Workspace' })",
+      "getByRole('textbox', { name: 'eCore Transaction ID:' })",
+      "getByRole('button', { name: 'Search' })",
+      "getByRole('row', { name: /16809591/ })",
+      "getByTitle('Financial Asset (Signed)')",
+      "getByRole('cell', { name: 'Actions', exact: true })",
+      "getByText('View History', { exact: true }) for the transaction-level action",
+      "getByRole('dialog', { name: 'Transaction History' })"
+    ],
+    "discriminatingResult": "The accessible transaction-level View History action opens a Transaction History dialog containing Event History only. It does not expose the document-level Control History report required by the approved scenarios.",
+    "validatedLocatorFallback": "Nitin Saini authorized the observed raw-selector fallback in chat on 2026-09-17. The bounded read-only probe then opened both available documents by dispatching the application-owned delegated click through .snapshot-dropdown-action:has(.document-dropdown-actions) to .viewDocumentHistory. Both requests reached viewDocumentHistory.eo and getControllerHistory.eo successfully. These selectors are validated only as an accessibility-gap fallback for the hidden headless layout and require VALIDATED comments in implementation.",
+    "fixtureGaps": [
+      "TS-EC-11358-004: document with at least two Confirmed Transfer of Control events",
+      "TS-EC-11358-008: Financial Asset Addendum with transfers and Supplemental Doc"
+    ]
+  },
+  "observations": {
+    "transactionId": "16809591",
+    "documentId": "16809592",
+    "confirmedTransferOfControl": true,
+    "ui": {
+      "requestPath": "/ssweb/setup/workspace/container/ajax/getControllerHistory.eo",
+      "method": "POST",
+      "status": 200,
+      "heading": "Control History",
+      "headers": ["Date", "Transferred From", "Transferred To"],
+      "rows": [
+        ["09/16/2026 08:36:10 AM EDT", "SJTestOrganization", "NSOrganization"]
+      ]
+    },
+    "downloadedReport": {
+      "filename": "AuditTrail-16809592.pdf",
+      "heading": "Controller History",
+      "confirmedTransferOfControl": true,
+      "rows": [
+        ["09/16/2026 08:36:10 AM EDT", "SJTestOrganization", "NSOrganization"]
+      ]
+    },
+    "noTransferFixture": {
+      "transactionId": "16809586",
+      "documentId": "16809587",
+      "uiRequestPath": "/ssweb/setup/workspace/container/ajax/getControllerHistory.eo",
+      "uiStatus": 200,
+      "uiControlHistoryPresent": false,
+      "uiTables": [],
+      "downloadedReportFilename": "AuditTrail-16809587.pdf",
+      "downloadedReportControlHistoryPresent": false,
+      "confirmedTransferOfControlPresent": false
+    }
+  },
+  "validatedScenarioIds": [
+    "TS-EC-11358-001",
+    "TS-EC-11358-002",
+    "TS-EC-11358-003",
+    "TS-EC-11358-005"
+  ],
+  "remainingScenarioIds": [
+    "TS-EC-11358-004",
+    "TS-EC-11358-008"
+  ],
+  "notes": "This is validation evidence, not a governed execution result. Scripted evidence confirms the positive behavior for TS-001, TS-002, and TS-005 and the absence behavior for TS-003. The user-approved raw-selector fallback resolves the hidden document-menu interaction for the observed QA5 layout. The account exposes only two workspace rows, neither of which supplies the multiple-transfer, Financial Asset Addendum, or Supplemental Doc fixtures required by TS-004 and TS-008. Deferred TS-006 and TS-007 are outside this validation scope. No approved expectation changed."
+}

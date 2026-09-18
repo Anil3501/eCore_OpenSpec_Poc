@@ -1,0 +1,439 @@
+{
+  "schemaVersion": "1.0.0",
+  "testPlanId": "TP-EC-11358-001",
+  "artifactVersion": 2,
+  "release": "26.3",
+  "capability": "document-activity-history",
+  "jiraStoryIds": [
+    "EC-11358"
+  ],
+  "requirementIds": [
+    "REQ-EC-11358-001",
+    "REQ-EC-11358-002",
+    "REQ-EC-11358-003",
+    "REQ-EC-11358-004",
+    "REQ-EC-11358-005",
+    "REQ-EC-11358-006"
+  ],
+  "acIds": [
+    "AC-EC-11358-001",
+    "AC-EC-11358-002",
+    "AC-EC-11358-003",
+    "AC-EC-11358-004",
+    "AC-EC-11358-005",
+    "AC-EC-11358-006"
+  ],
+  "openSpecRefs": [
+    "openspec/changes/add-control-history-section/specs/document-activity-history/control-history/spec.md",
+    "openspec/changes/add-control-history-section/proposal.md",
+    "openspec/changes/add-control-history-section/design.md"
+  ],
+  "objective": "Verify that a financial asset document with a Confirmed Transfer of Control event shows a consolidated Control History table in its Document Activity History Report, that each row records the transfer date and the two organizations, that the table is absent without a confirmed transfer, that multiple transfers are ordered newest to oldest, that the table appears in the in-scope surfaces (UI view plus the two report APIs), and that only document types logging transfers at the document level produce it - asserting only what the approved acceptance criteria assert, at the strength the Gate 1 resolutions allow.",
+  "scope": {
+    "inScope": [
+      "A transferred financial asset showing a consolidated Control History table in the Document Activity History Report UI view (AC-EC-11358-001).",
+      "Structural presence of the three columns per row - transfer date, Transfer From org, Transfer To org (AC-EC-11358-002).",
+      "Absence of the table for a document with no Confirmed Transfer of Control event (AC-EC-11358-003).",
+      "Newest-to-oldest ordering of entries when a document has more than one confirmed transfer (AC-EC-11358-004).",
+      "The table appearing in the UI view and in the two report APIs eoRequestExport and eoGetDocumentActivityHistoryReport (AC-EC-11358-005), the API surfaces being scoped by the resolution of AMB-EC-11358-002.",
+      "Document type determining production of the table: Financial Asset and Financial Asset Addendum show it, Supplemental Doc does not (AC-EC-11358-006)."
+    ],
+    "outOfScope": [
+      "Exact column-header labels, table heading text and date/time format - the resolution of AMB-EC-11358-003 limits assertions to structural presence only. EC-13271 tracks a separate date-format defect.",
+      "The UI download, Certified Print package, Paper Out and retention-copy surfaces - the resolution of AMB-EC-11358-002 scopes automation this release to the UI view plus the two report APIs. These remaining surfaces are covered manually and are not automated here.",
+      "Automating eoRequestExport and eoGetDocumentActivityHistoryReport in this release. Both scenarios are deferred because the observed responses expose status or batch metadata only, no safe Authorized package fixture exists in NSOrg, and the generated-report retrieval route is not established.",
+      "Producing the transfer workflow itself (Transfer of Control, Pledge, Securitization) - the Confirmed Transfer of Control precondition is established as test data per the resolution of AMB-EC-11358-001, not exercised as behaviour under test."
+    ]
+  },
+  "assumptions": [
+    "The eCore Document Activity History Report is reachable at the configured base URL from the executing network for a document that has undergone a Confirmed Transfer of Control.",
+    "A seeded or reproducible financial asset document with at least one Confirmed Transfer of Control event is available, per the resolution of AMB-EC-11358-001 that every change of state of the document produces the confirmed event. Concrete document and org selection is confirmed at PLAYWRIGHT_VALIDATION.",
+    "The organization accounts referenced in the story provide access to view the transferred document, per the resolution of AMB-EC-11358-004. Credentials are supplied through environment configuration, never through this artifact.",
+    "The approved acceptance criteria are the only source of expected behaviour. Where the Gate 1 resolutions keep a criterion abstract - structural presence only - the corresponding scenario stays abstract."
+  ],
+  "dependencies": [
+    "requirements/approved/EC-11358.json at artifactVersion 2.",
+    "requirements/approved/EC-11358-ac-approval.json - Gate 1 decision APPROVE for all six criteria, with the four ambiguity resolutions.",
+    "openspec/changes/add-control-history-section/specs/document-activity-history/control-history/spec.md.",
+    "Environment access to the qa host for a document that has undergone a Confirmed Transfer of Control. Without it no scenario can execute and results must be recorded as BLOCKED.",
+    "reports/validation/TP-EC-11358-001-browser-validation.json - corrected QA5 UI and downloaded-report evidence for transaction 16809591 / document 16809592.",
+    "reports/validation/TP-EC-11358-001-api-validation.json - observed request/acknowledgment contracts and the reasons neither API response can assert Control History.",
+    "reports/validation/ecore-api-discovery.json - the evidence that the two report APIs are UNVERIFIED and that eCore AJAX endpoints are form-encoded .eo calls, not JSON."
+  ],
+  "risks": [
+    {
+      "riskId": "RISK-TP-EC-11358-001",
+      "description": "The two report APIs return acknowledgments rather than report content. Treating status=ok or batch metadata as proof of Control History would create a false-positive test.",
+      "level": "HIGH",
+      "mitigation": "TS-EC-11358-006 and TS-EC-11358-007 are deferred at Gate 2. Their technical evidence remains traceable, while AC-EC-11358-005 retains executable UI coverage through TS-EC-11358-005."
+    },
+    {
+      "riskId": "RISK-TP-EC-11358-002",
+      "description": "The Confirmed Transfer of Control precondition is non-deterministic to reproduce and requires a transfer between two organizations. Without a stable seeded document the transfer-dependent scenarios cannot execute reliably.",
+      "level": "HIGH",
+      "mitigation": "Test data for the transfer-dependent scenarios is established per the resolution of AMB-EC-11358-001. A scenario that cannot reach the precondition is recorded BLOCKED with the reason, never fabricated as passing."
+    },
+    {
+      "riskId": "RISK-TP-EC-11358-003",
+      "description": "The story states the three columns' meaning but not their literal labels or date format, and EC-13271 records a separate date-format defect. A scenario could be hardened prematurely against a label or format that is itself defective or unconfirmed.",
+      "level": "MEDIUM",
+      "mitigation": "Per the resolution of AMB-EC-11358-003, scenarios assert structural presence of the three columns only. No header text or date format is asserted."
+    },
+    {
+      "riskId": "RISK-TP-EC-11358-004",
+      "description": "Four report surfaces (UI download, Certified Print package, Paper Out, retention copy) are verified in the story but excluded from automation this release, leaving a coverage gap against REQ-EC-11358-005 if read narrowly.",
+      "level": "LOW",
+      "mitigation": "The exclusion follows the resolution of AMB-EC-11358-002 and is recorded in outOfScope and in the Gate 2 review. These surfaces remain manual coverage; automating them requires a later scope decision."
+    },
+    {
+      "riskId": "RISK-TP-EC-11358-005",
+      "description": "The qa environment may require network access that is unavailable at the scheduled time, so execution may be impossible.",
+      "level": "MEDIUM",
+      "mitigation": "Absence of application access is recorded as an environment blocker and the affected scenarios are recorded as BLOCKED. No result is inferred."
+    }
+  ],
+  "scenarios": [
+    {
+      "testScenarioId": "TS-EC-11358-001",
+      "title": "A transferred financial asset shows a consolidated Control History table in its Document Activity History Report",
+      "type": "POSITIVE",
+      "acIds": [
+        "AC-EC-11358-001"
+      ],
+      "preconditions": [
+        "A financial asset document with at least one Confirmed Transfer of Control event is available.",
+        "An organization account that can view the transferred document is available through environment configuration."
+      ],
+      "steps": [
+        "Sign in on behalf of the organization that can view the transferred document.",
+        "Open the Document Activity History Report for the transferred financial asset document.",
+        "Observe whether a Control History table consolidating the document's transfers is displayed."
+      ],
+      "expectedResult": "A Control History table is displayed that consolidates the document's transfers. The concrete document and org are confirmed at PLAYWRIGHT_VALIDATION; the precondition follows the resolution of AMB-EC-11358-001.",
+      "testDataRequirements": [
+        "A seeded or reproducible financial asset document with a Confirmed Transfer of Control event, established per AMB-EC-11358-001. Never a credential in this plan."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "HIGH",
+      "riskTag": "risk-high",
+      "suiteTag": "suite-smoke",
+      "scenarioAction": "CREATE",
+      "interfaceType": "UI"
+    },
+    {
+      "testScenarioId": "TS-EC-11358-002",
+      "title": "Each Control History row shows the transfer date and both organizations",
+      "type": "POSITIVE",
+      "acIds": [
+        "AC-EC-11358-002"
+      ],
+      "preconditions": [
+        "A document whose Document Activity History Report shows a Control History table is available."
+      ],
+      "steps": [
+        "Open the Document Activity History Report for a document that shows a Control History table.",
+        "Read each row of the Control History table.",
+        "Observe whether each row shows a transfer date, a Transfer From organization and a Transfer To organization."
+      ],
+      "expectedResult": "Each row shows the transfer date, the Transfer From organization and the Transfer To organization. Only structural presence of the three columns is asserted; exact labels and date format are not, per the resolution of AMB-EC-11358-003.",
+      "testDataRequirements": [
+        "The same transferred financial asset document as TS-EC-11358-001."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "HIGH",
+      "riskTag": "risk-medium",
+      "suiteTag": "suite-regression",
+      "scenarioAction": "CREATE",
+      "interfaceType": "UI"
+    },
+    {
+      "testScenarioId": "TS-EC-11358-003",
+      "title": "A document with no confirmed transfer shows no Control History table",
+      "type": "NEGATIVE",
+      "acIds": [
+        "AC-EC-11358-003"
+      ],
+      "preconditions": [
+        "A document that has no Confirmed Transfer of Control event is available."
+      ],
+      "steps": [
+        "Open the Document Activity History Report for a document that has no Confirmed Transfer of Control event.",
+        "Observe whether a Control History table is displayed."
+      ],
+      "expectedResult": "No Control History table is displayed.",
+      "testDataRequirements": [
+        "A document with no Confirmed Transfer of Control event, confirmed at PLAYWRIGHT_VALIDATION."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "HIGH",
+      "riskTag": "risk-medium",
+      "suiteTag": "suite-regression",
+      "scenarioAction": "CREATE",
+      "interfaceType": "UI"
+    },
+    {
+      "testScenarioId": "TS-EC-11358-004",
+      "title": "Multiple transfers are ordered newest to oldest",
+      "type": "POSITIVE",
+      "acIds": [
+        "AC-EC-11358-004"
+      ],
+      "preconditions": [
+        "A document with more than one Confirmed Transfer of Control event is available."
+      ],
+      "steps": [
+        "Open the Document Activity History Report for a document with more than one Confirmed Transfer of Control event.",
+        "Read the order of the Control History entries.",
+        "Observe whether the entries run from newest to oldest."
+      ],
+      "expectedResult": "The entries are ordered newest to oldest, so the oldest Transferred From entry represents the original controller.",
+      "testDataRequirements": [
+        "A document with at least two Confirmed Transfer of Control events, established per AMB-EC-11358-001."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "HIGH",
+      "riskTag": "risk-high",
+      "suiteTag": "suite-regression",
+      "scenarioAction": "CREATE",
+      "interfaceType": "UI"
+    },
+    {
+      "testScenarioId": "TS-EC-11358-005",
+      "title": "The Control History table appears in the Document Activity History Report UI view",
+      "type": "POSITIVE",
+      "acIds": [
+        "AC-EC-11358-005"
+      ],
+      "preconditions": [
+        "A document whose Document Activity History Report contains a Control History table is available."
+      ],
+      "steps": [
+        "Open the Document Activity History Report UI view for a document whose report contains a Control History table.",
+        "Observe whether the Control History table appears in the on-screen output."
+      ],
+      "expectedResult": "The Control History table appears in the UI view's output. This UI-view scenario provides the authoritative coverage of AC-EC-11358-005 while the report-API contracts remain unverified.",
+      "testDataRequirements": [
+        "The same transferred financial asset document as TS-EC-11358-001."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "HIGH",
+      "riskTag": "risk-medium",
+      "suiteTag": "suite-smoke",
+      "scenarioAction": "CREATE",
+      "interfaceType": "UI"
+    },
+    {
+      "testScenarioId": "TS-EC-11358-006",
+      "title": "The Control History table appears in the eoRequestExport report API output",
+      "type": "POSITIVE",
+      "acIds": [
+        "AC-EC-11358-005"
+      ],
+      "preconditions": [
+        "A document whose Document Activity History Report contains a Control History table is available.",
+        "A human-provisioned Paper Out batch for the target document is already at Authorized/Verification and will remain unverified after a read-only package download."
+      ],
+      "steps": [
+        "Confirm the eoRequestExport acknowledgment associated with the human-provisioned package fixture.",
+        "Open the existing Authorized/Verification item without changing its state.",
+        "Download its document package without selecting Verify and inspect the report for Control History."
+      ],
+      "expectedResult": "Deferred for this release. The acknowledgment cannot prove report content, and no safe Authorized/Verification fixture is available.",
+      "testDataRequirements": [
+        "The same transferred financial asset document as TS-EC-11358-001.",
+        "The observed request shape and response hash from reports/validation/TP-EC-11358-001-api-validation.json.",
+        "A human-provisioned Authorized/Verification fixture tied to document 16809592; the NSOrg queue had zero rows during the read-only probe."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "DEFERRED",
+      "priority": "MEDIUM",
+      "riskTag": "risk-high",
+      "suiteTag": "suite-regression",
+      "scenarioAction": "RETIRE",
+      "interfaceType": "HYBRID",
+      "apiContract": {
+        "method": "POST",
+        "path": "${ecoreBaseUrl}/ecore/",
+        "expectedStatusCodes": [200],
+        "contractSource": "OBSERVED",
+        "contractProvenance": "reports/validation/TP-EC-12000-001-api-validation.json - live QA5 eoLogin + eoRequestExport exchange; request is schema-backed by reports/jira/attachments/export-26.3.xsd. The success response contains batch metadata only and cannot assert Control History.",
+        "responseContractRef": "reports/validation/TP-EC-12000-001-api-validation.json",
+        "responseShapeHash": "194374ce9509b4caf989a2fbac6b437c8d1d558c0491c09340495d92fa222041",
+        "scaffoldingOnly": true
+      }
+    },
+    {
+      "testScenarioId": "TS-EC-11358-007",
+      "title": "The Control History table appears in the eoGetDocumentActivityHistoryReport report API output",
+      "type": "POSITIVE",
+      "acIds": [
+        "AC-EC-11358-005"
+      ],
+      "preconditions": [
+        "A document whose Document Activity History Report contains a Control History table is available.",
+        "An approved read-only route links the API acknowledgment to the generated report artifact."
+      ],
+      "steps": [
+        "Request the Document Activity History Report for the transferred document through the eoGetDocumentActivityHistoryReport report API.",
+        "Retrieve the generated report through an approved read-only route.",
+        "Observe whether the retrieved report contains the Control History section."
+      ],
+      "expectedResult": "Deferred for this release. The status-only acknowledgment cannot prove report content and no report retrieval route is established.",
+      "testDataRequirements": [
+        "The same transferred financial asset document as TS-EC-11358-001.",
+        "The human-dictated SOAP request and observed response hash from reports/validation/EC-11358-document-history-api-probe.json.",
+        "An authoritative retrieval mechanism; the observed api.xml acknowledgment contains no report content, Location header, or report reference."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "DEFERRED",
+      "priority": "MEDIUM",
+      "riskTag": "risk-high",
+      "suiteTag": "suite-regression",
+      "scenarioAction": "RETIRE",
+      "interfaceType": "HYBRID",
+      "apiContract": {
+        "method": "POST",
+        "path": "${ecoreBaseUrl}/ecore/",
+        "expectedStatusCodes": [200],
+        "contractSource": "UNVERIFIED",
+        "contractProvenance": "AGENT_DRAFTED - DICTATED: Nitin Saini supplied the SOAP Envelope with ecorews documents/document and vaultId placeholder on 2026-09-17. PROPOSED: the validated QA5 document vault ID 16809592 was substituted and markdown-corrupted namespace links normalized. Live authenticated POST returned HTTP 200 and status=ok; reports/validation/EC-11358-document-history-api-probe.json. The response is an acknowledgment only and cannot assert Control History.",
+        "responseContractRef": "reports/validation/EC-11358-document-history-api-probe.json",
+        "responseShapeHash": "516bbd4036a66d8e095d1a3fa52959ac4f43542757fd1c2fafe6a40fdd12ea10",
+        "scaffoldingOnly": true
+      }
+    },
+    {
+      "testScenarioId": "TS-EC-11358-008",
+      "title": "Document type determines whether the Control History table is produced",
+      "type": "POSITIVE",
+      "acIds": [
+        "AC-EC-11358-006"
+      ],
+      "preconditions": [
+        "A Financial Asset with transfers, a Financial Asset Addendum with transfers, and a Supplemental Doc are available."
+      ],
+      "steps": [
+        "Open the Document Activity History Report for a Financial Asset with transfers and observe whether a Control History table appears.",
+        "Open the Document Activity History Report for a Financial Asset Addendum with transfers and observe whether a Control History table appears.",
+        "Open the Document Activity History Report for a Supplemental Doc and observe whether a Control History table appears."
+      ],
+      "expectedResult": "The Financial Asset and Financial Asset Addendum show a Control History table and the Supplemental Doc shows none, because a Supplemental Doc does not log transfer events at the document level.",
+      "testDataRequirements": [
+        "One Financial Asset and one Financial Asset Addendum with transfers, and one Supplemental Doc, confirmed at PLAYWRIGHT_VALIDATION."
+      ],
+      "automationCandidate": true,
+      "automationDecision": "AUTOMATE",
+      "priority": "MEDIUM",
+      "riskTag": "risk-medium",
+      "suiteTag": "suite-regression",
+      "scenarioAction": "CREATE",
+      "interfaceType": "UI"
+    }
+  ],
+  "environmentRequirements": {
+    "environment": "qa",
+    "notes": [
+      "The eCore Document Activity History Report on the qa host, for a document that has undergone a Confirmed Transfer of Control. Network access may require VPN.",
+      "Organization accounts referenced in the story that can view the transferred document, supplied through environment configuration and never written into a governed artifact.",
+      "Seeded or reproducible documents covering: a single confirmed transfer, multiple confirmed transfers, no confirmed transfer, and the three document types (Financial Asset, Financial Asset Addendum, Supplemental Doc).",
+      "If the application cannot be reached, affected scenarios are recorded as BLOCKED with the unreachable host named. A blocked scenario is never reported as passed and never filed as a defect."
+    ]
+  },
+  "entryCriteria": [
+    "Gate 1 is cleared: requirements/approved/EC-11358-ac-approval.json records decision APPROVE for all six acceptance criteria.",
+    "The OpenSpec change add-control-history-section validates strictly and its spec delta covers all six approved criteria.",
+    "Artifact version 2 is approved at Gate 2 with TS-EC-11358-006 and TS-EC-11358-007 explicitly deferred."
+  ],
+  "exitCriteria": [
+    "Every scenario in this plan has a recorded execution result of PASSED, FAILED or BLOCKED - never an inferred one.",
+    "Every approved acceptance criterion maps to at least one executed scenario in the capability RTM.",
+    "No API scenario asserts its acceptance criterion until its contract is HUMAN_APPROVED; an API scenario still resting on an UNVERIFIED or OBSERVED contract is recorded as REVIEW_REQUIRED, not as covered.",
+    "Coverage is computed from RTM data only, and any uncovered, deferred, blocked, failed or manual-only surface is listed rather than rounded away.",
+    "Every clarification listed below is still visible with its current status; none has been silently resolved by observation."
+  ],
+  "coverageMappings": [
+    {
+      "acId": "AC-EC-11358-001",
+      "testScenarioIds": [
+        "TS-EC-11358-001"
+      ]
+    },
+    {
+      "acId": "AC-EC-11358-002",
+      "testScenarioIds": [
+        "TS-EC-11358-002"
+      ]
+    },
+    {
+      "acId": "AC-EC-11358-003",
+      "testScenarioIds": [
+        "TS-EC-11358-003"
+      ]
+    },
+    {
+      "acId": "AC-EC-11358-004",
+      "testScenarioIds": [
+        "TS-EC-11358-004"
+      ]
+    },
+    {
+      "acId": "AC-EC-11358-005",
+      "testScenarioIds": [
+        "TS-EC-11358-005",
+        "TS-EC-11358-006",
+        "TS-EC-11358-007"
+      ]
+    },
+    {
+      "acId": "AC-EC-11358-006",
+      "testScenarioIds": [
+        "TS-EC-11358-008"
+      ]
+    }
+  ],
+  "clarifications": [
+    {
+      "clarificationId": "AMB-EC-11358-001",
+      "question": "How is the Confirmed Transfer of Control precondition established deterministically in the test environment? Resolved at Gate 1: every change of state of the document produces the confirmed event; test data for the transfer-dependent scenarios is established on that basis. Concrete document confirmed at PLAYWRIGHT_VALIDATION.",
+      "status": "RESOLVED"
+    },
+    {
+      "clarificationId": "AMB-EC-11358-002",
+      "question": "Which report surfaces are in scope for automation this release? Resolved at Gate 1: the UI view plus the two report APIs (eoRequestExport, eoGetDocumentActivityHistoryReport). The API contracts must be captured and converted from OBSERVED to HUMAN_APPROVED at Gate 2 before any assertion.",
+      "status": "RESOLVED"
+    },
+    {
+      "clarificationId": "AMB-EC-11358-003",
+      "question": "What are the exact column-header labels, table heading text and date/time format? Resolved at Gate 1: assert structural presence of the table and its three columns only; exact labels and format are deferred.",
+      "status": "RESOLVED"
+    },
+    {
+      "clarificationId": "AMB-EC-11358-004",
+      "question": "Which organization account(s) view the transferred document? Resolved at Gate 1: the organization accounts referenced in the story; concrete org/credential selection confirmed at PLAYWRIGHT_VALIDATION.",
+      "status": "RESOLVED"
+    },
+    {
+      "clarificationId": "CLR-TP-EC-11358-001",
+      "question": "TS-EC-11358-006 and TS-EC-11358-007 are deferred because their API acknowledgments contain no report content, no generated-report retrieval route is established, and NSOrg has no safe Authorized/Verification package fixture.",
+      "status": "DEFERRED"
+    },
+    {
+      "clarificationId": "CLR-TP-EC-11358-002",
+      "question": "Four surfaces verified in the story - UI download, Certified Print package, Paper Out, retention copy - are excluded from automation this release per the resolution of AMB-EC-11358-002 and remain manual coverage. Does the reviewer accept this manual-only treatment, or require any of them automated now?",
+      "status": "RESOLVED"
+    }
+  ],
+  "approvalStatus": "APPROVED",
+  "approvalRef": "test-plans/approved/TP-EC-11358-001-v2-final-approval.json",
+  "dataClassification": "REAL_JIRA_DATA",
+  "timestamps": {
+    "createdAt": "2026-09-14T10:54:17.269Z",
+    "updatedAt": "2026-09-17T11:40:10.412Z",
+    "approvedAt": "2026-09-17T11:40:10.412Z"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "1.0.0",
+  "approvalId": "APR-TP-EC-11358-002",
+  "gate": "TEST_PLAN",
+  "artifactId": "TP-EC-11358-001",
+  "artifactVersion": 2,
+  "release": "26.3",
+  "capability": "document-activity-history",
+  "sourceArtifactPath": "test-plans/generated/TP-EC-11358-001.json",
+  "decision": "REPLACE_WITH_APPROVE_OR_REQUEST_CHANGES",
+  "reviewer": {
+    "name": "REPLACE_WITH_YOUR_NAME",
+    "role": "REPLACE_WITH_YOUR_ROLE",
+    "reference": null
+  },
+  "reviewedAt": "REPLACE_WITH_ISO_8601_TIMESTAMP",
+  "comments": "Choose one governed outcome: approve v2 while deferring both unobserved API scenarios, or request changes until each live response shape and responseShapeHash is presented for approval.",
+  "itemDecisions": [
+    { "itemId": "TS-EC-11358-001", "decision": "REPLACE_WITH_APPROVE", "comment": "UI scenario unchanged; corrected QA5 evidence validates the Control History table." },
+    { "itemId": "TS-EC-11358-002", "decision": "REPLACE_WITH_APPROVE", "comment": "UI scenario unchanged; corrected QA5 evidence validates the three-column row structure." },
+    { "itemId": "TS-EC-11358-003", "decision": "REPLACE_WITH_APPROVE", "comment": "UI scenario unchanged; still requires a governed execution." },
+    { "itemId": "TS-EC-11358-004", "decision": "REPLACE_WITH_APPROVE", "comment": "UI scenario unchanged; still requires multi-transfer test data." },
+    { "itemId": "TS-EC-11358-005", "decision": "REPLACE_WITH_APPROVE", "comment": "Authoritative UI coverage for AC-EC-11358-005; corrected QA5 evidence validates the on-screen table." },
+    { "itemId": "TS-EC-11358-006", "decision": "REPLACE_WITH_DEFER_OR_REQUEST_CHANGES", "comment": "eoRequestExport was not observed; no request shape, response shape, or responseShapeHash exists. Do not APPROVE as-is." },
+    { "itemId": "TS-EC-11358-007", "decision": "REPLACE_WITH_DEFER_OR_REQUEST_CHANGES", "comment": "eoGetDocumentActivityHistoryReport was not observed; no request shape, response shape, or responseShapeHash exists. Do not APPROVE as-is." },
+    { "itemId": "TS-EC-11358-008", "decision": "REPLACE_WITH_APPROVE", "comment": "UI scenario unchanged; still requires all three document-type candidates." }
+  ]
+}

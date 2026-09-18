@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<response xmlns="http://www.eoriginal.com/eowebapp-response" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" status="error" xsi:schemaLocation="http://www.eoriginal.com/eowebapp-response https://schemas.eoriginal.com/releases/26.8/eowebapp-response.xsd">
+  <errorList>
+    <error>
+      <code>LOGIN_REQUIRED</code>
+      <minorCode>1789640021245</minorCode>
+      <message>Login Required</message>
+    </error>
+  </errorList>
+</response>

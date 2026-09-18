@@ -1,0 +1,230 @@
+{
+  "schemaVersion": "1.0.0",
+  "capability": "document-activity-history",
+  "release": "26.3",
+  "artifactVersion": 4,
+  "dataClassification": "REAL_JIRA_DATA",
+  "updatedAt": "2026-09-17T11:59:00.373Z",
+  "entries": [
+    {
+      "traceId": "TRC-EC-11358-001",
+      "jiraStoryId": "EC-11358",
+      "requirementId": "REQ-EC-11358-001",
+      "acId": "AC-EC-11358-001",
+      "status": "APPROVED",
+      "changeType": "UNCHANGED",
+      "requirementArtifact": {
+        "path": "requirements/approved/EC-11358.json",
+        "version": 2
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/EC-11358-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-EC-11358-001-v2-final-approval.json",
+        "automationDesign": "features/approved/document-activity-history/TP-EC-11358-001-v2-automation-approval.json"
+      },
+      "openSpecRefs": [
+        "openspec/changes/add-control-history-section/specs/document-activity-history/control-history/spec.md"
+      ],
+      "testPlan": {
+        "testPlanId": "TP-EC-11358-001",
+        "testScenarioId": "TS-EC-11358-001",
+        "path": "test-plans/approved/TP-EC-11358-001.json",
+        "version": 2,
+        "interfaceType": "UI"
+      },
+      "automation": null,
+      "executionRefs": []
+    },
+    {
+      "traceId": "TRC-EC-11358-002",
+      "jiraStoryId": "EC-11358",
+      "requirementId": "REQ-EC-11358-002",
+      "acId": "AC-EC-11358-002",
+      "status": "APPROVED",
+      "changeType": "UNCHANGED",
+      "requirementArtifact": {
+        "path": "requirements/approved/EC-11358.json",
+        "version": 2
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/EC-11358-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-EC-11358-001-v2-final-approval.json",
+        "automationDesign": "features/approved/document-activity-history/TP-EC-11358-001-v2-automation-approval.json"
+      },
+      "openSpecRefs": [
+        "openspec/changes/add-control-history-section/specs/document-activity-history/control-history/spec.md"
+      ],
+      "testPlan": {
+        "testPlanId": "TP-EC-11358-001",
+        "testScenarioId": "TS-EC-11358-002",
+        "path": "test-plans/approved/TP-EC-11358-001.json",
+        "version": 2,
+        "interfaceType": "UI"
+      },
+      "automation": null,
+      "executionRefs": []
+    },
+    {
+      "traceId": "TRC-EC-11358-003",
+      "jiraStoryId": "EC-11358",
+      "requirementId": "REQ-EC-11358-003",
+      "acId": "AC-EC-11358-003",
+      "status": "APPROVED",
+      "changeType": "UNCHANGED",
+      "requirementArtifact": {
+        "path": "requirements/approved/EC-11358.json",
+        "version": 2
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/EC-11358-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-EC-11358-001-v2-final-approval.json",
+        "automationDesign": "features/approved/document-activity-history/TP-EC-11358-001-v2-automation-approval.json"
+      },
+      "openSpecRefs": [
+        "openspec/changes/add-control-history-section/specs/document-activity-history/control-history/spec.md"
+      ],
+      "testPlan": {
+        "testPlanId": "TP-EC-11358-001",
+        "testScenarioId": "TS-EC-11358-003",
+        "path": "test-plans/approved/TP-EC-11358-001.json",
+        "version": 2,
+        "interfaceType": "UI"
+      },
+      "automation": null,
+      "executionRefs": []
+    },
+    {
+      "traceId": "TRC-EC-11358-004",
+      "jiraStoryId": "EC-11358",
+      "requirementId": "REQ-EC-11358-004",
+      "acId": "AC-EC-11358-004",
+      "status": "APPROVED",
+      "changeType": "UNCHANGED",
+      "requirementArtifact": {
+        "path": "requirements/approved/EC-11358.json",
+        "version": 2
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/EC-11358-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-EC-11358-001-v2-final-approval.json",
+        "automationDesign": "features/approved/document-activity-history/TP-EC-11358-001-v2-automation-approval.json"
+      },
+      "openSpecRefs": [
+        "openspec/changes/add-control-history-section/specs/document-activity-history/control-history/spec.md"
+      ],
+      "testPlan": {
+        "testPlanId": "TP-EC-11358-001",
+        "testScenarioId": "TS-EC-11358-004",
+        "path": "test-plans/approved/TP-EC-11358-001.json",
+        "version": 2,
+        "interfaceType": "UI"
+      },
+      "automation": null,
+      "executionRefs": []
+    },
+    {
+      "traceId": "TRC-EC-11358-005",
+      "jiraStoryId": "EC-11358",
+      "requirementId": "REQ-EC-11358-005",
+      "acId": "AC-EC-11358-005",
+      "status": "APPROVED",
+      "changeType": "UNCHANGED",
+      "requirementArtifact": {
+        "path": "requirements/approved/EC-11358.json",
+        "version": 2
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/EC-11358-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-EC-11358-001-v2-final-approval.json",
+        "automationDesign": "features/approved/document-activity-history/TP-EC-11358-001-v2-automation-approval.json"
+      },
+      "openSpecRefs": [
+        "openspec/changes/add-control-history-section/specs/document-activity-history/control-history/spec.md"
+      ],
+      "testPlan": {
+        "testPlanId": "TP-EC-11358-001",
+        "testScenarioId": "TS-EC-11358-005",
+        "path": "test-plans/approved/TP-EC-11358-001.json",
+        "version": 2,
+        "interfaceType": "UI"
+      },
+      "automation": null,
+      "executionRefs": []
+    },
+    {
+      "traceId": "TRC-EC-11358-006",
+      "jiraStoryId": "EC-11358",
+      "requirementId": "REQ-EC-11358-006",
+      "acId": "AC-EC-11358-006",
+      "status": "APPROVED",
+      "changeType": "UNCHANGED",
+      "requirementArtifact": {
+        "path": "requirements/approved/EC-11358.json",
+        "version": 2
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/EC-11358-ac-approval.json",
+        "testPlan": "test-plans/approved/TP-EC-11358-001-v2-final-approval.json",
+        "automationDesign": "features/approved/document-activity-history/TP-EC-11358-001-v2-automation-approval.json"
+      },
+      "openSpecRefs": [
+        "openspec/changes/add-control-history-section/specs/document-activity-history/control-history/spec.md"
+      ],
+      "testPlan": {
+        "testPlanId": "TP-EC-11358-001",
+        "testScenarioId": "TS-EC-11358-008",
+        "path": "test-plans/approved/TP-EC-11358-001.json",
+        "version": 2,
+        "interfaceType": "UI"
+      },
+      "automation": null,
+      "executionRefs": []
+    },
+    {
+      "traceId": "TRC-EC-11358-007",
+      "jiraStoryId": "EC-11358",
+      "requirementId": "REQ-EC-11358-005",
+      "acId": "AC-EC-11358-005",
+      "status": "DEFERRED",
+      "changeType": "UNCHANGED",
+      "requirementArtifact": {
+        "path": "requirements/approved/EC-11358.json",
+        "version": 2
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/EC-11358-ac-approval.json",
+        "testPlan": null,
+        "automationDesign": null
+      },
+      "openSpecRefs": [
+        "openspec/changes/add-control-history-section/specs/document-activity-history/control-history/spec.md"
+      ],
+      "testPlan": null,
+      "automation": null,
+      "executionRefs": []
+    },
+    {
+      "traceId": "TRC-EC-11358-008",
+      "jiraStoryId": "EC-11358",
+      "requirementId": "REQ-EC-11358-005",
+      "acId": "AC-EC-11358-005",
+      "status": "DEFERRED",
+      "changeType": "UNCHANGED",
+      "requirementArtifact": {
+        "path": "requirements/approved/EC-11358.json",
+        "version": 2
+      },
+      "approvalRefs": {
+        "acceptanceCriteria": "requirements/approved/EC-11358-ac-approval.json",
+        "testPlan": null,
+        "automationDesign": null
+      },
+      "openSpecRefs": [
+        "openspec/changes/add-control-history-section/specs/document-activity-history/control-history/spec.md"
+      ],
+      "testPlan": null,
+      "automation": null,
+      "executionRefs": []
+    }
+  ]
+}

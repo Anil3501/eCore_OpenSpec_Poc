@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-16T14:24:22.386Z",
-  "node": "24.19.0",
+  "generatedAt": "2026-09-17T12:09:52.348Z",
+  "node": "24.18.0",
   "platform": "win32",
   "summary": {
     "passed": 5,
@@ -13,7 +13,7 @@
       "title": "Node 24+ is the runtime",
       "status": "PASS",
       "details": [
-        "Node 24.19.0."
+        "Node 24.18.0."
       ],
       "remedy": null
     },
