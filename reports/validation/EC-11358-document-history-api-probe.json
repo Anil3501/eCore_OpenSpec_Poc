@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "1.0.0",
+  "reportType": "API_CONTRACT_PROBE",
+  "jiraStoryId": "EC-11358",
+  "testPlanId": "TP-EC-11358-001",
+  "scenarioId": "TS-EC-11358-007",
+  "evidenceSource": "Authenticated scripted API observation; no undocumented request fields sent.",
+  "observedAt": "2026-09-17T11:29:36.812Z",
+  "observations": [
+    {
+      "request": {
+        "method": "POST",
+        "action": "eoGetDocumentActivityHistoryReport",
+        "contentType": "multipart/form-data",
+        "additionalFields": []
+      },
+      "response": {
+        "httpStatus": 200,
+        "responseStatus": "error",
+        "errorCodes": [
+          "UNDEFINED_REQUEST_PARAMETER"
+        ],
+        "elementNames": [
+          "code",
+          "error",
+          "errorList",
+          "message",
+          "minorCode",
+          "response"
+        ],
+        "contentType": null,
+        "contentDisposition": "attachment; filename=api.xml",
+        "hasLocation": false,
+        "byteLength": 505,
+        "isPdf": false,
+        "contractShape": "{errorCodes:[string],status:string}",
+        "responseShapeHash": "dce8570fe74155d3338fd14a549b358005873bb0988d02222a267ad30fbfd358"
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "contentType": "text/xml; charset=UTF-8",
+        "bodyRef": "reports/jira/attachments/eoGetDocumentActivityHistoryReport-request-16809592.xml",
+        "soapActionHeader": null
+      },
+      "response": {
+        "httpStatus": 200,
+        "responseStatus": "ok",
+        "errorCodes": [],
+        "elementNames": [
+          "response"
+        ],
+        "contentType": null,
+        "contentDisposition": "attachment; filename=api.xml",
+        "hasLocation": false,
+        "byteLength": 312,
+        "isPdf": false,
+        "contractShape": "{status:string}",
+        "responseShapeHash": "516bbd4036a66d8e095d1a3fa52959ac4f43542757fd1c2fafe6a40fdd12ea10"
+      }
+    }
+  ]
+}

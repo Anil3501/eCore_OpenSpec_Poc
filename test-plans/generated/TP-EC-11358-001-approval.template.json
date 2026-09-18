@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "1.0.0",
+  "approvalId": "APR-TP-EC-11358-001",
+  "gate": "TEST_PLAN",
+  "artifactId": "TP-EC-11358-001",
+  "artifactVersion": 1,
+  "release": "26.3",
+  "capability": "document-activity-history",
+  "sourceArtifactPath": "test-plans/generated/TP-EC-11358-001.json",
+  "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+  "reviewer": {
+    "name": "REPLACE_WITH_YOUR_NAME",
+    "role": "REPLACE_WITH_YOUR_ROLE",
+    "reference": null
+  },
+  "reviewedAt": "REPLACE_WITH_ISO_8601_TIMESTAMP",
+  "comments": "Replace with any overall comment. Approving TS-EC-11358-006 and TS-EC-11358-007 also authorises capturing the eoRequestExport and eoGetDocumentActivityHistoryReport contracts from live traffic at PLAYWRIGHT_VALIDATION and converting them from OBSERVED to HUMAN_APPROVED. Until then neither may assert AC-EC-11358-005. See sections 3 and 4 of the review.",
+  "itemDecisions": [
+    {
+      "itemId": "TS-EC-11358-001",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Transferred financial asset shows the Control History table (AC-001). UI."
+    },
+    {
+      "itemId": "TS-EC-11358-002",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Each row shows transfer date + both orgs (AC-002). UI. Structural presence only, per AMB-EC-11358-003."
+    },
+    {
+      "itemId": "TS-EC-11358-003",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "No confirmed transfer shows no table (AC-003). UI."
+    },
+    {
+      "itemId": "TS-EC-11358-004",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Multiple transfers ordered newest to oldest (AC-004). UI."
+    },
+    {
+      "itemId": "TS-EC-11358-005",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Table appears in the UI view (AC-005). UI. Authoritative coverage of AC-005 this release."
+    },
+    {
+      "itemId": "TS-EC-11358-006",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Table appears via eoRequestExport report API (AC-005). API. Contract UNVERIFIED; approving authorises capture + HUMAN_APPROVED conversion at Gate 2. Cannot assert AC-005 until then."
+    },
+    {
+      "itemId": "TS-EC-11358-007",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Table appears via eoGetDocumentActivityHistoryReport report API (AC-005). API. Contract UNVERIFIED; approving authorises capture + HUMAN_APPROVED conversion at Gate 2. Cannot assert AC-005 until then."
+    },
+    {
+      "itemId": "TS-EC-11358-008",
+      "decision": "REPLACE_WITH_DECISION",
+      "comment": "Document type decides whether the table is produced (AC-006). UI. Financial Asset + Addendum show it; Supplemental Doc does not."
+    }
+  ]
+}

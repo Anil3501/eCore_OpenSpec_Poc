@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  AGENT_DRAFTED
+  DICTATED: SOAP envelope, namespaces, documents/document elements, and vaultId placeholder
+  supplied by Nitin Saini in chat on 2026-09-17.
+  PROPOSED: substituted the validated QA5 document vault ID 16809592 and removed chat markdown
+  link syntax from the namespace URI values. Transport binding remains unverified.
+-->
+<soapenv:Envelope
+  xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+  xmlns:ecor="http://eoriginal.com/ecorews">
+  <soapenv:Header/>
+  <soapenv:Body>
+    <ecor:documents>
+      <ecor:document vaultId="16809592"/>
+    </ecor:documents>
+  </soapenv:Body>
+</soapenv:Envelope>

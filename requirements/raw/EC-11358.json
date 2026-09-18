@@ -1,0 +1,64 @@
+{
+  "_dataClassification": "REAL_JIRA_DATA",
+  "retrievalMethod": "ATLASSIAN_MCP",
+  "retrievalNote": "Retrieved via the official Atlassian MCP server (getJiraIssue) in this session. The Atlassian MCP was the primary path; the REST fallback (npm run jira:fetch) was not used, so no reports/jira/EC-11358.jira.json ungoverned snapshot exists. The issue payload below is a verbatim capture of the fields and comment thread returned by the MCP call.",
+  "requestedIssueKey": "EC-11358",
+  "cloudId": "b9a8efb8-013b-4ccb-b9a5-805ba813462d",
+  "retrievedAt": "2026-09-14T08:22:09.367Z",
+  "issue": {
+    "id": "75990",
+    "key": "EC-11358",
+    "self": "https://api.atlassian.com/ex/jira/b9a8efb8-013b-4ccb-b9a5-805ba813462d/rest/api/3/issue/75990",
+    "browseUrl": "https://eoriginal.atlassian.net/browse/EC-11358",
+    "fields": {
+      "summary": "Phase 2_13: Add new section to Document Activity History Report delineating the control history",
+      "issuetype": { "id": "10001", "name": "Story", "subtask": false },
+      "project": { "id": "10200", "key": "EC", "name": "ECORE", "projectTypeKey": "software" },
+      "components": [
+        { "id": "11307", "name": "Core+Mortgage", "description": "Applicable to both Core and Mortgage for ECORE project" }
+      ],
+      "labels": [],
+      "priority": { "id": "3", "name": "Medium" },
+      "status": { "id": "6", "name": "Closed", "statusCategory": { "key": "done", "name": "Done" } },
+      "resolution": { "id": "10000", "name": "Done", "description": "Work has been completed on this issue." },
+      "assignee": null,
+      "reporter": { "accountId": "62d6a5fd3b239b30ebc7ae5d", "displayName": "Pam Baumgarten", "emailAddress": "pam.baumgarten@wolterskluwer.com" },
+      "created": "2025-07-14T15:59:45.704-0400",
+      "updated": "2026-09-11T10:32:35.614-0400",
+      "fixVersions": [
+        { "id": "13198", "name": "26.3", "archived": false, "released": true, "releaseDate": "2026-05-11" }
+      ],
+      "description": "When a document is transferred between organizations, the document history retains the auditable events, which includes all transfer events.  This project creates a new **Control History** table in the document history that consolidates all transfers of the document into a table to easily see the chain of control for a financial asset.  This is similar to the MERS Controller and Location History table that is populated in the document history for SMARTDocs.  \n\nThe table includes the date of the transfer and the Transfer From and To Orgs.",
+      "comment": {
+        "comments": [
+          { "id": "174589", "author": "Pam Baumgarten", "created": "2025-11-12T15:33:48.562-0500", "body": "Improves the product.  Not specific to Art8.  Can be prioritized outside of Art8 priorities." },
+          { "id": "189749", "author": "Pam Baumgarten", "created": "2026-03-04T09:51:38.279-0500", "body": "Release from Pledge isn't logging events correctly.  That is addressed with https://eoriginal.atlassian.net/browse/EC-12511." },
+          { "id": "190059", "author": "Pam Baumgarten", "created": "2026-03-05T09:14:14.586-0500", "body": "@Valerie Daly Please review and provide feedback on the questions in red.  Thanks!" },
+          { "id": "190063", "author": "Valerie Daly", "created": "2026-03-05T09:37:41.822-0500", "body": "@Pam Baumgarten comments in blue" },
+          { "id": "190220", "author": "Pam Baumgarten", "created": "2026-03-05T17:10:34.696-0500", "body": "NOTE:  It is going to be tricky to identify the original controller and then add it to the table so it doesn't look clunky.  In the interest of keeping the table clean, we won't display the table until the first transfer event.  Then, any subsequent transfers will display in the table.  Users should be able to deduct that the oldest Transferred From entry is the original controller." },
+          { "id": "196909", "author": "Pam Baumgarten", "created": "2026-04-08T11:40:02.534-0400", "body": "@Daniel Mesa I was trying to grab a screenshot for 26.3 POD Release Notes, and I'm not seeing the new Control History table.  The following is from QA3 (26.3+20260401203935).  I don't see an Engineering Summary or any Comments from you.  Did you submit the changes on this one?" },
+          { "id": "196910", "author": "Pam Baumgarten", "created": "2026-04-08T11:43:50.806-0400", "body": "@Daniel Mesa I just noticed that the date seems to be 04/01 (if I'm interpreting the information correctly), and it looks like you moved to QA on 4/3.  Maybe the changes aren't on QA3 yet." },
+          { "id": "196943", "author": "Daniel Mesa", "created": "2026-04-08T12:34:46.973-0400", "body": "@Pam Baumgarten That timing is correct. It wasn't merged until 3 April and this build is from two days before that" },
+          { "id": "198118", "author": "Pam Baumgarten", "created": "2026-04-14T11:58:32.396-0400", "body": "@Daniel Mesa I'm not seeing the Control History table.  The following is from QA3 (26.3+20260409171658).  I tested Pledge, Securitization, and Transfer of Control (in case the logic was tied to a specific business action), but none of the various transfer types generated the Control History table." },
+          { "id": "198122", "author": "Daniel Mesa", "created": "2026-04-14T12:18:00.480-0400", "body": "@Pam Baumgarten I'll have to check the DB to make sure I have the right event types. Which event should be triggering it? I wrote it because I was seeing CONFIRMED_TRANSFER_OF_OWNERSHIP when I was testing, but should it actually be CONFIRMED_TRANSFER_OF_CONTROL? Should it be both?" },
+          { "id": "198124", "author": "Pam Baumgarten", "created": "2026-04-14T13:09:28.079-0400", "body": "@Daniel Mesa I assigned the ticket back to you.  I believe Transfer of Ownership is a different use case outside the scope of this ticket.  It should be limited to Confirmed Transfer of Control." },
+          { "id": "198493", "author": "Shreshta Jain", "created": "2026-04-21T07:42:09.550-0400", "body": "Reopening the ticket\nTested on  26.3+20260417202849\n\nThe Control history isn't displayed on the Document History\nPFA screenshot" },
+          { "id": "198528", "author": "Daniel Mesa", "created": "2026-04-21T14:09:19.735-0400", "body": "@Shreshta Jain Isn't it only supposed to show if there was a transfer of control? How does it do it with MERS if there haven't been any transfers @Pam Baumgarten ?" },
+          { "id": "198538", "author": "Pam Baumgarten", "created": "2026-04-21T15:48:15.455-0400", "body": "@Daniel Mesa @Shreshta Jain I would only expect to see the Control History table where a **Confirmed Transfer of Control** event is logged (which could be from a Transfer of Control, Pledge, Securitization, etc.).  If there are no **Confirmed Transfer of Control** events for a document, there is no table." },
+          { "id": "198582", "author": "Daniel Mesa", "created": "2026-04-22T11:11:54.836-0400", "body": "@Shreshta Jain @Pam Baumgarten I'm going to reassign because the screenshot is for a document that has no confirmed transfer event that I can see." },
+          { "id": "198593", "author": "Pam Baumgarten", "created": "2026-04-22T13:49:03.690-0400", "body": "@Daniel Mesa I just tested on QA3 (26.3+20260417202849), and I'm still not seeing a Control History table.  Can you tell me when the changes were committed?  I don't see a link in the Comments." },
+          { "id": "198619", "author": "Shreshta Jain", "created": "2026-04-23T06:07:20.123-0400", "body": "@Daniel Mesa Pam is right, even I don't see the Control history after a transfer has been made.\nPFA screenshots below" },
+          { "id": "198632", "author": "Daniel Mesa", "created": "2026-04-23T09:29:36.946-0400", "body": "@Shreshta Jain @Pam Baumgarten It seems to have been merged to 26.3 on 16 April, so I think it's fine to send back if you're not seeing it. In Shresta's case, there is no Confirmed Transfer of Control event, but in the example Pam sent I do see one. Can you do me a favor and send me the docId and transactionId for that, Pam? That way I can check the db to see what events are there and why I'm not seeing them" },
+          { "id": "198633", "author": "Shreshta Jain", "created": "2026-04-23T09:32:01.039-0400", "body": "Reopening the ticket\nCannot see the AC" },
+          { "id": "198635", "author": "Pam Baumgarten", "created": "2026-04-23T09:38:14.073-0400", "body": "@Daniel Mesa The TransactionID is 9045126, and the Doc ID is 9045127.  This is in QA3 in the PamQA3 org." },
+          { "id": "198668", "author": "Daniel Mesa", "created": "2026-04-23T14:42:10.534-0400", "body": "@Pam Baumgarten I think I shouldn't have changed the event type we're looking for. I don't see any CONFIRMED_TRANSFER_OF_CONTROL events. I think it might have to switch back to CONFIRMED_TRANSFER_OF_OWNERSHIP?" },
+          { "id": "198672", "author": "Pam Baumgarten", "created": "2026-04-23T14:58:07.420-0400", "body": "@Daniel Mesa Jeez - that's not confusing at all.  There is an eoTransferOwnership API call.  I figured the Confirmed Transfer of Ownership you referenced was specific to that API call.  I guess it is not and that the data on the backend is different than what we display on the front end in the UI and the audit trail.  I'm sorry for the confusion.  I didn't know it worked like that." },
+          { "id": "198728", "author": "Daniel Mesa", "created": "2026-04-24T12:55:44.046-0400", "body": "@Pam Baumgarten I figured out what's wrong. I forgot to cherry-pick down into 26.3 in the first place" },
+          { "id": "198874", "author": "Shreshta Jain", "created": "2026-04-28T12:32:52.292-0400", "body": "PFA closing screenshots below. When you do a Paper out from the Recipient organization. When you do a Certified print from the recipient org" },
+          { "id": "198961", "author": "Pam Baumgarten", "created": "2026-04-29T15:54:27.658-0400", "body": "For the downloaded Document Activity History Report, the Date Format is not the same as the rest of the audit trail or the UI.  Rather than holding up this ticket, I created [EC-13271] Control History table in downloaded Document Activity History Report has wrong date/time format - JIRA to address this minor issue." },
+          { "id": "198964", "author": "Pam Baumgarten", "created": "2026-04-29T16:25:30.516-0400", "body": "Product Approved\nTested on QA3 (26.3+20260427181434)\n\n* Confirmed the Control History table is compiled based on the Confirmed Transfer of Control events that display in the Document Activity History Report.\n* Tested the view in the UI, UI download, Certified Print package (UI), Paper Out (UI), eoRequestExport (API), and eoGetDocumentActivityHistoryReport (API).\n* Tested Transfer, Pledge and Securitize workflows\n* Tested Financial Asset, Financial Asset Addendum, and Supplemental Doc.  The Supplemental Doc doesn't log transfer events at the document level, so there was no Control History table (as expected).  Financial Asset and Financial Asset Addendum had the Control History table.\n* Confirmed events sorted newest to oldest\n* Confirmed the Control History also displays in a retention copy\n\nThere was an issue with the date/time format in the downloaded report, but I am submitting a new ticket to address that.  It is minor enough that we don't need to hold this up.  See more details in the comments below." }
+        ]
+      }
+    }
+  }
+}

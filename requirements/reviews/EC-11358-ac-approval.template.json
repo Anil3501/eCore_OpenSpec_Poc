@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0.0",
+  "approvalId": "APR-AC-EC-11358-001",
+  "gate": "ACCEPTANCE_CRITERIA",
+  "artifactId": "EC-11358",
+  "artifactVersion": 1,
+  "release": "26.3",
+  "capability": "document-activity-history",
+  "sourceArtifactPath": "requirements/normalized/EC-11358.json",
+  "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+  "reviewer": {
+    "name": "REPLACE_WITH_YOUR_NAME",
+    "role": "REPLACE_WITH_YOUR_ROLE",
+    "reference": null
+  },
+  "reviewedAt": "REPLACE_WITH_ISO_8601_TIMESTAMP",
+  "comments": "REPLACE_WITH_ANY_OVERALL_COMMENT. Answer every question the review package raised — in particular the four ambiguities: AMB-EC-11358-001 (deterministic Confirmed Transfer of Control precondition / seeded doc), AMB-EC-11358-002 (which report surfaces are in scope this release), AMB-EC-11358-003 (exact labels and date/time format), AMB-EC-11358-004 (org account and target document for viewing a transferred document).",
+  "itemDecisions": [
+    {
+      "itemId": "AC-EC-11358-001",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "REPLACE_WITH_A_SHORT_NOTE_ON_THIS_ITEM"
+    },
+    {
+      "itemId": "AC-EC-11358-002",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "REPLACE_WITH_A_SHORT_NOTE_ON_THIS_ITEM"
+    },
+    {
+      "itemId": "AC-EC-11358-003",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "REPLACE_WITH_A_SHORT_NOTE_ON_THIS_ITEM"
+    },
+    {
+      "itemId": "AC-EC-11358-004",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "REPLACE_WITH_A_SHORT_NOTE_ON_THIS_ITEM"
+    },
+    {
+      "itemId": "AC-EC-11358-005",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "REPLACE_WITH_A_SHORT_NOTE_ON_THIS_ITEM. Note AMB-EC-11358-002: the API surfaces have no HUMAN_APPROVED contract yet."
+    },
+    {
+      "itemId": "AC-EC-11358-006",
+      "decision": "REPLACE_WITH_APPROVE_OR_REJECT_OR_DEFER_OR_REQUEST_CHANGES",
+      "comment": "REPLACE_WITH_A_SHORT_NOTE_ON_THIS_ITEM"
+    }
+  ]
+}

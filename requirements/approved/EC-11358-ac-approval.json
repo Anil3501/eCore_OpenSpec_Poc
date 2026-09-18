@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "1.0.0",
+  "approvalId": "APR-AC-EC-11358-001",
+  "gate": "ACCEPTANCE_CRITERIA",
+  "artifactId": "EC-11358",
+  "artifactVersion": 2,
+  "release": "26.3",
+  "capability": "document-activity-history",
+  "sourceArtifactPath": "requirements/normalized/EC-11358.json",
+  "decision": "APPROVE",
+  "reviewer": {
+    "name": "Nitin Saini",
+    "role": "Senior QA",
+    "reference": null
+  },
+  "reviewedAt": "2026-09-14T10:41:41.156Z",
+  "comments": "All 6 acceptance criteria approved. Ambiguity resolutions: AMB-EC-11358-001 - the Confirmed Transfer of Control precondition is produced by every change of state of the document; test data to be established on that basis at test planning. AMB-EC-11358-002 - automation scope for this release is the UI view plus the two report APIs (eoRequestExport, eoGetDocumentActivityHistoryReport); the API contracts must be captured and HUMAN_APPROVED at Gate 2 before any acceptance criterion is asserted against them. AMB-EC-11358-003 - assert structural presence of the Control History table and its three columns only for now; exact header labels and date/time format are deferred. AMB-EC-11358-004 - use the organization accounts referenced in the story to view the transferred document.",
+  "itemDecisions": [
+    { "itemId": "AC-EC-11358-001", "decision": "APPROVE", "comment": "Control History table appears for a financial asset with a Confirmed Transfer of Control." },
+    { "itemId": "AC-EC-11358-002", "decision": "APPROVE", "comment": "Rows show transfer date, From org, To org; structural assertion only per AMB-003." },
+    { "itemId": "AC-EC-11358-003", "decision": "APPROVE", "comment": "No Confirmed Transfer of Control event means no table." },
+    { "itemId": "AC-EC-11358-004", "decision": "APPROVE", "comment": "Entries ordered newest to oldest." },
+    { "itemId": "AC-EC-11358-005", "decision": "APPROVE", "comment": "Scope this release: UI view + report APIs (eoRequestExport, eoGetDocumentActivityHistoryReport). API contracts require Gate 2 HUMAN_APPROVED before assertion." },
+    { "itemId": "AC-EC-11358-006", "decision": "APPROVE", "comment": "Financial Asset / Addendum show the table; Supplemental Doc does not." }
+  ]
+}

@@ -1,0 +1,324 @@
+{
+  "probe": "EC-11358-control-history-recon",
+  "story": "EC-11358",
+  "testPlanId": "TP-EC-11358-001",
+  "stage": "PLAYWRIGHT_VALIDATION",
+  "evidenceSource": "Scripted Playwright navigation. The Playwright MCP server exposed no browser tools in this session, so this is the documented fallback. Observation only; no approved expectation was edited and no destructive .eo verb was invoked.",
+  "startedAt": "2026-09-15T08:35:00.154Z",
+  "environment": {
+    "baseUrlHost": "qa5.eoriginal.org:8443",
+    "baseUrlMentionsQa3": false,
+    "configuredOrgMatchesKnownOrg": false,
+    "knownTransactionId": "9045126",
+    "knownDocId": "9045127",
+    "knownOrg": "PamQA3"
+  },
+  "homeUrl": "https://qa5.eoriginal.org:8443/ssweb/setup/welcome.eo",
+  "homeTitle": "eOriginal Command Center™",
+  "homeNavLinks": [
+    {
+      "text": "Nitin Saini",
+      "href": "/ssweb/setup/userSettings.eo",
+      "elementId": null
+    },
+    {
+      "text": "Nitin Saini",
+      "href": "/ssweb/setup/viewOrganizationData.eo?orgSid=6160",
+      "elementId": null
+    },
+    {
+      "text": "Home",
+      "href": "/ssweb/setup/welcome.eo",
+      "elementId": "header.home"
+    },
+    {
+      "text": "New Transaction",
+      "href": "/ssweb/setup/container/ct/newPackage.eo",
+      "elementId": "header.new_transaction"
+    },
+    {
+      "text": "Workspace",
+      "href": "/ssweb/setup/workspace/workspace.eo",
+      "elementId": "header.workspace"
+    },
+    {
+      "text": "Configuration Changes",
+      "href": "/ssweb/setup/analytics/admin/confChanges.eo",
+      "elementId": null
+    },
+    {
+      "text": "eAsset® Analytics",
+      "href": "/ssweb/setup/analytics/transDocActivity.eo",
+      "elementId": null
+    },
+    {
+      "text": "Event Analytics",
+      "href": "/ssweb/setup/analytics/detailByEvent.eo",
+      "elementId": null
+    },
+    {
+      "text": "Infographics",
+      "href": "/ssweb/setup/analytics/charts.eo",
+      "elementId": null
+    },
+    {
+      "text": "Manage Scheduled Reports",
+      "href": "/ssweb/setup/analytics/manageScheduledReports.eo",
+      "elementId": "manageReports"
+    },
+    {
+      "text": "Open Requests",
+      "href": "/ssweb/setup/analytics/openRequests.eo",
+      "elementId": null
+    },
+    {
+      "text": "Permission Analysis",
+      "href": "/ssweb/setup/analytics/admin/permissionMappings.eo",
+      "elementId": null
+    },
+    {
+      "text": "Transaction Retention Analysis",
+      "href": "/ssweb/setup/analytics/admin/transactionRetention.eo",
+      "elementId": null
+    },
+    {
+      "text": "User Activity Analysis",
+      "href": "/ssweb/setup/analytics/admin/userActivity.eo",
+      "elementId": null
+    },
+    {
+      "text": "Vault Content",
+      "href": "/ssweb/setup/analytics/admin/vaultContent.eo",
+      "elementId": null
+    },
+    {
+      "text": "Organization",
+      "href": "/ssweb/setup/prefs/preferences.eo",
+      "elementId": "header.preferences.org"
+    },
+    {
+      "text": "Vault",
+      "href": "/ssweb/setup/vault/vault.eo",
+      "elementId": "header.preferences.vault"
+    },
+    {
+      "text": "Tutorials",
+      "href": "https://wolters-kluwer.my.site.com/ComplianceSolutionsSupport/s/",
+      "elementId": "header.help.tutorial"
+    },
+    {
+      "text": "Support",
+      "href": "/ssweb/setup/support.eo",
+      "elementId": "header.help.support"
+    },
+    {
+      "text": "About",
+      "href": "/ssweb/setup/about.eo",
+      "elementId": "header.help.about"
+    },
+    {
+      "text": "Logout",
+      "href": "/ssweb/setup/logout.eo",
+      "elementId": "header.logout"
+    },
+    {
+      "text": "PROBE-TS003-CHECK is awaiting Verification.",
+      "href": "/ssweb/setup/workspace/workspaceBatch.eo?batch.id=366823",
+      "elementId": null
+    },
+    {
+      "text": "New Transaction",
+      "href": "/ssweb/setup/container/ct/newPackage.eo",
+      "elementId": null
+    },
+    {
+      "text": "Workspace",
+      "href": "/ssweb/setup/workspace/workspace.eo",
+      "elementId": null
+    },
+    {
+      "text": "Preferences",
+      "href": "/ssweb/setup/prefs/preferences.eo",
+      "elementId": null
+    }
+  ],
+  "workspaceUrl": "https://qa5.eoriginal.org:8443/ssweb/setup/workspace/workspace.eo",
+  "workspaceTitle": "eOriginal Command Center™",
+  "workspaceNavLinks": [
+    {
+      "text": "Nitin Saini",
+      "href": "/ssweb/setup/userSettings.eo",
+      "elementId": null
+    },
+    {
+      "text": "Nitin Saini",
+      "href": "/ssweb/setup/viewOrganizationData.eo?orgSid=6160",
+      "elementId": null
+    },
+    {
+      "text": "Home",
+      "href": "/ssweb/setup/welcome.eo",
+      "elementId": "header.home"
+    },
+    {
+      "text": "New Transaction",
+      "href": "/ssweb/setup/container/ct/newPackage.eo",
+      "elementId": "header.new_transaction"
+    },
+    {
+      "text": "Workspace",
+      "href": "/ssweb/setup/workspace/workspace.eo",
+      "elementId": "header.workspace"
+    },
+    {
+      "text": "Configuration Changes",
+      "href": "/ssweb/setup/analytics/admin/confChanges.eo",
+      "elementId": null
+    },
+    {
+      "text": "eAsset® Analytics",
+      "href": "/ssweb/setup/analytics/transDocActivity.eo",
+      "elementId": null
+    },
+    {
+      "text": "Event Analytics",
+      "href": "/ssweb/setup/analytics/detailByEvent.eo",
+      "elementId": null
+    },
+    {
+      "text": "Infographics",
+      "href": "/ssweb/setup/analytics/charts.eo",
+      "elementId": null
+    },
+    {
+      "text": "Manage Scheduled Reports",
+      "href": "/ssweb/setup/analytics/manageScheduledReports.eo",
+      "elementId": "manageReports"
+    },
+    {
+      "text": "Open Requests",
+      "href": "/ssweb/setup/analytics/openRequests.eo",
+      "elementId": null
+    },
+    {
+      "text": "Permission Analysis",
+      "href": "/ssweb/setup/analytics/admin/permissionMappings.eo",
+      "elementId": null
+    },
+    {
+      "text": "Transaction Retention Analysis",
+      "href": "/ssweb/setup/analytics/admin/transactionRetention.eo",
+      "elementId": null
+    },
+    {
+      "text": "User Activity Analysis",
+      "href": "/ssweb/setup/analytics/admin/userActivity.eo",
+      "elementId": null
+    },
+    {
+      "text": "Vault Content",
+      "href": "/ssweb/setup/analytics/admin/vaultContent.eo",
+      "elementId": null
+    },
+    {
+      "text": "Organization",
+      "href": "/ssweb/setup/prefs/preferences.eo",
+      "elementId": "header.preferences.org"
+    },
+    {
+      "text": "Vault",
+      "href": "/ssweb/setup/vault/vault.eo",
+      "elementId": "header.preferences.vault"
+    },
+    {
+      "text": "Tutorials",
+      "href": "https://wolters-kluwer.my.site.com/ComplianceSolutionsSupport/s/",
+      "elementId": "header.help.tutorial"
+    },
+    {
+      "text": "Support",
+      "href": "/ssweb/setup/support.eo",
+      "elementId": "header.help.support"
+    },
+    {
+      "text": "About",
+      "href": "/ssweb/setup/about.eo",
+      "elementId": "header.help.about"
+    },
+    {
+      "text": "Logout",
+      "href": "/ssweb/setup/logout.eo",
+      "elementId": "header.logout"
+    },
+    {
+      "text": "eCore Transaction ID",
+      "href": null,
+      "elementId": null
+    },
+    {
+      "text": "Previous",
+      "href": null,
+      "elementId": "DataTables_Table_0_previous"
+    },
+    {
+      "text": "Next",
+      "href": null,
+      "elementId": "DataTables_Table_0_next"
+    }
+  ],
+  "workspaceHeadings": [
+    "Search Criteria",
+    "Output",
+    "The attached documents must be in one of the following formats:",
+    "eCore Transaction ID",
+    "Transaction ID",
+    "eCore Transaction ID",
+    "Transaction ID",
+    "Document ID"
+  ],
+  "eoCallsObserved": [
+    {
+      "method": "GET",
+      "path": "/ssweb/setup/showLogin.eo",
+      "resourceType": "document",
+      "status": 302
+    },
+    {
+      "method": "GET",
+      "path": "/ssweb/setup/browserDetectionPage.eo",
+      "resourceType": "document",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/ssweb/setup/browserDetectionSubmit.eo",
+      "resourceType": "document",
+      "status": 302
+    },
+    {
+      "method": "GET",
+      "path": "/ssweb/setup/showLogin.eo",
+      "resourceType": "document",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/ssweb/setup/welcome.eo",
+      "resourceType": "document",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/ssweb/setup/workspace/workspace.eo",
+      "resourceType": "document",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/ssweb/setup/workspace/getSearchTransactionTypes.eo",
+      "resourceType": "xhr",
+      "status": 200
+    }
+  ],
+  "finishedAt": "2026-09-15T08:35:44.782Z"
+}

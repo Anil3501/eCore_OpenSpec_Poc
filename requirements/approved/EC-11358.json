@@ -1,0 +1,225 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactVersion": 2,
+  "release": "26.3",
+  "capability": "document-activity-history",
+  "supersedes": 1,
+  "changeType": "UNCHANGED",
+  "story": {
+    "jiraId": "EC-11358",
+    "summary": "Phase 2_13: Add new section to Document Activity History Report delineating the control history",
+    "description": "When a document is transferred between organizations, the document history retains the auditable events, which includes all transfer events. This project creates a new Control History table in the document history that consolidates all transfers of the document into a table to easily see the chain of control for a financial asset. This is similar to the MERS Controller and Location History table that is populated in the document history for SMARTDocs. The table includes the date of the transfer and the Transfer From and To Orgs.",
+    "issueType": "Story",
+    "priority": "Medium",
+    "status": "Closed",
+    "labels": [],
+    "components": ["Core+Mortgage"],
+    "parent": null,
+    "linkedIssues": [],
+    "sourceRef": "https://eoriginal.atlassian.net/browse/EC-11358"
+  },
+  "requirements": [
+    {
+      "requirementId": "REQ-EC-11358-001",
+      "description": "The Document Activity History Report includes a new Control History table that consolidates all transfers of a document into a single table, so the chain of control for a financial asset can be seen at a glance.",
+      "originalText": "This project creates a new **Control History** table in the document history that consolidates all transfers of the document into a table to easily see the chain of control for a financial asset.",
+      "sourceType": "EXTRACTED_FROM_JIRA",
+      "status": "APPROVED",
+      "version": 1,
+      "changeType": "UNCHANGED"
+    },
+    {
+      "requirementId": "REQ-EC-11358-002",
+      "description": "Each Control History row records the date of the transfer, the Transfer From organization and the Transfer To organization.",
+      "originalText": "The table includes the date of the transfer and the Transfer From and To Orgs.",
+      "sourceType": "EXTRACTED_FROM_JIRA",
+      "status": "APPROVED",
+      "version": 1,
+      "changeType": "UNCHANGED"
+    },
+    {
+      "requirementId": "REQ-EC-11358-003",
+      "description": "The Control History table is compiled from Confirmed Transfer of Control events. It is not displayed until at least one such event exists; a document with no Confirmed Transfer of Control event shows no Control History table.",
+      "originalText": "I would only expect to see the Control History table where a **Confirmed Transfer of Control** event is logged (which could be from a Transfer of Control, Pledge, Securitization, etc.).  If there are no **Confirmed Transfer of Control** events for a document, there is no table.",
+      "sourceType": "EXTRACTED_FROM_JIRA",
+      "status": "APPROVED",
+      "version": 1,
+      "changeType": "UNCHANGED"
+    },
+    {
+      "requirementId": "REQ-EC-11358-004",
+      "description": "Control History entries are sorted newest to oldest; the oldest Transferred From entry represents the original controller.",
+      "originalText": "Confirmed events sorted newest to oldest [Product Approved comment]; Users should be able to deduct that the oldest Transferred From entry is the original controller. [comment 190220]",
+      "sourceType": "EXTRACTED_FROM_JIRA",
+      "status": "APPROVED",
+      "version": 1,
+      "changeType": "UNCHANGED"
+    },
+    {
+      "requirementId": "REQ-EC-11358-005",
+      "description": "The Control History table appears across every surface that renders the Document Activity History Report: the UI view, the UI download, the Certified Print package, Paper Out, a retention copy, and the report APIs (eoRequestExport and eoGetDocumentActivityHistoryReport).",
+      "originalText": "Tested the view in the UI, UI download, Certified Print package (UI), Paper Out (UI), eoRequestExport (API), and eoGetDocumentActivityHistoryReport (API). ... Confirmed the Control History also displays in a retention copy",
+      "sourceType": "EXTRACTED_FROM_JIRA",
+      "status": "APPROVED",
+      "version": 1,
+      "changeType": "UNCHANGED"
+    },
+    {
+      "requirementId": "REQ-EC-11358-006",
+      "description": "The Control History table is produced for document types that log transfer events at the document level (Financial Asset and Financial Asset Addendum). A Supplemental Doc does not log transfer events at the document level and therefore has no Control History table.",
+      "originalText": "Tested Financial Asset, Financial Asset Addendum, and Supplemental Doc.  The Supplemental Doc doesn't log transfer events at the document level, so there was no Control History table (as expected).  Financial Asset and Financial Asset Addendum had the Control History table.",
+      "sourceType": "EXTRACTED_FROM_JIRA",
+      "status": "APPROVED",
+      "version": 1,
+      "changeType": "UNCHANGED"
+    }
+  ],
+  "acceptanceCriteria": [
+    {
+      "acId": "AC-EC-11358-001",
+      "requirementId": "REQ-EC-11358-001",
+      "description": "A financial asset document that has at least one Confirmed Transfer of Control event shows a Control History table in its Document Activity History Report, consolidating that document's transfers.",
+      "originalText": "This project creates a new **Control History** table in the document history that consolidates all transfers of the document into a table to easily see the chain of control for a financial asset.",
+      "given": "a financial asset document that has at least one Confirmed Transfer of Control event",
+      "when": "its Document Activity History Report is viewed",
+      "then": "a Control History table is displayed that consolidates the document's transfers",
+      "sourceType": "EXTRACTED_FROM_JIRA",
+      "status": "APPROVED",
+      "version": 1,
+      "rationale": null,
+      "clarificationRefs": ["AMB-EC-11358-001", "AMB-EC-11358-004"],
+      "changeType": "UNCHANGED"
+    },
+    {
+      "acId": "AC-EC-11358-002",
+      "requirementId": "REQ-EC-11358-002",
+      "description": "Every row of the Control History table shows the transfer date, the Transfer From organization and the Transfer To organization.",
+      "originalText": "The table includes the date of the transfer and the Transfer From and To Orgs.",
+      "given": "a document whose Document Activity History Report shows a Control History table",
+      "when": "the Control History table is read",
+      "then": "each row shows the transfer date, the Transfer From organization and the Transfer To organization",
+      "sourceType": "EXTRACTED_FROM_JIRA",
+      "status": "APPROVED",
+      "version": 1,
+      "rationale": null,
+      "clarificationRefs": ["AMB-EC-11358-003"],
+      "changeType": "UNCHANGED"
+    },
+    {
+      "acId": "AC-EC-11358-003",
+      "requirementId": "REQ-EC-11358-003",
+      "description": "A document with no Confirmed Transfer of Control event shows no Control History table.",
+      "originalText": "If there are no **Confirmed Transfer of Control** events for a document, there is no table.",
+      "given": "a document that has no Confirmed Transfer of Control event",
+      "when": "its Document Activity History Report is viewed",
+      "then": "no Control History table is displayed",
+      "sourceType": "EXTRACTED_FROM_JIRA",
+      "status": "APPROVED",
+      "version": 1,
+      "rationale": null,
+      "clarificationRefs": ["AMB-EC-11358-001"],
+      "changeType": "UNCHANGED"
+    },
+    {
+      "acId": "AC-EC-11358-004",
+      "requirementId": "REQ-EC-11358-004",
+      "description": "When a document has multiple Confirmed Transfer of Control events, the Control History entries are ordered newest to oldest.",
+      "originalText": "Confirmed events sorted newest to oldest",
+      "given": "a document with more than one Confirmed Transfer of Control event",
+      "when": "the Control History table is displayed",
+      "then": "the entries are ordered newest to oldest",
+      "sourceType": "EXTRACTED_FROM_JIRA",
+      "status": "APPROVED",
+      "version": 1,
+      "rationale": null,
+      "clarificationRefs": ["AMB-EC-11358-001"],
+      "changeType": "UNCHANGED"
+    },
+    {
+      "acId": "AC-EC-11358-005",
+      "requirementId": "REQ-EC-11358-005",
+      "description": "The Control History table appears in each surface that renders the report: UI view, UI download, Certified Print package, Paper Out, retention copy, and the report APIs (eoRequestExport, eoGetDocumentActivityHistoryReport).",
+      "originalText": "Tested the view in the UI, UI download, Certified Print package (UI), Paper Out (UI), eoRequestExport (API), and eoGetDocumentActivityHistoryReport (API). ... Confirmed the Control History also displays in a retention copy",
+      "given": "a document whose Document Activity History Report contains a Control History table",
+      "when": "the report is produced through a given surface (UI view, UI download, Certified Print package, Paper Out, retention copy, or a report API)",
+      "then": "the Control History table appears in that surface's output",
+      "sourceType": "EXTRACTED_FROM_JIRA",
+      "status": "APPROVED",
+      "version": 1,
+      "rationale": null,
+      "clarificationRefs": ["AMB-EC-11358-002"],
+      "changeType": "UNCHANGED"
+    },
+    {
+      "acId": "AC-EC-11358-006",
+      "requirementId": "REQ-EC-11358-006",
+      "description": "A Financial Asset or Financial Asset Addendum with transfers shows the Control History table, while a Supplemental Doc (which does not log transfer events at the document level) shows no Control History table.",
+      "originalText": "Tested Financial Asset, Financial Asset Addendum, and Supplemental Doc.  The Supplemental Doc doesn't log transfer events at the document level, so there was no Control History table (as expected).  Financial Asset and Financial Asset Addendum had the Control History table.",
+      "given": "a Financial Asset or Financial Asset Addendum with transfers, and a Supplemental Doc",
+      "when": "each document's Document Activity History Report is viewed",
+      "then": "the Financial Asset and Financial Asset Addendum show a Control History table and the Supplemental Doc shows none",
+      "sourceType": "EXTRACTED_FROM_JIRA",
+      "status": "APPROVED",
+      "version": 1,
+      "rationale": null,
+      "clarificationRefs": ["AMB-EC-11358-001"],
+      "changeType": "UNCHANGED"
+    }
+  ],
+  "ambiguities": [
+    {
+      "ambiguityId": "AMB-EC-11358-001",
+      "question": "How should automation deterministically establish the precondition of a Confirmed Transfer of Control event in the target test environment? Producing one requires a Transfer of Control, Pledge or Securitization workflow between two organizations. Is there a seeded, reusable document (the ticket references TransactionID 9045126 / Doc ID 9045127 in the PamQA3 org on QA3) that automation may rely on, or must the transfer flow be created per run?",
+      "impact": "Without a deterministic precondition, AC-EC-11358-001, -002, -004, -005 and -006 cannot be automated reliably. This determines whether these scenarios are executable or MANUAL_ONLY for this release.",
+      "relatedTo": ["AC-EC-11358-001", "AC-EC-11358-002", "AC-EC-11358-004", "AC-EC-11358-006", "REQ-EC-11358-001"],
+      "status": "RESOLVED",
+      "resolution": "The Confirmed Transfer of Control precondition is produced by every change of state of the document. Test data for the transfer-dependent scenarios is to be established on that basis during test planning (Gate 2).",
+      "resolvedBy": "Nitin Saini",
+      "resolvedAt": "2026-09-14T10:41:41.156Z"
+    },
+    {
+      "ambiguityId": "AMB-EC-11358-002",
+      "question": "Which report surfaces are in scope for automation in this release? The story verifies UI view, UI download, Certified Print package, Paper Out, retention copy, and two report APIs (eoRequestExport, eoGetDocumentActivityHistoryReport). The framework currently automates only UI flows and holds no verified contract for these APIs (they are UNVERIFIED per reports/validation/ecore-api-discovery.json). Should Gate 2 scope AC-EC-11358-005 to the UI view only, or include the other surfaces?",
+      "impact": "Determines the interfaceType (UI vs API/HYBRID) and coverage scope of AC-EC-11358-005. API surfaces cannot be asserted until a contract is HUMAN_APPROVED at Gate 2; asserting against observed traffic alone is prohibited.",
+      "relatedTo": ["AC-EC-11358-005", "REQ-EC-11358-005"],
+      "status": "RESOLVED",
+      "resolution": "Automation scope for this release is the UI view plus the two report APIs (eoRequestExport, eoGetDocumentActivityHistoryReport). The API contracts must be captured from live traffic and converted from OBSERVED to HUMAN_APPROVED at Gate 2 before any acceptance criterion is asserted against them.",
+      "resolvedBy": "Nitin Saini",
+      "resolvedAt": "2026-09-14T10:41:41.156Z"
+    },
+    {
+      "ambiguityId": "AMB-EC-11358-003",
+      "question": "What are the exact rendered column-header labels, the table heading text, and the expected date/time format for the Control History table in the UI? The story states the columns' meaning (date, from org, to org) but not their literal labels or format, and EC-13271 records a separate date-format defect in the downloaded report.",
+      "impact": "Precise assertions on header text and date format require confirmed expected values or MCP-validated locators; without them, scenarios can only assert structural presence, not exact labels/format.",
+      "relatedTo": ["AC-EC-11358-002", "REQ-EC-11358-002"],
+      "status": "RESOLVED",
+      "resolution": "For this release, scenarios assert structural presence of the Control History table and its three columns (transfer date, Transfer From org, Transfer To org) only. Exact header labels and date/time format are deferred and not asserted.",
+      "resolvedBy": "Nitin Saini",
+      "resolvedAt": "2026-09-14T10:41:41.156Z"
+    },
+    {
+      "ambiguityId": "AMB-EC-11358-004",
+      "question": "Which organization account(s) and credentials should automation use to view a document that has undergone a Confirmed Transfer of Control? A transfer involves two organizations (Transfer From and Transfer To), and viewing the resulting Control History may require access to a specific org/document.",
+      "impact": "Without confirmed org access and a target document, the happy-path scenario (AC-EC-11358-001) cannot reach the report. Determines whether the scenario is BLOCKED on environment access.",
+      "relatedTo": ["AC-EC-11358-001", "AC-EC-11358-005"],
+      "status": "RESOLVED",
+      "resolution": "Use the organization accounts referenced in the story to view the transferred document. Concrete org/credential selection to be confirmed against the environment during Playwright validation.",
+      "resolvedBy": "Nitin Saini",
+      "resolvedAt": "2026-09-14T10:41:41.156Z"
+    }
+  ],
+  "source": {
+    "system": "JIRA",
+    "retrievedVia": "ATLASSIAN_MCP",
+    "dataClassification": "REAL_JIRA_DATA",
+    "rawSnapshotPath": "requirements/raw/EC-11358.json",
+    "retrievedAt": "2026-09-14T08:22:09.367Z"
+  },
+  "approvalStatus": "APPROVED",
+  "approvalRef": "requirements/approved/EC-11358-ac-approval.json",
+  "timestamps": {
+    "createdAt": "2026-09-14T08:22:09.367Z",
+    "updatedAt": "2026-09-14T10:41:41.156Z",
+    "approvedAt": "2026-09-14T10:41:41.156Z"
+  }
+}

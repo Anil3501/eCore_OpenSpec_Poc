@@ -1,0 +1,164 @@
+{
+  "schemaVersion": "1.0.0",
+  "workflowId": "WF-EC-11358-R26.3",
+  "workflowDefinition": "sdd-jira-to-automation",
+  "jiraStoryId": "EC-11358",
+  "release": "26.3",
+  "capability": "document-activity-history",
+  "dataClassification": "REAL_JIRA_DATA",
+  "currentStage": "PLAYWRIGHT_VALIDATION",
+  "nextStage": "IMPLEMENTATION",
+  "lastSuccessfulStage": "AUTOMATION_APPROVAL",
+  "status": "BLOCKED",
+  "completedStages": [
+    {
+      "stage": "JIRA_RETRIEVAL",
+      "completedAt": "2026-09-14T08:22:09.367Z",
+      "agent": "jira-requirement-analysis",
+      "outputs": ["requirements/raw/EC-11358.json"]
+    },
+    {
+      "stage": "REQUIREMENT_NORMALIZATION",
+      "completedAt": "2026-09-14T08:22:09.367Z",
+      "agent": "jira-requirement-analysis",
+      "outputs": ["requirements/normalized/EC-11358.json"]
+    },
+    {
+      "stage": "AC_ANALYSIS",
+      "completedAt": "2026-09-14T08:22:09.367Z",
+      "agent": "jira-requirement-analysis",
+      "outputs": ["requirements/normalized/EC-11358.json"]
+    },
+    {
+      "stage": "AC_REVIEW_PACKAGE",
+      "completedAt": "2026-09-14T08:22:09.367Z",
+      "agent": "jira-requirement-analysis",
+      "outputs": [
+        "requirements/reviews/EC-11358-ac-review.md",
+        "requirements/reviews/EC-11358-ac-approval.template.json",
+        "traceability/capabilities/document-activity-history.rtm.proposed.json"
+      ]
+    },
+    {
+      "stage": "AC_APPROVAL",
+      "completedAt": "2026-09-14T10:41:41.156Z",
+      "agent": "sdd-workflow-orchestrator",
+      "outputs": [
+        "requirements/approved/EC-11358-ac-approval.json",
+        "requirements/approved/EC-11358.json",
+        "traceability/capabilities/document-activity-history.rtm.json"
+      ]
+    },
+    {
+      "stage": "OPENSPEC_GENERATION",
+      "completedAt": "2026-09-14T10:54:17.269Z",
+      "agent": "OpenSpec",
+      "outputs": [
+        "openspec/changes/add-control-history-section/proposal.md",
+        "openspec/changes/add-control-history-section/specs/document-activity-history/control-history/spec.md",
+        "openspec/changes/add-control-history-section/design.md",
+        "openspec/changes/add-control-history-section/tasks.md",
+        "traceability/capabilities/document-activity-history.rtm.json"
+      ]
+    },
+    {
+      "stage": "TEST_PLAN_GENERATION",
+      "completedAt": "2026-09-14T10:54:17.269Z",
+      "agent": "sdd-workflow-orchestrator",
+      "outputs": [
+        "test-plans/generated/TP-EC-11358-001.json",
+        "test-plans/generated/TP-EC-11358-001-review.md",
+        "test-plans/generated/TP-EC-11358-001-approval.template.json"
+      ]
+    },
+    {
+      "stage": "TEST_PLAN_APPROVAL",
+      "completedAt": "2026-09-17T11:40:10.412Z",
+      "agent": "sdd-workflow-orchestrator",
+      "outputs": [
+        "test-plans/approved/TP-EC-11358-001-v2-final-approval.json",
+        "test-plans/approved/TP-EC-11358-001.json",
+        "traceability/capabilities/document-activity-history.rtm.json"
+      ]
+    },
+    {
+      "stage": "BDD_DESIGN",
+      "completedAt": "2026-09-17T11:49:41.882Z",
+      "agent": "sdd-workflow-orchestrator",
+      "outputs": [
+        "features/generated/document-activity-history/control-history.feature",
+        "features/generated/document-activity-history/TP-EC-11358-001-automation-design.md"
+      ]
+    },
+    {
+      "stage": "AUTOMATION_REVIEW_PACKAGE",
+      "completedAt": "2026-09-17T11:56:49.145Z",
+      "agent": "sdd-workflow-orchestrator",
+      "outputs": [
+        "features/generated/document-activity-history/TP-EC-11358-001-automation-design.md",
+        "features/generated/document-activity-history/TP-EC-11358-001-automation-approval.template.json"
+      ]
+    },
+    {
+      "stage": "AUTOMATION_APPROVAL",
+      "completedAt": "2026-09-17T11:59:00.373Z",
+      "agent": "sdd-workflow-orchestrator",
+      "outputs": [
+        "features/approved/document-activity-history/TP-EC-11358-001-v2-automation-approval.json",
+        "features/approved/document-activity-history/control-history.feature",
+        "traceability/capabilities/document-activity-history.rtm.json"
+      ]
+    }
+  ],
+  "pendingApproval": null,
+  "inputArtifactVersions": {
+    "requirements/normalized/EC-11358.json": 2,
+    "requirements/approved/EC-11358-ac-approval.json": 1,
+    "requirements/approved/EC-11358.json": 2,
+    "test-plans/approved/TP-EC-11358-001.json": 2,
+    "test-plans/approved/TP-EC-11358-001-v2-final-approval.json": 2,
+    "features/approved/document-activity-history/TP-EC-11358-001-v2-automation-approval.json": 2
+  },
+  "outputArtifactPaths": [
+    "requirements/raw/EC-11358.json",
+    "requirements/normalized/EC-11358.json",
+    "requirements/reviews/EC-11358-ac-review.md",
+    "requirements/reviews/EC-11358-ac-approval.template.json",
+    "requirements/approved/EC-11358-ac-approval.json",
+    "requirements/approved/EC-11358.json",
+    "traceability/capabilities/document-activity-history.rtm.json",
+    "openspec/changes/add-control-history-section/proposal.md",
+    "openspec/changes/add-control-history-section/specs/document-activity-history/control-history/spec.md",
+    "openspec/changes/add-control-history-section/design.md",
+    "openspec/changes/add-control-history-section/tasks.md",
+    "test-plans/generated/TP-EC-11358-001.json",
+    "test-plans/generated/TP-EC-11358-001-review.md",
+    "test-plans/generated/TP-EC-11358-001-approval.template.json",
+    "test-plans/approved/TP-EC-11358-001-approval.json",
+    "test-plans/approved/TP-EC-11358-001.json",
+    "features/generated/document-activity-history/TP-EC-11358-001-automation-design.md",
+    "features/generated/document-activity-history/TP-EC-11358-001-automation-approval.template.json",
+    "features/approved/document-activity-history/control-history.feature",
+    "features/approved/document-activity-history/TP-EC-11358-001-automation-approval.json",
+    "features/approved/document-activity-history/TP-EC-11358-001-v2-automation-approval.json",
+    "reports/validation/TP-EC-11358-001-browser-validation.json",
+    "reports/validation/TP-EC-11358-001-api-validation.json",
+    "test-plans/generated/TP-EC-11358-001-v2-review.md",
+    "test-plans/generated/TP-EC-11358-001-v2-approval.template.json",
+    "test-plans/approved/TP-EC-11358-001-v2-approval.json"
+  ],
+  "retryCount": 2,
+  "createdAt": "2026-09-14T08:22:09.367Z",
+  "updatedAt": "2026-09-17T12:12:51.287Z",
+  "startedAt": "2026-09-14T08:22:09.367Z",
+  "completedAt": null,
+  "errorDetails": {
+    "code": "BLOCKER-EC-11358-PLAYWRIGHT-VALIDATION",
+    "message": "The user-approved raw-selector fallback opened document-level history for both QA5 workspace rows and resolved the hidden-menu locator blocker. Transaction 16809586 / document 16809587 validates TS-003 because getControllerHistory.eo returns no table and AuditTrail-16809587.pdf contains no Controller History. The account has no document with multiple confirmed transfers and no Financial Asset Addendum or Supplemental Doc fixture, so TS-004 and TS-008 remain blocked.",
+    "stage": "PLAYWRIGHT_VALIDATION",
+    "occurredAt": "2026-09-17T12:12:51.287Z",
+    "blocker": "Provide QA5 transaction/document identifiers for a document with at least two Confirmed Transfer of Control events, a Financial Asset Addendum with transfers, and a Supplemental Doc. The identifiers must be viewable by the configured NSOrganization account; no fixture will be guessed or self-provisioned."
+  },
+  "processingLock": null,
+  "assignedAgent": "sdd-workflow-orchestrator"
+}

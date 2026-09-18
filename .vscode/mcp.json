@@ -5,7 +5,12 @@
       "command": "npx",
       "args": [
         "playwright",
-        "mcp"
+        "mcp",
+        "--isolated",
+        "--storage-state",
+        ".auth/ecore-session.json",
+        "--viewport-size",
+        "1920x1080"
       ]
     },
     "atlassian": {

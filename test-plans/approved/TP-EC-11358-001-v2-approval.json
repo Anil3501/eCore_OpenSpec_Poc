@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "1.0.0",
+  "approvalId": "APR-TP-EC-11358-002",
+  "gate": "TEST_PLAN",
+  "artifactId": "TP-EC-11358-001",
+  "artifactVersion": 2,
+  "release": "26.3",
+  "capability": "document-activity-history",
+  "sourceArtifactPath": "test-plans/generated/TP-EC-11358-001.json",
+  "decision": "REQUEST_CHANGES",
+  "reviewer": {
+    "name": "Nitin Saini",
+    "role": "Senior QA",
+    "reference": null
+  },
+  "reviewedAt": "2026-09-17T09:10:34.570Z",
+  "comments": "Request changes",
+  "itemDecisions": [
+    {
+      "itemId": "TS-EC-11358-001",
+      "decision": "APPROVE",
+      "comment": "UI scenario unchanged; preserve the corrected validated QA5 evidence for transaction 16809591 / document 16809592 showing UI Control History."
+    },
+    {
+      "itemId": "TS-EC-11358-002",
+      "decision": "APPROVE",
+      "comment": "UI scenario unchanged; preserve the corrected validated QA5 evidence for the three-column Control History row."
+    },
+    {
+      "itemId": "TS-EC-11358-003",
+      "decision": "APPROVE",
+      "comment": "UI scenario unchanged; still requires a governed execution."
+    },
+    {
+      "itemId": "TS-EC-11358-004",
+      "decision": "APPROVE",
+      "comment": "UI scenario unchanged; still requires multi-transfer test data."
+    },
+    {
+      "itemId": "TS-EC-11358-005",
+      "decision": "APPROVE",
+      "comment": "Authoritative UI coverage remains approved; preserve the corrected UI Control History and PDF Controller History evidence for transaction 16809591 / document 16809592."
+    },
+    {
+      "itemId": "TS-EC-11358-006",
+      "decision": "REQUEST_CHANGES",
+      "comment": "Do not approve or defer until the live eoRequestExport request and response shapes are captured, responseShapeHash is computed, and the contract is presented for explicit Gate 2 approval."
+    },
+    {
+      "itemId": "TS-EC-11358-007",
+      "decision": "REQUEST_CHANGES",
+      "comment": "Do not approve or defer until the live eoGetDocumentActivityHistoryReport request and response shapes are captured, responseShapeHash is computed, and the contract is presented for explicit Gate 2 approval."
+    },
+    {
+      "itemId": "TS-EC-11358-008",
+      "decision": "APPROVE",
+      "comment": "UI scenario unchanged; still requires all three document-type candidates."
+    }
+  ]
+}

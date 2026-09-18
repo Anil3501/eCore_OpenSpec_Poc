@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0.0",
+  "approvalId": "APR-AD-EC-11358-002",
+  "gate": "AUTOMATION_DESIGN",
+  "artifactId": "TP-EC-11358-001",
+  "artifactVersion": 2,
+  "release": "26.3",
+  "capability": "document-activity-history",
+  "sourceArtifactPath": "features/generated/document-activity-history/TP-EC-11358-001-automation-design.md",
+  "decision": "APPROVE",
+  "reviewer": {
+    "name": "Nitin Saini",
+    "role": "Senior QA",
+    "reference": null
+  },
+  "reviewedAt": "2026-09-17T11:57:56.306Z",
+  "comments": "Approved for Gate 3 by Nitin Saini. Remaining test fixtures may be resolved during Playwright validation. This approval authorises implementation and execution of TS-EC-11358-001 through TS-EC-11358-005 and TS-EC-11358-008 against approved plan artifactVersion 2. Transaction 16809591 / document 16809592 is observed for the single-transfer scenarios. The no-transfer, multiple-transfer, Financial Asset Addendum, and Supplemental Doc fixtures remain PLAYWRIGHT_VALIDATION dependencies. Every locator remains MCP_VALIDATION_REQUIRED until Playwright MCP confirms it. TS-EC-11358-006 and TS-EC-11358-007 remain deferred and are not part of this approval.",
+  "itemDecisions": [
+    {
+      "itemId": "TS-EC-11358-001",
+      "decision": "APPROVE",
+      "comment": "Approve the transferred Financial Asset Control History scenario."
+    },
+    {
+      "itemId": "TS-EC-11358-002",
+      "decision": "APPROVE",
+      "comment": "Approve structural verification of transfer date and both organizations."
+    },
+    {
+      "itemId": "TS-EC-11358-003",
+      "decision": "APPROVE",
+      "comment": "Approve the no-confirmed-transfer absence scenario; resolve its fixture during Playwright validation."
+    },
+    {
+      "itemId": "TS-EC-11358-004",
+      "decision": "APPROVE",
+      "comment": "Approve newest-to-oldest ordering; resolve its multiple-transfer fixture during Playwright validation."
+    },
+    {
+      "itemId": "TS-EC-11358-005",
+      "decision": "APPROVE",
+      "comment": "Approve the UI-view scenario as authoritative executable coverage for AC-EC-11358-005."
+    },
+    {
+      "itemId": "TS-EC-11358-008",
+      "decision": "APPROVE",
+      "comment": "Approve document-type behavior; resolve the Financial Asset Addendum and Supplemental Doc fixtures during Playwright validation."
+    }
+  ]
+}

@@ -438,9 +438,13 @@ function checkApprovalEvidence(loaded: LoadedArtifacts): CheckResult {
   const approvedPlanFiles = new Set(collectJsonFiles(PATHS.testPlansApproved));
   for (const [file, plan] of loaded.testPlans) {
     if (!approvedPlanFiles.has(file)) continue;
-    const approval = loaded.approvals.find(
-      (item) => item.gate === 'TEST_PLAN' && item.artifactId === plan.testPlanId,
+    const planApprovals = loaded.approvals.filter(
+      (item) =>
+        item.gate === 'TEST_PLAN' &&
+        item.artifactId === plan.testPlanId &&
+        item.artifactVersion === plan.artifactVersion,
     );
+    const approval = planApprovals.find(isGateOpen) ?? planApprovals[0];
     if (!approval) {
       messages.push(`${file}: no TEST_PLAN approval artifact found for ${plan.testPlanId}.`);
       continue;
