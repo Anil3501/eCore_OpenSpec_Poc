@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-09-18T11:39:22.511Z",
+  "generatedAt": "2026-09-18T14:58:46.573Z",
   "scope": "all",
   "summary": {
-    "total": 24,
+    "total": 25,
     "passed": 23,
     "failed": 0,
-    "skipped": 1
+    "skipped": 2
   },
   "results": [
     {
@@ -45,7 +45,7 @@
       "title": "Workflow history events validate against schema",
       "status": "PASS",
       "messages": [
-        "174 history event(s) across 4 file(s) validated."
+        "175 history event(s) across 4 file(s) validated."
       ]
     },
     {
@@ -125,7 +125,7 @@
       "title": "Open OpenSpec changes pass `openspec validate --strict`",
       "status": "PASS",
       "messages": [
-        "4 open change(s) validated: add-control-history-section, add-home-navigation, add-organization-login, track-paper-out-media-type."
+        "3 open change(s) validated: add-control-history-section, add-organization-login, track-paper-out-media-type."
       ]
     },
     {
@@ -133,6 +133,14 @@
       "title": "No duplicate executable tests exist for a business scenario",
       "status": "PASS",
       "messages": []
+    },
+    {
+      "id": "SEM-TEST-REUSE",
+      "title": "Cross-story reuse claims resolve to real, matching, human-confirmed evidence",
+      "status": "SKIPPED",
+      "messages": [
+        "No cross-story reuse claims are declared in any test plan or RTM."
+      ]
     },
     {
       "id": "SEM-SAMPLE-ISOLATION",

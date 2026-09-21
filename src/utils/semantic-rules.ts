@@ -1518,6 +1518,126 @@ function checkNoDuplicateBusinessScenarios(): CheckResult {
     : fail('SEM-NO-DUPLICATES', 'No duplicate executable tests exist for a business scenario', messages);
 }
 
+/**
+ * A cross-story reuse claim is a testing judgement, exactly like an API
+ * contract: an agent may propose it, but it must resolve to real, matching
+ * evidence, and it may not back an APPROVED plan until a human confirms it at
+ * Gate 2. A scenario title matching another story's is never itself proof -
+ * this codebase has already seen a surface match mislead (the Paper Out®
+ * Request dialog trap; see AGENTS.md and `SEM-DISCOVERY-SIGNAL`).
+ */
+function checkTestReuse(loaded: LoadedArtifacts): CheckResult {
+  const id = 'SEM-TEST-REUSE';
+  const title = 'Cross-story reuse claims resolve to real, matching, human-confirmed evidence';
+
+  const approvedPlanFiles = new Set(collectJsonFiles(PATHS.testPlansApproved));
+  const messages: string[] = [];
+  let reuseCount = 0;
+
+  const scenarioIndex = new Map<
+    string,
+    { file: string; plan: TestPlan; scenario: TestPlan['scenarios'][number] }
+  >();
+  for (const [file, plan] of loaded.testPlans) {
+    for (const scenario of plan.scenarios) {
+      scenarioIndex.set(scenario.testScenarioId, { file, plan, scenario });
+    }
+  }
+
+  for (const [file, plan] of loaded.testPlans) {
+    const isApproved = approvedPlanFiles.has(file);
+    for (const scenario of plan.scenarios) {
+      const reuse = scenario.reuseSource;
+      if (reuse === undefined) continue;
+      reuseCount += 1;
+
+      const source = scenarioIndex.get(reuse.sourceTestScenarioId);
+      if (source === undefined) {
+        messages.push(
+          `${file}: ${scenario.testScenarioId} claims reuse of "${reuse.sourceTestScenarioId}", which does not exist in any test plan.`,
+        );
+        continue;
+      }
+
+      if (!source.plan.jiraStoryIds.includes(reuse.sourceJiraStoryId)) {
+        messages.push(
+          `${file}: ${scenario.testScenarioId} claims reuseSource.sourceJiraStoryId "${reuse.sourceJiraStoryId}", but "${reuse.sourceTestScenarioId}" belongs to ${source.plan.jiraStoryIds.join(', ')}.`,
+        );
+      }
+
+      const currentInterface = scenario.interfaceType ?? 'UI';
+      const sourceInterface = source.scenario.interfaceType ?? 'UI';
+      if (currentInterface !== sourceInterface) {
+        messages.push(
+          `${file}: ${scenario.testScenarioId} (interfaceType ${currentInterface}) claims reuse of "${reuse.sourceTestScenarioId}" (interfaceType ${sourceInterface}). Reused automation must exercise the same interface.`,
+        );
+      }
+
+      // Gate 2 must ratify a reuse claim before an approved plan may rely on
+      // it - exactly like an OBSERVED API contract may not back an assertion
+      // until a human agrees it at Gate 2.
+      if (isApproved && reuse.status !== 'CONFIRMED') {
+        messages.push(
+          `${file}: ${scenario.testScenarioId} reuseSource.status is "${reuse.status}" but the plan is approved. A reuse claim must be CONFIRMED at Gate 2, never assumed.`,
+        );
+      }
+    }
+  }
+
+  // RTM side: a trace whose automation is marked reused must point at
+  // automation that genuinely exists and is not a different asset wearing the
+  // same label.
+  for (const [file, rtm] of loaded.rtms) {
+    for (const entry of rtm.entries) {
+      const reusedFromTraceId = entry.automation?.reusedFromTraceId;
+      if (!reusedFromTraceId) continue;
+      reuseCount += 1;
+
+      let sourceEntry: typeof entry | undefined;
+      let sourceFile: string | undefined;
+      for (const [otherFile, otherRtm] of loaded.rtms) {
+        const found = otherRtm.entries.find((candidate) => candidate.traceId === reusedFromTraceId);
+        if (found) {
+          sourceEntry = found;
+          sourceFile = otherFile;
+          break;
+        }
+      }
+
+      if (!sourceEntry) {
+        messages.push(
+          `${file}: ${entry.traceId}.automation.reusedFromTraceId "${reusedFromTraceId}" does not exist in any capability RTM.`,
+        );
+        continue;
+      }
+      if (sourceEntry.automation === null) {
+        messages.push(
+          `${file}: ${entry.traceId} claims reuse of ${reusedFromTraceId} (${sourceFile}), which itself carries no automation.`,
+        );
+        continue;
+      }
+      if (sourceEntry.automation.featureFile !== entry.automation?.featureFile) {
+        messages.push(
+          `${file}: ${entry.traceId} claims reuse of ${reusedFromTraceId} but points at a different featureFile ("${entry.automation?.featureFile}" vs "${sourceEntry.automation.featureFile}"). Reused automation must be the same asset, not a copy.`,
+        );
+      }
+      if (!['IMPLEMENTED', 'EXECUTABLE'].includes(sourceEntry.automation.automationStatus)) {
+        messages.push(
+          `${file}: ${entry.traceId} claims reuse of ${reusedFromTraceId}, whose automationStatus is "${sourceEntry.automation.automationStatus}". Reuse must point at real, already-working automation.`,
+        );
+      }
+    }
+  }
+
+  if (reuseCount === 0) {
+    return skip(id, title, 'No cross-story reuse claims are declared in any test plan or RTM.');
+  }
+
+  return messages.length === 0
+    ? pass(id, title, [`${reuseCount} reuse claim(s) checked.`])
+    : fail(id, title, messages);
+}
+
 function checkSampleDataIsolation(loaded: LoadedArtifacts): CheckResult {
   const messages: string[] = [];
   const classificationByStory = new Map<string, string>();
@@ -1759,6 +1879,7 @@ export function runValidation(
     checkFeatureTraceability(),
     checkOpenSpecChanges(),
     checkNoDuplicateBusinessScenarios(),
+    checkTestReuse(loaded),
     checkSampleDataIsolation(loaded),
     checkVersionMonotonicity(loaded),
     checkWorkflowLocks(loaded),
@@ -1774,7 +1895,7 @@ export function runValidation(
   const scopeFilter: Record<Exclude<typeof scope, 'all'>, string[]> = {
     requirements: ['REQ-STRUCTURE', 'APR-STRUCTURE', 'SEM-APPROVAL-EVIDENCE', 'SEM-VERSIONS', 'SEM-SAMPLE-ISOLATION', 'TPL-STRUCTURE', 'SEM-NO-PLACEHOLDERS'],
     workflow: ['WF-STRUCTURE', 'SEM-GATES', 'SEM-LOCKS', 'TPL-REVIEW-SECTIONS'],
-    rtm: ['RTM-STRUCTURE', 'SEM-RTM', 'SEM-COVERAGE', 'SEM-FEATURE-TAGS', 'SEM-NO-DUPLICATES', 'SEM-OPENSPEC'],
+    rtm: ['RTM-STRUCTURE', 'SEM-RTM', 'SEM-COVERAGE', 'SEM-FEATURE-TAGS', 'SEM-NO-DUPLICATES', 'SEM-OPENSPEC', 'SEM-TEST-REUSE'],
     defects: ['DEF-STRUCTURE', 'SEM-DEFECT-EVIDENCE', 'SEM-SAMPLE-ISOLATION'],
     automation: ['SEM-AUTOMATION-HYGIENE', 'SEM-DISCOVERY-SIGNAL', 'SEM-FEATURE-TAGS', 'SEM-NO-DUPLICATES', 'SEM-API-CONTRACT'],
   };

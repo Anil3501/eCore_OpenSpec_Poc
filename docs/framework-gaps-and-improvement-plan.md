@@ -24,6 +24,9 @@ improvement:
    support scaling beyond 3,000+ tests without merge conflicts.
 5. **OpenSpec Partial Delivery & Archival Split:** Preserving deferred acceptance criteria during
    change archival without stalling completed capabilities.
+6. **Cross-Story Test Scenario Duplication (✅ Implemented):** Detecting when a scenario proposed for
+   one Jira story already has validated, executable coverage from another story, and reusing that
+   evidence via a Gate-2-ratified claim instead of authoring a duplicate feature/step/page-object.
 
 ---
 
@@ -101,7 +104,47 @@ improvement:
 
 ---
 
-## 3. Impact Assessment: Stages & Human Approval Gates
+---
+
+### ✅ Gap 6: Cross-Story Test Scenario Duplication — Implemented
+
+* **Original Gap:**
+  * `scenarioActionSchema` already carried a `REUSE` enum value, but nothing captured *what* was
+    being reused, and no mechanism let a scenario proposed for one Jira story point at
+    already-validated coverage from another. An agent facing an apparent duplicate had no governed
+    way to avoid authoring a second feature/step/page-object for the same business behaviour, and no
+    check would have caught a silent, unreviewed reuse decision either.
+* **Implementation (non-breaking):**
+  * `src/models/test-plan.model.ts` / `test-plans/test-plan.schema.json`: an optional `reuseSource`
+    object on a scenario (`sourceJiraStoryId`, `sourceTestScenarioId`, `matchedLayers`, `rationale`,
+    `status: PROPOSED → CONFIRMED`), required only when `scenarioAction` is `REUSE` **and** a
+    cross-story claim is actually being made — `REUSE` alone keeps its original, unrelated
+    same-story-revision meaning.
+  * `src/models/rtm.model.ts` / `traceability/schemas/rtm.schema.json`: optional
+    `automation.reusedFromTraceId` on an RTM entry, cross-referenced against **every** loaded
+    capability RTM (reuse is not restricted to one capability's file).
+  * `src/utils/semantic-rules.ts`: new `SEM-TEST-REUSE` check — resolves every `reuseSource` and
+    `reusedFromTraceId` to real, matching evidence, and fails an `APPROVED` test plan that still
+    carries a `PROPOSED` (not `CONFIRMED`) reuse claim.
+  * `workflow/definitions/sdd-jira-to-automation.workflow.json`: two new `TEST_PLAN_GENERATION`
+    rules — check the target capability's RTM/lookup index before authoring a new scenario, and
+    propose (never assume) reuse based on AC text, behaviour, interface type, data classification
+    and release/requirement version, not a matching scenario title alone.
+  * `templates/artifacts/test-plan.template.json`, `templates/reviews/test-plan-review.template.md`:
+    describe the field and add it as a standing Open question — **not** a new required review
+    section, so `TPL-REVIEW-SECTIONS` cannot retroactively fail a past approval.
+* **Zero-Breakage Guarantee:** `REUSE` had zero real usages in any existing artifact before this
+  change (confirmed by repo-wide search), so every existing test plan, RTM file and approved feature
+  continues to validate unchanged; `npm run validate:artifacts` and `npm run typecheck` both pass
+  with the new `SEM-TEST-REUSE` check reporting `SKIPPED` until a story actually proposes reuse.
+* **Governance impact:** **No new stage, no new gate.** The proposal happens inside the existing
+  `TEST_PLAN_GENERATION` stage; ratification happens inside the existing Gate 2
+  (`TEST_PLAN_APPROVAL`) — the same pattern already used for API-verifiability judgements and
+  `OBSERVED → HUMAN_APPROVED` API contracts.
+
+---
+
+
 
 A core requirement of this framework is maintaining lean, auditable governance without introducing
 unnecessary process overhead.
@@ -259,3 +302,4 @@ export const testDataRequirementsSchema = z.array(
 | **No Guessed Locators or Contracts** | API contracts remain strictly bound to `OPENAPI` or `HUMAN_APPROVED` (Gate 2) with shape hashes. |
 | **Honest Execution & Coverage** | Prod-restricted or data-gapped scenarios report `null` coverage on unverified tiers. |
 | **3 Immutable Approval Gates** | All enhancements feed into existing Gate 1, Gate 2, or Gate 3 artifacts without adding a 4th gate. |
+| **No Duplicated Test Evidence** | A cross-story scenario match is proposed (`reuseSource`, `PROPOSED`) and only becomes usable once a human `CONFIRMED`s it at Gate 2; `SEM-TEST-REUSE` blocks an approved plan still carrying an unconfirmed claim. |

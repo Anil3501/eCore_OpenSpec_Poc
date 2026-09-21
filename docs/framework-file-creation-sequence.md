@@ -89,6 +89,15 @@ document exists it is listed in the review package as `OBSERVED`, and Gate 2 con
 `HUMAN_APPROVED`. An approved plan may not assert an acceptance criterion against an `OBSERVED`
 contract.
 
+**Before authoring a new scenario, an existing cross-story match may be proposed for reuse instead
+of duplicated.** A scenario's `scenarioAction` may be set to `REUSE` with an attached `reuseSource`
+(`sourceJiraStoryId` from the *other* story, `sourceTestScenarioId`, `matchedLayers`, `rationale`,
+`status: PROPOSED`) — never on a matching scenario title alone. The claim is raised as an Open
+question in the Gate 2 review package; it stays `PROPOSED` until a human sets it to `CONFIRMED` in
+the recorded approval, and `SEM-TEST-REUSE` fails an `APPROVED` plan that still carries a
+`PROPOSED` one. `REUSE` without a `reuseSource` keeps its original, unrelated meaning — the same
+scenario carried forward unchanged across a same-story plan revision.
+
 ## 🔒 Gate 2 — TEST_PLAN_APPROVAL (human)
 
 | # | File | Notes |
@@ -218,7 +227,7 @@ Agent: **sdd-workflow-orchestrator**
 
 | # | File | Notes |
 | - | --- | --- |
-| 40 | `traceability/capabilities/<capability>.rtm.json` | Capability-partitioned Requirements Traceability Matrix (created/merged, never monolithic) |
+| 40 | `traceability/capabilities/<capability>.rtm.json` | Capability-partitioned Requirements Traceability Matrix (created/merged, never monolithic). A trace reusing another story's automation records `automation.reusedFromTraceId` instead of duplicating a feature/step/page-object/fixture — only once its `reuseSource` was `CONFIRMED` at Gate 2 |
 | 41 | `traceability/capabilities/<capability>.coverage.json` | Coverage matrix — `null` when denominator is zero, never fabricated 0%/100% |
 | 42 | `traceability/index/lookup.index.json` | Cross-capability lookup index so nothing is scanned linearly |
 | 43 | `workflow/history/<workflowId>.history.jsonl` | Append-only workflow history log |

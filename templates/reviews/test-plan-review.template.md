@@ -44,6 +44,12 @@ depending on the answer.
 Interface declarations are always one of these questions: whether an acceptance criterion is
 API-verifiable is a testing judgement, never something the story states.
 
+A proposed cross-story reuse is always one of these questions too: naming which existing
+`TS-<JIRA>-nnn` (from a different story) this scenario's evidence reuses, the layers checked for
+equivalence (AC text, behaviour, interface type, data classification, release/version scope — never
+scenario-title wording alone), and the rationale. It stays `PROPOSED` until you set it to
+`CONFIRMED` in your approval — a reuse claim never backs an approved plan on an agent's say-so.
+
 ## What these scenarios deliberately do not assert
 
 - REPLACE_WITH_EACH_THING_A_READER_MIGHT_ASSUME_IS_COVERED_BUT_IS_NOT.

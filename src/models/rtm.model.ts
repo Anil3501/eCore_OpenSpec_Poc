@@ -75,6 +75,14 @@ export const rtmEntrySchema = z.object({
         'REVIEW_REQUIRED',
       ]),
       scenarioAction: scenarioActionSchema.optional(),
+      /**
+       * Set only when this trace's automation is a cross-story reuse: the
+       * traceId (in any capability) whose feature file/step
+       * definitions/page objects/fixtures this entry shares rather than
+       * duplicates. `SEM-TEST-REUSE` requires it to resolve to a real trace
+       * carrying the same featureFile and working automationStatus.
+       */
+      reusedFromTraceId: traceIdSchema.nullable().optional(),
     })
     .nullable(),
   executionRefs: z.array(

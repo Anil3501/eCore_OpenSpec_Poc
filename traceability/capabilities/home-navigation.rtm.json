@@ -23,7 +23,7 @@
         "automationDesign": "features/approved/home-navigation/TP-ETA-411-001-automation-approval.json"
       },
       "openSpecRefs": [
-        "openspec/changes/add-home-navigation/specs/home-navigation/home-screen-navigation/spec.md"
+        "openspec/specs/home-navigation/home-screen-navigation/spec.md"
       ],
       "testPlan": {
         "testPlanId": "TP-ETA-411-001",
@@ -103,7 +103,7 @@
         "automationDesign": "features/approved/home-navigation/TP-ETA-411-001-automation-approval.json"
       },
       "openSpecRefs": [
-        "openspec/changes/add-home-navigation/specs/home-navigation/home-screen-navigation/spec.md"
+        "openspec/specs/home-navigation/home-screen-navigation/spec.md"
       ],
       "testPlan": {
         "testPlanId": "TP-ETA-411-001",
@@ -163,7 +163,7 @@
         "automationDesign": "features/approved/home-navigation/TP-ETA-411-001-automation-approval.json"
       },
       "openSpecRefs": [
-        "openspec/changes/add-home-navigation/specs/home-navigation/home-screen-navigation/spec.md"
+        "openspec/specs/home-navigation/home-screen-navigation/spec.md"
       ],
       "testPlan": {
         "testPlanId": "TP-ETA-411-001",
@@ -224,7 +224,7 @@
         "automationDesign": "features/approved/home-navigation/TP-ETA-411-001-automation-approval.json"
       },
       "openSpecRefs": [
-        "openspec/changes/add-home-navigation/specs/home-navigation/home-screen-navigation/spec.md"
+        "openspec/specs/home-navigation/home-screen-navigation/spec.md"
       ],
       "testPlan": {
         "testPlanId": "TP-ETA-411-001",
@@ -283,7 +283,7 @@
         "automationDesign": "features/approved/home-navigation/TP-ETA-411-001-automation-approval.json"
       },
       "openSpecRefs": [
-        "openspec/changes/add-home-navigation/specs/home-navigation/home-screen-navigation/spec.md"
+        "openspec/specs/home-navigation/home-screen-navigation/spec.md"
       ],
       "testPlan": {
         "testPlanId": "TP-ETA-411-001",
@@ -344,7 +344,7 @@
         "automationDesign": "features/approved/home-navigation/TP-ETA-411-001-automation-approval.json"
       },
       "openSpecRefs": [
-        "openspec/changes/add-home-navigation/specs/home-navigation/home-screen-navigation/spec.md"
+        "openspec/specs/home-navigation/home-screen-navigation/spec.md"
       ],
       "testPlan": {
         "testPlanId": "TP-ETA-411-001",
@@ -430,7 +430,7 @@
         "automationDesign": "features/approved/home-navigation/TP-ETA-411-001-automation-approval.json"
       },
       "openSpecRefs": [
-        "openspec/changes/add-home-navigation/specs/home-navigation/home-screen-navigation/spec.md"
+        "openspec/specs/home-navigation/home-screen-navigation/spec.md"
       ],
       "testPlan": {
         "testPlanId": "TP-ETA-411-001",

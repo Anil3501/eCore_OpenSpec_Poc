@@ -37,10 +37,10 @@ flowchart TD
     S5 --> S6
 
     subgraph TP["Test Plan — Agent: sdd-workflow-orchestrator\n(invoking Playwright Test Planner)"]
-        S6["TEST_PLAN_GENERATION\ntest-plans/generated/&lt;TP-ID&gt;.json\n+ review.md + approval template\n(each scenario: interfaceType UI/API/HYBRID)"]
+        S6["TEST_PLAN_GENERATION\ntest-plans/generated/&lt;TP-ID&gt;.json\n+ review.md + approval template\n(each scenario: interfaceType UI/API/HYBRID)\n(scenarioAction REUSE + reuseSource:\ncross-story match PROPOSED, never assumed)"]
     end
 
-    S6 --> G2{{"🔒 GATE 2\nTEST_PLAN_APPROVAL (human)\ntest-plans/approved/&lt;TP-ID&gt;-approval.json\n(API/HYBRID contracts agreed HUMAN_APPROVED here)"}}
+    S6 --> G2{{"🔒 GATE 2\nTEST_PLAN_APPROVAL (human)\ntest-plans/approved/&lt;TP-ID&gt;-approval.json\n(API/HYBRID contracts agreed HUMAN_APPROVED here;\nreuseSource.status set CONFIRMED here)"}}
 
     G2 -->|APPROVE| S7
     G2 -->|REQUEST_CHANGES| S6
@@ -85,7 +85,7 @@ flowchart TD
     end
 
     subgraph RTM["Traceability — Agent: sdd-workflow-orchestrator"]
-        S15["RTM_UPDATE\ntraceability/capabilities/&lt;capability&gt;.rtm.json\n+ .coverage.json, index/lookup.index.json\nworkflow/history/&lt;workflowId&gt;.history.jsonl"]
+        S15["RTM_UPDATE\ntraceability/capabilities/&lt;capability&gt;.rtm.json\n(automation.reusedFromTraceId when CONFIRMED-reused)\n+ .coverage.json, index/lookup.index.json\nworkflow/history/&lt;workflowId&gt;.history.jsonl"]
     end
 
     S15 --> S16
@@ -160,6 +160,13 @@ flowchart LR
   is one file per business capability, cross-referenced by
   `traceability/index/lookup.index.json`, which is what lets this scale past 3,000+ tests without a
   linear scan.
+- **A cross-story match is a Gate 2 proposal, not an agent decision.** `TEST_PLAN_GENERATION` may set
+  `scenarioAction: REUSE` with a `reuseSource` naming the other story's scenario and the layers
+  checked for equivalence (never a matching title alone); it stays `PROPOSED` and is raised as an
+  Open question in the review package until a human sets it `CONFIRMED` at `GATE 2`. `SEM-TEST-REUSE`
+  fails an approved plan still carrying a `PROPOSED` claim. Once confirmed, `RTM_UPDATE` records the
+  reuse as `automation.reusedFromTraceId` on the new trace instead of `IMPLEMENTATION` generating a
+  duplicate feature, step, page object or fixture.
 
 ## Related reading
 

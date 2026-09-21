@@ -13,6 +13,7 @@ import {
   jiraIdSchema,
   releaseSchema,
   requirementIdSchema,
+  reuseMatchedLayerSchema,
   riskIdSchema,
   scenarioActionSchema,
   SCHEMA_VERSION,
@@ -58,6 +59,25 @@ export const apiContractSchema = z
   })
   .strict();
 
+/**
+ * A cross-story reuse claim: this scenario's evidence is another story's
+ * already-validated scenario, not newly authored automation.
+ *
+ * `status` starts `PROPOSED` - an agent may name a candidate and its
+ * rationale, but the claim only becomes usable once a human ratifies it at
+ * Gate 2, exactly like an `OBSERVED` API contract may not back an assertion
+ * until it is `HUMAN_APPROVED`. See `SEM-TEST-REUSE`.
+ */
+export const reuseSourceSchema = z
+  .object({
+    sourceJiraStoryId: jiraIdSchema,
+    sourceTestScenarioId: testScenarioIdSchema,
+    matchedLayers: z.array(reuseMatchedLayerSchema).min(1),
+    rationale: z.string().min(1),
+    status: z.enum(['PROPOSED', 'CONFIRMED']),
+  })
+  .strict();
+
 export const testScenarioSchema = z.object({
   testScenarioId: testScenarioIdSchema,
   title: z.string().min(1),
@@ -86,6 +106,8 @@ export const testScenarioSchema = z.object({
   // Optional so plans approved before API support remain valid unedited.
   interfaceType: interfaceTypeSchema.optional(),
   apiContract: apiContractSchema.optional(),
+  // Present only for a cross-story REUSE claim; see reuseSourceSchema above.
+  reuseSource: reuseSourceSchema.optional(),
 });
 
 export const testPlanSchema = z
@@ -207,6 +229,33 @@ export const testPlanSchema = z
             message: `${scenario.testScenarioId} references "${acId}", which is not listed in the plan acIds.`,
           });
         }
+      }
+
+      // A cross-story reuse claim is a testing judgement, not a fact: it must
+      // name what it reuses and belong to a different story than this plan,
+      // and it may not back an approved plan until a human has confirmed it.
+      if (scenario.scenarioAction === 'REUSE' && scenario.reuseSource !== undefined) {
+        if (plan.jiraStoryIds.includes(scenario.reuseSource.sourceJiraStoryId)) {
+          ctx.addIssue({
+            code: 'custom',
+            path: ['scenarios'],
+            message: `${scenario.testScenarioId} reuseSource.sourceJiraStoryId "${scenario.reuseSource.sourceJiraStoryId}" must belong to a different story than this plan (${plan.jiraStoryIds.join(', ')}). Reuse within the same story is a plan revision, not a cross-story reuse.`,
+          });
+        }
+        if (plan.approvalStatus === 'APPROVED' && scenario.reuseSource.status !== 'CONFIRMED') {
+          ctx.addIssue({
+            code: 'custom',
+            path: ['scenarios'],
+            message: `${scenario.testScenarioId} reuseSource.status is "${scenario.reuseSource.status}" but the plan is APPROVED. A reuse claim must be CONFIRMED at Gate 2, never assumed.`,
+          });
+        }
+      }
+      if (scenario.reuseSource !== undefined && scenario.scenarioAction !== 'REUSE') {
+        ctx.addIssue({
+          code: 'custom',
+          path: ['scenarios'],
+          message: `${scenario.testScenarioId} declares reuseSource but scenarioAction is "${scenario.scenarioAction ?? 'unset'}". Set scenarioAction to "REUSE".`,
+        });
       }
     }
 

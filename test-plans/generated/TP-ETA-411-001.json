@@ -23,9 +23,9 @@
     "AC-ETA-411-009"
   ],
   "openSpecRefs": [
-    "openspec/changes/add-home-navigation/specs/home-navigation/home-screen-navigation/spec.md",
-    "openspec/changes/add-home-navigation/proposal.md",
-    "openspec/changes/add-home-navigation/design.md"
+    "openspec/specs/home-navigation/home-screen-navigation/spec.md",
+    "openspec/changes/archive/2026-09-18-add-home-navigation/proposal.md",
+    "openspec/changes/archive/2026-09-18-add-home-navigation/design.md"
   ],
   "objective": "Verify that a signed-in Organization user is offered the six modules named in ETA-411, can open them from the Dashboard icons and from the top-right navigation menu, can reach Organization and Vault grouped beneath Preferences, and can return to the Home page using Command Center - and that a visitor who is not signed in is refused a module and kept on the sign-in page. Each scenario asserts only what its approved acceptance criterion asserts.",
   "scope": {
@@ -54,7 +54,7 @@
   "dependencies": [
     "requirements/approved/ETA-411.json - the approved acceptance criteria this plan may cover.",
     "requirements/approved/ETA-411-ac-approval.json - Gate 1 evidence.",
-    "openspec/changes/add-home-navigation/specs/home-navigation/home-screen-navigation/spec.md - the approved spec delta.",
+    "openspec/specs/home-navigation/home-screen-navigation/spec.md - the approved spec delta.",
     "reports/validation/ETA-411-navigation-validation.json - walked evidence that each Dashboard icon reaches its destination, and that Command Center returns Home.",
     "reports/validation/ETA-411-home-icons-probe.json - structural observation of the Home page icons and the navigation menu entries.",
     "A configured ECORE_* organization credential in the local .env, read only through env.requireEcoreLogin()."

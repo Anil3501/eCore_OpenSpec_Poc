@@ -54,7 +54,7 @@
       "priority": "REPLACE_WITH_LOW_OR_MEDIUM_OR_HIGH",
       "riskTag": "REPLACE_WITH_risk-low_OR_risk-medium_OR_risk-high",
       "suiteTag": "REPLACE_WITH_suite-smoke_OR_suite-regression_OR_suite-critical",
-      "scenarioAction": "REPLACE_WITH_CREATE_OR_REUSE_OR_UPDATE_OR_RETIRE_OR_REGRESSION_OR_REVIEW_REQUIRED",
+      "scenarioAction": "REPLACE_WITH_CREATE_OR_REUSE_OR_UPDATE_OR_RETIRE_OR_REGRESSION_OR_REVIEW_REQUIRED. REUSE for a genuine cross-story match additionally requires a reuseSource object (sourceJiraStoryId from a DIFFERENT story, sourceTestScenarioId, matchedLayers, rationale, status starting PROPOSED) - omit reuseSource entirely for every other action, including a same-story scenario carried forward unchanged across a plan revision.",
       "interfaceType": "REPLACE_WITH_UI_OR_API_OR_HYBRID. Absence means UI. API and HYBRID additionally require an apiContract, and an endpoint, field name or status code is never authored by an agent."
     }
   ],

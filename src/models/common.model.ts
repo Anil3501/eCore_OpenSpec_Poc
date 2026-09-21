@@ -95,6 +95,16 @@ export const changeTypeSchema = z.enum([
   'REVIEW_REQUIRED',
 ]);
 
+/**
+ * On an RTM trace's `automation` block, `REUSE` marks automation carried
+ * forward unchanged across a same-story plan revision (`TEST_STRATEGY_REVISION`).
+ *
+ * On a test-plan scenario, `REUSE` additionally covers a *cross-story* claim:
+ * a brand-new `TS-<JIRA>-nnn` whose evidence is another story's already-
+ * validated scenario rather than newly authored automation. That claim is
+ * carried in the scenario's `reuseSource` (see `reuseSourceSchema` below) and
+ * is never decided silently - `SEM-TEST-REUSE` and Gate 2 both enforce this.
+ */
 export const scenarioActionSchema = z.enum([
   'REUSE',
   'UPDATE',
@@ -102,6 +112,21 @@ export const scenarioActionSchema = z.enum([
   'RETIRE',
   'REGRESSION',
   'REVIEW_REQUIRED',
+]);
+
+/**
+ * Which layers were compared to judge a cross-story reuse claim equivalent.
+ * Surface signals such as a matching scenario title are deliberately not a
+ * layer here - the framework has already seen a title alone mislead (the
+ * Paper Out® Request dialog trap; see AGENTS.md).
+ */
+export const reuseMatchedLayerSchema = z.enum([
+  'AC_TEXT',
+  'BEHAVIOR',
+  'INTERFACE_TYPE',
+  'DATA_CLASSIFICATION',
+  'REQUIREMENT_VERSION',
+  'RELEASE_SCOPE',
 ]);
 
 /**

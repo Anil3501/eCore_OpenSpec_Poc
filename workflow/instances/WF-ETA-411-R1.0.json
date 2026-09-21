@@ -6,10 +6,10 @@
     "release":  "1.0",
     "capability":  "home-navigation",
     "dataClassification":  "REAL_JIRA_DATA",
-    "currentStage":  "OPENSPEC_ARCHIVE",
-    "nextStage":  "COMPLETED",
-    "lastSuccessfulStage":  "RTM_UPDATE",
-    "status":  "IN_PROGRESS",
+    "currentStage":  "COMPLETED",
+    "nextStage":  null,
+    "lastSuccessfulStage":  "OPENSPEC_ARCHIVE",
+    "status":  "COMPLETED",
     "completedStages":  [
                             {
                                 "stage":  "JIRA_RETRIEVAL",
@@ -186,6 +186,15 @@
                                 "outputs":  [
                                                 "defects/DEF-ETA-411-001.json"
                                             ]
+                            },
+                            {
+                                "stage":  "OPENSPEC_ARCHIVE",
+                                "completedAt":  "2026-09-18T12:57:59.000Z",
+                                "agent":  "OpenSpec",
+                                "outputs":  [
+                                                "openspec/specs/home-navigation/home-screen-navigation/spec.md",
+                                                "openspec/changes/archive/2026-09-18-add-home-navigation/**"
+                                            ]
                             }
                         ],
     "pendingApproval":  null,
@@ -222,9 +231,9 @@
                             ],
     "retryCount":  0,
     "createdAt":  "2026-09-04T18:32:00.000Z",
-    "updatedAt":  "2026-09-07T14:45:00.000Z",
+    "updatedAt":  "2026-09-18T12:57:59.000Z",
     "startedAt":  "2026-09-04T18:32:00.000Z",
-    "completedAt":  null,
+    "completedAt":  "2026-09-18T12:57:59.000Z",
     "errorDetails":  null,
     "processingLock":  null,
     "assignedAgent":  "sdd-workflow-orchestrator"

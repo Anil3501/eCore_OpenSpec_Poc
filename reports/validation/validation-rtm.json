@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-09-17T11:59:37.343Z",
+  "generatedAt": "2026-09-18T14:59:02.869Z",
   "scope": "rtm",
   "summary": {
-    "total": 6,
+    "total": 7,
     "passed": 6,
     "failed": 0,
-    "skipped": 0
+    "skipped": 1
   },
   "results": [
     {
@@ -41,7 +41,7 @@
       "title": "Open OpenSpec changes pass `openspec validate --strict`",
       "status": "PASS",
       "messages": [
-        "4 open change(s) validated: add-control-history-section, add-home-navigation, add-organization-login, track-paper-out-media-type."
+        "3 open change(s) validated: add-control-history-section, add-organization-login, track-paper-out-media-type."
       ]
     },
     {
@@ -49,6 +49,14 @@
       "title": "No duplicate executable tests exist for a business scenario",
       "status": "PASS",
       "messages": []
+    },
+    {
+      "id": "SEM-TEST-REUSE",
+      "title": "Cross-story reuse claims resolve to real, matching, human-confirmed evidence",
+      "status": "SKIPPED",
+      "messages": [
+        "No cross-story reuse claims are declared in any test plan or RTM."
+      ]
     }
   ]
 }

@@ -151,6 +151,11 @@
                 "scenarioAction": {
                   "type": "string",
                   "enum": ["REUSE", "UPDATE", "CREATE", "RETIRE", "REGRESSION", "REVIEW_REQUIRED"]
+                },
+                "reusedFromTraceId": {
+                  "description": "Set only for a cross-story reuse: the traceId (any capability) whose automation this entry shares rather than duplicates. Must resolve to a real trace with the same featureFile and a working automationStatus.",
+                  "type": ["string", "null"],
+                  "pattern": "^TRC-[A-Z0-9-]+-[0-9]{3}$"
                 }
               }
             }

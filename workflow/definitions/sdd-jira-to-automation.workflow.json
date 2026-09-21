@@ -113,7 +113,9 @@
         "An API scenario may ADD coverage. It may never REPLACE a UI scenario - that would delete the only end-to-end proof of a journey while leaving the coverage number unchanged.",
         "An API or HYBRID scenario must carry an apiContract. Never guess an endpoint, a field name or a status code.",
         "An agent may compose a contract only when a human explicitly asks for it and confirms it a second time after seeing it in chat. Consent is per contract and single use. The draft is written UNVERIFIED, its provenance begins AGENT_DRAFTED, and it names which fields were dictated and which were proposed.",
-        "The review package lists every proposed contract so the human approving Gate 2 is agreeing to it explicitly."
+        "The review package lists every proposed contract so the human approving Gate 2 is agreeing to it explicitly.",
+        "Before authoring a new scenario, check the target capability's RTM and traceability/index/lookup.index.json for an existing scenario already covering the same acceptance-criterion behaviour in another story. A matching scenario title is never itself proof of equivalence - verify AC text, business behaviour, interfaceType, data classification and release/requirement version before proposing reuse.",
+        "A genuine cross-story match is proposed, never assumed: set scenarioAction to REUSE, carry its reuseSource (sourceJiraStoryId, sourceTestScenarioId, matchedLayers, rationale, status PROPOSED), and raise it explicitly in the Gate 2 review package's Open questions. Reuse only becomes usable once a human sets reuseSource.status to CONFIRMED in the recorded APR-TP-* approval - never decided silently, and never by reassigning another story's scenario ID."
       ]
     },
     {

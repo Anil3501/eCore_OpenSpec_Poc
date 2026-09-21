@@ -289,6 +289,22 @@ checks fail. See [src/utils/schema-parity.ts](src/utils/schema-parity.ts).
 - **Fixtures are capability-partitioned.** Rather than a monolithic registry, domain fixtures live
   in modular slices (`src/fixtures/<capability>.fixture.ts`, `api.fixture.ts`, `coverage.fixture.ts`)
   and are composed and re-exported in `src/fixtures/test.ts` for clean scaling without merge bottlenecks.
+- **A scenario that already exists for another story is reused, never silently re-authored.**
+  `REQ-*`/`AC-*`/`TS-*` IDs stay story-scoped and immutable — reuse never means renaming or sharing
+  one, only pointing a new trace at existing evidence. During `TEST_PLAN_GENERATION` an agent may
+  propose reuse (never decide it) by setting a scenario's `scenarioAction` to `REUSE` and attaching a
+  `reuseSource` (`sourceJiraStoryId` from the *other* story, `sourceTestScenarioId`, `matchedLayers`,
+  `rationale`, `status: PROPOSED`). A matching scenario **title** is never proof of equivalence — a
+  reviewer checks AC text, Gherkin behaviour, `interfaceType`, data classification and
+  release/requirement version, the same discipline as the "Paper Out® Request" dialog-title trap
+  above. The claim is raised explicitly as an Open question in the Gate 2 review package and only
+  becomes usable once the human sets `reuseSource.status` to `CONFIRMED` in that approval —
+  `SEM-TEST-REUSE` fails an `APPROVED` plan carrying a still-`PROPOSED` reuse claim. Once confirmed,
+  the RTM records reuse via `automation.reusedFromTraceId` on the new trace, pointing at the source
+  trace's already `IMPLEMENTED`/`EXECUTABLE` automation instead of generating a duplicate feature,
+  step, page-object or fixture. `REUSE` without a `reuseSource` still means what it always meant —
+  the same scenario carried forward unchanged across a same-story plan revision — so no existing
+  artifact is affected by this.
 - All config goes through [src/utils/env.ts](src/utils/env.ts). **Never read `process.env`
   directly.** That includes [playwright.config.ts](playwright.config.ts), which uses `env.isCi`
   rather than `process.env.CI`. Requirements are enforced lazily (`requireBaseUrl()`,
