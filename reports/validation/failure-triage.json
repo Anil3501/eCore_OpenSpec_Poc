@@ -1,109 +1,196 @@
 {
-  "generatedAt": "2026-09-08T10:56:14.951Z",
+  "generatedAt": "2026-09-23T14:12:10.877Z",
   "source": "reports/execution/results.json",
   "summary": {
-    "totalFailures": 2,
-    "LOCATOR_SUSPECT": 2,
+    "totalFailures": 6,
+    "LOCATOR_SUSPECT": 0,
     "APPLICATION_DEFECT": 0,
+    "CONTRACT_MISMATCH": 0,
     "AMBIGUOUS": 0,
-    "ENVIRONMENT_BLOCKER": 0
+    "ENVIRONMENT_BLOCKER": 0,
+    "MANUAL_ONLY_PLACEHOLDER": 4,
+    "KNOWN_AMBIGUITY": 2
   },
   "findings": [
     {
-      "proposedDefectId": "DEF-ETA-411-002",
-      "fingerprint": "abfa194c20bbe19c34fca711608ed5daaaa1b9636d8b78adb6f999b4d4185a9f",
-      "classification": "LOCATOR_SUSPECT",
+      "proposedDefectId": null,
+      "fingerprint": "59aeeafdae3914f10b3bbde49afe045c5441503059922d48d64604c49220cee7",
+      "classification": "KNOWN_AMBIGUITY",
       "matchedSignals": [
-        "WAITING_FOR_LOCATOR",
-        "LOCATOR_TIMEOUT"
+        "BLOCKER-EC-12000"
       ],
-      "classificationRationale": "Matched locator signal(s): WAITING_FOR_LOCATOR, LOCATOR_TIMEOUT. No application-behaviour signal matched.",
-      "specTitle": "Command Center returns the user to the Home page from each module",
-      "featureFile": ".features-gen/features/approved/home-navigation/home-screen-navigation.feature.spec.js",
+      "classificationRationale": "This failure cites an already-recorded ambiguity (BLOCKER-EC-12000). It is a known, open question awaiting a human decision, not a new defect - never route to healing, never file a bug. Use the blocker-escalation-note skill to (re)surface it if it is not already with a human.",
+      "suggestedRouting": "HUMAN_REVIEW",
+      "specTitle": "Historical Paper Out records are not retroactively updated with Media Type",
+      "featureFile": ".features-gen/features/approved/paper-out-export/paper-out-media-type.feature.spec.js",
       "projectName": "bdd",
-      "status": "timedOut",
+      "status": "failed",
       "retryIndex": 0,
-      "durationSeconds": 45.7,
-      "errorMessage": "Test timeout of 45000ms exceeded.\nError: locator.click: Test timeout of 45000ms exceeded.\nCall log:\n  - waiting for locator('#icon-buttons').getByRole('link', { name: 'Vault', exact: true })\n\n\n   at src\\pages\\ecore-home.page.ts:135\n\n  133 |\n  134 |   async activateDashboardIcon(name: string): Promise<void> {\n> 135 |     await this.dashboardIcon(name).click();\n      |                                    ^\n  136 |   }\n  137 | }\n  138 |\n    at EcoreHomePage.activateDashboardIcon (D:\\Anil_Data\\AI Automation Projects\\InterSoft_Git\\eCore_OpenSpec_POC\\src\\pages\\ecore-home.page.ts:135:36)\n    at Object.<anonymous> (D:\\Anil_Data\\AI Automation Projects\\InterSoft_Git\\eCore_OpenSpec_POC\\steps\\home-screen-navigation.steps.ts:185:24)\n    at D:\\Anil_Data\\AI Automation Projects\\InterSoft_Git\\eCore_OpenSpec_POC\\.features-gen\\features\\approved\\home-navigation\\home-screen-navigation.feature.spec.js:40:5",
+      "durationSeconds": 0.9,
+      "errorMessage": "Error: BLOCKER-EC-12000-004: the recorded Media Type is not observable anywhere in qa5. A real transaction-level Paper Out was driven end to end against \"test collection\" on 2026-09-14 (submitted, then cancelled), and \"Media Type\" appeared on neither the Workspace, the Work Queue nor the transaction History dialog - the History recorded no Paper Out event at all. Two questions need a human before these steps can assert anything: (1) where is Media Type meant to surface in 26.3, and (2) is the recording change actually deployed to qa5? The remaining candidates (package cover page, activity history report) are reachable only via Verify, which permanently destroys vault documents, so they were not probed. See features/generated/paper-out-export/TP-EC-12000-001-automation-design.md and reports/validation/TP-EC-12000-001-browser-validation.json. (BLOCKER-EC-12000-001, the earlier \"no qualifying fixture\" gap, is RESOLVED: \"test collection\" qualifies and now backs TS-EC-12000-003.)\n\n   at steps\\paper-out-media-type-blocked.steps.ts:65\n\n  63 |\n  64 | function blocked(reason: string): never {\n> 65 |   throw new Error(reason);\n     |         ^\n  66 | }\n  67 |\n  68 | // --- TS-EC-12000-011 through -015 (eoRequestExport, HYBRID) ---\n    at blocked (D:\\Anil_Data\\AI Automation Projects\\InterSoft_Git\\eCore_OpenSpec_POC\\steps\\paper-out-media-type-blocked.steps.ts:65:9)\n    at Object.<anonymous> (D:\\Anil_Data\\AI Automation Projects\\InterSoft_Git\\eCore_OpenSpec_POC\\steps\\paper-out-media-type-blocked.steps.ts:80:3)\n    at D:\\Anil_Data\\AI Automation Projects\\InterSoft_Git\\eCore_OpenSpec_POC\\.features-gen\\features\\approved\\paper-out-export\\paper-out-media-type.feature.spec.js:114:5",
       "errorStack": null,
       "tags": {
-        "release": "1.0",
-        "capability": "home-navigation",
-        "requirementId": "REQ-ETA-411-005",
-        "acId": "AC-ETA-411-007",
-        "testPlanId": "TP-ETA-411-001",
-        "testScenarioId": "TS-ETA-411-006",
-        "jiraStoryId": "ETA-411"
+        "release": "26.3",
+        "capability": "paper-out-export",
+        "requirementId": "REQ-EC-12000-005",
+        "acId": "AC-EC-12000-017",
+        "testPlanId": "TP-EC-12000-001",
+        "testScenarioId": "TS-EC-12000-017",
+        "jiraStoryId": "EC-12000",
+        "interfaceType": "UI"
       },
-      "evidence": [
-        {
-          "name": "screenshot",
-          "contentType": "image/png",
-          "sourcePath": "test-results/features-approved-home-nav-9be09--Home-page-from-each-module-bdd/test-failed-1.png",
-          "preservedPath": "reports/defects/DEF-ETA-411-002/test-failed-1.png"
-        },
-        {
-          "name": "error-context",
-          "contentType": "text/markdown",
-          "sourcePath": "test-results/features-approved-home-nav-9be09--Home-page-from-each-module-bdd/error-context.md",
-          "preservedPath": "reports/defects/DEF-ETA-411-002/error-context.md"
-        },
-        {
-          "name": "trace",
-          "contentType": "application/zip",
-          "sourcePath": "test-results/features-approved-home-nav-9be09--Home-page-from-each-module-bdd/trace.zip",
-          "preservedPath": "reports/defects/DEF-ETA-411-002/trace.zip"
-        }
-      ],
-      "reproductionCommand": "npx playwright test --project=bdd --grep \"@ts-TS-ETA-411-006\""
+      "evidence": [],
+      "reproductionCommand": "npx playwright test --project=bdd --grep \"@ts-TS-EC-12000-017\""
     },
     {
-      "proposedDefectId": "DEF-ETA-411-002",
-      "fingerprint": "abfa194c20bbe19c34fca711608ed5daaaa1b9636d8b78adb6f999b4d4185a9f",
-      "classification": "LOCATOR_SUSPECT",
+      "proposedDefectId": null,
+      "fingerprint": "59aeeafdae3914f10b3bbde49afe045c5441503059922d48d64604c49220cee7",
+      "classification": "KNOWN_AMBIGUITY",
       "matchedSignals": [
-        "WAITING_FOR_LOCATOR",
-        "LOCATOR_TIMEOUT"
+        "BLOCKER-EC-12000"
       ],
-      "classificationRationale": "Matched locator signal(s): WAITING_FOR_LOCATOR, LOCATOR_TIMEOUT. No application-behaviour signal matched.",
-      "specTitle": "Command Center returns the user to the Home page from each module",
-      "featureFile": ".features-gen/features/approved/home-navigation/home-screen-navigation.feature.spec.js",
+      "classificationRationale": "This failure cites an already-recorded ambiguity (BLOCKER-EC-12000). It is a known, open question awaiting a human decision, not a new defect - never route to healing, never file a bug. Use the blocker-escalation-note skill to (re)surface it if it is not already with a human.",
+      "suggestedRouting": "HUMAN_REVIEW",
+      "specTitle": "Historical Paper Out records are not retroactively updated with Media Type",
+      "featureFile": ".features-gen/features/approved/paper-out-export/paper-out-media-type.feature.spec.js",
       "projectName": "bdd",
-      "status": "timedOut",
+      "status": "failed",
       "retryIndex": 1,
-      "durationSeconds": 46.3,
-      "errorMessage": "Test timeout of 45000ms exceeded.\nError: locator.click: Test timeout of 45000ms exceeded.\nCall log:\n  - waiting for locator('#icon-buttons').getByRole('link', { name: 'Vault', exact: true })\n\n\n   at src\\pages\\ecore-home.page.ts:135\n\n  133 |\n  134 |   async activateDashboardIcon(name: string): Promise<void> {\n> 135 |     await this.dashboardIcon(name).click();\n      |                                    ^\n  136 |   }\n  137 | }\n  138 |\n    at EcoreHomePage.activateDashboardIcon (D:\\Anil_Data\\AI Automation Projects\\InterSoft_Git\\eCore_OpenSpec_POC\\src\\pages\\ecore-home.page.ts:135:36)\n    at Object.<anonymous> (D:\\Anil_Data\\AI Automation Projects\\InterSoft_Git\\eCore_OpenSpec_POC\\steps\\home-screen-navigation.steps.ts:185:24)\n    at D:\\Anil_Data\\AI Automation Projects\\InterSoft_Git\\eCore_OpenSpec_POC\\.features-gen\\features\\approved\\home-navigation\\home-screen-navigation.feature.spec.js:40:5",
+      "durationSeconds": 2.4,
+      "errorMessage": "Error: BLOCKER-EC-12000-004: the recorded Media Type is not observable anywhere in qa5. A real transaction-level Paper Out was driven end to end against \"test collection\" on 2026-09-14 (submitted, then cancelled), and \"Media Type\" appeared on neither the Workspace, the Work Queue nor the transaction History dialog - the History recorded no Paper Out event at all. Two questions need a human before these steps can assert anything: (1) where is Media Type meant to surface in 26.3, and (2) is the recording change actually deployed to qa5? The remaining candidates (package cover page, activity history report) are reachable only via Verify, which permanently destroys vault documents, so they were not probed. See features/generated/paper-out-export/TP-EC-12000-001-automation-design.md and reports/validation/TP-EC-12000-001-browser-validation.json. (BLOCKER-EC-12000-001, the earlier \"no qualifying fixture\" gap, is RESOLVED: \"test collection\" qualifies and now backs TS-EC-12000-003.)\n\n   at steps\\paper-out-media-type-blocked.steps.ts:65\n\n  63 |\n  64 | function blocked(reason: string): never {\n> 65 |   throw new Error(reason);\n     |         ^\n  66 | }\n  67 |\n  68 | // --- TS-EC-12000-011 through -015 (eoRequestExport, HYBRID) ---\n    at blocked (D:\\Anil_Data\\AI Automation Projects\\InterSoft_Git\\eCore_OpenSpec_POC\\steps\\paper-out-media-type-blocked.steps.ts:65:9)\n    at Object.<anonymous> (D:\\Anil_Data\\AI Automation Projects\\InterSoft_Git\\eCore_OpenSpec_POC\\steps\\paper-out-media-type-blocked.steps.ts:80:3)\n    at D:\\Anil_Data\\AI Automation Projects\\InterSoft_Git\\eCore_OpenSpec_POC\\.features-gen\\features\\approved\\paper-out-export\\paper-out-media-type.feature.spec.js:114:5",
       "errorStack": null,
       "tags": {
-        "release": "1.0",
-        "capability": "home-navigation",
-        "requirementId": "REQ-ETA-411-005",
-        "acId": "AC-ETA-411-007",
-        "testPlanId": "TP-ETA-411-001",
-        "testScenarioId": "TS-ETA-411-006",
-        "jiraStoryId": "ETA-411"
+        "release": "26.3",
+        "capability": "paper-out-export",
+        "requirementId": "REQ-EC-12000-005",
+        "acId": "AC-EC-12000-017",
+        "testPlanId": "TP-EC-12000-001",
+        "testScenarioId": "TS-EC-12000-017",
+        "jiraStoryId": "EC-12000",
+        "interfaceType": "UI"
       },
-      "evidence": [
-        {
-          "name": "screenshot",
-          "contentType": "image/png",
-          "sourcePath": "test-results/features-approved-home-nav-9be09--Home-page-from-each-module-bdd-retry1/test-failed-1.png",
-          "preservedPath": "reports/defects/DEF-ETA-411-002/test-failed-1.png"
-        },
-        {
-          "name": "error-context",
-          "contentType": "text/markdown",
-          "sourcePath": "test-results/features-approved-home-nav-9be09--Home-page-from-each-module-bdd-retry1/error-context.md",
-          "preservedPath": "reports/defects/DEF-ETA-411-002/error-context.md"
-        },
-        {
-          "name": "trace",
-          "contentType": "application/zip",
-          "sourcePath": "test-results/features-approved-home-nav-9be09--Home-page-from-each-module-bdd-retry1/trace.zip",
-          "preservedPath": "reports/defects/DEF-ETA-411-002/trace.zip"
-        }
+      "evidence": [],
+      "reproductionCommand": "npx playwright test --project=bdd --grep \"@ts-TS-EC-12000-017\""
+    },
+    {
+      "proposedDefectId": null,
+      "fingerprint": "522197fd2e52e542b5d7e7fcc237e3bede737386f0087d3fb7dbb41c27d7cc2b",
+      "classification": "MANUAL_ONLY_PLACEHOLDER",
+      "matchedSignals": [
+        "MANUAL_ONLY_PLACEHOLDER"
       ],
-      "reproductionCommand": "npx playwright test --project=bdd --grep \"@ts-TS-ETA-411-006\""
+      "classificationRationale": "This step definition exists only for traceability and deliberately throws so a MANUAL_ONLY scenario can never report a false automated pass. This is correct behaviour, not a defect - never route to healing, never file a bug. Confirm the AC manually per the approved test plan.",
+      "suggestedRouting": "HUMAN_REVIEW",
+      "specTitle": "Paper Out Request modal's right-side section borders are visually aligned",
+      "featureFile": ".features-gen/features/approved/paper-out-export/paper-out-media-type.feature.spec.js",
+      "projectName": "bdd",
+      "status": "failed",
+      "retryIndex": 0,
+      "durationSeconds": 1,
+      "errorMessage": "Error: TS-EC-12000-019 is MANUAL_ONLY per the approved test plan (test-plans/approved/TP-EC-12000-001.json): visual border alignment is not a reliable Playwright assertion target. A human reviewer must confirm this visually; this step definition exists only for traceability and must never report an automated pass.\n\n   at steps\\paper-out-media-type-blocked.steps.ts:65\n\n  63 |\n  64 | function blocked(reason: string): never {\n> 65 |   throw new Error(reason);\n     |         ^\n  66 | }\n  67 |\n  68 | // --- TS-EC-12000-011 through -015 (eoRequestExport, HYBRID) ---\n    at blocked (D:\\Anil_Data\\AI Automation Projects\\InterSoft_Git\\eCore_OpenSpec_POC\\steps\\paper-out-media-type-blocked.steps.ts:65:9)\n    at Object.<anonymous> (D:\\Anil_Data\\AI Automation Projects\\InterSoft_Git\\eCore_OpenSpec_POC\\steps\\paper-out-media-type-blocked.steps.ts:95:15)\n    at D:\\Anil_Data\\AI Automation Projects\\InterSoft_Git\\eCore_OpenSpec_POC\\.features-gen\\features\\approved\\paper-out-export\\paper-out-media-type.feature.spec.js:126:5",
+      "errorStack": null,
+      "tags": {
+        "release": "26.3",
+        "capability": "paper-out-export",
+        "requirementId": "REQ-EC-12000-007",
+        "acId": "AC-EC-12000-019",
+        "testPlanId": "TP-EC-12000-001",
+        "testScenarioId": "TS-EC-12000-019",
+        "jiraStoryId": "EC-12000",
+        "interfaceType": "UI"
+      },
+      "evidence": [],
+      "reproductionCommand": "npx playwright test --project=bdd --grep \"@ts-TS-EC-12000-019\""
+    },
+    {
+      "proposedDefectId": null,
+      "fingerprint": "522197fd2e52e542b5d7e7fcc237e3bede737386f0087d3fb7dbb41c27d7cc2b",
+      "classification": "MANUAL_ONLY_PLACEHOLDER",
+      "matchedSignals": [
+        "MANUAL_ONLY_PLACEHOLDER"
+      ],
+      "classificationRationale": "This step definition exists only for traceability and deliberately throws so a MANUAL_ONLY scenario can never report a false automated pass. This is correct behaviour, not a defect - never route to healing, never file a bug. Confirm the AC manually per the approved test plan.",
+      "suggestedRouting": "HUMAN_REVIEW",
+      "specTitle": "Paper Out Request modal's right-side section borders are visually aligned",
+      "featureFile": ".features-gen/features/approved/paper-out-export/paper-out-media-type.feature.spec.js",
+      "projectName": "bdd",
+      "status": "failed",
+      "retryIndex": 1,
+      "durationSeconds": 2.5,
+      "errorMessage": "Error: TS-EC-12000-019 is MANUAL_ONLY per the approved test plan (test-plans/approved/TP-EC-12000-001.json): visual border alignment is not a reliable Playwright assertion target. A human reviewer must confirm this visually; this step definition exists only for traceability and must never report an automated pass.\n\n   at steps\\paper-out-media-type-blocked.steps.ts:65\n\n  63 |\n  64 | function blocked(reason: string): never {\n> 65 |   throw new Error(reason);\n     |         ^\n  66 | }\n  67 |\n  68 | // --- TS-EC-12000-011 through -015 (eoRequestExport, HYBRID) ---\n    at blocked (D:\\Anil_Data\\AI Automation Projects\\InterSoft_Git\\eCore_OpenSpec_POC\\steps\\paper-out-media-type-blocked.steps.ts:65:9)\n    at Object.<anonymous> (D:\\Anil_Data\\AI Automation Projects\\InterSoft_Git\\eCore_OpenSpec_POC\\steps\\paper-out-media-type-blocked.steps.ts:95:15)\n    at D:\\Anil_Data\\AI Automation Projects\\InterSoft_Git\\eCore_OpenSpec_POC\\.features-gen\\features\\approved\\paper-out-export\\paper-out-media-type.feature.spec.js:126:5",
+      "errorStack": null,
+      "tags": {
+        "release": "26.3",
+        "capability": "paper-out-export",
+        "requirementId": "REQ-EC-12000-007",
+        "acId": "AC-EC-12000-019",
+        "testPlanId": "TP-EC-12000-001",
+        "testScenarioId": "TS-EC-12000-019",
+        "jiraStoryId": "EC-12000",
+        "interfaceType": "UI"
+      },
+      "evidence": [],
+      "reproductionCommand": "npx playwright test --project=bdd --grep \"@ts-TS-EC-12000-019\""
+    },
+    {
+      "proposedDefectId": null,
+      "fingerprint": "5a1b834a7d6278145bc9c8ab229e99943f431094ba9237d1988e43941048d4d0",
+      "classification": "MANUAL_ONLY_PLACEHOLDER",
+      "matchedSignals": [
+        "MANUAL_ONLY_PLACEHOLDER"
+      ],
+      "classificationRationale": "This step definition exists only for traceability and deliberately throws so a MANUAL_ONLY scenario can never report a false automated pass. This is correct behaviour, not a defect - never route to healing, never file a bug. Confirm the AC manually per the approved test plan.",
+      "suggestedRouting": "HUMAN_REVIEW",
+      "specTitle": "Media Type is visible on the Paper Out package cover page",
+      "featureFile": ".features-gen/features/approved/paper-out-export/paper-out-media-type.feature.spec.js",
+      "projectName": "bdd",
+      "status": "failed",
+      "retryIndex": 0,
+      "durationSeconds": 2.3,
+      "errorMessage": "Error: TS-EC-12000-020 is MANUAL_ONLY per the approved test plan v2 (test-plans/approved/TP-EC-12000-001-v2.json), split out of TS-EC-12000-016 at Gate 2 v2 (CLR-TP-EC-12000-002): the package cover page is a printed/downloaded artifact, and confirming Media Type is visible on it needs a human to open the real downloaded file rather than a Playwright locator. This step definition exists only for traceability and must never report an automated pass.\n\n   at steps\\paper-out-media-type-blocked.steps.ts:65\n\n  63 |\n  64 | function blocked(reason: string): never {\n> 65 |   throw new Error(reason);\n     |         ^\n  66 | }\n  67 |\n  68 | // --- TS-EC-12000-011 through -015 (eoRequestExport, HYBRID) ---\n    at blocked (D:\\Anil_Data\\AI Automation Projects\\InterSoft_Git\\eCore_OpenSpec_POC\\steps\\paper-out-media-type-blocked.steps.ts:65:9)\n    at Object.<anonymous> (D:\\Anil_Data\\AI Automation Projects\\InterSoft_Git\\eCore_OpenSpec_POC\\steps\\paper-out-media-type-blocked.steps.ts:102:86)\n    at D:\\Anil_Data\\AI Automation Projects\\InterSoft_Git\\eCore_OpenSpec_POC\\.features-gen\\features\\approved\\paper-out-export\\paper-out-media-type.feature.spec.js:132:5",
+      "errorStack": null,
+      "tags": {
+        "release": "26.3",
+        "capability": "paper-out-export",
+        "requirementId": "REQ-EC-12000-005",
+        "acId": "AC-EC-12000-016",
+        "testPlanId": "TP-EC-12000-001",
+        "testScenarioId": "TS-EC-12000-020",
+        "jiraStoryId": "EC-12000",
+        "interfaceType": "UI"
+      },
+      "evidence": [],
+      "reproductionCommand": "npx playwright test --project=bdd --grep \"@ts-TS-EC-12000-020\""
+    },
+    {
+      "proposedDefectId": null,
+      "fingerprint": "5a1b834a7d6278145bc9c8ab229e99943f431094ba9237d1988e43941048d4d0",
+      "classification": "MANUAL_ONLY_PLACEHOLDER",
+      "matchedSignals": [
+        "MANUAL_ONLY_PLACEHOLDER"
+      ],
+      "classificationRationale": "This step definition exists only for traceability and deliberately throws so a MANUAL_ONLY scenario can never report a false automated pass. This is correct behaviour, not a defect - never route to healing, never file a bug. Confirm the AC manually per the approved test plan.",
+      "suggestedRouting": "HUMAN_REVIEW",
+      "specTitle": "Media Type is visible on the Paper Out package cover page",
+      "featureFile": ".features-gen/features/approved/paper-out-export/paper-out-media-type.feature.spec.js",
+      "projectName": "bdd",
+      "status": "failed",
+      "retryIndex": 1,
+      "durationSeconds": 2,
+      "errorMessage": "Error: TS-EC-12000-020 is MANUAL_ONLY per the approved test plan v2 (test-plans/approved/TP-EC-12000-001-v2.json), split out of TS-EC-12000-016 at Gate 2 v2 (CLR-TP-EC-12000-002): the package cover page is a printed/downloaded artifact, and confirming Media Type is visible on it needs a human to open the real downloaded file rather than a Playwright locator. This step definition exists only for traceability and must never report an automated pass.\n\n   at steps\\paper-out-media-type-blocked.steps.ts:65\n\n  63 |\n  64 | function blocked(reason: string): never {\n> 65 |   throw new Error(reason);\n     |         ^\n  66 | }\n  67 |\n  68 | // --- TS-EC-12000-011 through -015 (eoRequestExport, HYBRID) ---\n    at blocked (D:\\Anil_Data\\AI Automation Projects\\InterSoft_Git\\eCore_OpenSpec_POC\\steps\\paper-out-media-type-blocked.steps.ts:65:9)\n    at Object.<anonymous> (D:\\Anil_Data\\AI Automation Projects\\InterSoft_Git\\eCore_OpenSpec_POC\\steps\\paper-out-media-type-blocked.steps.ts:102:86)\n    at D:\\Anil_Data\\AI Automation Projects\\InterSoft_Git\\eCore_OpenSpec_POC\\.features-gen\\features\\approved\\paper-out-export\\paper-out-media-type.feature.spec.js:132:5",
+      "errorStack": null,
+      "tags": {
+        "release": "26.3",
+        "capability": "paper-out-export",
+        "requirementId": "REQ-EC-12000-005",
+        "acId": "AC-EC-12000-016",
+        "testPlanId": "TP-EC-12000-001",
+        "testScenarioId": "TS-EC-12000-020",
+        "jiraStoryId": "EC-12000",
+        "interfaceType": "UI"
+      },
+      "evidence": [],
+      "reproductionCommand": "npx playwright test --project=bdd --grep \"@ts-TS-EC-12000-020\""
     }
   ]
 }

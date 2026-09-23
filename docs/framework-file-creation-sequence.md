@@ -75,7 +75,7 @@ Agent: **OpenSpec** (via `openspec-propose` skill). Only approved ACs from step 
 
 ## Stage 6 — TEST_PLAN_GENERATION
 
-Agent: **sdd-workflow-orchestrator** (invoking Playwright Test Planner)
+Agent: **sdd-workflow-orchestrator** (authors the plan directly from approved ACs and OpenSpec artifacts)
 
 | # | File | Notes |
 | - | --- | --- |
@@ -109,7 +109,7 @@ scenario carried forward unchanged across a same-story plan revision.
 
 ## Stage 7 — BDD_DESIGN
 
-Agent: **sdd-workflow-orchestrator** (invoking Playwright Test Generator)
+Agent: **sdd-workflow-orchestrator** (authors Gherkin directly; business behaviour only)
 
 | # | File | Notes |
 | - | --- | --- |
@@ -134,27 +134,31 @@ Agent: **sdd-workflow-orchestrator** (invoking Playwright Test Generator)
 
 ## Stage 9 — PLAYWRIGHT_VALIDATION
 
-Agent: **playwright-test-planner** (via Playwright MCP, browser-driven). Replaces
-`MCP_VALIDATION_REQUIRED` placeholders with real, validated locators.
+Agent: **sdd-workflow-orchestrator**, driving the `playwright-test` MCP tools directly
+(`browser_navigate`, `browser_snapshot`, `browser_click`/`type`/`select_option`,
+`browser_network_requests`) — **not** the generic `playwright-test-planner` sub-agent, whose own
+output does not match this stage's JSON reports. Replaces `MCP_VALIDATION_REQUIRED` locators and
+`API_CONTRACT_UNVERIFIED` contracts with validated / `OBSERVED` evidence.
 
 | # | File | Notes |
 | - | --- | --- |
 | 25 | `reports/validation/<TEST-PLAN-ID>-browser-validation.json` | Evidence that scenarios were explored/validated against the live app |
 | 25a | `reports/validation/<TEST-PLAN-ID>-api-validation.json` | **Only when a scenario declares `API`/`HYBRID`.** Contracts observed from real traffic during the approved flow, recorded as `OBSERVED` — evidence of what the application does, never authority for what it should do |
+| 25b | `reports/validation/<JIRA-ID>-playwright-validation.md` | Human-readable validation summary (e.g. `ETA-351-playwright-validation.md`) |
 | 26 | `scripts/<jira-id>-<topic>-probe.ts` | One-off exploration probes (e.g. `scripts/eta-351-login-probe.ts`). Never imported by `src/`, `steps/` or `tests/` — they exist to produce evidence and to make a `VALIDATED -` waiver reproducible |
-| 26a | `reports/validation/<JIRA-ID>-<topic>-probe.json` | The probe's captured output — the evidence half of the pair |
+| 26a | `reports/validation/<JIRA-ID>-<topic>-probe.json` | The probe's captured output — the evidence half of the pair. A screenshot (`<JIRA-ID>-<topic>.png`) may accompany it |
 
 ## Stage 10 — IMPLEMENTATION
 
-Agent: **sdd-workflow-orchestrator** (invoking Playwright Test Generator)
+Agent: **sdd-workflow-orchestrator** (authors page objects, steps, fixtures, components and API clients directly, following the validated locators/contracts from Stage 9)
 
 | # | File | Notes |
 | - | --- | --- |
 | 27 | `steps/<capability-topic>.steps.ts` | Thin step orchestration — no locators, no hard-coded data |
 | 28 | `src/pages/<page-name>.page.ts` | Page objects — own all locators (`getByRole` → `getByLabel` → `getByPlaceholder` → `getByText` → `getByTestId`) |
 | 29 | `src/components/<component-name>.component.ts` | Shared UI components (when needed) |
-| 29a | `src/api/<capability>.api.ts` | **Only for `API`/`HYBRID` scenarios.** API clients extending `ApiClient` — own all endpoints the way page objects own locators. No absolute URLs, no `process.env` |
-| 29b | `src/models/api/<capability>.contract.ts` | **Only for `API`/`HYBRID` scenarios.** Zod response contracts. The whole response is parsed, never spot-checked |
+| 29a | `src/api/<name>.client.ts` | **Only for `API`/`HYBRID` scenarios.** API clients extending `ApiClient` (`src/api/api-client.ts`) — own all endpoints the way page objects own locators (e.g. `eo-request-export.client.ts`). No absolute URLs, no `process.env` |
+| 29b | `src/models/api/<name>.model.ts` | **Only for `API`/`HYBRID` scenarios.** Zod response contracts (e.g. `eo-export.model.ts`). The whole response is parsed, never spot-checked |
 | 30 | `src/fixtures/<capability>.fixture.ts` | Modular capability fixture slice (e.g. `account-access.fixture.ts`, `home-navigation.fixture.ts`, `paper-out-export.fixture.ts`, `api.fixture.ts`, `coverage.fixture.ts`) |
 | 30a | `src/fixtures/test.ts` | Shared fixture composition and re-export (`FrameworkFixtures`, `test`, `expect`) — maintains 100% backward compatibility for all step definitions |
 | 31 | `src/services/<capability>.service.ts` | Business/service helpers used by steps (e.g. `organization-login.service.ts`) |
@@ -245,7 +249,7 @@ Agent: **OpenSpec** (via `openspec-archive-change` skill). Commands:
 | # | File | Notes |
 | - | --- | --- |
 | 44 | `openspec/specs/<capability>/<spec-name>/spec.md` | The **living spec** — how the system now behaves. The CLI folds the delta from step 14 into it |
-| 45 | `openspec/changes/archive/<change-name>/**` | The retired change, moved out of `openspec/changes/` by the CLI so it stops counting as open work |
+| 45 | `openspec/changes/archive/<YYYY-MM-DD>-<change-name>/**` | The retired change, date-stamped and moved out of `openspec/changes/` by the CLI so it stops counting as open work (e.g. `archive/2026-09-18-add-home-navigation/`) |
 | — | `traceability/capabilities/<capability>.rtm.json` (updated) | `openSpecRefs` repointed from the change path to the living-spec path; otherwise `SEM-RTM` fails immediately after the move |
 | — | `workflow/instances/WF-<JIRA-ID>-R<release>.json` (updated to `COMPLETED`) | Final state transition |
 
@@ -298,14 +302,16 @@ applicable) release-baselined in `traceability/releases/<release>.baseline.json`
 24  features/approved/<capability>/<feature>.feature
 25  reports/validation/<TEST-PLAN-ID>-browser-validation.json
 25a reports/validation/<TEST-PLAN-ID>-api-validation.json   (API/HYBRID only)
+25b reports/validation/<JIRA-ID>-playwright-validation.md
 26  scripts/<jira-id>-<topic>-probe.ts
 26a reports/validation/<JIRA-ID>-<topic>-probe.json
 27  steps/<capability-topic>.steps.ts
 28  src/pages/<page-name>.page.ts
 29  src/components/<component-name>.component.ts   (if needed)
-29a src/api/<capability>.api.ts                    (API/HYBRID only)
-29b src/models/api/<capability>.contract.ts        (API/HYBRID only)
-30  src/fixtures/test.ts
+29a src/api/<name>.client.ts                        (API/HYBRID only)
+29b src/models/api/<name>.model.ts                  (API/HYBRID only)
+30  src/fixtures/<capability>.fixture.ts
+30a src/fixtures/test.ts
 31  src/services/<capability>.service.ts
 32  test-data/<capability>.sample.json
 33  .features-gen/**                                (generated, npm run bdd)
@@ -317,7 +323,7 @@ applicable) release-baselined in `traceability/releases/<release>.baseline.json`
 42  traceability/index/lookup.index.json
 43  workflow/history/<workflowId>.history.jsonl
 44  openspec/specs/<capability>/<spec-name>/spec.md            (openspec archive)
-45  openspec/changes/archive/<change-name>/**                  (openspec archive)
+45  openspec/changes/archive/<YYYY-MM-DD>-<change-name>/**     (openspec archive)
 ```
 
 Steps 37–39 (`FAILURE_TRIAGE`) and the healing/bug-reporting branches only occur when
@@ -346,9 +352,15 @@ main numbering is unchanged.
 | Workflow state | [workflow/instances/WF-ETA-351-R1.0.json](../workflow/instances/WF-ETA-351-R1.0.json) |
 
 `ETA-411` (capability `home-navigation`, plan `TP-ETA-411-001`) is a second worked example, useful
-because it covers a multi-scenario navigation story with deferred acceptance criteria. Read either
-one to see how a real story was reasoned about — **never open one to find out what shape a field
-should take.** That comes from the JSON Schema and the template, in that order.
+because it covers a multi-scenario navigation story with deferred acceptance criteria. `EC-12000`
+(capability `paper-out-export`, plan `TP-EC-12000-001`) and `EC-11358` (capability
+`document-activity-history`, plan `TP-EC-11358-001`) are the current `API`/`HYBRID` worked examples —
+read them to see the `src/api/<name>.client.ts` + `src/models/api/<name>.model.ts` layer and
+`@interface-hybrid` scenarios in practice. Read any of them to see how a real story was reasoned
+about — **never open one to find out what shape a field should take.** That comes from the JSON
+Schema and the template, in that order.
 
-Neither story has reached `OPENSPEC_ARCHIVE` yet, so `openspec/specs/` is still empty and both
-changes remain open in `openspec/changes/`.
+`ETA-411` / `add-home-navigation` has reached `OPENSPEC_ARCHIVE`: its living spec is
+[openspec/specs/home-navigation/home-screen-navigation/spec.md](../openspec/specs/home-navigation/home-screen-navigation/spec.md)
+and its change is retired under `openspec/changes/archive/2026-09-18-add-home-navigation/`.
+`ETA-351` / `add-organization-login` remains open in `openspec/changes/`.

@@ -75,6 +75,46 @@ function getEnvValue(key: string): string | undefined {
   return process.env[key];
 }
 
+/**
+ * Non-secret role registry for `requireEcoreLoginAs()`.
+ *
+ * `config/test-users.json` declares which named eCore identities exist and
+ * where their secret credentials live in `.env` - it never carries a secret
+ * itself, so it is safe to commit, exactly like `config/environments/*.json`.
+ * A role's existence and permissions are a business fact and must be supplied
+ * by a human via this file, never invented here. Absent entirely (the common
+ * case until a story actually needs a second identity) means zero roles are
+ * registered and requireEcoreLoginAs() always reports the role as unknown.
+ */
+interface TestUserRoleEntry {
+  /** Prefix used to read `<envPrefix>_USERNAME` / `_PASSWORD` from .env. */
+  envPrefix: string;
+  /** Falls back to ECORE_LOGIN_TYPE/ECORE_ORGANIZATION/_ID when unset. */
+  loginType?: string;
+  organization?: string;
+  organizationId?: string;
+}
+
+const TEST_USERS_REGISTRY_PATH = path.resolve(process.cwd(), 'config', 'test-users.json');
+const testUserRoles = new Map<string, TestUserRoleEntry>();
+if (fs.existsSync(TEST_USERS_REGISTRY_PATH)) {
+  try {
+    const parsedRegistry = JSON.parse(fs.readFileSync(TEST_USERS_REGISTRY_PATH, 'utf8'));
+    if (typeof parsedRegistry === 'object' && parsedRegistry !== null) {
+      for (const [role, entry] of Object.entries(parsedRegistry as Record<string, unknown>)) {
+        if (typeof entry === 'object' && entry !== null && typeof (entry as TestUserRoleEntry).envPrefix === 'string') {
+          testUserRoles.set(role.toUpperCase(), entry as TestUserRoleEntry);
+        }
+      }
+    }
+  } catch (err) {
+    console.warn(
+      `[env] Warning: failed to parse ${TEST_USERS_REGISTRY_PATH}: ${(err as Error).message}. ` +
+        'No test-user roles are registered.',
+    );
+  }
+}
+
 export const TEST_ENVIRONMENTS = ['local', 'dev', 'qa', 'uat', 'staging', 'prod'] as const;
 export type TestEnvironment = (typeof TEST_ENVIRONMENTS)[number];
 
@@ -310,6 +350,14 @@ export interface FrameworkEnvironment {
   requireCredentials(): Credentials;
   /** Required lazily, only for the eCore organization login form. */
   requireEcoreLogin(): EcoreLogin;
+  /**
+   * Required lazily, only when a scenario needs a named secondary identity
+   * (e.g. "APPROVER") distinct from the master ECORE_USERNAME account. The
+   * role must already be declared in config/test-users.json - never invented.
+   */
+  requireEcoreLoginAs(role: string): EcoreLogin;
+  /** True only when `role` is declared in config/test-users.json AND its .env credentials are set. */
+  hasEcoreLoginRole(role: string): boolean;
   /** Required lazily, only by an eoRequestExport-calling (HYBRID) scenario. */
   requireEoApiConfig(): EoApiConfig;
   /** Required lazily, only by a direct Jira REST fallback. */
@@ -436,6 +484,40 @@ export const env: FrameworkEnvironment = {
       organization: values.ECORE_ORGANIZATION as string,
       organizationId: values.ECORE_ORGANIZATION_ID as string,
       password: values.ECORE_PASSWORD as string,
+    };
+  },
+
+  hasEcoreLoginRole(role: string): boolean {
+    const entry = testUserRoles.get(role.toUpperCase());
+    if (!entry) return false;
+    const username = getEnvValue(`${entry.envPrefix}_USERNAME`);
+    const password = getEnvValue(`${entry.envPrefix}_PASSWORD`);
+    return username !== undefined && username !== '' && password !== undefined && password !== '';
+  },
+
+  requireEcoreLoginAs(role: string): EcoreLogin {
+    const entry = testUserRoles.get(role.toUpperCase());
+    if (!entry) {
+      throw new Error(
+        `Unknown test-user role "${role}". Declare it in config/test-users.json with an ` +
+          'envPrefix before a scenario may sign in as it - a role is never invented at runtime. ' +
+          'See config/test-users.json.example.',
+      );
+    }
+    const username = getEnvValue(`${entry.envPrefix}_USERNAME`);
+    const password = getEnvValue(`${entry.envPrefix}_PASSWORD`);
+    if (username === undefined || username === '' || password === undefined || password === '') {
+      throw new Error(
+        `Missing configuration for test-user role "${role}": ${entry.envPrefix}_USERNAME, ` +
+          `${entry.envPrefix}_PASSWORD. Set them in your local .env. Values are never logged.`,
+      );
+    }
+    return {
+      loginType: entry.loginType ?? (values.ECORE_LOGIN_TYPE as string | undefined) ?? '',
+      username,
+      organization: entry.organization ?? (values.ECORE_ORGANIZATION as string | undefined) ?? '',
+      organizationId: entry.organizationId ?? (values.ECORE_ORGANIZATION_ID as string | undefined) ?? '',
+      password,
     };
   },
 

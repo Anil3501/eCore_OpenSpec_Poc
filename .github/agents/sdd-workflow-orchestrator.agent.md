@@ -138,6 +138,8 @@ before `RTM_UPDATE`. An all-green run skips the branch entirely:
 - healed → `RTM_UPDATE`
 - not healed after two attempts → `BUG_REPORTING` → `RTM_UPDATE`
 - `FAILURE_TRIAGE` classifying `APPLICATION_DEFECT` or `CONTRACT_MISMATCH` → `BUG_REPORTING` directly
+- `FAILURE_TRIAGE` classifying `MANUAL_ONLY_PLACEHOLDER` or `KNOWN_AMBIGUITY` → `RTM_UPDATE` directly,
+  skipping both healing and filing — neither is a defect (see `src/utils/failure-triage.ts`)
 
 The branch adds **no fourth approval gate**. Bugs are filed automatically and assigned to the
 configured reviewer; the compensating controls are fingerprint deduplication and mandatory human
@@ -306,6 +308,13 @@ else to `LOCATOR_HEALING`. A defect classified `ENVIRONMENT_BLOCKER` **halts the
 workflow `BLOCKED` with the unreachable host or missing variable named in `errorDetails`, and
 neither heal nor file it. The application was never reached, so the failure proves nothing about
 it.
+
+A finding classified `MANUAL_ONLY_PLACEHOLDER` or `KNOWN_AMBIGUITY` is **not a defect** — route it
+straight to `RTM_UPDATE`, never to `LOCATOR_HEALING` or `BUG_REPORTING`, and never allocate a
+`DEF-ID` for it. `MANUAL_ONLY_PLACEHOLDER` means the failing step deliberately threw to keep a
+`MANUAL_ONLY` scenario traceable — correct, by-design behaviour. `KNOWN_AMBIGUITY` means the error
+text cites an already-recorded `BLOCKER-*`/`AMB-*` id — an open question already awaiting a human
+decision; use the `blocker-escalation-note` skill to (re)surface it if it is not already with one.
 
 **Check `interfaceType` before routing.** An `API` defect never goes to `LOCATOR_HEALING`, whatever
 its classification — it exercises no locator, so the healer would burn both attempts against a DOM

@@ -220,10 +220,14 @@
       "nextWhenLocatorSuspect": "LOCATOR_HEALING",
       "nextWhenApplicationDefect": "BUG_REPORTING",
       "nextWhenContractMismatch": "BUG_REPORTING",
+      "nextWhenManualOnlyPlaceholder": "RTM_UPDATE",
+      "nextWhenKnownAmbiguity": "RTM_UPDATE",
       "haltsWorkflowWhenEnvironmentBlocker": true,
       "rules": [
         "Evidence is copied out of test-results/ before anything else; the next run overwrites it.",
         "ENVIRONMENT_BLOCKER outranks every other signal. DNS, TLS, proxy, refused connection or missing configuration means the application was never reached, so the failure proves nothing about it. Halt - never heal it, never file it.",
+        "MANUAL_ONLY_PLACEHOLDER outranks every other signal too, checked before ENVIRONMENT_BLOCKER: a step definition that deliberately throws to keep a MANUAL_ONLY scenario traceable (see steps/paper-out-media-type-blocked.steps.ts) is doing exactly what it must. This is correct, by-design behaviour, not a failure - never heal it, never file it, allocate no DEF-ID. Record it and move straight to RTM_UPDATE, where it is reflected as MANUAL_ONLY, not FAILED.",
+        "KNOWN_AMBIGUITY is a failure whose error text cites an already-recorded BLOCKER-*/AMB-* id. That question already exists in a governed artifact and awaits a human decision - it is not a new defect. Never heal it, never file it, allocate no DEF-ID. Use the blocker-escalation-note skill to (re)surface it to a human if it is not already with one, then move to RTM_UPDATE.",
         "Classification is mechanical. AMBIGUOUS is routed to healing first, because an unnecessary heal is cheaper than a false bug.",
         "Read the failing scenario's @interface- tag BEFORE classifying. An API scenario exercises no locator, so LOCATOR_SUSPECT and AMBIGUOUS-routed-to-healing do not apply to it - routing one to the healer would burn both attempts against a DOM the test never touched and then file a locator bug it never was.",
         "An API failure is CONTRACT_MISMATCH when the call completed but violated the approved contract, APPLICATION_DEFECT when the behaviour itself is wrong, and ENVIRONMENT_BLOCKER when the request never reached the application. A 502, a refused connection or a TLS failure is a blocker; a 401 is only a blocker when the test never obtained a credential at all.",
@@ -249,6 +253,7 @@
         "test.fixme, test.skip and waitForTimeout are forbidden. Silencing a test is not healing it.",
         "After two attempts without a green re-run, set classification LOCATOR_UNHEALABLE and outcome NOT_HEALED, revert speculative edits and hand over to BUG_REPORTING.",
         "An APPLICATION_DEFECT never enters this stage.",
+        "A MANUAL_ONLY_PLACEHOLDER or KNOWN_AMBIGUITY finding never enters this stage - neither is a locator problem, and FAILURE_TRIAGE routes both directly to RTM_UPDATE.",
         "An @interface-api scenario never enters this stage. It exercises no locator, and src/api/** is outside the blast radius. Refuse and hand back, exactly as for an ENVIRONMENT_BLOCKER.",
         "A CONTRACT_MISMATCH never enters this stage. Either the application changed or the agreed contract is wrong, and both are human decisions rather than something a test may absorb."
       ],

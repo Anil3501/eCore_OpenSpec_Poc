@@ -44,7 +44,8 @@ are additional, not a replacement.
    or `AMBIGUOUS` must reach `LOCATOR_UNHEALABLE` (two recorded failed healing attempts) before it
    may be reported. Only `APPLICATION_DEFECT` and `CONTRACT_MISMATCH` may go straight to
    `BUG_REPORTING`. An `ENVIRONMENT_BLOCKER` is **never** reported and **never** healed — it halts
-   the workflow.
+   the workflow. A `MANUAL_ONLY_PLACEHOLDER` or `KNOWN_AMBIGUITY` is **never** reported and **never**
+   healed either — neither one is a defect, so both go straight to `RTM_UPDATE`.
 4. **Never duplicate a fingerprint.** If another defect artifact with the same `fingerprint` already
    has `status: REPORTED`, set this one to `DUPLICATE`, set `jira.dedupeOf` to the existing issue
    key, and stop. Re-filing an existing bug wastes a human's time.
@@ -123,6 +124,8 @@ does not apply — there is nothing there to heal.
 | Signal | Classification |
 | --- | --- |
 | Refused connection, DNS, TLS, proxy, `502`/`503`/`504`, or no `API_BASE_URL` configured | `ENVIRONMENT_BLOCKER` — the request never reached the application |
+| Error text reads "is MANUAL_ONLY per the approved test plan" | `MANUAL_ONLY_PLACEHOLDER` — a step definition deliberately threw; this is correct, by-design behaviour |
+| Error text cites an already-recorded `BLOCKER-*`/`AMB-*` id | `KNOWN_AMBIGUITY` — an existing, open question already awaiting a human decision |
 | Call completed, but status or response shape violates the approved contract | `CONTRACT_MISMATCH` |
 | Call completed and matched the contract, but the behaviour is wrong | `APPLICATION_DEFECT` |
 
@@ -155,6 +158,15 @@ Tell the orchestrator, per defect:
 
 - `ENVIRONMENT_BLOCKER` → **halt.** Set `status: BLOCKED` and tell the human exactly what is
   unreachable. Do not heal it, do not file it.
+- `MANUAL_ONLY_PLACEHOLDER` → next stage `RTM_UPDATE` directly, skipping both healing and filing.
+  This is a step definition that deliberately threw so a `MANUAL_ONLY` scenario can never report a
+  false automated pass (see `steps/paper-out-media-type-blocked.steps.ts`) — it is correct, by-design
+  behaviour, not a defect. Allocate no `DEF-ID`.
+- `KNOWN_AMBIGUITY` → next stage `RTM_UPDATE` directly, skipping both healing and filing. The error
+  text cites an already-recorded `BLOCKER-*`/`AMB-*` id, so the open question already exists in a
+  governed artifact and is awaiting a human decision — filing a second Jira issue would duplicate it
+  in the wrong channel. Use the `blocker-escalation-note` skill to (re)surface it if it is not
+  already in front of a human. Allocate no `DEF-ID`.
 - `APPLICATION_DEFECT` → next stage `BUG_REPORTING`
 - `CONTRACT_MISMATCH` → next stage `BUG_REPORTING`. **Never** route it to healing: either the
   application changed or the agreed contract is wrong, and both are human decisions rather than
@@ -165,10 +177,14 @@ Tell the orchestrator, per defect:
 `AMBIGUOUS` goes to healing first. An unnecessary heal attempt is cheap; a bug report that turns out
 to be a stale selector costs a developer an afternoon and erodes trust in the whole suite.
 
-**`ENVIRONMENT_BLOCKER` is checked before everything else.** DNS failure, refused connection, TLS
-error, proxy failure or missing configuration all mean the application was never reached — so the
-failure proves nothing about it. Filing that as a product bug is the single fastest way to make the
-whole framework untrustworthy. Say what is unreachable and stop.
+**`ENVIRONMENT_BLOCKER` is checked before everything else, and `MANUAL_ONLY_PLACEHOLDER` right after
+it.** DNS failure, refused connection, TLS error, proxy failure or missing configuration all mean the
+application was never reached — so the failure proves nothing about it. Filing that as a product bug
+is the single fastest way to make the whole framework untrustworthy. Say what is unreachable and
+stop. A deliberate `MANUAL_ONLY` throw is the same category of non-defect for a different reason: the
+step is working exactly as designed, so routing it to `LOCATOR_HEALING` would burn both attempts
+against a throw with no locator behind it, and filing it would report a bug against correct behaviour.
+
 
 ---
 

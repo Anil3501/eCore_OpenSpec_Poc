@@ -69,6 +69,12 @@ Invoked by the **SDD Workflow Orchestrator** at stage `LOCATOR_HEALING`, for one
    `CONTRACT_MISMATCH`, refuse and hand back immediately — the same reflex as an
    `ENVIRONMENT_BLOCKER`, and for the same reason: **there is no locator to repair.** An API
    scenario touches no DOM, and `src/api/**` is outside your blast radius.
+8. **Never heal a `MANUAL_ONLY_PLACEHOLDER` or `KNOWN_AMBIGUITY`.** Refuse and hand back
+   immediately. A `MANUAL_ONLY_PLACEHOLDER` is a step definition deliberately throwing so a
+   `MANUAL_ONLY` scenario can never report a false automated pass — there is no locator to repair,
+   only a `throw` doing exactly what it must. A `KNOWN_AMBIGUITY` cites an already-recorded
+   `BLOCKER-*`/`AMB-*` id — it is an open question already awaiting a human decision, not something
+   two healing attempts could ever resolve.
 
    This rule is load-bearing. Without it an API failure classified `AMBIGUOUS` would be routed here
    by the standard "heal first" policy, you would burn both attempts hunting for elements the test

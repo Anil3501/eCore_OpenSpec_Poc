@@ -31,7 +31,9 @@ export type FailureClassification =
   | 'APPLICATION_DEFECT'
   | 'AMBIGUOUS'
   | 'ENVIRONMENT_BLOCKER'
-  | 'CONTRACT_MISMATCH';
+  | 'CONTRACT_MISMATCH'
+  | 'MANUAL_ONLY_PLACEHOLDER'
+  | 'KNOWN_AMBIGUITY';
 
 /**
  * Signals that the test never reached the application at all: DNS, TLS, proxy,
@@ -43,6 +45,26 @@ export type FailureClassification =
  * files. An environment blocker is never healed and never reported; the
  * workflow halts and a human is told exactly what is unreachable.
  */
+/**
+ * A step definition that deliberately throws to keep a MANUAL_ONLY scenario
+ * traceable (see `steps/paper-out-media-type-blocked.steps.ts`) is not a
+ * failure of the application - it is the step doing exactly what it must. This
+ * signal outranks every other check: healing it would burn attempts against a
+ * throw with no locator behind it, and filing it would report a bug against
+ * correct, by-design behaviour. Never healed, never filed - mirrors
+ * ENVIRONMENT_BLOCKER's precedent.
+ */
+const MANUAL_ONLY_SIGNAL: RegExp = /\bis manual_only per the approved test plan\b/i;
+
+/**
+ * A step that throws citing an already-recorded `BLOCKER-*`/`AMB-*` id is
+ * reporting a known, already-escalated ambiguity - not a new defect. The
+ * question it raises already exists in a governed artifact; filing a second
+ * Jira issue for it duplicates that question in the wrong channel. Route to a
+ * human via the `blocker-escalation-note` skill instead of bug filing.
+ */
+const KNOWN_AMBIGUITY_SIGNAL: RegExp = /\b(?:BLOCKER|AMB)-[A-Z][A-Z0-9]*-\d{3,}\b/;
+
 const ENVIRONMENT_SIGNALS: { id: string; pattern: RegExp }[] = [
   { id: 'DNS_FAILURE', pattern: /err_name_not_resolved|enotfound|eai_again/i },
   { id: 'CONNECTION_REFUSED', pattern: /err_connection_refused|econnrefused/i },
@@ -181,12 +203,43 @@ function classify(
   rationale: string;
   suggestedRouting: 'LOCATOR_HEALING' | 'BUG_REPORTING' | 'ENVIRONMENT_HALT' | 'HUMAN_REVIEW';
 } {
+  // Checked before everything else, including ENVIRONMENT_BLOCKER: a
+  // MANUAL_ONLY placeholder throw is a step doing exactly what it is supposed
+  // to do, not a signal about the environment or the application.
+  if (MANUAL_ONLY_SIGNAL.test(errorText)) {
+    return {
+      classification: 'MANUAL_ONLY_PLACEHOLDER',
+      matchedSignals: ['MANUAL_ONLY_PLACEHOLDER'],
+      rationale:
+        'This step definition exists only for traceability and deliberately throws so a MANUAL_ONLY ' +
+        'scenario can never report a false automated pass. This is correct behaviour, not a defect - ' +
+        'never route to healing, never file a bug. Confirm the AC manually per the approved test plan.',
+      suggestedRouting: 'HUMAN_REVIEW',
+    };
+  }
+
+  // Also checked early: a thrown BLOCKER-*/AMB-* id means this failure already
+  // has a name and a governed record. It needs a human decision, not a second
+  // Jira ticket duplicating the same open question.
+  const knownAmbiguity = KNOWN_AMBIGUITY_SIGNAL.exec(errorText)?.[0] ?? null;
+  if (knownAmbiguity) {
+    return {
+      classification: 'KNOWN_AMBIGUITY',
+      matchedSignals: [knownAmbiguity],
+      rationale:
+        `This failure cites an already-recorded ambiguity (${knownAmbiguity}). It is a known, open ` +
+        'question awaiting a human decision, not a new defect - never route to healing, never file a ' +
+        'bug. Use the blocker-escalation-note skill to (re)surface it if it is not already with a human.',
+      suggestedRouting: 'HUMAN_REVIEW',
+    };
+  }
+
   const environment = ENVIRONMENT_SIGNALS.filter((signal) => signal.pattern.test(errorText)).map(
     (s) => s.id,
   );
 
-  // Checked first and unconditionally: if the application was never reached,
-  // nothing can be concluded about its behaviour.
+  // Checked next: if the application was never reached, nothing can be
+  // concluded about its behaviour.
   if (environment.length > 0) {
     return {
       classification: 'ENVIRONMENT_BLOCKER',
@@ -435,7 +488,13 @@ export function triage(): TriageFinding[] {
         );
         const capability = tags.capability ?? 'unknown-capability';
         const fingerprint = fingerprintOf(tags, capability, normalizeErrorSignature(errorMessage));
-        const proposedDefectId = allocateDefectId(fingerprint, tags.jiraStoryId);
+        // MANUAL_ONLY_PLACEHOLDER and KNOWN_AMBIGUITY are never eligible to
+        // become a defect, so no DEF-ID is allocated for either - allocating
+        // one would imply a bug report is the correct next step.
+        const proposedDefectId =
+          classification === 'MANUAL_ONLY_PLACEHOLDER' || classification === 'KNOWN_AMBIGUITY'
+            ? null
+            : allocateDefectId(fingerprint, tags.jiraStoryId);
 
         findings.push({
           proposedDefectId,
@@ -489,6 +548,8 @@ function main(): void {
     CONTRACT_MISMATCH: findings.filter((f) => f.classification === 'CONTRACT_MISMATCH').length,
     AMBIGUOUS: findings.filter((f) => f.classification === 'AMBIGUOUS').length,
     ENVIRONMENT_BLOCKER: findings.filter((f) => f.classification === 'ENVIRONMENT_BLOCKER').length,
+    MANUAL_ONLY_PLACEHOLDER: findings.filter((f) => f.classification === 'MANUAL_ONLY_PLACEHOLDER').length,
+    KNOWN_AMBIGUITY: findings.filter((f) => f.classification === 'KNOWN_AMBIGUITY').length,
   };
 
   const report = {
@@ -504,7 +565,7 @@ function main(): void {
 
   console.log(render(findings));
   console.log(
-    `\nFailures: ${findings.length} | locator-suspect: ${byClassification.LOCATOR_SUSPECT} | application: ${byClassification.APPLICATION_DEFECT} | contract-mismatch: ${byClassification.CONTRACT_MISMATCH} | ambiguous: ${byClassification.AMBIGUOUS} | environment: ${byClassification.ENVIRONMENT_BLOCKER}`,
+    `\nFailures: ${findings.length} | locator-suspect: ${byClassification.LOCATOR_SUSPECT} | application: ${byClassification.APPLICATION_DEFECT} | contract-mismatch: ${byClassification.CONTRACT_MISMATCH} | ambiguous: ${byClassification.AMBIGUOUS} | environment: ${byClassification.ENVIRONMENT_BLOCKER} | manual-only: ${byClassification.MANUAL_ONLY_PLACEHOLDER} | known-ambiguity: ${byClassification.KNOWN_AMBIGUITY}`,
   );
 
   if (byClassification.ENVIRONMENT_BLOCKER > 0) {
@@ -513,6 +574,22 @@ function main(): void {
         '(DNS, TLS, proxy, refused connection or missing configuration).\n' +
         'These prove nothing about the product. Do NOT heal them and do NOT file them as bugs - ' +
         'restore access and re-run. Fix the environment first, then re-triage.',
+    );
+  }
+
+  if (byClassification.MANUAL_ONLY_PLACEHOLDER > 0) {
+    console.log(
+      `\n${byClassification.MANUAL_ONLY_PLACEHOLDER} failure(s) are MANUAL_ONLY placeholder throws - ` +
+        'this is correct, by-design behaviour, not a defect. Do NOT heal them and do NOT file them as ' +
+        'bugs. No DEF-ID was allocated for these.',
+    );
+  }
+
+  if (byClassification.KNOWN_AMBIGUITY > 0) {
+    console.log(
+      `\n${byClassification.KNOWN_AMBIGUITY} failure(s) cite an already-recorded BLOCKER-*/AMB-* id - ` +
+        'a known, open question awaiting a human decision, not a new defect. Do NOT heal them and do ' +
+        'NOT file them as bugs. Use the blocker-escalation-note skill instead. No DEF-ID was allocated.',
     );
   }
 

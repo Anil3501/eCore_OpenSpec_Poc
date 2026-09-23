@@ -1,0 +1,7 @@
+{
+  "_comment": "Template only. Copy to config/test-users.json and add a real role when a story needs one. NEVER put a username or password value in this file - it IS committed. Only envPrefix (a pointer to .env) and non-secret overrides belong here.",
+  "APPROVER": {
+    "envPrefix": "ECORE_USER_APPROVER",
+    "_comment": "Reads ECORE_USER_APPROVER_USERNAME / ECORE_USER_APPROVER_PASSWORD from .env. loginType/organization/organizationId are optional and fall back to the shared ECORE_* values when omitted."
+  }
+}

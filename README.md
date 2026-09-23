@@ -82,8 +82,9 @@ A green run goes straight from execution to the RTM update. A failure takes a br
 flowchart LR
   EXEC[EXECUTION] -->|all passed| RTM[RTM_UPDATE]
   EXEC -->|any failed| TRIAGE[FAILURE_TRIAGE]
-  TRIAGE -->|APPLICATION_DEFECT| BUG[BUG_REPORTING]
+  TRIAGE -->|APPLICATION_DEFECT / CONTRACT_MISMATCH| BUG[BUG_REPORTING]
   TRIAGE -->|LOCATOR_SUSPECT / AMBIGUOUS| HEAL[LOCATOR_HEALING]
+  TRIAGE -->|MANUAL_ONLY_PLACEHOLDER / KNOWN_AMBIGUITY| RTM
   HEAL -->|healed| RTM
   HEAL -->|not healed after 2 attempts| BUG
   BUG --> RTM
@@ -97,6 +98,16 @@ between the bug and the story — the relationship is recorded only in the defec
 becomes a `DUPLICATE` rather than a second ticket, and every filed bug is assigned to a named human
 for review. The agent may not approve, alter or close anything it filed, and it may not assign
 severity, priority or root cause — those are human judgements.
+
+Two classifications are checked before everything else and never reach healing or bug filing, and
+allocate no `DEF-ID`:
+
+- **`MANUAL_ONLY_PLACEHOLDER`** — the failure is a step definition deliberately throwing to keep a
+  `MANUAL_ONLY` scenario traceable (see `steps/paper-out-media-type-blocked.steps.ts`). This is
+  correct, by-design behaviour, not a defect.
+- **`KNOWN_AMBIGUITY`** — the failure's error text cites an already-recorded `BLOCKER-*`/`AMB-*` id.
+  That question already exists in a governed artifact and awaits a human decision; use the
+  `blocker-escalation-note` skill to (re)surface it rather than filing a duplicate Jira issue.
 
 > **Accepted risk.** A Playwright `trace.zip` can embed request headers, cookies and typed form
 > values. This project attaches traces to its internal Jira deliberately. Set `BUG_ATTACH_TRACE=false`
@@ -238,11 +249,32 @@ never committed.
 | `JIRA_BUG_LINK_TYPE` | no | Label recorded in the defect's `jira.linkType` field only; no live Jira issue link is created. Defaults to `Relates` |
 | `BUG_ATTACH_TRACE` | no | Attach `trace.zip` to filed bugs. Defaults to `true` |
 
+### Named secondary test-user identities (optional)
+
+A scenario that needs a role distinct from the master `ECORE_USERNAME` account (e.g. an "Approver"
+or "ReadOnly" user with its own permissions) uses `env.requireEcoreLoginAs('<ROLE>')` instead of
+`env.requireEcoreLogin()`. This is opt-in and additive — nothing above changes, and the framework
+scaffolds normally with zero roles registered.
+
+1. Declare the role, non-secretly, in `config/test-users.json` (copy from
+   [config/test-users.json.example](config/test-users.json.example)). This file only names an
+   `envPrefix` — it is safe to commit, exactly like `config/environments/*.json`, because it never
+   holds a credential. A role's existence is a business fact and must come from a human via this
+   file; the framework never invents one.
+2. Add the matching secret pair to your local `.env`: `<envPrefix>_USERNAME` / `<envPrefix>_PASSWORD`
+   (e.g. `ECORE_USER_APPROVER_USERNAME` / `ECORE_USER_APPROVER_PASSWORD`). `loginType`/`organization`/
+   `organizationId` are optional per role and fall back to the shared `ECORE_*` values above when
+   omitted.
+3. Call `env.requireEcoreLoginAs('APPROVER')` from a fixture or service — it returns the same
+   `EcoreLogin` shape as `requireEcoreLogin()`. `env.hasEcoreLoginRole('APPROVER')` checks
+   availability without throwing.
+
 All access goes through the typed loader in [src/utils/env.ts](src/utils/env.ts). Page objects,
 fixtures and steps must import `env` from there and must never read `process.env` directly. Missing
 values are enforced **lazily** (`requireBaseUrl()`, `requireCredentials()`, `requireEcoreLogin()`,
-`requireJiraConfig()`, `requireJiraBugConfig()`) so scaffolding and validation work without secrets. Secret values are never
-logged or embedded in an error message — only variable *names* appear in errors.
+`requireEcoreLoginAs()`, `requireJiraConfig()`, `requireJiraBugConfig()`) so scaffolding and
+validation work without secrets. Secret values are never logged or embedded in an error message —
+only variable *names* appear in errors.
 
 ---
 

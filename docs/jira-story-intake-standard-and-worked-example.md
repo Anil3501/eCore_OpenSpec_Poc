@@ -17,7 +17,10 @@ Two real, unresolved ambiguities already on file make the cost concrete:
 `AMB-ETA-351-004` (does concealing a password on screen also require blocking autocomplete/clipboard/
 page-source exposure?) and `AMB-ETA-351-006` (does anything change by role/permission after Home?) —
 both **DEFERRED**, both because the story never said. This standard exists so the next story doesn't
-repeat that.
+repeat that. `EC-12000` is a heavier example of the same failure mode — one missing "API details"
+section cost three separate approved test-plan revisions before its contract could even be
+scaffolded; see §3.5 below and
+[docs/EC-12000-intake-lessons-and-recommended-documentation.md](EC-12000-intake-lessons-and-recommended-documentation.md).
 
 ---
 
@@ -64,6 +67,32 @@ exist to prevent. §6 below (Test Data Contract) makes that three-way split — 
 pre-existing/seeded, fabricated-synthetic — and a fourth, honest **gap** status — an explicit part of
 the story, so a missing value becomes a tracked risk instead of a guess.
 
+### 1.2 Acceptance criteria arrive in three real shapes — this standard must cover all three
+
+**Not every real story gives you clean Given/When/Then criteria, and this standard would be useless
+if it only worked for the ones that do.** Looking at the acceptance-criteria `sourceType` actually
+recorded for the four real stories this framework has processed
+(`src/models/common.model.ts`'s `sourceTypeSchema`: `EXTRACTED_FROM_JIRA` vs.
+`PROPOSED_BY_REQUIREMENT_ANALYSIS`), three distinct shapes show up in practice:
+
+| Tier | What the story actually contained | Real example | What the framework had to do |
+| --- | --- | --- | --- |
+| **FULL** — enumerable, testable criteria | `EC-11358`'s Jira ticket listed criteria that map close to 1:1 onto testable statements | [requirements/approved/EC-11358.json](../requirements/approved/EC-11358.json) — **12 of 12** acceptance criteria `EXTRACTED_FROM_JIRA`, none proposed | Normalize wording into `AC-*` IDs; almost nothing to propose |
+| **PARTIAL** — some explicit, rest implied | Jira named some criteria outright and left adjacent behaviour (error paths, role variations, non-functional exclusions) unstated | [requirements/approved/ETA-351.json](../requirements/approved/ETA-351.json) — **8** `EXTRACTED_FROM_JIRA` + **8** `PROPOSED_BY_REQUIREMENT_ANALYSIS` (each carrying a mandatory `rationale` per `src/models/requirement.model.ts`); same pattern in [ETA-411.json](../requirements/approved/ETA-411.json) (7 + 9) | Propose the missing criteria explicitly, each with a rationale, and let Gate 1 ratify or reject each one individually |
+| **NARRATIVE-ONLY** — a real "Acceptance Criteria" field exists, but as unstructured prose | `EC-12000`'s Jira `Acceptance Criteria` custom field was a nested nine-item nested list in nine-year-old free prose, not one criterion per testable statement — no Given/When/Then, no interface (`UI`/`API`/`HYBRID`) declared anywhere, no endpoint named, no out-of-scope line | [requirements/approved/EC-12000.json](../requirements/approved/EC-12000.json) — all 19 acceptance criteria are technically `EXTRACTED_FROM_JIRA`, but only because a human/agent had to decompose that prose into 19 separate testable statements first. See [docs/EC-12000-intake-lessons-and-recommended-documentation.md](EC-12000-intake-lessons-and-recommended-documentation.md) for the full cost of that decomposition happening *after* the story was written instead of before | Three approved test-plan revisions and a production incident before the API half of that decomposition was even scaffolded |
+
+**The critical, load-bearing rule this standard is built around:** whichever tier a story falls into —
+FULL, PARTIAL, or NARRATIVE-ONLY, or **even a story with zero acceptance criteria at all** (only a
+summary and screenshots) — **Part 2's §2 (Preconditions/environment), §4 (Out of scope), §5 (API
+details) and §6 (Test Data Contract) are never optional and never derivable from the AC tier.** They
+are facts about the system, the environment, and the data — not judgements about behaviour — so no
+amount of well-written Given/When/Then prose substitutes for them, and no absence of one excuses
+skipping them either. A `NARRATIVE-ONLY` or **no-AC** story still needs its endpoint named, its scope
+boundary drawn, and its test data classified; it just also needs its behaviour decomposed into
+individual criteria — by the author, ideally, or by requirement analysis with every proposed item
+individually ratified at Gate 1 if not. §3 below tells you exactly what to write for your story's
+actual tier, including the no-AC-at-all case.
+
 ---
 
 ## Part 2 — The Standard Story Template
@@ -78,6 +107,16 @@ here is API-first).
 ## 1. Summary
 One sentence: who does what, and why.
 
+## 1a. AC Completeness for this story (declare one — see Part 1.2)
+- [ ] FULL — every criterion below is already stated as a testable Given/When/Then.
+- [ ] PARTIAL — some criteria are stated below; the rest are known gaps the author is aware of
+      and expects requirement analysis to propose (each proposal will need a rationale and
+      individual Gate 1 ratification — see `PROPOSED_BY_REQUIREMENT_ANALYSIS` in
+      `src/models/common.model.ts`).
+- [ ] NARRATIVE-ONLY / NONE — this story has a description and/or attachments but no criterion
+      below is yet decomposed into a testable statement. Do not treat this as "nothing to write" —
+      §2/§4/§5/§6 below are still mandatory; only §3's decomposition is deferred.
+
 ## 2. Preconditions / environment
 - Which logical tier(s) this must pass on — by TIER NAME (`dev` / `qa` / `uat` / `staging` / `prod`),
   never a URL or hostname. A URL is resolved per physical run from profile configs (`config/environments/<profile>.json`)
@@ -91,7 +130,19 @@ One sentence: who does what, and why.
   reference to §6 (Test Data Contract) rather than inline, so it isn't duplicated or contradicted.
 
 ## 3. Acceptance Criteria (Given/When/Then, one block per criterion)
-For EACH criterion:
+**If this story is FULL:** write every block below as the finished statement.
+**If PARTIAL:** write the explicit ones below and list the known gaps under "Proposed gaps"
+(one line each — what's missing and why the author couldn't fill it directly); requirement
+analysis will draft a `PROPOSED_BY_REQUIREMENT_ANALYSIS` candidate with a rationale for each gap,
+and Gate 1 will ratify or reject every one individually — nothing is silently accepted.
+**If NARRATIVE-ONLY/NONE:** paste the raw description/prose here as-is (do not summarize it away)
+and write "DECOMPOSITION PENDING" — the framework will still decompose it into individual
+`AC-*` entries before Gate 1, but writing §4/§5/§6 below does not wait on that decomposition, and
+neither does naming which endpoints and data are involved (see EC-12000: the prose already named
+a `mediaType` field and an export action three revisions before anyone wrote it down as an
+`apiContract`).
+
+For EACH criterion (once decomposed, regardless of tier):
 - AC-<n>: Given <preconditions>, When <action>, Then <observable, checkable outcome>.
 - Interface: UI | API | HYBRID   <!-- omit only if genuinely UI; never omit to avoid deciding -->
 - If the "Then" involves a number, threshold, timeout, message, or limit — state the exact value.
@@ -99,11 +150,19 @@ For EACH criterion:
   criteria; they are ambiguities waiting to be raised.
 
 ## 4. Explicitly out of scope
-List what this story deliberately does NOT cover (a later reader — human or agent — must not guess
-whether an adjacent behaviour was forgotten or excluded on purpose).
+**Mandatory regardless of §1a's tier** — a NARRATIVE-ONLY story needs this line more, not less,
+because nothing else in it draws the boundary. List what this story deliberately does NOT cover (a
+later reader — human or agent — must not guess whether an adjacent behaviour was forgotten or
+excluded on purpose).
 
-## 5. API details (REQUIRED whenever any AC above is API or HYBRID)
-For EACH endpoint any in-scope AC depends on:
+## 5. API details (REQUIRED whenever any AC above is, or will become once decomposed, API or HYBRID)
+**Mandatory regardless of §1a's tier — write this from what you already know about the system, even
+before every AC is decomposed.** An endpoint name, a field, a status code are facts about the
+running application, not judgements about behaviour, so they don't wait on Given/When/Then wording.
+`EC-12000`'s three-revision cost traced to exactly this: the endpoint (`eoRequestExport`) and the
+`mediaType` field both existed and were known before the AC prose was ever decomposed — they simply
+weren't written down here first. For EACH endpoint any in-scope (or likely-to-be-in-scope) AC
+depends on:
 - Method + full path (or the operation name if it's an RPC-style verb, e.g. an `.eo` endpoint).
 - Auth mechanism (session cookie, bearer token, form POST + redirect, etc.).
 - Request shape: content type, and every parameter/field name + type the story requires
@@ -124,7 +183,9 @@ For EACH endpoint any in-scope AC depends on:
   including a destructively-named endpoint reached by an unexpected HTTP method).
 
 ## 6. Test Data Contract (state which of the four buckets EVERY data value falls into)
-Do not leave a single value implicit. For each data element any AC or negative case needs:
+**Mandatory regardless of §1a's tier.** Do not leave a single value implicit. For each data element
+any AC or negative case needs — including one you expect to name only once decomposition happens —
+list it now if you already know it exists:
 - **Author-supplied** — a business-meaningful value the story owner is providing directly here
   (a specific threshold, limit, role name, message text). Give the literal value.
 - **Pre-existing / seeded** — a record expected to already exist in every target tier (an account,
@@ -157,6 +218,7 @@ in or out of scope for this story. Silence here is exactly what produced `AMB-ET
 
 | Story field above | Consumed by | Enforced by |
 | --- | --- | --- |
+| §1a AC Completeness (FULL/PARTIAL/NARRATIVE-ONLY) | Per-criterion `acceptanceCriteria[].sourceType` (`EXTRACTED_FROM_JIRA` vs. `PROPOSED_BY_REQUIREMENT_ANALYSIS`) | `src/models/common.model.ts` `sourceTypeSchema`; a `PROPOSED_BY_REQUIREMENT_ANALYSIS` entry requires a non-empty `rationale`, `src/models/requirement.model.ts` |
 | §3 Interface: UI/API/HYBRID | `test-plans/*/scenarios[].interfaceType` | `test-plan.schema.json`, `SEM-API-CONTRACT` |
 | §3 exact values (no vague language) | `acceptanceCriteria[].given/when/then` | `requirements/schemas/jira-requirement.schema.json`; unresolved vagueness becomes `AMB-*` |
 | §4 out of scope | `test-plans/*.json` → `scope.outOfScope` | Human-reviewed at Gate 2 |
@@ -280,7 +342,34 @@ instead of leaving them silent. Those are **correct** open items, resolved by ob
 `PLAYWRIGHT_VALIDATION` and by confirming seed data respectively, not a symptom of an incomplete
 story.
 
-### 3.4 How that story flows through the framework
+### 3.5 A real story that stalled: EC-12000
+
+`ETA-777` above is illustrative and, per §1.2, closest to the **FULL** tier — every AC is already
+Given/When/Then before the story reaches this framework. `EC-12000` is the real-world
+**NARRATIVE-ONLY** counterexample: its Jira `Acceptance Criteria` custom field was not empty — it
+held a genuine nine-item nested list plus a separate "Notes to QA" field naming a real UI/API test
+matrix — but neither was written as individual, testable Given/When/Then statements, and neither
+named an endpoint, an interface, or an out-of-scope boundary. All 19 resulting `AC-EC-12000-*`
+entries are technically `EXTRACTED_FROM_JIRA` (none were agent-proposed), which is exactly the trap:
+"the AC came from Jira" is not the same claim as "the AC was automation-ready." `EC-12000` is
+already `COMPLETED`, and its entire cost is on file: **3 ambiguities** (`AMB-EC-12000-001/002/003`),
+**6 risks** (`RISK-TP-EC-12000-001` through `-006`), and **3 separate approved test-plan revisions**
+of the same plan — traceable, comment-by-comment, to exactly two missing sections of Part 2: **§4
+(out of scope)** and **§5 (API details)**. The story never named the `eoRequestExport` endpoint
+anywhere; that single gap alone produced a `REVIEW_REQUIRED`/`UNVERIFIED` contract that took three
+approved revisions and a human dictating the endpoint in chat to even scaffold — and it still cannot
+be promoted to `HUMAN_APPROVED` today. The story also never stated that Collections-initiated Paper
+Out was out of scope, so a tester found that gap **after** the ticket had already closed once, and it
+had to be reopened.
+
+The full comment-by-comment timeline, every ambiguity/risk mapped to the missing field that caused it,
+and the complete story rewritten section-by-section against Part 2 above (using only facts that were
+genuinely available at story-write time) are in
+[docs/EC-12000-intake-lessons-and-recommended-documentation.md](EC-12000-intake-lessons-and-recommended-documentation.md).
+Read it as a second, real-world confirmation of Part 2 — never as a template to copy from (per
+`AGENTS.md` rule, a finished story is evidence of one decision, not a standard).
+
+### 3.6 How that story flows through the framework
 
 Using [docs/framework-file-creation-sequence.md](framework-file-creation-sequence.md) stage-by-stage,
 the good story above produces (capability `workspace-search`, illustrative IDs):
@@ -373,3 +462,4 @@ exact ambiguity the framework will raise — resolve it now, or accept that it w
 | What eCore's real API surface is (read before writing any API section) | [reports/validation/ecore-api-discovery.json](../reports/validation/ecore-api-discovery.json) |
 | The rule that rejects an unauthoritative contract backing an approved assertion | `checkApiContracts` (`SEM-API-CONTRACT`) in [src/utils/semantic-rules.ts](../src/utils/semantic-rules.ts) |
 | A real, human-facing-only worked story (never an authoring reference) | [requirements/approved/ETA-351.json](../requirements/approved/ETA-351.json) |
+| A second real worked story, showing what a missing API-details section costs in practice | [docs/EC-12000-intake-lessons-and-recommended-documentation.md](EC-12000-intake-lessons-and-recommended-documentation.md) |
