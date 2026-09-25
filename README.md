@@ -85,7 +85,7 @@ flowchart LR
   TRIAGE -->|APPLICATION_DEFECT / CONTRACT_MISMATCH| BUG[BUG_REPORTING]
   TRIAGE -->|LOCATOR_SUSPECT / AMBIGUOUS| HEAL[LOCATOR_HEALING]
   TRIAGE -->|MANUAL_ONLY_PLACEHOLDER / KNOWN_AMBIGUITY| RTM
-  HEAL -->|healed| RTM
+  HEAL -->|healed - full suite re-run required| EXEC
   HEAL -->|not healed after 2 attempts| BUG
   BUG --> RTM
 ```

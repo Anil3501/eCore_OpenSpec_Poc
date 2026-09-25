@@ -135,7 +135,8 @@ before `RTM_UPDATE`. An all-green run skips the branch entirely:
 
 `EXECUTION →(any failure)→ FAILURE_TRIAGE →(LOCATOR_SUSPECT | AMBIGUOUS)→ LOCATOR_HEALING`
 
-- healed → `RTM_UPDATE`
+- healed → back to `EXECUTION` (a full re-run, not just the healer's own targeted scenario) →
+  `RTM_UPDATE` only if that re-run is green
 - not healed after two attempts → `BUG_REPORTING` → `RTM_UPDATE`
 - `FAILURE_TRIAGE` classifying `APPLICATION_DEFECT` or `CONTRACT_MISMATCH` → `BUG_REPORTING` directly
 - `FAILURE_TRIAGE` classifying `MANUAL_ONLY_PLACEHOLDER` or `KNOWN_AMBIGUITY` → `RTM_UPDATE` directly,
@@ -300,6 +301,25 @@ If any scenario failed or timed out, set `currentStage` to `FAILURE_TRIAGE` inst
 `RTM_UPDATE`. Do not update the RTM until the branch completes — a defect reference belongs in the
 same merge.
 
+**EXECUTION is re-entered a second time** whenever `LOCATOR_HEALING` reports a heal. The healer's
+own re-run only proves the one repaired scenario; a full `npm test` is required to prove the repair
+did not regress anything else before the run is trusted. On this re-entry:
+
+- Write a **new** `traceability/executions/<EXECUTION-ID>.json`. Never edit or delete the execution
+  record that captured the original failure — it remains the true historical record of that run.
+- A stage may appear in `completedStages` only once (idempotency rule), so append this run's output
+  paths to the `EXECUTION` entry already present in `completedStages` — never add a second entry for
+  the same stage. `WF-ETA-411-R1.0.json` already does exactly this for `EXEC-ETA-411-001` and
+  `EXEC-ETA-411-002`.
+- If this re-run is green, proceed to `RTM_UPDATE` — only now does the healed scenario count as
+  passing.
+- If this re-run still fails the **same** defect's scenario, this is a healing regression, not a new
+  failure: reopen the defect (`status: HEALING`) and return to `LOCATOR_HEALING` for its remaining
+  attempt if the two-attempt cap is not yet reached, otherwise `BUG_REPORTING`. Never silently
+  re-triage it as an unrelated new defect.
+- If it fails on a **different** scenario, treat that as an ordinary new failure and route to
+  `FAILURE_TRIAGE` as usual.
+
 **FAILURE_TRIAGE** — delegate to `bug-analyzer`. It runs `npm run triage:failures`, preserves
 evidence out of `test-results/` (which the next run overwrites) and writes `defects/<DEF-ID>.json`.
 On return, record the defect ids in `defectContext.activeDefectIds`, set `healingAttemptCount` to 0,
@@ -328,6 +348,10 @@ return. A successful heal changes files under `src/pages/**` or `src/components/
 changed file. **This does not reopen Gate 3** — the approved behaviour is unchanged, only the
 address of an element moved. If the healer reports it had to change what a test asserts, stop and
 escalate to a human.
+
+A heal reported as `HEALED` does **not** advance straight to `RTM_UPDATE`. Set `currentStage` back
+to `EXECUTION` and run the full suite again (see the EXECUTION instructions above) — the healer's
+own re-run proves only the one scenario it touched.
 
 **BUG_REPORTING** — delegate to `bug-analyzer`. Before dispatching, confirm the defect is genuinely
 eligible: `APPLICATION_DEFECT`, `CONTRACT_MISMATCH`, or `LOCATOR_UNHEALABLE` with two recorded

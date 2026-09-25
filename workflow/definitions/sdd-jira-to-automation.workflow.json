@@ -207,7 +207,13 @@
       "next": "RTM_UPDATE",
       "nextOnSuccess": "RTM_UPDATE",
       "nextOnFailure": "FAILURE_TRIAGE",
-      "blockedWhen": "PLAYWRIGHT_BASE_URL, credentials, application access or test data are unavailable. Record BLOCKED - never fabricate a passing result."
+      "blockedWhen": "PLAYWRIGHT_BASE_URL, credentials, application access or test data are unavailable. Record BLOCKED - never fabricate a passing result.",
+      "rules": [
+        "EXECUTION is re-entered a second time when LOCATOR_HEALING reports nextWhenHealed - a healer's own targeted re-run of one scenario proves the repair, but only a full run proves it did not regress anything else.",
+        "A re-entry writes a new traceability/executions/<EXECUTION-ID>.json. The prior execution that recorded the original failure is never edited or deleted - it stays the true historical record of what happened on that run.",
+        "Because a stage may appear in completedStages only once, a re-entry appends its new output paths to the EXECUTION entry already present in completedStages instead of adding a second entry for the same stage.",
+        "If this re-run still fails the same defect's scenario, treat it as a healing regression, not a new failure: reopen the defect (status HEALING) and return to LOCATOR_HEALING for its remaining attempt if the two-attempt cap is not yet reached, otherwise BUG_REPORTING. Do not silently re-triage it as a fresh, unrelated defect."
+      ]
     },
     {
       "stage": "FAILURE_TRIAGE",
@@ -244,14 +250,15 @@
       "maxAttempts": 2,
       "requires": ["defects/<DEF-ID>.json"],
       "outputs": ["src/pages/**", "src/components/**", "defects/<DEF-ID>.json"],
-      "next": "RTM_UPDATE",
-      "nextWhenHealed": "RTM_UPDATE",
+      "next": "EXECUTION",
+      "nextWhenHealed": "EXECUTION",
       "nextWhenNotHealed": "BUG_REPORTING",
       "rules": [
         "Only locators and waits inside src/pages/** and src/components/** may change.",
         "Feature files, step definitions, assertions and test data are out of bounds - changing them would change the approved behaviour under test.",
         "test.fixme, test.skip and waitForTimeout are forbidden. Silencing a test is not healing it.",
         "After two attempts without a green re-run, set classification LOCATOR_UNHEALABLE and outcome NOT_HEALED, revert speculative edits and hand over to BUG_REPORTING.",
+        "A healed defect (outcome HEALED) does not go straight to RTM_UPDATE. The healer's own re-run only proves the one repaired scenario; the orchestrator re-enters EXECUTION to run the complete suite again before RTM_UPDATE records anything as passing. This does not reopen Gate 3 - the approved behaviour is unchanged, only the address of an element moved.",
         "An APPLICATION_DEFECT never enters this stage.",
         "A MANUAL_ONLY_PLACEHOLDER or KNOWN_AMBIGUITY finding never enters this stage - neither is a locator problem, and FAILURE_TRIAGE routes both directly to RTM_UPDATE.",
         "An @interface-api scenario never enters this stage. It exercises no locator, and src/api/** is outside the blast radius. Refuse and hand back, exactly as for an ENVIRONMENT_BLOCKER.",

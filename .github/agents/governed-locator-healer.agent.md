@@ -6,19 +6,23 @@ tools:
   - read
   - edit
   - execute
+  - playwright-test/browser_navigate
+  - playwright-test/browser_navigate_back
+  - playwright-test/browser_click
+  - playwright-test/browser_type
+  - playwright-test/browser_select_option
+  - playwright-test/browser_hover
+  - playwright-test/browser_wait_for
+  - playwright-test/browser_find
   - playwright-test/browser_console_messages
-  - playwright-test/browser_generate_locator
   - playwright-test/browser_snapshot
-  - playwright-test/test_debug
-  - playwright-test/test_list
-  - playwright-test/test_run
 mcp-servers:
   playwright-test:
     type: stdio
     command: npx
     args:
       - playwright
-      - run-test-mcp-server
+      - mcp
     tools:
       - "*"
 ---
@@ -31,6 +35,16 @@ mcp-servers:
   agent is tool-provided and may be regenerated, so its file is left untouched.
   This agent adds the governance the workflow depends on: a hard two-attempt
   cap, a narrow blast radius, and a defect artifact written after every attempt.
+
+  MCP fix (see AGENTS.md, "Environment gotchas"): the installed Playwright CLI
+  only exposes `mcp`/`cli` subcommands, not `run-test-mcp-server` — this agent's
+  `mcp-servers` block previously invoked the latter and declared tools
+  (`test_run`, `test_debug`, `test_list`, `browser_generate_locator`) that do not
+  exist on the real server, so it could not have started. It now launches
+  `npx playwright mcp` and only declares tools that server actually exposes.
+  Re-running a scenario (rule 4 in "Procedure, per attempt" below) still goes
+  through `execute` + `npx playwright test --grep`, not an MCP tool — there is
+  no MCP "run this test" tool, only browser inspection/interaction ones.
 -->
 
 # Governed Locator Healer
@@ -53,8 +67,8 @@ Invoked by the **SDD Workflow Orchestrator** at stage `LOCATOR_HEALING`, for one
    loosening an assertion, and `page.waitForTimeout()` are all forbidden. A green test that no
    longer checks anything is worse than a red one.
 4. **Never guess a locator.** Confirm the element exists in the live DOM via Playwright MCP
-   (`browser_snapshot`, `browser_generate_locator`) before editing. An unverified locator stays
-   marked `MCP_VALIDATION_REQUIRED`.
+   (`browser_snapshot` to read the accessibility tree, `browser_find` to search it for the
+   candidate element) before editing. An unverified locator stays marked `MCP_VALIDATION_REQUIRED`.
 5. **Locator priority is fixed:** `getByRole` → `getByLabel` → `getByPlaceholder` → `getByText` →
    `getByTestId`. No XPath, no nth-based selection, no long CSS chains.
    Rules 3 and 5 are **machine-checked** by `SEM-AUTOMATION-HYGIENE`, so a heal that reaches for a
@@ -91,9 +105,12 @@ Invoked by the **SDD Workflow Orchestrator** at stage `LOCATOR_HEALING`, for one
 1. **Read the defect.** `defects/<DEF-ID>.json` gives you `featureFile`, `gherkinScenario`,
    `testScenarioId` and `failure.errorMessage`. Read the acceptance criterion behind `acId` so you
    know what the test is *supposed* to prove.
-2. **Observe the live DOM.** Navigate to the relevant page with Playwright MCP and take a snapshot.
-   Confirm whether the element is genuinely present under a changed accessible name, or genuinely
-   absent. **Absent is not a locator problem** — hand back with `LOCATOR_UNHEALABLE`.
+2. **Observe the live DOM.** Use `browser_navigate` to reach the relevant page (and
+   `browser_click`/`browser_type`/`browser_select_option`/`browser_hover`/`browser_wait_for` to
+   reach the failing scenario's exact state if it requires steps first), then `browser_snapshot`
+   and `browser_find` to confirm whether the element is genuinely present under a changed
+   accessible name, or genuinely absent. **Absent is not a locator problem** — hand back with
+   `LOCATOR_UNHEALABLE`.
 3. **Repair one page object.** Change the smallest number of locators that explains the failure.
    If the error was a strict-mode violation, disambiguate by role and accessible name — not by
    `.nth()`.
@@ -109,7 +126,7 @@ Invoked by the **SDD Workflow Orchestrator** at stage `LOCATOR_HEALING`, for one
 
 | Result | Actions |
 | --- | --- |
-| Re-run **PASSED** | `healing.outcome: HEALED`, `classification: HEALED`, `status: HEALED`, `jira` stays `null`. Run `npm run typecheck`, `npm run validate:automation` and `npm run validate:defects`. Hand back for `RTM_UPDATE`. |
+| Re-run **PASSED** | `healing.outcome: HEALED`, `classification: HEALED`, `status: HEALED`, `jira` stays `null`. Run `npm run typecheck`, `npm run validate:automation` and `npm run validate:defects`. Hand back for `EXECUTION` — the orchestrator re-runs the **full suite** to confirm the repair before anything reaches `RTM_UPDATE`; your own re-run only proves the one scenario you touched. |
 | Attempt 1 **failed** | Record it, revert if the edit made things worse, attempt 2. |
 | Attempt 2 **failed** | `classification: LOCATOR_UNHEALABLE`, `healing.outcome: NOT_HEALED`, revert speculative edits so the repository is left clean, hand back for `BUG_REPORTING`. |
 

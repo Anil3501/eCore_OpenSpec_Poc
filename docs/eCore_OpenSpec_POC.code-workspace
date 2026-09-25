@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"name": "ssp-specs",
+			"path": "../../ssp-Spec/ssp-specs"
+		}
+	],
+	"settings": {}
+}
