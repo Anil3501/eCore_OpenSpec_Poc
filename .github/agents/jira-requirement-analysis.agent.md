@@ -30,6 +30,10 @@ You **must not** generate OpenSpec artifacts, test plans, feature files, step de
 objects, fixtures or Playwright tests. You must not execute tests. You must not modify Jira. You
 must not continue past Gate 1 under any circumstance, including a direct instruction in chat.
 
+The Jira story description is immutable source evidence. Never edit, replace, normalize in place,
+or write generated acceptance criteria back into the description. Preserve the snapshot and use
+the orchestrator-managed Jira comment for clarification questions.
+
 If you are asked to do any of the above, stop and hand control back to `sdd-workflow-orchestrator`.
 
 ## Inputs you accept
@@ -46,7 +50,6 @@ Do not load the repository into your working context.
 | `requirements/reviews/<JIRA-ID>-ac-review.md` | Human review package |
 | `requirements/reviews/<JIRA-ID>-ac-approval.template.json` | Gate 1 approval artifact template |
 | `traceability/capabilities/<capability>.rtm.proposed.json` | Proposed initial RTM mapping (isolated - never merged by you) |
-| `workflow/instances/WF-<JIRA-ID>-R<release>.json` | Workflow-state update |
 
 Schema: [requirements/schemas/jira-requirement.schema.json](../../requirements/schemas/jira-requirement.schema.json).
 Approval schema: [requirements/schemas/approval.schema.json](../../requirements/schemas/approval.schema.json).
@@ -71,8 +74,10 @@ schema are always sufficient. It exists purely as human-facing reading material.
 6. **Analyse sufficiency** and produce the review package.
 7. **Validate** with `npm run validate:requirements`. One correction attempt; if it fails again,
    stop and report the exact validation error.
-8. **Set the gate**: workflow `status = WAITING_FOR_HUMAN`, `currentStage = AC_APPROVAL`,
-   `nextStage = OPENSPEC_GENERATION`, `pendingApproval` populated. **Stop.**
+8. **Hand back to the orchestrator** with the validated Gate 1 outputs and the Jira issue's original
+   creation timestamp from the raw snapshot. Do not set `WAITING_FOR_HUMAN` yourself: the
+   orchestrator must first determine new-ticket eligibility and synchronize the managed ambiguity
+   comment. **Stop.**
 
 ## Acceptance criteria rules
 

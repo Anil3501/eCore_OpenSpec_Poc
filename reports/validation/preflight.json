@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-09-25T15:25:40.741Z",
+  "generatedAt": "2026-09-28T14:54:11.058Z",
   "node": "24.19.0",
   "platform": "win32",
   "summary": {
     "passed": 5,
     "failed": 0,
-    "warned": 0
+    "warned": 1
   },
   "checks": [
     {
@@ -47,9 +47,21 @@
       "remedy": null
     },
     {
+      "id": "JIRA-WRITE-POLICY",
+      "title": "Temporary Jira write policy is valid and visible",
+      "status": "PASS",
+      "details": [
+        "TEMPORARY_ALLOWLIST: ETA only; active since 2026-09-28T13:39:42.575Z; immutable existing-issue fields: description",
+        "Restricted operations: WORKFLOW_START, COMMENT_CREATE, COMMENT_EDIT, ATTACHMENT_UPLOAD, BUG_CREATE.",
+        "Immutable existing-issue fields: description.",
+        "Cross-project reads remain allowed."
+      ],
+      "remedy": null
+    },
+    {
       "id": "ENVIRONMENT",
       "title": "Environment configuration is present",
-      "status": "PASS",
+      "status": "WARN",
       "details": [
         "testEnvironment: qa",
         "profile: (default)",
@@ -60,18 +72,21 @@
         "apiAuthMode: SESSION_COOKIE",
         "credentialsConfigured: true",
         "ecoreLoginConfigured: true",
-        "eoApiConfigured: true",
-        "jiraConfigured: true",
-        "jiraBugFilingConfigured: true",
+        "eoApiConfigured: false",
+        "jiraConfigured: false",
+        "jiraBugFilingConfigured: false",
         "coverageEnabled: true",
         "coverageIncludesThirdParty: false",
-        "jiraProjectKey: ETA",
-        "jiraBugProjectKey: ETA",
+        "jiraProjectKey: (not set)",
+        "jiraBugProjectKey: (not set)",
         "jiraBugIssueType: Bug",
         "jiraBugLinkType: Relates",
-        "bugAttachTrace: true"
+        "bugAttachTrace: true",
+        "",
+        "Not configured:",
+        "Jira REST fallback (JIRA_*)"
       ],
-      "remedy": null
+      "remedy": "Copy .env.example to .env and fill in the listed groups. Artifact generation and validation work without them; executing against the application does not."
     }
   ]
 }

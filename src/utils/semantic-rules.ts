@@ -34,6 +34,12 @@ import { workflowHistoryEventSchema } from '../models/workflow-history.model.ts'
 import { exists, listFiles, listFilesRecursive, readJson, readText, PROJECT_ROOT, toAbsolute } from './artifact-io.ts';
 import { resolveBinEntry } from './node-bin.ts';
 import { checkSchemaParity } from './schema-parity.ts';
+import {
+  assertJiraIssueAllowed,
+  findProhibitedJiraWriteGrants,
+  isAtOrAfterPolicyActivation,
+  readJiraWritePolicy,
+} from './jira-policy.ts';
 
 export type CheckStatus = 'PASS' | 'FAIL' | 'SKIPPED';
 
@@ -958,7 +964,8 @@ function checkReviewSections(loaded: LoadedArtifacts): CheckResult {
       continue;
     }
 
-    const headings = headingLines(readText(approval.reviewPackagePath));
+    const reviewContent = readText(approval.reviewPackagePath);
+    const headings = headingLines(reviewContent);
     for (const section of spec.requiredSections) {
       if (!headings.some((heading) => heading.includes(section.toLowerCase()))) {
         messages.push(
@@ -966,6 +973,44 @@ function checkReviewSections(loaded: LoadedArtifacts): CheckResult {
         );
       }
     }
+
+    if (approval.gate === 'AUTOMATION_DESIGN') {
+      const openQuestionsMatch = reviewContent.match(/##\s+Open questions([\s\S]*?)(?=\n##\s+|$)/i);
+      if (openQuestionsMatch) {
+        const questionLines = openQuestionsMatch[1]
+          .split(/\r?\n/)
+          .map((line) => line.trim())
+          .filter(Boolean);
+        const validQuestionPattern =
+          /^(?:-\s*)?\*\*(?:AMB|CLR-TP|BLOCKER)-[A-Z0-9-]+-\d{3}\*\*\s+\[(REVIEW_REQUIRED|RESOLVED|DEFERRED|WITHDRAWN)\]\s+[—-]\s+.+$/;
+        const candidateQuestionPrefix = /^(?:-\s*)?\*\*([A-Za-z0-9_-]+)\*\*/;
+
+        for (const line of questionLines) {
+          const lower = line.toLowerCase();
+          if (
+            lower === 'none' ||
+            lower === 'none.' ||
+            lower === '- none' ||
+            lower === '- none.' ||
+            lower === 'no open questions.' ||
+            line.startsWith('>') ||
+            line.startsWith('Every Jira-visible question needs') ||
+            line.startsWith('Anything an agent would otherwise')
+          ) {
+            continue;
+          }
+
+          if (candidateQuestionPrefix.test(line) || /\[(?:REVIEW_REQUIRED|RESOLVED|DEFERRED|WITHDRAWN)\]/.test(line)) {
+            if (!validQuestionPattern.test(line)) {
+              messages.push(
+                `${approval.reviewPackagePath}: open question "${line}" does not match required pattern "**<ID>** [<STATUS>] — <Question>". Valid ID prefixes are AMB, CLR-TP, BLOCKER with 3-digit sequence, and status must be REVIEW_REQUIRED, RESOLVED, DEFERRED, or WITHDRAWN.`,
+              );
+            }
+          }
+        }
+      }
+    }
+
     checked += 1;
   }
 
@@ -1830,6 +1875,7 @@ function checkWorkflowLocks(loaded: LoadedArtifacts): CheckResult {
       } else {
         lockedScopes.set(scope, state.workflowId);
       }
+
     }
   }
 
@@ -1844,6 +1890,114 @@ function checkWorkflowLocks(loaded: LoadedArtifacts): CheckResult {
   return messages.length === 0
     ? pass('SEM-LOCKS', 'No two workflows write to the same traceability artifact')
     : fail('SEM-LOCKS', 'No two workflows write to the same traceability artifact', messages);
+}
+
+function checkJiraPolicy(loaded: LoadedArtifacts): CheckResult {
+  const id = 'SEM-JIRA-POLICY';
+  const title = 'ETA-only workflow and Jira write policy is enforced';
+  const messages: string[] = [];
+
+  let policy;
+  try {
+    policy = readJiraWritePolicy();
+  } catch (error) {
+    return fail(id, title, [error instanceof Error ? error.message : String(error)]);
+  }
+
+  for (const file of listFiles('.github/agents', '.agent.md')) {
+    for (const grant of findProhibitedJiraWriteGrants(readText(file))) {
+      messages.push(`${file}: prohibited direct Jira write grant "${grant}". Use the guarded repository helper.`);
+    }
+  }
+
+  const allowedRestWriters = new Set(['src/utils/jira-write-client.ts']);
+  for (const file of [
+    ...listFilesRecursive('src', '.ts'),
+    ...listFilesRecursive('scripts', '.ts'),
+  ]) {
+    const content = readText(file);
+    if (
+      /\/rest\/api\/3\//.test(content) &&
+      /\b(method:\s*['"](?:POST|PUT|DELETE)['"]|fetch\s*\()/.test(content) &&
+      !allowedRestWriters.has(file) &&
+      file !== 'src/utils/jira-fetch.ts'
+    ) {
+      messages.push(`${file}: restricted Jira REST write path bypasses src/utils/jira-write-client.ts.`);
+    }
+  }
+
+  for (const [file, state] of loaded.workflows) {
+    const createdAfterActivation = isAtOrAfterPolicyActivation(state.createdAt, policy);
+    const updatedAfterActivation = isAtOrAfterPolicyActivation(state.updatedAt, policy);
+    if (createdAfterActivation || updatedAfterActivation) {
+      try {
+        assertJiraIssueAllowed(state.jiraStoryId, 'WORKFLOW_START', policy);
+      } catch (error) {
+        messages.push(`${file} -> jiraStoryId: ${(error as Error).message}`);
+      }
+    }
+    if (createdAfterActivation && state.jiraAmbiguitySync === undefined) {
+      messages.push(
+        `${file} -> jiraAmbiguitySync: workflows created after ${policy.activatedAt} must record new-ticket eligibility.`,
+      );
+    }
+    const sync = state.jiraAmbiguitySync;
+    if (sync?.eligible) {
+      if (
+        !createdAfterActivation ||
+        sync.issueCreatedAt === null ||
+        !isAtOrAfterPolicyActivation(sync.issueCreatedAt, policy)
+      ) {
+        messages.push(
+          `${file} -> jiraAmbiguitySync: eligible write-back requires both workflow and Jira issue creation at or after ${policy.activatedAt}.`,
+        );
+      }
+      try {
+        assertJiraIssueAllowed(
+          state.jiraStoryId,
+          sync.managedCommentId ? 'COMMENT_EDIT' : 'COMMENT_CREATE',
+          policy,
+        );
+      } catch (error) {
+        messages.push(`${file} -> jiraAmbiguitySync: ${(error as Error).message}`);
+      }
+    }
+  }
+
+  for (const [file, requirement] of loaded.requirements) {
+    if (!isAtOrAfterPolicyActivation(requirement.timestamps.updatedAt, policy)) continue;
+    try {
+      assertJiraIssueAllowed(requirement.story.jiraId, 'WORKFLOW_START', policy);
+    } catch (error) {
+      messages.push(`${file} -> story.jiraId: ${(error as Error).message}`);
+    }
+  }
+
+  for (const [file, plan] of loaded.testPlans) {
+    if (!isAtOrAfterPolicyActivation(plan.timestamps.updatedAt, policy)) continue;
+    for (const jiraStoryId of plan.jiraStoryIds) {
+      try {
+        assertJiraIssueAllowed(jiraStoryId, 'WORKFLOW_START', policy);
+      } catch (error) {
+        messages.push(`${file} -> jiraStoryIds: ${(error as Error).message}`);
+      }
+    }
+  }
+
+  for (const [file, rtm] of loaded.rtms) {
+    if (!isAtOrAfterPolicyActivation(rtm.updatedAt, policy)) continue;
+    for (const entry of rtm.entries) {
+      const requirement = loaded.requirements.get(entry.requirementArtifact.path);
+      if (!requirement || !isAtOrAfterPolicyActivation(requirement.timestamps.updatedAt, policy)) continue;
+      try {
+        assertJiraIssueAllowed(entry.jiraStoryId, 'WORKFLOW_START', policy);
+      } catch (error) {
+        messages.push(`${file} -> ${entry.traceId}.jiraStoryId: ${(error as Error).message}`);
+      }
+    }
+  }
+
+  return messages.length === 0 ? pass(id, title) : fail(id, title, messages);
 }
 
 export interface ValidationScope {
@@ -1883,6 +2037,7 @@ export function runValidation(
     checkSampleDataIsolation(loaded),
     checkVersionMonotonicity(loaded),
     checkWorkflowLocks(loaded),
+    checkJiraPolicy(loaded),
     checkDefectEvidence(loaded),
     checkAutomationHygiene(loaded),
     checkDiscoverySignal(),
@@ -1893,11 +2048,11 @@ export function runValidation(
   if (scope === 'all') return all;
 
   const scopeFilter: Record<Exclude<typeof scope, 'all'>, string[]> = {
-    requirements: ['REQ-STRUCTURE', 'APR-STRUCTURE', 'SEM-APPROVAL-EVIDENCE', 'SEM-VERSIONS', 'SEM-SAMPLE-ISOLATION', 'TPL-STRUCTURE', 'SEM-NO-PLACEHOLDERS'],
-    workflow: ['WF-STRUCTURE', 'SEM-GATES', 'SEM-LOCKS', 'TPL-REVIEW-SECTIONS'],
-    rtm: ['RTM-STRUCTURE', 'SEM-RTM', 'SEM-COVERAGE', 'SEM-FEATURE-TAGS', 'SEM-NO-DUPLICATES', 'SEM-OPENSPEC', 'SEM-TEST-REUSE'],
-    defects: ['DEF-STRUCTURE', 'SEM-DEFECT-EVIDENCE', 'SEM-SAMPLE-ISOLATION'],
-    automation: ['SEM-AUTOMATION-HYGIENE', 'SEM-DISCOVERY-SIGNAL', 'SEM-FEATURE-TAGS', 'SEM-NO-DUPLICATES', 'SEM-API-CONTRACT'],
+    requirements: ['REQ-STRUCTURE', 'APR-STRUCTURE', 'SEM-APPROVAL-EVIDENCE', 'SEM-VERSIONS', 'SEM-SAMPLE-ISOLATION', 'SEM-JIRA-POLICY', 'TPL-STRUCTURE', 'SEM-NO-PLACEHOLDERS'],
+    workflow: ['WF-STRUCTURE', 'SEM-GATES', 'SEM-LOCKS', 'SEM-JIRA-POLICY', 'TPL-REVIEW-SECTIONS'],
+    rtm: ['RTM-STRUCTURE', 'SEM-RTM', 'SEM-COVERAGE', 'SEM-FEATURE-TAGS', 'SEM-NO-DUPLICATES', 'SEM-OPENSPEC', 'SEM-TEST-REUSE', 'SEM-JIRA-POLICY'],
+    defects: ['DEF-STRUCTURE', 'SEM-DEFECT-EVIDENCE', 'SEM-SAMPLE-ISOLATION', 'SEM-JIRA-POLICY'],
+    automation: ['SEM-AUTOMATION-HYGIENE', 'SEM-DISCOVERY-SIGNAL', 'SEM-FEATURE-TAGS', 'SEM-NO-DUPLICATES', 'SEM-API-CONTRACT', 'TPL-REVIEW-SECTIONS', 'SEM-NO-PLACEHOLDERS'],
   };
 
   const wanted = new Set(scopeFilter[scope]);

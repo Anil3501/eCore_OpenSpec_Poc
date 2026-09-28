@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-09-17T11:59:17.858Z",
+  "generatedAt": "2026-09-28T13:44:40.678Z",
   "scope": "workflow",
   "summary": {
     "total": 4,
-    "passed": 4,
+    "passed": 3,
     "failed": 0,
-    "skipped": 0
+    "skipped": 1
   },
   "results": [
     {
@@ -19,9 +19,9 @@
     {
       "id": "TPL-REVIEW-SECTIONS",
       "title": "A review package blocking a gate carries every required section",
-      "status": "PASS",
+      "status": "SKIPPED",
       "messages": [
-        "1 pending review package(s) checked."
+        "No workflow is currently waiting at an approval gate."
       ]
     },
     {

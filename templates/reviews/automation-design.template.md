@@ -48,7 +48,10 @@ an acceptance criterion.
 
 ## Open questions
 
-**REPLACE_WITH_QUESTION_ID** — REPLACE_WITH_THE_QUESTION and what changes depending on the answer.
+Every Jira-visible question needs a stable `AMB-*`, `CLR-TP-*` or `BLOCKER-*` id and an explicit
+status so the managed Jira comment can be updated idempotently.
+
+**REPLACE_WITH_QUESTION_ID** [REVIEW_REQUIRED] — REPLACE_WITH_THE_QUESTION and what changes depending on the answer.
 
 Anything an agent would otherwise have to invent — a role, a message, a limit, a policy — belongs
 here rather than in the design.

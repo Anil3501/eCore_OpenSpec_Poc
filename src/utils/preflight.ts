@@ -18,6 +18,7 @@ import path from 'node:path';
 
 import { PROJECT_ROOT, readJson, toAbsolute } from './artifact-io.ts';
 import { env } from './env.ts';
+import { describeJiraWritePolicy, readJiraWritePolicy } from './jira-policy.ts';
 import { resolveBinEntry } from './node-bin.ts';
 
 type CheckStatus = 'PASS' | 'FAIL' | 'WARN';
@@ -219,6 +220,26 @@ function checkEnvironment(): CheckResult {
   return result('ENVIRONMENT', 'Environment configuration is present', 'PASS', details);
 }
 
+function checkJiraPolicy(): CheckResult {
+  try {
+    const policy = readJiraWritePolicy();
+    return result('JIRA-WRITE-POLICY', 'Temporary Jira write policy is valid and visible', 'PASS', [
+      describeJiraWritePolicy(policy),
+      `Restricted operations: ${policy.restrictedOperations.join(', ')}.`,
+      `Immutable existing-issue fields: ${policy.immutableIssueFields.join(', ')}.`,
+      'Cross-project reads remain allowed.',
+    ]);
+  } catch (error) {
+    return result(
+      'JIRA-WRITE-POLICY',
+      'Temporary Jira write policy is valid and visible',
+      'FAIL',
+      [error instanceof Error ? error.message : String(error)],
+      'Restore config/jira-write-policy.json to a schema-valid, version-controlled policy.',
+    );
+  }
+}
+
 function render(checks: CheckResult[]): void {
   const symbol: Record<CheckStatus, string> = { PASS: '[PASS]', FAIL: '[FAIL]', WARN: '[WARN]' };
   for (const check of checks) {
@@ -236,6 +257,7 @@ async function main(): Promise<void> {
     checkDependenciesInstalled(),
     checkBinaries(),
     await checkPlaywrightBrowsers(),
+    checkJiraPolicy(),
     checkEnvironment(),
   ];
 

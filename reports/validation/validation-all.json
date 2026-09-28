@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-09-25T15:25:46.243Z",
+  "generatedAt": "2026-09-28T14:54:36.439Z",
   "scope": "all",
   "summary": {
-    "total": 25,
-    "passed": 23,
+    "total": 26,
+    "passed": 24,
     "failed": 0,
     "skipped": 2
   },
@@ -125,7 +125,7 @@
       "title": "Open OpenSpec changes pass `openspec validate --strict`",
       "status": "PASS",
       "messages": [
-        "3 open change(s) validated: add-control-history-section, add-organization-login, track-paper-out-media-type."
+        "4 open change(s) validated: add-control-history-section, add-organization-login, add-temporary-eta-jira-guard, track-paper-out-media-type."
       ]
     },
     {
@@ -157,6 +157,12 @@
     {
       "id": "SEM-LOCKS",
       "title": "No two workflows write to the same traceability artifact",
+      "status": "PASS",
+      "messages": []
+    },
+    {
+      "id": "SEM-JIRA-POLICY",
+      "title": "ETA-only workflow and Jira write policy is enforced",
       "status": "PASS",
       "messages": []
     },

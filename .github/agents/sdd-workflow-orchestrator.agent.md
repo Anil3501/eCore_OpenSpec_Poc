@@ -58,6 +58,15 @@ work yourself.
    dependency (a shared RTM capability entry, a shared page object, a fixture being reused) — never
    "for reference" or "to check the convention." See AGENTS.md § "Where an artifact's shape comes
    from."
+10. **Enforce the temporary ETA boundary before acting.** Run
+    `npm run jira:check -- WORKFLOW_START <JIRA-ID>` before creating, resetting or resuming a
+    workflow. A blocked check means no governed artifact is created or modified. Cross-project Jira
+    reads remain allowed, but comments, attachments and bugs must use guarded repository helpers;
+    never add a direct Jira write tool grant.
+11. **Never change an existing Jira issue description in any phase.** The source story description
+    is immutable evidence. Clarifications and ambiguity updates go only to the managed comment.
+    Creating a new bug with its initial, human-reviewed description is allowed; editing that
+    description after creation is not.
 
 ## Ownership model
 
@@ -150,9 +159,12 @@ assignment.
 
 For every request, run this loop exactly once per batch:
 
-1. **Locate the instance.** `workflow/instances/WF-<JIRA-ID>-R<release>.json`. If it does not exist
+1. **Check Jira policy, then locate the instance.** Run
+   `npm run jira:check -- WORKFLOW_START <JIRA-ID>`. Only after it passes, locate
+   `workflow/instances/WF-<JIRA-ID>-R<release>.json`. If it does not exist
    and the user asked to start a workflow, create it with `status = NOT_STARTED`,
-   `currentStage = JIRA_RETRIEVAL`, `retryCount = 0`, `processingLock = null`.
+   `currentStage = JIRA_RETRIEVAL`, `retryCount = 0`, `processingLock = null`, and
+   `jiraAmbiguitySync` set to `PENDING_ISSUE_VERIFICATION`, ineligible and `NOT_REQUIRED`.
 2. **Check the lock.** If `processingLock` is non-null and not owned by this run, stop and report
    that another process holds the lock. Never write to a locked artifact.
 3. **Verify prerequisites** for `currentStage` using the `requires` list in the workflow definition.
@@ -189,6 +201,10 @@ the same capability RTM must run sequentially.
 
 At `AC_APPROVAL`, `TEST_PLAN_APPROVAL` and `AUTOMATION_APPROVAL`:
 
+- For a workflow whose `jiraAmbiguitySync.eligible` is true, run
+  `npm run jira:sync-ambiguities -- <workflowId>` after validating the review package and before
+  presenting the gate. Apply the report's `statePatch` to workflow state. A `FAILED` result is
+  visible and retryable but **does not block the gate**.
 - Set `status = WAITING_FOR_HUMAN`.
 - Set `pendingApproval` with `gate`, `reviewPackagePath`, `approvalTemplatePath`,
   `expectedApprovalPath`, `requestedAt`.
@@ -204,12 +220,23 @@ status.
 If `decision` is `REQUEST_CHANGES`, set `status = CHANGES_REQUESTED`, return `currentStage` to the
 generating stage, increment `retryCount`, and re-run only the affected items.
 
+On every gate resume, run the same synchronization again after applying recorded human answers and
+before starting the next stage. The content hash makes unchanged retries a no-op, while resolved,
+deferred, withdrawn or changed questions update the same managed comment.
+
 ## Stage-specific instructions
 
 **JIRA_RETRIEVAL → AC_REVIEW_PACKAGE** — delegate the whole span to `jira-requirement-analysis`.
 Provide only the Jira ID, release, capability and target paths. Never paste the repository into the
 delegated task. That agent must stop at Gate 1; if it produces anything beyond the Gate 1 outputs,
 reject the handoff.
+
+After `JIRA_RETRIEVAL`, read the Jira issue's real creation timestamp from the raw snapshot. Compare
+both it and the workflow's `createdAt` with `config/jira-write-policy.json.activatedAt`. Set
+`jiraAmbiguitySync.eligibilityReason` to `NEW_ETA_TICKET` and `eligible: true` only when both are at
+or after activation; otherwise set `HISTORICAL_TICKET`, `eligible: false` and `status:
+NOT_REQUIRED`. Never infer creation time from an updated timestamp and never backfill a workflow
+that lacks the synchronization block.
 
 **OPENSPEC_GENERATION** — invoke the existing OpenSpec workflow (`openspec-propose` skill /
 `opsx-propose` prompt / `OpenSpec` agent). Follow `openspec/config.yaml` and the CLI-reported paths.
@@ -253,6 +280,11 @@ covers, the interface it exercises, the page objects and steps it will need, whi
 still `MCP_VALIDATION_REQUIRED`, and which API contracts are still `API_CONTRACT_UNVERIFIED`. List
 every open question explicitly. A reviewer approving unverified locators must be able to see that
 that is what they are approving.
+
+Every Gate 3 open question must use the template form
+`**<AMB-*|CLR-TP-*|BLOCKER-*>** [REVIEW_REQUIRED|RESOLVED|DEFERRED|WITHDRAWN] — <question>`.
+Unstructured prose is not eligible for Jira synchronization because it cannot be updated
+idempotently.
 
 The approval template is pre-filled with one item decision per scenario and `decision` left blank.
 Its `artifactId` is the test plan id and its `artifactVersion` is the approved plan's version, so

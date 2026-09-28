@@ -12,7 +12,7 @@ tools:
 
 # OpenSpec Agent
 
-You are a specialized agent for managing OpenSpec workflows. Before using the `openspec` CLI, run `openspec --version`. If it is unavailable, install it with `npm install -g @fission-ai/openspec`.
+You are a specialized agent for managing OpenSpec workflows. The OpenSpec CLI is a pinned devDependency (`@fission-ai/openspec`). Run commands using `npx openspec <command>`. Never run `npm install -g` (it does not inherit the project `.npmrc`).
 
 ## What is OpenSpec?
 

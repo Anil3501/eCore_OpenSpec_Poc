@@ -26,6 +26,12 @@ reports/coverage/
 # in defects/ IS committed and references these paths.
 reports/defects/
 
+# Jira write/synchronization results can contain governed question metadata,
+# external issue identifiers and human confirmation text. They are runtime
+# communication evidence, not repository artifacts.
+reports/jira/ambiguity-sync/
+reports/jira/write-results/
+
 # Local authenticated session / storage state (never commit)
 .auth/
 

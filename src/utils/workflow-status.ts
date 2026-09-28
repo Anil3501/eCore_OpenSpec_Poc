@@ -11,6 +11,7 @@
 import { listFiles, readJson, exists } from './artifact-io.ts';
 import { workflowStateSchema, type WorkflowState } from '../models/workflow-state.model.ts';
 import { approvalArtifactSchema } from '../models/approval.model.ts';
+import { describeJiraWritePolicy, readJiraWritePolicy } from './jira-policy.ts';
 
 const INSTANCES_DIR = 'workflow/instances';
 
@@ -41,6 +42,7 @@ function describeGate(state: WorkflowState): string[] {
 function main(): void {
   const requestedId = process.argv[2];
   const files = listFiles(INSTANCES_DIR, '.json');
+  console.log(`Jira policy      : ${describeJiraWritePolicy(readJiraWritePolicy())}`);
 
   if (files.length === 0) {
     console.log(`No workflow instances found in ${INSTANCES_DIR}/.`);
@@ -67,6 +69,14 @@ function main(): void {
     console.log(`  Last successful : ${state.lastSuccessfulStage ?? '(none)'}`);
     console.log(`  Assigned agent  : ${state.assignedAgent ?? '(none)'}`);
     console.log(`  Processing lock : ${state.processingLock ? state.processingLock.lockId : '(none)'}`);
+    const sync = state.jiraAmbiguitySync;
+    console.log(
+      `  Jira ambiguity  : ${
+        sync
+          ? `${sync.status} (${sync.eligibilityReason}; comment ${sync.managedCommentId ?? 'not created'})`
+          : 'NOT_REQUIRED (historical workflow)'
+      }`,
+    );
     for (const line of describeGate(state)) console.log(line);
 
     if (state.status === 'WAITING_FOR_HUMAN') {

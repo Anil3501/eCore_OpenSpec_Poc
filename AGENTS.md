@@ -21,6 +21,10 @@ npm run probe:api            # loopback check that the API client layer actually
 npm run capture:session      # sign in once -> .auth/ecore-session.json for MCP exploration
 npm run triage:failures      # classify failed results, preserve evidence, fingerprint them
 npm run jira:fetch -- ETA-351 # REST fallback: fetch an issue verbatim into reports/jira/
+npm run jira:check -- WORKFLOW_START ETA-351 # fail-closed temporary ETA guard
+npm run jira:sync-ambiguities -- WF-ETA-351-R1.0 # guarded managed-comment sync
+npm run test:jira-policy     # policy, side-effect and bypass regression tests
+npm run test:jira-ambiguities # durable sync-state and comment-format tests
 npm run workflow:status      # read-only summary of every workflow instance
 ```
 
@@ -33,6 +37,24 @@ exposes no issue-fetch tool, `npm run jira:fetch` is the documented REST fallbac
 `JIRA_URL` / `JIRA_EMAIL` / `JIRA_API_TOKEN`. It writes a verbatim snapshot to `reports/jira/` and
 **never** writes a governed artifact — promoting it into `requirements/raw/<JIRA-ID>.json` is the
 requirement-analysis stage's job.
+
+**Temporary ETA-only enforcement is active.** `config/jira-write-policy.json` permits governed
+workflow starts, comment create/edit, attachment upload and bug creation only for `ETA`. Jira reads
+remain cross-project. Governed agents have no direct Jira write tool grants: every external write
+uses `src/utils/jira-write-client.ts` through the repository CLI, which checks the policy before
+loading credentials, reading attachment paths or opening a network connection. The policy has no
+environment override or automatic expiry; removal requires a reviewed repository change.
+
+**Existing Jira issue descriptions are immutable in every phase.** Never edit a source story's
+description, append generated ACs to it, or replace it with normalized content. Ambiguities and
+clarifications go to the single managed comment. A newly filed bug may receive its initial
+human-reviewed description during creation, but that description is not edited afterward.
+
+New ETA workflows initialize `jiraAmbiguitySync` and become eligible only when both the workflow and
+the Jira issue were created at or after the policy activation timestamp. Eligible workflows keep
+one managed Jira comment synchronized before each approval gate and on gate resume. Existing
+workflow instances and historical Jira tickets are never backfilled. Jira synchronization failure
+is recorded and retryable but never substitutes for or blocks the normal approval artifact.
 
 ## Non-negotiable rules
 
@@ -81,7 +103,7 @@ models. Violating them fails validation.
    rule under rule 2.
 5. **No agent approves its own output.**
    The `bug-analyzer` does not get a fourth formal approval-artifact gate (there is no
-   `APR-*-BUG-*` file), but it may not call `createJiraIssue` until a human has seen the fully
+   `APR-*-BUG-*` file), but it may not invoke the guarded Jira bug helper until a human has seen the fully
    composed bug in chat and explicitly confirmed it — that reply is transcribed verbatim into the
    defect's `notes` before filing. The compensating controls remain mandatory regardless: a failure
    fingerprint that is already `REPORTED` becomes a `DUPLICATE` instead of a second ticket, every

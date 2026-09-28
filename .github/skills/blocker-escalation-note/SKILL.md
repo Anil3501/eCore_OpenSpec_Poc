@@ -16,6 +16,11 @@ already exists on disk, in plain language a non-agent can act on.
 `requirements/`, `test-plans/`, `traceability/`, `workflow/`, or `defects/` — those stay exactly as
 already recorded. It produces a short note only.
 
+For a new ETA workflow whose `jiraAmbiguitySync.eligible` is true, the orchestrator mirrors all
+recorded gate questions through `npm run jira:sync-ambiguities -- <workflowId>`. This skill still
+does not post or edit Jira comments; use it only for a separate human-forwardable note or for a
+historical/ineligible workflow.
+
 ## Input
 
 A blocker/ambiguity id (e.g., `BLOCKER-EC-12000-002`, `AMB-EC-12000-001`), a scenario id

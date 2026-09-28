@@ -19,6 +19,84 @@ export const processingLockSchema = z.object({
   scope: z.array(z.string()),
 });
 
+export const jiraAmbiguitySyncItemSchema = z
+  .object({
+    itemId: z.string().regex(/^(AMB|CLR-TP|BLOCKER)-[A-Z][A-Z0-9]+-\d+-\d{3}$/),
+    gate: approvalGateSchema,
+    question: z.string().min(1),
+    impact: z.string().min(1).nullable(),
+    status: z.enum(['REVIEW_REQUIRED', 'RESOLVED', 'DEFERRED', 'WITHDRAWN']),
+    sourcePath: z.string().min(1),
+  })
+  .strict();
+
+export const jiraAmbiguitySyncSchema = z
+  .object({
+    policyVersion: z.literal('1.0'),
+    eligible: z.boolean(),
+    eligibilityReason: z.enum([
+      'PENDING_ISSUE_VERIFICATION',
+      'NEW_ETA_TICKET',
+      'HISTORICAL_TICKET',
+    ]),
+    issueCreatedAt: isoTimestampSchema.nullable(),
+    managedCommentId: z.string().regex(/^\d+$/).nullable(),
+    contentHash: z.string().regex(/^[a-f0-9]{64}$/).nullable(),
+    status: z.enum(['NOT_REQUIRED', 'PENDING', 'SYNCED', 'FAILED']),
+    lastAttemptAt: isoTimestampSchema.nullable(),
+    lastSyncedAt: isoTimestampSchema.nullable(),
+    lastErrorCode: z.string().min(1).nullable(),
+    items: z.array(jiraAmbiguitySyncItemSchema),
+  })
+  .strict()
+  .superRefine((sync, ctx) => {
+    if (sync.eligibilityReason === 'PENDING_ISSUE_VERIFICATION') {
+      if (sync.eligible || sync.issueCreatedAt !== null || sync.status !== 'NOT_REQUIRED') {
+        ctx.addIssue({
+          code: 'custom',
+          path: ['eligibilityReason'],
+          message: 'PENDING_ISSUE_VERIFICATION must remain ineligible and NOT_REQUIRED until Jira issue creation is verified.',
+        });
+      }
+    }
+    if (sync.eligibilityReason === 'NEW_ETA_TICKET' && (!sync.eligible || sync.issueCreatedAt === null)) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['eligible'],
+        message: 'NEW_ETA_TICKET requires eligible=true and issueCreatedAt.',
+      });
+    }
+    if (sync.eligibilityReason === 'HISTORICAL_TICKET' && (sync.eligible || sync.status !== 'NOT_REQUIRED')) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['eligible'],
+        message: 'HISTORICAL_TICKET must remain ineligible with status NOT_REQUIRED.',
+      });
+    }
+    if (sync.status === 'SYNCED') {
+      if (
+        sync.managedCommentId === null ||
+        sync.contentHash === null ||
+        sync.lastAttemptAt === null ||
+        sync.lastSyncedAt === null ||
+        sync.lastErrorCode !== null
+      ) {
+        ctx.addIssue({
+          code: 'custom',
+          path: ['status'],
+          message: 'SYNCED requires comment identity, content hash, attempt/sync timestamps, and no error code.',
+        });
+      }
+    }
+    if (sync.status === 'FAILED' && (sync.lastAttemptAt === null || sync.lastErrorCode === null)) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['status'],
+        message: 'FAILED requires lastAttemptAt and lastErrorCode.',
+      });
+    }
+  });
+
 export const workflowStateSchema = z
   .object({
     schemaVersion: z.literal(SCHEMA_VERSION),
@@ -90,6 +168,9 @@ export const workflowStateSchema = z
       })
       .nullable()
       .optional(),
+    // Absent on historical workflows. New workflows receive this only after Jira issue creation
+    // time is read from the raw snapshot, so old tickets can never be updated by backfill.
+    jiraAmbiguitySync: jiraAmbiguitySyncSchema.optional(),
   })
   .strict()
   .superRefine((state, ctx) => {

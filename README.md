@@ -114,6 +114,38 @@ allocate no `DEF-ID`:
 > to withhold them; the defect artifact then records `attachmentsWithheld: true` rather than
 > silently dropping evidence.
 
+### Temporary ETA-only Jira guard
+
+The version-controlled policy in `config/jira-write-policy.json` currently allows governed workflow
+starts and Jira comment, attachment and bug writes only for `ETA`. Jira retrieval and other
+read-only analysis remain available across projects.
+
+```powershell
+npm run jira:check -- WORKFLOW_START ETA-123
+npm run jira:check -- COMMENT_CREATE ETA-123
+```
+
+Governed agents do not receive direct Jira write tools. Comments, attachments and bugs use the
+guarded repository clients, which reject a missing, malformed or non-ETA target before credentials
+are loaded or a network connection is opened. The restriction has no environment override and does
+not expire automatically; changing or removing it requires a reviewed repository change.
+
+The description of an existing Jira issue is immutable in every workflow phase. Requirement
+normalization never writes back into the story description, and ambiguity lifecycle changes update
+only the managed comment. A new bug receives its initial human-reviewed description at creation;
+the framework does not edit that description later.
+
+For workflows and Jira tickets created after policy activation, Gate 1, Gate 2 and Gate 3 questions
+are mirrored into one managed Jira comment:
+
+```powershell
+npm run jira:sync-ambiguities -- WF-ETA-123-R1.0
+```
+
+Governed artifacts remain authoritative. The comment is updated when a question changes lifecycle,
+while Jira synchronization failure remains non-blocking and retryable. Historical workflows and
+old Jira tickets are never scanned or backfilled.
+
 ### Guardrail instruction files
 
 Three `.github/instructions/*.instructions.md` files are auto-attached by file path and carry the
@@ -239,10 +271,10 @@ never committed.
 | `ECORE_API_BASE_URL` | for eoRequestExport (HYBRID) scenarios | Base URL of the `/ecore/` integration API, e.g. `https://qa5.eoriginal.org:8443/ecore/` |
 | `ECORE_API_LOGIN_USERNAME` | for eoRequestExport (HYBRID) scenarios | A dedicated API-enabled account, distinct from `ECORE_USERNAME` |
 | `ECORE_API_KEY` | for eoRequestExport (HYBRID) scenarios | The API key for `ECORE_API_LOGIN_USERNAME`. Organization reuses `ECORE_ORGANIZATION` above |
-| `JIRA_URL` | no | Jira Cloud site URL, for a direct REST fallback |
-| `JIRA_EMAIL` | no | Atlassian account e-mail, for a direct REST fallback |
-| `JIRA_API_TOKEN` | no | Atlassian API token. **Not used by the MCP server**, which uses OAuth |
-| `JIRA_PROJECT_KEY` | no | Default Jira project key |
+| `JIRA_URL` | no | Jira Cloud site URL, for the read fallback and guarded repository writes |
+| `JIRA_EMAIL` | no | Atlassian account e-mail, for the read fallback and guarded repository writes |
+| `JIRA_API_TOKEN` | no | Atlassian API token for REST. **Not used by the MCP server**, which uses OAuth |
+| `JIRA_PROJECT_KEY` | no | Default Jira project key. Must be permitted by `config/jira-write-policy.json` for writes |
 | `JIRA_BUG_PROJECT_KEY` | no | Project bugs are filed in. Falls back to `JIRA_PROJECT_KEY` |
 | `JIRA_BUG_ISSUE_TYPE` | no | Issue type name for filed bugs. Defaults to `Bug` |
 | `JIRA_BUG_ASSIGNEE_ACCOUNT_ID` | for bug filing | Atlassian accountId every filed bug is assigned to for review |
@@ -326,8 +358,9 @@ Rules that are not negotiable:
 1. Authenticate the Atlassian MCP server (see above) and configure `.env`.
 2. In VS Code Agent Mode, select the **SDD Workflow Orchestrator** agent.
 3. Ask it to start the workflow, for example:
-   *"Start the SDD workflow for Jira story ABC-123, release 2.1, capability account-access."*
-4. It creates `workflow/instances/WF-ABC-123-R2.1.json`, delegates `JIRA_RETRIEVAL` to the Jira
+   *"Start the SDD workflow for Jira story ETA-123, release 2.1, capability account-access."*
+4. It first runs the ETA policy check, creates `workflow/instances/WF-ETA-123-R2.1.json`, delegates
+   `JIRA_RETRIEVAL` to the Jira
    Requirement Analysis Agent, and halts at Gate 1 with `WAITING_FOR_HUMAN`.
 5. Inspect progress at any time with `npm run workflow:status`.
 
@@ -528,6 +561,10 @@ npm run validate:defects        # defect reports are backed by real failed execu
 npm run validate:automation     # locator and wait policy in page objects, steps and fixtures
 npm run validate:artifacts      # everything
 npm run triage:failures         # classify failed results, preserve evidence, fingerprint them
+npm run jira:check -- WORKFLOW_START ETA-123 # verify a target before any governed write
+npm run jira:sync-ambiguities -- WF-ETA-123-R1.0 # update the single managed comment
+npm run test:jira-policy        # policy and guarded transport tests
+npm run test:jira-ambiguities   # synchronization state and formatting tests
 npm run workflow:status         # read-only summary of every workflow instance
 npm run typecheck               # tsc --noEmit
 ```
@@ -627,4 +664,3 @@ specs/                   Playwright Planner output (tool-owned)
     [reports/validation/TP-ETA-411-001-expectation-mismatch.json](reports/validation/TP-ETA-411-001-expectation-mismatch.json)
     with three options for the reviewer. The approved artifact was **not** edited to match observed
     behaviour.
-

@@ -7,18 +7,16 @@ tools:
   - edit
   - execute
   - atlassian/getJiraIssue
-  - atlassian/createJiraIssue
-  - atlassian/addCommentToJiraIssue
 ---
 
 <!--
   Model policy: no `model:` key is declared, so this agent inherits the current
   VS Code Agent Mode model, matching every other governed agent in this repo.
 
-  Jira access is provided by the official Atlassian MCP server configured in
-  .vscode/mcp.json. Authentication is interactive OAuth handled by VS Code,
-  which means this agent CANNOT run unattended in CI. Never place a token in a
-  workspace file.
+  Jira reads are provided by the official Atlassian MCP server configured in
+  .vscode/mcp.json. Restricted writes use the ETA-guarded repository REST
+  helper and the typed environment loader. Never place a token in a workspace
+  file.
 -->
 
 # Bug Analyzer Agent
@@ -59,7 +57,7 @@ are additional, not a replacement.
    Jira description or the chat. Name variables, never values.
 8. **Never write to `traceability/` directly.** That directory is orchestrator-owned. You write
    `traceability/capabilities/<capability>.rtm.proposed.json` and let the orchestrator merge it.
-9. **Never file a bug without an explicit human confirmation.** `createJiraIssue` may only be called
+9. **Never file a bug without an explicit human confirmation.** The guarded Jira write helper may only be called
    after the composed bug (summary, description, classification, evidence) has been shown to a human
    in chat and that human has given an explicit affirmative reply. `jira.linkedStory` is a governed
    traceability field, not proof that a human agreed to file — only a transcribed confirmation is.
@@ -67,6 +65,9 @@ are additional, not a replacement.
     `atlassian/createIssueLink`. The relationship between the bug and the story is recorded only in
     `jira.linkedStory` (this repository's own governed metadata) and in the description's `Story:`
     line — not as a live Jira "relates to" link.
+11. **Never edit an existing Jira issue description.** A new bug receives its initial description
+    only during guarded creation after human confirmation. Any later clarification belongs in a
+    comment; the source story and filed bug descriptions remain unchanged.
 
 ## What you own
 
@@ -241,14 +242,14 @@ Never write "this is a P1", "the API is broken" or "this affects all users". You
 
 ### 2.3a Human confirmation gate — required before filing
 
-`createJiraIssue` is an irreversible, external side effect. It may only run after a human has seen
+Jira bug creation is an irreversible, external side effect. It may only run after a human has seen
 the fully composed bug and explicitly said to file it.
 
 1. Set `status: REVIEW_REQUIRED` and save the defect artifact with the composed description from
    §2.3 already in `notes`.
 2. Show the human, in chat: the summary line, the full description, the classification, and the
    evidence file names. Ask a plain yes/no question — do not bury it in other output.
-3. **Stop here and wait.** Do not call `createJiraIssue` in the same turn you asked. A chat message
+3. **Stop here and wait.** Do not invoke the Jira write helper in the same turn you asked. A chat message
    from *you* is never a confirmation; only the human's reply is.
 4. If the human declines, changes the description, or asks a question: apply the change (if any),
    leave `status: REVIEW_REQUIRED`, and stop again. Re-ask after any material change.
@@ -261,20 +262,21 @@ the fully composed bug and explicitly said to file it.
 This sequence filed ETA-417 on 2026-09-07 with a link step that no longer applies — no issue link is
 created (see Non-negotiable rule 10). Follow the remaining order rather than improvising.
 
-1. **Create and assign in one call.** `atlassian/createJiraIssue` with `projectKey`, `issueTypeName`,
-   `summary`, `description` and **`assignee_account_id`** set to `assigneeAccountId`. Assigning at
-   creation means a bug can never exist unassigned, even briefly.
-   Pass `cloudId` as the `JIRA_URL` value — the tools accept a site URL in place of the UUID.
-   Carry the story's `fixVersions` through `additional_fields`. When the story has none, omit the
-   field entirely — never send a placeholder — and add this line to the description:
+1. **Create a request under `reports/defects/<DEF-ID>/jira-write-request.json`.** Use operation
+   `BUG_CREATE` and include the reviewed summary, description, story fix versions, the human's
+   confirmation text verbatim, and the permitted evidence paths. Do not put Jira credentials in the
+   request.
+2. **Run `npm run jira:write -- reports/defects/<DEF-ID>/jira-write-request.json`.** This repository
+   helper performs the ETA policy check before loading credentials or opening a network connection,
+   creates and assigns the bug through Jira REST, and uploads the evidence through the same guarded
+   path. A non-ETA destination must fail before any external side effect.
+   Assigning at creation means a bug can never exist unassigned, even briefly. When the story has no
+   fix version, pass an empty array and add this line to the description:
    `Fix version: none on the story under test. Set by the assigned reviewer.`
-2. **Attach** the evidence. The Atlassian MCP server exposes **no attachment tool**, so Jira REST
-   is the only route — do not waste a turn looking for one. Use `env.requireJiraConfig()`:
-   `POST {url}/rest/api/3/issue/{issueKey}/attachments` with header `X-Atlassian-Token: no-check`.
-   Record the route used in `jira.createdVia`.
    If `BUG_ATTACH_TRACE` is false, withhold `trace.zip`, still attach screenshots, and set
    `evidence.attachmentsWithheld: true`. Never silently drop evidence.
-3. **Read the issue back** with `atlassian/getJiraIssue` and confirm the assignee and every
+3. **Read the result** from `reports/jira/write-results/`, then read the issue back with
+   `atlassian/getJiraIssue` and confirm the assignee and every
    attachment landed. A create call returning `200` proves a ticket exists, not that it is complete.
    Record only what the read-back confirms — never what you intended to send. `jira.linkedStory`
    still records `jiraStoryId` in the defect artifact for this framework's own traceability, but no

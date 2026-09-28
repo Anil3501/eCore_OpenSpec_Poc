@@ -1,19 +1,35 @@
 {
-  "generatedAt": "2026-09-14T18:27:40.159Z",
+  "generatedAt": "2026-09-28T14:54:27.642Z",
   "scope": "automation",
   "summary": {
-    "total": 4,
-    "passed": 4,
+    "total": 7,
+    "passed": 6,
     "failed": 0,
-    "skipped": 0
+    "skipped": 1
   },
   "results": [
+    {
+      "id": "TPL-REVIEW-SECTIONS",
+      "title": "A review package blocking a gate carries every required section",
+      "status": "SKIPPED",
+      "messages": [
+        "No workflow is currently waiting at an approval gate."
+      ]
+    },
+    {
+      "id": "SEM-NO-PLACEHOLDERS",
+      "title": "No approved artifact still carries a template placeholder",
+      "status": "PASS",
+      "messages": [
+        "30 approved artifact(s) scanned."
+      ]
+    },
     {
       "id": "SEM-FEATURE-TAGS",
       "title": "Every Gherkin scenario carries traceability tags",
       "status": "PASS",
       "messages": [
-        "6 approved and generated feature file(s) checked."
+        "7 approved and generated feature file(s) checked."
       ]
     },
     {
@@ -27,8 +43,16 @@
       "title": "Automation code follows the approved locator and wait policy",
       "status": "PASS",
       "messages": [
-        "21 automation source file(s) and 3 approved feature file(s) checked against 5 locator/wait rules.",
-        "1 API client file(s) checked against 6 API hygiene rules."
+        "26 automation source file(s) and 4 approved feature file(s) checked against 5 locator/wait rules.",
+        "2 API client file(s) checked against 6 API hygiene rules."
+      ]
+    },
+    {
+      "id": "SEM-DISCOVERY-SIGNAL",
+      "title": "Multi-candidate discovery loops disqualify on content, not container chrome",
+      "status": "PASS",
+      "messages": [
+        "3 expectOpen() discovery site(s) checked across 26 file(s)."
       ]
     },
     {
@@ -36,7 +60,7 @@
       "title": "API scenarios rest on an authoritative, tagged contract",
       "status": "PASS",
       "messages": [
-        "10 API/hybrid scenario(s) checked."
+        "14 API/hybrid scenario(s) checked."
       ]
     }
   ]

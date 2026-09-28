@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "1.0",
+  "mode": "TEMPORARY_ALLOWLIST",
+  "activatedAt": "2026-09-28T13:39:42.575Z",
+  "allowedProjectKeys": [
+    "ETA"
+  ],
+  "immutableIssueFields": [
+    "description"
+  ],
+  "restrictedOperations": [
+    "WORKFLOW_START",
+    "COMMENT_CREATE",
+    "COMMENT_EDIT",
+    "ATTACHMENT_UPLOAD",
+    "BUG_CREATE"
+  ]
+}
