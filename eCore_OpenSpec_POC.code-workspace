@@ -2,6 +2,12 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"path": "../project-docs-ssp"
+		},
+		{
+			"path": "../ssp-specs"
 		}
 	],
 	"settings": {}

@@ -6,8 +6,8 @@ A complete, production-grade training guide and operational manual for **Manual 
 Leads, Product Owners, and Automation Engineers**. This v2 supersedes
 [manual-qa-training-and-operations-guide.md](manual-qa-training-and-operations-guide.md): it
 consolidates the duplicated tail sections of v1 into one clean flow, documents additional
-first-class framework features and flows, and expands the interactive training curriculum in
-[§16](#16-interactive-qa-training-curriculum-expanded).
+first-class framework features and flows, and turns the training curriculum into a recurring cycle in
+[§20](#20-continuous-qa-training-cycle-watch-learn-hands-on-apply-review-repeat).
 
 > **What changed from v1**
 > - Removed the duplicated section tree (v1 restarted its numbering after the curriculum).
@@ -16,8 +16,11 @@ first-class framework features and flows, and expands the interactive training c
 >   `KNOWN_AMBIGUITY`), API contract shape-hashing, capability-partitioned scaling, workflow locking
 >   & resumability, the two workflow entry points, the templates/manifest system, and the `SEM-*`
 >   semantic rules.
-> - Expanded the training curriculum with hourly modules, learning objectives, graded labs,
->   knowledge checks, and a certification path.
+> - Added four new sections: why Wolters Kluwer is adopting this model (§1.4), the agent/skill
+>   roster and how QE interacts with agents (§16), operating VS Code day-to-day (§17), where
+>   existing tests live and how they migrate (§18), and how this fits the QE lifecycle (§19).
+> - Replaced the one-time 4-day masterclass with a **recurring** Watch → Learn → Hands-on → Apply →
+>   Review → Repeat cycle (§20), run against real QE tickets, not just reference stories.
 
 ---
 
@@ -38,8 +41,12 @@ first-class framework features and flows, and expands the interactive training c
 13. [Failure Triage, Governed Locator Healing & Defect Logging](#13-failure-triage-governed-locator-healing--defect-logging)
 14. [Reports, Metrics, RTM & Coverage at Scale](#14-reports-metrics-rtm--coverage-at-scale)
 15. [Architecture, Layering, Governance Rules & Environment](#15-architecture-layering-governance-rules--environment)
-16. [Interactive QA Training Curriculum (Expanded)](#16-interactive-qa-training-curriculum-expanded)
-17. [Quick Reference Card](#17-quick-reference-card)
+16. [Agent Roster: How the Agents Work, and How QE Interacts With Them](#16-agent-roster-how-the-agents-work-and-how-qe-interacts-with-them)
+17. [Using VS Code with OpenSpec/SDD](#17-using-vs-code-with-openspecsdd)
+18. [Where Existing Tests Live & How They Migrate to the New Framework](#18-where-existing-tests-live--how-they-migrate-to-the-new-framework)
+19. [How This Fits the QE Lifecycle & What Changes Day-to-Day](#19-how-this-fits-the-qe-lifecycle--what-changes-day-to-day)
+20. [Continuous QA Training Cycle: Watch → Learn → Hands-on → Apply → Review → Repeat](#20-continuous-qa-training-cycle-watch-learn-hands-on-apply-review-repeat)
+21. [Quick Reference Card](#21-quick-reference-card)
 
 ---
 
@@ -101,9 +108,33 @@ Zod models. Violating any of them fails `npm run validate:artifacts`.
 | **Product Owner** | How ambiguities surface for your decision and where your answers are recorded. |
 | **Automation Engineer** | Layering rules, API contract governance, healing guardrails, and environment traps. |
 
+### 1.4 Why Wolters Kluwer Is Adopting This Model
+Three pressures are driving the move, in plain terms:
+
+- **Scale.** Manual + ad-hoc scripted regression cannot keep pace with 3,000+ scenarios across a
+  growing product surface (eCore, SmartSign+ and its sibling repos). Capability-partitioned RTMs
+  and agent-drafted automation are how that scale gets covered without a proportional headcount
+  increase.
+- **Speed without losing control.** Generative AI can draft requirements analysis, test scenarios
+  and Playwright code far faster than a human typing them line by line — but unsupervised AI output
+  is not trustworthy for regulated e-signature/document workflows. SDD is WK's answer to getting the
+  speed **and** keeping every business rule, locator and defect under human sign-off (see the five
+  non-negotiable rules in [§1.2](#12-the-five-non-negotiable-rules)).
+- **Auditability.** Every requirement, test scenario and approval is a stable-ID, schema-validated
+  artifact on disk — not a chat transcript or a spreadsheet — so a regulator, auditor or new team
+  member can trace *why* a scenario exists back to the exact acceptance criterion and Jira story that
+  produced it. This is the same spec-first discipline already used for OpenSpec changes in
+  `ssp-specs` for the SmartSign+ product line, so the pattern is deliberately shared across teams.
+
 ---
 
 ## 2. Why Governed Spec-Driven Development (SDD)?
+**What is SDD?** Spec-Driven Development means every change starts from an approved, machine- and
+human-readable specification — not from a developer's private mental model of the requirement.
+**What is OpenSpec?** OpenSpec is the tool that authors and version-controls that specification as a
+delta change plus a living spec document (full detail in [§4](#4-the-role-of-openspec-from-delta-changes-to-living-specifications)).
+Together they are the layer that sits *before* any test or code is generated, so both the test and
+the implementation are checked against the same approved source of truth.
 
 | Capability Area | Traditional Manual + Scripted | Ungoverned Autonomous AI | Governed SDD (This Framework) |
 | :--- | :--- | :--- | :--- |
@@ -751,23 +782,222 @@ new artifact must not open them to find a field's shape or phrasing.
 
 ---
 
-## 16. Interactive QA Training Curriculum (Expanded)
+## 16. Agent Roster: How the Agents Work, and How QE Interacts With Them
 
-A structured **4-day masterclass** (≈6 taught hours/day) plus an optional **Day 5 certification**.
-Each module lists a learning objective, a hands-on lab, and a knowledge check. Reference stories:
-`ETA-351` (UI, `account-access`), `ETA-411` (multi-scenario, `home-navigation`), `EC-12000`
-(API/HYBRID, `paper-out-export`), `EC-11358` (HYBRID, `document-activity-history`).
+### 16.1 How the agents work, in one picture
+The **`sdd-workflow-orchestrator`** is the only agent that owns workflow state. It reads the durable
+instance file, runs **exactly one stage**, delegates that stage to a specialist agent when one
+exists, persists the result, and halts at the next gate. No agent jumps ahead, and no agent invents
+what a specialist agent hasn't produced.
 
 ```mermaid
-timeline
-    title 4-Day Manual QA Automation Masterclass
-    Day 1 : SDD Foundations : Jira Intake & Atlassian MCP : Gate 1 AC Review & Sign-off
-    Day 2 : Test Planning & Scenarios : UI vs API vs Hybrid : Contract Governance : Gate 2
-    Day 3 : BDD Gherkin & Layering : Playwright MCP Validation : Gate 3
-    Day 4 : Execution : Failure Triage & Healing : Human Defect Logging : RTM & OpenSpec Archival
+flowchart LR
+    QE[QE Engineer in Copilot Chat] -->|"Start / continue workflow for <STORY>"| ORC[sdd-workflow-orchestrator]
+    ORC -->|JIRA_RETRIEVAL...AC_REVIEW_PACKAGE| FA[jira-requirement-analysis\n Functional Analysis Agent]
+    ORC -->|OPENSPEC_GENERATION / ARCHIVE| OS[OpenSpec agent]
+    ORC -->|TEST_PLAN_GENERATION...EXECUTION| ORC
+    ORC -->|failed run| BA[bug-analyzer]
+    BA -->|locator suspect| GLH[governed-locator-healer]
+    FA --> ORC
+    OS --> ORC
+    GLH --> ORC
 ```
 
-### Day 1 — Foundations, SDD & Gate 1
+### 16.2 The functional analysis agent — `jira-requirement-analysis`
+This is the agent QE will meet first on every new story. It retrieves the Jira issue through the
+official Atlassian MCP (never guesses at it), preserves the raw snapshot verbatim, normalizes it
+into stable `REQ-*` IDs, extracts acceptance criteria verbatim as `AC-*`, proposes additional
+criteria **only** with an explicit rationale, and raises an `AMB-*` for anything missing. It always
+**stops at Gate 1** — it never approves its own extraction, and it never touches a test plan.
+
+### 16.3 The test-case generation stage — `TEST_PLAN_GENERATION`
+Test-case generation is **not** a separate persistent agent file; it is a stage the
+`sdd-workflow-orchestrator` performs itself once Gate 1 is signed. It authors `TS-*` scenarios,
+assigns each an interface type (`UI`/`API`/`HYBRID`), attaches contracts where needed, and proposes
+cross-story reuse where a matching scenario already exists (see [§5.5](#55-cross-story-scenario-reuse)).
+The generic **`playwright-test-planner`** / **`playwright-test-generator`** sub-agents are
+tool-provided and remain available for ad-hoc, non-governed exploration, but the governed workflow
+never delegates to them — their built-in markdown plan / flat `.spec.ts` output doesn't match this
+framework's schema-validated artifacts or strict feature/step/page-object layering.
+
+### 16.4 Other available agents
+
+| Agent | Role | When QE sees it |
+| :--- | :--- | :--- |
+| `sdd-workflow-orchestrator` | Owns state, stage sequencing, gates, and drives Playwright MCP directly at `PLAYWRIGHT_VALIDATION`/`IMPLEMENTATION`. | Every stage of every story. |
+| `jira-requirement-analysis` | Functional analysis — see [§16.2](#162-the-functional-analysis-agent--jira-requirement-analysis). | Stages 1–4, always stops at Gate 1. |
+| `OpenSpec` | Drafts/validates/archives the delta spec and living spec. | `OPENSPEC_GENERATION`, `OPENSPEC_ARCHIVE`. |
+| `bug-analyzer` | Triages a failed run, classifies it, preserves evidence, and — only after a human confirms the composed bug in chat — files a Jira defect. | Any red run at `FAILURE_TRIAGE`/`BUG_REPORTING`. |
+| `governed-locator-healer` | Repairs a stale/ambiguous locator, capped at two attempts, then hands off to `bug-analyzer`. | `LOCATOR_HEALING`. |
+| `playwright-test-planner` / `playwright-test-generator` / `playwright-test-healer` | Generic, tool-provided Playwright sub-agents. Left available for manual, outside-workflow use; never invoked by the governed path. | Ad-hoc use only, if a QE wants a scratch exploration. |
+| `Explore` | Fast, read-only codebase Q&A. Safe to call any time you just need an answer, not a change. | Whenever you're not sure where something lives. |
+
+### 16.5 Other available skills
+Skills are reusable playbooks an agent (or a human, via a prompt file) can follow. The ones already
+in this repo:
+
+| Skill | Purpose |
+| :--- | :--- |
+| `openspec-propose` | Draft a complete new OpenSpec change (proposal + design + specs + tasks) in one step. |
+| `openspec-apply-change` | Work through an OpenSpec change's task list during implementation. |
+| `openspec-update-change` | Revise an existing change's planning artifacts and keep them coherent. |
+| `openspec-sync-specs` | Fold an approved delta spec into the main living specs without archiving. |
+| `openspec-archive-change` | Finalize and archive a completed change. |
+| `openspec-explore` | A thinking-partner mode for exploring an idea before committing to a change. |
+| `playwright-mcp-validate` | Drive Playwright MCP against the real app to replace `MCP_VALIDATION_REQUIRED` / `API_CONTRACT_UNVERIFIED` placeholders with confirmed evidence. |
+| `blocker-escalation-note` | Turn a recorded `BLOCKER-*`/`AMB-*` into a short note a human can hand to a developer or PO. |
+
+### 16.6 How QE interacts with the agents
+QE never edits agent internals and never calls a tool directly — everything happens through natural
+language in Copilot Chat, and every agent response is checked against artifacts on disk, not trusted
+on its word. In practice:
+
+1. **Start or resume:** *"Start the workflow for EC-12000 in release 26.3."* / *"Continue WF-EC-12000-R26.3."*
+2. **Review, not rubber-stamp:** open the review package the orchestrator names (a `.md` file), read
+   it against the real Jira story, and only then write the approval JSON yourself (or ask the agent
+   to draft it and you edit the decision fields) — a chat reply alone is never an approval
+   ([§1.2, rule 1](#12-the-five-non-negotiable-rules)).
+3. **Answer ambiguities directly:** when an `AMB-*` or `BLOCKER-*` surfaces, QE (or the PO, via QE)
+   supplies the missing business fact; the agent never guesses it.
+4. **Confirm, don't assume, defect filing:** `bug-analyzer` composes a bug in chat and waits — it
+   files nothing until QE explicitly replies to confirm.
+5. **Ask `Explore` when in doubt:** if you just need to find where something lives, ask `Explore`
+   instead of digging through folders by hand.
+
+---
+
+## 17. Using VS Code with OpenSpec/SDD
+
+### 17.1 Opening the workspace and picking an agent
+Open the `.code-workspace` file so both `eCore_OpenSpec_POC` and any sibling spec repo load together.
+In the Copilot Chat panel, use the agent picker to select `sdd-workflow-orchestrator` for anything
+workflow-related; leave it on the default agent for a quick read-only question (or explicitly ask for
+`Explore`).
+
+### 17.2 Driving the workflow from chat
+Typical turns look like plain English, because the orchestrator itself resolves them to a stage:
+- *"Start the workflow for `<JIRA-KEY>`."*
+- *"Show me the Gate 1 review package for `<JIRA-KEY>`."*
+- *"Gate 2 approved, notes attached — continue."*
+- *"What's blocking `WF-<STORY>-R<release>`?"* (or run `npm run workflow:status` yourself)
+
+### 17.3 Terminal commands you'll run every session
+```powershell
+npm run preflight            # run this first, every session
+npm run validate:artifacts   # run this after any artifact you touched
+npm run workflow:status      # read-only, no side effects — safe to run any time
+```
+See the [§21 Quick Reference Card](#21-quick-reference-card) for the full command list.
+
+### 17.4 Reviewing artifacts in the editor
+Every gate's review package is plain Markdown, and every approval is plain JSON — both render and
+diff natively in VS Code. Use the editor's built-in JSON schema validation (this repo's schemas are
+already wired up) to catch a malformed field before `validate:artifacts` does. Use the Search view
+or `grep` to find every place a given `REQ-*`/`AC-*`/`TS-*` ID appears before signing off on it.
+
+### 17.5 Recommended habits
+- Never hand-edit `.features-gen/**` — it's regenerated by `bddgen` and any edit is silently lost.
+- Keep the terminal in PowerShell mode and chain commands with `;`, not `&&`.
+- Run `npm run preflight` at the start of a session and after switching branches — a stage's
+  `requires` list doesn't check that its own CLI is installed.
+
+---
+
+## 18. Where Existing Tests Live & How They Migrate to the New Framework
+
+### 18.1 Where tests live today
+- **Manual test cases** historically live in Jira/TestRail/spreadsheets, written and executed by
+  hand story-by-story, with no machine-checkable link back to the acceptance criteria they cover.
+- **Existing scripted automation** for the SmartSign+ product line lives in a sibling
+  Playwright-BDD repository (see the `ssp-specs` workspace root's `openspec/` and its own
+  feature/step/page-object layering), following the same layering conventions this framework uses.
+
+### 18.2 Where tests live in this framework
+| What | Where |
+| :--- | :--- |
+| Approved Gherkin scenarios | `features/approved/<capability>/*.feature` |
+| Step definitions (thin orchestration only) | `steps/**` |
+| Page objects / components (locators) | `src/pages/**`, `src/components/**` |
+| API clients / Zod contracts | `src/api/**`, `src/models/api/**` |
+| Test plans (source of truth for scenario coverage) | `test-plans/approved/*.json` |
+| Traceability (what's automated, what's manual-only, what's deferred) | `traceability/capabilities/*.rtm.json` |
+
+### 18.3 The migration model: story-by-story, never a rewrite
+There is no big-bang cutover. A story migrates only when it is driven through the governed workflow:
+1. **New automation** is written fresh, via the normal `NEW_STORY` entry point.
+2. **A story already covered by legacy/manual tests** keeps those tests running unchanged until a
+   human decides, at Gate 2, to retire or supersede them — an API scenario **adds** coverage, it
+   never silently replaces a UI scenario ([§7](#7-the-3-human-approval-gates)).
+3. **A story whose automation exists but needs new coverage** (e.g. adding API coverage to an
+   already-automated UI story) re-enters at Gate 2 via `TEST_STRATEGY_REVISION`
+   ([§9.4](#94-the-two-entry-points)) rather than being rewritten from scratch.
+4. **Cross-story reuse** ([§5.5](#55-cross-story-scenario-reuse)) lets a new story point at an
+   already-implemented scenario from another story instead of duplicating it, once a human confirms
+   the match is real and not just a matching title.
+
+---
+
+## 19. How This Fits the QE Lifecycle & What Changes Day-to-Day
+
+### 19.1 Mapping onto the QE lifecycle
+| Traditional QE lifecycle stage | Where it sits in this framework |
+| :--- | :--- |
+| Requirements review | `JIRA_RETRIEVAL` → `AC_REVIEW_PACKAGE` → **Gate 1** |
+| Test design | `TEST_PLAN_GENERATION` → **Gate 2** |
+| Automation / scripting | `BDD_DESIGN` → `AUTOMATION_REVIEW_PACKAGE` → **Gate 3** → `PLAYWRIGHT_VALIDATION` → `IMPLEMENTATION` |
+| Execution | `BDD_GENERATION` → `EXECUTION` |
+| Defect management | `FAILURE_TRIAGE` → `LOCATOR_HEALING` / `BUG_REPORTING` |
+| Regression / coverage reporting | `RTM_UPDATE` (capability RTM + coverage matrix) |
+| Release sign-off | `OPENSPEC_ARCHIVE` folds the delivered behaviour into the living spec |
+
+Nothing about the lifecycle's *stages* changes — QE still reviews requirements, designs tests,
+watches automation run, triages failures, and reports coverage. What changes is *who drafts the
+first version of each artifact* and *what evidence backs each decision*.
+
+### 19.2 What changes day-to-day for QE engineers
+| Before | Now |
+| :--- | :--- |
+| Write ACs/test cases from scratch in a spreadsheet or TestRail. | Review an agent-drafted extraction against the real Jira story and sign or correct it. |
+| Hand-code Playwright/Selenium scripts line by line. | Review generated Gherkin, validated locators, and a design doc; sign or request changes. |
+| Chase down why a coverage number looks off. | Read a capability RTM/coverage matrix that is mechanically derived and never fabricated. |
+| Manually retype an XPath when the DOM changes. | Let `governed-locator-healer` attempt a fix (max 2 tries); review the diff. |
+| File a bug by hand, often without full repro evidence. | Review a fully composed bug (with evidence) and explicitly confirm before it's filed. |
+| Test design and automation happen in separate tools/teams. | Both live in the same governed workflow with a single audit trail per story. |
+
+The QE engineer's judgement calls **increase in importance, not decrease**: business-rule decisions,
+ambiguity answers, gate approvals, reuse confirmations, and defect confirmations are all still,
+and only ever, a human call.
+
+---
+
+## 20. Continuous QA Training Cycle: Watch → Learn → Hands-on → Apply → Review → Repeat
+
+This is **not a one-time workshop**. Training runs as a recurring loop, applied to a fresh real QE
+ticket every cycle, so the skill keeps compounding instead of decaying after a single session.
+
+```mermaid
+flowchart LR
+    W[Watch\na short demo of one\nworkflow slice] --> L[Learn\nread the matching\nguide section + quiz]
+    L --> H[Hands-on\nsandbox lab on a\nreference story]
+    H --> A[Apply to real work\nrun the same slice on\nyour own QE ticket]
+    A --> R[Review\npaired review with a\nmentor/lead]
+    R -->|next slice, next real ticket| W
+```
+
+| Loop stage | What happens | Who's involved |
+| :--- | :--- | :--- |
+| **Watch** | A short (15–20 min) live or recorded walkthrough of **one** workflow slice — e.g. just Gate 1, or just failure triage. | Facilitator demos; trainees observe only. |
+| **Learn** | Trainees read the matching section of this guide and answer the knowledge checks below before touching a keyboard. | Self-paced, checked in the next session. |
+| **Hands-on** | Trainees repeat the same slice in a sandbox against a **reference story** (`ETA-351`, `ETA-411`, `EC-12000`, `EC-11358`) where the "right answer" is already known. | Trainee, with a mentor on standby. |
+| **Apply to real work** | Trainees repeat the identical slice against **their own currently assigned, real QE ticket/application** — not a reference story — with a coach available. | Trainee + mentor; produces real artifacts. |
+| **Review** | A lead/mentor pairs with the trainee on the real artifacts just produced (the Gate signature, the triage call, the defect draft), gives feedback, and logs it. | Mentor + trainee. |
+| **Repeat** | The next cycle covers the next workflow slice, reusing the same loop — and keeps running, on a normal sprint cadence, after the formal curriculum ends. It never stops at a fixed end date. | Whole team, ongoing. |
+
+> **Cadence:** one slice per cycle, roughly weekly, folded into normal sprint ceremonies once the
+> initial six cycles below are complete — this becomes the team's standing way of onboarding new
+> stories and new hires, not a one-off event.
+
+### Cycle 1 — Foundations, SDD & Gate 1
 
 | Module | Learning objective | Hands-on lab | Knowledge check |
 | :--- | :--- | :--- | :--- |
@@ -777,9 +1007,11 @@ timeline
 | **1.4 Requirement normalization** | Distinguish extracted vs. proposed ACs and `AMB-*`. | Read `requirements/normalized/ETA-351.json`. | Spot one proposed AC and justify it. |
 | **1.5 Gate 1 review** | Complete a real Gate 1 sign-off. | Review `ETA-351-ac-review.md`; write `ETA-351-ac-approval.json`. | Which decisions flow downstream, which don't? |
 
-**Day-1 outcome:** a signed Gate 1 approval that passes `npm run validate:artifacts`.
+**Apply-to-real-work step:** run modules 1.3–1.5 again, this time against a ticket actually assigned
+to you this sprint. **Cycle-1 outcome:** a signed Gate 1 approval, on both the reference story and
+your real ticket, that passes `npm run validate:artifacts`.
 
-### Day 2 — Test Planning, Interface Types, Contracts & Gate 2
+### Cycle 2 — Test Planning, Interface Types, Contracts & Gate 2
 
 | Module | Learning objective | Hands-on lab | Knowledge check |
 | :--- | :--- | :--- | :--- |
@@ -790,9 +1022,11 @@ timeline
 | **2.5 Cross-story reuse** | Propose and confirm a `REUSE` claim. | Add a `reuseSource` (PROPOSED) and reason about it. | What makes titles insufficient proof? |
 | **2.6 Gate 2 review** | Sign a test-plan approval. | Approve `TP-EC-12000-001-approval.json`. | Where is a contract promoted to `HUMAN_APPROVED`? |
 
-**Day-2 outcome:** a signed Gate 2 approval with at least one `HUMAN_APPROVED` contract.
+**Apply-to-real-work step:** author and sign the Gate 2 plan for your own ticket from Cycle 1.
+**Cycle-2 outcome:** a signed Gate 2 approval with at least one `HUMAN_APPROVED` contract, on your
+real ticket.
 
-### Day 3 — BDD Gherkin, Layering, MCP Validation & Gate 3
+### Cycle 3 — BDD Gherkin, Layering, MCP Validation & Gate 3
 
 | Module | Learning objective | Hands-on lab | Knowledge check |
 | :--- | :--- | :--- | :--- |
@@ -803,10 +1037,11 @@ timeline
 | **3.5 Contract observation** | Capture an `.eo` call from live traffic. | Record `browser_network_requests` for a hybrid flow. | Why is observed traffic not authority? |
 | **3.6 Gate 3 review** | Sign an automation-design approval. | Approve `TP-EC-12000-001-automation-approval.json`. | Why do features stay in `generated/` until now? |
 
-**Day-3 outcome:** validated locators/contracts and a signed Gate 3 approval; feature promoted to
-`features/approved/`.
+**Apply-to-real-work step:** validate locators/contracts and sign Gate 3 for your own ticket.
+**Cycle-3 outcome:** validated locators/contracts and a signed Gate 3 approval; your feature promoted
+to `features/approved/`.
 
-### Day 4 — Execution, Triage, Healing, Defects & Living Specs
+### Cycle 4 — Execution, Triage, Healing, Defects & Living Specs
 
 | Module | Learning objective | Hands-on lab | Knowledge check |
 | :--- | :--- | :--- | :--- |
@@ -817,10 +1052,11 @@ timeline
 | **4.5 Governed defect filing** | Walk the human-confirmation gate. | Draft a defect; rehearse the confirm/reject flow. | Why no Jira link between bug and story? |
 | **4.6 RTM & archival** | Update RTM and archive a change. | Inspect coverage; `npx openspec validate` then `archive`. | When is archival blocked? |
 
-**Day-4 outcome:** a green (or correctly-triaged) run, an updated RTM, and an archived OpenSpec
-change.
+**Apply-to-real-work step:** run your own ticket to a green (or correctly-triaged) execution and
+update its RTM entry. **Cycle-4 outcome:** a green or correctly-triaged run, an updated RTM, and — if
+the story is complete — an archived OpenSpec change, on your real ticket.
 
-### Day 5 (Optional) — Scaling, Multi-Env, Roles & Certification
+### Cycle 5 (Recurring) — Scaling, Multi-Env, Roles
 
 | Module | Learning objective | Hands-on lab | Knowledge check |
 | :--- | :--- | :--- | :--- |
@@ -828,14 +1064,23 @@ change.
 | **5.2 Multi-environment** | Run against a non-default profile. | Launch with `--env=<profile>`; read `env.ts` resolution. | Why never read `process.env` directly? |
 | **5.3 Second identities** | Configure a role user safely. | Add a role to `config/test-users.json` + `.env` prefix. | Why can't an agent invent a role? |
 | **5.4 `TEST_STRATEGY_REVISION`** | Add API coverage to an automated story. | Re-enter at Gate 2; preserve prior evidence first. | What must precede an instance reset? |
-| **5.5 Capstone** | Take a fresh story end-to-end through all three gates. | Drive an unseen story to a green RTM. | — |
 
-**Certification criteria:** independently drive a story through all three gates with zero
-non-negotiable-rule violations; produce a validating RTM with honest coverage; correctly triage one
-of each failure class; and file one human-confirmed defect. Pass = a clean
-`npm run validate:artifacts` plus a reviewer sign-off on the capstone.
+### Cycle 6 (Checkpoint, not an endpoint) — Full Loop on a Real Ticket
 
-### Assessment rubric (per day)
+| Module | Learning objective | Hands-on lab | Knowledge check |
+| :--- | :--- | :--- | :--- |
+| **6.1 Full-loop capstone** | Independently drive one real, previously-untouched QE ticket end to end through all three gates and execution. | Pick an unseen ticket from your own backlog; run it through Watch → Learn → Hands-on → Apply → Review with a mentor observing only the Review step. | — |
+
+**Checkpoint criteria (not a finish line):** independently drive a real ticket through all three
+gates with zero non-negotiable-rule violations; produce a validating RTM with honest coverage;
+correctly triage one of each failure class encountered; and file one human-confirmed defect if one
+arises. Pass = a clean `npm run validate:artifacts` plus a mentor sign-off in Review. **After the
+checkpoint, the cycle does not stop** — it folds into the normal sprint rhythm: every new real ticket
+a trainee picks up runs through the same Watch → Learn (as needed) → Hands-on (as needed) → Apply →
+Review loop, with Review gradually shrinking from every ticket to a periodic spot-check as
+proficiency grows.
+
+### Assessment rubric (progressive, re-applied every cycle)
 
 | Level | Criteria |
 | :--- | :--- |
@@ -845,7 +1090,7 @@ of each failure class; and file one human-confirmed defect. Pass = a clean
 
 ---
 
-## 17. Quick Reference Card
+## 21. Quick Reference Card
 
 ```powershell
 # Setup & health
