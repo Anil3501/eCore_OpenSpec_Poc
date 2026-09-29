@@ -23,8 +23,10 @@ npm run triage:failures      # classify failed results, preserve evidence, finge
 npm run jira:fetch -- ETA-351 # REST fallback: fetch an issue verbatim into reports/jira/
 npm run jira:check -- WORKFLOW_START ETA-351 # fail-closed temporary ETA guard
 npm run jira:sync-ambiguities -- WF-ETA-351-R1.0 # guarded managed-comment sync
+npm run jira:sync-approved-artifacts -- WF-ETA-351-R1.0 SYNC ACCEPTANCE_CRITERIA
 npm run test:jira-policy     # policy, side-effect and bypass regression tests
 npm run test:jira-ambiguities # durable sync-state and comment-format tests
+npm run test:jira-approved-artifacts # approved attachment lifecycle and idempotency tests
 npm run workflow:status      # read-only summary of every workflow instance
 ```
 
@@ -55,6 +57,14 @@ the Jira issue were created at or after the policy activation timestamp. Eligibl
 one managed Jira comment synchronized before each approval gate and on gate resume. Existing
 workflow instances and historical Jira tickets are never backfilled. Jira synchronization failure
 is recorded and retryable but never substitutes for or blocks the normal approval artifact.
+
+The same eligibility initializes `jiraApprovedArtifactSync`. After Gate 1 or Gate 2 approval
+validates and the artifact is promoted, the orchestrator uploads only the approved requirements or
+approved test-plan JSON with a versioned filename and maintains a separate managed comment. Old
+attachments are never deleted: reopening Gate 1 supersedes the current AC and stales dependent
+plans; reopening Gate 2 supersedes only the current plan; Gate 3 reopening changes neither. Drafts,
+raw snapshots, approval templates, credentials, sessions, traces and test data are never uploaded.
+Repository artifacts remain authoritative, and synchronization failure remains non-blocking.
 
 ## Non-negotiable rules
 
@@ -226,12 +236,8 @@ that shortcut — they must always exercise the real sign-in.
 The **SDD Workflow Orchestrator** owns all state and every handoff. It runs **one stage per
 invocation**, then persists state. Stage order, per-stage agent, required inputs and outputs are
 data, not prose — see
-[workflow/definitions/sdd-jira-to-automation.workflow.json](workflow/definitions/sdd-jira-to-automation.workflow.json).
-
-For the file-by-file list of everything one story creates, in stage order, with the reference
-`ETA-351` filenames, see
-[docs/framework-file-creation-sequence.md](docs/framework-file-creation-sequence.md). Consult it
-before creating an artifact rather than guessing a path.
+[workflow/definitions/sdd-jira-to-automation.workflow.json](workflow/definitions/sdd-jira-to-automation.workflow.json)
+and the blank artifact structures under [templates/](templates/README.md).
 
 | Directory | Contains | Owner |
 | --- | --- | --- |

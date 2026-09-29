@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-28T14:54:36.439Z",
+  "generatedAt": "2026-09-29T10:18:41.565Z",
   "scope": "all",
   "summary": {
     "total": 26,
@@ -125,7 +125,7 @@
       "title": "Open OpenSpec changes pass `openspec validate --strict`",
       "status": "PASS",
       "messages": [
-        "4 open change(s) validated: add-control-history-section, add-organization-login, add-temporary-eta-jira-guard, track-paper-out-media-type."
+        "3 open change(s) validated: add-control-history-section, add-organization-login, track-paper-out-media-type."
       ]
     },
     {

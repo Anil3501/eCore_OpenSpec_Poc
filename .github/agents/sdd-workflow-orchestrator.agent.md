@@ -164,7 +164,8 @@ For every request, run this loop exactly once per batch:
    `workflow/instances/WF-<JIRA-ID>-R<release>.json`. If it does not exist
    and the user asked to start a workflow, create it with `status = NOT_STARTED`,
    `currentStage = JIRA_RETRIEVAL`, `retryCount = 0`, `processingLock = null`, and
-   `jiraAmbiguitySync` set to `PENDING_ISSUE_VERIFICATION`, ineligible and `NOT_REQUIRED`.
+   both `jiraAmbiguitySync` and `jiraApprovedArtifactSync` set to
+   `PENDING_ISSUE_VERIFICATION`, ineligible and `NOT_REQUIRED`.
 2. **Check the lock.** If `processingLock` is non-null and not owned by this run, stop and report
    that another process holds the lock. Never write to a locked artifact.
 3. **Verify prerequisites** for `currentStage` using the `requires` list in the workflow definition.
@@ -218,11 +219,25 @@ have `decision = APPROVE`. Only items with an item-level `APPROVE` decision may 
 status.
 
 If `decision` is `REQUEST_CHANGES`, set `status = CHANGES_REQUESTED`, return `currentStage` to the
-generating stage, increment `retryCount`, and re-run only the affected items.
+generating stage, increment `retryCount`, and re-run only the affected items. If that gate already
+has a CURRENT approved-artifact Jira attachment, first run
+`npm run jira:sync-approved-artifacts -- <workflowId> REOPEN <gate>` and apply its `statePatch`.
+Gate 1 reopening marks the current AC attachment `SUPERSEDED` and dependent current plans `STALE`;
+Gate 2 reopening supersedes only the current plan; Gate 3 reopening changes neither.
 
 On every gate resume, run the same synchronization again after applying recorded human answers and
 before starting the next stage. The content hash makes unchanged retries a no-op, while resolved,
 deferred, withdrawn or changed questions update the same managed comment.
+
+After a Gate 1 approval validates and `requirements/approved/<JIRA-ID>.json` is promoted, run
+`npm run jira:sync-approved-artifacts -- <workflowId> SYNC ACCEPTANCE_CRITERIA`. After a Gate 2
+approval validates and the plan is promoted, retry the AC command first, then run
+`npm run jira:sync-approved-artifacts -- <workflowId> SYNC TEST_PLAN`. Apply every report's
+`statePatch` to workflow state. Synchronization uses a separate managed approved-artifacts comment,
+uploads only schema-valid approved artifacts with versioned filenames, and never uploads drafts,
+raw Jira snapshots, review packages, approval templates, test data, sessions, traces or evidence.
+A `FAILED` result is visible and retryable but never invalidates the approval or blocks the next
+stage. A Jira attachment or comment is never approval evidence.
 
 ## Stage-specific instructions
 
@@ -233,10 +248,10 @@ reject the handoff.
 
 After `JIRA_RETRIEVAL`, read the Jira issue's real creation timestamp from the raw snapshot. Compare
 both it and the workflow's `createdAt` with `config/jira-write-policy.json.activatedAt`. Set
-`jiraAmbiguitySync.eligibilityReason` to `NEW_ETA_TICKET` and `eligible: true` only when both are at
-or after activation; otherwise set `HISTORICAL_TICKET`, `eligible: false` and `status:
-NOT_REQUIRED`. Never infer creation time from an updated timestamp and never backfill a workflow
-that lacks the synchronization block.
+both synchronization blocks' `eligibilityReason` to `NEW_ETA_TICKET` and `eligible: true` only when
+both are at or after activation; otherwise set both to `HISTORICAL_TICKET`, `eligible: false` and
+`status: NOT_REQUIRED`. They must carry the same issue creation timestamp. Never infer creation time
+from an updated timestamp and never backfill a workflow that lacks either synchronization block.
 
 **OPENSPEC_GENERATION** — invoke the existing OpenSpec workflow (`openspec-propose` skill /
 `opsx-propose` prompt / `OpenSpec` agent). Follow `openspec/config.yaml` and the CLI-reported paths.

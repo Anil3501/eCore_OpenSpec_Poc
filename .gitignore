@@ -30,6 +30,7 @@ reports/defects/
 # external issue identifiers and human confirmation text. They are runtime
 # communication evidence, not repository artifacts.
 reports/jira/ambiguity-sync/
+reports/jira/approved-artifact-sync/
 reports/jira/write-results/
 
 # Local authenticated session / storage state (never commit)

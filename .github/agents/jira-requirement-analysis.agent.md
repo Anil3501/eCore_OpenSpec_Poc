@@ -69,15 +69,38 @@ schema are always sufficient. It exists purely as human-facing reading material.
    interpretation. Set `dataClassification` to `REAL_JIRA_DATA`.
 3. **Verify identity.** The returned issue key must equal the requested key. If it does not, stop
    and report the mismatch.
-4. **Normalize** the story into requirements with ids `REQ-<JIRA-ID>-NNN`.
-5. **Extract** existing acceptance criteria into `AC-<JIRA-ID>-NNN`.
-6. **Analyse sufficiency** and produce the review package.
-7. **Validate** with `npm run validate:requirements`. One correction attempt; if it fails again,
+4. **Resolve fields and custom fields.** Resolve field names dynamically via the `names` mapping in
+   the raw snapshot. When standard `description` is empty or generic, inspect custom fields (e.g.
+   "Acceptance Criteria", "Functional Specs", "Requirements", "Preconditions") and embedded sections.
+5. **Normalize** the story into requirements with ids `REQ-<JIRA-ID>-NNN`.
+6. **Extract** existing acceptance criteria into `AC-<JIRA-ID>-NNN`.
+7. **Analyse sufficiency** and produce the review package.
+8. **Validate** with `npm run validate:requirements`. One correction attempt; if it fails again,
    stop and report the exact validation error.
-8. **Hand back to the orchestrator** with the validated Gate 1 outputs and the Jira issue's original
+9. **Hand back to the orchestrator** with the validated Gate 1 outputs and the Jira issue's original
    creation timestamp from the raw snapshot. Do not set `WAITING_FOR_HUMAN` yourself: the
    orchestrator must first determine new-ticket eligibility and synchronize the managed ambiguity
    comment. **Stop.**
+
+## Resolving field mismatches and custom fields
+
+Jira projects and issue types often use custom fields or varying schemas to store requirements and
+acceptance criteria.
+- **Dynamic Field Mapping**: Inspect the `names` dictionary in the raw Jira response (`raw.names`) to
+  resolve any `customfield_*` ID to its human-readable title.
+- **Search Hierarchy**: Search for requirements and acceptance criteria in:
+  1. Standard `description` and `summary`.
+  2. Custom fields whose names match "Acceptance Criteria", "Requirements", "Functional Specs",
+     "Business Rules", "Preconditions", or "Test Conditions".
+  3. Embedded structured headings/tables inside description or ADF text (e.g. `## Acceptance Criteria`).
+  4. Parent epic description or linked issues where explicitly linked as parent/context.
+- **Preservation & Provenance**: When extracting criteria from a custom field:
+  - Populate `originalText` with the exact verbatim text from that field.
+  - Set `sourceType = EXTRACTED_FROM_JIRA`.
+  - Document the source field name in the Gate 1 review package under Jira story information.
+- **Ambiguity Guard**: If a field mapping is non-standard, conflicts with another field, or leaves
+  the requirement scope uncertain, raise an `AMB-*` ambiguity with `status: REVIEW_REQUIRED` so
+  the interpretation is explicitly validated by a human at Gate 1. Never guess.
 
 ## Acceptance criteria rules
 

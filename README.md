@@ -123,12 +123,21 @@ read-only analysis remain available across projects.
 ```powershell
 npm run jira:check -- WORKFLOW_START ETA-123
 npm run jira:check -- COMMENT_CREATE ETA-123
+npm run jira:sync-approved-artifacts -- WF-ETA-123-R1.0 SYNC ACCEPTANCE_CRITERIA
 ```
 
 Governed agents do not receive direct Jira write tools. Comments, attachments and bugs use the
 guarded repository clients, which reject a missing, malformed or non-ETA target before credentials
 are loaded or a network connection is opened. The restriction has no environment override and does
 not expire automatically; changing or removing it requires a reviewed repository change.
+
+For eligible new ETA workflows, approved Gate 1 requirements and approved Gate 2 test plans are
+mirrored to Jira as immutable, versioned JSON attachments after repository approval and promotion.
+A separate managed comment identifies the one CURRENT version and retains SUPERSEDED or STALE
+versions as audit history. Drafts are never uploaded, Jira remains non-authoritative, and a
+synchronization failure is recorded for retry without blocking the next workflow stage. Reopening
+Gate 1 supersedes the current AC and stales dependent plans; reopening Gate 2 supersedes only the
+plan; reopening Gate 3 does not change either artifact.
 
 The description of an existing Jira issue is immutable in every workflow phase. Requirement
 normalization never writes back into the story description, and ambiguity lifecycle changes update

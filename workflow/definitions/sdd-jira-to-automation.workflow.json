@@ -18,6 +18,7 @@
       "rules": [
         "Run the version-controlled WORKFLOW_START Jira policy check before creating any governed artifact. Only ETA story keys are accepted while the temporary guard is active.",
         "Initialize jiraAmbiguitySync as PENDING_ISSUE_VERIFICATION. It becomes eligible only after the real Jira issue creation timestamp proves both the issue and workflow were created after policy activation.",
+        "Initialize jiraApprovedArtifactSync with the same pending eligibility. It mirrors only schema-valid approved Gate 1 and Gate 2 artifacts after promotion; Jira remains a non-authoritative mirror.",
         "The Jira story description is immutable in every phase. Generated criteria, clarifications and ambiguity lifecycle updates may be written only to governed repository artifacts and the managed Jira comment."
       ]
     },
@@ -36,7 +37,8 @@
         "Resetting an instance does overwrite it, so the evidence of the previous run must be preserved elsewhere BEFORE the reset: append a WORKFLOW_RESTARTED event to workflow/history/<workflowId>.history.jsonl, which is append-only, and confirm the prior state is committed to version control. If either is missing, stop - the protection this rule exists for is gone.",
         "Existing execution records, approvals and defect artifacts are historical evidence and are never regenerated or overwritten.",
         "The revised test plan is a new artifactVersion of the same TEST-PLAN-ID, merged by testScenarioId. Existing scenarios are preserved; new scenarios are added.",
-        "An added API scenario must not retire a UI scenario covering the same acceptance criterion unless a human explicitly approves the retirement at Gate 2."
+        "An added API scenario must not retire a UI scenario covering the same acceptance criterion unless a human explicitly approves the retirement at Gate 2.",
+        "Before generating the revision, run the approved-artifact synchronizer with REOPEN TEST_PLAN. The previous Jira attachment remains immutable and is marked SUPERSEDED in the managed approved-artifacts comment."
       ]
     }
   ],
@@ -92,7 +94,12 @@
       "approvalArtifact": "requirements/approved/<JIRA-ID>-ac-approval.json",
       "outputs": ["requirements/approved/<JIRA-ID>.json"],
       "next": "OPENSPEC_GENERATION",
-      "haltsWorkflow": true
+      "haltsWorkflow": true,
+      "rules": [
+        "After the approval artifact validates and the approved requirement artifact is promoted, synchronize it as a versioned Jira attachment for eligible workflows.",
+        "Apply the synchronization report statePatch. A FAILED Jira synchronization is visible and retryable but never invalidates Gate 1 or blocks OPENSPEC_GENERATION.",
+        "If Gate 1 is reopened after an earlier approval, retain every attachment, mark the prior AC version SUPERSEDED and mark dependent test-plan versions STALE. Draft revisions are never uploaded."
+      ]
     },
     {
       "stage": "OPENSPEC_GENERATION",
@@ -141,7 +148,10 @@
         "This gate is where an OBSERVED contract becomes HUMAN_APPROVED. A human agreeing to the endpoint, status codes and response shape is exactly as authoritative as an OpenAPI document.",
         "An approved plan may not assert an acceptance criterion against an OBSERVED or UNVERIFIED contract. Observed traffic records what the application does, not what it should do, so it would make a current bug the definition of correct.",
         "When a contract becomes HUMAN_APPROVED, record responseShapeHash from computeResponseShapeHash in src/utils/api-contract-shape.ts. An OpenAPI document is diffable so its drift is visible; a human decision is not, and an unrecorded shape can move without anyone noticing.",
-        "An AGENT_DRAFTED contract reaching this gate deserves more scrutiny, not less: read its PROPOSED: fields as open questions, since nothing outside this gate has ever checked them against the real endpoint."
+        "An AGENT_DRAFTED contract reaching this gate deserves more scrutiny, not less: read its PROPOSED: fields as open questions, since nothing outside this gate has ever checked them against the real endpoint.",
+        "After the approval artifact validates and the approved test plan is promoted, retry AC synchronization first and then synchronize the plan as a versioned Jira attachment for eligible workflows.",
+        "Apply every synchronization report statePatch. A FAILED Jira synchronization is visible and retryable but never invalidates Gate 2 or blocks BDD_DESIGN.",
+        "If Gate 2 is reopened after an earlier approval, retain the previous attachment and mark it SUPERSEDED. Gate 3 reopening alone never changes AC or test-plan attachment lifecycle."
       ]
     },
     {

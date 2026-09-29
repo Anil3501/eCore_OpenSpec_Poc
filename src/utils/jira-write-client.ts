@@ -40,6 +40,11 @@ export interface JiraBugCreateRequest {
   humanConfirmation: string;
 }
 
+export interface JiraUploadedAttachment {
+  id: string;
+  filename: string;
+}
+
 function buildUrl(baseUrl: string, endpoint: string): string {
   const base = new URL(baseUrl);
   if (base.protocol !== 'https:') {
@@ -143,15 +148,49 @@ function safeAttachmentPath(relativePath: string): string {
   return absolute;
 }
 
+function safeAttachmentFileName(fileName: string): string {
+  if (
+    fileName.trim() === '' ||
+    path.basename(fileName) !== fileName ||
+    fileName.includes('/') ||
+    fileName.includes('\\')
+  ) {
+    throw new Error('Jira attachment filename must be a non-empty basename.');
+  }
+  return fileName;
+}
+
+function parseUploadedAttachments(result: unknown): JiraUploadedAttachment[] {
+  if (!Array.isArray(result)) {
+    throw new Error('Jira attachment upload returned an unexpected response.');
+  }
+  return result.map((item) => {
+    if (item === null || typeof item !== 'object') {
+      throw new Error('Jira attachment upload returned an item with an unexpected shape.');
+    }
+    const record = item as { id?: unknown; filename?: unknown };
+    const id =
+      typeof record.id === 'number'
+        ? String(record.id)
+        : typeof record.id === 'string'
+          ? record.id
+          : '';
+    if (!/^\d+$/.test(id) || typeof record.filename !== 'string' || record.filename.trim() === '') {
+      throw new Error('Jira attachment upload returned an item without an id or filename.');
+    }
+    return { id, filename: record.filename };
+  });
+}
+
 export async function uploadJiraAttachments(
   issueKeyValue: unknown,
   relativePaths: string[],
   config: JiraRestConfig,
   options: { policy?: JiraWritePolicy; transport?: JiraTransport } = {},
-): Promise<{ uploaded: string[] }> {
+): Promise<{ uploaded: string[]; attachments: JiraUploadedAttachment[] }> {
   const issueKey = assertJiraIssueAllowed(issueKeyValue, 'ATTACHMENT_UPLOAD', options.policy);
   const absolutePaths = relativePaths.map(safeAttachmentPath);
-  if (absolutePaths.length === 0) return { uploaded: [] };
+  if (absolutePaths.length === 0) return { uploaded: [], attachments: [] };
 
   const form = new FormData();
   for (const absolute of absolutePaths) {
@@ -169,15 +208,47 @@ export async function uploadJiraAttachments(
     },
     body: form,
   });
-  const result = await requireOk(response, 'Jira attachment upload');
-  if (!Array.isArray(result)) {
-    throw new Error('Jira attachment upload returned an unexpected response.');
-  }
+  const attachments = parseUploadedAttachments(
+    await requireOk(response, 'Jira attachment upload'),
+  );
   return {
-    uploaded: result
-      .map((item) => (item && typeof item === 'object' ? (item as { filename?: unknown }).filename : undefined))
-      .filter((value): value is string => typeof value === 'string'),
+    uploaded: attachments.map((attachment) => attachment.filename),
+    attachments,
   };
+}
+
+export async function uploadJiraAttachmentContent(
+  issueKeyValue: unknown,
+  fileNameValue: string,
+  content: Uint8Array,
+  config: JiraRestConfig,
+  options: { policy?: JiraWritePolicy; transport?: JiraTransport } = {},
+): Promise<JiraUploadedAttachment> {
+  const issueKey = assertJiraIssueAllowed(issueKeyValue, 'ATTACHMENT_UPLOAD', options.policy);
+  const fileName = safeAttachmentFileName(fileNameValue);
+  const bytes = new Uint8Array(content.byteLength);
+  bytes.set(content);
+  const form = new FormData();
+  form.append('file', new Blob([bytes]), fileName);
+
+  const transport = options.transport ?? defaultTransport;
+  const response = await transport({
+    method: 'POST',
+    url: buildUrl(config.url, `/rest/api/3/issue/${encodeURIComponent(issueKey)}/attachments`),
+    headers: {
+      Authorization: authorization(config),
+      Accept: 'application/json',
+      'X-Atlassian-Token': 'no-check',
+    },
+    body: form,
+  });
+  const attachments = parseUploadedAttachments(
+    await requireOk(response, 'Jira attachment upload'),
+  );
+  if (attachments.length !== 1) {
+    throw new Error('Jira single attachment upload did not return exactly one attachment.');
+  }
+  return attachments[0];
 }
 
 export async function createJiraBug(

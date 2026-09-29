@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-09-28T13:44:40.678Z",
+  "generatedAt": "2026-09-29T10:18:00.230Z",
   "scope": "workflow",
   "summary": {
-    "total": 4,
-    "passed": 3,
+    "total": 5,
+    "passed": 4,
     "failed": 0,
     "skipped": 1
   },
@@ -33,6 +33,12 @@
     {
       "id": "SEM-LOCKS",
       "title": "No two workflows write to the same traceability artifact",
+      "status": "PASS",
+      "messages": []
+    },
+    {
+      "id": "SEM-JIRA-POLICY",
+      "title": "ETA-only workflow and Jira write policy is enforced",
       "status": "PASS",
       "messages": []
     }

@@ -16,6 +16,7 @@ import {
   createJiraBug,
   createJiraComment,
   editJiraComment,
+  uploadJiraAttachmentContent,
   uploadJiraAttachments,
   type JiraRestConfig,
   type JiraTransport,
@@ -157,6 +158,47 @@ test('ETA comments use the injected transport', async () => {
   assert.equal(requests.length, 2);
   assert.match(requests[0], /ETA-1\/comment$/);
   assert.match(requests[1], /ETA-1\/comment\/101$/);
+});
+
+test('approved artifact content upload returns Jira attachment identity', async () => {
+  let calls = 0;
+  const transport: JiraTransport = async (request) => {
+    calls += 1;
+    assert.equal(request.method, 'POST');
+    assert.match(request.url, /ETA-1\/attachments$/);
+    return response([{ id: '501', filename: 'ETA-1-approved-requirements-v1.json' }]);
+  };
+
+  assert.deepEqual(
+    await uploadJiraAttachmentContent(
+      'ETA-1',
+      'ETA-1-approved-requirements-v1.json',
+      new TextEncoder().encode('{"approved":true}\n'),
+      config,
+      { policy, transport },
+    ),
+    { id: '501', filename: 'ETA-1-approved-requirements-v1.json' },
+  );
+  assert.equal(calls, 1);
+});
+
+test('blocked approved artifact upload rejects before transport', async () => {
+  let calls = 0;
+  const transport: JiraTransport = async () => {
+    calls += 1;
+    return response([]);
+  };
+  await assert.rejects(
+    uploadJiraAttachmentContent(
+      'EC-1',
+      'EC-1-approved-requirements-v1.json',
+      new TextEncoder().encode('{}'),
+      config,
+      { policy, transport },
+    ),
+    JiraPolicyError,
+  );
+  assert.equal(calls, 0);
 });
 
 test('bug creation remains gated by project and human confirmation', async () => {

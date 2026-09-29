@@ -169,9 +169,103 @@
     "jiraAmbiguitySync": {
       "description": "Absent on historical workflows. Present only after Jira issue creation time has been verified for a newly initialized workflow.",
       "$ref": "#/$defs/jiraAmbiguitySync"
+    },
+    "jiraApprovedArtifactSync": {
+      "description": "Absent on historical workflows. Mirrors only approved Gate 1 and Gate 2 artifacts for eligible new ETA tickets.",
+      "$ref": "#/$defs/jiraApprovedArtifactSync"
     }
   },
   "$defs": {
+    "jiraApprovedArtifactRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifactType",
+        "artifactId",
+        "artifactVersion",
+        "approvalId",
+        "sourceArtifactPath",
+        "sourceArtifactVersion",
+        "contentHash",
+        "fileName",
+        "jiraAttachmentId",
+        "lifecycle",
+        "uploadedAt"
+      ],
+      "properties": {
+        "artifactType": {
+          "type": "string",
+          "enum": ["ACCEPTANCE_CRITERIA", "TEST_PLAN"]
+        },
+        "artifactId": { "type": "string", "minLength": 1 },
+        "artifactVersion": { "type": "integer", "minimum": 1 },
+        "approvalId": {
+          "type": "string",
+          "pattern": "^APR-(AC|TP)-[A-Z0-9-]+-[0-9]{3}$"
+        },
+        "sourceArtifactPath": { "type": "string", "minLength": 1 },
+        "sourceArtifactVersion": {
+          "anyOf": [{ "type": "integer", "minimum": 1 }, { "type": "null" }]
+        },
+        "contentHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "fileName": { "type": "string", "minLength": 1 },
+        "jiraAttachmentId": { "type": "string", "pattern": "^[0-9]+$" },
+        "lifecycle": {
+          "type": "string",
+          "enum": ["CURRENT", "SUPERSEDED", "STALE"]
+        },
+        "uploadedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "jiraApprovedArtifactSync": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "policyVersion",
+        "eligible",
+        "eligibilityReason",
+        "issueCreatedAt",
+        "managedCommentId",
+        "contentHash",
+        "status",
+        "lastAttemptAt",
+        "lastSyncedAt",
+        "lastErrorCode",
+        "artifacts"
+      ],
+      "properties": {
+        "policyVersion": { "type": "string", "const": "1.0" },
+        "eligible": { "type": "boolean" },
+        "eligibilityReason": {
+          "type": "string",
+          "enum": ["PENDING_ISSUE_VERIFICATION", "NEW_ETA_TICKET", "HISTORICAL_TICKET"]
+        },
+        "issueCreatedAt": {
+          "anyOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }]
+        },
+        "managedCommentId": {
+          "anyOf": [{ "type": "string", "pattern": "^[0-9]+$" }, { "type": "null" }]
+        },
+        "contentHash": {
+          "anyOf": [{ "type": "string", "pattern": "^[a-f0-9]{64}$" }, { "type": "null" }]
+        },
+        "status": {
+          "type": "string",
+          "enum": ["NOT_REQUIRED", "PENDING", "SYNCED", "FAILED"]
+        },
+        "lastAttemptAt": {
+          "anyOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }]
+        },
+        "lastSyncedAt": {
+          "anyOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }]
+        },
+        "lastErrorCode": { "type": ["string", "null"], "minLength": 1 },
+        "artifacts": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/jiraApprovedArtifactRecord" }
+        }
+      }
+    },
     "jiraAmbiguitySyncItem": {
       "type": "object",
       "additionalProperties": false,

@@ -61,10 +61,8 @@ which one — never guess which blocker the user wants escalated.
    automation">
    ```
 
-5. **Deliver it.** Show the note in chat by default. Only write it to a file if the user asks to
-   persist it — and then only under `docs/` (never under a governed folder), following the same
-   "docs is for human-facing evaluation notes" convention already used for the framework-readiness
-   evaluations in this repo.
+5. **Deliver it.** Show the note in chat by default. Only write it to a file if the user explicitly asks to
+   persist it in a custom output path outside governed folders.
 
 ## Guardrails
 

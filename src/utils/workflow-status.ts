@@ -77,6 +77,14 @@ function main(): void {
           : 'NOT_REQUIRED (historical workflow)'
       }`,
     );
+    const artifactSync = state.jiraApprovedArtifactSync;
+    console.log(
+      `  Jira artifacts  : ${
+        artifactSync
+          ? `${artifactSync.status} (${artifactSync.eligibilityReason}; ${artifactSync.artifacts.length} attachment record(s); comment ${artifactSync.managedCommentId ?? 'not created'})`
+          : 'NOT_REQUIRED (historical workflow)'
+      }`,
+    );
     for (const line of describeGate(state)) console.log(line);
 
     if (state.status === 'WAITING_FOR_HUMAN') {

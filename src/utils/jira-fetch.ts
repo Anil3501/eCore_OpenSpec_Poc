@@ -54,6 +54,7 @@ function buildIssueUrl(baseUrl: string, issueKey: string): URL {
     );
   }
   const url = new URL(`/rest/api/3/issue/${encodeURIComponent(issueKey)}`, base);
+  url.searchParams.set('fields', '*all');
   url.searchParams.set('expand', 'renderedFields,names');
   return url;
 }

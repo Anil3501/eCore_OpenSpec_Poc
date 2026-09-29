@@ -6,6 +6,7 @@
  * gate ordering, execution honesty and sample-data isolation.
  */
 import { execFileSync } from 'node:child_process';
+import crypto from 'node:crypto';
 import fs from 'node:fs';
 
 import {
@@ -1941,6 +1942,11 @@ function checkJiraPolicy(loaded: LoadedArtifacts): CheckResult {
         `${file} -> jiraAmbiguitySync: workflows created after ${policy.activatedAt} must record new-ticket eligibility.`,
       );
     }
+    if (createdAfterActivation && state.jiraApprovedArtifactSync === undefined) {
+      messages.push(
+        `${file} -> jiraApprovedArtifactSync: workflows created after ${policy.activatedAt} must record approved-artifact synchronization eligibility.`,
+      );
+    }
     const sync = state.jiraAmbiguitySync;
     if (sync?.eligible) {
       if (
@@ -1960,6 +1966,60 @@ function checkJiraPolicy(loaded: LoadedArtifacts): CheckResult {
         );
       } catch (error) {
         messages.push(`${file} -> jiraAmbiguitySync: ${(error as Error).message}`);
+      }
+    }
+    const artifactSync = state.jiraApprovedArtifactSync;
+    if (
+      artifactSync !== undefined &&
+      (sync === undefined ||
+        sync.eligible !== artifactSync.eligible ||
+        sync.eligibilityReason !== artifactSync.eligibilityReason ||
+        sync.issueCreatedAt !== artifactSync.issueCreatedAt)
+    ) {
+      messages.push(
+        `${file} -> jiraApprovedArtifactSync: eligibility must match jiraAmbiguitySync for the same Jira ticket.`,
+      );
+    }
+    if (artifactSync?.eligible) {
+      if (
+        !createdAfterActivation ||
+        artifactSync.issueCreatedAt === null ||
+        !isAtOrAfterPolicyActivation(artifactSync.issueCreatedAt, policy)
+      ) {
+        messages.push(
+          `${file} -> jiraApprovedArtifactSync: eligible synchronization requires both workflow and Jira issue creation at or after ${policy.activatedAt}.`,
+        );
+      }
+      try {
+        assertJiraIssueAllowed(state.jiraStoryId, 'ATTACHMENT_UPLOAD', policy);
+        assertJiraIssueAllowed(
+          state.jiraStoryId,
+          artifactSync.managedCommentId ? 'COMMENT_EDIT' : 'COMMENT_CREATE',
+          policy,
+        );
+      } catch (error) {
+        messages.push(`${file} -> jiraApprovedArtifactSync: ${(error as Error).message}`);
+      }
+      for (const artifact of artifactSync.artifacts) {
+        // Historical Jira attachments are immutable, but approved repository paths are promoted
+        // in place for a new artifactVersion. Only the CURRENT record can be compared to today's
+        // file bytes; SUPERSEDED/STALE hashes describe the retained Jira attachment.
+        if (artifact.lifecycle !== 'CURRENT') continue;
+        if (!exists(artifact.sourceArtifactPath)) {
+          messages.push(
+            `${file} -> jiraApprovedArtifactSync.artifacts: source path "${artifact.sourceArtifactPath}" does not exist.`,
+          );
+          continue;
+        }
+        const digest = crypto
+          .createHash('sha256')
+          .update(fs.readFileSync(toAbsolute(artifact.sourceArtifactPath)))
+          .digest('hex');
+        if (digest !== artifact.contentHash) {
+          messages.push(
+            `${file} -> jiraApprovedArtifactSync.artifacts: ${artifact.artifactId} v${artifact.artifactVersion} no longer matches its synchronized checksum.`,
+          );
+        }
       }
     }
   }
