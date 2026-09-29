@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-09-25T15:25:40.741Z",
+  "generatedAt": "2026-09-29T11:29:57.308Z",
   "node": "24.19.0",
   "platform": "win32",
   "summary": {
-    "passed": 5,
+    "passed": 4,
     "failed": 0,
-    "warned": 0
+    "warned": 1
   },
   "checks": [
     {
@@ -49,7 +49,7 @@
     {
       "id": "ENVIRONMENT",
       "title": "Environment configuration is present",
-      "status": "PASS",
+      "status": "WARN",
       "details": [
         "testEnvironment: qa",
         "profile: (default)",
@@ -60,18 +60,21 @@
         "apiAuthMode: SESSION_COOKIE",
         "credentialsConfigured: true",
         "ecoreLoginConfigured: true",
-        "eoApiConfigured: true",
-        "jiraConfigured: true",
-        "jiraBugFilingConfigured: true",
+        "eoApiConfigured: false",
+        "jiraConfigured: false",
+        "jiraBugFilingConfigured: false",
         "coverageEnabled: true",
         "coverageIncludesThirdParty: false",
-        "jiraProjectKey: ETA",
-        "jiraBugProjectKey: ETA",
+        "jiraProjectKey: (not set)",
+        "jiraBugProjectKey: (not set)",
         "jiraBugIssueType: Bug",
         "jiraBugLinkType: Relates",
-        "bugAttachTrace: true"
+        "bugAttachTrace: true",
+        "",
+        "Not configured:",
+        "Jira REST fallback (JIRA_*)"
       ],
-      "remedy": null
+      "remedy": "Copy .env.example to .env and fill in the listed groups. Artifact generation and validation work without them; executing against the application does not."
     }
   ]
 }

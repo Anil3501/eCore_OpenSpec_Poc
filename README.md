@@ -178,6 +178,186 @@ Authentication is **OAuth and requires a human**. It cannot be automated by an a
 type-stripping — there is no build step and no bundler. `package.json` deliberately has no
 `"type": "module"`; the resulting warning is suppressed inside the npm scripts.
 
+### Fresh-clone workstation requirements
+
+The following instructions cover a clean Windows machine with a fresh VS Code installation.
+
+#### 1. Install the workstation software
+
+| Requirement | Required for | Notes |
+| --- | --- | --- |
+| Windows 10/11 (64-bit) | All use | The documented terminal commands use Windows PowerShell syntax. |
+| Current Visual Studio Code | Agent workflows and editing | Use a release with GitHub Copilot Agent Mode and MCP server support. Trust the workspace when prompted. |
+| Git for Windows | Clone, pull and branch operations | Ensure `git` is available on `PATH`. |
+| Node.js 24 or later (64-bit) | Framework runtime | Must include `node`, `npm` and `npx` on `PATH`. Node 24 native TypeScript type-stripping is required. |
+| Windows PowerShell | Scripts and documented commands | Included with Windows. PowerShell 7 is optional; commands are compatible with Windows PowerShell 5.1. |
+| Corporate network/VPN and certificates | npm, QA and Jira access | Required when Artifactory, eCore QA or Atlassian is restricted to the corporate network. |
+
+Java/JDK, Python, Docker Desktop, a local database and globally installed workflow CLIs are **not**
+required by this repository.
+
+Optional `winget` examples for software that is not already installed:
+
+```powershell
+winget install --id Microsoft.VisualStudioCode -e
+winget install --id Git.Git -e
+winget install --id OpenJS.NodeJS -e
+```
+
+Open a new terminal after installation and verify:
+
+```powershell
+code --version
+git --version
+node --version # must be v24 or later
+npm --version
+```
+
+#### 2. Install the VS Code extensions
+
+| Extension | Extension ID | Requirement |
+| --- | --- | --- |
+| GitHub Copilot | `GitHub.copilot` | Required. Sign in with a GitHub account that has Copilot access. |
+| GitHub Copilot Chat | `GitHub.copilot-chat` | Required for Agent Mode, custom agents, skills and MCP tools. |
+| PowerShell | `ms-vscode.PowerShell` | Recommended for editing and troubleshooting the repository's PowerShell commands. |
+| Playwright Test for VS Code | `ms-playwright.playwright` | Optional convenience for Test Explorer and debugging; CLI execution does not depend on it. |
+
+Install them through the Extensions view or from PowerShell:
+
+```powershell
+code --install-extension GitHub.copilot
+code --install-extension GitHub.copilot-chat
+code --install-extension ms-vscode.PowerShell
+# Optional:
+code --install-extension ms-playwright.playwright
+```
+
+VS Code's built-in Git support is sufficient; GitLens is not required. No Atlassian or separate MCP
+extension is required.
+
+#### 3. Clone and open the repository
+
+Clone with Git, open the repository folder (or `eCore_OpenSpec_POC.code-workspace`) in VS Code, and
+confirm **Workspace Trust**. The multi-root workspace also references sibling `project-docs-ssp` and
+`ssp-specs` folders; those folders are useful for the wider platform context but are not required to
+execute this repository's existing tests.
+
+#### 4. Configure npm registry access
+
+`node_modules` is not committed. A fresh clone must install dependencies from the corporate npm
+Artifactory. The local `.npmrc` is deliberately git-ignored because it may contain a credential, so
+it does **not** arrive with a clone. Obtain the approved registry URL and token configuration through
+your organisation's secure onboarding process and create either:
+
+- `<repo>/.npmrc` for this repository, or
+- `%USERPROFILE%/.npmrc` for the current Windows user.
+
+Never paste a token into README, `.env.example` or another committed file. Verify the active registry
+without printing authentication values:
+
+```powershell
+npm config get registry
+```
+
+#### 5. Install project-managed dependencies
+
+Use the committed lockfile for a deterministic installation:
+
+```powershell
+npm ci
+npx playwright install chromium
+```
+
+`npm ci` installs all packages from `package-lock.json`; do not install them individually or
+globally. Important package groups are:
+
+- **Workflow and test tooling:** `@fission-ai/openspec`, `@playwright/test`, `playwright-bdd`,
+   `typescript`, `ts-node` and `@types/node`.
+- **Runtime validation and configuration:** `zod`, `dotenv` and `pdf-parse`.
+- **Browser code coverage:** `v8-to-istanbul`, `istanbul-lib-coverage`, `istanbul-lib-report`,
+   `istanbul-reports` and their TypeScript declarations.
+
+The `openspec`, `bddgen` and `playwright` commands are therefore local executables under
+`node_modules`; never install workflow CLIs globally.
+
+**OpenSpec is required**, but it is installed automatically by `npm ci` from the correct scoped
+package, `@fission-ai/openspec`, declared in `package.json`. Do not run `npm install -g openspec`:
+the unscoped `openspec` package is unrelated, and a global install may bypass the corporate
+Artifactory configuration. Verify the repository-local CLI after installation:
+
+```powershell
+npx openspec --version
+npm run preflight
+```
+
+#### 6. Create local environment configuration
+
+`.env` is not committed and does not arrive with a clone:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+Fill the required values described in [Environment configuration](#environment-configuration):
+
+- UI execution: `PLAYWRIGHT_BASE_URL`, `ECORE_LOGIN_TYPE`, `ECORE_USERNAME`,
+   `ECORE_ORGANIZATION`, `ECORE_ORGANIZATION_ID` and `ECORE_PASSWORD`.
+- HYBRID/eCore integration API execution: also provide `ECORE_API_BASE_URL`,
+   `ECORE_API_LOGIN_USERNAME` and `ECORE_API_KEY`.
+- Jira REST fallback or bug filing: provide only the relevant `JIRA_*` variables. They are not
+   required for ordinary test execution or artifact validation.
+
+Keep `HEADLESS=true` for headless test execution. Never commit `.env`.
+
+#### 7. Configure MCP servers in VS Code
+
+Both servers are already declared in [.vscode/mcp.json](.vscode/mcp.json). They do not require a
+separate MCP extension or a global MCP package.
+
+**Playwright MCP (`playwright-test`)**
+
+- Provided by the locally installed Playwright npm package (`npx playwright mcp`).
+- Used for live browser exploration, accessibility snapshots, locator validation and network/API
+   observation during `PLAYWRIGHT_VALIDATION` and implementation work.
+- `npm ci` and `npx playwright install chromium` must complete first.
+- For an authenticated eCore exploration session, run `npm run capture:session` to create the local,
+   git-ignored `.auth/ecore-session.json`, then open **MCP: List Servers** and start
+   `playwright-test`.
+- Existing generated tests can run through Playwright Test without starting Playwright MCP.
+
+**Atlassian MCP (`atlassian`)**
+
+- Hosted remotely by Atlassian at the URL already recorded in `.vscode/mcp.json`; nothing is
+   installed locally.
+- Used for Jira Cloud story retrieval and governed issue operations.
+- Open **MCP: List Servers**, start `atlassian`, and complete the interactive OAuth consent in the
+   browser. The signed-in account must have access to the relevant Jira project.
+- Jira Server/Data Center is not supported by this hosted endpoint. Existing tests and non-Jira
+   artifact validation can run without starting Atlassian MCP.
+
+#### 8. Validate the fresh machine
+
+Run these checks from the repository root:
+
+```powershell
+npm run preflight
+npm run validate:artifacts
+npm run typecheck
+```
+
+`preflight` verifies Node 24+, every package declared in `package.json`, the local OpenSpec,
+`bddgen` and Playwright CLIs, the Chromium binary, and the available environment groups. A missing
+optional credential group is a warning; a missing runtime, dependency, CLI or browser is a failure.
+
+Once preflight succeeds, generate and execute an approved story by tag, for example:
+
+```powershell
+npx bddgen test --tags "@EC-12000"
+npx playwright test .features-gen/features/approved/paper-out-export/paper-out-media-type.feature.spec.js
+```
+
+The default is headless execution when `HEADLESS=true`.
+
 ```powershell
 npm run setup               # npm install + playwright install + npm run preflight
 Copy-Item .env.example .env # then fill in the values below
@@ -187,7 +367,7 @@ npm run validate:artifacts  # confirm the checkout is healthy
 `npm run setup` is the whole first-run sequence. To do it by hand:
 
 ```powershell
-npm install                 # uses the Artifactory registry in .npmrc
+npm install                 # uses the Artifactory registry in your local/user .npmrc
 npx playwright install      # download browser binaries (first time only)
 npm run preflight           # confirm every CLI a stage needs is executable
 ```
@@ -207,13 +387,13 @@ fixed: the CLI is now a pinned devDependency, and preflight catches the general 
 A `WARN` never fails preflight. Artifact generation and validation are designed to work on a clone
 with no `.env`; only executing against the application needs secrets.
 
-> **Never install a workflow CLI globally.** `npm install -g` does not inherit the project `.npmrc`,
-> so it will reach for public npm and fail. Declare it as a devDependency instead.
+> **Never install a workflow CLI globally.** A global install does not reliably use this
+> repository's local registry configuration, so it may reach public npm and fail. Declare the CLI
+> as a devDependency instead.
 
-> **npm E403 from `registry.npmjs.org`?** Public npm is firewalled here. The project `.npmrc`
-> points at the corporate Artifactory registry, but it is **not** inherited by `npm install -g` or
-> by `npm init` / `npx create-*` run outside this folder — configure the registry at user level
-> (`~/.npmrc`) for those. Retrying the same command will not help.
+> **npm E403 from `registry.npmjs.org`?** Public npm is firewalled here. Configure the corporate
+> Artifactory in a local or user-level `.npmrc`. A fresh clone does not include `.npmrc`, and
+> retrying the same command without configuring the registry will not help.
 
 ---
 
